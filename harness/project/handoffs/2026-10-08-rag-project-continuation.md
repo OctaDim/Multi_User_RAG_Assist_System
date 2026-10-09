@@ -131,7 +131,7 @@ RAG-13 — отдельную настройку всех пяти лимито�
 
 RAG-21 уточнено: disabled=True теперь означает административную блокировку.
 Исправлены условия доступа; прежняя инвертированная семантика в снимках источника
-историческая. Изменение оформлено через [inbox](../inbox/2026-10-09-disabled-semantics/request.md);
+историческая. Изменение оформлено через [исходную запись](../decisions/2026-10-09-disabled-semantics/request.md);
 обновлена документация, реализация доступа не начата.
 
 RAG-30 уточнено: параметры, требующие перезапуска процессов, отображаются
@@ -148,7 +148,7 @@ RAG-31 дополнено периодическими проверками ло
 
 ## Перенос семи рабочих записей из project inbox
 
-2026-10-09 семь завершённых заявок были отмечены кандидатами на перенос: они относятся к приложению, а не к механизму harness. После публикации заявок common перенос начат 2026-10-10. Выполнено 3 из 7 отдельных переносов. Исходные записи сохраняют completed, прежние даты и содержание; статус реализации приложения не меняется.
+2026-10-09 семь завершённых заявок были отмечены кандидатами на перенос: они относятся к приложению, а не к механизму harness. После публикации заявок common перенос начат 2026-10-10. Выполнено 4 из 7 отдельных переносов. Исходные записи сохраняют completed, прежние даты и содержание; статус реализации приложения не меняется.
 Полная карта путей, хеши и отдельные проверки: [переносы](../testing/evidence/work/2026-10-10-project-record-transfers/). Шесть записей решений размещаются в decisions, исследование идей — в docs. Ссылки в старых завершённых отчётах исторические; новые связанные дополнения показывают текущие пути.
 
 | Материал | Содержание обычной работы | Уже сохранённые результаты |
@@ -156,7 +156,7 @@ RAG-31 дополнено периодическими проверками ло
 | [2026-10-08-import-rag-decisions](../decisions/2026-10-08-import-rag-decisions/request.md) | Перенос 32 согласованных решений RAG, источников и контекста продолжения | [Реестр решений](../decisions/2026-10-08-rag-architecture-decisions.md), этот handoff, [снимок и проверка переноса](../testing/evidence/2026-10-08-rag-decision-import/verification.md) |
 | [2026-10-09-generation-limits](../decisions/2026-10-09-generation-limits/request.md) | Уточнение RAG-11: до 12 активных запросов, до 3 продвигаемых за шаг; связанные требования RAG-30 | Реестр решений, этот handoff, [проверка документации](../testing/evidence/2026-10-09-generation-limits-documentation-check.md) |
 | [2026-10-09-user-document-permissions-and-limits](../decisions/2026-10-09-user-document-permissions-and-limits/request.md) | Уточнение RAG-12/13/14: OCR рукописей, персональные разрешения и лимиты, права администраторов | Реестр решений, этот handoff, [проверка документации](../testing/evidence/2026-10-09-user-document-settings-documentation-check.md) |
-| [2026-10-09-disabled-semantics](../inbox/2026-10-09-disabled-semantics/request.md) | Уточнение RAG-21: disabled=True означает административную блокировку | Реестр решений, этот handoff, [проверка документации](../testing/evidence/2026-10-09-disabled-semantics-documentation-check.md) |
+| [2026-10-09-disabled-semantics](../decisions/2026-10-09-disabled-semantics/request.md) | Уточнение RAG-21: disabled=True означает административную блокировку | Реестр решений, этот handoff, [проверка документации](../testing/evidence/2026-10-09-disabled-semantics-documentation-check.md) |
 | [2026-10-09-model-settings-admin-availability](../inbox/2026-10-09-model-settings-admin-availability/request.md) | Уточнение RAG-30: доступность изменения параметров моделей в админке | Реестр решений и этот handoff; результат проверки описан в заявке, отдельный отчёт не найден |
 | [2026-10-09-local-llm-return](../inbox/2026-10-09-local-llm-return/request.md) | Уточнение RAG-31: периодическая проверка и возврат к локальной LLM при достаточной скорости и качестве | Реестр решений, этот handoff, [проверка документации](../testing/evidence/2026-10-09-local-llm-return-documentation-check.md) |
 | [2026-10-09-continue-rag-ideation](../inbox/2026-10-09-continue-rag-ideation/request.md) | Исследование и ранжирование семи идей приложения | [Обзор кандидатов](../docs/ideation/2026-10-09-personal-rag-ideation.html), этот handoff, [проверка документации](../testing/evidence/2026-10-09-rag-ideation-documentation-check.md) |

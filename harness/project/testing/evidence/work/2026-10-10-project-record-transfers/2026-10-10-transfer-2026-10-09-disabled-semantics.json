@@ -1,0 +1,28 @@
+{
+  "created": "2026-10-10T01:07:08.343888+02:00",
+  "operation": "move completed application record, no reexecution",
+  "old_path": "harness/project/inbox/2026-10-09-disabled-semantics",
+  "new_path": "harness/project/decisions/2026-10-09-disabled-semantics",
+  "files": {
+    "request.md": "7fac327b70d74c64b1358155f27002b20570724dc8411b7907d2dedb97e768e2",
+    "README.human.md": "1aebd913d6e92356c648a8de3b3eb20561a0e799ee29ed453b8f3ff8f40cb285"
+  },
+  "preservation": "all source bytes, explicit creation dates and completed status unchanged; historical project evidence unchanged",
+  "dependent_live_links": {
+    "harness/project/handoffs/2026-10-08-rag-project-continuation.md": {
+      "before": "f3c731299435cfde3ed86e24fc7fd1f2e21474ff474d1709a7ea2d156342eb43",
+      "after": "901d55d9bb3b18ef13face1d2c47ce6f35ff37146120dcf82c2a810c56b14432"
+    },
+    "harness/project/decisions/2026-10-08-rag-architecture-decisions.md": {
+      "before": "627d1871fa07c9ec41b1eff42a3a602c2e8261a00879f8c7c6ce35d42de0757b",
+      "after": "e3d8cc0c32176127823da367a90ebd7436740b5d399fff07470f33a124ec8e04"
+    }
+  },
+  "historical_report_addenda": [
+    "harness/project/testing/evidence/2026-10-09-disabled-semantics-documentation-check.md"
+  ],
+  "Codex": "проверенный для механического переноса: локальные hashes, completeness, links и preservation проверены основным агентом текущей Codex сессии; независимый CLI review не выполнялся",
+  "Claude": "непроверенный; пропущен",
+  "overall": "непроверенный",
+  "application_runtime": "not executed or revalidated"
+}
