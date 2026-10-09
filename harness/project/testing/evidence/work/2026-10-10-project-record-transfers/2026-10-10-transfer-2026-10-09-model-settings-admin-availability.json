@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-10T01:07:22.334317+02:00",
+  "operation": "move completed application record, no reexecution",
+  "old_path": "harness/project/inbox/2026-10-09-model-settings-admin-availability",
+  "new_path": "harness/project/decisions/2026-10-09-model-settings-admin-availability",
+  "files": {
+    "request.md": "52dbbb4f481240f354d695e8960d40d222b73d3883f2d71030035a8d4aec6677",
+    "README.human.md": "e7adbc87f926691cfd7a3a908156c529efe82fd171cfe41748a74d334e24f4a2"
+  },
+  "preservation": "all source bytes, explicit creation dates and completed status unchanged; historical project evidence unchanged",
+  "dependent_live_links": {
+    "harness/project/handoffs/2026-10-08-rag-project-continuation.md": {
+      "before": "901d55d9bb3b18ef13face1d2c47ce6f35ff37146120dcf82c2a810c56b14432",
+      "after": "2f1e447b16fc1c5c0ee295dce1a9ca14b905a8311c8bd2e1a43dba5feb7adf3a"
+    },
+    "harness/project/decisions/2026-10-08-rag-architecture-decisions.md": {
+      "before": "e3d8cc0c32176127823da367a90ebd7436740b5d399fff07470f33a124ec8e04",
+      "after": "649fd94127e8738b3cac7ec05b75ab92e84f8bbff3bccdd52c869b1bf0cc168b"
+    }
+  },
+  "historical_report_addenda": [],
+  "Codex": "проверенный для механического переноса: локальные hashes, completeness, links и preservation проверены основным агентом текущей Codex сессии; независимый CLI review не выполнялся",
+  "Claude": "непроверенный; пропущен",
+  "overall": "непроверенный",
+  "application_runtime": "not executed or revalidated"
+}
