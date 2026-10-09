@@ -1,0 +1,22 @@
+{
+  "date_utc": "2026-10-02T22:04:50.737004+00:00",
+  "endpoint": "https://api.z.ai/api/paas/v4/chat/completions",
+  "parameters": {
+    "model": "glm-4.7-flash",
+    "stream": true,
+    "max_tokens": 192,
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "generation": [],
+  "checks": {},
+  "retries": 0,
+  "socket_timeout_seconds": 120.0,
+  "error": {
+    "http_status": 429,
+    "body": "{\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}",
+    "retry_after": null
+  }
+}

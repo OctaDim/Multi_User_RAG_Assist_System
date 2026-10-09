@@ -1,0 +1,170 @@
+{
+  "imported_at": "2026-10-08T21:54:02+02:00",
+  "source_root": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants",
+  "source_access": "read-only",
+  "source_creation_dates": "Preserved if stated; unknown dates not inferred from import/commit/mtime.",
+  "decisions_count": 32,
+  "files": [
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/architecture.md",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/architecture.md",
+      "sha256": "01656c3513272539060170d552f88895800bdde6fedea4b55d7da1a452395b63",
+      "bytes": 60161,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/idea-review.md",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/idea-review.md",
+      "sha256": "ad7088a12da54047f9dfef2caa49ec321d5c62dce60474b5416df8ef94c6605f",
+      "bytes": 31755,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/local-ai.md",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/local-ai.md",
+      "sha256": "b6c26686818a45d289bce6ba058f231e3242f3f4f24499bfe229ce86dd3c75d7",
+      "bytes": 28738,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/conversation_transcripts/conversation-transcript-2026-10-02.md",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/conversation_transcripts/conversation-transcript-2026-10-02.md",
+      "sha256": "4888c58eae14f7af7e65d9ecaab0eca8e484cd43d8fdeaa645e195b9f0bdd666",
+      "bytes": 28453,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen3-17b-q8-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen3-17b-q8-llm.log",
+      "sha256": "2046e88af18ba9020b893d9ad212b980e8e0ef1fbbc073c5b513b2a41e469a2a",
+      "bytes": 4449,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen3-17b-q8.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen3-17b-q8.json",
+      "sha256": "eeb583763e1aaa6beca9b0b0a7feb4ac499607b12216a311d1c21f16bfe3e453",
+      "bytes": 18545,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen3-4b-q4-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen3-4b-q4-llm.log",
+      "sha256": "c6ea3bf176e48dc5b80fc1dd7ffc55a261c88ba83858e7094a180bfa8f74d220",
+      "bytes": 4447,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen3-4b-q4.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen3-4b-q4.json",
+      "sha256": "c4be7952aeff0c550b2162d74e4fffdbe1ffc188af5375c08d5aed956d84551f",
+      "bytes": 18260,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4-llm.log",
+      "sha256": "909a3e1902e153c9aed4afe77438cdd8b9d048ece164efc6219557f2b58afae1",
+      "bytes": 4600,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4-t4-tb8-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4-t4-tb8-llm.log",
+      "sha256": "d62de3755f97a598b3b9a2fe25795318791f8775f52a5ef367e9ee4e709f8a8b",
+      "bytes": 4453,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4-t4-tb8.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4-t4-tb8.json",
+      "sha256": "fc2738d952e1b052ce71452de8f0b7a66cc003551f17c1e17e440c2dd0faf324",
+      "bytes": 18715,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4-t8-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4-t8-llm.log",
+      "sha256": "a5de3effebf11bd68549c44f60d93ce491fe67245c114be312d1279f30e8c516",
+      "bytes": 4600,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4-t8.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4-t8.json",
+      "sha256": "0c3ec5726a565797beee659ab3975cc2bd078d0c31f9ced776c43c2c75733658",
+      "bytes": 18685,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/e5-qwen35-2b-q4.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/e5-qwen35-2b-q4.json",
+      "sha256": "abd3b32520343cec31aefacab664306ff145639d4ff689a9eab2b7bd32cc71ec",
+      "bytes": 18686,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/manifest.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/manifest.json",
+      "sha256": "498776ed1d3d9c3731799b6895915d0d69e0e316e8ef394f05f3ad35250c6513",
+      "bytes": 6841,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/qwen-embedding-qwen35-2b-q4-embedding.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/qwen-embedding-qwen35-2b-q4-embedding.log",
+      "sha256": "71e634d97e7f8d00f787fe14ede56089bf4f0890ceecc025993eaad26f7bfcb2",
+      "bytes": 4406,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/qwen-embedding-qwen35-2b-q4-llm.log",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/qwen-embedding-qwen35-2b-q4-llm.log",
+      "sha256": "1138557582daee1f9f53e1e8cec92bdd5e01d125754b204b05346e8df1eddd3c",
+      "bytes": 3249,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/qwen-embedding-qwen35-2b-q4.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/qwen-embedding-qwen35-2b-q4.json",
+      "sha256": "84a813e39683b3a2b481151df2bf128676290747542876959f0846de4a0e4a49",
+      "bytes": 10871,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/zai-glm-47-flash-retry.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/zai-glm-47-flash-retry.json",
+      "sha256": "3277646ecec0a58e2b436bcfeec1026f740893a7085836e14e5a3c32938514dc",
+      "bytes": 531,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/zai-glm-47-flash-thinking.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/zai-glm-47-flash-thinking.json",
+      "sha256": "826170d13c8f26fa098c2de1119ad37206377586ef1e881a4f43296d07cb7c7d",
+      "bytes": 2302,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/_docs/benchmarks/zai-glm-47-flash.json",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/_docs/benchmarks/zai-glm-47-flash.json",
+      "sha256": "a06fbb0fec6dc6308f2e0929c742254c56d4bf6209accddd42ba47b18653bed2",
+      "bytes": 427,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/experiments/local_models.py",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/experiments/local_models.py",
+      "sha256": "b6013e77ab39e216315a12b597f24ad5dec16c71a6de6cb0021f5886177c3918",
+      "bytes": 14165,
+      "transform": "none"
+    },
+    {
+      "source": "/home/octadim/MyProjects/Multi-Users_RAG_Assistants/experiments/zai_probe.py",
+      "target": "harness/project/testing/evidence/2026-10-08-rag-decision-import/experiments/zai_probe.py",
+      "sha256": "9ff22fa42a2651dc0a87fa6b1a3b50fbd9b9e6123e9045d2c163d5604989b3a1",
+      "bytes": 7094,
+      "transform": "none"
+    }
+  ]
+}
