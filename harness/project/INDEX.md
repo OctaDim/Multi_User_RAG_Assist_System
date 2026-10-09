@@ -34,3 +34,10 @@
 - [Состояние для продолжения](handoffs/2026-10-08-rag-project-continuation.md).
 - [Продолжение отбора идей — 7 кандидатов, ещё не принятые решения](docs/ideation/2026-10-09-personal-rag-ideation.html).
 - [Источники и происхождение](testing/evidence/2026-10-08-rag-decision-import/import-manifest.json).
+
+
+Новые свидетельства приложения — project/testing/evidence/work/; механизм project
+— project/testing/evidence/harness/; переносимый механизм common — common/testing/evidence/.
+Перед записью открой comm-protect-harness-evidence: текущие отчёты можно дополнять,
+завершённые — только новым связанным дополнением, исходные логи/снимки неизменны.
+Старые evidence остаются на прежних путях; назначение определяет маршрут.

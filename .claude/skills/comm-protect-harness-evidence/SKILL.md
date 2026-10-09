@@ -3,30 +3,21 @@ name: comm-protect-harness-evidence
 description: Use when saving or changing harness evidence, distinguishing application results from protected mechanism evidence and parent operations.
 ---
 
-# Защита evidence
+# Preserve evidence by purpose and operation
 
-До записи классифицируй назначение и операцию: защищены все материалы
-`harness/common/testing/evidence/` и свидетельства механизма в
-`harness/project/testing/evidence/`, включая родительские операции.
-Разрешённое создание/обновление результатов проверки приложения сохраняй прямо
-в project без отдельной заявки; сохраняй failed/unrun/passed. Перенос/очистка
-старых свидетельств этим не разрешены. Папка/название/«проверка» недостаточны;
-перед родительской операцией проверь содержимое. Смешанные свидетельства
-механизма защищены; неясное назначение требует уточнения до записи.
-Явный вызов скилла границу не меняет.
+Before classifying any evidence operation read [operations](references/operations.md)
+and from root `harness/common/skills/comm-process-harness-inbox/SKILL.md` plus its
+`references/workflow.md` for the authorized route. Reading within project access is allowed.
 
-Перед изменением прочитай из корня проекта
-`harness/common/skills/comm-process-harness-inbox/SKILL.md`
-и `harness/common/skills/comm-process-harness-inbox/references/workflow.md`.
-Для защищённых свидетельств обычный маршрут — согласованная inbox-обработка,
-включая её доказательства. Прямые создание, дополнение, перезапись, удаление,
-перенос, переименование, замена, сжатие и очистка по умолчанию запрещены;
-инструменты/скрипты/другие агенты исключений не дают. Чтение разрешено.
-Прямое исключение требует названного обхода и отдельного вопроса → однозначного
-положительного ответа, строго по workflow; до ответа изменяющие команды
-и проверки с записью запрещены. Стадии и расширение состава согласуются там же.
+Application/task evidence belongs in `harness/project/testing/evidence/work/`;
+project mechanism evidence in `harness/project/testing/evidence/harness/`;
+portable common evidence stays `harness/common/testing/evidence/`.
+Existing evidence keeps paths until an addressed migration. Purpose, not
+folder/name, governs; mechanism in work remains protected. Inspect all contents
+before parent operations; mixed mechanism stays protected, unknown purpose/state
+requires clarification before mutation. Explicit invocation changes no boundary.
 
-Перед удалением/заменой/переносом установи зависимые ссылки/доказательства,
-покажи последствия. Возраст/успешные тесты не означают ненужность.
-Сохраняй проверки/ограничения/статусы; копирование/разрешение их не повышают.
-Инструкция управляет поведением, а не технически блокирует запись.
+Apply operations to new/current/completed reports and raw runs; record actual
+written or blocked files and preserve statuses. Completion: permitted results
+saved, original raw/completed evidence preserved, provenance/dates/links intact.
+No automatic migration or technical filesystem enforcement.

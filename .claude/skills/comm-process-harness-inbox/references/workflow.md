@@ -9,6 +9,10 @@ Classify purpose/operation before routing:
   without another request; an authorized save is this ordinary route.
   preserve candidate/accepted, planned/implemented and failed/unrun/passed status.
   It does not authorize migration or cleanup of existing materials.
+  Before any evidence operation use comm-protect-harness-evidence: new work evidence
+  and additions to a current unfinished report are direct; completed corrections
+  are new dated linked addenda, raw logs/snapshots immutable. Report state, not age
+  or work/ placement, determines whether a report is still current.
 Purpose governs, not folder/name/"test": app API contracts are work records;
 agent procedures remain mechanism even in docs.
 Inspect contents/descendants before parent operations. Mixed mechanism stays

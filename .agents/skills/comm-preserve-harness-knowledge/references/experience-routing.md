@@ -19,8 +19,13 @@ Check existing fixes/tests: they do not themselves replace instructions.
 Keep only essential reasons/evidence separately; no error story in SKILL and
 no additional router. Procedure belongs to skills/resources; early limits to rules.
 Decisions/contracts/invariants/limitations/essential alternatives → decisions;
-results/check limitations/raw evidence → testing/evidence; basic config → base;
+application results/check limitations/raw evidence → project/testing/evidence/work;
+project mechanism results → project/testing/evidence/harness; common → common/testing/evidence; basic config → base;
 specifications → specs; explanations/research → docs; plans → docs/plans;
 unfinished state → handoffs. Inbox is temporary full request/candidate.
 Docs/decisions/specs/evidence are reasons/formal contracts, not independent
 agent procedures. Before placement read the own material-placement resource.
+
+Before any evidence operation read from project root
+`harness/common/skills/comm-protect-harness-evidence/SKILL.md`; it owns report
+completion, additions/addenda and raw immutability, including legacy paths.
