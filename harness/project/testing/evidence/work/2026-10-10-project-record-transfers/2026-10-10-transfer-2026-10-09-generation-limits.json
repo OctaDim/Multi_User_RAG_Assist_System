@@ -1,0 +1,28 @@
+{
+  "created": "2026-10-10T01:06:01.885234+02:00",
+  "operation": "move completed application record, no reexecution",
+  "old_path": "harness/project/inbox/2026-10-09-generation-limits",
+  "new_path": "harness/project/decisions/2026-10-09-generation-limits",
+  "files": {
+    "request.md": "93ff7f698b5df2208a883b6d0c3f31cb166baee501e8acdb9305275a787203b3",
+    "README.human.md": "c504ee0f972f45e27c280b4937e3c2df72721ab584392a7f914c60b519fecfe6"
+  },
+  "preservation": "all source bytes, explicit creation dates and completed status unchanged; historical project evidence unchanged",
+  "dependent_live_links": {
+    "harness/project/handoffs/2026-10-08-rag-project-continuation.md": {
+      "before": "c511cf754f1bf2fd34d6776681f78ac3d0176fe30aa4bde33af91656ba97c552",
+      "after": "ef2937340de753b9d2d0cbbc66ca0fc57e01edd0c42a627816bf684e97446fd4"
+    },
+    "harness/project/decisions/2026-10-08-rag-architecture-decisions.md": {
+      "before": "d9106b265f5009d005ba2cb1a4f222129268e3173bbd1394bddd85170e3f31e2",
+      "after": "0534d08ea8df33bde341516f102b6d8cafcea779a3fd1f0e1f65cfe2a53b9728"
+    }
+  },
+  "historical_report_addenda": [
+    "harness/project/testing/evidence/2026-10-09-generation-limits-documentation-check.md"
+  ],
+  "Codex": "проверенный для механического переноса: локальные hashes, completeness, links и preservation проверены основным агентом текущей Codex сессии; независимый CLI review не выполнялся",
+  "Claude": "непроверенный; пропущен",
+  "overall": "непроверенный",
+  "application_runtime": "not executed or revalidated"
+}
