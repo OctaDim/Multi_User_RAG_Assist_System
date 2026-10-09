@@ -32,7 +32,7 @@
 
 - [Согласованные решения](decisions/2026-10-08-rag-architecture-decisions.md).
 - [Состояние для продолжения](handoffs/2026-10-08-rag-project-continuation.md).
-- [Продолжение отбора идей — 7 кандидатов, ещё не принятые решения](docs/ideation/2026-10-09-personal-rag-ideation.html).
+- [Обзор 7 идей на дату подготовки](docs/ideation/2026-10-09-personal-rag-ideation.html): все семь разобраны; №1–№6 приняты в MVP, №7 — согласованная граница условного fallback. Решения RAG-33–RAG-39 и контекст продолжения сохранены.
 - [Источники и происхождение](testing/evidence/2026-10-08-rag-decision-import/import-manifest.json).
 
 
