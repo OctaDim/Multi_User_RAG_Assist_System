@@ -1,0 +1,212 @@
+{
+  "common_records": 41,
+  "project_records": 0,
+  "open_requests": 0,
+  "items": [
+    {
+      "path": "harness/common/inbox/2026-10-05-authoring-skill-workflows/request.md",
+      "status": "выполнена.",
+      "sha256": "3c570fd23be7c5b7101b46ce105e484836814fae11f45f743378011919796aaf"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-create-lazy-skill-authoring/request.md",
+      "status": "выполнена.",
+      "sha256": "b81e90393920c14fd05071d7b34ca2290e297e1762e36a4a4520b89d84f4c2ef"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-entrypoint-crlf/request.md",
+      "status": "выполнена.",
+      "sha256": "e6d5fd010a1a322c56e0b71031d834115853c3d933f3047294168a15c6364364"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-entrypoint-fenced-code/request.md",
+      "status": "выполнена.",
+      "sha256": "40e23880275673e28cda906d0e3f28cc8b92aa13ebb517227e81ef99caaaec83"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-inbox-execution-status/request.md",
+      "status": "выполнена.",
+      "sha256": "aeb499d00f28818d199e54e83aec09cbaf486626da04735fd2c3d6857bcc3c5b"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-rule-copy-drift/request.md",
+      "status": "выполнена.",
+      "sha256": "fda9c74726ddb9e4abd9d3344d2918a26cae2c7e0797f1bfcc4046e03fb37fd3"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-rules-entrypoint/request.md",
+      "status": "выполнена.",
+      "sha256": "e655fbee1c32c265a03cebe4548f1acba8bcf9637f6590ec50c7ee69a3fc9777"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-05-workflow-43-skills-rules/request.md",
+      "status": "выполнена.",
+      "sha256": "7d06a684910be624cabb280b5630e451d92c8c6740780c6e8cbc2bd97c6f039e"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-compress-human-folder-guides/request.md",
+      "status": "выполнена.",
+      "sha256": "639a814b977a34de014c10e54814f84554bec052d7c9e22dfa0c2f3175eb236c"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-dependencies-through-uv/request.md",
+      "status": "выполнена.",
+      "sha256": "c4d6b2363af587864dd7daabe8995f815bde1284e0ce78a87969d354e9ea7eca"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-fix-human-guide-content-search/request.md",
+      "status": "выполнена.",
+      "sha256": "121d3d2e703fe57362430c92015dc3157181bd344ce6a17dff75bc1f1924b1fd"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-harness-structure-and-update-dates/request.md",
+      "status": "выполнена.",
+      "sha256": "a2ba5a71ff9654d4f5cb325329a98b341cbbb4f62d67e6a6b53fddc9acc97fee"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-human-readme-refresh/request.md",
+      "status": "выполнена.",
+      "sha256": "2a53914abc26ef933aebd84a011e202350f85a96105ca6bb2055394294fa1efd"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-inbox-authorization-interpretation/request.md",
+      "status": "выполнена.",
+      "sha256": "26d615166f65c818d6db062cfe1ea42a9cd5181123077d55208a51cde29b1004"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-inbox-sequential-user-decisions/request.md",
+      "status": "выполнена.",
+      "sha256": "8777d3f19f6980ac5ac8bb788fd436429dfbb17047b7b5e5cffcff3c76760e9e"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-plugin-eval-human-filter/request.md",
+      "status": "выполнена.",
+      "sha256": "b5164618f4510848b1f8c777a1b89d0f9b713b620b471e84f7e6a3987983fc54"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-two-installation-modes/request.md",
+      "status": "выполнена.",
+      "sha256": "e261df3574bf6982aa2a52afa5cbfd0bb287cb0c7e3eab350899f6124be2d74b"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-06-unittest-to-pytest/request.md",
+      "status": "выполнена.",
+      "sha256": "892c3c18caa9187d46340c38d7aacc1d66bbbbd0be1d95efba8d2c97a0fc4362"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-agents-startup-order/request.md",
+      "status": "выполнена.",
+      "sha256": "72c304d45e6e7763f1bf6f28aff2120a337a70bf4b46479b96c0973293536c29"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-harness-direct-change-confirmation/request.md",
+      "status": "выполнена.",
+      "sha256": "fa8c3ae1f17c3cf8d0b77724faef6f81811c3f3ce558297d2949cffba4e30513"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-lazy-context-routing/request.md",
+      "status": "выполнена.",
+      "sha256": "38de2fab9dbd84f91d0be0654ef9dbe1719def3686ec9dfb345de8b7dfb1ab34"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-plugin-eval-budget-details/request.md",
+      "status": "выполнена.",
+      "sha256": "1b698619edb7429d617a82d86ef171c301d8243156ff954f7ef1922d9f279d8b"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-preservation-attestation-correction/request.md",
+      "status": "выполнена.",
+      "sha256": "71315e1dd686ec16e1c28edf157b05dc662a52403e00471cfb7e5b929cd8df3b"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-protect-evidence/request.md",
+      "status": "выполнена.",
+      "sha256": "6b3babb7f8adad67901ed85dc5cb451d9920e2c7022328f2f63c381482fc2ee4"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-rules-skills-instruction-order/request.md",
+      "status": "выполнена.",
+      "sha256": "50b29666e57f7af74f410502e87b3fda5833da348ba7ab6d1c355a9c414605cf"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-safe-recursive-rule-reading/request.md",
+      "status": "выполнена.",
+      "sha256": "c5dd23a118c9b7e45b70d159da9f8f4109c5e1d5c386a5b90b8f2c2c6049ec07"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-skill-rule-publication-evidence/request.md",
+      "status": "выполнена.",
+      "sha256": "66c2162f30d8559c057430f25796984b68eb5baf5ca391526f9545149e4b6458"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-07-workflow-48-lessons-to-skills/request.md",
+      "status": "выполнена.",
+      "sha256": "a036a2deb8d769430f3d1c344fb37134e66aa5569bd7fc531f7c84bc36e32be8"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-acceptance-connection-status/request.md",
+      "status": "выполнена.",
+      "sha256": "440420fe8f34ceb8cb3c232c63e2b69b43d7677ac7c8adcdbb8cc651f9018231"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-entrypoint-task-history/request.md",
+      "status": "выполнена.",
+      "sha256": "941938b96e6afa22d62e5596d804269e77ecdab2c6326251424fae434d2ec70f"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-harness-audit-remediation/request.md",
+      "status": "выполнена.",
+      "sha256": "0fad32191b83caea93cf2630c3e45fa87b4b757ac7193e5bd13103768c49fb98"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-normalize-mixed-line-endings/request.md",
+      "status": "выполнена.",
+      "sha256": "3181b1007b322c8c0021dce10ddb36b00e12d4ad951d177e3ca7f9e77a32b446"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-refactor-core-harness-skills/request.md",
+      "status": "выполнена.",
+      "sha256": "26b8245bc4a95a6f9045801cfb60eeec7f79b2c76b643c9a4f928b1e841d4d02"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-snapshot-human-guides/request.md",
+      "status": "выполнена.",
+      "sha256": "2271f5840b5ea02cb1328c1edf5dc4ed0fe431db432e06599e67cd9d0a5015fb"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-08-task-focused-skill-authoring/request.md",
+      "status": "выполнена.",
+      "sha256": "25c77f88aa9d28ad4dac306fc2b2797b5ed7df0f2cdc9e934361756db1d1495a"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-09-confirm-development-workflow/request.md",
+      "status": "completed",
+      "sha256": "d5a5bc5e8a3e1889e5bce55f7b18576c11e02c92681e792a13334a8111ee03d0"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-09-evidence-permissions-and-project-skeleton/request.md",
+      "status": "completed",
+      "sha256": "8dca76eccf27938debffc7b2de9f653fc196c7f65fe898ed14537f3c05a61261"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-09-project-harness-inbox-boundaries/request.md",
+      "status": "completed",
+      "sha256": "8de47e267da6ac4b83d54cc6bdac8c5b94b890d51d7158624515e27a9f44b1c1"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-09-recommended-superpowers-workflow-selection/request.md",
+      "status": "completed",
+      "sha256": "0cfbeb8d2675faa01cae76d888b936775998657a3a278934c9c497d3fc105a21"
+    },
+    {
+      "path": "harness/common/inbox/2026-10-09-superpowers-entrypoint-for-ce-workflow/request.md",
+      "status": "completed",
+      "sha256": "ba899385f5a6f86a5fed2187fad8ad8a538fcbcd3a5925426ccfbfe83d5abdec"
+    },
+    {
+      "path": "harness/common/inbox/protected-entrypoints-request.md",
+      "status": "выполнена.",
+      "sha256": "0fac23248fb4e7f0c2fe5d074f2c7533038c728853b0587a1d03d58718fd20d5"
+    }
+  ]
+}
