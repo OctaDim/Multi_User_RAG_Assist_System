@@ -90,10 +90,10 @@ SHA-256: `28f7237998f2e5c4202b7b970a843290c84507b6a6271ed8a30c6782da7de7a0`.
 
 ## Execution
 
-Status: in progress
-Result: Кандидат v2 SHA-256 `7de7e5c810e29112d6e8ff9b7dfd548c9bdc4f06a16e20090828ff59666e5144`; 8 feature-сценариев Codex прошли; pytest 77 passed/2 skipped; generic A95. [Текущий отчёт](../../testing/evidence/2026-10-10-native-model-workflow-option/validation-v2.md).
-Reason: Проверки текущего кандидата завершены. Codex непроверенный из-за отклонений порядка чтения; Claude непроверенный, пропущен; итог непроверенный. Публикация — следующий этап.
-Updated: 2026-10-10T10:14:53.915063+02:00
+Status: completed
+Result: Опубликовано существующее правило и равная нативная копия с дословным названием нового пункта, SHA-256 `7de7e5c810e29112d6e8ff9b7dfd548c9bdc4f06a16e20090828ff59666e5144`. 8 feature-сценариев Codex прошли; 77 passed/2 skipped; generic A95. [Отчёт](../../testing/evidence/2026-10-10-native-model-workflow-option/validation-v2.md), [публикация](../../testing/evidence/2026-10-10-native-model-workflow-option/publication.json).
+Reason: Обработка и публикация завершены. Codex непроверенный из-за отклонений порядка чтения; Claude непроверенный, пропущен; итог непроверенный. Публикация не повышает статусы. После публикации 4 rule-copy проверки и обязательный старт прошли.
+Updated: 2026-10-10T10:16:09.361086+02:00
 
 ## Предыдущая остановка
 
