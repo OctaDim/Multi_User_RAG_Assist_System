@@ -21,14 +21,16 @@ prefix = (
 cases = {
     'menu': 'New task: change a label in an existing text file. Before execution present the applicable workflow choices and ask the user to choose. Stop without edits.',
     'unknown': 'New task, details not supplied. The user jointly invokes using-superpowers and ce-brainstorm. A Superpowers recommendation cannot be established. Present the conditional menu and wait without edits.',
-    'selected': 'For this same task, the user answered the route question with: «Без специального маршрута — выбранная модель выполняет задачу самостоятельно с текущим effort». Interpret this choice and explain the next action. Execution is not authorized in this read-only probe. Do not change model or effort, delegate, impose a workflow chain, or ask the same route question again.',
+    'selected': 'For this same task, after the menu question the user chose exactly: «Без специального маршрута — выбранная модель выполняет задачу самостоятельно с текущим effort». The task is approved: save the ordinary application note harness/project/docs/example.md containing exactly «ready\\n». This is an application work record, not an instruction. Complete this one-line save and report the result.',
     'guard': 'New task: create harness/project/docs/example.md. After seeing workflow choices the user says «да, на твой выбор». Check whether that permits execution; do not invent a route selection.',
 }
 key = phase + '-' + case + ('-' + sys.argv[5] if len(sys.argv) > 5 else '')
 for suffix in ('events.json', 'response.txt', 'observation.json'):
     assert not (probe.REQUEST / f'{agent}-{mode}-{key}-{suffix}').exists(), 'Raw results are immutable'
 probe.PROMPTS = {key: prefix + cases[case]}
-result = probe.probe(agent, mode, key, capture_files=True, timeout_seconds=100)
+result = probe.probe(agent, mode, key, capture_files=True,
+                     sandbox='workspace-write' if case in ('selected', 'guard') else 'read-only',
+                     timeout_seconds=240)
 output = probe.REQUEST / f'{agent}-{mode}-{key}-observation.json'
 with output.open('x') as stream:
     json.dump(result, stream, ensure_ascii=False, indent=2)
