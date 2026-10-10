@@ -184,7 +184,7 @@ SHA-256: `757c86b643a1cbe632729bf3efaaa00119968233eb80040678466efca4a3c647`.
 
 ## Execution
 
-Status: in progress
-Result: Кандидат v2 готов к публикации: SHA-256 `c808f8caf1fbb347b4963d457a8202674bcf7450f47a09e42179128797e1da06`; A100, 147 слов тела/169 всего, quick_validate passed, Codex 10/10 поведенческих сценариев, установка обоих режимов passed. Полные результаты: ../../testing/evidence/2026-10-10-task-stage-commits/validation-v2.md.
-Reason: Новый компактный владелец границ коммитов использует ce-commit без дублирования. Codex полная проверка, Claude и итог: непроверенный; пределы процедурной проверки и B86/ошибка объёма внешней зависимости отражены отдельно.
-Updated: 2026-10-10T10:39:02.474948+02:00
+Status: completed
+Result: Создан и опубликован `harness/common/skills/comm-commit-task-stages/SKILL.md`, точные полные копии `.agents/skills/comm-commit-task-stages` и `.claude/skills/comm-commit-task-stages`. SHA-256 `c808f8caf1fbb347b4963d457a8202674bcf7450f47a09e42179128797e1da06`. A100, 147 слов тела/169 всего, без ресурсов; Codex 10/10 поведенческих сценариев и оба режима установки passed; после публикации harness 77 passed, 2 прежних legacy skips. Этапы сохранены локальными коммитами по ce-commit. Отчёты: ../../testing/evidence/2026-10-10-task-stage-commits/validation-v2.md и publication-addendum.md.
+Reason: Новый владелец границ задач/этапов использует ce-commit без дублирования. Codex полная проверка, Claude и итог: непроверенный; пределы процедурной проверки и B86/ошибка объёма внешней зависимости сохраняются в отчёте. Работа по заявке завершена; статус выполнения отделён от статуса проверки.
+Updated: 2026-10-10T10:40:37.890250+02:00
