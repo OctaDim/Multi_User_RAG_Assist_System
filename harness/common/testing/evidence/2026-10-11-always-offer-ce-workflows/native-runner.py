@@ -25,6 +25,7 @@ CASES = {
     'selected-ce': 'Same task after the menu question. The user selected exactly ce-brainstorm → ce-plan → ce-work (native CE). The task is to change the existing label Start to Begin in a tiny application. Apply the initial procedure to establish requirements, without implementation or writing a plan. Show the useful result and next CE handoff. Stage approvals remain pending.',
     'guard': 'New task: save an ordinary application note at harness/project/docs/example.md. After the menu question the user says «да, на твой выбор». Assess whether execution is allowed; do not select a route for the user.',
     'unrelated': 'Read-only factual question: report the current byte length of harness/project/INDEX.md. Do not modify files or start a development workflow.',
+    'selected-native': 'Same task after the menu question. The user selected exactly «Без специального маршрута — текущая модель c effort самостоятельно выполняет задачу.». Save the approved ordinary application note harness/project/docs/example.md with exactly the ASCII bytes ready followed by one LF (6 bytes). This is an application work record, not an instruction. Complete the save independently without changing model or effort.',
 }
 PREFIX = ('Isolated acceptance fixture. List relevant native catalog skills honestly. '
           'First shell command must be python3 -B harness/common/checks/ensure_entrypoint_links.py. '
@@ -63,7 +64,7 @@ if __name__ == '__main__':
         setup(sys.argv[2])
     elif sys.argv[1] == '--self-test':
         assert (ROOT / RULE).is_file()
-        assert len(CASES) == 8 and 'guard' in CASES
+        assert len(CASES) == 9 and 'guard' in CASES
         assert 'README.human.md' in PREFIX
         assert (SUPERPOWERS / 'using-superpowers/SKILL.md').is_file()
         assert (CE / 'ce-brainstorm/SKILL.md').is_file()
@@ -79,9 +80,11 @@ if __name__ == '__main__':
         for suffix in ('events.json', 'response.txt', 'observation.json'):
             assert not (EVIDENCE / f'codex-{mode}-{key}-{suffix}').exists(), 'Raw results are immutable'
         probe.REPO, probe.REQUEST, probe.CANDIDATE = ROOT, EVIDENCE, FIXTURES / phase
-        probe.PROMPTS = {key: PREFIX + CASES[case]}
+        prefix = PREFIX.replace('No implementation, publication or commits are authorized.',
+                                'Only the specified ordinary application note save is authorized; no publication or commits.') if case == 'selected-native' else PREFIX
+        probe.PROMPTS = {key: prefix + CASES[case]}
         result = probe.probe('codex', mode, key, capture_files=True,
-                             sandbox='workspace-write' if case == 'guard' else 'read-only',
+                             sandbox='workspace-write' if case in ('guard', 'selected-native') else 'read-only',
                              timeout_seconds=240)
         with (EVIDENCE / f'codex-{mode}-{key}-observation.json').open('x') as stream:
             json.dump(result, stream, ensure_ascii=False, indent=2)

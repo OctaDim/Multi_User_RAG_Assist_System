@@ -8,9 +8,9 @@ Superpowers. Покажи конкретные этапы каждого рек�
 
 Всегда предложи отдельные альтернативы:
 
-- **Superpowers + Compound Engineering:** `using-superpowers + ce-brainstorm → ce-plan → ce-work`  - с одновременным выполненим `using-superpowers и ce-brainstorm`
+- **Superpowers + Compound Engineering:** `using-superpowers + ce-brainstorm → ce-plan → ce-work`  - с одновременным выполненим `using-superpowers и ce-`этапов
 - **Compound Engineering:**  `ce-brainstorm → ce-plan → ce-work`  - нативный ce-маршрут
-- Без специального маршрута — выбранная модель выполняет задачу самостоятельно с текущим effort.
+- Без специального маршрута — текущая модель c effort самостоятельно выполняет задачу.
 
 Оба CE-пункта и пункт без специального маршрута показывай дословно при любой рекомендации
 Superpowers и при её отсутствии. После его явного выбора основной агент
@@ -51,7 +51,7 @@ systematic-debugging → установление первопричины → �
 Если Superpowers рекомендует полную цепочку, либо рекомендация не установлена
 и показано условное меню, сразу покажи оба полных варианта исполнения:
 
-1. Superpowers, самостоятельно: `brainstorming → writing-plans → executing-plans`.
+1. **Superpowers, через одного агента:** `brainstorming → writing-plans → executing-plans`.
 2. Superpowers, через субагентов: `brainstorming → writing-plans → subagent-driven-development`.
 
 При каждом показе этих полных цепочек до получения выбора обязательно выведи:
