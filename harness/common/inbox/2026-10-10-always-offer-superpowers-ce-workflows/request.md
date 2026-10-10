@@ -92,10 +92,10 @@
 
 ## Execution
 
-Status: in progress
-Result: Исправленная v3 7b9cddee04cc0fccbcc4aa6972ffbc9eba7a5234ffb2f58795df46ca1d3bf9f8 подготовлена; 20 сценариев Codex успешны в проверенной области, ограничения startup и CE раскрыты. Локально 77 passed / 2 прежних skip; две установки PASS, generic A95. [Отчёт v3](../../testing/evidence/2026-10-11-always-offer-ce-workflows/validation-v3.md). Предыдущие этапы: def9b5a, 60ed09d.
-Reason: Исправленная текущая версия и размещение подтверждены в чате; публикация выполняется после сохранения этапа проверки. Codex непроверенный в целом; Claude skip, непроверенный; итог непроверенный.
-Updated: 2026-10-11T01:26:37.581076+02:00
+Status: completed
+Result: Исправленная v3 7b9cddee04cc0fccbcc4aa6972ffbc9eba7a5234ffb2f58795df46ca1d3bf9f8 опубликована в существующем common-правиле и равной обычной .claude/rules-копии. 20 сценариев Codex успешны в проверенном объёме; локально и после публикации 77 passed / 2 прежних skip, обе установки PASS, generic A95. [Проверка v3](../../testing/evidence/2026-10-11-always-offer-ce-workflows/validation-v3.md), [публикация](../../testing/evidence/2026-10-11-always-offer-ce-workflows/publication-v3.md). Подготовительные этапы: def9b5a, 60ed09d, 107cc27.
+Reason: Подтверждённая исправленная версия опубликована, разрешённый объём завершён. Codex непроверенный в целом: ограничения startup и полного CE раскрыты; Claude skip, непроверенный; итог непроверенный.
+Updated: 2026-10-11T01:28:28.685031+02:00
 
 
 ## Уточнение поведения и согласованный дизайн, 2026-10-11
