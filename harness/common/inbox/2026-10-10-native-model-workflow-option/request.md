@@ -91,9 +91,9 @@ SHA-256: `28f7237998f2e5c4202b7b970a843290c84507b6a6271ed8a30c6782da7de7a0`.
 ## Execution
 
 Status: in progress
-Result: Подготовлен полный [кандидат](comm-confirm-development-workflow.md), SHA-256 `3f27a68d6dabd432d92f1109ae6390c8bf49ec4b5fafc1de095d9bed001b8f77`. Локальные проверки установки прошли; pytest 77 passed/2 skipped; generic plugin-eval A95, 0 errors, inherited budget warning. [Отчёт](../../testing/evidence/2026-10-10-native-model-workflow-option/validation.md).
-Reason: Нативные baseline сессии Codex и Claude не выполнили задания: сеть/OAuth. Автоматическая проверка разрешений отклонила escalated сетевые проверки из-за отсутствия отдельного разрешения на передачу внутренних инструкций внешним сервисам и использование/обновление OAuth. Нативные статусы непроверенные; публикация не выполнена, следующая заявка не начата. Проверки возобновлены; прежний результат сохранён как история ниже.
-Updated: 2026-10-10T09:59:09.042900+02:00
+Result: Кандидат v2 SHA-256 `7de7e5c810e29112d6e8ff9b7dfd548c9bdc4f06a16e20090828ff59666e5144`; 8 feature-сценариев Codex прошли; pytest 77 passed/2 skipped; generic A95. [Текущий отчёт](../../testing/evidence/2026-10-10-native-model-workflow-option/validation-v2.md).
+Reason: Проверки текущего кандидата завершены. Codex непроверенный из-за отклонений порядка чтения; Claude непроверенный, пропущен; итог непроверенный. Публикация — следующий этап.
+Updated: 2026-10-10T10:14:53.915063+02:00
 
 ## Предыдущая остановка
 

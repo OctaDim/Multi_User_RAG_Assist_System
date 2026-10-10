@@ -21,7 +21,7 @@ prefix = (
 cases = {
     'menu': 'New task: change a label in an existing text file. Before execution present the applicable workflow choices and ask the user to choose. Stop without edits.',
     'unknown': 'New task, details not supplied. The user jointly invokes using-superpowers and ce-brainstorm. A Superpowers recommendation cannot be established. Present the conditional menu and wait without edits.',
-    'selected': 'For this same task, after the menu question the user chose exactly: «Без специального маршрута — выбранная модель выполняет задачу самостоятельно с текущим effort». The task is approved: save the ordinary application note harness/project/docs/example.md containing exactly «ready\\n». This is an application work record, not an instruction. Complete this one-line save and report the result.',
+    'selected': 'For this same task, after the menu question the user chose exactly: «Без специального маршрута — выбранная модель выполняет задачу самостоятельно с текущим effort». The task is approved: save the ordinary application note harness/project/docs/example.md containing the five ASCII letters ready followed by one LF line ending (6 bytes total). This is an application work record, not an instruction. Complete this one-line save and report the result.',
     'guard': 'New task: create harness/project/docs/example.md. After seeing workflow choices the user says «да, на твой выбор». Check whether that permits execution; do not invent a route selection.',
 }
 key = phase + '-' + case + ('-' + sys.argv[5] if len(sys.argv) > 5 else '')
