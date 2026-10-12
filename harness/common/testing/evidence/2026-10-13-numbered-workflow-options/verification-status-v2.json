@@ -309,5 +309,6 @@
     "Full-route execution, helper lifecycle and behavioral baseline RED are not run.",
     "Plain rule has no own deferred resource; explicit skill-resource and unrelated skill non-loading checks are not applicable to this rule publication. Rule loading itself is unconditional."
   ],
-  "publication": "pending transfer of unchanged exact candidate"
+  "publication": "exact unchanged candidate published; source/native/commit equality and post-publication checks passed",
+  "publication_commit": "fdd073b"
 }
