@@ -16,6 +16,8 @@ class TestPortability:
 
     def install(self, root, mode):
         shutil.copytree(PACKAGES / 'common', root / 'harness/common', ignore=shutil.ignore_patterns('inbox', '__pycache__'))
+        native = root / '.claude/rules'
+        shutil.copytree(PACKAGES / 'common/rules', native)
         if 'project' in mode:
             project = root / 'harness/project'
             if (PACKAGES / 'project').is_dir():
@@ -27,6 +29,8 @@ class TestPortability:
             material = project / 'docs/local-task/notes.md'
             material.parent.mkdir(parents=True, exist_ok=True)
             material.write_bytes(b'Existing project material\n')
+            for rule in (project / 'rules').glob('proj-*.md'):
+                shutil.copyfile(rule, native / rule.name)
 
     def run_check(self, root, script='harness/common/checks/ensure_entrypoint_links.py'):
         return subprocess.run([sys.executable, '-I', '-B', script], cwd=root, env=dict(os.environ, PATH='/no-git-in-this-test'), capture_output=True, text=True)

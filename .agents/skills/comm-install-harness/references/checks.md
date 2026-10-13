@@ -5,8 +5,10 @@ application/project; project requires common. Common-only copies common, then
 its checker creates only an absent neutral project from explicit agreed
 `harness/common/base/project-skeleton.json`: categories, INDEX/START/human guides,
 no old work, with project/testing/evidence/work and harness branches, without inbox/extra confirmation. Combined preserves existing
-project bytes, no replacement or automatic category additions. Missing/unsafe
-mandatory resources fail. Project-only refuses before writes, not a third mode.
+project bytes, no replacement or automatic category additions. Missing/unsafe/empty/non-UTF-8 START/INDEX fail before repair. Install the full
+ordinary canonical comm-/proj- rule set and equal native copies before startup;
+missing/extra/different copies or unreadable paths refuse, never auto-publish
+them. Personal nested rules and human guides are not extra canonical copies. Project-only refuses before writes, not a third mode.
 
 From target root run `python3 -B harness/common/checks/ensure_entrypoint_links.py`.
 It restores only startup links/rules-reading instruction, with notice before
