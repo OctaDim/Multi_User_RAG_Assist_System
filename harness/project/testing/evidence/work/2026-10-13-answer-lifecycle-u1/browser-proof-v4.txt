@@ -1,0 +1,37 @@
+127.0.0.1 - - [13/Oct/2026 14:30:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:30] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:30] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:30:30] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [13/Oct/2026 14:30:30] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [13/Oct/2026 14:30:30] "GET / HTTP/1.1" 304 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+.127.0.0.1 - - [13/Oct/2026 14:30:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:32] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:32] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:30:32] "GET / HTTP/1.1" 304 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+.127.0.0.1 - - [13/Oct/2026 14:30:33] "GET /?restore-proof HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:33] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:33] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:30:33] "GET / HTTP/1.1" 200 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+restore navigation=back_forward, draft=''
+.127.0.0.1 - - [13/Oct/2026 14:30:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:34] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:34] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:30:34] "GET / HTTP/1.1" 304 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+.127.0.0.1 - - [13/Oct/2026 14:30:35] "GET /?duplicate-proof HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:36] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:36] "GET /favicon.ico HTTP/1.1" 404 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+duplicate navigation=back_forward
+.127.0.0.1 - - [13/Oct/2026 14:30:37] "GET /?restart-proof HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:30:37] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:37] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:30:38] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:30:38] "GET /favicon.ico HTTP/1.1" 404 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+restart navigation=back_forward
+.
+6 passed in 8.96s

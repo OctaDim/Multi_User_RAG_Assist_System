@@ -1,0 +1,152 @@
+EEEE
+==================================== ERRORS ====================================
+_ ERROR at setup of test_reload_keeps_independent_conversation_and_tab_drafts __
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-27/test_reload_keeps_independent_0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+>       server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_draft_lifecycle.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <socket.socket fd=-1, family=0, type=0, proto=0>
+family = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>
+proto = 0, fileno = None
+
+    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):
+        # For user code address family and type values are IntEnum members, but
+        # for the underlying _socket.socket they're just integers. The
+        # constructor of _socket.socket converts the given argument to an
+        # integer automatically.
+        if fileno is None:
+            if family == -1:
+                family = AF_INET
+            if type == -1:
+                type = SOCK_STREAM
+            if proto == -1:
+                proto = 0
+>       _socket.socket.__init__(self, family, type, proto, fileno)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socket.py:233: PermissionError
+_ ERROR at setup of test_close_and_new_tab_discards_drafts_without_changing_neighbor _
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-27/test_close_and_new_tab_discard0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+>       server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_draft_lifecycle.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <socket.socket fd=-1, family=0, type=0, proto=0>
+family = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>
+proto = 0, fileno = None
+
+    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):
+        # For user code address family and type values are IntEnum members, but
+        # for the underlying _socket.socket they're just integers. The
+        # constructor of _socket.socket converts the given argument to an
+        # integer automatically.
+        if fileno is None:
+            if family == -1:
+                family = AF_INET
+            if type == -1:
+                type = SOCK_STREAM
+            if proto == -1:
+                proto = 0
+>       _socket.socket.__init__(self, family, type, proto, fileno)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socket.py:233: PermissionError
+____ ERROR at setup of test_browser_restore_does_not_restore_closed_drafts _____
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-27/test_browser_restore_does_not_0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+>       server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_draft_lifecycle.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <socket.socket fd=-1, family=0, type=0, proto=0>
+family = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>
+proto = 0, fileno = None
+
+    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):
+        # For user code address family and type values are IntEnum members, but
+        # for the underlying _socket.socket they're just integers. The
+        # constructor of _socket.socket converts the given argument to an
+        # integer automatically.
+        if fileno is None:
+            if family == -1:
+                family = AF_INET
+            if type == -1:
+                type = SOCK_STREAM
+            if proto == -1:
+                proto = 0
+>       _socket.socket.__init__(self, family, type, proto, fileno)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socket.py:233: PermissionError
+____________ ERROR at setup of test_opener_has_an_independent_draft ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-27/test_opener_has_an_independent0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+>       server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_draft_lifecycle.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <socket.socket fd=-1, family=0, type=0, proto=0>
+family = <AddressFamily.AF_INET: 2>, type = <SocketKind.SOCK_STREAM: 1>
+proto = 0, fileno = None
+
+    def __init__(self, family=-1, type=-1, proto=-1, fileno=None):
+        # For user code address family and type values are IntEnum members, but
+        # for the underlying _socket.socket they're just integers. The
+        # constructor of _socket.socket converts the given argument to an
+        # integer automatically.
+        if fileno is None:
+            if family == -1:
+                family = AF_INET
+            if type == -1:
+                type = SOCK_STREAM
+            if proto == -1:
+                proto = 0
+>       _socket.socket.__init__(self, family, type, proto, fileno)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/socket.py:233: PermissionError
+=========================== short test summary info ============================
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_reload_keeps_independent_conversation_and_tab_drafts
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_close_and_new_tab_discards_drafts_without_changing_neighbor
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_browser_restore_does_not_restore_closed_drafts
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_opener_has_an_independent_draft
+4 errors in 0.31s

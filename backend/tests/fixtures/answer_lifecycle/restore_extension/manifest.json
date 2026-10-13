@@ -1,0 +1,7 @@
+{
+  "manifest_version": 3,
+  "name": "U1 browser restore proof",
+  "version": "1.0",
+  "permissions": ["sessions", "tabs"],
+  "background": {"service_worker": "background.js"}
+}

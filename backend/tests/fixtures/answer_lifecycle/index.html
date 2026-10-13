@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>U1: жизненный цикл черновика</title>
+<label>Беседа <select id="conversation"><option>A</option><option>B</option></select></label>
+<label>Черновик <textarea id="draft"></textarea></label>
+<script type="module">
+// U1 candidate only: exercise KTD10 before creating the application frontend.
+const navigation = performance.getEntriesByType('navigation')[0].type;
+if (navigation !== 'reload') sessionStorage.clear();
+if (!sessionStorage.getItem('fixture-tab-id')) {
+  sessionStorage.setItem('fixture-tab-id', crypto.randomUUID());
+}
+const conversation = document.querySelector('#conversation');
+const draft = document.querySelector('#draft');
+const key = () => `draft:fixture-owner:${conversation.value}`;
+const restore = () => { draft.value = sessionStorage.getItem(key()) ?? ''; };
+conversation.addEventListener('change', restore);
+draft.addEventListener('input', () => sessionStorage.setItem(key(), draft.value));
+restore();
+document.documentElement.dataset.navigation = navigation;
+document.documentElement.dataset.tab = sessionStorage.getItem('fixture-tab-id');
+document.documentElement.dataset.ready = 'true';
+</script>
+</html>

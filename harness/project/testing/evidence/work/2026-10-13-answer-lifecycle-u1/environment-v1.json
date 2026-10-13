@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-13",
+  "python": "3.12.15",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "dependencies": {
+    "llama-cpp-python": "0.3.36",
+    "numpy": "2.5.4",
+    "pytest": "8.4.2",
+    "playwright": "1.49.1"
+  },
+  "native_libraries": {
+    "libggml-base.so": "31bc5513066bbe24aac11eaf98ae3ebd1bcaaaa94f8ff7d06ce94b9d19d1f232",
+    "libggml-cpu.so": "3dc28deb691529573fd3fd850a7efdc3e595298e85a1fac3a15441104806b68a",
+    "libggml.so": "a2dc2170f27723f2c808f5a4bcb2c061dfef4ece170cba1a3e0984a4d381a15e",
+    "libllama.so": "bd4f0f7960973d3e5d7efa5a8c824ea4f233ac6bd18511faf115b27d7d907159",
+    "libmtmd.so": "8b14e6b2096d6e687afae98d5aec1fb5011b9939432d89ebd56b631db7996bc3"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.5-2B-GGUF",
+    "revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+    "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+    "path": "/tmp/rag-answer-lifecycle-models/Qwen3.5-2B-Q4_K_M.gguf"
+  },
+  "native_trace": "native-proof-v1.txt"
+}

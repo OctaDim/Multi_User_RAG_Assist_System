@@ -1,0 +1,144 @@
+EEEE
+==================================== ERRORS ====================================
+_ ERROR at setup of test_reload_keeps_independent_conversation_and_tab_drafts __
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-28/test_reload_keeps_independent_0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        extension = FIXTURE / "restore_extension"
+        try:
+            with sync_playwright() as playwright:
+                context = playwright.chromium.launch_persistent_context(
+                    tmp_path / "profile",
+                    executable_path=playwright.chromium.executable_path,
+                    headless=False,
+                    ignore_default_args=["--disable-extensions"],
+                    args=[
+                        f"--disable-extensions-except={extension}",
+                        f"--load-extension={extension}",
+                    ],
+                )
+                try:
+                    worker = (
+                        context.service_workers[0]
+                        if context.service_workers
+                        else context.wait_for_event("serviceworker")
+                    )
+>                   print(f"browser={context.browser.version}")
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'NoneType' object has no attribute 'version'
+
+backend/tests/browser/test_draft_lifecycle.py:40: AttributeError
+_ ERROR at setup of test_close_and_new_tab_discards_drafts_without_changing_neighbor _
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-28/test_close_and_new_tab_discard0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        extension = FIXTURE / "restore_extension"
+        try:
+            with sync_playwright() as playwright:
+                context = playwright.chromium.launch_persistent_context(
+                    tmp_path / "profile",
+                    executable_path=playwright.chromium.executable_path,
+                    headless=False,
+                    ignore_default_args=["--disable-extensions"],
+                    args=[
+                        f"--disable-extensions-except={extension}",
+                        f"--load-extension={extension}",
+                    ],
+                )
+                try:
+                    worker = (
+                        context.service_workers[0]
+                        if context.service_workers
+                        else context.wait_for_event("serviceworker")
+                    )
+>                   print(f"browser={context.browser.version}")
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'NoneType' object has no attribute 'version'
+
+backend/tests/browser/test_draft_lifecycle.py:40: AttributeError
+____ ERROR at setup of test_browser_restore_does_not_restore_closed_drafts _____
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-28/test_browser_restore_does_not_0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        extension = FIXTURE / "restore_extension"
+        try:
+            with sync_playwright() as playwright:
+                context = playwright.chromium.launch_persistent_context(
+                    tmp_path / "profile",
+                    executable_path=playwright.chromium.executable_path,
+                    headless=False,
+                    ignore_default_args=["--disable-extensions"],
+                    args=[
+                        f"--disable-extensions-except={extension}",
+                        f"--load-extension={extension}",
+                    ],
+                )
+                try:
+                    worker = (
+                        context.service_workers[0]
+                        if context.service_workers
+                        else context.wait_for_event("serviceworker")
+                    )
+>                   print(f"browser={context.browser.version}")
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'NoneType' object has no attribute 'version'
+
+backend/tests/browser/test_draft_lifecycle.py:40: AttributeError
+____________ ERROR at setup of test_opener_has_an_independent_draft ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-28/test_opener_has_an_independent0')
+
+    @pytest.fixture
+    def browser_session(tmp_path):
+        handler = partial(SimpleHTTPRequestHandler, directory=str(FIXTURE))
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        extension = FIXTURE / "restore_extension"
+        try:
+            with sync_playwright() as playwright:
+                context = playwright.chromium.launch_persistent_context(
+                    tmp_path / "profile",
+                    executable_path=playwright.chromium.executable_path,
+                    headless=False,
+                    ignore_default_args=["--disable-extensions"],
+                    args=[
+                        f"--disable-extensions-except={extension}",
+                        f"--load-extension={extension}",
+                    ],
+                )
+                try:
+                    worker = (
+                        context.service_workers[0]
+                        if context.service_workers
+                        else context.wait_for_event("serviceworker")
+                    )
+>                   print(f"browser={context.browser.version}")
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'NoneType' object has no attribute 'version'
+
+backend/tests/browser/test_draft_lifecycle.py:40: AttributeError
+=========================== short test summary info ============================
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_reload_keeps_independent_conversation_and_tab_drafts
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_close_and_new_tab_discards_drafts_without_changing_neighbor
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_browser_restore_does_not_restore_closed_drafts
+ERROR backend/tests/browser/test_draft_lifecycle.py::test_opener_has_an_independent_draft
+4 errors in 5.23s

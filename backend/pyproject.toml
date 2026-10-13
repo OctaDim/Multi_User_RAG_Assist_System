@@ -1,0 +1,17 @@
+[project]
+name = "rag-answer-lifecycle"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "llama-cpp-python==0.3.36",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.4.2",
+    # Matches the Chromium 1148 binary available for the U1 browser proof.
+    "playwright==1.49.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

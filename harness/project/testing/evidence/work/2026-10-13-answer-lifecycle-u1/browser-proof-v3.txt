@@ -1,0 +1,85 @@
+127.0.0.1 - - [13/Oct/2026 14:28:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:28:41] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:28:41] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:28:41] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [13/Oct/2026 14:28:41] "GET / HTTP/1.1" 304 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+.127.0.0.1 - - [13/Oct/2026 14:28:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:28:42] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:28:42] "GET /favicon.ico HTTP/1.1" 404 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+.127.0.0.1 - - [13/Oct/2026 14:28:44] "GET /?restore-proof HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:28:44] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:28:44] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [13/Oct/2026 14:28:44] "GET / HTTP/1.1" 200 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+restore navigation=back_forward, draft='closed draft must disappear'
+F127.0.0.1 - - [13/Oct/2026 14:28:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Oct/2026 14:28:45] code 404, message File not found
+127.0.0.1 - - [13/Oct/2026 14:28:45] "GET /favicon.ico HTTP/1.1" 404 -
+browser=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+F
+=================================== FAILURES ===================================
+_____________ test_browser_restore_does_not_restore_closed_drafts ______________
+
+browser_session = (<BrowserContext browser=None>, <Worker url='chrome-extension://bnecmegihncpfdjbmhmogmpbknghgaki/background.js'>, 'http://127.0.0.1:38366/')
+
+    def test_browser_restore_does_not_restore_closed_drafts(browser_session):
+        context, worker, url = browser_session
+        closed = open_fixture(context, url + "?restore-proof")
+        neighbor = open_fixture(context, url)
+        closed.locator("#draft").fill("closed draft must disappear")
+        neighbor.locator("#draft").fill("neighbor A")
+        closed_url = closed.url
+        closed.close()
+        with context.expect_page() as restored_page:
+            worker.evaluate(
+                """async url => {
+                    for (let attempt = 0; attempt < 50; attempt++) {
+                        const sessions = await chrome.sessions.getRecentlyClosed();
+                        const entry = sessions.find(item => item.tab?.url === url);
+                        if (entry) return await chrome.sessions.restore(entry.tab.sessionId);
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                    }
+                    throw new Error('The closed browser tab was not recorded');
+                }""",
+                closed_url,
+            )
+        restored = restored_page.value
+        expect(restored.locator("html")).to_have_attribute("data-ready", "true")
+        observed = restored.locator("#draft").input_value()
+        print(f"restore navigation={restored.locator('html').get_attribute('data-navigation')}, draft={observed!r}")
+        expect(neighbor.locator("#draft")).to_have_value("neighbor A")
+>       assert observed == "", "R27/G2 failed: the browser restored the closed tab's draft"
+E       AssertionError: R27/G2 failed: the browser restored the closed tab's draft
+E       assert 'closed draft must disappear' == ''
+E         
+E         + closed draft must disappear
+
+backend/tests/browser/test_draft_lifecycle.py:110: AssertionError
+_____________________ test_opener_has_an_independent_draft _____________________
+
+browser_session = (<BrowserContext browser=None>, <Worker url='chrome-extension://bnecmegihncpfdjbmhmogmpbknghgaki/background.js'>, 'http://127.0.0.1:37874/')
+
+    def test_opener_has_an_independent_draft(browser_session):
+        context, _, url = browser_session
+        original = open_fixture(context, url)
+        original.locator("#draft").fill("original draft")
+        with context.expect_page() as opened_page:
+            original.evaluate("url => window.open(url)", url)
+        opened = opened_page.value
+        expect(opened.locator("html")).to_have_attribute("data-ready", "true")
+>       expect(opened.locator("#draft")).to_have_value("")
+E       AssertionError: Locator expected to have Value ''
+E       Actual value: original draft 
+E       Call log:
+E         - LocatorAssertions.to_have_value with timeout 5000ms
+E         -   - waiting for locator("#draft")
+E         -     9 × locator resolved to <textarea id="draft"></textarea>
+E         -       - unexpected value "original draft"
+
+backend/tests/browser/test_draft_lifecycle.py:121: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_draft_lifecycle.py::test_browser_restore_does_not_restore_closed_drafts
+FAILED backend/tests/browser/test_draft_lifecycle.py::test_opener_has_an_independent_draft
+2 failed, 2 passed in 10.70s
