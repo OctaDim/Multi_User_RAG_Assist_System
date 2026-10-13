@@ -1,0 +1,160 @@
+{
+  "created": "2026-10-13",
+  "purpose": "application_task_issue_publication",
+  "result": "completed",
+  "repository": "OctaDim/Multi_User_RAG_Assist_System",
+  "source": {
+    "path": "harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md",
+    "commit": "3f2196ce5da2530f1f791b25be41a7096793097d",
+    "sha256": "a8aa22842c61f6e6a23dcf99f2314e8730458894cfa130eff120c38e9a72f435",
+    "git_blob_sha": "adcf4a20073559907a20801b03849caa936d756c",
+    "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/blob/3f2196ce5da2530f1f791b25be41a7096793097d/harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md"
+  },
+  "overview": {
+    "number": 1,
+    "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/1",
+    "title": "feat(rag): реализовать RAG Answer Lifecycle по согласованному плану"
+  },
+  "units": [
+    {
+      "unit": "U1",
+      "number": 2,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/2",
+      "title": "feat(rag): U1: проверить runtime 12/3 и жизненный цикл черновиков",
+      "dependencies": [],
+      "depends_on_issue_numbers": []
+    },
+    {
+      "unit": "U2",
+      "number": 3,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/3",
+      "title": "feat(rag): U2: сохранять приём вопросов, историю и настройки",
+      "dependencies": [
+        "U1"
+      ],
+      "depends_on_issue_numbers": [
+        2
+      ]
+    },
+    {
+      "unit": "U3",
+      "number": 4,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/4",
+      "title": "feat(rag): U3: реализовать разрешённый поиск, контекст и паспорт ответа",
+      "dependencies": [
+        "U2"
+      ],
+      "depends_on_issue_numbers": [
+        3
+      ]
+    },
+    {
+      "unit": "U4",
+      "number": 5,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/5",
+      "title": "feat(rag): U4: реализовать общий справедливый координатор генерации",
+      "dependencies": [
+        "U1",
+        "U2",
+        "U3"
+      ],
+      "depends_on_issue_numbers": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "unit": "U5",
+      "number": 6,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/6",
+      "title": "feat(rag): U5: доставлять SSE-состояние и восстанавливать инициирующую вкладку",
+      "dependencies": [
+        "U2",
+        "U4"
+      ],
+      "depends_on_issue_numbers": [
+        3,
+        5
+      ]
+    },
+    {
+      "unit": "U6",
+      "number": 7,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/7",
+      "title": "feat(rag): U6: реализовать интерфейс ответа и независимые черновики",
+      "dependencies": [
+        "U1",
+        "U3",
+        "U5"
+      ],
+      "depends_on_issue_numbers": [
+        2,
+        4,
+        6
+      ]
+    },
+    {
+      "unit": "U7",
+      "number": 8,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/8",
+      "title": "feat(rag): U7: инвалидировать источники и восстанавливать потерянные исполнения",
+      "dependencies": [
+        "U2",
+        "U3",
+        "U4",
+        "U5"
+      ],
+      "depends_on_issue_numbers": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "unit": "U8",
+      "number": 9,
+      "url": "https://github.com/OctaDim/Multi_User_RAG_Assist_System/issues/9",
+      "title": "feat(rag): U8: проверить жизненный цикл ответа в совместной интеграции",
+      "dependencies": [
+        "U1",
+        "U2",
+        "U3",
+        "U4",
+        "U5",
+        "U6",
+        "U7"
+      ],
+      "depends_on_issue_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  ],
+  "verification": {
+    "all_titles_urls_states": true,
+    "unit_bodies_matched": 8,
+    "overview": {
+      "overview_sha256": "0671a74a96130493dc404198970903bea01acdaa0a6cc73052b1148e8e1205ad",
+      "overview_characters": 38125,
+      "published_body_match": true
+    },
+    "count": 9,
+    "body_normalization": "CRLF normalized to LF; trailing LF ignored",
+    "issue_source": "GitHub REST via authenticated gh CLI; read after create/update",
+    "existing_issues_before_creation": 0
+  },
+  "implementation_started": false,
+  "application_runtime_and_browser_tests": "not_run_issue_publication_only",
+  "remaining_implementation_prerequisites": [
+    "G1 runtime12/3 proof",
+    "G2 close/refresh/restore browser proof",
+    "G3–G5 real auth/document/deployment integration"
+  ]
+}
