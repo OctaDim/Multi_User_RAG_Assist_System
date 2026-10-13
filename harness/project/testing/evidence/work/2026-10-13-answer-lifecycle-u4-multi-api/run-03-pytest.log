@@ -1,0 +1,3 @@
+{"proof": "two_actual_api_processes", "epoch": 2, "native_pid": 164378, "source_similarity": 0.8862648269811405, "default_active": 12, "waiting": "2cea9434-fba5-4e7d-b676-2cf43ecf1473", "rss_at_twelve_bytes": 3492691968, "rounds": [[34, 35, 36, 37], [38, 39, 40, 41, 42, 43], [53, 54, 55], [56, 57, 58]], "all_native_release_acks": 19, "logs": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-u4-multi-api"}
+.
+1 passed in 63.95s (0:01:03)

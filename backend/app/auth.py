@@ -20,7 +20,11 @@ def bearer(authorization):
 
 async def lock_service(connection, *, exclusive=False):
     mode = "UPDATE" if exclusive else "SHARE"
-    return await (await connection.execute(f"SELECT *, healthy_until>clock_timestamp() AS healthy FROM service_state WHERE id=1 FOR {mode}")).fetchone()
+    return await (await connection.execute(
+        f'''SELECT s.id,s.epoch,coalesce(l.healthy_until>clock_timestamp(),false) AS healthy
+            FROM service_state s LEFT JOIN coordinator_lease l ON l.id=s.id AND l.epoch=s.epoch
+            WHERE s.id=1 FOR {mode} OF s''',
+    )).fetchone()
 
 
 async def principal(connection, token):

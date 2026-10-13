@@ -1,0 +1,18 @@
+INFO:     Started server process [163404]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:38370 (Press CTRL+C to quit)
+INFO:     127.0.0.1:41381 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41385 - "POST /api/conversations/f8303aea-c44c-4ef9-80fa-10e848c333bd/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41401 - "POST /api/conversations/1ad1df39-b04f-4594-82d1-3e49c61b9eeb/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41417 - "POST /api/conversations/999bbeea-d0ab-4b56-85a9-7f6b57ecbe29/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41431 - "POST /api/conversations/0c7237b9-f9b6-4347-87ba-bffa26fe8bec/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41433 - "POST /api/conversations/c78935fd-155b-460d-bb68-301846b2ba1f/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41437 - "POST /api/conversations/29b578ab-ff98-4876-9614-3f28a2e530d7/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41439 - "POST /api/conversations/c54329e6-76c7-4bee-bd00-2e108ccbd4ee/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39993 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40001 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [163404]

@@ -1,0 +1,52 @@
+{
+  "proof": "two_actual_api_processes",
+  "epoch": 2,
+  "native_pid": 164378,
+  "source_similarity": 0.8862648269811405,
+  "default_active": 12,
+  "waiting": "2cea9434-fba5-4e7d-b676-2cf43ecf1473",
+  "rss_at_twelve_bytes": 3492691968,
+  "rounds": [
+    [
+      34,
+      35,
+      36,
+      37
+    ],
+    [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43
+    ],
+    [
+      53,
+      54,
+      55
+    ],
+    [
+      56,
+      57,
+      58
+    ]
+  ],
+  "all_native_release_acks": 19,
+  "logs": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-u4-multi-api",
+  "prompt_token_range": [
+    2147,
+    2147
+  ],
+  "allocations": 19,
+  "release_acks": 19,
+  "native_promotion_phases": [
+    "prefill"
+  ],
+  "actual_api_pids": {
+    "run-03-api-1.log": "INFO:     Started server process [164409]",
+    "run-03-api-2.log": "INFO:     Started server process [164430]",
+    "run-03-api-1-restarted.log": "INFO:     Started server process [164596]"
+  },
+  "plan_sha256": "a8aa22842c61f6e6a23dcf99f2314e8730458894cfa130eff120c38e9a72f435"
+}

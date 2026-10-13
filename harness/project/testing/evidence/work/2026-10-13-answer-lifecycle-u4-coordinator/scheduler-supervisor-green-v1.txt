@@ -1,0 +1,56 @@
+......F
+=================================== FAILURES ===================================
+_________ test_real_supervisor_reaps_native_process_before_replacement _________
+
+environment = {'admin': {'id': UUID('a1696e9e-54bc-4da6-8a6c-10a7f3f7fc7c'), 'token': 'cc493f2d673c49f99cd56f3afd9174b6'}, 'chunk': ...ersation': UUID('d5cbbf88-b70a-4d6c-a255-d81fd1e82cb9'), 'document': UUID('0bac426a-ef25-485b-a996-5543bec7ea25'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_96cc7428a49a42da9b91229f2057efa3) at 0x7a753541ce30>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-48/test_real_supervisor_reaps_nat0')
+
+    async def test_real_supervisor_reaps_native_process_before_replacement(environment, connection, tmp_path):
+        env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+        processes = []
+        logs = []
+    
+        def launch(name):
+            log = tmp_path / name
+            out = log.open('wb')
+            logs.append(out)
+            process = subprocess.Popen([sys.executable, '-m', 'app.generation'], cwd='backend',
+                                       env=env, stdout=out, stderr=subprocess.STDOUT)
+            processes.append(process)
+            return process, log
+    
+        async def healthy_after(epoch):
+            row = await (await connection.execute('SELECT *,healthy_until>clock_timestamp() AS healthy FROM service_state')).fetchone()
+            return row if row['epoch'] > epoch and row['healthy'] else None
+    
+        def owner(log):
+            return next(json.loads(line) for line in log.read_text().splitlines() if line.startswith('{"event": "native_spawn"'))
+    
+        try:
+            first, first_log = launch('first-supervisor.log')
+>           service = await wait_for(lambda: healthy_after(1))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_service_recovery.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_service_recovery.py:18: in wait_for
+    value = await predicate()
+            ^^^^^^^^^^^^^^^^^
+backend/tests/test_service_recovery.py:40: in healthy_after
+    row = await (await connection.execute('SELECT *,healthy_until>clock_timestamp() AS healthy FROM service_state')).fetchone()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/psycopg/cursor_async.py:252: in fetchone
+    record = self._tx.load_row(self._pos, self._make_row)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg_binary/_psycopg/transform.pyx:515: in psycopg_binary._psycopg.Transformer.load_row
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   psycopg.DataError: timestamp too small (before year 1): '-infinity'
+
+psycopg_binary/types/datetime.pyx:796: DataError
+=========================== short test summary info ============================
+FAILED backend/tests/test_service_recovery.py::test_real_supervisor_reaps_native_process_before_replacement
+1 failed, 6 passed in 9.59s

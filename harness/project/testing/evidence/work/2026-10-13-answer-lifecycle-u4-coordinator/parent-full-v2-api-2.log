@@ -1,0 +1,47 @@
+INFO:     Started server process [174812]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:38458 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38595 - "POST /api/conversations/8a26041d-7989-44f6-a012-5f9101969634/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38597 - "POST /api/conversations/ab333837-5e3e-4ee7-b409-fc88eb3b5f31/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38613 - "POST /api/conversations/fd1f7e95-b4b4-4250-b0d1-c6896a8dcfb8/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38623 - "POST /api/conversations/488575c8-0360-451d-96e3-dee5f421815f/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38639 - "POST /api/conversations/f077ea9c-a8b0-4f2c-8816-97d3419ec535/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38649 - "POST /api/conversations/ce37bc33-d15d-44f4-adea-9823a2a484e1/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38665 - "POST /api/conversations/c6260db5-cc06-4f7b-9328-be3669f4744d/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39789 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39799 - "GET /api/conversations/42e02946-5305-4b3d-a792-ca284e36ecc8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39805 - "POST /api/answers/1f94ada9-18cb-44aa-840d-355295abad30/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39815 - "POST /api/answers/bec9c937-ee86-443c-8a9f-543e6e880661/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39821 - "POST /api/answers/bff33336-2aac-49af-a0da-3674a16c8a8b/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39837 - "POST /api/answers/645ba3f4-9c95-4a29-a336-c915b22f9ce6/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39851 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40051 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40059 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40073 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40089 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40101 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40117 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40127 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40143 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40155 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40159 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40167 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40173 - "POST /api/conversations/c1b82ae5-efbe-4e29-b94f-98f39b165c80/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40177 - "POST /api/conversations/a98e7a66-49b9-4396-8e14-20b195fb1ac0/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40183 - "POST /api/conversations/b83aee38-6658-47d1-a1b0-48e005303098/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40771 - "GET /api/conversations/42e02946-5305-4b3d-a792-ca284e36ecc8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40781 - "POST /api/answers/1f94ada9-18cb-44aa-840d-355295abad30/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40783 - "POST /api/answers/bec9c937-ee86-443c-8a9f-543e6e880661/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40787 - "POST /api/answers/bff33336-2aac-49af-a0da-3674a16c8a8b/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40797 - "POST /api/answers/645ba3f4-9c95-4a29-a336-c915b22f9ce6/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40813 - "POST /api/answers/b5fb8164-963c-49e4-a2f3-5f3a89042511/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40829 - "POST /api/answers/bd730dc6-189d-4b63-9ec0-d80add9abef7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40837 - "POST /api/answers/842952d8-690d-42ce-97ff-04a3adb8d9e8/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40847 - "POST /api/answers/d268f091-8803-4e8d-a5dd-bd2b27dd8d41/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40849 - "POST /api/answers/6c085b41-9350-444a-a6b9-49a2c2f8fd0b/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40857 - "POST /api/answers/b8a0de00-9d8d-4e30-896b-94add81235eb/stop HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [174812]

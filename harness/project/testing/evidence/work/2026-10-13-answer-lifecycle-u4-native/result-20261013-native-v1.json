@@ -1,0 +1,54 @@
+{
+  "recorded_at_utc": "2026-10-13T14:30:46.920818+00:00",
+  "status": "complete native boundary; overall U4 remains parent-owned",
+  "plan_path": "harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md",
+  "plan_sha256": "a8aa22842c61f6e6a23dcf99f2314e8730458894cfa130eff120c38e9a72f435",
+  "behavior_changed": true,
+  "existing_tests_inspected": [
+    "backend/tests/runtime/test_generation_contract.py"
+  ],
+  "tests_added_or_changed": [
+    "backend/tests/runtime/test_production_runtime.py"
+  ],
+  "tests_used_unchanged": [
+    "NativeContext isolated prefix baseline from U1"
+  ],
+  "red_observed_before_production": "Collection failed: ModuleNotFoundError: app.llama_runtime; exit 2",
+  "command": "RAG_MODEL_PATH=/tmp/rag-answer-lifecycle-models/Qwen3.5-2B-Q4_K_M.gguf uv run --cache-dir /tmp/rag-answer-lifecycle-uv-cache --project backend --no-sync pytest -s backend/tests/runtime/test_production_runtime.py",
+  "green_results": [
+    "5 passed in 9.50s",
+    "5 passed in 39.42s (strengthened complete 4096 prefill and shutdown check)"
+  ],
+  "proofs": [
+    "2 independent native contexts match unchanged U1 standalone 8-token prefixes; survivor advances after sibling releases",
+    "Real Russian output reached EOS in 11 tokens, complete UTF8 byte reconstruction equals delivered text",
+    "Actual oversized prompt 15013 tokens rejects before allocation; full 4096 prompt evaluates in 128 advances of 32 and returns context_limit",
+    "Real native abort callback runs inside decode; close waits until decode returns and then frees sampler/context; duplicate ACK safe",
+    "Injected sampler allocation failure frees the actual partially allocated native context",
+    "Runtime teardown closes outstanding native context/sampler before model free"
+  ],
+  "raw_logs": [
+    {
+      "path": "green-20261013T-native-01.log",
+      "sha256": "967a72b2e4f29c24ec3d30b6060b1a8d4c5a0a2e15b3e63eb7a285b46a8fd83c"
+    },
+    {
+      "path": "green-20261013T-native-02.log",
+      "sha256": "13cc040ec77ad00622b6e53ecaa30025266e64e04f2c164a21605b9a5fa5708f"
+    },
+    {
+      "path": "red-20261013T-native-import.log",
+      "sha256": "418419acd7aebae7de4f19e4172c068aeb49a3fb520d9c77695db4c88fcb3df3"
+    }
+  ],
+  "capacity_boundary": "No physical capacity beyond already measured U1 12 claimed; max_active and step_width are coordinator responsibilities; no new settings cap",
+  "not_built": [
+    "Speculative decoding",
+    "Output truncation or hidden clamp",
+    "Auto download or retry",
+    "HTTP completion wrapper",
+    "Coordinator/supervisor in worker"
+  ],
+  "not_checked": "Parent owns canonical integrated runtime/scheduler, two API processes, settings, supervisor and full U4 acceptance.",
+  "standalone_shipping_skipped": true
+}

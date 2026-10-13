@@ -1,0 +1,18 @@
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_service_recovery.py ________________
+ImportError while importing test module '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_service_recovery.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/test_service_recovery.py:10: in <module>
+    from app.generation import Supervisor
+E   ImportError: cannot import name 'Supervisor' from 'app.generation' (/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py)
+------------------------------- Captured stderr --------------------------------
+[0;93m2026-10-13 17:41:09.901994926 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+=========================== short test summary info ============================
+ERROR backend/tests/test_service_recovery.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.21s

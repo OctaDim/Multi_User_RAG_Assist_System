@@ -1,0 +1,157 @@
+import asyncio
+import json
+import os
+from pathlib import Path
+import signal
+import subprocess
+import sys
+from time import monotonic
+
+import pytest
+
+from test_scheduler import submit
+
+
+async def wait_for(predicate, timeout=30):
+    until = monotonic() + timeout
+    while monotonic() < until:
+        value = await predicate()
+        if value:
+            return value
+        await asyncio.sleep(0.05)
+    raise AssertionError('Expected process state was not reached')
+
+
+@pytest.mark.parametrize('mode', ['SHARE', 'UPDATE'])
+async def test_application_service_lock_does_not_cancel_healthy_supervisor(environment, connection, tmp_path, mode):
+    path = tmp_path / 'healthy-supervisor.log'
+    env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+    native_pid = None
+    with path.open('xb') as log:
+        process = subprocess.Popen([sys.executable, '-m', 'app.generation'], cwd='backend',
+                                   env=env, stdout=log, stderr=subprocess.STDOUT)
+        try:
+            async def ready():
+                assert process.poll() is None, path.read_text()
+                row = await (await connection.execute('SELECT s.epoch,l.healthy_until>clock_timestamp() AS healthy FROM service_state s JOIN coordinator_lease l USING(id,epoch)')).fetchone()
+                return row if row['epoch'] > 1 and row['healthy'] else None
+
+            service = await wait_for(ready)
+            native_pid = next(json.loads(line)['pid'] for line in path.read_text().splitlines()
+                              if line.startswith('{"event": "native_spawn"'))
+            async with connection.transaction():
+                await connection.execute(f'SELECT id FROM service_state WHERE id=1 FOR {mode}')
+                await asyncio.sleep(1)
+                assert Path(f'/proc/{native_pid}').exists(), 'An application fence is not loss of coordinator ownership'
+            assert (await ready())['epoch'] == service['epoch']
+        finally:
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    await asyncio.to_thread(process.wait, 15)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    await asyncio.to_thread(process.wait, 10)
+            if native_pid is not None:
+                assert not Path(f'/proc/{native_pid}').exists()
+
+
+async def test_real_supervisor_reaps_native_process_before_replacement(environment, connection, tmp_path):
+    env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+    processes = []
+    logs = []
+    decode = tmp_path / 'inside-native-decode'
+    hook = tmp_path / 'native-hook.py'
+    hook.write_text(f'''from pathlib import Path
+import os,time
+from app.llama_runtime import LlamaContext,native
+original=LlamaContext.__init__
+marker=Path({str(decode)!r})
+def initialize(self,*args,**kwargs):
+    original(self,*args,**kwargs)
+    @native.ggml_abort_callback
+    def abort(_):
+        if self.output_tokens and not self._decoder.getstate()[0] and not marker.exists():
+            marker.write_text(str(os.getpid()))
+            while True: time.sleep(0.01)
+        return self._cancelled.is_set()
+    self._test_callback=abort
+    native.llama_set_abort_callback(self.context,abort,None)
+LlamaContext.__init__=initialize
+from app.generation import main
+main()
+''')
+    launcher = tmp_path / 'supervisor-launcher.py'
+    launcher.write_text(f'''from app import generation
+original=generation.subprocess.Popen
+def spawn(args,**kwargs):
+    if '--worker' in args:
+        args=[args[0],{str(hook)!r},*args[3:]]
+    return original(args,**kwargs)
+generation.subprocess.Popen=spawn
+generation.main()
+''')
+
+    def launch(name):
+        log = tmp_path / name
+        out = log.open('wb')
+        logs.append(out)
+        process = subprocess.Popen([sys.executable, str(launcher)], cwd='backend',
+                                   env=env, stdout=out, stderr=subprocess.STDOUT)
+        processes.append(process)
+        return process, log
+
+    async def healthy_after(epoch):
+        row = await (await connection.execute('SELECT s.epoch,l.healthy_until>clock_timestamp() AS healthy FROM service_state s JOIN coordinator_lease l USING(id,epoch)')).fetchone()
+        return row if row['epoch'] > epoch and row['healthy'] else None
+
+    def owner(log):
+        return next(json.loads(line) for line in log.read_text().splitlines() if line.startswith('{"event": "native_spawn"'))
+
+    try:
+        first, first_log = launch('first-supervisor.log')
+        service = await wait_for(lambda: healthy_after(1))
+        predecessor = owner(first_log)
+        competing, competing_log = launch('competing-supervisor.log')
+        assert await asyncio.to_thread(competing.wait, 15) != 0
+        assert 'Generation supervisor already owns this service' in competing_log.read_text()
+        assert 'native_spawn' not in competing_log.read_text()
+        request = await submit(connection, environment)
+
+        async def prefix():
+            row = await (await connection.execute('SELECT * FROM requests WHERE id=%s', (request['id'],))).fetchone()
+            return row if row['answer_text'] and row['state'] == 'generating' else None
+
+        partial = await wait_for(prefix)
+        async def inside_decode():
+            return decode.exists()
+        await wait_for(inside_decode)
+        assert int(decode.read_text()) == predecessor['pid']
+        assert Path(f"/proc/{predecessor['pid']}").exists()
+        assert (await (await connection.execute('SELECT pg_terminate_backend(%s) AS terminated', (predecessor['keeper_pid'],))).fetchone())['terminated']
+        await asyncio.to_thread(first.wait, 15)
+        assert not Path(f"/proc/{predecessor['pid']}").exists(), 'Confirmed reap must precede replacement load'
+        second, second_log = launch('second-supervisor.log')
+        await wait_for(lambda: healthy_after(service['epoch']))
+        replacement = owner(second_log)
+        assert replacement['pid'] != predecessor['pid']
+        row = await (await connection.execute('SELECT * FROM requests WHERE id=%s', (request['id'],))).fetchone()
+        assert row['state'] == 'interrupted' and row['reason'] == 'execution_lost'
+        assert row['answer_text'].startswith(partial['answer_text'])
+        message = await (await connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'", (request['id'],))).fetchone()
+        assert message['text'] == row['answer_text'] and message['excluded']
+        assert (await (await connection.execute('SELECT count(*) AS n FROM events WHERE request_id=%s AND kind=\'state\'', (request['id'],))).fetchone())['n'] == 1
+        print({'proof': 'supervisor_physical_reap', 'predecessor': predecessor, 'replacement': replacement,
+               'saved_prefix_chars': len(row['answer_text']), 'inside_real_native_decode': True,
+               'native_logs': str(tmp_path)}, flush=True)
+    finally:
+        for process in processes:
+            if process.poll() is None:
+                process.send_signal(signal.SIGTERM)
+                try:
+                    await asyncio.to_thread(process.wait, 15)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    await asyncio.to_thread(process.wait, 10)
+        for out in logs:
+            out.close()

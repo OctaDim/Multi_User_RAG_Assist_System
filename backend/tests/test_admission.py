@@ -134,8 +134,12 @@ async def test_failed_transaction_leaves_no_partial_admission(environment, conne
         assert [message["text"] for message in history["messages"]] == ["Question"]
 
 
-async def test_unavailable_coordinator_refuses_before_admission(environment, connection):
-    await connection.execute("UPDATE service_state SET healthy_until=now()-interval '1 second'")
+@pytest.mark.parametrize('initial', [False, True])
+async def test_unavailable_coordinator_refuses_before_admission(environment, connection, initial):
+    if initial:
+        await connection.execute("UPDATE coordinator_lease SET healthy_until='-infinity'")
+    else:
+        await connection.execute("UPDATE coordinator_lease SET healthy_until=now()-interval '1 second'")
     with pytest.raises(AccessError, match="coordinator_unavailable"):
         await send(connection, environment)
     assert await count(connection, "requests") == 0

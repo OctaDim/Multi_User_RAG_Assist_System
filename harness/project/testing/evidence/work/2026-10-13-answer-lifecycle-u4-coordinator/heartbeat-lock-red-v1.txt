@@ -1,0 +1,38 @@
+F
+=================================== FAILURES ===================================
+_______ test_application_service_lock_does_not_cancel_healthy_supervisor _______
+
+environment = {'admin': {'id': UUID('ccad1c6d-7207-4387-a0d4-dfde622993ab'), 'token': '1e49eef6045547cebc02dd4975cf55f1'}, 'chunk': ...ersation': UUID('87b91b5c-432f-48b4-af19-b08163608341'), 'document': UUID('dde76528-f324-455b-8b83-b070a05d7503'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_8bf329e3023c41d9820e0f619d47de82) at 0x73024cbb5010>
+tmp_path = PosixPath('/tmp/rag-u4-heartbeat-red-v1/test_application_service_lock_0')
+
+    async def test_application_service_lock_does_not_cancel_healthy_supervisor(environment, connection, tmp_path):
+        path = tmp_path / 'healthy-supervisor.log'
+        env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+        native_pid = None
+        with path.open('xb') as log:
+            process = subprocess.Popen([sys.executable, '-m', 'app.generation'], cwd='backend',
+                                       env=env, stdout=log, stderr=subprocess.STDOUT)
+            try:
+                async def ready():
+                    assert process.poll() is None, path.read_text()
+                    row = await (await connection.execute('SELECT epoch,healthy_until>clock_timestamp() AS healthy FROM service_state')).fetchone()
+                    return row if row['epoch'] > 1 and row['healthy'] else None
+    
+                service = await wait_for(ready)
+                native_pid = next(json.loads(line)['pid'] for line in path.read_text().splitlines()
+                                  if line.startswith('{"event": "native_spawn"'))
+                async with connection.transaction():
+                    await connection.execute('SELECT id FROM service_state WHERE id=1 FOR SHARE')
+                    await asyncio.sleep(1)
+>                   assert Path(f'/proc/{native_pid}').exists(), 'An application fence is not loss of coordinator ownership'
+E                   AssertionError: An application fence is not loss of coordinator ownership
+E                   assert False
+E                    +  where False = exists()
+E                    +    where exists = PosixPath('/proc/171611').exists
+E                    +      where PosixPath('/proc/171611') = Path('/proc/171611')
+
+backend/tests/test_service_recovery.py:42: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_service_recovery.py::test_application_service_lock_does_not_cancel_healthy_supervisor
+1 failed in 9.09s

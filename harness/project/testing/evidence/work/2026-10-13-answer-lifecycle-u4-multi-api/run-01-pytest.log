@@ -1,0 +1,173 @@
+F
+=================================== FAILURES ===================================
+___ test_two_http_processes_share_native_capacity_fairness_and_hot_settings ____
+
+environment = {'admin': {'id': UUID('551d58e6-e936-4f0f-9095-489f21ad0ecb'), 'token': 'd63ac5f2250d4d65ae731dadb8a35f0d'}, 'chunk': ...ersation': UUID('fefef12b-3148-45b8-99a1-809a70c1d27c'), 'document': UUID('04eb3dc0-8d51-4ec0-b3c6-e225dc76cc5f'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_f5275f60fec24e858be13b257492d7ed) at 0x756575753b00>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-52/test_two_http_processes_share_0')
+
+    async def test_two_http_processes_share_native_capacity_fairness_and_hot_settings(environment, connection, tmp_path):
+        model = Path(os.environ['RAG_MODEL_PATH'])
+        with model.open('rb') as source:
+            assert hashlib.file_digest(source, 'sha256').hexdigest() == 'aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223'
+        embedder = E5Embedder(os.environ['RAG_E5_DIR'])
+        paragraph = ('The annual budget is 100 euros. The approved annual budget is 100 euros. '
+                     'The budget pays for the annual maintenance of the library and its reading rooms. ')
+        passage = paragraph * 55
+        question = 'What is the approved annual budget for the library and its reading rooms?'
+        vector = (await asyncio.to_thread(embedder.encode, [passage]))[0]
+        query = (await asyncio.to_thread(embedder.encode, [question], query=True))[0]
+        similarity = sum(left * right for left, right in zip(vector, query))
+        assert similarity >= 0.75, 'Real fixture passage must meet the unchanged production retrieval threshold'
+        revision, chunk = await seed_revision(connection, environment['document'], text=passage, embedding=vector)
+        del embedder
+    
+        log_directory = Path(os.environ.get('RAG_MULTI_API_EVIDENCE_DIR', tmp_path))
+        run_name = os.environ.get('RAG_MULTI_API_RUN_NAME', 'process')
+        env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+        backend = Path(__file__).parents[2]
+        processes, streams, requests = [], [], []
+        native_pid = None
+        bootstrap = tmp_path / 'trace-generation.py'
+        bootstrap.write_text('''import logging
+    logging.basicConfig(level=logging.DEBUG,format='%(message)s')
+    logging.getLogger('psycopg').setLevel(logging.WARNING)
+    logging.getLogger('psycopg.pool').setLevel(logging.WARNING)
+    from app import generation
+    original=generation.subprocess.Popen
+    def spawn(args,**kwargs):
+        if '--worker' in args:
+            args=[args[0],__file__,*args[3:]]
+        return original(args,**kwargs)
+    generation.subprocess.Popen=spawn
+    generation.main()
+    ''')
+    
+        def launch(name, command):
+            path = log_directory / f'{run_name}-{name}.log'
+            stream = path.open('xb')
+            streams.append(stream)
+            process = subprocess.Popen(command, cwd=backend, env=env, stdout=stream, stderr=subprocess.STDOUT)
+            processes.append(process)
+            return process, path
+    
+        async def stop_process(process):
+            if process.poll() is None:
+                process.send_signal(signal.SIGTERM)
+                try:
+                    await asyncio.to_thread(process.wait, 15)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    await asyncio.to_thread(process.wait, 10)
+    
+        async def api(name):
+            process, log = launch(name, [str(backend / '.venv/bin/rag-api'), '--port', '0'])
+    
+            async def listening():
+                assert process.poll() is None, log.read_text(errors='replace')
+                found = re.search(r'Uvicorn running on (http://127\.0\.0\.1:\d+)', log.read_text(errors='replace'))
+                return found.group(1) if found else None
+    
+            return process, await eventually(listening, 20)
+    
+        async def http(base, method, route, token, payload=None, proof=None):
+            def send():
+                headers = {'Authorization': f'Bearer {token}'}
+                if payload is not None:
+                    headers['Content-Type'] = 'application/json'
+                if proof:
+                    headers['X-Tab-Proof'] = proof
+                body = json.dumps(payload).encode() if payload is not None else None
+                with urlopen(Request(base + route, data=body, headers=headers, method=method), timeout=10) as response:
+                    assert response.status == 200
+                    return json.load(response)
+            return await asyncio.to_thread(send)
+    
+        async def submit(base):
+            conversation, tab, operation, proof = uuid4(), uuid4(), uuid4(), uuid4().hex
+            await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)', (conversation, environment['user']['id']))
+            await connection.execute('INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s)',
+                                     (tab, environment['user']['id'], hashlib.sha256(proof.encode()).hexdigest()))
+            payload = {'operation_key': str(operation), 'question': question,
+                       'document_ids': [str(environment['document'])], 'tab_id': str(tab)}
+            route = f'/api/conversations/{conversation}/answers'
+            result = await http(base, 'POST', route, environment['user']['token'], payload, proof)
+            requests.append(result['id'])
+            return result['id'], route, payload, proof
+    
+        async def applied(base, revision):
+            current = await http(base, 'GET', '/api/settings', environment['super_admin']['token'])
+            return current if current['revision'] == current['applied_revision'] == revision else None
+    
+        async def snapshot(base, request_id):
+            row = await (await connection.execute('SELECT conversation_id FROM requests WHERE id=%s', (request_id,))).fetchone()
+            return await http(base, 'GET', f"/api/conversations/{row['conversation_id']}", environment['user']['token'])
+    
+        try:
+            supervisor, native_log = launch('supervisor', [sys.executable, str(bootstrap)])
+    
+            async def healthy():
+                assert supervisor.poll() is None, native_log.read_text(errors='replace')
+                row = await (await connection.execute('SELECT epoch,healthy_until>clock_timestamp() AS healthy FROM service_state')).fetchone()
+                return row if row['healthy'] and row['epoch'] > 1 else None
+    
+            service = await eventually(healthy)
+            spawn = next(value for value in traces(native_log) if value['event'] == 'native_spawn')
+            native_pid = spawn['pid']
+            first_api, first = await api('api-1')
+            _, second = await api('api-2')
+            initial_settings = await http(first, 'GET', '/api/settings', environment['super_admin']['token'])
+            assert initial_settings['revision'] == 0
+            assert initial_settings['values']['max_active'] == 12 and initial_settings['values']['step_width'] == 3
+            first_request, route, payload, proof = await submit(first)
+            replay = await http(second, 'POST', route, environment['user']['token'], payload, proof)
+            assert replay['id'] == first_request
+            for index in range(1, 13):
+                await submit(second if index % 2 else first)
+            original = set(requests[:12])
+            waiting = requests[12]
+    
+            async def at_capacity():
+                active = live_contexts(traces(native_log))
+                row = await (await connection.execute('SELECT state,passport FROM requests WHERE id=%s', (waiting,))).fetchone()
+                return active if set(active) == original and row['state'] == 'queued' else None
+    
+            pointers = await eventually(at_capacity)
+            assert len(set(pointers.values())) == 12 and all(pointers.values())
+            rss_bytes = int(Path(f'/proc/{native_pid}/statm').read_text().split()[1]) * os.sysconf('SC_PAGE_SIZE')
+    
+            async def fair_round(revision, width, expected, after):
+                events = traces(native_log)
+                steps = [value for value in events[after:] if value['event'] == 'native_step' and value['revision'] == revision]
+                assert all(value['step_width'] == width and len(value['promoted']) <= width for value in steps)
+                for start in range(len(steps)):
+                    batch = steps[start:start + (len(expected) + width - 1) // width]
+                    promoted = [item['request'] for value in batch for item in value['promoted']]
+                    if len(promoted) == len(expected) and set(promoted) == expected:
+                        assert len(set(promoted)) == len(promoted)
+                        return [value['step'] for value in batch]
+                return None
+    
+            baseline_boundary = len(traces(native_log))
+            first_round = await eventually(lambda: fair_round(0, 3, original, baseline_boundary))
+            allocations = [value for value in traces(native_log) if value['event'] == 'native_allocate']
+            assert len(allocations) == 12 and all(1400 <= value['prompt_tokens'] <= 2400 for value in allocations)
+            for request_id in original | {waiting}:
+                row = await (await connection.execute('SELECT passport FROM requests WHERE id=%s', (request_id,))).fetchone()
+                assert [value['id'] for value in row['passport']['passed']] == [str(chunk)]
+                assert row['passport']['passed'][0]['revision_id'] == str(revision)
+    
+            shrink_boundary = len(traces(native_log))
+            saved = await http(second, 'PATCH', '/api/settings', environment['super_admin']['token'], {'max_active': 6, 'step_width': 2})
+            assert saved['revision'] == 1
+            await eventually(lambda: applied(first, 1))
+            shrink_round = await eventually(lambda: fair_round(1, 2, original, shrink_boundary))
+            assert live_contexts(traces(native_log)) == pointers
+>           assert (await snapshot(second, waiting))['active']['state'] == 'queued'
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'active'
+
+tests/integration/test_multi_process.py:213: KeyError
+=========================== short test summary info ============================
+FAILED tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings
+1 failed in 46.99s

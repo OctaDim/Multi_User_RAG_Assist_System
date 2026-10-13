@@ -1,0 +1,50 @@
+INFO:     Started server process [164430]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:38844 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38285 - "POST /api/conversations/5c460134-be30-4237-8bf8-29cf752b92d3/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38289 - "POST /api/conversations/67ff4f5d-af06-40db-9f37-e2e8c9fdee3a/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38305 - "POST /api/conversations/a24e89a9-c03e-45cd-8e35-1d8ac43dc171/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38311 - "POST /api/conversations/a85cabef-a414-451a-9d2d-8cfc0f26f283/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38313 - "POST /api/conversations/f73fc5ec-0d32-4d09-8b0e-bc5d7ad651cc/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38315 - "POST /api/conversations/1093ec2f-952a-4db2-8f7c-ce8defd41071/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38319 - "POST /api/conversations/2bdfd7ed-73bf-465d-9eb5-2ddf84a2c6bb/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41011 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41021 - "GET /api/conversations/6c28c1b6-0999-494f-997b-935bebbd1907 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41033 - "POST /api/answers/2ddf91d3-87e3-4726-9ea6-186a5cb768d7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41043 - "POST /api/answers/93c85a18-22bb-47b5-91d8-78e697a2e8e1/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41047 - "POST /api/answers/bd449184-c6b6-4aaa-94f5-0828c2996444/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41049 - "POST /api/answers/5a03d881-708f-4fa4-ab04-4c2fcc046c47/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41065 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41073 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41075 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41081 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41097 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41103 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41119 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40295 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40301 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40309 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40323 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40331 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40341 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40347 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40351 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40359 - "POST /api/conversations/fcbe8f4f-9501-4610-a088-fc0e5a4109f7/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40371 - "POST /api/conversations/b736accb-58d9-4e90-b355-83e68177869a/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40381 - "POST /api/conversations/11dc5284-335b-4c47-baf4-f1f73664878c/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41063 - "GET /api/conversations/6c28c1b6-0999-494f-997b-935bebbd1907 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40891 - "POST /api/answers/2ddf91d3-87e3-4726-9ea6-186a5cb768d7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40895 - "POST /api/answers/93c85a18-22bb-47b5-91d8-78e697a2e8e1/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40897 - "POST /api/answers/bd449184-c6b6-4aaa-94f5-0828c2996444/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40899 - "POST /api/answers/5a03d881-708f-4fa4-ab04-4c2fcc046c47/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40903 - "POST /api/answers/4423c3f4-93a0-4bb8-b292-e523d059b455/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40911 - "POST /api/answers/afa780a3-c46f-4d1f-91fc-e4924dd4475e/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40921 - "POST /api/answers/2cea9434-fba5-4e7d-b676-2cf43ecf1473/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40937 - "POST /api/answers/8dad8e49-39e3-4799-bdf5-57637243f0d1/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40949 - "POST /api/answers/508cd32e-c8fa-4e46-a658-886470b14b52/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40965 - "POST /api/answers/fcb7bfb0-f23b-470f-b687-989308b26953/stop HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [164430]

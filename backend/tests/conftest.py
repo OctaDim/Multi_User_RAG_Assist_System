@@ -63,7 +63,8 @@ async def environment(postgres):
         await connection.execute("INSERT INTO documents(id,owner_id,ready,deleted) VALUES (%s,%s,true,false)", (data["document"], owner))
         data["revision"], data["chunk"] = await seed_revision(connection, data["document"])
         await connection.execute("INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s)", (data["tab"], owner, hashlib.sha256(data["proof"].encode()).hexdigest()))
-        await connection.execute("UPDATE service_state SET healthy_until=now()+interval '1 hour', epoch=1 WHERE id=1")
+        await connection.execute("UPDATE service_state SET epoch=1 WHERE id=1")
+        await connection.execute("UPDATE coordinator_lease SET healthy_until=now()+interval '1 hour',epoch=1 WHERE id=1")
     try:
         yield data
     finally:

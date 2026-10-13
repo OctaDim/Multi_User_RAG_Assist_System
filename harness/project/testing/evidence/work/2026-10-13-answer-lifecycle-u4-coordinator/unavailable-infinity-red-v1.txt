@@ -1,0 +1,36 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_unavailable_coordinator_refuses_before_admission _____________
+
+environment = {'admin': {'id': UUID('72ba4eaf-5c80-4aba-94dd-2c5bad1425bc'), 'token': '43a3e044a77a44e38774dc0f14245664'}, 'chunk': ...ersation': UUID('6ea4c083-6c47-4384-9d7f-c9e7177f2585'), 'document': UUID('d9de351f-c7fb-4c7f-af53-ccb58c6edd1f'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_68c6b493598448b9a806dff54827dc88) at 0x7120a819b020>
+
+    async def test_unavailable_coordinator_refuses_before_admission(environment, connection):
+        await connection.execute("UPDATE service_state SET healthy_until='-infinity'")
+        with pytest.raises(AccessError, match="coordinator_unavailable"):
+>           await send(connection, environment)
+
+backend/tests/test_admission.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_admission.py:13: in send
+    return await answers.admit(
+backend/app/answers.py:33: in admit
+    service = await lock_service(connection)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/auth.py:23: in lock_service
+    return await (await connection.execute(f"SELECT *, healthy_until>clock_timestamp() AS healthy FROM service_state WHERE id=1 FOR {mode}")).fetchone()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/psycopg/cursor_async.py:252: in fetchone
+    record = self._tx.load_row(self._pos, self._make_row)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg_binary/_psycopg/transform.pyx:515: in psycopg_binary._psycopg.Transformer.load_row
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   ???
+E   psycopg.DataError: timestamp too small (before year 1): '-infinity'
+
+psycopg_binary/types/datetime.pyx:796: DataError
+=========================== short test summary info ============================
+FAILED backend/tests/test_admission.py::test_unavailable_coordinator_refuses_before_admission
+1 failed, 12 deselected in 1.57s
