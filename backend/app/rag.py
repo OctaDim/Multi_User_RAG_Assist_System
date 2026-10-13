@@ -67,6 +67,8 @@ class GuardedSaver(BaseCheckpointSaver):
                    ORDER BY d.id FOR SHARE''',
                 (self.binding['request_id'], self.binding['request_id']),
             )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
             conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
             request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
             stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()

@@ -9,6 +9,7 @@ import re
 import signal
 import subprocess
 import sys
+import threading
 from time import monotonic
 from urllib.request import Request, urlopen
 from uuid import uuid4
@@ -81,6 +82,11 @@ async def test_two_http_processes_share_native_capacity_fairness_and_hot_setting
     backend = Path(__file__).parents[2]
     processes, streams, requests = [], [], []
     native_pid = None
+    presence_thread = None
+    presence_stop = threading.Event()
+    presence_ready = threading.Event()
+    presence_errors = []
+    shared_tab = None
     bootstrap = tmp_path / 'trace-generation.py'
     bootstrap.write_text('''import logging
 logging.basicConfig(level=logging.DEBUG,format='%(message)s')
@@ -137,10 +143,9 @@ generation.main()
         return await asyncio.to_thread(send)
 
     async def submit(base, *, lose_ack=False):
-        conversation, tab, operation, proof = uuid4(), uuid4(), uuid4(), uuid4().hex
+        conversation, operation = uuid4(), uuid4()
+        tab, proof = shared_tab['id'], shared_tab['proof']
         await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)', (conversation, environment['user']['id']))
-        await connection.execute('INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s)',
-                                 (tab, environment['user']['id'], hashlib.sha256(proof.encode()).hexdigest()))
         payload = {'operation_key': str(operation), 'question': question,
                    'document_ids': [str(environment['document'])], 'tab_id': str(tab)}
         route = f'/api/conversations/{conversation}/answers'
@@ -152,6 +157,32 @@ generation.main()
             request_id = result['id']
         requests.append(request_id)
         return request_id, route, payload, proof
+
+    def keep_presence(base, tab):
+        # One actual tab SSE/ACK connection serves all background conversations.
+        # Auth/documents remain component fixtures, not G3/G4 browser acceptance.
+        headers = {'Authorization': f"Bearer {environment['user']['token']}", 'X-Tab-Proof': tab['proof']}
+        try:
+            with urlopen(Request(base + f"/api/tabs/{tab['id']}/events", headers=headers), timeout=10) as response:
+                while not presence_stop.is_set():
+                    line = response.readline()
+                    if not line:
+                        break
+                    if line.startswith(b'data: '):
+                        event = json.loads(line[6:])
+                        if event['kind'] == 'heartbeat':
+                            heartbeat = event['payload']
+                            ack_headers = {**headers, 'X-Connection-Epoch': str(heartbeat['connection_epoch']),
+                                           'X-Heartbeat-Challenge': heartbeat['challenge']}
+                            with urlopen(Request(base + f"/api/tabs/{tab['id']}/heartbeat", headers=ack_headers, data=b'', method='POST'), timeout=10) as ack:
+                                assert json.load(ack)['confirmed']
+                            presence_ready.set()
+                if not presence_stop.is_set():
+                    raise AssertionError('Originating SSE closed before integration completed')
+        except Exception as error:
+            if not presence_stop.is_set():
+                presence_errors.append(error)
+            presence_ready.set()
 
     async def applied(base, revision):
         current = await http(base, 'GET', '/api/settings', environment['super_admin']['token'])
@@ -175,6 +206,12 @@ generation.main()
         native_pid = spawn['pid']
         first_api, first = await api('api-1')
         _, second = await api('api-2')
+        shared_tab = await http(second, 'POST', '/api/tabs', environment['user']['token'])
+        presence_thread = threading.Thread(target=keep_presence, args=(second, shared_tab), daemon=True)
+        presence_thread.start()
+        assert await asyncio.to_thread(presence_ready.wait, 10)
+        assert not presence_errors
+
         initial_settings = await http(first, 'GET', '/api/settings', environment['super_admin']['token'])
         assert initial_settings['revision'] == 0
         assert initial_settings['values']['max_active'] == 12 and initial_settings['values']['step_width'] == 3
@@ -303,9 +340,15 @@ generation.main()
                           'rounds': [first_round, shrink_round, expanded_round, restart_round],
                           'all_native_release_acks': 19, 'logs': str(log_directory)}), flush=True)
     finally:
+        presence_stop.set()
+        if presence_thread:
+            await asyncio.to_thread(presence_thread.join, 10)
         for process in reversed(processes):
             await stop_process(process)
         for stream in streams:
             stream.close()
+        if presence_thread:
+            assert not presence_thread.is_alive()
+            assert not presence_errors
         if native_pid is not None:
             assert not Path(f'/proc/{native_pid}').exists(), 'Supervisor stop must reap its native child'

@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________ test_admission_requires_confirmed_connection _________________
+
+environment = {'admin': {'id': UUID('66243cc5-8e15-4751-8efb-5b895bd9df52'), 'token': '912ce533a75b45cf8284bc6f3302e754'}, 'chunk': ...ersation': UUID('fdd05f96-7e2d-4980-bfc2-3a3e203be744'), 'document': UUID('620428d5-0b37-44af-ace6-4cdc73e97aef'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_e33eeb442a964a608278ad1c5a990df2) at 0x7ef3035cdd00>
+
+    async def test_admission_requires_confirmed_connection(environment, connection):
+        # Existing proof-only fixture is intentionally used for RED before U5.
+        await connection.execute('UPDATE tabs SET connection_epoch=0 WHERE id=%s', (environment['tab'],))
+>       with pytest.raises(AccessError, match='tab_disconnected'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_stream_recovery.py:15: Failed
+=========================== short test summary info ============================
+FAILED backend/tests/test_stream_recovery.py::test_admission_requires_confirmed_connection
+1 failed in 1.31s

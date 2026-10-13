@@ -1,0 +1,23 @@
+{
+  "2026-10-13-u5-green-01.log": "108f80d626d8b816bc6247cb551ab1bc4d581b1fc5c5405554558e6b74e96721",
+  "2026-10-13-u5-green-02.log": "01cb77e6aa5450b498c5c85961ea4cfa39b7779e220d18d1eb6b653e88bddad9",
+  "2026-10-13-u5-green-03.log": "07eb2a4f3d807f21569ac59a1ab08e25dcf3913c91827256611492e82b467496",
+  "2026-10-13-u5-green-04.log": "05262de0d115db8d065e83e59d9100e3af101ce59bec81e9af6d1b10c0fc0f2a",
+  "2026-10-13-u5-reconnect-regression-red-01.log": "9134428f35e5c48b5d30f8a5823b6ec9c22ff33b37a159d555e9d575c578f77f",
+  "2026-10-13-u5-red-01.log": "3efcf1b8d1522995043a58bb9ade73f34fdd53fc83341f62e5680ac343cf34ba",
+  "2026-10-13-u5-red-02.log": "fa8fcedcbae1298cfbac3f365058cd0e5ca1045747716023984623bf0872d690",
+  "2026-10-13-u5-red-03.log": "5e934c492609c58cc7ebf9e8e9d06508c8d9ff67c8fa40c141525f2be0fb50b4",
+  "competing-supervisor-parent-full-v1-0.txt": "6f6345ffa92e831b69932220187340848df08cf76ba2fa556891090f8690a48b",
+  "first-supervisor-parent-full-v1-0.txt": "2d4752b1e80de08452a6de18de0f2c5eeb39d2cd486661b02e28caf9b688b9d1",
+  "healthy-supervisor-parent-full-v1-0.txt": "32684af92c799f35bc419dfbeebc67344402a4920fb21a2c2ff0b7f1b0555763",
+  "healthy-supervisor-parent-full-v1-1.txt": "0b7052e8f19a29bb8163bbcf1d1fece778124a04a76bcae4a2bfda9e136e051c",
+  "parent-all-app-v1.txt": "dcec5f1649dcc9981794c5ec0cac85d167db146ea3cf618e2491bf7f4c12ceac",
+  "parent-all-harness-v1.txt": "c3b97d2b8e35374808a9c9ba067211114c222a70afc4d6913a0f78eb12c3512d",
+  "parent-full-v1-api-1-restarted.log": "9a7c6e9c65e1ec2b18bf5a4cbc1a60dc5228803f67ea8598983472c2ed0adbd1",
+  "parent-full-v1-api-1.log": "8e7785f4bda917245d8d28c74531a0a7cc98ce384953db2467317a3b87113aab",
+  "parent-full-v1-api-2.log": "abd507955e9654d993d5ba61fa91a095d4bc999921d4250a96d786493b5d8c6a",
+  "parent-full-v1-supervisor.log": "33d9801c9e0f846f4421e8dce93149f1623fd371028b54e19feb2e569b34a866",
+  "parent-idle-red-snapshot-characterization-v1.txt": "3acb662804e975a5cd0ab58dbac4108d5316acbeb7ccc7988ace1d635ff4ed0b",
+  "parent-simplify-green-v1.txt": "8b7041bc7db6cb08b0a6b4738fb5d678181c2e4cdac97c48ccef3de20f883a0b",
+  "second-supervisor-parent-full-v1-0.txt": "d96939b1f09ccfedd86e549d75e3f2d06df1c3598fd71583c6d17e491326dbe8"
+}

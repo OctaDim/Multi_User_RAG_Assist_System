@@ -1,0 +1,10 @@
+{
+  "deadline-api-loss-first-parent-full-v1.txt": {
+    "source": "/tmp/rag-u5-full-v1/test_actual_tab_sse_confirmed_0/first.log",
+    "sha256": "b7e434e3dbc9b2d458ac1fa91af5d56dc8caf19ae70615d86126f36ead8ea684"
+  },
+  "deadline-api-loss-second-parent-full-v1.txt": {
+    "source": "/tmp/rag-u5-full-v1/test_actual_tab_sse_confirmed_0/second.log",
+    "sha256": "32fe16bd1d3d0a28ce6514688d8bcffcc61129f4f3b079fcade1d887c5360008"
+  }
+}

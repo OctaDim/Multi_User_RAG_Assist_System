@@ -36,15 +36,16 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             "SELECT * FROM documents WHERE id=ANY(%s::uuid[]) AND owner_id=%s ORDER BY id FOR SHARE",
             (scope, actor["id"]),
         )).fetchall()
+        from app.events import live, lock_tab
+        tab = await lock_tab(connection, actor, tab_id, tab_proof)
         history = await conversation(connection, actor, conversation_id)
-        tab = await (await connection.execute("SELECT id FROM tabs WHERE id=%s AND owner_id=%s AND proof_hash=%s FOR SHARE", (tab_id, actor["id"], secret_hash(tab_proof)))).fetchone()
-        if not tab:
-            raise AccessError("invalid_tab")
         previous = await (await connection.execute("SELECT * FROM requests WHERE owner_id=%s AND operation_key=%s", (actor["id"], operation_key))).fetchone()
         if previous:
             if previous["fingerprint"] != fingerprint:
                 raise AccessError("operation_conflict", 409)
             return previous
+        if not live(tab):
+            raise AccessError("tab_disconnected", 409)
         if await (await connection.execute("SELECT id FROM requests WHERE conversation_id=%s AND state=ANY(%s)", (conversation_id, list(UNFINISHED)))).fetchone():
             raise AccessError("conversation_busy", 409)
         if len(documents) != len(scope):
@@ -95,12 +96,24 @@ async def stop(connection, token, request_id):
         return await transition(connection, request, "interrupted", "user_stop")
 
 
+async def histories(connection, conversation_ids):
+    result = {identifier: {"conversation_id": identifier, "messages": [], "requests": [], "watermark": 0}
+              for identifier in conversation_ids}
+    messages = await (await connection.execute("SELECT * FROM messages WHERE conversation_id=ANY(%s::uuid[]) ORDER BY id", (conversation_ids,))).fetchall()
+    requests = await (await connection.execute("SELECT * FROM requests WHERE conversation_id=ANY(%s::uuid[]) ORDER BY created_at,id", (conversation_ids,))).fetchall()
+    watermarks = await (await connection.execute("SELECT conversation_id,max(id) AS watermark FROM events WHERE conversation_id=ANY(%s::uuid[]) GROUP BY conversation_id", (conversation_ids,))).fetchall()
+    for message in messages:
+        result[message["conversation_id"]]["messages"].append(message)
+    for request in requests:
+        result[request["conversation_id"]]["requests"].append(request)
+    for watermark in watermarks:
+        result[watermark["conversation_id"]]["watermark"] = watermark["watermark"]
+    return list(result.values())
+
+
 async def snapshot(connection, token, conversation_id):
     async with connection.transaction():
-        await lock_service(connection)
+        await lock_service(connection, exclusive=True)
         actor = await principal(connection, token)
         await conversation(connection, actor, conversation_id, read_only=True)
-        messages = await (await connection.execute("SELECT * FROM messages WHERE conversation_id=%s ORDER BY id", (conversation_id,))).fetchall()
-        requests = await (await connection.execute("SELECT * FROM requests WHERE conversation_id=%s ORDER BY created_at,id", (conversation_id,))).fetchall()
-        watermark = await (await connection.execute("SELECT coalesce(max(id),0) AS watermark FROM events WHERE conversation_id=%s", (conversation_id,))).fetchone()
-        return {"conversation_id": conversation_id, "messages": messages, "requests": requests, **watermark}
+        return (await histories(connection, [conversation_id]))[0]

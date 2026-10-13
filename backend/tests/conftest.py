@@ -9,6 +9,7 @@ from psycopg.rows import dict_row
 import pytest
 
 from app.db import migrate
+from app import events
 
 
 async def seed_revision(connection, document_id, *, text="The annual budget is 100 euros.",
@@ -52,7 +53,7 @@ async def environment(postgres):
     dsn = make_conninfo(postgres, dbname=name)
     await migrate(dsn)
     data = {"dsn": dsn, "conversation": uuid4(), "document": uuid4(), "tab": uuid4(), "proof": uuid4().hex}
-    async with await psycopg.AsyncConnection.connect(dsn, autocommit=True) as connection:
+    async with await psycopg.AsyncConnection.connect(dsn, autocommit=True, row_factory=dict_row) as connection:
         for role in ("user", "admin", "super_admin"):
             owner, token = uuid4(), uuid4().hex
             data[role] = {"id": owner, "token": token}
@@ -63,6 +64,10 @@ async def environment(postgres):
         await connection.execute("INSERT INTO documents(id,owner_id,ready,deleted) VALUES (%s,%s,true,false)", (data["document"], owner))
         data["revision"], data["chunk"] = await seed_revision(connection, data["document"])
         await connection.execute("INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s)", (data["tab"], owner, hashlib.sha256(data["proof"].encode()).hexdigest()))
+        # Component-only presence projection via the same connect/challenge/ACK
+        # operations as SSE. This is not the G3 issuer/browser acceptance proof.
+        tab = await events.connect(connection, data['user']['token'], data['tab'], data['proof'])
+        await events.ack(connection, data['user']['token'], data['tab'], data['proof'], tab['connection_epoch'], tab['challenge'])
         await connection.execute("UPDATE service_state SET epoch=1 WHERE id=1")
         await connection.execute("UPDATE coordinator_lease SET healthy_until=now()+interval '1 hour',epoch=1 WHERE id=1")
     try:

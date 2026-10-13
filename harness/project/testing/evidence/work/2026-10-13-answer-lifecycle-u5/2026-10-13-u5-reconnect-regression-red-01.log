@@ -1,0 +1,23 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_unacknowledged_reconnect_does_not_extend_original_grace _________
+
+environment = {'admin': {'id': UUID('7ba3a4d8-77a0-4341-9813-b80c356554ab'), 'token': '19b9da9d55ad4a5099c2f787b8464bde'}, 'chunk': ...ersation': UUID('ee8f2cad-072c-4551-82ff-422a629381fc'), 'document': UUID('a9fe3dab-b1e4-49ca-8d45-56aa27552923'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_8e057b878762462e998e97dc52de1709) at 0x7aa9f13ea150>
+presence = (<module 'app.events' from '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/events.py'>, [datetime.d...SA7MXI-GHeC9mkA-BdVY6UV6OhfKSfNexPFVfMltw', 'connection_epoch': 2, 'id': UUID('2550ea12-22b7-49d7-ab49-217633d3a728')})
+
+    async def test_unacknowledged_reconnect_does_not_extend_original_grace(environment, connection, presence):
+        events, clock, token, connect, tab = presence
+        request = await send(connection, environment)
+        await events.disconnect(connection, token, tab['id'], environment['proof'], tab['connection_epoch'])
+        clock[0] += timedelta(seconds=9)
+        raw = await events.connect(connection, token, tab['id'], environment['proof'])
+        clock[0] += timedelta(seconds=2)
+>       with pytest.raises(AccessError, match='tab_disconnected'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_stream_recovery.py:251: Failed
+=========================== short test summary info ============================
+FAILED backend/tests/test_stream_recovery.py::test_unacknowledged_reconnect_does_not_extend_original_grace
+1 failed in 1.27s

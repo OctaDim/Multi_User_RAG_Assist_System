@@ -1,0 +1,121 @@
+['uv', 'run', '--project', 'backend', '--frozen', '--cache-dir', '/tmp/rag-answer-lifecycle-uv-cache', 'pytest', '-c', 'backend/pyproject.toml', 'backend/tests/test_stream_recovery.py', '-k', 'idle_expired_tab_lock or owner_snapshot_preserves', '-q']
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_idle_expired_tab_lock_does_not_delay_another_origin_deadline _______
+
+fut = <Future cancelled>, timeout = 3
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:520: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+environment = {'admin': {'id': UUID('ded3312e-3b1d-4eb3-bcbf-eb2826bf8e34'), 'token': 'd0452a54ce934b6b975bf2e9b9aaf7cd'}, 'chunk': ...ersation': UUID('6239368a-b93e-4007-9dad-bdee6164be63'), 'document': UUID('2956bd81-687d-4124-99f4-127d39216ac7'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_41e09012c8e7427092ffe4381089f3e6) at 0x72502a1ef7a0>
+presence = (<module 'app.events' from '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/events.py'>, [datetime.d...mVISb_PiDiv45N3kImXkk-g2xys2DSz7T9AaexqAc', 'connection_epoch': 2, 'id': UUID('c71e91f7-ac4c-4297-9c43-f03312d28640')})
+
+    async def test_idle_expired_tab_lock_does_not_delay_another_origin_deadline(environment, connection, presence):
+        import psycopg
+        from psycopg.rows import dict_row
+        events, clock, token, connect, tab = presence
+        request = await send(connection, environment)
+        await events.disconnect(connection, token, tab['id'], environment['proof'], tab['connection_epoch'])
+        clock[0] += timedelta(seconds=11)
+        idle = UUID(int=0)
+        old_deadline = clock[0] - timedelta(seconds=20)
+        await connection.execute('INSERT INTO tabs(id,owner_id,proof_hash,deadline) VALUES (%s,%s,%s,%s)',
+                                 (idle, environment['user']['id'], 'idle', old_deadline))
+        async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as locked:
+            async with locked.transaction():
+                await locked.execute('SELECT id FROM tabs WHERE id=%s FOR UPDATE', (idle,))
+                expiry = asyncio.create_task(events.expire_due(connection))
+                try:
+>                   await asyncio.wait_for(asyncio.shield(expiry), 3)
+
+backend/tests/test_stream_recovery.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x72502950ec80>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/timeouts.py:115: TimeoutError
+=========================== short test summary info ============================
+FAILED backend/tests/test_stream_recovery.py::test_idle_expired_tab_lock_does_not_delay_another_origin_deadline
+1 failed, 1 passed, 23 deselected in 4.76s

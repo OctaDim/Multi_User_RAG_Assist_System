@@ -1,4 +1,6 @@
 import argparse
+import asyncio
+from contextlib import suppress
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -7,7 +9,8 @@ from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 import uvicorn
 
-from app.api import answers, settings
+from app.api import answers, settings, tabs
+from app.events import deadlines
 from app.auth import AccessError
 from app.db import database_url
 
@@ -19,12 +22,19 @@ async def lifespan(app):
         async with pool.connection() as connection:
             await connection.execute("SELECT id FROM service_state WHERE id=1")
         app.state.pool = pool
-        yield
+        deadline_task = asyncio.create_task(deadlines(pool))
+        try:
+            yield
+        finally:
+            deadline_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await deadline_task
 
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(answers.router)
 app.include_router(settings.router)
+app.include_router(tabs.router)
 
 
 @app.exception_handler(AccessError)

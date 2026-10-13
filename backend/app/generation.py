@@ -58,6 +58,9 @@ class Coordinator:
                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
                    ORDER BY id FOR SHARE''', (request_id, request_id),
             )).fetchall()
+            if not finalizing:
+                from app.events import origin
+                await origin(connection, request_id)
             conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (row['conversation_id'],))).fetchone()
             request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (request_id,))).fetchone()
             binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request_id,))).fetchone()

@@ -1,0 +1,18 @@
+INFO:     Started server process [186705]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:37832 (Press CTRL+C to quit)
+INFO:     127.0.0.1:41493 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41495 - "POST /api/answers/123e230f-82ae-4a01-a333-ddf11c20685b/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41505 - "POST /api/answers/aae4fcf6-45bc-4a28-a377-9e68d3692439/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41507 - "POST /api/answers/1ef46ceb-2b71-41a9-a78e-e825ace303c3/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41519 - "POST /api/answers/a8b35511-a260-4932-adf5-e888ab1982dd/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41521 - "POST /api/answers/6bde48cf-5d37-497b-a74c-9a277309830f/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41529 - "POST /api/answers/9e91b50e-dd15-463b-a29a-a21943f1b433/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41543 - "POST /api/answers/a7a880a9-a44c-40ea-9b0e-226cd8b87dcb/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41547 - "POST /api/answers/9f10b071-41b6-459e-98c9-8f0bb6c76c11/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41553 - "POST /api/answers/83be9467-e339-4d6b-90ab-6e551b6df1fd/stop HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [186705]
