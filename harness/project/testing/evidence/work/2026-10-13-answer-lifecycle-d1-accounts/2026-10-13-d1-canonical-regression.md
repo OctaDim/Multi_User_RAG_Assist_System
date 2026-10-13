@@ -1,0 +1,13 @@
+# D1 canonical acceptance — account dependency implemented
+
+Base42a51a5. Real-account issuer/UI prerequisite is implemented and independently useful; the whole lifecycle and G3/G4/G5 are not complete. Worker report/frozen manifest describes original21 app files. Parent review report records one reuse simplification and actual invited-registration SMTP failure fix with RED/GREEN evidence.
+
+Full accumulated regression after final application edits: **122 application tests passed in248.47s; all168 active harness tests passed in25.77s. No skips or deselections.** Exact commands, stdout/stderr and native traces are immutable parent-all-app-v1.txt and parent-all-harness-v1.txt; driver parent-full-regression-driver-v1.py. The root pytest configuration and file discovery select all eight active harness test files; historical inbox/candidate copies are not active suites. Earlier native, E5, multi-process PostgreSQL/API recovery, browser draft/SSE and all current account cases were included. Standalone linter/typechecker are not configured; compileall and git diff --check passed. No dependencies changed.
+
+Actual native recovery rerun reaped PID204164 before replacement204251, epochs2→3, preserving prefix5 and never restarting the old graph. Multi-API test retained default12 active contexts/queued13th, live settings/fair scheduling and19 physical release acknowledgements. Their fixture accounts/documents remain component-only; real issuer accounts in the new browser tests and manual walkthrough were created via the actual UI/SMTP path.
+
+Parent manually drove another fresh migrated DB/real browser outside pytest: signup→received mailbox link→verify→login→own empty history→narrow viewport→logout. Separate parent-manual-browser-walk-v1.md and screenshots distinguish these observations from automated tests and human attestation. All owned verification processes were reaped.
+
+Outstanding dependencies: real document publisher/OCR/permissions/quotas (D2), answer/draft/passport UI (U6), actual irreversible transport/access/source fence (U7), joint full-user scenarios/operational acceptance (U8). Only owned loopback SMTP was tested; configured external TLS/auth mail deployment remains unverified. Neither page classifier research nor account guard tests upgrade those gates. No SSO/billing/password recovery/rate-limit product controls or retry broker were added.
+
+The user requirement persists: after EVERY U and after substantive prerequisite integration, all accumulated application regressions AND all active harness tests must pass before advancing. Failures are repaired rather than excluded, and earlier failed raw logs are preserved.

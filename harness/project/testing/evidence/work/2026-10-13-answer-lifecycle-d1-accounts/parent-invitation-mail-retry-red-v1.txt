@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_invited_registration_retries_actual_smtp_failure _____________
+backend/tests/browser/test_accounts.py:218: in test_invited_registration_retries_actual_smtp_failure
+    expect(page.locator('#status')).to_have_text('Откройте письмо и подтвердите email, затем войдите.')
+E   AssertionError: Locator expected to have text 'Откройте письмо и подтвердите email, затем войдите.'
+E   Actual value: Регистрация этого email недоступна. 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 5000ms
+E     -   - waiting for locator("#status")
+E     -     4 × locator resolved to <p id="status" role="status" aria-live="polite">Письмо не доставлено. Повторите регистрацию с тем…</p>
+E     -       - unexpected value "Письмо не доставлено. Повторите регистрацию с тем же паролем."
+E     -     5 × locator resolved to <p id="status" role="status" aria-live="polite">Регистрация этого email недоступна.</p>
+E     -       - unexpected value "Регистрация этого email недоступна."
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_accounts.py::test_invited_registration_retries_actual_smtp_failure
+1 failed in 10.31s

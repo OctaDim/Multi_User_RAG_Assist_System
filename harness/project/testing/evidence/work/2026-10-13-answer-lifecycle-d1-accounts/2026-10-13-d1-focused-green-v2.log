@@ -1,0 +1,4 @@
+...........concurrent PostgreSQL connections: [194908, 194909]
+..............................................................D1: real Chromium; independent static/API/mailbox origins; SMTP delivery; CLI invite; UI signup/verify/login/admin/block/soft-delete/logout; no network mocks.
+..
+75 passed in 67.85s (0:01:07)

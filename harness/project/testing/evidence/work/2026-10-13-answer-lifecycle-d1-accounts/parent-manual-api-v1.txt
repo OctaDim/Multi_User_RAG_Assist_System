@@ -1,0 +1,21 @@
+INFO:     Started server process [205422]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:41084 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38795 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38603 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38603 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:38605 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38605 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40561 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40561 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40561 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38015 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38965 - "OPTIONS /api/conversations/58269676-72cb-4712-82af-a2dc033944fd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38965 - "GET /api/conversations/58269676-72cb-4712-82af-a2dc033944fd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38977 - "OPTIONS /api/accounts/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38977 - "POST /api/accounts/logout HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [205422]

@@ -1,0 +1,6 @@
+Canonical D1 full accumulated application regression and complete active harness.
+['uv', 'run', '--project', 'backend', '--frozen', '--cache-dir', '/tmp/rag-answer-lifecycle-uv-cache', 'pytest', '-c', 'pytest.ini', '-q']
+........................................................................ [ 42%]
+........................................................................ [ 85%]
+........................                                                 [100%]
+168 passed in 25.77s

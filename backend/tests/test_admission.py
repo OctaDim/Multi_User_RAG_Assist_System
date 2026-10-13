@@ -147,7 +147,7 @@ async def test_unavailable_coordinator_refuses_before_admission(environment, con
 
 async def test_database_enforces_occupancy_and_owner_operation_uniqueness(environment, connection):
     request = await send(connection, environment)
-    clone = "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,state,execution_epoch,context_epoch) SELECT %s,%s,owner_id,%s,fingerprint,scope,origin_tab,state,execution_epoch,context_epoch FROM requests WHERE id=%s"
+    clone = "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,origin_session,state,execution_epoch,context_epoch) SELECT %s,%s,owner_id,%s,fingerprint,scope,origin_tab,origin_session,state,execution_epoch,context_epoch FROM requests WHERE id=%s"
     with pytest.raises(psycopg.errors.UniqueViolation) as occupancy:
         await connection.execute(clone, (uuid4(), environment["conversation"], uuid4(), request["id"]))
     assert occupancy.value.diag.constraint_name == "one_unfinished_request"

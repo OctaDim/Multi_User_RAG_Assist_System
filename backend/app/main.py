@@ -1,15 +1,18 @@
 import argparse
 import asyncio
+import os
 from contextlib import suppress
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 import uvicorn
 
-from app.api import answers, settings, tabs
+from app.api import accounts, answers, settings, tabs
 from app.events import deadlines
 from app.auth import AccessError
 from app.db import database_url
@@ -31,15 +34,29 @@ async def lifespan(app):
                 await deadline_task
 
 
-app = FastAPI(lifespan=lifespan)
-app.include_router(answers.router)
-app.include_router(settings.router)
-app.include_router(tabs.router)
-
-
-@app.exception_handler(AccessError)
 async def access_error(request: Request, error: AccessError):
     return JSONResponse(status_code=error.status, content={"error": error.code})
+
+
+async def invalid_input(request: Request, error: RequestValidationError):
+    # Pydantic's default response echoes rejected input, including passwords/tokens.
+    return JSONResponse(status_code=422, content={'error': 'invalid_input'})
+
+
+def create_app():
+    application = FastAPI(lifespan=lifespan)
+    origin = os.environ.get('RAG_FRONTEND_ORIGIN', '').rstrip('/')
+    application.add_middleware(CORSMiddleware, allow_origins=[origin] if origin else [],
+                               allow_methods=['GET', 'POST', 'PATCH'],
+                               allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof'])
+    for router in (accounts.router, answers.router, settings.router, tabs.router):
+        application.include_router(router)
+    application.add_exception_handler(AccessError, access_error)
+    application.add_exception_handler(RequestValidationError, invalid_input)
+    return application
+
+
+app = create_app()
 
 
 def main():

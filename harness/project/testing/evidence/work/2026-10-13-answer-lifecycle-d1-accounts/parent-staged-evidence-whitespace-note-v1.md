@@ -1,0 +1,3 @@
+# Staged whitespace inspection supplement
+
+The first D1 staging attempt stopped before commit: unrestricted git diff --cached --check reported trailing whitespace in immutable native/stdout RED logs and one final blank line in the already-hashed bounded packet. Those evidence bytes are retained unchanged. Application source/test/frontend staged whitespace is checked explicitly; no test assertion, suite or application check was relaxed. The earlier canonical report states the tracked git diff --check result; it is not a claim that verbatim raw logs conform to source whitespace formatting. Rechecking all source files does not require repeating successful runtime tests because no source changed after the full green regression.

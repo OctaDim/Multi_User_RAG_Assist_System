@@ -1,0 +1,22 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_____________ test_resend_links_are_one_use_despite_delivery_order _____________
+tests/test_accounts.py:160: in test_resend_links_are_one_use_despite_delivery_order
+    assert verified.status_code == 200
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+_ test_unchanged_or_increased_access_preserves_session_and_execution[changes0] _
+tests/test_accounts.py:174: in test_unchanged_or_increased_access_preserves_session_and_execution
+    assert current['state'] == 'accepted'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+_ test_unchanged_or_increased_access_preserves_session_and_execution[changes1] _
+tests/test_accounts.py:174: in test_unchanged_or_increased_access_preserves_session_and_execution
+    assert current['state'] == 'accepted'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_accounts.py::test_resend_links_are_one_use_despite_delivery_order
+FAILED tests/test_accounts.py::test_unchanged_or_increased_access_preserves_session_and_execution[changes0]
+FAILED tests/test_accounts.py::test_unchanged_or_increased_access_preserves_session_and_execution[changes1]
+3 failed in 4.09s

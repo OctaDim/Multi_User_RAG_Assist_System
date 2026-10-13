@@ -58,7 +58,8 @@ async def environment(postgres):
             owner, token = uuid4(), uuid4().hex
             data[role] = {"id": owner, "token": token}
             await connection.execute("INSERT INTO accounts(id, role, verified, active, disabled, paid) VALUES (%s,%s,true,true,false,false)", (owner, role))
-            await connection.execute("INSERT INTO sessions(token_hash, owner_id, expires_at) VALUES (%s,%s,now()+interval '1 hour')", (hashlib.sha256(token.encode()).hexdigest(), owner))
+            session = await (await connection.execute("INSERT INTO sessions(token_hash, owner_id, expires_at) VALUES (%s,%s,now()+interval '1 hour') RETURNING id", (hashlib.sha256(token.encode()).hexdigest(), owner))).fetchone()
+            data[role]['session_id'] = session['id']
         owner = data["user"]["id"]
         await connection.execute("INSERT INTO conversations(id,owner_id) VALUES (%s,%s)", (data["conversation"], owner))
         await connection.execute("INSERT INTO documents(id,owner_id,ready,deleted) VALUES (%s,%s,true,false)", (data["document"], owner))

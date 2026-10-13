@@ -1,0 +1,35 @@
+{
+  "base": "42a51a5372f98b1a319178bb287d01d2e7af34df",
+  "source_sha256": "9b5e78536da1df102a8dff04e609f24fa1a7b77ff4f0fabe140e357f6db70a87",
+  "app_files": {
+    "backend/app/accounts.py": "ff051c7241b2f7f2bb24f149f9104890bae4bae042443b45d49938dc13fba02b",
+    "backend/app/api/accounts.py": "9b50c454b38b06d01408020db5537ebd43c51b5701f0535574c5a278faa2e941",
+    "backend/app/answers.py": "b27aa40750f396b286294eb996dad102d44b1a68d09a14748b70a64be44cb6d8",
+    "backend/app/auth.py": "d30bb8df9eb4f8895115f1d335c024e86f1ad263292837fbea30bebcea90b37b",
+    "backend/app/generation.py": "38bd07929f25a7fa8dc886ea90be065ea45e7ef4de00a6a5ba854283847f5376",
+    "backend/app/main.py": "c689921a9d4b0fc9de49d6674f60a7893eae15ab3f0e0238838115aa5f0ea463",
+    "backend/app/rag.py": "049d95c259e45d9778391c990008dd4328e2fd29c5d5db3888f869f22f13f484",
+    "backend/migrations/005_accounts.sql": "3daaf6924c097914e42f004d76a18691d7692b91a177e5b1b5e72d30e8587d0e",
+    "backend/tests/conftest.py": "7a5439e7eb94fced7418397cfced9172d908731fe420c0475b89b162e95766a1",
+    "backend/tests/test_admission.py": "48598ae89eae689bf39dafd9a26c8af841ab3e2091e2b5a074a3d2bded0cf138",
+    "backend/tests/test_accounts.py": "7b11fa1d9c4b0aa5217336643731855f7178e2478458a79a1d9ebe516a12deaf",
+    "backend/tests/mailbox.py": "dafb5a10a34eca560b82a43af064cf7c422fd3176a601d1efd1e4c4d739def9a",
+    "backend/tests/browser/test_accounts.py": "3daf817f5666620da264db6d6850341ac57b778f74e7895084b19ab1f9b93f5d",
+    "backend/tests/browser/__init__.py": "7a9b2ac84126a9a96fe0ef2dfbfe25aa2b6b668a3eb2d96dff65758c858ea841",
+    "frontend/README.human.md": "319c3515afe36d4a0eaa30ed9369dc79c9d697ae5e3dca7f921dc11902d8fa27",
+    "frontend/index.html": "e7c62d804f60e1cae38e7ab6df176e64fe650edf2f0e5641c0ee5f8d7a5b4ad7",
+    "frontend/src/README.human.md": "9408137c3e531a1fce17fa1a18da04e7a0284a9e3806691ea08e0dee3c8b614a",
+    "frontend/src/api.js": "334eb56576165cdd8a468809e35813212754afa978778df1fb970ece88c6429f",
+    "frontend/src/app.js": "e774c045c407a86d5eeb08cecbae0a59bdf72d578576b5160d2e56824db4fbe7",
+    "frontend/src/auth.js": "920863aa8d713ca8021c167aeff2506ae51b514078cd250bb101c79273421267",
+    "frontend/src/styles.css": "dfe19fd7b25139aa9e24a7880fd7604704b1ff860dcfe0cf213f2a328b625e84"
+  },
+  "logs": {
+    "2026-10-13-d1-focused-green-v1.log": "25e3c8e128ce12feb4bc5c47d642e2b4669722a6bfe79c13d9756f0d84f807e8",
+    "2026-10-13-d1-red-registration.log": "9f0cfed069b25a0bc92d042854eabe0f03bd13d6c9de43746eee6fca49ee4774",
+    "2026-10-13-d1-focused-green-v2.log": "a82d34608c9557988058bb38784133ff6636cbec1ff3ff1da9cd4a8a964fee39",
+    "2026-10-13-d1-red-final-boundaries-clean.log": "279e02976e868b7309496afb6d4061376d650ee9aec6958b03c0a5c1fcf1ba19",
+    "2026-10-13-d1-red-resend.log": "756561cd5156dddf0d63d6b0d09a587d45f1274cc9b804795e736b748d57be60",
+    "2026-10-13-d1-focused-green-v3.log": "73806a0efd45879d06475964f7ac74d5c0b24b6f74a88537adb5f84dca2bf7b0"
+  }
+}

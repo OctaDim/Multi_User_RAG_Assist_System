@@ -1,0 +1,17 @@
+:root { font-family: system-ui, sans-serif; color: #172c38; background: #f3f6f7; }
+body { margin: 0; }
+main { max-width: 56rem; margin: 2rem auto; padding: 0 1rem 3rem; }
+h1 { font-size: clamp(1.7rem, 5vw, 2.5rem); }
+form { background: white; border: 1px solid #d5e0e5; border-radius: .6rem; padding: 1.25rem; }
+#authentication { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 20rem),1fr)); gap: 1rem; }
+[hidden] { display: none !important; }
+label { display: block; margin: .9rem 0; }
+input:not([type="checkbox"]), select { display: block; box-sizing: border-box; width: 100%; padding: .65rem; margin-top: .3rem; font: inherit; border: 1px solid #879da8; border-radius: .3rem; }
+input[type="checkbox"] { margin-left: .6rem; width: 1.2rem; height: 1.2rem; vertical-align: middle; }
+button { font: inherit; padding: .65rem 1rem; background: #155f79; color: white; border: 0; border-radius: .3rem; cursor: pointer; }
+button:disabled { opacity: .65; cursor: default; }
+:focus-visible { outline: 3px solid #bd6d0d; outline-offset: 3px; }
+#status { min-height: 1.5rem; overflow-wrap: anywhere; }
+#accounts { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 18rem),1fr)); gap: 1rem; }
+h3 { overflow-wrap: anywhere; }
+li { margin-bottom: .7rem; }

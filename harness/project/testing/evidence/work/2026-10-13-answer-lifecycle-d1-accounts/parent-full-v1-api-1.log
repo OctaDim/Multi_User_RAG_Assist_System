@@ -1,0 +1,26 @@
+INFO:     Started server process [202855]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:39088 (Press CTRL+C to quit)
+INFO:     127.0.0.1:39515 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39517 - "POST /api/conversations/d7eb8e81-3de6-47f6-bd76-5f09f756f887/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39519 - "POST /api/conversations/3a684a71-294a-45a5-bbc7-f7e0663652de/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39529 - "POST /api/conversations/403acf1e-1aa8-45dc-a79a-c0725ebb2722/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39531 - "POST /api/conversations/36ba2bad-ddde-4a9b-9c55-754c188cdf8d/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39539 - "POST /api/conversations/df057df0-1bdc-4f98-a8c6-332989862679/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39545 - "POST /api/conversations/700c2aaa-3aa0-48c4-bea2-226569afa09b/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37973 - "POST /api/conversations/e5ff41d7-4cf6-46e9-a279-6a8c73637719/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41109 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41119 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41779 - "POST /api/answers/4f5b92bb-6e95-4656-b876-d81cb75c4be5/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41785 - "POST /api/answers/f7a8d004-c292-4401-9c87-46b7f3ee0da7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41791 - "POST /api/answers/43439607-c832-4f89-9f74-092a45f157b5/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41793 - "GET /api/conversations/e5ff41d7-4cf6-46e9-a279-6a8c73637719 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41797 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41803 - "POST /api/conversations/99ee8d94-1eb5-4ef0-8c45-47d11e05f9f9/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41805 - "POST /api/conversations/35ec857e-912f-4da6-8408-c858db536ac2/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41807 - "POST /api/conversations/005bdb6c-d08d-45f3-8a52-9a0f3d911179/answers HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [202855]

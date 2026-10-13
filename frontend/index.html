@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="api-origin" content="http://127.0.0.1:8000">
+  <meta name="referrer" content="no-referrer">
+  <title>Личная библиотека RAG</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+<main>
+  <h1>Личная библиотека</h1>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="authentication" aria-label="Вход и регистрация">
+    <form id="login">
+      <h2>Вход</h2>
+      <label>Email<input name="email" type="email" autocomplete="username" required maxlength="254"></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required minlength="15" maxlength="1024"></label>
+      <button>Войти</button>
+    </form>
+    <form id="register">
+      <h2>Регистрация</h2>
+      <p>После регистрации откройте ссылку в письме, затем войдите.</p>
+      <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+      <label>Пароль (от 15 символов)<input name="password" type="password" autocomplete="new-password" required minlength="15" maxlength="1024"></label>
+      <label>Приглашение оператора (если выдано)<input name="invitation" autocomplete="off" maxlength="128"></label>
+      <button>Зарегистрироваться</button>
+    </form>
+  </section>
+  <section id="workspace" hidden>
+    <p id="identity"></p>
+    <button id="logout" type="button">Выйти</button>
+    <h2>Мои беседы</h2>
+    <ul id="conversations"></ul>
+    <section id="history" aria-label="История беседы"></section>
+    <section id="administration" hidden>
+      <h2>Аккаунты</h2>
+      <p>Блокировка или мягкое удаление завершают текущие запросы и сессии выбранного аккаунта. Документы и история сохраняются.</p>
+      <div id="accounts"></div>
+    </section>
+  </section>
+</main>
+</body>
+</html>

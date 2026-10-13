@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_real_registration_mail_verification_and_login ______________
+tests/test_accounts.py:15: in test_real_registration_mail_verification_and_login
+    assert registered.status_code == 201
+E   assert 404 == 201
+E    +  where 404 = <Response [404 Not Found]>.status_code
+=========================== short test summary info ============================
+FAILED tests/test_accounts.py::test_real_registration_mail_verification_and_login
+1 failed in 1.71s

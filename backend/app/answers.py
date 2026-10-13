@@ -55,8 +55,8 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
         if not service["healthy"]:
             raise AccessError("coordinator_unavailable", 503)
         request = await (await connection.execute(
-            "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,state,execution_epoch,context_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s,'accepted',%s,%s) RETURNING *",
-            (uuid4(), conversation_id, actor["id"], operation_key, fingerprint, scope, tab_id, service["epoch"], history["context_epoch"]),
+            "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,origin_session,state,execution_epoch,context_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,'accepted',%s,%s) RETURNING *",
+            (uuid4(), conversation_id, actor["id"], operation_key, fingerprint, scope, tab_id, actor['session_id'], service["epoch"], history["context_epoch"]),
         )).fetchone()
         await connection.execute(
             "INSERT INTO graph_bindings(request_id,thread_id,owner_id,conversation_id,execution_epoch,context_epoch,account_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s)",

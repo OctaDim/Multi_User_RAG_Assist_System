@@ -12,7 +12,7 @@ from langgraph.graph import END, START, StateGraph
 from psycopg.types.json import Jsonb
 
 from app import sources
-from app.auth import AccessError, lock_service, principal
+from app.auth import AccessError, lock_service, principal, originating_session
 from app.answers import UNFINISHED, event
 
 
@@ -57,10 +57,10 @@ class GuardedSaver(BaseCheckpointSaver):
                 actor = await principal(connection, self.token)
                 if actor['id'] != self.binding['owner_id']:
                     raise AccessError('not_found', 404)
-            else:
-                actor = await (await connection.execute('SELECT * FROM accounts WHERE id=%s FOR SHARE', (self.binding['owner_id'],))).fetchone()
-                if not actor or not actor['verified'] or not actor['active'] or actor['disabled']:
-                    raise AccessError('access_denied')
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
             documents = await (await connection.execute(
                 '''SELECT d.* FROM documents d WHERE d.id IN
                     (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)

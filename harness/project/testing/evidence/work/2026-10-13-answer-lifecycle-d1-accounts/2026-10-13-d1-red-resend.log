@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_resend_links_are_one_use_despite_delivery_order _____________
+tests/test_accounts.py:159: in test_resend_links_are_one_use_despite_delivery_order
+    assert client.post('/api/accounts/verify', json={'token': first}).status_code == 200
+E   AssertionError: assert 400 == 200
+E    +  where 400 = <Response [400 Bad Request]>.status_code
+E    +    where <Response [400 Bad Request]> = post('/api/accounts/verify', json={'token': 'P74rB9QITZUo89zKpe4Gq93EFSM34kFsgKafYLBWN3Y'})
+E    +      where post = <starlette.testclient.TestClient object at 0x7f1f66693380>.post
+=========================== short test summary info ============================
+FAILED tests/test_accounts.py::test_resend_links_are_one_use_despite_delivery_order
+1 failed in 3.64s

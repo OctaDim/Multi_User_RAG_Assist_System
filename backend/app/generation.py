@@ -19,7 +19,7 @@ from psycopg.types.json import Jsonb
 from psycopg_pool import AsyncConnectionPool
 
 from app import answers, settings, sources
-from app.auth import AccessError, lock_service
+from app.auth import AccessError, lock_service, originating_session
 from app.db import database_url
 from app.rag import E5Embedder, run_graph
 
@@ -53,6 +53,8 @@ class Coordinator:
             if not row or row['execution_epoch'] != self.epoch:
                 raise AccessError('lost_execution', 409)
             actor = await (await connection.execute('SELECT * FROM accounts WHERE id=%s FOR SHARE', (row['owner_id'],))).fetchone()
+            if not finalizing:
+                actor = await originating_session(connection, request_id)
             documents = await (await connection.execute(
                 '''SELECT * FROM documents WHERE id IN
                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
@@ -67,7 +69,7 @@ class Coordinator:
             if request['state'] not in answers.UNFINISHED:
                 raise AccessError('terminal_request', 409)
             if not finalizing:
-                if not actor or not actor['verified'] or not actor['active'] or actor['disabled'] or actor['context_epoch'] != binding['account_epoch']:
+                if actor['context_epoch'] != binding['account_epoch']:
                     raise AccessError('access_denied')
                 if conversation['owner_id'] != actor['id'] or any(value['owner_id'] != actor['id'] for value in documents):
                     raise AccessError('not_found', 404)
