@@ -1,0 +1,4 @@
+ImportError while loading conftest '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/conftest.py'.
+backend/tests/conftest.py:12: in <module>
+    from app.db import migrate
+E   ModuleNotFoundError: No module named 'app'

@@ -1,0 +1,30 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_________ test_installed_package_ignores_an_unrelated_neighbor_config __________
+
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-36/test_installed_package_ignores0')
+
+    def test_installed_package_ignores_an_unrelated_neighbor_config(tmp_path):
+        package = tmp_path / "app"
+        package.mkdir()
+        module_file = package / "resources.py"
+        shutil.copyfile(resources.__file__, module_file)
+        packaged = package / "_resources" / "config"
+        packaged.mkdir(parents=True)
+        (packaged / "runtime.toml").write_text("max_active = 12\n")
+        unrelated = tmp_path / "config"
+        unrelated.mkdir()
+        (unrelated / "runtime.toml").write_text("unrelated = true\n")
+        spec = importlib.util.spec_from_file_location("installed_resources", module_file)
+        installed = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(installed)
+>       assert (installed.resource_path("config") / "runtime.toml").read_text() == "max_active = 12\n"
+E       AssertionError: assert 'unrelated = true\n' == 'max_active = 12\n'
+E         
+E         - max_active = 12
+E         + unrelated = true
+
+backend/tests/test_resources.py:22: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_resources.py::test_installed_package_ignores_an_unrelated_neighbor_config
+1 failed, 1 passed in 0.06s

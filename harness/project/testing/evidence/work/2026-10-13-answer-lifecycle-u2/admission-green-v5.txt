@@ -1,0 +1,3 @@
+..concurrent PostgreSQL connections: [143294, 143293]
+........................
+26 passed in 6.81s

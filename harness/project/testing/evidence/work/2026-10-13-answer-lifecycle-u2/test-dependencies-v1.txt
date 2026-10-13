@@ -1,0 +1,10 @@
+Resolved 66 packages in 1.81s
+Downloading pgserver (10.7MiB)
+ Downloaded pgserver
+Prepared 5 packages in 2.72s
+Installed 5 packages in 95ms
+ + fasteners==0.20
+ + pgserver==0.1.4
+ + platformdirs==4.13.0
+ + psutil==7.2.2
+ + pytest-asyncio==1.4.0

@@ -1,0 +1,1 @@
+Installed wheel uses its own packaged config and migrations

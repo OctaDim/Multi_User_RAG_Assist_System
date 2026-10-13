@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/rag-u2-wheel-check.py", line 9, in <module>
+    assert defaults()['generation']['max_active'] == 12
+           ~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'generation'
