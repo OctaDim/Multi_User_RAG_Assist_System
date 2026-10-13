@@ -1,0 +1,15 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+decode: removing memory module entries for seq_id = 0, pos = [0, +inf)
+Actual native abort callback entered C; context close waited for C return before physical free.
+.
+1 passed in 16.20s

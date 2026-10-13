@@ -1,0 +1,28 @@
+{
+  "input": "real-handwritten-title-author-input-v1.png",
+  "sha256": "69cb8a47d1550729c439bc0c67bf54335f57faedc472a69a4cbb0848a016d9ad",
+  "scope": "Permitted real handwritten title/author OCR, not four-language handwriting accuracy",
+  "result": {
+    "id": "chatcmpl-80f66e3f-4739-4ccf-828a-869e6acd6dad",
+    "object": "chat.completion",
+    "created": 1791912876,
+    "model": "/tmp/rag-answer-lifecycle-models/ocr/PaddleOCR-VL-1.5.gguf",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Dreams\n—Langston Hughes"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 35,
+      "completion_tokens": 7,
+      "total_tokens": 42
+    }
+  },
+  "seconds": 10.198462091997499
+}

@@ -12,7 +12,7 @@ from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 import uvicorn
 
-from app.api import accounts, answers, settings, tabs
+from app.api import accounts, answers, documents, settings, tabs
 from app.events import deadlines
 from app.auth import AccessError
 from app.db import database_url
@@ -47,9 +47,9 @@ def create_app():
     application = FastAPI(lifespan=lifespan)
     origin = os.environ.get('RAG_FRONTEND_ORIGIN', '').rstrip('/')
     application.add_middleware(CORSMiddleware, allow_origins=[origin] if origin else [],
-                               allow_methods=['GET', 'POST', 'PATCH'],
+                               allow_methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
                                allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof'])
-    for router in (accounts.router, answers.router, settings.router, tabs.router):
+    for router in (accounts.router, answers.router, documents.router, settings.router, tabs.router):
         application.include_router(router)
     application.add_exception_handler(AccessError, access_error)
     application.add_exception_handler(RequestValidationError, invalid_input)

@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_real_correction_switches_whole_index_and_preserves_original _______
+backend/tests/test_documents.py:150: in test_real_correction_switches_whole_index_and_preserves_original
+    assert after['pages'][0]['text']=='The annual budget is 10 euros.'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_real_correction_switches_whole_index_and_preserves_original
+1 failed in 3.33s

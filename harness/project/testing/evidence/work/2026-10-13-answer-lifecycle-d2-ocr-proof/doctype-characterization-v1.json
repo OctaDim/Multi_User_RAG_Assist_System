@@ -1,0 +1,61 @@
+{
+  "scope": "Input scaling characterization on two images only, not region detection or calibrated accuracy",
+  "results": [
+    {
+      "image": "printed-four-languages-v1.png",
+      "preprocessing": "pixels_0_255",
+      "scores": {
+        "chart": 0.0,
+        "diagram": 0.0,
+        "document_handwritten": 0.0,
+        "document_printed": 0.0,
+        "map": 0.0,
+        "photo": 1.0,
+        "screenshot": 0.0
+      },
+      "predicted": "photo"
+    },
+    {
+      "image": "printed-four-languages-v1.png",
+      "preprocessing": "pixels_0_1",
+      "scores": {
+        "chart": 2.5674098957928493e-10,
+        "diagram": 3.5436885355011327e-06,
+        "document_handwritten": 0.01414092630147934,
+        "document_printed": 0.9858466982841492,
+        "map": 1.1366711608409852e-12,
+        "photo": 7.008259944596418e-11,
+        "screenshot": 8.805787729215808e-06
+      },
+      "predicted": "document_printed"
+    },
+    {
+      "image": "paddle-handwrite-en-original.png",
+      "preprocessing": "pixels_0_255",
+      "scores": {
+        "chart": 0.0,
+        "diagram": 0.0,
+        "document_handwritten": 0.0,
+        "document_printed": 0.0,
+        "map": 0.0,
+        "photo": 1.0,
+        "screenshot": 0.0
+      },
+      "predicted": "photo"
+    },
+    {
+      "image": "paddle-handwrite-en-original.png",
+      "preprocessing": "pixels_0_1",
+      "scores": {
+        "chart": 1.9319894050608766e-19,
+        "diagram": 3.164786903653294e-07,
+        "document_handwritten": 0.9727874398231506,
+        "document_printed": 6.435890043121617e-09,
+        "map": 8.105217885745475e-12,
+        "photo": 4.2577802394916375e-11,
+        "screenshot": 0.027212129905819893
+      },
+      "predicted": "document_handwritten"
+    }
+  ]
+}

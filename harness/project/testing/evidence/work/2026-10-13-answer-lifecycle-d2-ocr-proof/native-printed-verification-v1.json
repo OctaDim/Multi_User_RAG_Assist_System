@@ -1,0 +1,13 @@
+{
+  "exact_line_match": true,
+  "languages": [
+    "English",
+    "German",
+    "Russian",
+    "Belarusian"
+  ],
+  "seconds": 90.24365500902059,
+  "peak_rss_kib": 3642576,
+  "input_kind": "synthetic printed input, not real handwriting",
+  "publisher_gate_closed": false
+}

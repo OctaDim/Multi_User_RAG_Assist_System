@@ -1,0 +1,24 @@
+{
+  "scope": "Candidate real handwritten crop and permitted mixed PDF raster recognition; no production publisher/G4 acceptance",
+  "pdf_sha256": "9584f556bbe78569bc771010866b5ad7b7ac8046427bfa3ef713811eea9f09a6",
+  "masked_bounds": [
+    [
+      104,
+      783,
+      458,
+      908
+    ],
+    [
+      252,
+      916,
+      795,
+      1034
+    ]
+  ],
+  "total_seconds": 83.04125909198774,
+  "maxrss_kib": 3675160,
+  "inputs": [
+    "real-handwritten-title-author-input-v1.png",
+    "mixed-pdf-printed-only-input-v1.png"
+  ]
+}

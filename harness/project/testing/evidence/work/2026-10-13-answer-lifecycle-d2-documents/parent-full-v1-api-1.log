@@ -1,0 +1,41 @@
+INFO:     Started server process [223105]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:39592 (Press CTRL+C to quit)
+INFO:     127.0.0.1:38623 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38635 - "POST /api/conversations/521737d0-de2a-44c5-8114-d8b594aab7ad/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38637 - "POST /api/conversations/141c60ef-b8ab-4732-81db-1b7859c3ab3a/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38645 - "POST /api/conversations/d34c40aa-a6cb-452f-88b3-9baacc9ab475/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38647 - "POST /api/conversations/a13f9ca0-4bc3-4a02-9c0c-ab7b921f98db/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38655 - "POST /api/conversations/fb637d95-5f62-4cfa-80fa-347a10e5725e/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38667 - "POST /api/conversations/6490bf00-2ec6-44f5-81bc-ac35bc5a799d/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38677 - "POST /api/conversations/02642f8a-b6a5-4261-9d4c-cfc801dea3ea/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38231 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38237 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38247 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38257 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40195 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40205 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40215 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40231 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40239 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40243 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40253 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40255 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40263 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40265 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40271 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40273 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40277 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40285 - "POST /api/answers/b7895eb8-8c6d-4aef-a7d4-f2fbf497633f/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40301 - "POST /api/answers/d010ebf0-4468-45d6-a135-8d49b0f4ac97/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40313 - "POST /api/answers/8f58aa0a-1769-40da-b342-85a4e7248ff4/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40315 - "GET /api/conversations/02642f8a-b6a5-4261-9d4c-cfc801dea3ea HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40327 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40331 - "POST /api/conversations/3711bc1e-d49e-4f3a-bae1-7198808942f8/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40339 - "POST /api/conversations/5ebdd19f-fdc4-41c1-8196-f6391bd511ad/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40353 - "POST /api/conversations/9ea004f2-6ba8-44d6-8261-40e7700312f2/answers HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [223105]

@@ -2,13 +2,16 @@ import { token } from './auth.js';
 const origin = document.querySelector('meta[name="api-origin"]').content.replace(/\/$/, '');
 
 export async function api(path, method = 'GET', body) {
+  const credential = token();
   const headers = {};
-  if (token()) headers.Authorization = `Bearer ${token()}`;
-  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  const binary = body instanceof Blob;
+  if (credential) headers.Authorization = `Bearer ${credential}`;
+  if (body !== undefined) headers['Content-Type'] = binary ? 'application/octet-stream' : 'application/json';
   const response = await fetch(`${origin}/api${path}`, {
-    method, headers, body: body === undefined ? undefined : JSON.stringify(body),
+    method, headers, body: body === undefined ? undefined : binary ? body : JSON.stringify(body),
   });
-  const result = await response.json();
-  if (!response.ok) throw new Error(result.error || 'request_failed');
+  const result = response.headers.get('content-type')?.includes('application/json') ? await response.json() : await response.blob();
+  if (token() !== credential) throw new Error('session_changed');
+  if (!response.ok) throw new Error(result?.error || 'request_failed');
   return result;
 }

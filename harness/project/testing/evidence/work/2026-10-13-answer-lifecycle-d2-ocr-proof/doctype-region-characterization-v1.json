@@ -1,0 +1,145 @@
+{
+  "scope": "Manually selected regions, no automated localization; stretch/letterbox characterization, not production acceptance",
+  "results": [
+    {
+      "region": "printed_line_english",
+      "preprocessing": "stretch",
+      "scores": {
+        "chart": 0.03552423417568207,
+        "diagram": 0.348231703042984,
+        "document_handwritten": 0.5112023949623108,
+        "document_printed": 0.06208791956305504,
+        "map": 1.1005110017725528e-10,
+        "photo": 0.008796755224466324,
+        "screenshot": 0.03415704518556595
+      },
+      "predicted": "document_handwritten"
+    },
+    {
+      "region": "printed_line_english",
+      "preprocessing": "letterbox",
+      "scores": {
+        "chart": 0.0036188235972076654,
+        "diagram": 0.10208963602781296,
+        "document_handwritten": 0.2718055248260498,
+        "document_printed": 0.60984867811203,
+        "map": 0.0025855167768895626,
+        "photo": 0.004426439292728901,
+        "screenshot": 0.005625362507998943
+      },
+      "predicted": "document_printed"
+    },
+    {
+      "region": "printed_block",
+      "preprocessing": "stretch",
+      "scores": {
+        "chart": 0.00026402465300634503,
+        "diagram": 0.9896129965782166,
+        "document_handwritten": 0.004572481848299503,
+        "document_printed": 5.6961078371386975e-05,
+        "map": 2.6428707312897703e-12,
+        "photo": 2.6550567781669088e-05,
+        "screenshot": 0.005467004142701626
+      },
+      "predicted": "diagram"
+    },
+    {
+      "region": "printed_block",
+      "preprocessing": "letterbox",
+      "scores": {
+        "chart": 9.312032744901444e-08,
+        "diagram": 0.0018065411131829023,
+        "document_handwritten": 0.9503974318504333,
+        "document_printed": 0.014240864664316177,
+        "map": 1.23995420153733e-07,
+        "photo": 3.945005119021516e-06,
+        "screenshot": 0.03355100750923157
+      },
+      "predicted": "document_handwritten"
+    },
+    {
+      "region": "handwritten_title",
+      "preprocessing": "stretch",
+      "scores": {
+        "chart": 4.249154881108552e-05,
+        "diagram": 0.995668888092041,
+        "document_handwritten": 3.815621676039882e-05,
+        "document_printed": 1.2227532351971604e-05,
+        "map": 1.0704900160751762e-10,
+        "photo": 0.0042310720309615135,
+        "screenshot": 7.186618859122973e-06
+      },
+      "predicted": "diagram"
+    },
+    {
+      "region": "handwritten_title",
+      "preprocessing": "letterbox",
+      "scores": {
+        "chart": 0.0014502489939332008,
+        "diagram": 0.37788164615631104,
+        "document_handwritten": 0.5670270919799805,
+        "document_printed": 0.04968848079442978,
+        "map": 3.158191930197063e-08,
+        "photo": 0.0010769481305032969,
+        "screenshot": 0.0028755515813827515
+      },
+      "predicted": "document_handwritten"
+    },
+    {
+      "region": "handwritten_signature",
+      "preprocessing": "stretch",
+      "scores": {
+        "chart": 4.603920751833357e-05,
+        "diagram": 0.0052148811519145966,
+        "document_handwritten": 1.2207451846255046e-12,
+        "document_printed": 1.1280066290753066e-11,
+        "map": 5.673615799395293e-09,
+        "photo": 0.9947391152381897,
+        "screenshot": 1.6217956977371273e-09
+      },
+      "predicted": "photo"
+    },
+    {
+      "region": "handwritten_signature",
+      "preprocessing": "letterbox",
+      "scores": {
+        "chart": 0.0005446686409413815,
+        "diagram": 0.8077970743179321,
+        "document_handwritten": 0.14695113897323608,
+        "document_printed": 0.04406363144516945,
+        "map": 3.506846812939557e-09,
+        "photo": 0.00042197370203211904,
+        "screenshot": 0.000221620561205782
+      },
+      "predicted": "diagram"
+    },
+    {
+      "region": "handwritten_title_author",
+      "preprocessing": "stretch",
+      "scores": {
+        "chart": 9.367092701495494e-08,
+        "diagram": 0.9991586208343506,
+        "document_handwritten": 5.396672804636182e-06,
+        "document_printed": 8.659489125761866e-09,
+        "map": 2.2969215418555677e-10,
+        "photo": 0.0008334889425896108,
+        "screenshot": 2.393357135588303e-06
+      },
+      "predicted": "diagram"
+    },
+    {
+      "region": "handwritten_title_author",
+      "preprocessing": "letterbox",
+      "scores": {
+        "chart": 3.4808371651706693e-07,
+        "diagram": 0.23615355789661407,
+        "document_handwritten": 0.7481445074081421,
+        "document_printed": 0.0015690949512645602,
+        "map": 2.594481907417477e-14,
+        "photo": 3.5367114037399006e-07,
+        "screenshot": 0.014132017269730568
+      },
+      "predicted": "document_handwritten"
+    }
+  ]
+}

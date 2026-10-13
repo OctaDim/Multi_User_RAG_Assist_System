@@ -1,0 +1,38 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 28940 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 3094 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 99 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 105 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 118 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 119 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 112 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 125 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 139 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 149 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 128 ms
+Real PDFium/D-FINE/native full-context GGUF/E5/pgvector whole publisher and manual text correction; fixture issuer is component-only.
+.
+1 passed in 68.28s (0:01:08)

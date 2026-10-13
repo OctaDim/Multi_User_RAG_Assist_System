@@ -8,7 +8,9 @@ dependencies = [
     "langgraph-checkpoint-postgres==3.1.3",
     "llama-cpp-python==0.3.36",
     "onnxruntime==1.31.0",
+    "pillow==12.3.0",
     "psycopg[binary,pool]==3.3.6",
+    "pypdfium2==5.14.0",
     "tokenizers==0.23.3",
     "uvicorn==0.54.0",
 ]
@@ -21,6 +23,7 @@ build-backend = "hatchling.build"
 rag-api = "app.main:main"
 rag-migrate = "app.db:main"
 rag-generation = "app.generation:main"
+rag-documents = "app.document_worker:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["app"]

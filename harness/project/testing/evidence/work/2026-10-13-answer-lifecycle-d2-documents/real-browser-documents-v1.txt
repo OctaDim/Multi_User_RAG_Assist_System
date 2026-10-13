@@ -1,0 +1,36 @@
+FF
+=================================== FAILURES ===================================
+_______________ test_ui_smtp_original_text_correction_and_delete _______________
+backend/tests/browser/test_documents.py:49: in test_ui_smtp_original_text_correction_and_delete
+    expect(page.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
+E   AssertionError: Locator expected to have text 'Файлы приняты. Обработка выполняется в фоне.'
+E   Actual value: Не удалось выполнить действие. 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 5000ms
+E     -   - waiting for locator("#status")
+E     -     2 × locator resolved to <p id="status" role="status" aria-live="polite">Вы вошли.</p>
+E     -       - unexpected value "Вы вошли."
+E     -     7 × locator resolved to <p id="status" role="status" aria-live="polite">Не удалось выполнить действие.</p>
+E     -       - unexpected value "Не удалось выполнить действие."
+______ test_ui_permission_choice_actual_native_pdf_and_unchanged_original ______
+backend/tests/browser/test_documents.py:90: in test_ui_permission_choice_actual_native_pdf_and_unchanged_original
+    expect(user.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
+E   AssertionError: Locator expected to have text 'Файлы приняты. Обработка выполняется в фоне.'
+E   Actual value: Не удалось выполнить действие. 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 5000ms
+E     -   - waiting for locator("#status")
+E     -     2 × locator resolved to <p id="status" role="status" aria-live="polite">Вы вошли.</p>
+E     -       - unexpected value "Вы вошли."
+E     -     7 × locator resolved to <p id="status" role="status" aria-live="polite">Не удалось выполнить действие.</p>
+E     -       - unexpected value "Не удалось выполнить действие."
+=============================== warnings summary ===============================
+backend/tests/browser/test_documents.py:95
+  /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/browser/test_documents.py:95: SyntaxWarning: invalid escape sequence '\.'
+    expect(user.locator('#document-correction textarea')).to_have_value(re.compile('The annual budget is 100 euros\.',re.S))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_documents.py::test_ui_smtp_original_text_correction_and_delete
+FAILED backend/tests/browser/test_documents.py::test_ui_permission_choice_actual_native_pdf_and_unchanged_original
+2 failed, 1 warning in 24.86s

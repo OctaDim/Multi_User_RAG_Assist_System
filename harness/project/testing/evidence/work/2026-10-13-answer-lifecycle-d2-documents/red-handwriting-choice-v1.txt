@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume ____
+backend/tests/test_documents.py:110: in test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume
+    assert response.status_code==200 and response.json()['mode']=='skip_handwriting'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume
+1 failed in 1.55s

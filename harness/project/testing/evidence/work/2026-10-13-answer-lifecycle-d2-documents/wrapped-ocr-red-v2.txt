@@ -1,0 +1,16 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_documented_wrapped_locations_are_not_part_of_recognized_text _______
+
+    def test_documented_wrapped_locations_are_not_part_of_recognized_text():
+        from app.ocr import parse_spotting
+        coordinates=''.join(f'<|LOC_{value}|>' for value in [10,20,100,20,100,50,10,50])
+        lines=parse_spotting('<|TEXT_START|>Budget<|TEXT_END|><|LOC_BEGIN|>'+coordinates+'<|LOC_END|>',1000,1000)
+>       assert len(lines)==1 and lines[0]['text']=='Budget' and lines[0]['bbox']==[10,20,100,50]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/test_document_ocr.py:37: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_documented_wrapped_locations_are_not_part_of_recognized_text
+1 failed, 6 deselected in 0.22s

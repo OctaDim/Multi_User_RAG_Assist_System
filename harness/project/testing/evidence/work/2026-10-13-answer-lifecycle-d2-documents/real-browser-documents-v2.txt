@@ -1,0 +1,4 @@
+Real UI signup/SMTP verification/login; original upload; actual E5 worker; whole ready view; no HTML execution; unchanged download; new correction; deletion.
+.Real operator CLI/UI account; ordinary UI owner; policy saved in real admin form; explicit print-only PDF choice; actual PDFium/D-FINE/GGUF/E5 worker; spatial skip blocks and unchanged original.
+.
+2 passed in 99.24s (0:01:39)

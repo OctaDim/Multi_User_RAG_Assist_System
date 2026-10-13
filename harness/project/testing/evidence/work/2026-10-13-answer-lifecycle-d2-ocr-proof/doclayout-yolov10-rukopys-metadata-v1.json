@@ -1,0 +1,176 @@
+{
+  "_id": "6a1f4f427df725178543fdff",
+  "id": "Hukyl/doclayout-yolov10-rukopys",
+  "private": false,
+  "pipeline_tag": "object-detection",
+  "library_name": "doclayout-yolo",
+  "tags": [
+    "doclayout-yolo",
+    "yolov10",
+    "object-detection",
+    "document-layout-analysis",
+    "handwritten",
+    "ukrainian",
+    "rukopys",
+    "uk",
+    "dataset:UkrainianCatholicUniversity/rukopys",
+    "base_model:juliozhao/DocLayout-YOLO-DocStructBench",
+    "base_model:finetune:juliozhao/DocLayout-YOLO-DocStructBench",
+    "license:agpl-3.0",
+    "model-index",
+    "region:us"
+  ],
+  "downloads": 12,
+  "likes": 1,
+  "modelId": "Hukyl/doclayout-yolov10-rukopys",
+  "author": "Hukyl",
+  "sha": "ecd30d78b1e907bf86d088d68302c45db6b08da9",
+  "lastModified": "2026-07-31T11:48:40.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": [
+    {
+      "name": "doclayout-yolov10-rukopys",
+      "results": [
+        {
+          "task": {
+            "type": "object-detection",
+            "name": "Document Layout Detection"
+          },
+          "dataset": {
+            "type": "UkrainianCatholicUniversity/rukopys",
+            "name": "Rukopys, gold val",
+            "split": "validation"
+          },
+          "metrics": [
+            {
+              "type": "mAP@50",
+              "value": 0.8263,
+              "name": "mAP@50",
+              "verified": false
+            },
+            {
+              "type": "mAP@50-95",
+              "value": 0.5547,
+              "name": "mAP@50-95",
+              "verified": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "config": {},
+  "cardData": {
+    "language": [
+      "uk"
+    ],
+    "library_name": "doclayout-yolo",
+    "pipeline_tag": "object-detection",
+    "license": "agpl-3.0",
+    "base_model": "juliozhao/DocLayout-YOLO-DocStructBench",
+    "datasets": [
+      "UkrainianCatholicUniversity/rukopys"
+    ],
+    "metrics": [
+      "precision",
+      "recall"
+    ],
+    "tags": [
+      "doclayout-yolo",
+      "yolov10",
+      "object-detection",
+      "document-layout-analysis",
+      "handwritten",
+      "ukrainian",
+      "rukopys"
+    ],
+    "model-index": [
+      {
+        "name": "doclayout-yolov10-rukopys",
+        "results": [
+          {
+            "task": {
+              "type": "object-detection",
+              "name": "Document Layout Detection"
+            },
+            "dataset": {
+              "type": "UkrainianCatholicUniversity/rukopys",
+              "name": "Rukopys, gold val",
+              "split": "validation"
+            },
+            "metrics": [
+              {
+                "type": "mAP@50",
+                "value": 0.8263,
+                "name": "mAP@50",
+                "verified": false
+              },
+              {
+                "type": "mAP@50-95",
+                "value": 0.5547,
+                "name": "mAP@50-95",
+                "verified": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "8d9cc61b9a09d6a6aabfec07d37bb398bc65aa30",
+      "size": 7389
+    },
+    {
+      "rfilename": "args.yaml",
+      "blobId": "ced613652ec71bcb1e04ab1ef8ab3a9910812daa",
+      "size": 1595
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "5f8419d8c40941504c68da26f39a36c8c7777dcc",
+      "size": 964
+    },
+    {
+      "rfilename": "metrics.json",
+      "blobId": "e80279246b3c8811359ac71aeda9387e3ea5749d",
+      "size": 7195
+    },
+    {
+      "rfilename": "results.csv",
+      "blobId": "46d4f9e7425589fc9cf3969802cf4daeec19770a",
+      "size": 29280
+    },
+    {
+      "rfilename": "weights/best.pt",
+      "blobId": "93f423d46aebb1b237578cb681317b13c07624c4",
+      "size": 40614461,
+      "lfs": {
+        "sha256": "2e541b664e0a59df262033e91d5a759613979838a87d5e7e68c1ad6953e6beab",
+        "size": 40614461,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "weights/last.pt",
+      "blobId": "2278ede4dcc3dda8bfa7e9f67e949ef0c830d6bf",
+      "size": 40624317,
+      "lfs": {
+        "sha256": "13a4223c6cac2d1db4c68642b58d2c826cf0c660b52f1012187681a26f6df2ca",
+        "size": 40624317,
+        "pointerSize": 133
+      }
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-06-02T21:46:42.000Z",
+  "usedStorage": 81238778
+}

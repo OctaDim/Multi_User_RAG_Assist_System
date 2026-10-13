@@ -1,0 +1,26 @@
+[
+  {
+    "name": "config.json",
+    "revision": "192cb34880784d916477139a8c403a0e451d179e",
+    "sha256": "18b610b3f6a251e55f84e49933a33759660a8a154929560302db8b8639686047",
+    "bytes": 4546,
+    "seconds": 1.1918225909757894,
+    "url": "https://huggingface.co/onnx-community/dfine-egret-x-rukopys-ONNX/resolve/192cb34880784d916477139a8c403a0e451d179e/config.json"
+  },
+  {
+    "name": "preprocessor_config.json",
+    "revision": "192cb34880784d916477139a8c403a0e451d179e",
+    "sha256": "cd38cd59999e7a95d68e487fbe5132df3d4e5c32a0836add57e6126ba0c4eaf1",
+    "bytes": 444,
+    "seconds": 1.1715158650185913,
+    "url": "https://huggingface.co/onnx-community/dfine-egret-x-rukopys-ONNX/resolve/192cb34880784d916477139a8c403a0e451d179e/preprocessor_config.json"
+  },
+  {
+    "name": "onnx/model.onnx",
+    "revision": "192cb34880784d916477139a8c403a0e451d179e",
+    "sha256": "86a8ba2d3df749b88fb2df707ca26429c2ebbc278c3b9378d7be1518da85d423",
+    "bytes": 250924657,
+    "seconds": 68.17206556300516,
+    "url": "https://huggingface.co/onnx-community/dfine-egret-x-rukopys-ONNX/resolve/192cb34880784d916477139a8c403a0e451d179e/onnx/model.onnx"
+  }
+]

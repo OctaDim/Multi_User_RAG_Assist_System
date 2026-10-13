@@ -1,0 +1,24 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_ test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting _
+backend/tests/test_document_ocr.py:12: in test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting
+    from app.ocr import parse_spotting, compose_page, SKIP_TEXT
+E   ModuleNotFoundError: No module named 'app.ocr'
+_ test_invalid_or_degenerate_native_coordinates_fail_whole_page[Unlocated OCR text] _
+backend/tests/test_document_ocr.py:28: in test_invalid_or_degenerate_native_coordinates_fail_whole_page
+    from app.ocr import parse_spotting
+E   ModuleNotFoundError: No module named 'app.ocr'
+_ test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|>] _
+backend/tests/test_document_ocr.py:28: in test_invalid_or_degenerate_native_coordinates_fail_whole_page
+    from app.ocr import parse_spotting
+E   ModuleNotFoundError: No module named 'app.ocr'
+_ test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|>] _
+backend/tests/test_document_ocr.py:28: in test_invalid_or_degenerate_native_coordinates_fail_whole_page
+    from app.ocr import parse_spotting
+E   ModuleNotFoundError: No module named 'app.ocr'
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting
+FAILED backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[Unlocated OCR text]
+FAILED backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|>]
+FAILED backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|>]
+4 failed in 0.05s

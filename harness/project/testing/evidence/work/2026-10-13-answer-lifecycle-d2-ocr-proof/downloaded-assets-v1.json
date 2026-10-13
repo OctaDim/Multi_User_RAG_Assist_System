@@ -1,0 +1,26 @@
+[
+  {
+    "repo": "PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+    "revision": "cc977c16989848c264d813ec1705cb181b7a21ee",
+    "file": "/tmp/rag-answer-lifecycle-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf",
+    "bytes": 881770496,
+    "sha256": "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87",
+    "seconds": 175.85
+  },
+  {
+    "repo": "PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+    "revision": "cc977c16989848c264d813ec1705cb181b7a21ee",
+    "file": "/tmp/rag-answer-lifecycle-models/ocr/PaddleOCR-VL-1.5.gguf",
+    "bytes": 935768992,
+    "sha256": "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+    "seconds": 307.61
+  },
+  {
+    "repo": "monkt/doctype",
+    "revision": "8b16a76b82eb4279215904d6b17f74049ed0c044",
+    "file": "/tmp/rag-answer-lifecycle-models/ocr/doctype_classifier.onnx",
+    "bytes": 12467955,
+    "sha256": "f5d45d2f35d3d2d330d6dd5db12ee097d845008806bfaeb4577b8ca856273e9e",
+    "seconds": 17.67
+  }
+]

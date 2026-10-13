@@ -1,0 +1,55 @@
+{
+  "_id": "68e209933464c973b26b5bfa",
+  "id": "monkt/doctype",
+  "private": false,
+  "pipeline_tag": "image-classification",
+  "tags": [
+    "onnx",
+    "image-classification",
+    "dataset:monkt/doctype",
+    "license:mit",
+    "region:us"
+  ],
+  "downloads": 0,
+  "likes": 1,
+  "modelId": "monkt/doctype",
+  "author": "monkt",
+  "sha": "8b16a76b82eb4279215904d6b17f74049ed0c044",
+  "lastModified": "2025-10-07T05:40:07.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "mit",
+    "pipeline_tag": "image-classification",
+    "datasets": [
+      "monkt/doctype"
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "2b6a7ee5d7a6c1669c1a0612fd0a83403119bb67",
+      "size": 1528
+    },
+    {
+      "rfilename": "doctype_classifier.onnx",
+      "blobId": "7227d2886de871339a65368a1a38b03c2c9e07f3",
+      "size": 12467955,
+      "lfs": {
+        "sha256": "f5d45d2f35d3d2d330d6dd5db12ee097d845008806bfaeb4577b8ca856273e9e",
+        "size": 12467955,
+        "pointerSize": 133
+      }
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2025-10-05T06:00:51.000Z",
+  "usedStorage": 12467955
+}

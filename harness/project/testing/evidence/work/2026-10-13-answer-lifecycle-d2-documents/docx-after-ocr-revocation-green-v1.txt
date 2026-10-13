@@ -1,0 +1,71 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ test_real_docx_embedded_handwriting_is_processed_before_publication[True] ___
+
+environment = {'admin': {'id': UUID('013c2480-2598-4894-8392-aa39a9a732e9'), 'session_id': UUID('6a2622da-7a24-4e37-8a3c-f5c3f76b45f...ersation': UUID('d893d747-56ac-490c-982c-d3daffaafb24'), 'document': UUID('c440f5d3-504e-43a3-9f83-eb6f40be9b88'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7591d6a7c350>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7591d71f9a00>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-111/test_real_docx_embedded_handwr0')
+revoke_after_ocr = True
+
+    @pytest.mark.parametrize('revoke_after_ocr',[False,True])
+    async def test_real_docx_embedded_handwriting_is_processed_before_publication(environment,rag_pool,monkeypatch,tmp_path,revoke_after_ocr):
+        import os
+        from io import BytesIO
+        from zipfile import ZipFile
+        from pathlib import Path
+        from app.document_worker import DocumentWorker
+        from app.rag import E5Embedder
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn']);monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        package=BytesIO()
+        with ZipFile(package,'w') as archive:
+            archive.writestr('word/document.xml','<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:p><w:r><w:t>Owned body with embedded handwriting.</w:t></w:r></w:p></w:document>')
+            archive.writestr('word/media/title.png',(Path(__file__).resolve().parents[2]/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/real-handwritten-title-author-input-v1.png').read_bytes())
+        content=package.getvalue();headers={'Authorization':'Bearer '+environment['user']['token']}
+        with TestClient(create_app()) as client:
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'image.docx','size':len(content)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+            if revoke_after_ocr:
+                stage_page=worker.stage_page
+                async def revoke_before_image_publication(job,revision,page,text,regions):
+                    if any(region['kind']=='handwritten' for region in regions):
+                        policy_url='/api/documents/policies/'+str(environment['user']['id'])
+                        policy=client.get(policy_url,headers=headers).json()
+                        admin={'Authorization':'Bearer '+environment['admin']['token']}
+                        assert client.patch(policy_url,headers=admin,json={'limits':policy['limits'],'permissions':policy['permissions']|{'handwriting':False}}).status_code==200
+                        assert client.patch(policy_url,headers=admin,json={'limits':policy['limits'],'permissions':policy['permissions']}).status_code==200
+                    await stage_page(job,revision,page,text,regions)
+                monkeypatch.setattr(worker,'stage_page',revoke_before_image_publication)
+            try:
+                assert await worker.process_one()
+                response=client.get('/api/documents/'+document,headers=headers)
+                if revoke_after_ocr:
+>                   assert response.status_code==409
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError
+
+backend/tests/test_documents.py:351: AssertionError
+----------------------------- Captured stderr call -----------------------------
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 7
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=616, ny=196)
+clip_encode: output embedding shape [1024, 154, 1]
+image slice encoded in 1800 ms
+decoding image batch 1/2, n_tokens_batch = 128
+image decoded (batch 1/2) in 124 ms
+decoding image batch 2/2, n_tokens_batch = 26
+image decoded (batch 2/2) in 61 ms
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_real_docx_embedded_handwriting_is_processed_before_publication[True]
+1 failed, 15 deselected in 19.46s

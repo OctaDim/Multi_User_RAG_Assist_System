@@ -1,0 +1,13 @@
+# D2 parent review snapshot — not final acceptance
+
+All three ce-simplify-code persona files were reread in full. The platform already returned an unrecoverable agent-thread limit during D1 and has no supported release primitive; these three passes run inline. Scope is the D2 owned application/tests/config/manifest set from the bounded packet, not earlier committed units or protected harness mechanism.
+
+Reuse: source publication/delete uses extracted switch_source inside the existing authorized transaction rather than creating a second provenance/terminal path. E5Embedder, principal, lock_service and unchanged published-revision trigger are reused. No additional behavior-equivalent simplification found.
+
+Quality: UUID storage paths, atomic non-overwriting originals, exact declared byte count, current-owner/role checks, immutable whole revisions, correction base, preserved skip blocks and text-only DOM rendering are retained. The reviewed worker lacked lost-job reconciliation; RED proved it and a singleton-startup transaction now marks old processing jobs/staging revisions failed without requeue, keeps original/old published history and fences old job UUIDs. Documented wrapped Spotting tokens and diagonal degenerate polygons now have RED/GREEN tests. Trust-boundary checks/native physical-close waits are not simplification targets.
+
+Efficiency: actual recognition and E5 run outside DB transaction and event loop; native context is shared by this singleton worker and physically closed only after outstanding C work. Warm policy polling still performs a config read/no-op initialization. Removing that changes existing configuration-error behavior, so skipped here. Sequential uploads preserve current failure/ordering behavior; no speculative parallel upload change. No extra framework or unused service wrapper added.
+
+Known remaining review action before canonical D2 acceptance: once full v2 finishes with frozen code, execute actual DOCX handwriting recognition then revoke/restore before publication. The current needs_handwriting reset may lose that attempt's durable permission dependency. A test patch is prepared in /tmp but not applied during the full gate. Final report must identify its actual result and fix if proved.
+
+These passes do not upgrade G4/U7/U8. Real mixed PDF candidate evidence does not prove all-language handwriting accuracy or joint load. Actual HTTP handoff, source/access invalidation and integrated RAG acceptance remain their planned later gates. No standalone lint/typecheck is configured; compileall, node --check and tracked git diff --check passed at this snapshot.

@@ -1,0 +1,243 @@
+{
+  "_id": "6a912461ff65a75f8af27d96",
+  "id": "onnx-community/dfine-egret-x-rukopys-ONNX",
+  "private": false,
+  "pipeline_tag": "object-detection",
+  "library_name": "transformers.js",
+  "tags": [
+    "transformers.js",
+    "onnx",
+    "d_fine",
+    "object-detection",
+    "d-fine",
+    "dfine",
+    "document-layout-analysis",
+    "handwritten",
+    "ukrainian",
+    "rukopys",
+    "docling",
+    "uk",
+    "dataset:UkrainianCatholicUniversity/rukopys",
+    "base_model:Hukyl/dfine-egret-x-rukopys",
+    "base_model:quantized:Hukyl/dfine-egret-x-rukopys",
+    "license:apache-2.0",
+    "model-index",
+    "region:us"
+  ],
+  "downloads": 19,
+  "likes": 0,
+  "modelId": "onnx-community/dfine-egret-x-rukopys-ONNX",
+  "author": "onnx-community",
+  "sha": "192cb34880784d916477139a8c403a0e451d179e",
+  "lastModified": "2026-08-28T06:02:17.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": [
+    {
+      "name": "dfine-egret-x-rukopys",
+      "results": [
+        {
+          "task": {
+            "type": "object-detection",
+            "name": "Document Layout Detection"
+          },
+          "dataset": {
+            "type": "UkrainianCatholicUniversity/rukopys",
+            "name": "Rukopys, gold val",
+            "split": "validation"
+          },
+          "metrics": [
+            {
+              "type": "mAP@50",
+              "value": 0.6704,
+              "name": "mAP@50",
+              "verified": false
+            },
+            {
+              "type": "mAP@50-95",
+              "value": 0.4441,
+              "name": "mAP@50-95",
+              "verified": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "config": {
+    "architectures": [
+      "DFineForObjectDetection"
+    ],
+    "model_type": "d_fine"
+  },
+  "cardData": {
+    "language": [
+      "uk"
+    ],
+    "library_name": "transformers.js",
+    "pipeline_tag": "object-detection",
+    "license": "apache-2.0",
+    "base_model": [
+      "Hukyl/dfine-egret-x-rukopys"
+    ],
+    "datasets": [
+      "UkrainianCatholicUniversity/rukopys"
+    ],
+    "metrics": [
+      "precision",
+      "recall"
+    ],
+    "tags": [
+      "d-fine",
+      "dfine",
+      "object-detection",
+      "document-layout-analysis",
+      "handwritten",
+      "ukrainian",
+      "rukopys",
+      "docling"
+    ],
+    "model-index": [
+      {
+        "name": "dfine-egret-x-rukopys",
+        "results": [
+          {
+            "task": {
+              "type": "object-detection",
+              "name": "Document Layout Detection"
+            },
+            "dataset": {
+              "type": "UkrainianCatholicUniversity/rukopys",
+              "name": "Rukopys, gold val",
+              "split": "validation"
+            },
+            "metrics": [
+              {
+                "type": "mAP@50",
+                "value": 0.6704,
+                "name": "mAP@50",
+                "verified": false
+              },
+              {
+                "type": "mAP@50-95",
+                "value": 0.4441,
+                "name": "mAP@50-95",
+                "verified": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "transformersInfo": {
+    "auto_model": "AutoModelForObjectDetection",
+    "pipeline_tag": "object-detection",
+    "processor": "AutoTokenizer"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "e5cbdd18ce11a65cd7073438860c3d3cb36cc563",
+      "size": 7529
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "29390a9ae1a72aba4d112fe5e5ee8ccdf6245e28",
+      "size": 4546
+    },
+    {
+      "rfilename": "onnx/model.onnx",
+      "blobId": "c0bd48f57b78d47b1e410696d514c24f35773385",
+      "size": 250924657,
+      "lfs": {
+        "sha256": "86a8ba2d3df749b88fb2df707ca26429c2ebbc278c3b9378d7be1518da85d423",
+        "size": 250924657,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "onnx/model_bnb4.onnx",
+      "blobId": "fc602398928e977a5ad8d08cd5d17007805e67c2",
+      "size": 216537444,
+      "lfs": {
+        "sha256": "f001f6f0bf66425c303a146ff5340d0fc32573e60c307dfa3992d08930fb54fe",
+        "size": 216537444,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "onnx/model_fp16.onnx",
+      "blobId": "86fcdc05262ab3b738efa8f549719a4f6bfa7565",
+      "size": 126195153,
+      "lfs": {
+        "sha256": "6d94c852f890ce182b4d2ed88f05402720048e029a3781bb834d42e2550a9717",
+        "size": 126195153,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "onnx/model_int8.onnx",
+      "blobId": "95e3aaa2e8f86bef93bf4e16bf82d0901bda7f8c",
+      "size": 65239687,
+      "lfs": {
+        "sha256": "42173de85094a767f093351e3f29552759157d05a088e0f562e4869698e65bf0",
+        "size": 65239687,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "onnx/model_q4.onnx",
+      "blobId": "fc602398928e977a5ad8d08cd5d17007805e67c2",
+      "size": 216537444,
+      "lfs": {
+        "sha256": "f001f6f0bf66425c303a146ff5340d0fc32573e60c307dfa3992d08930fb54fe",
+        "size": 216537444,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "onnx/model_q4f16.onnx",
+      "blobId": "269c2d3fa39c208feebf21379c09651a005428a0",
+      "size": 111592825,
+      "lfs": {
+        "sha256": "e4eb546010f6bf6b1761c5607c4f7ddd64910923764ab9cb8564be244c5e5288",
+        "size": 111592825,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "onnx/model_quantized.onnx",
+      "blobId": "95e3aaa2e8f86bef93bf4e16bf82d0901bda7f8c",
+      "size": 65239687,
+      "lfs": {
+        "sha256": "42173de85094a767f093351e3f29552759157d05a088e0f562e4869698e65bf0",
+        "size": 65239687,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "onnx/model_uint8.onnx",
+      "blobId": "33b809c287b032ebe611ddd2877859c97605534f",
+      "size": 65239857,
+      "lfs": {
+        "sha256": "50277f7fb94de328899b6ad76620619a3c69efdef6548f00e29ee3cbf9ded8d7",
+        "size": 65239857,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "preprocessor_config.json",
+      "blobId": "fcdff16b42e5ebc51d28f59184490c6eff91a88b",
+      "size": 444
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-08-28T06:02:09.000Z",
+  "usedStorage": 835729623
+}

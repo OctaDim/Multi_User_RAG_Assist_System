@@ -1,0 +1,65 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_worker_restart_ends_lost_job_without_requeue _______________
+
+environment = {'admin': {'id': UUID('33259186-5ee5-426c-b57a-5b30c104c305'), 'session_id': UUID('ca216ded-d0d3-42ac-a5f9-078f7fb8903...ersation': UUID('17d1e04a-89b4-4282-b49a-3b556a442972'), 'document': UUID('eccc165d-fb2c-4a54-992b-d10725fd5eb0'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x77e574d51490>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77e574c22b40>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-105/test_worker_restart_ends_lost_0')
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_e4a86edac8aa4c0b87a877b7656f5c63) at 0x77e574c6ec90>
+
+    async def test_worker_restart_ends_lost_job_without_requeue(environment, rag_pool, monkeypatch, tmp_path, connection):
+        from uuid import uuid4
+        from app.document_worker import DocumentWorker
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+        monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        with TestClient(create_app()) as client:
+            content=b'An original whose worker was lost.'
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'lost.txt','size':len(content)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,None)
+            lost=await worker.claim()
+            revision=uuid4()
+>           await connection.execute("INSERT INTO source_revisions(id,document_id,status,upload_complete,page_count) VALUES (%s,%s,'staging',true,1)",(revision,document))
+
+backend/tests/test_documents.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_e4a86edac8aa4c0b87a877b7656f5c63) at 0x77e574c6ec90>
+query = "INSERT INTO source_revisions(id,document_id,status,upload_complete,page_count) VALUES (%s,%s,'staging',true,1)"
+params = (UUID('bec7e93f-ef80-4615-a4e4-8137a667ef02'), 'e58ee932-f6f9-4431-9d00-2b478a86e6d7')
+
+    async def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool = False,
+    ) -> AsyncCursor[Row]:
+        """Execute a query and return a cursor to read its results."""
+        try:
+            cur = self.cursor()
+            if binary:
+                cur.format = BINARY
+    
+            if isinstance(query, Template):
+                if params is not None:
+                    raise TypeError(
+                        "'execute()' with string template query"
+                        " doesn't support parameters"
+                    )
+                return await cur.execute(query, prepare=prepare)
+            else:
+                return await cur.execute(query, params, prepare=prepare)
+    
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           psycopg.errors.NotNullViolation: null value in column "mode" of relation "source_revisions" violates not-null constraint
+E           DETAIL:  Failing row contains (bec7e93f-ef80-4615-a4e4-8137a667ef02, e58ee932-f6f9-4431-9d00-2b478a86e6d7, staging, t, 1, null, f, []).
+
+backend/.venv/lib/python3.12/site-packages/psycopg/connection_async.py:333: NotNullViolation
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_worker_restart_ends_lost_job_without_requeue
+1 failed, 14 deselected in 1.68s

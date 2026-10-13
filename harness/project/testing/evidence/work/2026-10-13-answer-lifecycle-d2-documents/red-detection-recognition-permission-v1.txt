@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_revocation_after_detection_cannot_start_recognition ___________
+backend/tests/test_documents.py:191: in test_revocation_after_detection_cannot_start_recognition
+    assert calls==[]
+           ^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_revocation_after_detection_cannot_start_recognition
+1 failed in 12.51s

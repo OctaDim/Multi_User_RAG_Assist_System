@@ -1,0 +1,95 @@
+[
+  {
+    "size": [
+      1200,
+      1400
+    ],
+    "position": [
+      100,
+      780
+    ],
+    "handwriting": [
+      {
+        "bbox": [
+          104,
+          773,
+          292,
+          854
+        ],
+        "detection_confidence": 0.9108670949935913
+      }
+    ]
+  },
+  {
+    "size": [
+      1200,
+      1400
+    ],
+    "position": [
+      100,
+      100
+    ],
+    "handwriting": [
+      {
+        "bbox": [
+          103,
+          94,
+          290,
+          175
+        ],
+        "detection_confidence": 0.9298097491264343
+      }
+    ]
+  },
+  {
+    "size": [
+      1200,
+      1400
+    ],
+    "position": [
+      292,
+      602
+    ],
+    "handwriting": [
+      {
+        "bbox": [
+          295,
+          596,
+          481,
+          673
+        ],
+        "detection_confidence": 0.9005551338195801
+      }
+    ]
+  },
+  {
+    "size": [
+      640,
+      640
+    ],
+    "position": [
+      12,
+      220
+    ],
+    "handwriting": [
+      {
+        "bbox": [
+          14,
+          216,
+          202,
+          290
+        ],
+        "detection_confidence": 0.9402791261672974
+      },
+      {
+        "bbox": [
+          87,
+          282,
+          371,
+          352
+        ],
+        "detection_confidence": 0.8038231134414673
+      }
+    ]
+  }
+]

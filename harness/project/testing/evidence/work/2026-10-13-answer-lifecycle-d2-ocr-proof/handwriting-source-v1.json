@@ -1,0 +1,9 @@
+{
+  "repo": "PaddlePaddle/PP-OCRv5_Online_Demo",
+  "revision": "1d1dd16b6d0d5add6eb83caecbcdd07a9292ac98",
+  "url": "https://huggingface.co/spaces/PaddlePaddle/PP-OCRv5_Online_Demo/resolve/1d1dd16b6d0d5add6eb83caecbcdd07a9292ac98/examples/handwrite_en_demo.png",
+  "file": "examples/handwrite_en_demo.png",
+  "size": 769122,
+  "sha256": "a00a5fe0302f72d1f6de2a13b64a6aaaab5f35de2cdda2581d49a6d578053118",
+  "purpose": "Official real English handwriting example, compatibility/calibration input only; no full G4 or held-out accuracy claim"
+}

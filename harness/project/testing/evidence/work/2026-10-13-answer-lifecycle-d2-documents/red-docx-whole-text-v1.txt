@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_docx_headers_footnotes_and_body_are_all_published ____________
+backend/tests/test_documents.py:288: in test_docx_headers_footnotes_and_body_are_all_published
+    assert 'Main owned fact.' in text and 'Header owned fact.' in text and 'Footnote owned fact.' in text
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_docx_headers_footnotes_and_body_are_all_published
+1 failed in 3.28s

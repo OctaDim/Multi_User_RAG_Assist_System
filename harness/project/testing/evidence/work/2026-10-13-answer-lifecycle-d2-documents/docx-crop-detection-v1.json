@@ -1,0 +1,23 @@
+{
+  "real-handwritten-title-author-input-v1.png": [],
+  "mixed-real-title-fixture-v1.png": [
+    {
+      "bbox": [
+        104,
+        783,
+        458,
+        908
+      ],
+      "detection_confidence": 0.9019514918327332
+    },
+    {
+      "bbox": [
+        252,
+        916,
+        795,
+        1034
+      ],
+      "detection_confidence": 0.7427183985710144
+    }
+  ]
+}

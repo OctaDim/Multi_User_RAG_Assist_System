@@ -138,6 +138,8 @@ async def register(connection, email, password, invitation=None):
                 (uuid4(), email, encoded, role),
             )).fetchone()
             await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)', (uuid4(), account['id']))
+            from app.documents import initialize_policy
+            await initialize_policy(connection, account['id'])
             await audit(connection, None, account, 'bootstrap' if invitation else 'register', {})
         await connection.execute(
             "INSERT INTO email_verifications(token_hash,owner_id,expires_at) VALUES (%s,%s,clock_timestamp()+interval '1 hour')",
@@ -272,6 +274,11 @@ async def mutate(connection, token, target_id, changes):
         if access_lost:
             await connection.execute('UPDATE sessions SET revoked=true WHERE owner_id=%s', (target_id,))
             await terminal_accounts(connection, target_id, 'account_changed')
+            await connection.execute(
+                '''UPDATE document_files f SET state='failed',error='document_access_lost',job_id=NULL
+                   FROM documents d WHERE d.id=f.document_id AND d.owner_id=%s
+                   AND f.state IN ('receiving','queued','processing','awaiting_choice')''', (target_id,),
+            )
         await audit(connection, actor['id'], updated, 'update_account', previous)
         return public(updated)
 

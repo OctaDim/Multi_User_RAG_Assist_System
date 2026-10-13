@@ -1,0 +1,28 @@
+{
+  "input": "mixed-pdf-printed-only-input-v1.png",
+  "sha256": "9e48ff0d0d01e3382fb26245196531da68e16793c404ed6a6381451d5476c576",
+  "scope": "Only detector-masked PDF raster is passed to OCR; handwriting is not recognized",
+  "result": {
+    "id": "chatcmpl-c5d0d300-fb2c-49d0-a564-46b283cb05ef",
+    "object": "chat.completion",
+    "created": 1791912945,
+    "model": "/tmp/rag-answer-lifecycle-models/ocr/PaddleOCR-VL-1.5.gguf",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Document OCR test\n\nThe annual budget is 100 euros.\n\nDer Jahreshaushalt betraegt 100 Euro.\n\nГодовой бюджет составляет 100 евро.\n\nГадавы бюджэт складае 100 еўра."
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 51,
+      "completion_tokens": 74,
+      "total_tokens": 125
+    }
+  },
+  "seconds": 70.79310596198775
+}

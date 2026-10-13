@@ -1,0 +1,37 @@
+INFO:     Started server process [229534]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:39680 (Press CTRL+C to quit)
+INFO:     127.0.0.1:39523 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39203 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39203 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:39211 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39211 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39297 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39297 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39297 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40057 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40057 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39297 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40985 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40985 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:40985 - "OPTIONS /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40991 - "PUT /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40991 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40839 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41845 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40711 - "OPTIONS /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40711 - "GET /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40713 - "GET /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40713 - "OPTIONS /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/corrections HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40713 - "POST /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/corrections HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40713 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41227 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39045 - "GET /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40545 - "GET /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40545 - "DELETE /api/documents/4e4722d9-32b6-4583-8f77-ec65ab30664a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40545 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [229534]

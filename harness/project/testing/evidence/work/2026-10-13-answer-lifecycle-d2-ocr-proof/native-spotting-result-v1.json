@@ -1,0 +1,29 @@
+{
+  "input": "mixed-pdf-printed-only-input-v1.png",
+  "result": {
+    "id": "chatcmpl-60fe3300-5c15-4fa7-be26-e7fb91410aed",
+    "object": "chat.completion",
+    "created": 1791914269,
+    "model": "/tmp/rag-answer-lifecycle-models/ocr/PaddleOCR-VL-1.5.gguf",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра."
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 51,
+      "completion_tokens": 110,
+      "total_tokens": 161
+    }
+  },
+  "seconds": 69.38039509998634,
+  "maxrss_kib": 3703596,
+  "runtime": "llama-cpp-python 0.3.36 MTMD CPU",
+  "scope": "Compatibility/printed-language proof only; not whole publisher or handwriting gate"
+}

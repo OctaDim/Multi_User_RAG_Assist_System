@@ -1,0 +1,9 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_real_text_publisher_indexes_whole_original ________________
+backend/tests/test_documents.py:26: in test_real_text_publisher_indexes_whole_original
+    from app.document_worker import DocumentWorker
+E   ModuleNotFoundError: No module named 'app.document_worker'
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_real_text_publisher_indexes_whole_original
+1 failed in 1.51s

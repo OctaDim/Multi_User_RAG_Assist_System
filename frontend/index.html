@@ -35,6 +35,16 @@
     <h2>Мои беседы</h2>
     <ul id="conversations"></ul>
     <section id="history" aria-label="История беседы"></section>
+    <section id="library" aria-label="Личные документы">
+      <h2>Мои документы</h2>
+      <form id="document-upload">
+        <label>Выберите документы<input name="files" type="file" multiple accept=".pdf,.docx,.txt,.md" required></label>
+        <button>Загрузить документы</button>
+      </form>
+      <button id="refresh-documents" type="button">Обновить статусы документов</button>
+      <ul id="documents"></ul>
+      <section id="document-view" aria-label="Просмотр и исправление документа"></section>
+    </section>
     <section id="administration" hidden>
       <h2>Аккаунты</h2>
       <p>Блокировка или мягкое удаление завершают текущие запросы и сессии выбранного аккаунта. Документы и история сохраняются.</p>

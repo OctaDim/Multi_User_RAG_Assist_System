@@ -24,11 +24,12 @@ PASSWORD = 'A long owned browser password'
 
 
 @pytest.fixture
-def real_account_browser(environment, monkeypatch):
+def real_account_browser(environment, monkeypatch, tmp_path):
     with socket.socket() as reservation:
         reservation.bind(('127.0.0.1', 0))
         api_port = reservation.getsockname()[1]
     api_url = f'http://127.0.0.1:{api_port}'
+    monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path/'originals'))
 
     class Static(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):

@@ -1,0 +1,10 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_______ test_revoked_permission_and_account_access_stop_queued_documents _______
+backend/tests/test_documents.py:67: in test_revoked_permission_and_account_access_stop_queued_documents
+    assert current['state']=='failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_revoked_permission_and_account_access_stop_queued_documents
+1 failed, 1 passed in 1.69s

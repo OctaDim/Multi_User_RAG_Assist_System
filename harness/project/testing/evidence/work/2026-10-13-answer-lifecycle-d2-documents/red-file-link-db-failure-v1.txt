@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ test_database_failure_after_atomic_file_link_keeps_original_accounted _____
+backend/tests/test_documents.py:126: in test_database_failure_after_atomic_file_link_keeps_original_accounted
+    assert row['state']=='failed' and row['original_sha256']==hashlib.sha256(content).hexdigest()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_database_failure_after_atomic_file_link_keeps_original_accounted
+1 failed in 1.26s

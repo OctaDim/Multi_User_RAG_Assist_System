@@ -1,0 +1,7 @@
+{
+  "printed_lines_exact": true,
+  "allowed_real_title_author_read": true,
+  "handwriting_absent_from_print_only_output": true,
+  "both_finish_at_eos": true,
+  "scope": "One constructed mixed raster PDF from real handwriting crop and synthetic printed text, not held-out regional accuracy or publisher proof"
+}

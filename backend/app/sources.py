@@ -50,50 +50,55 @@ async def source_flags(connection, request_id):
 
 async def change_source(connection, token, document_id, *, deleted=False, revision_id=None):
     """Publisher boundary: switch a complete staged revision, or soft-delete its document."""
-    from app.answers import transition
-
     async with connection.transaction():
         await lock_service(connection)
         actor = await principal(connection, token)
-        document = await (await connection.execute(
-            "SELECT * FROM documents WHERE id=%s AND owner_id=%s FOR UPDATE", (document_id, actor['id']),
+        return await switch_source(connection, actor, document_id, deleted=deleted, revision_id=revision_id)
+
+
+async def switch_source(connection, actor, document_id, *, deleted=False, revision_id=None):
+    """Internal publisher shares the authorized transaction and owner/source locks."""
+    from app.answers import transition
+
+    document = await (await connection.execute(
+        "SELECT * FROM documents WHERE id=%s AND owner_id=%s FOR UPDATE", (document_id, actor['id']),
+    )).fetchone()
+    if not document:
+        raise AccessError('not_found', 404)
+    if deleted and document['deleted']:
+        return
+    if not deleted and document['deleted']:
+        raise AccessError('source_deleted', 409)
+    if not deleted and revision_id == document['published_revision']:
+        return
+    if not deleted:
+        await connection.execute("SELECT id FROM source_revisions WHERE id=%s AND document_id=%s FOR UPDATE", (revision_id, document_id))
+        revision = await (await connection.execute(
+            """SELECT r.* FROM source_revisions r WHERE id=%s AND document_id=%s
+            AND status='published' AND upload_complete
+            AND (mode='complete' OR (skip_confirmed AND jsonb_array_length(limitations)>0))
+            AND (SELECT count(*) FROM source_pages p WHERE p.revision_id=r.id)=r.page_count
+            AND NOT EXISTS(SELECT 1 FROM source_pages p WHERE p.revision_id=r.id AND (status<>'ready' OR page>r.page_count))""",
+            (revision_id, document_id),
         )).fetchone()
-        if not document:
-            raise AccessError('not_found', 404)
-        if deleted and document['deleted']:
-            return
-        if not deleted and document['deleted']:
-            raise AccessError('source_deleted', 409)
-        if not deleted and revision_id == document['published_revision']:
-            return
-        if not deleted:
-            await connection.execute("SELECT id FROM source_revisions WHERE id=%s AND document_id=%s FOR UPDATE", (revision_id, document_id))
-            revision = await (await connection.execute(
-                """SELECT r.* FROM source_revisions r WHERE id=%s AND document_id=%s
-                AND status='published' AND upload_complete
-                AND (mode='complete' OR (skip_confirmed AND jsonb_array_length(limitations)>0))
-                AND (SELECT count(*) FROM source_pages p WHERE p.revision_id=r.id)=r.page_count
-                AND NOT EXISTS(SELECT 1 FROM source_pages p WHERE p.revision_id=r.id AND (status<>'ready' OR page>r.page_count))""",
-                (revision_id, document_id),
-            )).fetchone()
-            if not revision:
-                raise AccessError('revision_not_ready', 409)
-        affected = await (await connection.execute(
-            """SELECT DISTINCT r.conversation_id FROM requests r JOIN request_sources s ON s.request_id=r.id
-               WHERE s.document_id=%s ORDER BY r.conversation_id""", (document_id,),
-        )).fetchall()
-        for row in affected:
-            await connection.execute("SELECT id FROM conversations WHERE id=%s FOR UPDATE", (row['conversation_id'],))
-        await connection.execute("UPDATE documents SET deleted=%s,published_revision=coalesce(%s,published_revision) WHERE id=%s", (deleted, revision_id, document_id))
-        # Provenance already includes all ancestors actually passed to this answer.
-        for row in affected:
-            await connection.execute("UPDATE conversations SET context_epoch=context_epoch+1 WHERE id=%s", (row['conversation_id'],))
-        requests = await (await connection.execute(
-            """SELECT r.* FROM requests r WHERE EXISTS(SELECT 1 FROM request_sources s WHERE s.request_id=r.id AND s.document_id=%s)
-               ORDER BY r.id FOR UPDATE""", (document_id,),
-        )).fetchall()
-        for request in requests:
-            flags = await source_flags(connection, request['id'])
-            await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
-            if deleted:
-                await transition(connection, request, 'interrupted', 'source_deleted')
+        if not revision:
+            raise AccessError('revision_not_ready', 409)
+    affected = await (await connection.execute(
+        """SELECT DISTINCT r.conversation_id FROM requests r JOIN request_sources s ON s.request_id=r.id
+           WHERE s.document_id=%s ORDER BY r.conversation_id""", (document_id,),
+    )).fetchall()
+    for row in affected:
+        await connection.execute("SELECT id FROM conversations WHERE id=%s FOR UPDATE", (row['conversation_id'],))
+    await connection.execute("UPDATE documents SET deleted=%s,published_revision=coalesce(%s,published_revision) WHERE id=%s", (deleted, revision_id, document_id))
+    # Provenance already includes all ancestors actually passed to this answer.
+    for row in affected:
+        await connection.execute("UPDATE conversations SET context_epoch=context_epoch+1 WHERE id=%s", (row['conversation_id'],))
+    requests = await (await connection.execute(
+        """SELECT r.* FROM requests r WHERE EXISTS(SELECT 1 FROM request_sources s WHERE s.request_id=r.id AND s.document_id=%s)
+           ORDER BY r.id FOR UPDATE""", (document_id,),
+    )).fetchall()
+    for request in requests:
+        flags = await source_flags(connection, request['id'])
+        await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
+        if deleted:
+            await transition(connection, request, 'interrupted', 'source_deleted')

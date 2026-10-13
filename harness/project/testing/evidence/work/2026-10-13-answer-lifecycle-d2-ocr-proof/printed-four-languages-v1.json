@@ -1,0 +1,14 @@
+{
+  "kind": "synthetic printed test input, not handwritten",
+  "expected_lines": [
+    "Document OCR test",
+    "The annual budget is 100 euros.",
+    "Der Jahreshaushalt betraegt 100 Euro.",
+    "Годовой бюджет составляет 100 евро.",
+    "Гадавы бюджэт складае 100 еўра."
+  ],
+  "sha256": {
+    "printed-four-languages-v1.png": "a57ec0b42c494187e3acb02dc4e12f34080e212afb3114450af5ba51d82b2210",
+    "printed-four-languages-v1.pdf": "1a5d566352a67124d928725b19fa74ee04dcee3f30b1b11674d4788cb176321f"
+  }
+}

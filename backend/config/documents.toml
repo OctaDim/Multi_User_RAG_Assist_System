@@ -1,0 +1,13 @@
+[limits]
+file_bytes = 50000000
+pdf_pages = 500
+batch_files = 20
+documents = 1000
+original_bytes = 2000000000
+
+[permissions]
+pdf = true
+docx = true
+txt = true
+md = true
+handwriting = true

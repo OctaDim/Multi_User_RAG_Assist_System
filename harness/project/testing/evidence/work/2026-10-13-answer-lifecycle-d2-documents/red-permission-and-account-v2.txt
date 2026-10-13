@@ -1,0 +1,16 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_revoked_permission_and_account_access_stop_queued_documents[permission] _
+backend/tests/test_documents.py:72: in test_revoked_permission_and_account_access_stop_queued_documents
+    assert current['state']=='failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+__ test_revoked_permission_and_account_access_stop_queued_documents[account] ___
+backend/tests/test_documents.py:72: in test_revoked_permission_and_account_access_stop_queued_documents
+    assert current['state']=='failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_revoked_permission_and_account_access_stop_queued_documents[permission]
+FAILED backend/tests/test_documents.py::test_revoked_permission_and_account_access_stop_queued_documents[account]
+2 failed in 1.56s

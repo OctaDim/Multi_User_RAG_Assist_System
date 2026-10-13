@@ -1,0 +1,32 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_worker_restart_ends_lost_job_without_requeue _______________
+
+environment = {'admin': {'id': UUID('fdf06641-38a7-47c9-82e9-f5d54d7fdff2'), 'session_id': UUID('83dad1e5-2da6-4d4b-abdd-b8106b26320...ersation': UUID('7f0a5641-8c41-4593-963f-d3d8002b89a3'), 'document': UUID('ee47db9b-f127-4670-a53a-b72a4ecb9f14'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x73ff97e651c0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73ff97e27350>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-106/test_worker_restart_ends_lost_0')
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_aee580a354c348d18567076dfbe4408b) at 0x73ff97e67b00>
+
+    async def test_worker_restart_ends_lost_job_without_requeue(environment, rag_pool, monkeypatch, tmp_path, connection):
+        from uuid import uuid4
+        from app.document_worker import DocumentWorker
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+        monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        with TestClient(create_app()) as client:
+            content=b'An original whose worker was lost.'
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'lost.txt','size':len(content)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,None)
+            lost=await worker.claim()
+            revision=uuid4()
+            await connection.execute("INSERT INTO source_revisions(id,document_id,status,upload_complete,page_count,mode) VALUES (%s,%s,'staging',true,1,'complete')",(revision,document))
+>           await worker.reconcile_lost()
+                  ^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'DocumentWorker' object has no attribute 'reconcile_lost'
+
+backend/tests/test_documents.py:66: AttributeError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_worker_restart_ends_lost_job_without_requeue
+1 failed, 14 deselected in 1.83s

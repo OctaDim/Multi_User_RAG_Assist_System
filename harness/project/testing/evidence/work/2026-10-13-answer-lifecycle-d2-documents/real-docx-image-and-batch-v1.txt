@@ -1,0 +1,21 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 7
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=616, ny=196)
+clip_encode: output embedding shape [1024, 154, 1]
+image slice encoded in 2166 ms
+decoding image batch 1/2, n_tokens_batch = 128
+image decoded (batch 1/2) in 2279 ms
+decoding image batch 2/2, n_tokens_batch = 26
+image decoded (batch 2/2) in 38 ms
+..
+2 passed in 57.03s

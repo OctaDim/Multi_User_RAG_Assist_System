@@ -1,0 +1,35 @@
+{
+  "seconds": 1.9241226669983007,
+  "inputs": [
+    [
+      "pixel_values",
+      [
+        "batch_size",
+        3,
+        "height",
+        "width"
+      ],
+      "tensor(float)"
+    ]
+  ],
+  "outputs": [
+    [
+      "logits",
+      [
+        "batch_size",
+        "num_queries",
+        7
+      ],
+      "tensor(float)"
+    ],
+    [
+      "pred_boxes",
+      [
+        "batch_size",
+        "num_queries",
+        4
+      ],
+      "tensor(float)"
+    ]
+  ]
+}

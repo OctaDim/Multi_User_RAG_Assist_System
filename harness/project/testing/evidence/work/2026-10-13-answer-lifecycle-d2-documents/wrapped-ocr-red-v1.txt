@@ -1,0 +1,49 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_documented_wrapped_locations_are_not_part_of_recognized_text _______
+
+    def test_documented_wrapped_locations_are_not_part_of_recognized_text():
+        from app.ocr import parse_spotting
+        coordinates=''.join(f'<|LOC_{value}|>' for value in [10,20,100,20,100,50,10,50])
+>       lines=parse_spotting('Budget<|LOC_BEGIN|>'+coordinates+'<|LOC_END|>',1000,1000)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_document_ocr.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+raw = 'Budget<|LOC_BEGIN|><|LOC_10|><|LOC_20|><|LOC_100|><|LOC_20|><|LOC_100|><|LOC_50|><|LOC_10|><|LOC_50|><|LOC_END|>'
+width = 1000, height = 1000
+
+    def parse_spotting(raw, width, height):
+        lines, end = [], 0
+        for match in LOCATIONS.finditer(raw):
+            text = match.group(1).strip()
+            values = [int(value) for value in re.findall(r'<\|LOC_(\d+)\|>', match.group(2))]
+            if not text or any(value > 1000 for value in values):
+                raise AccessError('invalid_ocr_coordinates', 422)
+            polygon = [[values[index]/1000*width, values[index+1]/1000*height] for index in range(0,8,2)]
+            xs, ys = [point[0] for point in polygon], [point[1] for point in polygon]
+            bbox = [min(xs), min(ys), max(xs), max(ys)]
+            if bbox[0] >= bbox[2] or bbox[1] >= bbox[3]:
+                raise AccessError('invalid_ocr_coordinates', 422)
+            lines.append({'kind':'printed','text':text,'bbox':bbox,'polygon':polygon})
+            end = match.end()
+        if raw[end:].strip():
+>           raise AccessError('unlocated_ocr_text', 422)
+E           app.auth.AccessError: unlocated_ocr_text
+
+backend/app/ocr.py:55: AccessError
+_________________ test_diagonal_zero_area_polygon_is_rejected __________________
+
+    def test_diagonal_zero_area_polygon_is_rejected():
+        from app.ocr import parse_spotting
+        raw='Budget'+''.join(f'<|LOC_{value}|>' for value in [10,10,20,20,30,30,40,40])
+>       with pytest.raises(AccessError,match='invalid_ocr_coordinates'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_document_ocr.py:43: Failed
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_documented_wrapped_locations_are_not_part_of_recognized_text
+FAILED backend/tests/test_document_ocr.py::test_diagonal_zero_area_polygon_is_rejected
+2 failed, 5 deselected in 0.40s

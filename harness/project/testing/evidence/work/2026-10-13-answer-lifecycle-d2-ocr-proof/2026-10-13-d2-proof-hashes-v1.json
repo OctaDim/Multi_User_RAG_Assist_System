@@ -1,0 +1,23 @@
+{
+  "doctype-probe-v1.py": "4a060fcc40c89e9f9eda1d02515b6b3b29990ff31fb604334f2156d3702cadf9",
+  "doctype-characterization-v1.json": "66779cd0a1a352af81452f6da87e5747d685ee5f248cf0433aa8d66f25fcd58c",
+  "download-pinned-assets-v1.py": "e6d511d31caab7c36df427c252c61f817cfca3c55603f76f44faf6b9dba237c5",
+  "doctype-metadata-v1.json": "a05d575c84756d37af1df05b334d178366f86c7cfcb0fbda342c0bdbe7297dda",
+  "pdfium-metadata-v1.json": "6864b27f27e5191d806506819f90ff02a33f015a1e0958c2ffb411bc9bc01fee",
+  "native-ocr-probe-v2.py": "23c64a458178e06b22cde4904fcc958a7529ecb03faf4ce521add5ff54834cc5",
+  "paddleocr-metadata-v1.json": "c9988f1ac4d9ec90e634a1b16cf52f7957545adda1102f04be515f3fcdae7189",
+  "printed-four-languages-v1.json": "ccd02f76e57a91db5bf69435d4e5e23b93a05c7fd8716fce23e4ba6b244baa6a",
+  "printed-four-languages-v1.pdf": "1a5d566352a67124d928725b19fa74ee04dcee3f30b1b11674d4788cb176321f",
+  "printed-four-languages-v1.png": "a57ec0b42c494187e3acb02dc4e12f34080e212afb3114450af5ba51d82b2210",
+  "doctype-dataset-metadata-v1.json": "aa37da225d97e8da140ab0b0d0ab7a4207df5f1817058421e7241bbcc74b6d36",
+  "native-printed-verification-v1.json": "5de5be69d0ec321e0d238143fee2e1b92bfc6f94b7747d2f00601e86c6823b32",
+  "native-ocr-v1.log": "6f91def8e150eadd1b1c66c37780bcee2ac60046f69e2e594f667b9f45baddfb",
+  "downloaded-assets-v1.json": "fbe96cdc55a02567ae797cc196c068a7936e3c0d5b7f7247a67bade25ce3d33e",
+  "doctype-region-probe-v1.py": "ec85f4dab94d839a823f06eac1d9f2972177cacf8b8ce59185ee4f44efa9dd36",
+  "native-ocr-result-v2.json": "de169f4e2224185d0b773402840a8ab3331bf043e2afc7e6ced9a70b3e1c7730",
+  "doctype-region-characterization-v1.json": "14b919fc61fad2c187f85618b4a3ffed1d7fe054deb4f2245d5ef74ae24d1276",
+  "native-ocr-v2.log": "0b23833ee8eb9ef88401abab05f8ddd91464355058e8af987a7f3ace94a505b9",
+  "2026-10-13-d2-candidate-proofs-v1.md": "e2d4d5bbfa3250fb5c5b35323abf51a0782f0ae381d8c8f725d545c0466f7e7b",
+  "paddle-handwrite-en-original.png": "a00a5fe0302f72d1f6de2a13b64a6aaaab5f35de2cdda2581d49a6d578053118",
+  "handwriting-source-v1.json": "6dfb6932b95cdd541181a39ebaf5cb44aa1df0a4f195b261a722d559cd98a369"
+}

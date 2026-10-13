@@ -15,3 +15,10 @@ button:disabled { opacity: .65; cursor: default; }
 #accounts { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 18rem),1fr)); gap: 1rem; }
 h3 { overflow-wrap: anywhere; }
 li { margin-bottom: .7rem; }
+textarea { box-sizing: border-box; display: block; width: 100%; padding: .6rem; font: inherit; }
+#library { margin-top: 2rem; }
+#library button { margin: .4rem .4rem .4rem 0; }
+.document-page { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,20rem),1fr)); gap: 1rem; margin-bottom: 1rem; }
+.original-page { margin: 0; position: relative; align-self: start; }
+.original-page img { display: block; width: 100%; }
+.skip-region { position: absolute; box-sizing: border-box; border: 2px solid #b45d00; background: #ffe6bf60; font-size: .7rem; overflow: hidden; }

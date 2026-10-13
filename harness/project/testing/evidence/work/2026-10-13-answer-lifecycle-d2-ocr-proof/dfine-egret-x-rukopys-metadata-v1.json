@@ -1,0 +1,198 @@
+{
+  "_id": "6a26df1f202e5c96fcb782fd",
+  "id": "Hukyl/dfine-egret-x-rukopys",
+  "private": false,
+  "pipeline_tag": "object-detection",
+  "library_name": "transformers",
+  "tags": [
+    "transformers",
+    "safetensors",
+    "d_fine",
+    "object-detection",
+    "d-fine",
+    "dfine",
+    "document-layout-analysis",
+    "handwritten",
+    "ukrainian",
+    "rukopys",
+    "docling",
+    "uk",
+    "dataset:UkrainianCatholicUniversity/rukopys",
+    "base_model:docling-project/docling-layout-egret-xlarge",
+    "base_model:finetune:docling-project/docling-layout-egret-xlarge",
+    "license:apache-2.0",
+    "model-index",
+    "endpoints_compatible",
+    "region:us"
+  ],
+  "downloads": 94,
+  "likes": 0,
+  "modelId": "Hukyl/dfine-egret-x-rukopys",
+  "author": "Hukyl",
+  "sha": "6c4574e07f33b2e0b8f53dcfd3db1d6c5affa277",
+  "lastModified": "2026-07-30T13:08:49.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": [
+    {
+      "name": "dfine-egret-x-rukopys",
+      "results": [
+        {
+          "task": {
+            "type": "object-detection",
+            "name": "Document Layout Detection"
+          },
+          "dataset": {
+            "type": "UkrainianCatholicUniversity/rukopys",
+            "name": "Rukopys, gold val",
+            "split": "validation"
+          },
+          "metrics": [
+            {
+              "type": "mAP@50",
+              "value": 0.6704,
+              "name": "mAP@50",
+              "verified": false
+            },
+            {
+              "type": "mAP@50-95",
+              "value": 0.4441,
+              "name": "mAP@50-95",
+              "verified": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "config": {
+    "architectures": [
+      "DFineForObjectDetection"
+    ],
+    "model_type": "d_fine"
+  },
+  "cardData": {
+    "language": [
+      "uk"
+    ],
+    "library_name": "transformers",
+    "pipeline_tag": "object-detection",
+    "license": "apache-2.0",
+    "base_model": "docling-project/docling-layout-egret-xlarge",
+    "datasets": [
+      "UkrainianCatholicUniversity/rukopys"
+    ],
+    "metrics": [
+      "precision",
+      "recall"
+    ],
+    "tags": [
+      "d-fine",
+      "dfine",
+      "object-detection",
+      "document-layout-analysis",
+      "handwritten",
+      "ukrainian",
+      "rukopys",
+      "docling"
+    ],
+    "model-index": [
+      {
+        "name": "dfine-egret-x-rukopys",
+        "results": [
+          {
+            "task": {
+              "type": "object-detection",
+              "name": "Document Layout Detection"
+            },
+            "dataset": {
+              "type": "UkrainianCatholicUniversity/rukopys",
+              "name": "Rukopys, gold val",
+              "split": "validation"
+            },
+            "metrics": [
+              {
+                "type": "mAP@50",
+                "value": 0.6704,
+                "name": "mAP@50",
+                "verified": false
+              },
+              {
+                "type": "mAP@50-95",
+                "value": 0.4441,
+                "name": "mAP@50-95",
+                "verified": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "transformersInfo": {
+    "auto_model": "AutoModelForObjectDetection",
+    "pipeline_tag": "object-detection",
+    "processor": "AutoTokenizer"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "6cd605a433e92ccd78e1a9fe7f1cfa57c01dc802",
+      "size": 7060
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "2d365790722c854be23b38c173077d6a36c4982d",
+      "size": 4483
+    },
+    {
+      "rfilename": "metrics.json",
+      "blobId": "9d693e5ccd6e5c14cf463faaea5a465e00f897b4",
+      "size": 858
+    },
+    {
+      "rfilename": "model.safetensors",
+      "blobId": "cb85125d337ababe35e3a703c84337c993be9190",
+      "size": 251019324,
+      "lfs": {
+        "sha256": "3c016e4dde03379bd241599e93d8fe845ceeea30370336368c8fe3f774c57647",
+        "size": 251019324,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "preprocessor_config.json",
+      "blobId": "bdc2e74dae3e07b1e914761e24f3155b44d92492",
+      "size": 424
+    },
+    {
+      "rfilename": "selection_comparison.json",
+      "blobId": "e65351e975f4a46d0769196d83e0542466db06a8",
+      "size": 320
+    },
+    {
+      "rfilename": "training_log.jsonl",
+      "blobId": "b2e358e728501910b578805e9654d84dcde74fac",
+      "size": 20664
+    },
+    {
+      "rfilename": "training_meta.json",
+      "blobId": "6fe5cf4353256e55bb3428ac198aec0dead906b3",
+      "size": 1253
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-06-08T15:26:23.000Z",
+  "safetensors": {
+    "parameters": {
+      "F32": 62704769
+    },
+    "total": 62704769
+  },
+  "usedStorage": 251019324
+}
