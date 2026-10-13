@@ -1,0 +1,27 @@
+Resolved 78 packages in 2.49s
+   Building rag-answer-lifecycle @ file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+Downloading hf-xet (4.0MiB)
+Downloading onnxruntime (22.7MiB)
+Downloading tokenizers (3.2MiB)
+      Built rag-answer-lifecycle @ file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+ Downloaded tokenizers
+ Downloaded hf-xet
+ Downloaded onnxruntime
+Prepared 14 packages in 28.88s
+Uninstalled 2 packages in 46ms
+Installed 14 packages in 21ms
+ + filelock==4.1.1
+ + flatbuffers==25.12.19
+ + fsspec==2026.9.0
+ + hf-xet==1.7.0
+ + huggingface-hub==2.2.0
+ + langgraph==1.2.15
+ + langgraph-prebuilt==1.1.0
+ + langgraph-sdk==0.4.7
+ + onnxruntime==1.31.0
+ + protobuf==7.36.2
+ ~ rag-answer-lifecycle==0.1.0 (from file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend)
+ + tokenizers==0.23.3
+ + tqdm==4.70.1
+ - websockets==17.2
+ + websockets==16.1.1

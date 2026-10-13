@@ -3,7 +3,6 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 import uvicorn
@@ -20,7 +19,6 @@ async def lifespan(app):
         async with pool.connection() as connection:
             await connection.execute("SELECT id FROM service_state WHERE id=1")
         app.state.pool = pool
-        app.state.checkpointer = AsyncPostgresSaver(pool)
         yield
 
 

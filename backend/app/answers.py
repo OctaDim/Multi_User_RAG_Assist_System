@@ -4,6 +4,7 @@ from uuid import uuid4
 from psycopg.types.json import Jsonb
 
 from app.auth import AccessError, lock_service, principal, secret_hash
+from app.sources import available, source_flags
 
 
 UNFINISHED = ("accepted", "searching", "queued", "generating")
@@ -48,7 +49,7 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             raise AccessError("conversation_busy", 409)
         if len(documents) != len(scope):
             raise AccessError("invalid_scope", 404)
-        if not any(document["ready"] and not document["deleted"] for document in documents):
+        if not await available(connection, actor["id"], scope):
             raise AccessError("no_ready_sources", 409)
         if not service["healthy"]:
             raise AccessError("coordinator_unavailable", 503)
@@ -56,6 +57,11 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,state,execution_epoch,context_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s,'accepted',%s,%s) RETURNING *",
             (uuid4(), conversation_id, actor["id"], operation_key, fingerprint, scope, tab_id, service["epoch"], history["context_epoch"]),
         )).fetchone()
+        await connection.execute(
+            "INSERT INTO graph_bindings(request_id,thread_id,owner_id,conversation_id,execution_epoch,context_epoch,account_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+            (request['id'], f"{conversation_id}:{request['id']}:{history['context_epoch']}", actor['id'], conversation_id,
+             service['epoch'], history['context_epoch'], actor['context_epoch']),
+        )
         await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'user',%s)", (request["id"], conversation_id, question))
         await event(connection, request, "accepted", {"state": "accepted", "version": request["version"]})
         return request
@@ -70,6 +76,9 @@ async def transition(connection, request, state, reason):
         return request
     if state != "completed":
         await connection.execute("UPDATE messages SET excluded=true WHERE request_id=%s AND role='assistant'", (request["id"],))
+    flags = await source_flags(connection, request['id'])
+    if flags:
+        await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
     await event(connection, updated, "terminal", {"state": state, "reason": reason, "version": updated["version"]})
     return updated
 

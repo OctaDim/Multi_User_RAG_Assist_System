@@ -1,0 +1,26 @@
+FF
+=================================== FAILURES ===================================
+_________ test_ready_flag_without_whole_published_revision_is_rejected _________
+
+environment = {'admin': {'id': UUID('20dc95c3-9098-46a0-8602-0b295b56887c'), 'token': '3c3717c101964443a9782adebcfdadc7'}, 'conversa...sn': 'user=postgres dbname=test_2c9404b385cc4e3095c6ddb7188c039a host=/tmp/pytest-of-octadim/pytest-39/postgres0', ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_2c9404b385cc4e3095c6ddb7188c039a) at 0x71db979c7650>
+
+    async def test_ready_flag_without_whole_published_revision_is_rejected(environment, connection):
+        # A standalone ready flag is not evidence of whole-revision publication.
+        await connection.execute("UPDATE documents SET ready=true")
+>       with pytest.raises(AccessError, match="no_ready_sources"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_source_contract.py:20: Failed
+____________________ test_production_graph_boundary_exists _____________________
+
+    async def test_production_graph_boundary_exists():
+>       from app.rag import GuardedSaver, build_graph
+E       ModuleNotFoundError: No module named 'app.rag'
+
+backend/tests/test_rag_context.py:2: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED backend/tests/test_source_contract.py::test_ready_flag_without_whole_published_revision_is_rejected
+FAILED backend/tests/test_rag_context.py::test_production_graph_boundary_exists
+2 failed in 1.51s

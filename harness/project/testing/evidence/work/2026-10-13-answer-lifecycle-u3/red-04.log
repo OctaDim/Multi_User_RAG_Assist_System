@@ -1,0 +1,38 @@
+FF
+=================================== FAILURES ===================================
+__ test_published_revision_is_immutable_so_ocr_correction_needs_new_identity ___
+
+environment = {'admin': {'id': UUID('2b5278cc-60fa-434e-8bb6-249a1d156ca4'), 'token': '03eda15cbd3042dfbaebddd353500596'}, 'chunk': ...ersation': UUID('c91548c2-b668-42f8-8f5a-d1b903468709'), 'document': UUID('d382b0cb-2b9b-4098-ad80-a9323f8cc5e5'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_6dd275b8a63e4c29b03fb3855ea9dfea) at 0x7efad39b30e0>
+
+    async def test_published_revision_is_immutable_so_ocr_correction_needs_new_identity(environment, connection):
+        import psycopg
+    
+>       with pytest.raises(psycopg.errors.ObjectNotInPrerequisiteState):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'psycopg.errors.ObjectNotInPrerequisiteState'>
+
+backend/tests/test_source_contract.py:84: Failed
+____ test_correction_before_late_complete_marks_original_without_cancelling ____
+
+environment = {'admin': {'id': UUID('7b2c40d9-2339-4a34-9924-f9631b4c53a5'), 'token': '6bbdb72132eb40dcab4d93d5ec54a6c9'}, 'chunk': ...ersation': UUID('f01f9361-ecf6-417b-9ad8-93a6b2bb705d'), 'document': UUID('26f453ee-6d0c-48b2-8909-55182abe931a'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_0b0a7926fac847439d3dda8507cbd825) at 0x7efad39bd3d0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7efad39bfce0>
+
+    async def test_correction_before_late_complete_marks_original_without_cancelling(environment, connection, rag_pool):
+        request = await send(connection, environment)
+        await run(rag_pool, request)
+        revision, _ = await seed_revision(connection, environment['document'], text='Corrected budget 10', attach=False)
+        await sources.change_source(connection, environment['user']['token'], environment['document'], revision_id=revision)
+        await complete(connection, request, 'LATE ORIGINAL OCR 100')
+        snapshot = await answers.snapshot(connection, environment['user']['token'], environment['conversation'])
+        original = next(value for value in snapshot['messages'] if value['role'] == 'assistant')
+        assert original['text'] == 'LATE ORIGINAL OCR 100'
+>       assert original['excluded'] and original['source_flags'] == {str(environment['document']): 'corrected'}
+E       assert (False)
+
+backend/tests/test_rag_context.py:173: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_source_contract.py::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity
+FAILED backend/tests/test_rag_context.py::test_correction_before_late_complete_marks_original_without_cancelling
+2 failed, 23 deselected in 3.71s

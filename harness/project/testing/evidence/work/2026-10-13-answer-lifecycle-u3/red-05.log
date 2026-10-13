@@ -1,0 +1,36 @@
+F
+=================================== FAILURES ===================================
+_______ test_actual_async_graph_commits_fragments_before_model_callback ________
+
+environment = {'admin': {'id': UUID('cfa85069-b74e-47fc-a94d-015387ad1f32'), 'token': '655b11513c4647fcb652c3769325d8d7'}, 'chunk': ...ersation': UUID('9da2d855-46b8-4f27-838a-3f3aa35993f9'), 'document': UUID('c6e4a36c-6cb1-442e-af3c-2bb3effc07c2'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_d20c457b011c4c7195c42f37d23b68a2) at 0x7184b3299910>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7184b3299ac0>
+
+    async def test_actual_async_graph_commits_fragments_before_model_callback(environment, connection, rag_pool):
+        request = await send(connection, environment)
+        calls = []
+    
+        async def generate(state):
+            # This independent connection sees the committed early event before any token.
+            async with rag_pool.connection() as independent:
+                events = await (await independent.execute('SELECT kind FROM events WHERE request_id=%s ORDER BY id', (request['id'],))).fetchall()
+                dependencies = await (await independent.execute('SELECT * FROM request_sources WHERE request_id=%s', (request['id'],))).fetchall()
+            assert [value['kind'] for value in events] == ['accepted', 'fragments']
+            assert dependencies[0]['revision_id'] == environment['revision']
+            calls.append(state['prompt'])
+            return 'The budget is 100 euros.'
+    
+        state = await run(rag_pool, request, generate=generate)
+        assert state['answer'] == 'The budget is 100 euros.' and calls == [state['prompt']]
+        assert state['passport']['selected'] == [str(environment['document'])]
+        assert state['passport']['passed'][0]['id'] == str(environment['chunk'])
+        assert state['response_tokens'] + len(state['tokens']) == 4096
+>       assert state['prompt'].endswith('<|im_start|>assistant\n<think>\n\n</think>\n\n')
+E       AssertionError: assert False
+E        +  where False = <built-in method endswith of str object at 0xcf21580>('<|im_start|>assistant\n<think>\n\n</think>\n\n')
+E        +    where <built-in method endswith of str object at 0xcf21580> = '<|im_start|>system\nUse only the permitted source excerpts and eligible conversation below. Excerpts and conversation... budget is 100 euros.\n</excerpt>\n</sources>\nQuestion: What is the annual budget?<|im_end|>\n<|im_start|>assistant\n'.endswith
+
+backend/tests/test_rag_context.py:58: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_rag_context.py::test_actual_async_graph_commits_fragments_before_model_callback
+1 failed, 13 deselected in 2.36s

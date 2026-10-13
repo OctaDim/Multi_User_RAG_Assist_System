@@ -1,0 +1,84 @@
+EF
+==================================== ERRORS ====================================
+_ ERROR at setup of test_ready_flag_without_whole_published_revision_is_rejected _
+
+self = <Coroutine test_ready_flag_without_whole_published_revision_is_rejected>
+
+    def setup(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        if runner_fixture_id not in self.fixturenames:
+            self.fixturenames.append(runner_fixture_id)
+        # When loop factories are configured, resolve the loop factory
+        # fixture early so that a factory variant change cascades cache
+        # invalidation before any async fixture checks its cache.
+        hook_caller = self.config.hook.pytest_asyncio_loop_factories
+        if hook_caller.get_hookimpls():
+            _ = self._request.getfixturevalue(_asyncio_loop_factory.__name__)
+>       return super().setup()
+               ^^^^^^^^^^^^^^^
+
+backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:558: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:926: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+backend/tests/conftest.py:16: in postgres
+    server = pgserver.get_server(tmp_path_factory.mktemp("postgres"), cleanup_mode="stop")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py:291: in get_server
+    return PostgresServer(pgdata, cleanup_mode=cleanup_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py:61: in __init__
+    with self._lock:
+         ^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:166: in __enter__
+    gotten = self.acquire()
+             ^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:144: in acquire
+    self._do_open()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <fasteners.process_lock.InterProcessLock object at 0x751b438dda90>
+
+    def _do_open(self):
+        basedir = os.path.dirname(self.path)
+        if basedir:
+            made_basedir = _ensure_tree(basedir)
+            if made_basedir:
+                self.logger.log(_utils.BLATHER,
+                                'Created lock base path `%s`', basedir)
+        # Open in append mode so we don't overwrite any potential contents of
+        # the target file. This eliminates the possibility of an attacker
+        # creating a symlink to an important file in our lock path.
+        if self.lockfile is None or self.lockfile.closed:
+>           self.lockfile = open(self.path, 'a')
+                            ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 30] Read-only file system: b'/run/user/1000/python_PostgresServer/.lockfile'
+
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:114: OSError
+=================================== FAILURES ===================================
+____________________ test_production_graph_boundary_exists _____________________
+
+    async def test_production_graph_boundary_exists():
+>       from app.rag import GuardedSaver, build_graph
+E       ModuleNotFoundError: No module named 'app.rag'
+
+backend/tests/test_rag_context.py:2: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED backend/tests/test_rag_context.py::test_production_graph_boundary_exists
+ERROR backend/tests/test_source_contract.py::test_ready_flag_without_whole_published_revision_is_rejected
+1 failed, 1 error in 0.09s
+Exception ignored in atexit callback: <bound method PostgresServer._cleanup of <pgserver.postgres_server.PostgresServer object at 0x751b41555580>>
+Traceback (most recent call last):
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py", line 204, in _cleanup
+    with self._lock:
+         ^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 166, in __enter__
+    gotten = self.acquire()
+             ^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 144, in acquire
+    self._do_open()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 114, in _do_open
+    self.lockfile = open(self.path, 'a')
+                    ^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: b'/run/user/1000/python_PostgresServer/.lockfile'
