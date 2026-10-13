@@ -119,9 +119,37 @@ def report_history_changes(root):
         print('Сравнение настроек с историей не проверено: Git отсутствует; он не обязателен.')
 
 
+def ordinary_path(path):
+    """Check original components from the root before following any ancestor."""
+    path = Path(path).absolute()
+    for component in (*reversed(path.parents), path):
+        try:
+            mode = component.lstat().st_mode
+        except FileNotFoundError:
+            continue
+        if stat.S_ISLNK(mode):
+            raise ValueError(f'Symlink forbidden: {component}')
+    return path
+
+
+def ordinary_tree(path):
+    """Inspect directory entries without following links or suppressing I/O errors."""
+    path = ordinary_path(path)
+    pending = [path] if path.is_dir() else []
+    while pending:
+        directory = ordinary_path(pending.pop())
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                if entry.is_symlink():
+                    raise ValueError(f'Symlink forbidden: {entry.path}')
+                if entry.is_dir(follow_symlinks=False):
+                    pending.append(Path(entry.path))
+
+
 def ordinary_directory(path, root):
-    for directory in (path, *path.parents):
-        if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
+    ordinary_path(path)
+    for directory in (*reversed(path.parents), path):
+        if directory.exists() and not directory.is_dir():
             relative = directory.relative_to(root) if directory.is_relative_to(root) else directory
             raise ValueError(f'Not an ordinary directory: {relative}')
 
@@ -180,6 +208,7 @@ def check_rule_copies(root):
 
 
 def snapshot_input(path, root):
+    ordinary_path(path)
     ordinary_directory(path.parent, root)
     if path.is_symlink() or (path.exists() and not path.is_file()):
         raise ValueError(f'Not a regular file: {path.name}')
@@ -353,10 +382,10 @@ def repair_startup_blocks(content, resources, missing_connections):
 
 def ensure(root):
     print(WARNING)
-    root = root.absolute()
+    root = ordinary_path(root)
     ordinary_directory(root, root)
     root = Path(os.path.normpath(root))
-    script = Path(__file__).absolute()
+    script = ordinary_path(__file__)
     ordinary_directory(script.parent, root)
     if script.is_symlink():
         raise ValueError(f'Unsafe checker path: {script}')
@@ -365,9 +394,10 @@ def ensure(root):
         ordinary_directory(directory, root)
     if not common.is_dir():
         raise ValueError('harness/common is required; project-only is unsupported.')
-    checker = common / 'checks/ensure_entrypoint_links.py'
+    checker = ordinary_path(common / 'checks/ensure_entrypoint_links.py')
     if checker.is_symlink() or (checker.exists() and not checker.is_file()):
         raise ValueError(f'Unsafe checker path: {checker}')
+    ordinary_tree(root / 'harness')
     categories = load_project_skeleton(common, root)
     create_project = not project.exists()
     resources = [f'harness/{package}/{name}' for name in ('START.md', 'INDEX.md')
