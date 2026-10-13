@@ -1,0 +1,6 @@
+Exact committed U3 baseline 89ae6fe; full previous U1-U3 regression.
+['/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python', '-m', 'pytest', '-c', 'pytest.ini', '-q']
+........................................................................ [ 42%]
+........................................................................ [ 85%]
+........................                                                 [100%]
+168 passed in 29.80s
