@@ -10,9 +10,11 @@ mandatory resources fail. Project-only refuses before writes, not a third mode.
 
 From target root run `python3 -B harness/common/checks/ensure_entrypoint_links.py`.
 It restores only startup links/rules-reading instruction, with notice before
-repair, never publishes copies. Keep existing AGENTS startup command; old project
-wrapper may delegate to common, not an independent implementation/new skeleton
-wrapper. Direct protected-entrypoint edits/hooks/blocking/machine setup forbidden.
+repair, never publishes copies. The only working entrypoint is the trusted
+ordinary common checker, launched directly; no project wrapper or extra launcher.
+Symlinks in its path, root and input paths refuse before repair. Keep an existing
+AGENTS startup command; a retired project command needs an addressed inbox
+correction, never automatic rewriting. Direct protected-entrypoint edits/hooks/blocking/machine setup forbidden.
 For warnings/errors use from root
 `harness/common/skills/comm-diagnose-harness-entrypoints/SKILL.md`.
 

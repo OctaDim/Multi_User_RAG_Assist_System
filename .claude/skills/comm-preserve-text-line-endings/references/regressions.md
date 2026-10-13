@@ -16,8 +16,8 @@ Existing tests выполняют реальное восстановление 
 - Уже правильный CRLF импорт без ремонта/ложного предупреждения.
 - Повторный запуск сохраняет bytes и не выводит сообщение о повреждении.
 - Git HEAD comparison после CRLF link repair без ложного settings warning.
-- Common-only и combined, старый project wrapper; независимая project копия
-  не создаётся. Unsafe resources и незакрытые fences дают отказ до записи.
+- Common-only и combined, только прямой common без project wrapper;
+  небезопасные пути и симлинки отклоняются до восстановления. Unsafe resources и незакрытые fences дают отказ до записи.
 
 Для другого узкого ремонта проверь исходные bytes вне согласованных вставок,
 EOL новых строк, распознавание повторного результата и Git comparison, если

@@ -98,10 +98,9 @@ def report_history_changes(root):
 
 def ordinary_directory(path, root):
     for directory in (path, *path.parents):
-        if directory == root:
-            break
         if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
-            raise ValueError(f'Not an ordinary directory: {directory.relative_to(root)}')
+            relative = directory.relative_to(root) if directory.is_relative_to(root) else directory
+            raise ValueError(f'Not an ordinary directory: {relative}')
 
 
 def load_project_skeleton(common, root):
@@ -204,11 +203,19 @@ def repair_startup_blocks(content, resources, missing):
 
 def ensure(root):
     print(WARNING)
+    ordinary_directory(root, root)
+    script = Path(__file__).absolute()
+    ordinary_directory(script.parent, root)
+    if script.is_symlink():
+        raise ValueError(f'Unsafe checker path: {script}')
     common, project = root / 'harness/common', root / 'harness/project'
-    for directory in (common, project):
+    for directory in (common, common / 'checks', project):
         ordinary_directory(directory, root)
     if not common.is_dir():
         raise ValueError('harness/common is required; project-only is unsupported.')
+    checker = common / 'checks/ensure_entrypoint_links.py'
+    if checker.is_symlink() or (checker.exists() and not checker.is_file()):
+        raise ValueError(f'Unsafe checker path: {checker}')
     categories = load_project_skeleton(common, root)
     create_project = not project.exists()
     resources = [f'harness/{package}/{name}' for name in ('START.md', 'INDEX.md')
@@ -286,7 +293,7 @@ def main():
     if len(sys.argv) > 2:
         print('Usage: python3 ensure_entrypoint_links.py [project-root]', file=sys.stderr)
         return 2
-    root = Path(sys.argv[1] if len(sys.argv) == 2 else '.').resolve()
+    root = Path(sys.argv[1] if len(sys.argv) == 2 else '.').absolute()
     try:
         changed = ensure(root)
     except (OSError, UnicodeError, ValueError) as error:

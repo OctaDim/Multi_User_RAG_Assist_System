@@ -6,6 +6,12 @@ machine config. It does not change Git settings or block writes/commits.
 Protected AGENTS/CLAUDE edits are forbidden by agreement, not technically blocked;
 propose changes through harness/<package>/inbox, whose existence is not permission.
 
+Use only the trusted ordinary common Python file, directly, without a project
+wrapper/launcher. Symlinks in the checker path (including ancestors), target root
+and input paths are forbidden; the checker refuses before repair. An arbitrary
+substituted Python file cannot authenticate itself: executing the installed
+trusted code is a launch prerequisite, not a guarantee about attacker code.
+
 Check installed START/INDEX and ordinary safe inputs. Missing rule directory
 may be created; symlink/path-file errors refuse BEFORE protected input repair.
 Checker restores START/INDEX links, .claude/rules link and Codex recursive
