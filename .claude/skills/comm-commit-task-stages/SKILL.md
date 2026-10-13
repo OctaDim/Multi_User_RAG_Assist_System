@@ -1,28 +1,30 @@
 ---
 name: comm-commit-task-stages
-description: Use when starting authorized repository work or reaching a task or stage boundary in a Git repository.
+description: Use when deciding when to commit repository work, including ideation, brainstorming, planning, implementation, verification, fixes and documentation.
 ---
 
-# Commit task boundaries
+# Commit completed results
 
-Required: read and apply `compound-engineering:ce-commit` before the first
-boundary; use it for every commit.
+Use `compound-engineering:ce-commit` for every local commit.
 
-1. Before a task set and each task, commit authorized pending changes.
-2. After every completed stage, commit its owned changes.
-3. At task/set completion, commit any remaining owned changes.
+Commit a completed task or substantive substage with an independently useful,
+verified result. A workflow label, user answer, question, dialogue turn, small
+edit or passing check alone is not a boundary. Task/set entry is not a trigger.
 
-Take stages from the selected workflow or approved plan and preserve its gates.
-The orchestrator owns canonical commits.
+Accumulate related small changes until their result is complete. Update
+documents, decisions and harness memory promptly without committing every save.
+A short task usually needs one final commit; long work may preserve independent
+completed results separately. Set no question/file/line/time thresholds.
 
-At boundaries with no owned changes, report “nothing to commit”; no empty or
-duplicate commits. Before touching overlapping pre-existing changes, resolve
-unclear ownership. Preserve unrelated staged files and `exclude:` paths through
-ce-commit’s explicit file lists.
+Exceptions: an explicit user command to commit now, or a justified checkpoint
+before a risky operation. Explain the command or concrete risk. Preserve workflow
+gates, isolation and recovery; group related steps before dispatch, never bypass
+a safety transaction.
 
-A missing Git/ce-commit or failed commit stops the boundary; preserve changes
-and report the blocker.
+Before committing, run change-appropriate checks and inspect current ownership.
+The orchestrator commits only authorized owned changes through explicit file
+lists; preserve unrelated work and `exclude:` paths. No empty/duplicate commits.
+Missing Git/ce-commit or failed checks/commit: preserve changes, report the blocker.
 
-Done: each boundary records hash/subject or a clean skip; owned changes are
-committed. These local commits do not authorize push, PR, merge or history
-rewriting, choose a route, or upgrade verification.
+Done: completed owned results have hash/subject, or a clean skip. Commits grant
+no push, PR, merge, history rewriting, route choice or verification upgrade.

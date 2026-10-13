@@ -1,6 +1,6 @@
 ---
 name: comm-commit-task-stages
-description: Use for commit timing in all repository work, including ideation, brainstorming, planning, implementation, verification, fixes and documentation.
+description: Use when deciding when to commit repository work, including ideation, brainstorming, planning, implementation, verification, fixes and documentation.
 ---
 
 # Commit completed results
