@@ -1,0 +1,127 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+backend/tests/browser/test_invalidation.py FFF
+
+=================================== FAILURES ===================================
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../native-release'), PosixPath('/tmp/u7-worker-real-browser-1/test_real_ocr_mutation_preserv0/generation.log'), 'before')
+environment = {'admin': {'id': UUID('203d4a97-e3bf-4caf-803c-cde68e6bac5e'), 'session_id': UUID('2668515a-fdf7-4ed7-8cef-76226832616...ersation': UUID('91aeeb9d-8f64-4752-99d0-01a845814acc'), 'document': UUID('a7db86ce-2614-4683-876e-a57a35d7fb0f'), ...}
+mutation = 'delete'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+>           register(page,mailbox,frontend,email);login(page,email)
+                                                  ^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_invalidation.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:57010/'>
+email = 'u7-real-delete-test_real_ocr_mutation_preserv0@owned.test'
+
+    def login(page, email):
+        form = page.locator('#login')
+        form.locator('[name=email]').fill(email)
+        form.locator('[name=password]').fill(PASSWORD)
+        form.get_by_role('button', name='Войти', exact=True).click()
+>       expect(page.locator('#workspace')).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: False 
+E       Call log:
+E         - LocatorAssertions.to_be_visible with timeout 5000ms
+E         -   - waiting for locator("#workspace")
+E         -     9 × locator resolved to <section hidden="" id="workspace">…</section>
+E         -       - unexpected value "hidden"
+
+backend/tests/browser/test_accounts.py:108: AssertionError
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-delete] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...1/native-release'), PosixPath('/tmp/u7-worker-real-browser-1/test_real_ocr_mutation_preserv1/generation.log'), 'after')
+environment = {'admin': {'id': UUID('f39c45ca-85ae-4b04-8c45-bac880fd71d7'), 'session_id': UUID('97884dcc-001e-4dbd-afd5-32a05c7c5f2...ersation': UUID('d57caa97-ac36-4ed6-b13a-bf95bb961a09'), 'document': UUID('7678739d-6e79-4ce8-a56c-1b46891793f6'), ...}
+mutation = 'delete'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+>           register(page,mailbox,frontend,email);login(page,email)
+                                                  ^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_invalidation.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:58348/'>
+email = 'u7-real-delete-test_real_ocr_mutation_preserv1@owned.test'
+
+    def login(page, email):
+        form = page.locator('#login')
+        form.locator('[name=email]').fill(email)
+        form.locator('[name=password]').fill(PASSWORD)
+        form.get_by_role('button', name='Войти', exact=True).click()
+>       expect(page.locator('#workspace')).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: False 
+E       Call log:
+E         - LocatorAssertions.to_be_visible with timeout 5000ms
+E         -   - waiting for locator("#workspace")
+E         -     9 × locator resolved to <section hidden="" id="workspace">…</section>
+E         -       - unexpected value "hidden"
+
+backend/tests/browser/test_accounts.py:108: AssertionError
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-correction] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...2/native-release'), PosixPath('/tmp/u7-worker-real-browser-1/test_real_ocr_mutation_preserv2/generation.log'), 'after')
+environment = {'admin': {'id': UUID('99783a63-6f33-4298-be2f-14c8e5340dd5'), 'session_id': UUID('abdef376-6acb-4a79-a834-6c31ab19010...ersation': UUID('52655cec-ac88-4d9b-be96-d97f19eae668'), 'document': UUID('ddaf49ce-ad1b-43ae-acd5-dfd464c55022'), ...}
+mutation = 'correction'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+>           register(page,mailbox,frontend,email);login(page,email)
+                                                  ^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_invalidation.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:57802/'>
+email = 'u7-real-correction-test_real_ocr_mutation_preserv2@owned.test'
+
+    def login(page, email):
+        form = page.locator('#login')
+        form.locator('[name=email]').fill(email)
+        form.locator('[name=password]').fill(PASSWORD)
+        form.get_by_role('button', name='Войти', exact=True).click()
+>       expect(page.locator('#workspace')).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: False 
+E       Call log:
+E         - LocatorAssertions.to_be_visible with timeout 5000ms
+E         -   - waiting for locator("#workspace")
+E         -     9 × locator resolved to <section hidden="" id="workspace">…</section>
+E         -       - unexpected value "hidden"
+
+backend/tests/browser/test_accounts.py:108: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete]
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-delete]
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-correction]
+============================== 3 failed in 47.83s ==============================

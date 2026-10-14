@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 35 items / 34 deselected / 1 selected
+
+backend/tests/test_invalidation.py F                                     [100%]
+
+=================================== FAILURES ===================================
+____ test_natural_session_expiry_during_serialization_closes_unhanded_body _____
+
+environment = {'admin': {'id': UUID('66f2ecf3-43a2-4504-be56-0a27a32994bb'), 'session_id': UUID('8e1911f1-484c-423b-bf86-a65e5e26bad...ersation': UUID('6e71f8e8-1575-4a93-b715-f70c12ee6df5'), 'document': UUID('fa389374-5389-4862-b687-6b03c55284f9'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_2f187ec61e5e40f28e14716f056a6abb) at 0x7c1d2853d730>
+tmp_path = PosixPath('/tmp/u7-worker-final-expiry-red-1/test_natural_session_expiry_du0')
+
+    async def test_natural_session_expiry_during_serialization_closes_unhanded_body(environment,connection,tmp_path):
+        import asyncio
+        with held_apis(environment,tmp_path,serialization_delay=2) as (ports,clients,_,_):
+            await connection.execute("UPDATE sessions SET expires_at=clock_timestamp()+interval '1 second' WHERE id=%s",(environment['user']['session_id'],))
+            peer=socket.create_connection(('127.0.0.1',ports[0]),timeout=5)
+            peer.sendall((f"GET /api/accounts/me HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer {environment['user']['token']}\r\nConnection: close\r\n\r\n").encode())
+            data=await asyncio.to_thread(receive_all,peer)
+>           assert str(environment['user']['id']).encode() not in data,'Session expired during encoding but the private body was still handed off'
+E           AssertionError: Session expired during encoding but the private body was still handed off
+E           assert b'56733fb0-7f8e-42b9-96c2-b170397c90ad' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 10:26:02 GMT\r\nserver: uvicorn\r\ncontent-type: application/json\r\nvary:...ive":true,"disabled":false,"paid":false},"conversations":[{"id":"6e71f8e8-1575-4a93-b715-f70c12ee6df5"}]}\r\n0\r\n\r\n'
+E            +  where b'56733fb0-7f8e-42b9-96c2-b170397c90ad' = <built-in method encode of str object at 0x7c1d28503cd0>()
+E            +    where <built-in method encode of str object at 0x7c1d28503cd0> = '56733fb0-7f8e-42b9-96c2-b170397c90ad'.encode
+E            +      where '56733fb0-7f8e-42b9-96c2-b170397c90ad' = str(UUID('56733fb0-7f8e-42b9-96c2-b170397c90ad'))
+
+backend/tests/test_invalidation.py:401: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_natural_session_expiry_during_serialization_closes_unhanded_body
+======================= 1 failed, 34 deselected in 4.90s =======================

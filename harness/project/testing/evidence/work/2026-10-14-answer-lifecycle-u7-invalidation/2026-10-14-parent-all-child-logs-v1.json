@@ -1,0 +1,491 @@
+{
+  "copied": [
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_account_revoke_closes_pre0/api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-01-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "ad6995bb27c1ef284514853e6aec9aeaee9096e12b40928e849537c6b3912a67"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_account_revoke_closes_pre0/api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-02-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "7961aa062a7c1bc45634d8f1889a0815504aacc21ed4768faf7c70887b49ff03"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_account_view_is_freshly_s0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-03-held-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "cbcab6192db64d6014479e64783d8b336a9fd86d6a7f67f2c957c197d7698813"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_account_view_is_freshly_s0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-04-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "1829300687b9976a912c69e87968c158b60b77efeb10943b4f42088bd5c72d27"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_actual_print_only_pdf_lim0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-05-document-worker-v1.log",
+      "bytes": 1346,
+      "sha256": "7074828a0abf9551884df0f9244ab575793ad3f2fdfcc7c69a2bdfeec7715f46"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_actual_print_only_pdf_lim0/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-06-generation-v1.log",
+      "bytes": 99486,
+      "sha256": "045aeb82f5eec3354b0755f9c94b0a217506e0c3be8a234df84e7dc0d3375277"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_actual_tab_sse_confirmed_0/first.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-07-first-v1.log",
+      "bytes": 364,
+      "sha256": "f2501c1cc0ba1f850e332bac7dd9b37adcf019839a7b95c4f778237f83171d07"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_actual_tab_sse_confirmed_0/second.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-08-second-v1.log",
+      "bytes": 9856,
+      "sha256": "d00451fc61b409cc8cef34117024efc112aa40ffa1cce0e12395a657bb528e50"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_application_service_lock_0/healthy-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-09-healthy-supervisor-v1.log",
+      "bytes": 56490,
+      "sha256": "ce8a4e365d5e6ff603cbac6bd0e04526fb5a683b378e04f782e8395160843b0d"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_application_service_lock_1/healthy-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-10-healthy-supervisor-v1.log",
+      "bytes": 56490,
+      "sha256": "2ddfffbeaa795f2d49d4ccda9631ccee7ec214e216a3192aad39e81a765d81ca"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-11-held-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "387e1c8688740356437b269bf6ed4d8ce353fb63853e61ea00c1d93932999d48"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-12-held-api-1-v1.log",
+      "bytes": 558,
+      "sha256": "392d3dd11048c6321d357c1e8c251d374dff36d2c932586f6445c20d4a483154"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr1/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-13-held-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "43060ea801118df39093757385fcd83108e0ac223fa955fdd2d7a8e4319ad35b"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr1/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-14-held-api-1-v1.log",
+      "bytes": 486,
+      "sha256": "29c94d6d1579e9e66b0d006a854dc5b0a3e7eca8e54fa6db88f974b00030a05d"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr2/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-15-held-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "3f6bedea36686ea1fb733e8b0dff15724f546743d8fd8c1b9f145d2edb3cb575"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_current_session_fences_pr2/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-16-held-api-1-v1.log",
+      "bytes": 589,
+      "sha256": "7ac2a0f2486e8ec8128ddbc4bb326b215e5d42af86f19ffcea67d496fa75c192"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_delayed_real_ack_preserve0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-17-document-worker-v1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_delayed_real_ack_preserve0/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-18-generation-v1.log",
+      "bytes": 99485,
+      "sha256": "4122e1ccedeb4ab5891e22cf657fbd0915faff757871566f26058f90ecd40c3d"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-19-held-api-0-v1.log",
+      "bytes": 525,
+      "sha256": "0aa767180a00f0d2a4b357a2de84f689d5a105a6439983c557e83a66fbacffcd"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-20-held-api-1-v1.log",
+      "bytes": 709,
+      "sha256": "ef6ab46a5632becf5a3d645a3a62d57c0c5e9e2f36ff9b1d6c3ffb4af0c4e423"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p1/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-21-held-api-0-v1.log",
+      "bytes": 533,
+      "sha256": "181fa7d9abc9be3eedc50ce4f19e62a77a92bc100315442e5a0296f975e9c9f6"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p1/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-22-held-api-1-v1.log",
+      "bytes": 709,
+      "sha256": "2544ce8962ea77c4ac9272e9d90a1a0020fc28847a0e031266cc40ad0266ab41"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p2/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-23-held-api-0-v1.log",
+      "bytes": 479,
+      "sha256": "11db1671bf5d9fd7bff667648510a6187ed72bb0c0b9d90b266ce41716a97991"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_deleted_document_closes_p2/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-24-held-api-1-v1.log",
+      "bytes": 709,
+      "sha256": "b674c6c70dee0bc59000e2d6deea213380892464d7cdfee2d2bcdbbb528a745d"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_fresh_handoff_snapshot_wa0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-25-held-api-0-v1.log",
+      "bytes": 518,
+      "sha256": "c210865bc8389c2df53bfadf39a7509c248462926a6b3bcebf699d42a77aa19c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_fresh_handoff_snapshot_wa0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-26-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "2479455742bd3f0962e74a6c4ff2cf63bde4e829bcf58e978df62e4c7991d577"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_live_predecessor_record_b0/unconfirmed-record.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-27-unconfirmed-record-v1.log",
+      "bytes": 1564,
+      "sha256": "a67ff8c26d4bef504a5a933c2713b1e4e56c14e5cd9c995c2b98ae949f79040b"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_minted_login_token_is_fen0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-28-held-api-0-v1.log",
+      "bytes": 485,
+      "sha256": "3bf72aa12dcf04e524a29d802ed2493b0eab0349f2da69ec6515e2a31005f517"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_minted_login_token_is_fen0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-29-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "138266ba75913a34ccf08e976e1a6c55db2ec75b929eb2f58d54f704a8e9f51c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_natural_session_expiry_du0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-30-held-api-0-v1.log",
+      "bytes": 481,
+      "sha256": "f307df0765c4e479809849883f436a530ecd6f4dea1a627a9cbf1d8cd6332fdc"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_natural_session_expiry_du0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-31-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "99539c898575fdae0ac8fe822bd407bd7975ed56688c1b557a16d5a8aede9c24"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_old_real_snapshot_cannot_0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-32-document-worker-v1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_old_real_snapshot_cannot_0/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-33-generation-v1.log",
+      "bytes": 99586,
+      "sha256": "c51cfcfa1c6fd7ada98451a91b3a54837eb4357ea5bfba332310523d24571ed8"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_snapshot_retains0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-34-held-api-0-v1.log",
+      "bytes": 520,
+      "sha256": "b3145514f44d5e4d524ba21e03acb59cf4fdb2f38fde76659378365c3bf4c9c1"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_snapshot_retains0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-35-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "ffde1c79003eb12d56a0cf4553c0ae06790390404a3f13f43daa978bcc13f75c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-36-held-api-0-v1.log",
+      "bytes": 518,
+      "sha256": "c9bc02d6de88458c0907363f0810010072c30e3ecee7f03f27234a1000005f47"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-37-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "e38e41c59a7f405fcf85d30c123c070e5202e8abebfbd87b7bbbcff2847b9d21"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r1/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-38-held-api-0-v1.log",
+      "bytes": 1030,
+      "sha256": "d6052beda7b4aefbf4a9a47d2f93c793099449840ac9be2bc9a8cb5e7765f639"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r1/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-39-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "3644a46ac5c06093f4f9b3f1a43db854ad858460e18f0f2b725ce2547b9e0029"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r2/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-40-held-api-0-v1.log",
+      "bytes": 1030,
+      "sha256": "fc484e494841acd979cd1bd495e969ea0b47a36a87322d434c03353f691734d7"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r2/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-41-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "c8158ba1c0bfa5eacd2805acf7e9112d4c3380463643867126215ad54f3bc0ec"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r3/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-42-held-api-0-v1.log",
+      "bytes": 518,
+      "sha256": "27b18ff5046abe6747a13695d071dd3d8bb8bff968035a25784d37f6355c9377"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r3/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-43-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "fc6c4a42d792f6bf1cb7dc9182304ea55465ea4a392ec0fc3b908be4506091c0"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r4/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-44-held-api-0-v1.log",
+      "bytes": 1030,
+      "sha256": "c69e73efd7bcd99adc762edb76f839a152892d8e978d4fd4abcd77d733955fb0"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r4/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-45-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "3477d2cd91f84887b92bde7c50c6096de35eae39379387f32651d330efd32a16"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r5/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-46-held-api-0-v1.log",
+      "bytes": 1030,
+      "sha256": "85974f23ff60a4de2e49b2b9ea68aca30b1dc553989bf06a1e1cfac207d4809b"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_prepared_sse_and_replay_r5/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-47-held-api-1-v1.log",
+      "bytes": 414,
+      "sha256": "204c89f486af5f6b4aa9cea191f0b9c62a1e9107f2aa2ff8b1fad6ae9137d83e"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_ready_source_never_auto_s0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-48-document-worker-v1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_coordinator_recovery0/state-recovery.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-49-state-recovery-v1.log",
+      "bytes": 56490,
+      "sha256": "5eb9ea1c5230ed1426e2a635a3079e1a18eb388f74aec8521bd4346a02ae8f2c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_fragments_precede_an0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-50-document-worker-v1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_fragments_precede_an0/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-51-generation-v1.log",
+      "bytes": 99586,
+      "sha256": "0f925bcc8040fb2f69005ae792c3bcbe419fcb7a610b486072e5587d98170d5e"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-52-document-worker-v1.log",
+      "bytes": 822,
+      "sha256": "bd3943382e8ef75230e34842201ea642b5b6cef86894fb45c9b1579ebaa750ec"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv0/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-53-generation-v1.log",
+      "bytes": 213426,
+      "sha256": "5bb139d95ec6d006e357bb1cb5eff60b35453a9c405a6bf5fd84447a54bece93"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv1/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-54-document-worker-v1.log",
+      "bytes": 823,
+      "sha256": "d8686be7a2ea9f6f984c04b6933a382238181b53a39b2bb2c1baf74e3a02b570"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv1/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-55-generation-v1.log",
+      "bytes": 206830,
+      "sha256": "00a9a98533aedbb79b55943caad967332aa3197ba5450f260f42d878f72acf8d"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv2/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-56-document-worker-v1.log",
+      "bytes": 823,
+      "sha256": "f68299565d28a12667d51a7393e8e6cb05e17a44bad62708bbab5da129a6b829"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_ocr_mutation_preserv2/generation.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-57-generation-v1.log",
+      "bytes": 211756,
+      "sha256": "7b43b2aa5f076a68936629803b1c44420fbb1da9cd1d70ab9d49fb4fd613faa1"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-58-held-api-0-v1.log",
+      "bytes": 1034,
+      "sha256": "1b69edc9dba3e3e630d8f8207f09b4f58e7777cc50a3976bf00b211aeffdafa6"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-59-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "23bd46b039e3100407906b8e3b790015993215f61b90451bc6083c5ef802ae97"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_1/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-60-held-api-0-v1.log",
+      "bytes": 1078,
+      "sha256": "16d36b1f10309ab8f0d573d0eef402c69364c18cf1b913c7a80920fcd73caa0a"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_1/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-61-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "7d019d45fa496b2c07bb0410b5953f2ebf83a322c53b9251d89ad83975ce7b8e"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_2/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-62-held-api-0-v1.log",
+      "bytes": 1205,
+      "sha256": "29b0be92ed5508d191fe14784e64e4da3fe6d3f38ec083f2b93d80d40a74bd00"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_2/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-63-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "e863c47bcfd3a3120de2729b4417160e31c53f49c5c056e0881742992adea4f5"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_3/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-64-held-api-0-v1.log",
+      "bytes": 1583,
+      "sha256": "a4eb6f827fd509e8cb765e49770cd86d6add25a6e586487f2da36b6173c4d5bf"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_3/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-65-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "aa308cc50cfc50a3324b410a6ca84809d84270e98fe03e6106cdfcf9169e8d26"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_4/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-66-held-api-0-v1.log",
+      "bytes": 1583,
+      "sha256": "76774a954e7697f871b1c1392f34827429e7deae1050a71d701819c629743822"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_socket_backpressure_4/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-67-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "e3f85b5f61a4cbc3adebf605bbee9035188012280a506f0e24956433520fdf51"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_supervisor_reaps_nat0/competing-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-68-competing-supervisor-v1.log",
+      "bytes": 1301,
+      "sha256": "bca10d6a1635d29a65e55813460ab40190a4954b4822039fedfae3454589c8e6"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_supervisor_reaps_nat0/first-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-69-first-supervisor-v1.log",
+      "bytes": 100971,
+      "sha256": "cda1bb05de86c5ea46eefa4ea517bda41a604c926a90ff25bd0c9ab608a3379c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_supervisor_reaps_nat0/second-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-70-second-supervisor-v1.log",
+      "bytes": 56490,
+      "sha256": "f3b9e801a55c0f037118d7daa37a3658022f9ca3d26cf97caea0d283912ae70a"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_real_supervisor_reaps_nat0/unreaped-successor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-71-unreaped-successor-v1.log",
+      "bytes": 1448,
+      "sha256": "a0175d90b3de31be90f776451ce46bb9f01d5490d6896648d86f5b03a5888d11"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_role_downgrade_closes_pre0/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-72-held-api-0-v1.log",
+      "bytes": 478,
+      "sha256": "7d7939f5a96b2c37dbbef683195cda36a536f73408f10c761a8c22ae712a0853"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_role_downgrade_closes_pre0/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-73-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "bb142ad8d31d6e7c2f2dd8d54de09280caafeea55a56c0813a92681203115214"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_role_downgrade_closes_pre1/held-api-0.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-74-held-api-0-v1.log",
+      "bytes": 478,
+      "sha256": "6d25f365bedb32edec198d65d14f4fe147faa8de660cda296a3ed072454e7f07"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_role_downgrade_closes_pre1/held-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-75-held-api-1-v1.log",
+      "bytes": 517,
+      "sha256": "caffa9bff5d5a0481e555ea673ea62a44a460af900761ce9340d05bd50498891"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_two_http_processes_share_0/process-api-1-restarted.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-76-process-api-1-restarted-v1.log",
+      "bytes": 1368,
+      "sha256": "9d8abca72d78103429b30862d3c9066da7de299da75c7cbbd09e75649597031c"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_two_http_processes_share_0/process-api-1.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-77-process-api-1-v1.log",
+      "bytes": 87592,
+      "sha256": "e93f6f2bdc403b3293f70d4055586f668ffd6f80fbd656cc16bb0757c65e6f74"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_two_http_processes_share_0/process-api-2.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-78-process-api-2-v1.log",
+      "bytes": 81656,
+      "sha256": "00644b635e954bf157fb77a927330e94c72d1af943e59e296f9a38b427a42faa"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_two_http_processes_share_0/process-supervisor.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-79-process-supervisor-v1.log",
+      "bytes": 902783,
+      "sha256": "8f5704a0649e2069ff41aa44836d75f9eec74a08f4baa025e76b5ea61e1c49b2"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_ui_permission_choice_actu0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-80-document-worker-v1.log",
+      "bytes": 1346,
+      "sha256": "059b45b462351dfdd4608561d9c4cee2283c9afbd820835f975354636256746a"
+    },
+    {
+      "source": "/tmp/rag-u7-all-application-v1/test_ui_smtp_original_text_cor0/document-worker.log",
+      "target": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-81-document-worker-v1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "policy": "physical direct-child process logs only; aliases and Chromium profile logs not followed"
+}

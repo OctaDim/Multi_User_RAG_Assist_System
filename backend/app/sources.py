@@ -78,12 +78,19 @@ async def history(connection, request):
 
 
 async def source_flags(connection, request_id):
+    return (await source_flags_for(connection, [request_id])).get(request_id, {})
+
+
+async def source_flags_for(connection, request_ids):
     rows = await (await connection.execute(
-        """SELECT s.document_id,s.revision_id,d.deleted,d.published_revision<>s.revision_id AS corrected
-        FROM request_sources s JOIN documents d ON d.id=s.document_id WHERE s.request_id=%s""", (request_id,),
+        """SELECT s.request_id,s.document_id,d.deleted,d.published_revision<>s.revision_id AS corrected
+        FROM request_sources s JOIN documents d ON d.id=s.document_id WHERE s.request_id=ANY(%s::uuid[])""", (request_ids,),
     )).fetchall()
-    return {str(row['document_id']): 'deleted' if row['deleted'] else 'corrected'
-            for row in rows if row['deleted'] or row['corrected']}
+    flags = {}
+    for row in rows:
+        if row['deleted'] or row['corrected']:
+            flags.setdefault(row['request_id'], {})[str(row['document_id'])] = 'deleted' if row['deleted'] else 'corrected'
+    return flags
 
 
 async def change_source(connection, token, document_id, *, deleted=False, revision_id=None):
@@ -96,7 +103,7 @@ async def change_source(connection, token, document_id, *, deleted=False, revisi
 
 async def switch_source(connection, actor, document_id, *, deleted=False, revision_id=None):
     """Internal publisher shares the authorized transaction and owner/source locks."""
-    from app.answers import transition
+    from app.answers import transition, event
 
     document = await (await connection.execute(
         "SELECT * FROM documents WHERE id=%s AND owner_id=%s FOR UPDATE", (document_id, actor['id']),
@@ -139,4 +146,8 @@ async def switch_source(connection, actor, document_id, *, deleted=False, revisi
         flags = await source_flags(connection, request['id'])
         await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
         if deleted:
-            await transition(connection, request, 'interrupted', 'source_deleted')
+            request = await transition(connection, request, 'interrupted', 'source_deleted')
+        updated = await (await connection.execute('UPDATE requests SET version=version+1 WHERE id=%s RETURNING *', (request['id'],))).fetchone()
+        await event(connection, updated, 'source_status', {'version': updated['version'], 'source_flags': flags,
+            'excluded': bool(flags) or updated['state'] in ('interrupted', 'failed'),
+            'state': updated['state'], 'reason': updated['reason']})

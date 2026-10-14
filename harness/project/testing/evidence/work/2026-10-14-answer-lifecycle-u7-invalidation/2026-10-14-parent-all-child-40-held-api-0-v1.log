@@ -1,0 +1,13 @@
+INFO:     Started server process [60286]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58840 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60841 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60849 - "GET /api/tabs/a52e42f9-595f-42f2-9a01-36cff6d9ba6c/events HTTP/1.1" 200 OK
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_50cdce7d59844ec7bacd1d89b64dd0b0) at 0x749961e4d100>: Explicit rollback() forbidden within a Transaction context. (Either raise Rollback() or allow an exception to propagate out of the context.)
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_50cdce7d59844ec7bacd1d89b64dd0b0) at 0x749961e4d100>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x749961e4d100>
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60286]

@@ -216,11 +216,13 @@ export class Conversations {
       }
       const question = questions.get(request.id) || 'Вопрос';
       if (card.question.textContent !== question) card.question.textContent = question;
-      const stateLabel = `${labels[request.state] || request.state}${Object.hasOwn(reasons,request.reason) ? `: ${reasons[request.reason]}` : ''}`;
+      const sourceLabels = Object.entries(request.source_flags || {}).map(([identifier,flag]) =>
+        `${this.documentName(identifier,request.passport?.available?.find(source=>source.document_id===identifier)?.name)}: ${flag === 'deleted' ? 'источник удалён' : 'OCR исправлен'}`);
+      const stateLabel = `${labels[request.state] || request.state}${Object.hasOwn(reasons,request.reason) ? `: ${reasons[request.reason]}` : ''}${sourceLabels.length ? `. ${sourceLabels.join('; ')}. Исключён из контекста следующих ответов.` : ''}`;
       if (card.state.textContent !== stateLabel) card.state.textContent = stateLabel;
       card.answer.hidden = !request.answer_text;
       card.answerLabel.hidden = !request.answer_text;
-      const citationSignature = JSON.stringify(request.citations || []);
+      const citationSignature = JSON.stringify([request.citations || [], request.source_flags || {}]);
       if (card.answerText !== request.answer_text || card.citationSignature !== citationSignature) {
         this.answer(card, request);
         card.answerText = request.answer_text;
@@ -230,14 +232,15 @@ export class Conversations {
       if (card.citationSignature !== citationSignature) {
         card.citationSignature = citationSignature; card.quotes.replaceChildren();
         for (const citation of request.citations || []) {
-          card.quotes.append(textElement('h4',`Цитата [${citation.number}]: ${this.documentName(citation.document_id,citation.name)} · Страница ${citation.page}`));
+          const flag = request.source_flags?.[citation.document_id];
+          card.quotes.append(textElement('h4',`Цитата [${citation.number}]: ${this.documentName(citation.document_id,citation.name)} · Страница ${citation.page}${flag ? ` · ${flag === 'deleted' ? 'Источник удалён' : 'OCR исправлен; первоначальная цитата'}` : ''}`));
           const quote = textElement('blockquote',citation.quote);
           quote.className = 'cited-quote'; quote.id = `citation-${request.id}-${citation.number}`;
           card.quotes.append(quote);
         }
       }
       if (request.passport?.passed) {
-        const signature = JSON.stringify(request.passport);
+        const signature = JSON.stringify([request.passport,request.source_flags || {}]);
         if (card.signature === signature) continue;
         card.signature = signature;
         card.contents.replaceChildren();
@@ -351,11 +354,18 @@ export class Conversations {
         const history = this.histories.get(value.conversation_id);
         const request = history?.requests.find(request => request.id === value.request_id);
         if (!request) {this.cursor = null; throw new Error('missing_request');}
+        if (value.kind === 'invalidated') {
+          await this.refresh(value.conversation_id);
+          this.cursor = value.id;
+          return;
+        }
         if (value.payload.version > request.version) {
           if (value.payload.version !== request.version+1) {this.cursor = null; throw new Error('missing_request_version');}
+          if (value.payload.source_flags) request.source_flags = value.payload.source_flags;
+          if (Object.hasOwn(value.payload,'excluded')) request.excluded = value.payload.excluded;
           if (value.kind === 'output') {request.answer_text += value.payload.text; request.citations = value.payload.citations || [];}
           else if (value.kind === 'fragments') {request.passport = value.payload.passport; request.state = 'queued';}
-          else if (value.kind === 'state' || value.kind === 'terminal') {request.state = value.payload.state; request.reason = value.payload.reason;}
+          else if (value.kind === 'state' || value.kind === 'terminal' || value.kind === 'source_status') {request.state = value.payload.state; request.reason = value.payload.reason;}
           request.version = value.payload.version;
         }
       }

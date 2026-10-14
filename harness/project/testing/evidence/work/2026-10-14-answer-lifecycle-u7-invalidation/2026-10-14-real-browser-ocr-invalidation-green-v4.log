@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+backend/tests/browser/test_invalidation.py {'proof': 'real_u7_ocr_invalidation', 'email': 'u7-real-delete-test_real_ocr_mutation_preserv0@owned.test', 'mutation': 'delete', 'first_state': 'completed', 'native_trace': '/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv0/generation.log', 'actual_smtp_and_upload': True}
+.{'proof': 'real_u7_ocr_invalidation', 'email': 'u7-real-delete-test_real_ocr_mutation_preserv1@owned.test', 'mutation': 'delete', 'first_state': 'completed', 'native_trace': '/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv1/generation.log', 'actual_smtp_and_upload': True}
+.{'proof': 'real_u7_ocr_invalidation', 'email': 'u7-real-correction-test_real_ocr_mutation_preserv2@owned.test', 'mutation': 'correction', 'first_state': 'completed', 'native_trace': '/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv2/generation.log', 'actual_smtp_and_upload': True}
+.
+
+======================== 3 passed in 192.49s (0:03:12) =========================

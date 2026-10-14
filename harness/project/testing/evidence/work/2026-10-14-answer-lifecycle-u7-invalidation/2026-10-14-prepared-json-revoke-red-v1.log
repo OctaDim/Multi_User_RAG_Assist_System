@@ -1,0 +1,64 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_account_revoke_closes_prepared_body_before_real_handoff _________
+
+environment = {'admin': {'id': UUID('37cbcd09-855c-40a7-81b5-014216f1f5a3'), 'session_id': UUID('99815ee3-1122-4ad0-8581-d8c5806c49c...ersation': UUID('4f4911cd-09d9-4265-a3bf-b7bbc48fa0a5'), 'document': UUID('79ceb62e-a247-491b-b3a4-87eb95ca071a'), ...}
+tmp_path = PosixPath('/tmp/rag-u7-handoff-red-v1/test_account_revoke_closes_pre0')
+
+    def test_account_revoke_closes_prepared_body_before_real_handoff(environment, tmp_path):
+        held, release = tmp_path/'prepared-body', tmp_path/'release-body'
+        launcher = tmp_path/'held-api.py'
+        launcher.write_text(f'''import asyncio,sys
+    from pathlib import Path
+    from app import main
+    original=main.app
+    class HoldBody:
+        async def __call__(self,scope,receive,send):
+            async def handoff(message):
+                if (scope.get('path')=='/api/accounts/me' and message['type']=='http.response.body'
+                    and (b'x-owned-pause',b'u7-proof') in scope.get('headers',[])):
+                    Path({str(held)!r}).write_text('prepared')
+                    while not Path({str(release)!r}).exists():await asyncio.sleep(.01)
+                await send(message)
+            await original(scope,receive,handoff)
+    main.app=HoldBody()
+    main.main()
+    ''')
+        ports = [unused_port(), unused_port()]
+        processes, logs = [], []
+        peer = None
+        try:
+            env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
+            for index, port in enumerate(ports):
+                log = (tmp_path/f'api-{index}.log').open('wb'); logs.append(log)
+                command = [sys.executable, str(launcher), '--port', str(port)] if index==0 else [str(Path('backend/.venv/bin/rag-api').absolute()), '--port', str(port)]
+                process = subprocess.Popen(command, cwd='backend', env=env, stdout=log, stderr=subprocess.STDOUT)
+                processes.append(process)
+                wait_ready(port, process)
+            peer = socket.create_connection(('127.0.0.1', ports[0]), timeout=5)
+            peer.sendall((f"GET /api/accounts/me HTTP/1.1\r\nHost: 127.0.0.1:{ports[0]}\r\n"
+                          f"Authorization: Bearer {environment['user']['token']}\r\nX-Owned-Pause: u7-proof\r\nConnection: close\r\n\r\n").encode())
+            deadline = time.monotonic()+10
+            while not held.exists() and time.monotonic()<deadline:
+                time.sleep(.01)
+            assert held.exists(), 'Private response never reached the prepared-body pause'
+            mutation = Request(f"http://127.0.0.1:{ports[1]}/api/accounts/{environment['user']['id']}",
+                data=json.dumps({'disabled':True}).encode(), method='PATCH',
+                headers={'Content-Type':'application/json','Authorization':f"Bearer {environment['super_admin']['token']}"})
+            with urlopen(mutation, timeout=3) as response:
+                assert response.status==200
+            release.write_text('released after committed revocation')
+            received = b''
+            while data := peer.recv(65536):
+                received += data
+>           assert str(environment['user']['id']).encode() not in received, 'Prepared private body escaped after access revocation'
+E           AssertionError: Prepared private body escaped after access revocation
+E           assert b'd706b8e8-0fb3-4f85-bee6-026cccd52896' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:10:16 GMT\r\nserver: uvicorn\r\ncontent-length: 208\r\ncontent-type: ap...ed":true,"active":true,"disabled":false,"paid":false},"conversations":[{"id":"4f4911cd-09d9-4265-a3bf-b7bbc48fa0a5"}]}'
+E            +  where b'd706b8e8-0fb3-4f85-bee6-026cccd52896' = <built-in method encode of str object at 0x77458a311cf0>()
+E            +    where <built-in method encode of str object at 0x77458a311cf0> = 'd706b8e8-0fb3-4f85-bee6-026cccd52896'.encode
+E            +      where 'd706b8e8-0fb3-4f85-bee6-026cccd52896' = str(UUID('d706b8e8-0fb3-4f85-bee6-026cccd52896'))
+
+backend/tests/test_invalidation.py:76: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_account_revoke_closes_prepared_body_before_real_handoff
+1 failed in 3.01s

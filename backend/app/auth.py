@@ -29,7 +29,7 @@ async def lock_service(connection, *, exclusive=False):
 
 async def principal(connection, token):
     actor = await (await connection.execute(
-        "SELECT a.*,s.id AS session_id FROM accounts a JOIN sessions s ON s.owner_id=a.id WHERE s.token_hash=%s AND NOT s.revoked AND s.expires_at>clock_timestamp() FOR SHARE OF a,s",
+        "SELECT a.*,s.id AS session_id,s.expires_at AS session_expires_at FROM accounts a JOIN sessions s ON s.owner_id=a.id WHERE s.token_hash=%s AND NOT s.revoked AND s.expires_at>clock_timestamp() FOR SHARE OF a,s",
         (secret_hash(token),),
     )).fetchone()
     if not actor:

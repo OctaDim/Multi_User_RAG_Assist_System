@@ -2,7 +2,7 @@ from urllib.parse import parse_qs, urlsplit
 from concurrent.futures import ThreadPoolExecutor
 from uuid import uuid4
 
-from fastapi.testclient import TestClient
+from live_http import LiveClient as TestClient
 import pytest
 from app import accounts, answers, events
 from app.auth import AccessError, principal, secret_hash

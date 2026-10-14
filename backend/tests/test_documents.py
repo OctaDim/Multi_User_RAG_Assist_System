@@ -1,6 +1,6 @@
 """Real originals/publisher checks; fixture principals here are component-only."""
 import pytest
-from fastapi.testclient import TestClient
+from live_http import LiveClient as TestClient
 from app.main import create_app
 
 
@@ -145,7 +145,7 @@ async def test_database_failure_after_atomic_file_link_keeps_original_accounted(
         CREATE TRIGGER owned_queue_failure BEFORE UPDATE ON document_files FOR EACH ROW EXECUTE FUNCTION reject_queue();""")
     content=b'A complete owned original.'
     headers={'Authorization':'Bearer '+environment['user']['token']}
-    with TestClient(create_app(),raise_server_exceptions=False) as client:
+    with TestClient(create_app()) as client:
         document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'fault.txt','size':len(content)}]}).json()['documents'][0]['id']
         assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==500
         row=await (await connection.execute('SELECT state,original_sha256 FROM document_files WHERE document_id=%s',(document,))).fetchone()

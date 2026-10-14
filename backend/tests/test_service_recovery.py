@@ -128,7 +128,15 @@ generation.main()
         await wait_for(inside_decode)
         assert int(decode.read_text()) == predecessor['pid']
         assert Path(f"/proc/{predecessor['pid']}").exists()
+        # Keep the supervisor from reaping while a real successor tries to acquire
+        # the now-free DB ownership. The inherited native host fence must win.
+        first.send_signal(signal.SIGSTOP)
         assert (await (await connection.execute('SELECT pg_terminate_backend(%s) AS terminated', (predecessor['keeper_pid'],))).fetchone())['terminated']
+        blocked, blocked_log = launch('unreaped-successor.log')
+        assert await asyncio.to_thread(blocked.wait, 15) != 0
+        assert 'native_spawn' not in blocked_log.read_text(), 'Successor loaded before physical predecessor termination'
+        assert Path(f"/proc/{predecessor['pid']}").exists()
+        first.send_signal(signal.SIGCONT)
         await asyncio.to_thread(first.wait, 15)
         assert not Path(f"/proc/{predecessor['pid']}").exists(), 'Confirmed reap must precede replacement load'
         second, second_log = launch('second-supervisor.log')
@@ -150,6 +158,7 @@ generation.main()
     finally:
         for process in processes:
             if process.poll() is None:
+                process.send_signal(signal.SIGCONT)
                 process.send_signal(signal.SIGTERM)
                 try:
                     await asyncio.to_thread(process.wait, 15)
@@ -158,3 +167,68 @@ generation.main()
                     await asyncio.to_thread(process.wait, 10)
         for out in logs:
             out.close()
+
+
+async def test_live_predecessor_record_blocks_unconfirmed_replacement(environment,connection,tmp_path):
+    from app.generation import Supervisor
+    predecessor=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'])
+    supervisor=Supervisor(environment['dsn'])
+    runtime=(await (await connection.execute('SELECT runtime_id FROM service_state WHERE id=1')).fetchone())['runtime_id']
+    supervisor.acquire_fence(runtime)
+    supervisor.child=predecessor
+    supervisor.record_child()
+    os.close(supervisor.fence);supervisor.fence=None
+    path=tmp_path/'unconfirmed-record.log'
+    try:
+        with path.open('xb') as log:
+            successor=subprocess.Popen([sys.executable,'-m','app.generation'],cwd='backend',
+                env=dict(os.environ,RAG_DATABASE_URL=environment['dsn']),stdout=log,stderr=subprocess.STDOUT)
+            try:
+                assert await asyncio.to_thread(successor.wait,15)!=0
+            finally:
+                if successor.poll() is None:successor.kill();await asyncio.to_thread(successor.wait,10)
+        assert predecessor.poll() is None
+        assert 'Predecessor reap is unconfirmed; replacement blocked' in path.read_text()
+        assert 'native_spawn' not in path.read_text()
+        assert (await (await connection.execute('SELECT epoch FROM service_state WHERE id=1')).fetchone())['epoch']==1
+    finally:
+        predecessor.terminate();await asyncio.to_thread(predecessor.wait,10)
+
+
+async def test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed(environment,connection,tmp_path):
+    from uuid import uuid4
+    from app import answers
+    requests=[]
+    for state in ('accepted','searching','queued','generating','completed'):
+        room=uuid4()
+        await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)',(room,environment['user']['id']))
+        request=await answers.admit(connection,environment['user']['token'],room,uuid4(),'Budget?',
+            [environment['document']],environment['tab'],environment['proof'])
+        await connection.execute('UPDATE requests SET state=%s WHERE id=%s',(state,request['id']))
+        if state=='completed':
+            await connection.execute("UPDATE requests SET answer_text='SAVED COMPLETED' WHERE id=%s",(request['id'],))
+            await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','SAVED COMPLETED')",(request['id'],room))
+        requests.append((state,request))
+    path=tmp_path/'state-recovery.log'
+    with path.open('xb') as log:
+        process=subprocess.Popen([sys.executable,'-m','app.generation'],cwd='backend',env=dict(os.environ,
+            RAG_DATABASE_URL=environment['dsn']),stdout=log,stderr=subprocess.STDOUT)
+        try:
+            async def healthy():
+                assert process.poll() is None,path.read_text()
+                row=await (await connection.execute('SELECT epoch,healthy_until>clock_timestamp() AS healthy FROM coordinator_lease WHERE id=1')).fetchone()
+                return row if row['epoch']>1 and row['healthy'] else None
+            await wait_for(healthy)
+            for original,request in requests:
+                row=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                messages=await (await connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(request['id'],))).fetchall()
+                if original=='completed':
+                    assert row['state']=='completed' and row['answer_text']=='SAVED COMPLETED'
+                    assert messages[0]['text']=='SAVED COMPLETED' and not messages[0]['excluded']
+                else:
+                    assert row['state']=='interrupted' and row['reason']=='execution_lost' and not messages
+                assert not (await (await connection.execute('SELECT started FROM graph_bindings WHERE request_id=%s',(request['id'],))).fetchone())['started']
+        finally:
+            process.terminate()
+            try:await asyncio.to_thread(process.wait,15)
+            except subprocess.TimeoutExpired:process.kill();await asyncio.to_thread(process.wait,10)

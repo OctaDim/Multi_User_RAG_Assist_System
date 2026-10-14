@@ -1,13 +1,35 @@
+import asyncio
 import json
+import os
 from uuid import uuid4
 
 from psycopg.types.json import Jsonb
 
 from app.auth import AccessError, lock_service, principal, secret_hash
-from app.sources import available, source_flags, cited_spans
+from app.sources import available, source_flags, source_flags_for, cited_spans
 
 
 UNFINISHED = ("accepted", "searching", "queued", "generating")
+
+
+async def project(connection, request, *, flags=None):
+    if flags is None:
+        flags = await source_flags(connection, request['id'])
+    return {**request, 'citations': cited_spans(request['answer_text'], request['passport']),
+            'source_flags': flags, 'excluded': bool(flags) or request['state'] in ('interrupted', 'failed')}
+
+
+def question_budget(question):
+    from app.llama_runtime import Vocabulary
+    from app.rag import pack_context
+    path = os.environ.get('RAG_MODEL_PATH')
+    if not path:
+        raise AccessError('tokenizer_unavailable', 503)
+    vocabulary = Vocabulary(path)
+    try:
+        pack_context(question, [], [], vocabulary.tokenize)
+    finally:
+        vocabulary.close()
 
 
 async def create_conversation(connection, token):
@@ -39,6 +61,18 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
     scope = sorted(set(document_ids))
     payload = {"conversation": str(conversation_id), "question": question, "documents": list(map(str, scope)), "tab": str(tab_id)}
     fingerprint = secret_hash(json.dumps(payload, sort_keys=True, ensure_ascii=False))
+    # Authenticate before expensive tokenization, then release all mutation locks.
+    # The full admission transaction below rechecks everything before INSERT.
+    async with connection.transaction():
+        await lock_service(connection)
+        actor = await principal(connection, token)
+        await conversation(connection, actor, conversation_id)
+        previous = await (await connection.execute('SELECT * FROM requests WHERE owner_id=%s AND operation_key=%s', (actor['id'],operation_key))).fetchone()
+        if previous:
+            if previous['fingerprint'] != fingerprint:
+                raise AccessError('operation_conflict', 409)
+            return await project(connection, previous)
+    await asyncio.to_thread(question_budget, question)
     async with connection.transaction():
         service = await lock_service(connection)
         actor = await principal(connection, token)
@@ -53,7 +87,7 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
         if previous:
             if previous["fingerprint"] != fingerprint:
                 raise AccessError("operation_conflict", 409)
-            return previous
+            return await project(connection, previous)
         if not live(tab):
             raise AccessError("tab_disconnected", 409)
         if await (await connection.execute("SELECT id FROM requests WHERE conversation_id=%s AND state=ANY(%s)", (conversation_id, list(UNFINISHED)))).fetchone():
@@ -79,7 +113,7 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             "operation_key": str(operation_key), "scope": list(map(str, scope)),
             "created_at": request['created_at'].isoformat(),
         })
-        return request
+        return await project(connection, request)
 
 
 async def transition(connection, request, state, reason):
@@ -94,7 +128,8 @@ async def transition(connection, request, state, reason):
     flags = await source_flags(connection, request['id'])
     if flags:
         await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
-    await event(connection, updated, "terminal", {"state": state, "reason": reason, "version": updated["version"]})
+    await event(connection, updated, "terminal", {"state": state, "reason": reason, "version": updated["version"],
+                                                'source_flags': flags, 'excluded': bool(flags) or state != 'completed'})
     return updated
 
 
@@ -116,11 +151,11 @@ async def histories(connection, conversation_ids):
     messages = await (await connection.execute("SELECT * FROM messages WHERE conversation_id=ANY(%s::uuid[]) ORDER BY id", (conversation_ids,))).fetchall()
     requests = await (await connection.execute("SELECT * FROM requests WHERE conversation_id=ANY(%s::uuid[]) ORDER BY created_at,id", (conversation_ids,))).fetchall()
     watermarks = await (await connection.execute("SELECT conversation_id,max(id) AS watermark FROM events WHERE conversation_id=ANY(%s::uuid[]) GROUP BY conversation_id", (conversation_ids,))).fetchall()
+    flags = await source_flags_for(connection, [request['id'] for request in requests])
     for message in messages:
         result[message["conversation_id"]]["messages"].append(message)
     for request in requests:
-        request['citations'] = cited_spans(request['answer_text'], request['passport'])
-        result[request["conversation_id"]]["requests"].append(request)
+        result[request["conversation_id"]]["requests"].append(await project(connection, request, flags=flags.get(request['id'], {})))
     for watermark in watermarks:
         result[watermark["conversation_id"]]["watermark"] = watermark["watermark"]
     return list(result.values())

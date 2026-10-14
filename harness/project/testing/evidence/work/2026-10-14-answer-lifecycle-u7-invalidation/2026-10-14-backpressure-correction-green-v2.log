@@ -1,0 +1,69 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 24 items / 18 deselected / 6 selected
+
+backend/tests/test_invalidation.py ...F..                                [100%]
+
+=================================== FAILURES ===================================
+____ test_real_socket_backpressure_revocation_holds_no_database_locks[png] _____
+
+environment = {'admin': {'id': UUID('10b89a25-667d-423e-87d7-6963ad2de85b'), 'session_id': UUID('12c1ea94-b642-4bfa-832b-c742fab74a0...ersation': UUID('e88c1120-e131-492e-8452-97392d40e518'), 'document': UUID('11af34cc-19d7-464f-9b8d-5d86c1d72f96'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-backpressure-correction-2/test_real_socket_backpressure_2')
+target = 'png'
+
+    @pytest.mark.parametrize('target',['json','file','png','snapshot','replay'])
+    def test_real_socket_backpressure_revocation_holds_no_database_locks(environment,tmp_path,target):
+        from io import BytesIO
+        from PIL import Image
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        # The first response fills the actual kernel/asyncio send buffer. A pipelined
+        # second private response is prepared while its transport cannot yet write.
+        # No flow.pause_writing call or synthetic drain gate is used by this test.
+        route='/api/accounts/me'
+        if target in ('snapshot','replay'):route=f"/api/tabs/{environment['tab']}/events"
+        # Uploads are genuine HTTP files, even in this fixture-principal component proof.
+        preparation=tmp_path/'setup';preparation.mkdir()
+        with held_apis(environment,preparation,originals=tmp_path/'originals') as (_,setup,_,_):
+            large=b'BUFFER PRESSURE '+os.urandom(3*1024*1024-len(b'BUFFER PRESSURE ')-1)
+            batch=setup[1].post('/api/documents/uploads',headers=headers,json={'files':[{'name':'pressure.txt','size':len(large)}]}).json()
+            pressure=batch['documents'][0]['id']
+            assert setup[1].put(f'/api/documents/{pressure}/original',headers=headers,content=large).status_code==200
+            pdf=BytesIO();Image.new('RGB',(64,64),'white').save(pdf,format='PDF');small=pdf.getvalue()
+            batch=setup[1].post('/api/documents/uploads',headers=headers,json={'files':[{'name':'target.pdf','size':len(small)}]}).json()
+            document=batch['documents'][0]['id']
+            assert setup[1].put(f'/api/documents/{document}/original',headers=headers,content=small).status_code==200
+            if target in ('snapshot','replay'):
+                from uuid import uuid4
+                admitted=setup[1].post(f"/api/conversations/{environment['conversation']}/answers",headers=headers|{'X-Tab-Proof':environment['proof']},
+                    json={'operation_key':str(uuid4()),'question':'UNHANDED PRIVATE QUESTION',
+                        'document_ids':[str(environment['document'])],'tab_id':str(environment['tab'])})
+                assert admitted.status_code==200
+        if target in ('file','png'):route=f'/api/documents/{document}/'+('original' if target=='file' else 'pages/1/original')
+        with held_apis(environment,tmp_path,backpressure_path=route) as (ports,clients,_,_):
+            peer=socket.socket();peer.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,65536);peer.settimeout(10)
+            peer.connect(('127.0.0.1',ports[0]))
+            extra=f"X-Tab-Proof: {environment['proof']}\r\n" if target in ('snapshot','replay') else ''
+            if target=='replay':extra+='Last-Event-ID: 0\r\n'
+            peer.sendall((f"GET /api/documents/{pressure}/original HTTP/1.1\r\nHost: localhost\r\nAuthorization: {headers['Authorization']}\r\n\r\n"
+                f"GET {route} HTTP/1.1\r\nHost: localhost\r\nAuthorization: {headers['Authorization']}\r\n{extra}Connection: close\r\n\r\n").encode())
+            received=b'';until=time.monotonic()+20
+            try:
+                while not (tmp_path/'target-drain').exists() and time.monotonic()<until:
+                    received+=peer.recv(2048)
+                    time.sleep(.003)
+>               assert (tmp_path/'real-pause').exists() and (tmp_path/'target-drain').exists(),'Actual private-response network drainage was not observed'
+E               AssertionError: Actual private-response network drainage was not observed
+E               assert (True and False)
+E                +  where True = exists()
+E                +    where exists = (PosixPath('/tmp/u7-worker-backpressure-correction-2/test_real_socket_backpressure_2') / 'real-pause').exists
+E                +  and   False = exists()
+E                +    where exists = (PosixPath('/tmp/u7-worker-backpressure-correction-2/test_real_socket_backpressure_2') / 'target-drain').exists
+
+backend/tests/test_invalidation.py:333: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[png]
+============ 1 failed, 5 passed, 18 deselected in 62.70s (0:01:02) =============

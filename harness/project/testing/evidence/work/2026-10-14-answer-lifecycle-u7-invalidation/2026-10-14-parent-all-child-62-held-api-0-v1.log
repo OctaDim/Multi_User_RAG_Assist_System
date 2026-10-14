@@ -1,0 +1,15 @@
+INFO:     Started server process [60718]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:60524 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57471 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57487 - "GET /api/documents/3e879551-ba74-45f6-aa5d-dd599090662f/pages/1/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57501 - "GET /api/documents/e6ea8ab7-a531-4b8e-8238-19b919013ce2/original HTTP/1.1" 200 OK
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_5d74f688d9e146f38a907b40ea6b70fd) at 0x7a5438c64f80>: sending query failed: another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_5d74f688d9e146f38a907b40ea6b70fd) at 0x7a5438c64f80>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7a5438c64f80>
+INFO:     127.0.0.1:57501 - "GET /api/documents/3e879551-ba74-45f6-aa5d-dd599090662f/pages/1/original HTTP/1.1" 401 Unauthorized
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60718]

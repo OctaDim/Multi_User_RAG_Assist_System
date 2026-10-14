@@ -1,0 +1,66 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 20 items / 18 deselected / 2 selected
+
+backend/tests/test_invalidation.py F                                     [ 50%]
+backend/tests/test_frontend_reducer.py F                                 [100%]
+
+=================================== FAILURES ===================================
+_______ test_irreducible_native_question_budget_refuses_before_admission _______
+
+environment = {'admin': {'id': UUID('622f6b3e-46bd-4ff7-9db2-9babe90d7658'), 'session_id': UUID('28bde057-c633-47dd-8f6d-ccd5bcdac20...ersation': UUID('c44d9d3a-81b4-4028-afee-c69f590e9c76'), 'document': UUID('38e292d5-594b-4b7e-95aa-54b94c7f4a90'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_23cfe3b113384ae38d20a1ed18604ddc) at 0x71303a353860>
+
+    async def test_irreducible_native_question_budget_refuses_before_admission(environment,connection):
+        from uuid import uuid4
+        from app import answers
+        from app.auth import AccessError
+>       with pytest.raises(AccessError,match='context_too_large'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_invalidation.py:230: Failed
+_______ test_source_status_event_marks_original_without_replacing_quote ________
+
+    def test_source_status_event_marks_original_without_replacing_quote():
+        script=r'''import assert from 'node:assert/strict';
+    globalThis.document={querySelector:()=>({content:'http://127.0.0.1:8000'})};
+    const {Conversations}=await import('./frontend/src/conversations.js');
+    const request={id:'answer',version:3,state:'generating',answer_text:'100 euros [source:1]',citations:[{quote:'100'}]};
+    const controller=Object.create(Conversations.prototype);
+    controller.current=()=>true;controller.render=()=>{};controller.selected='room';controller.cursor=2;
+    controller.histories=new Map([['room',{requests:[request],messages:[]}]]);
+    await controller.receive({id:3,kind:'source_status',conversation_id:'room',request_id:'answer',payload:{
+     version:4,state:'generating',source_flags:{document:'corrected'},excluded:true}});
+    assert.deepEqual(request.source_flags,{document:'corrected'});
+    assert.equal(request.excluded,true);assert.equal(request.state,'generating');
+    assert.equal(request.answer_text,'100 euros [source:1]');assert.equal(request.citations[0].quote,'100');
+    '''
+        result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
+            input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
+>       assert result.returncode==0,result.stdout+result.stderr
+E       AssertionError: file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/drafts.js:5
+E           for (const key of Object.keys(sessionStorage)) {
+E                                         ^
+E         
+E         ReferenceError: sessionStorage is not defined
+E             at clearDrafts (file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/drafts.js:5:33)
+E             at file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/drafts.js:11:71
+E             at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+E             at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:578:26)
+E             at async file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/[eval1]:3:23
+E         
+E         Node.js v22.14.0
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', '--experimental-default-type=module', '--input-type=module', '-'], returncode=1, stdout...578:26)\n    at async file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/[eval1]:3:23\n\nNode.js v22.14.0\n').returncode
+
+backend/tests/test_frontend_reducer.py:52: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_irreducible_native_question_budget_refuses_before_admission
+FAILED backend/tests/test_frontend_reducer.py::test_source_status_event_marks_original_without_replacing_quote
+======================= 2 failed, 18 deselected in 1.42s =======================

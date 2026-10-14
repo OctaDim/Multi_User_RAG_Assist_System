@@ -227,7 +227,8 @@ class Coordinator:
                             (request_id, request['conversation_id'], request['answer_text'], bool(flags), Jsonb(flags)),
                         )
                         await answers.event(connection, request, 'output', {'text': result['text'], 'version': request['version'],
-                                                                           'citations': sources.cited_spans(request['answer_text'], request['passport'])})
+                                                                           'citations': sources.cited_spans(request['answer_text'], request['passport']),
+                                                                           'source_flags': flags, 'excluded': bool(flags)})
                     if result['done']:
                         completed = result['reason'] == 'eos'
                         await answers.transition(connection, request, 'completed' if completed else 'interrupted',

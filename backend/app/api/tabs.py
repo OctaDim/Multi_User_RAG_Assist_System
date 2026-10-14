@@ -42,6 +42,7 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
     pool = request.app.state.pool
     async with pool.connection() as connection:
         tab = await events.connect(connection, token, tab_id, tab_proof)
+    request.scope.setdefault('state', {})['delivery_epoch'] = tab['connection_epoch']
 
     async def deliver():
         cursor = last_event_id
@@ -55,7 +56,7 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
                     value = await events.read(connection, token, tab_id, tab_proof, tab['connection_epoch'], cursor)
                 if value:
                     yield encode(value)
-                    cursor = value['id']
+                    cursor = request.scope['state'].pop('delivery_cursor', value['id'])
                 if asyncio.get_running_loop().time() >= next_heartbeat:
                     async with pool.connection() as connection:
                         heartbeat = await events.heartbeat(connection, token, tab_id, tab_proof, tab['connection_epoch'])

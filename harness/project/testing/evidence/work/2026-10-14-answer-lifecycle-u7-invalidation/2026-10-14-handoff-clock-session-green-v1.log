@@ -1,0 +1,316 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 35 items / 22 deselected / 13 selected
+
+backend/tests/test_invalidation.py .FFFFFFF.....                         [100%]
+
+=================================== FAILURES ===================================
+____ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-delete] ____
+
+environment = {'admin': {'id': UUID('feaae623-62bd-4600-82af-f7ab14ac2644'), 'session_id': UUID('ed055f62-2573-4e18-8a04-48b54098b97...ersation': UUID('42215db4-fadb-4af0-aa13-bc393abe5844'), 'document': UUID('7770849a-d1cb-4518-b8d7-67f72fea741a'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_5d1af09cbe8c4c5cb22a838fbb87b267) at 0x748b7555d2b0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x748b74d582f0>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r0')
+invalidation = 'delete', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+__ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-connection] __
+
+environment = {'admin': {'id': UUID('8ba15329-26a1-4089-bee5-3bb2245302f2'), 'session_id': UUID('d3bf445a-4e09-4761-b95e-694091ae9cc...ersation': UUID('b507c162-a54a-4a8e-9100-a2214ce26e3e'), 'document': UUID('2b58a958-3116-4316-bce1-7e3685c84af2'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_400b2a2d85bc4681b434e38fb2e65b43) at 0x748b74d587d0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-2' at 0x748b59a57920>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r1')
+invalidation = 'connection', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+____ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-proof] _____
+
+environment = {'admin': {'id': UUID('923e55dc-5cb2-492a-8bb8-7bee3c28c51d'), 'session_id': UUID('984a1824-f392-4e34-ab5a-9ae53d98e09...ersation': UUID('efa6b6e5-c121-485a-aaf6-f4417aff9886'), 'document': UUID('b1849a79-5278-469d-8059-0bd6d43c0405'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_e8ccab1b8eae4ce29be0ebd7eb996148) at 0x748b59a8f6e0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-3' at 0x748b59a8d2e0>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r2')
+invalidation = 'proof', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+_____ test_prepared_sse_and_replay_rechecks_source_and_tab[output-delete] ______
+
+environment = {'admin': {'id': UUID('dbde7194-241d-4fa7-8d44-481441a08181'), 'session_id': UUID('b166d914-0354-43db-a7db-88b01a8619d...ersation': UUID('2e23eb3c-2417-4bd1-b73e-e362d2bfb27e'), 'document': UUID('885d56b0-547a-4c8e-847d-23647cc26e8f'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_ce52ee49e2db4945bc6bb11a56dcc489) at 0x748b59a8f680>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-4' at 0x748b59a8f590>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r3')
+invalidation = 'delete', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+___ test_prepared_sse_and_replay_rechecks_source_and_tab[output-connection] ____
+
+environment = {'admin': {'id': UUID('494b8c94-3987-4076-8d45-3c7c0bc41c9f'), 'session_id': UUID('c642e49a-9aa4-48fd-a7f3-85b2a802bf9...ersation': UUID('3dea5917-9c20-483f-8f2a-82a3474deed1'), 'document': UUID('201373ff-b592-4d37-ad4f-578abbdce052'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_3a2331d4793a4eba86b13c0a22e2744c) at 0x748b597ac950>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-5' at 0x748b597af350>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r4')
+invalidation = 'connection', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+______ test_prepared_sse_and_replay_rechecks_source_and_tab[output-proof] ______
+
+environment = {'admin': {'id': UUID('cb957f4a-0bcd-4f40-8316-63af3a82c02e'), 'session_id': UUID('862a06d9-269f-4963-b726-d35ba1a6e81...ersation': UUID('081b3c28-48e3-4850-99b2-b9339f12b29c'), 'document': UUID('96604801-5208-4014-8a24-42d0d34ef8c4'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_8da9639e0b874736ba4ce8b84c882ed5) at 0x748b59a8ce00>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-6' at 0x748b59a8ce60>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_prepared_sse_and_replay_r5')
+invalidation = 'proof', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+>       request=await send(connection,environment);await run(rag_pool,request)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+______ test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor _______
+
+environment = {'admin': {'id': UUID('9078f332-c863-439a-8d73-3eab8b3b96a1'), 'session_id': UUID('1b65d677-5991-41c2-a1ba-ee6d392a4a6...ersation': UUID('1d31223b-793d-456c-9976-f1929fcbbe93'), 'document': UUID('c829e184-f39d-47b9-9cfc-4fdbddbdae90'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_48e4a5e8079844aebfed90b0bd756729) at 0x748b59a57830>
+tmp_path = PosixPath('/tmp/u7-worker-last-clock-green-1/test_fresh_handoff_snapshot_wa0')
+
+    async def test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor(environment,connection,tmp_path):
+        import asyncio,re
+        from uuid import uuid4
+        from app import answers,events
+        from test_source_contract import send
+>       await send(connection,environment)
+
+backend/tests/test_invalidation.py:329: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_source_contract.py:10: in send
+    return await answers.admit(
+backend/app/answers.py:75: in admit
+    await asyncio.to_thread(question_budget, question)
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/threads.py:25: in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+question = 'What is the annual budget?'
+
+    def question_budget(question):
+        from app.llama_runtime import Vocabulary
+        from app.rag import pack_context
+        path = os.environ.get('RAG_MODEL_PATH')
+        if not path:
+>           raise AccessError('tokenizer_unavailable', 503)
+E           app.auth.AccessError: tokenizer_unavailable
+
+backend/app/answers.py:27: AccessError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-delete]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-connection]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-proof]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-delete]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-connection]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-proof]
+FAILED backend/tests/test_invalidation.py::test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor
+================= 7 failed, 6 passed, 22 deselected in 18.23s ==================

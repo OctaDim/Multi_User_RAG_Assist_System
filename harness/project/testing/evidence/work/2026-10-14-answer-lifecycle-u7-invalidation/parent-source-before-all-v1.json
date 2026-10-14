@@ -1,0 +1,102 @@
+{
+  "base": "2f6597e276282f1a394495e5d60bdd1c817d682a",
+  "creation_utc": "2026-10-14 11:00 UTC",
+  "files": [
+    {
+      "path": "backend/app/answers.py",
+      "sha256": "71bf5dbdf4362bdc4174a8111c6a80ef59ee6ff25535cc8fa1c97ec19dd9acae"
+    },
+    {
+      "path": "backend/app/api/tabs.py",
+      "sha256": "8669eba974eef94378407ead8da672374a9a2ec67f26d46498309facbef3177d"
+    },
+    {
+      "path": "backend/app/auth.py",
+      "sha256": "ed4e335d5464442865ef44c2708de57e426b8b65732818ae7ce83db0d9175a4e"
+    },
+    {
+      "path": "backend/app/events.py",
+      "sha256": "62b9380b4e0e5fc13a3d53d95f5e5f1abc02a8cb3a13beded0f6907653fc843b"
+    },
+    {
+      "path": "backend/app/generation.py",
+      "sha256": "568de411ded9a1c425197c9065e3f82ed988a4e61f3789d71baa2d7760bffc05"
+    },
+    {
+      "path": "backend/app/handoff.py",
+      "sha256": "9e86822be246fae43d3383be68d46f380e793ec7fd204840f6cf30b49fbe141a"
+    },
+    {
+      "path": "backend/app/llama_runtime.py",
+      "sha256": "64397ba4a2ea08d7774c428c279d14a4ac6a513956f888c96b8556a68cf1f811"
+    },
+    {
+      "path": "backend/app/main.py",
+      "sha256": "d6b689f6ea66f62a2b8207424e1cfbb84d2e0340083f5256baab3d2c2843a2fe"
+    },
+    {
+      "path": "backend/app/rag.py",
+      "sha256": "0fa235ff24195c8ee542bca7259dea74fb004d3a6724ee6ba12656571bfd6891"
+    },
+    {
+      "path": "backend/app/sources.py",
+      "sha256": "c9892eefafe201c94cdcabab7ec0947fae63b22a405000d3e81bba36f74b3046"
+    },
+    {
+      "path": "backend/tests/runtime/test_production_runtime.py",
+      "sha256": "8da05d3a8d812121e0d5690fdca340ce856f5804ead0f7cf13509f393b14c5db"
+    },
+    {
+      "path": "backend/tests/test_accounts.py",
+      "sha256": "0b77bd289bf99d6b137f20d96bbd7e54b40056acb3c203d0b21615aad9333e93"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "sha256": "f837fd447bb3f944c5189784864ee220e2329a7a3f73ba6a61cdf9baba3cb71a"
+    },
+    {
+      "path": "backend/tests/test_frontend_reducer.py",
+      "sha256": "a148485f11e240e378b0c7c3715744a1bd8a517d88559557ce6a2d26217910db"
+    },
+    {
+      "path": "backend/tests/test_http.py",
+      "sha256": "5b255ffefdc15668f5fc75e96aa2c847ba5eef35d0c70eafd8ae1a7732043ee4"
+    },
+    {
+      "path": "backend/tests/test_rag_context.py",
+      "sha256": "dcf731972d6e685555b10609553f13a591decb2dc26283fc22c1df19b96e2a81"
+    },
+    {
+      "path": "backend/tests/test_service_recovery.py",
+      "sha256": "7e61d6eace67634aa22bc3f181e851c199d7dc9aae152120ce7b3df68ea4571c"
+    },
+    {
+      "path": "backend/tests/browser/test_invalidation.py",
+      "sha256": "a4c65dac3511924ae98ec1c756e776b598f0201b09e82b6b2aa828d2476eaa4c"
+    },
+    {
+      "path": "backend/tests/live_http.py",
+      "sha256": "645e3db1b399d04bc49c54550f11a68f72a93fb81126b7a25ff873bb209079dd"
+    },
+    {
+      "path": "backend/tests/test_invalidation.py",
+      "sha256": "ac32a48eaf3e4a4e612d72af03b8967d6653568fe33ac75c3c87cdf701a62b05"
+    },
+    {
+      "path": "frontend/src/conversations.js",
+      "sha256": "4daf4b8394fec9e776f22b929e676f55e99e6153dea9681da59ceabed88e7255"
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "sha256": "002582f4f91afab9ff49d6584f458f0d942203c90371ad3ed76025c75c461ee6"
+    },
+    {
+      "path": "backend/uv.lock",
+      "sha256": "fd8a73673aaf67fc4dec05b11d62e67368b4b9f127de68b67bfe7cbb062ec64a"
+    },
+    {
+      "path": "harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md",
+      "sha256": "a8aa22842c61f6e6a23dcf99f2314e8730458894cfa130eff120c38e9a72f435"
+    }
+  ]
+}

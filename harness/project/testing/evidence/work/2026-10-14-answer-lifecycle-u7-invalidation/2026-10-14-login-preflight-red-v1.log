@@ -1,0 +1,76 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items / 3 deselected / 1 selected
+
+backend/tests/test_http.py F                                             [100%]
+
+=================================== FAILURES ===================================
+__________ test_login_preflight_is_public_and_keeps_exact_cors_origin __________
+
+environment = {'admin': {'id': UUID('ae337e4c-bf69-4b56-ade1-58a77e96ab41'), 'session_id': UUID('aafb2caa-2b68-4a59-b1c3-0b5d75fb09c...ersation': UUID('37cb48dd-0ee1-43bb-8008-853f02c327fb'), 'document': UUID('fdf50918-a86a-41d5-97a7-4f11103e575d'), ...}
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76987c96c410>
+
+    def test_login_preflight_is_public_and_keeps_exact_cors_origin(environment,monkeypatch):
+        from app.main import create_app
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+        monkeypatch.setenv('RAG_FRONTEND_ORIGIN','http://127.0.0.1:54321')
+        with TestClient(create_app()) as client:
+            response=client.options('/api/accounts/login',headers={'Origin':'http://127.0.0.1:54321',
+                'Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'content-type'})
+>           assert response.status_code==200
+E           assert 500 == 200
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+backend/tests/test_http.py:56: AssertionError
+----------------------------- Captured stderr call -----------------------------
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1216, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py", line 178, in __call__
+    await self.app(scope, receive, checked)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 88, in __call__
+    await response(scope, receive, send)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/responses.py", line 169, in __call__
+    await send({"type": "http.response.start", "status": self.status_code, "headers": self.raw_headers})
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py", line 176, in checked
+    await send(message)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 161, in _send
+    await send(message)
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py", line 130, in guarded
+    current = await serialize(connection, grant, message)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py", line 95, in serialize
+    value = await view(connection, scope, token, value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py", line 23, in view
+    actor = await principal(connection, token)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/auth.py", line 33, in principal
+    (secret_hash(token),),
+     ^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/auth.py", line 12, in secret_hash
+    return hashlib.sha256(value.encode()).hexdigest()
+                          ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'encode'
+=========================== short test summary info ============================
+FAILED backend/tests/test_http.py::test_login_preflight_is_public_and_keeps_exact_cors_origin
+======================= 1 failed, 3 deselected in 1.74s ========================

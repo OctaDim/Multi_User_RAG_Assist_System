@@ -1,0 +1,12 @@
+INFO:     Started server process [60094]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58980 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60177 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60193 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60193 - "PUT /api/documents/1a9a3acb-8b4d-4375-a939-f0b1f1bb842b/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60193 - "DELETE /api/documents/1a9a3acb-8b4d-4375-a939-f0b1f1bb842b HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60094]

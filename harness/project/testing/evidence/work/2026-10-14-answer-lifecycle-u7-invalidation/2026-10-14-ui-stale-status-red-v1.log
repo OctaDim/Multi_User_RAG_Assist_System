@@ -1,0 +1,63 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items / 1 deselected / 1 selected
+
+backend/tests/test_frontend_reducer.py F                                 [100%]
+
+=================================== FAILURES ===================================
+_______ test_source_status_event_marks_original_without_replacing_quote ________
+
+    def test_source_status_event_marks_original_without_replacing_quote():
+        script=r'''import assert from 'node:assert/strict';
+    globalThis.document={querySelector:()=>({content:'http://127.0.0.1:8000'})};
+    globalThis.sessionStorage={getItem:()=>null,removeItem:()=>{}};
+    const {Conversations}=await import('./frontend/src/conversations.js');
+    const request={id:'answer',version:3,state:'generating',answer_text:'100 euros [source:1]',citations:[{quote:'100'}]};
+    const controller=Object.create(Conversations.prototype);
+    controller.current=()=>true;controller.render=()=>{};controller.selected='room';controller.cursor=2;
+    controller.histories=new Map([['room',{requests:[request],messages:[]}]]);
+    await controller.receive({id:3,kind:'source_status',conversation_id:'room',request_id:'answer',payload:{
+     version:4,state:'generating',source_flags:{document:'corrected'},excluded:true}});
+    assert.deepEqual(request.source_flags,{document:'corrected'});
+    assert.equal(request.excluded,true);assert.equal(request.state,'generating');
+    assert.equal(request.answer_text,'100 euros [source:1]');assert.equal(request.citations[0].quote,'100');
+    await controller.receive({id:4,kind:'output',conversation_id:'room',request_id:'answer',payload:{
+     version:3,text:'stale',source_flags:{},excluded:false}});
+    assert.deepEqual(request.source_flags,{document:'corrected'});assert.equal(request.excluded,true);
+    '''
+        result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
+            input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
+>       assert result.returncode==0,result.stdout+result.stderr
+E       AssertionError: node:internal/modules/run_main:122
+E             triggerUncaughtException(
+E             ^
+E         
+E         AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+E         + actual - expected
+E         
+E         + {}
+E         - {
+E         -   document: 'corrected'
+E         - }
+E         
+E             at file:///home/octadim/MyProjects/Multi_User_RAG_Assist_System/[eval1]:16:8 {
+E           generatedMessage: true,
+E           code: 'ERR_ASSERTION',
+E           actual: {},
+E           expected: { document: 'corrected' },
+E           operator: 'deepStrictEqual'
+E         }
+E         
+E         Node.js v22.14.0
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', '--experimental-default-type=module', '--input-type=module', '-'], returncode=1, stdout...TION',\n  actual: {},\n  expected: { document: 'corrected' },\n  operator: 'deepStrictEqual'\n}\n\nNode.js v22.14.0\n").returncode
+
+backend/tests/test_frontend_reducer.py:56: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_frontend_reducer.py::test_source_status_event_marks_original_without_replacing_quote
+======================= 1 failed, 1 deselected in 0.26s ========================

@@ -51,7 +51,7 @@ class GuardedSaver(BaseCheckpointSaver):
         self.token = token
 
     @asynccontextmanager
-    async def guard(self, config=None):
+    async def guard(self, config=None, *, preparing=False):
         async with self.pool.connection() as connection, connection.transaction():
             service = await lock_service(connection)
             if self.token:
@@ -86,16 +86,20 @@ class GuardedSaver(BaseCheckpointSaver):
                 raise AccessError('terminal_request', 409)
             if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
                 raise AccessError('lost_execution', 409)
-            if (actor['context_epoch'] != stored['account_epoch'] or conversation['context_epoch'] != stored['context_epoch']
-                or request['context_epoch'] != stored['context_epoch']):
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
                 raise AccessError('stale_context', 409)
-            invalid = await (await connection.execute(
-                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
-                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
-                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
-            )).fetchone()
-            if invalid:
-                raise AccessError('stale_source', 409)
+            if not preparing:
+                invalid = await (await connection.execute(
+                    '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                       ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                       WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+                )).fetchone()
+                if invalid:
+                    raise AccessError('stale_source', 409)
+            if preparing and await (await connection.execute('''SELECT 1 FROM request_sources p
+                JOIN documents d ON d.id=p.document_id WHERE p.request_id=%s AND d.deleted LIMIT 1''', (request['id'],))).fetchone():
+                raise AccessError('source_deleted',409)
             yield connection, request
 
     async def aget_tuple(self, config):
@@ -163,32 +167,31 @@ def pack_context(question, history, fragments, tokenize, *, n_ctx=4096, response
 
 
 async def prepare(saver, embedder, tokenize, *, min_similarity=0.75):
-    async with saver.guard() as (connection, request):
+    async with saver.guard(preparing=True) as (connection, request):
         question = (await (await connection.execute("SELECT text FROM messages WHERE request_id=%s AND role='user'", (request['id'],))).fetchone())['text']
     embedding = (await asyncio.to_thread(embedder.encode, [question], query=True))[0]
-    async with saver.guard() as (connection, request):
+    async with saver.guard(preparing=True) as (connection, request):
         available = await sources.available(connection, request['owner_id'], request['scope'])
         if not available:
             raise AccessError('no_ready_sources', 409)
         found = await sources.retrieve(connection, request['owner_id'], request['scope'], embedding, min_similarity=min_similarity)
         previous = await sources.history(connection, request)
-    packed = pack_context(question, previous, found, tokenize)
-    dependencies = {(str(value['document_id']), str(value['revision_id'])) for value in found}
-    history_dependencies = {(item['document_id'], item['revision_id'])
-                            for value in packed['history'] for item in value['dependencies']}
-    dependencies.update(history_dependencies)
-    passport = {
-        'selected': list(map(str, request['scope'])),
-        'available': [{key: str(row[key]) if key in ('document_id', 'revision_id') else row[key]
-                       for key in ('document_id', 'revision_id', 'mode', 'limitations', 'name')} for row in available],
-        'excluded': [str(value) for value in request['scope'] if value not in {row['document_id'] for row in available}],
-        'found': [fragment_payload(value) for value in found],
-        'passed': [fragment_payload(value) for value in packed['fragments']],
-        'insufficient_evidence': not bool(packed['fragments']),
-        'history_requests': [str(value['request_id']) for value in packed['history']],
-        'history_dependencies': [{'document_id': doc, 'revision_id': rev} for doc, rev in sorted(history_dependencies)],
-    }
-    async with saver.guard() as (connection, request):
+        packed = pack_context(question, previous, found, tokenize)
+        dependencies = {(str(value['document_id']), str(value['revision_id'])) for value in found}
+        history_dependencies = {(item['document_id'], item['revision_id'])
+                                for value in packed['history'] for item in value['dependencies']}
+        dependencies.update(history_dependencies)
+        passport = {
+            'selected': list(map(str, request['scope'])),
+            'available': [{key: str(row[key]) if key in ('document_id', 'revision_id') else row[key]
+                           for key in ('document_id', 'revision_id', 'mode', 'limitations', 'name')} for row in available],
+            'excluded': [str(value) for value in request['scope'] if value not in {row['document_id'] for row in available}],
+            'found': [fragment_payload(value) for value in found],
+            'passed': [fragment_payload(value) for value in packed['fragments']],
+            'insufficient_evidence': not bool(packed['fragments']),
+            'history_requests': [str(value['request_id']) for value in packed['history']],
+            'history_dependencies': [{'document_id': doc, 'revision_id': rev} for doc, rev in sorted(history_dependencies)],
+        }
         current = {(str(row['document_id']), str(row['revision_id'])) for row in await sources.available(connection, request['owner_id'], request['scope'])}
         if not dependencies.issubset(current):
             raise AccessError('stale_source', 409)
@@ -213,9 +216,19 @@ class RAGState(TypedDict, total=False):
     answer: str
 
 
-def build_graph(saver, embedder, tokenize, *, generate=None, min_similarity=0.75):
+async def run_graph(pool, request_id, execution_epoch, embedder, tokenize, *, token=None, generate=None, min_similarity=0.75):
+    async with pool.connection() as connection:
+        binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request_id,))).fetchone()
+    if not binding or binding['execution_epoch'] != execution_epoch:
+        raise AccessError('lost_execution', 409)
+    saver = GuardedSaver(pool, binding, token=token)
+    async with saver.guard(preparing=True) as (connection, _):
+        if not await (await connection.execute('UPDATE graph_bindings SET started=true WHERE request_id=%s AND NOT started RETURNING request_id', (request_id,))).fetchone():
+            raise AccessError('graph_already_started', 409)
+    prepared = await prepare(saver, embedder, tokenize, min_similarity=min_similarity)
+
     async def retrieve_node(state):
-        return await prepare(saver, embedder, tokenize, min_similarity=min_similarity)
+        return prepared
 
     graph = StateGraph(RAGState)
     graph.add_node('prepare', retrieve_node)
@@ -230,17 +243,18 @@ def build_graph(saver, embedder, tokenize, *, generate=None, min_similarity=0.75
         graph.add_edge('generate', END)
     else:
         graph.add_edge('prepare', END)
-    return graph.compile(checkpointer=saver)
-
-
-async def run_graph(pool, request_id, execution_epoch, embedder, tokenize, *, token=None, generate=None, min_similarity=0.75):
-    async with pool.connection() as connection:
-        binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request_id,))).fetchone()
-    if not binding or binding['execution_epoch'] != execution_epoch:
-        raise AccessError('lost_execution', 409)
-    saver = GuardedSaver(pool, binding, token=token)
-    async with saver.guard() as (connection, _):
-        if not await (await connection.execute('UPDATE graph_bindings SET started=true WHERE request_id=%s AND NOT started RETURNING request_id', (request_id,))).fetchone():
-            raise AccessError('graph_already_started', 409)
-    graph = build_graph(saver, embedder, tokenize, generate=generate, min_similarity=min_similarity)
-    return await graph.ainvoke({'request_id': str(request_id)}, {'configurable': {'thread_id': binding['thread_id']}})
+    compiled = graph.compile(checkpointer=saver)
+    try:
+        return await compiled.ainvoke({'request_id': str(request_id)}, {'configurable': {'thread_id': binding['thread_id']}})
+    except AccessError as error:
+        if generate is not None or error.code not in ('stale_context', 'stale_source'):
+            raise
+        # Preparation already committed its immutable inputs. OCR closes saver
+        # writes but must not cancel this one current native generation. Nothing
+        # is retried or resumed, and no stale state is written to persistence.
+        from app.generation import Coordinator
+        async with Coordinator(pool, execution_epoch, None, None).guard(request_id) as (connection, _):
+            flags = await sources.source_flags(connection, request_id)
+            if any(flag != 'corrected' for flag in flags.values()):
+                raise
+        return {'request_id':str(request_id), **prepared}

@@ -195,6 +195,42 @@ async def read(connection, token, tab_id, proof, epoch, cursor=None):
         )).fetchone()
 
 
+async def delivery_tab(connection, token, tab_id, proof, epoch):
+    actor = await principal(connection, token)
+    tab = await lock_tab(connection, actor, tab_id, proof)
+    if tab['connection_epoch'] != epoch:
+        raise AccessError('stale_connection', 409)
+    if (not tab['connected'] or now() >= tab['ack_until']
+        or (tab['deadline'] is not None and now() >= tab['deadline'])):
+        raise AccessError('tab_disconnected', 409)
+    return tab
+
+
+async def delivery_event(connection, actor, prepared):
+    """Refresh committed delivery inside the transport barrier; cursor stays stable."""
+    if prepared['kind'] == 'heartbeat':
+        return prepared
+    if prepared['kind'] == 'snapshot':
+        conversations = await (await connection.execute('SELECT id FROM conversations WHERE owner_id=%s ORDER BY id', (actor['id'],))).fetchall()
+        watermark = (await (await connection.execute('''SELECT coalesce(max(e.id),0) AS id FROM events e
+            JOIN conversations c ON c.id=e.conversation_id WHERE c.owner_id=%s''',(actor['id'],))).fetchone())['id']
+        return {'id':watermark, 'kind':'snapshot', 'payload':{'conversations':await answers.histories(connection,[row['id'] for row in conversations])}}
+    value = await (await connection.execute('''SELECT e.* FROM events e JOIN conversations c ON c.id=e.conversation_id
+        WHERE e.id=%s AND c.owner_id=%s''',(prepared['id'],actor['id']))).fetchone()
+    if not value:
+        raise AccessError('not_found',404)
+    request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR SHARE',(value['request_id'],))).fetchone()
+    from app.sources import source_flags
+    flags = await source_flags(connection, request['id'])
+    # Old output/fragments are no longer grants to publish after a stop/delete.
+    # The preserved history is returned separately with its current labels.
+    if value['kind'] in ('output','fragments') and request['state'] in ('interrupted','failed'):
+        return {**value, 'kind':'invalidated', 'payload':{'version':request['version'],
+            'state':request['state'], 'reason':request['reason'], 'source_flags':flags, 'excluded':True}}
+    return {**value, 'payload':{**value['payload'], 'source_flags':flags,
+        'excluded':bool(flags) or request['state'] in ('interrupted','failed')}}
+
+
 async def deadlines(pool):
     while True:
         async with pool.connection() as connection:

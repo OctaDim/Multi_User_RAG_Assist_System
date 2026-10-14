@@ -1,0 +1,343 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+backend/tests/browser/test_invalidation.py FFF
+
+=================================== FAILURES ===================================
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../native-release'), PosixPath('/tmp/u7-worker-real-browser-3/test_real_ocr_mutation_preserv0/generation.log'), 'before')
+environment = {'admin': {'id': UUID('3cb1ee86-4180-4771-a0e1-e7add5eaab53'), 'session_id': UUID('adf8dcd0-5424-4eca-9d46-7f6445eafe5...ersation': UUID('1137394b-ce98-4c80-938c-10ec8337a8a5'), 'document': UUID('d4d2b9fe-b03a-4894-bbe8-2db4491ae4a8'), ...}
+mutation = 'delete'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+            register(page,mailbox,frontend,email)
+            page.on('console',lambda message:print('U7 browser console:',message.text,flush=True))
+            page.on('requestfailed',lambda request:print('U7 failed HTTP:',request.method,request.url,request.failure,flush=True))
+            try:login(page,email)
+            except Exception:
+                print('U7 login status:',page.locator('#status').inner_text(),flush=True)
+                raise
+            page.locator('#document-upload input').set_input_files({'name':'scanned-budget.pdf','mimeType':'application/pdf','buffer':scanned_budget()})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            item=ready(page,'scanned-budget.pdf',timeout=45)
+            item.get_by_role('button',name='Открыть документ',exact=True).click()
+            original=page.locator('#document-correction textarea').input_value()
+            assert '100' in original,'Actual OCR must read the source before this proof'
+            page.get_by_role('checkbox',name='scanned-budget.pdf',exact=True).check()
+            page.locator('#question').fill('What is the annual budget? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=30000)
+            until=time.monotonic()+30
+            while not marker.exists() and time.monotonic()<until:page.wait_for_timeout(50)
+            assert marker.exists(),'Real native context did not reach the controlled computation boundary'
+            if mode=='after':
+                expect(page.locator('#history .answer-text')).not_to_have_text('')
+            if mutation=='delete':
+                item.get_by_role('button',name='Удалить документ',exact=True).click()
+                expect(page.locator('#history')).to_contain_text('Источник удалён',timeout=15000)
+                expect(page.locator('#history')).to_contain_text('Прерван',timeout=15000)
+            else:
+                page.locator('#document-correction textarea').fill(original.replace('100','10'))
+                page.get_by_role('button',name='Сохранить исправления',exact=True).click()
+                ready(page,'scanned-budget.pdf',timeout=45)
+                expect(page.locator('#history')).to_contain_text('OCR исправлен',timeout=15000)
+            release.touch()
+            if mutation=='correction':
+                expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
+            page.locator('#history .answer-passport summary').click()
+            expect(page.locator('#history .answer-passport')).to_contain_text('100')
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at LIMIT 1''',(email,)).fetchone()
+                assert row['state']==('completed' if mutation=='correction' else 'interrupted')
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(row['id'],)).fetchall()
+                if messages:
+                    assert messages[0]['excluded'] and list(messages[0]['source_flags'].values())==['corrected' if mutation=='correction' else 'deleted']
+                else:assert mutation=='delete' and mode=='before'
+                if mode=='before':assert not messages and not row['answer_text']
+                else:assert messages and row['answer_text']
+                old_request=row['id']
+            if mutation=='delete':
+                page.locator('#document-upload input').set_input_files({'name':'current-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 10 euros.'})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'current-budget.txt')
+                page.get_by_role('checkbox',name='current-budget.txt',exact=True).check()
+            page.locator('#question').fill('What is the annual budget now? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history article').last).to_contain_text('Завершён',timeout=30000)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at DESC LIMIT 1''',(email,)).fetchone()
+                assert str(old_request) not in row['passport']['history_requests']
+                assert all('100' not in value['text'] for value in row['passport']['passed'])
+                binding=connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s',(row['id'],)).fetchone()
+            async def checkpoint():
+                from psycopg import AsyncConnection
+                from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+                async with await AsyncConnection.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    value=await AsyncPostgresSaver(connection).aget_tuple({'configurable':{'thread_id':binding['thread_id']}})
+                    assert value and str(old_request) not in repr(value.checkpoint)
+                    assert '100' not in value.checkpoint['channel_values']['prompt']
+            import asyncio
+>           asyncio.run(checkpoint())
+
+backend/tests/browser/test_invalidation.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+main = <coroutine object test_real_ocr_mutation_preserves_original_and_excludes_future_context.<locals>.checkpoint at 0x7f5368537de0>
+
+    def run(main, *, debug=None, loop_factory=None):
+        """Execute the coroutine and return the result.
+    
+        This function runs the passed coroutine, taking care of
+        managing the asyncio event loop, finalizing asynchronous
+        generators and closing the default executor.
+    
+        This function cannot be called when another asyncio event loop is
+        running in the same thread.
+    
+        If debug is True, the event loop will be run in debug mode.
+        If loop_factory is passed, it is used for new event loop creation.
+    
+        This function always creates a new event loop and closes it at the end.
+        It should be used as a main entry point for asyncio programs, and should
+        ideally only be called once.
+    
+        The executor is given a timeout duration of 5 minutes to shutdown.
+        If the executor hasn't finished within that duration, a warning is
+        emitted and the executor is closed.
+    
+        Example:
+    
+            async def main():
+                await asyncio.sleep(1)
+                print('hello')
+    
+            asyncio.run(main())
+        """
+        if events._get_running_loop() is not None:
+            # fail fast with short traceback
+>           raise RuntimeError(
+                "asyncio.run() cannot be called from a running event loop")
+E           RuntimeError: asyncio.run() cannot be called from a running event loop
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:191: RuntimeError
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-delete] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...1/native-release'), PosixPath('/tmp/u7-worker-real-browser-3/test_real_ocr_mutation_preserv1/generation.log'), 'after')
+environment = {'admin': {'id': UUID('722b5102-372d-4bff-942a-70b4a4fec951'), 'session_id': UUID('3afe6209-e46a-454a-84f1-9fe688f6598...ersation': UUID('e5325f1d-22de-4cb5-bdf4-cb36ec3aa005'), 'document': UUID('65f473c9-b1ab-4615-9fe4-7a310ab33c99'), ...}
+mutation = 'delete'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+            register(page,mailbox,frontend,email)
+            page.on('console',lambda message:print('U7 browser console:',message.text,flush=True))
+            page.on('requestfailed',lambda request:print('U7 failed HTTP:',request.method,request.url,request.failure,flush=True))
+            try:login(page,email)
+            except Exception:
+                print('U7 login status:',page.locator('#status').inner_text(),flush=True)
+                raise
+            page.locator('#document-upload input').set_input_files({'name':'scanned-budget.pdf','mimeType':'application/pdf','buffer':scanned_budget()})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            item=ready(page,'scanned-budget.pdf',timeout=45)
+            item.get_by_role('button',name='Открыть документ',exact=True).click()
+            original=page.locator('#document-correction textarea').input_value()
+            assert '100' in original,'Actual OCR must read the source before this proof'
+            page.get_by_role('checkbox',name='scanned-budget.pdf',exact=True).check()
+            page.locator('#question').fill('What is the annual budget? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=30000)
+            until=time.monotonic()+30
+            while not marker.exists() and time.monotonic()<until:page.wait_for_timeout(50)
+            assert marker.exists(),'Real native context did not reach the controlled computation boundary'
+            if mode=='after':
+                expect(page.locator('#history .answer-text')).not_to_have_text('')
+            if mutation=='delete':
+                item.get_by_role('button',name='Удалить документ',exact=True).click()
+                expect(page.locator('#history')).to_contain_text('Источник удалён',timeout=15000)
+                expect(page.locator('#history')).to_contain_text('Прерван',timeout=15000)
+            else:
+                page.locator('#document-correction textarea').fill(original.replace('100','10'))
+                page.get_by_role('button',name='Сохранить исправления',exact=True).click()
+                ready(page,'scanned-budget.pdf',timeout=45)
+                expect(page.locator('#history')).to_contain_text('OCR исправлен',timeout=15000)
+            release.touch()
+            if mutation=='correction':
+                expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
+            page.locator('#history .answer-passport summary').click()
+            expect(page.locator('#history .answer-passport')).to_contain_text('100')
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at LIMIT 1''',(email,)).fetchone()
+                assert row['state']==('completed' if mutation=='correction' else 'interrupted')
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(row['id'],)).fetchall()
+                if messages:
+                    assert messages[0]['excluded'] and list(messages[0]['source_flags'].values())==['corrected' if mutation=='correction' else 'deleted']
+                else:assert mutation=='delete' and mode=='before'
+                if mode=='before':assert not messages and not row['answer_text']
+                else:assert messages and row['answer_text']
+                old_request=row['id']
+            if mutation=='delete':
+                page.locator('#document-upload input').set_input_files({'name':'current-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 10 euros.'})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'current-budget.txt')
+                page.get_by_role('checkbox',name='current-budget.txt',exact=True).check()
+            page.locator('#question').fill('What is the annual budget now? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history article').last).to_contain_text('Завершён',timeout=30000)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at DESC LIMIT 1''',(email,)).fetchone()
+                assert str(old_request) not in row['passport']['history_requests']
+                assert all('100' not in value['text'] for value in row['passport']['passed'])
+                binding=connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s',(row['id'],)).fetchone()
+            async def checkpoint():
+                from psycopg import AsyncConnection
+                from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+                async with await AsyncConnection.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    value=await AsyncPostgresSaver(connection).aget_tuple({'configurable':{'thread_id':binding['thread_id']}})
+                    assert value and str(old_request) not in repr(value.checkpoint)
+                    assert '100' not in value.checkpoint['channel_values']['prompt']
+            import asyncio
+>           asyncio.run(checkpoint())
+
+backend/tests/browser/test_invalidation.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+main = <coroutine object test_real_ocr_mutation_preserves_original_and_excludes_future_context.<locals>.checkpoint at 0x7f5368167ef0>
+
+    def run(main, *, debug=None, loop_factory=None):
+        """Execute the coroutine and return the result.
+    
+        This function runs the passed coroutine, taking care of
+        managing the asyncio event loop, finalizing asynchronous
+        generators and closing the default executor.
+    
+        This function cannot be called when another asyncio event loop is/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/unraisableexception.py:33: RuntimeWarning: coroutine 'test_real_ocr_mutation_preserves_original_and_excludes_future_context.<locals>.checkpoint' was never awaited
+  gc.collect()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+        running in the same thread.
+    
+        If debug is True, the event loop will be run in debug mode.
+        If loop_factory is passed, it is used for new event loop creation.
+    
+        This function always creates a new event loop and closes it at the end.
+        It should be used as a main entry point for asyncio programs, and should
+        ideally only be called once.
+    
+        The executor is given a timeout duration of 5 minutes to shutdown.
+        If the executor hasn't finished within that duration, a warning is
+        emitted and the executor is closed.
+    
+        Example:
+    
+            async def main():
+                await asyncio.sleep(1)
+                print('hello')
+    
+            asyncio.run(main())
+        """
+        if events._get_running_loop() is not None:
+            # fail fast with short traceback
+>           raise RuntimeError(
+                "asyncio.run() cannot be called from a running event loop")
+E           RuntimeError: asyncio.run() cannot be called from a running event loop
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py:191: RuntimeError
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-correction] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...2/native-release'), PosixPath('/tmp/u7-worker-real-browser-3/test_real_ocr_mutation_preserv2/generation.log'), 'after')
+environment = {'admin': {'id': UUID('d377e0e8-789e-41ce-b0bc-f4aa973db005'), 'session_id': UUID('c8dc09f1-beac-487e-91b5-8ff96e1b7c2...ersation': UUID('7336789a-9bce-4b32-8046-075d641ce710'), 'document': UUID('c9b6eb34-3e80-48fa-b4b8-2618d0bdf4a2'), ...}
+mutation = 'correction'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+            register(page,mailbox,frontend,email)
+            page.on('console',lambda message:print('U7 browser console:',message.text,flush=True))
+            page.on('requestfailed',lambda request:print('U7 failed HTTP:',request.method,request.url,request.failure,flush=True))
+            try:login(page,email)
+            except Exception:
+                print('U7 login status:',page.locator('#status').inner_text(),flush=True)
+                raise
+            page.locator('#document-upload input').set_input_files({'name':'scanned-budget.pdf','mimeType':'application/pdf','buffer':scanned_budget()})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            item=ready(page,'scanned-budget.pdf',timeout=45)
+            item.get_by_role('button',name='Открыть документ',exact=True).click()
+            original=page.locator('#document-correction textarea').input_value()
+            assert '100' in original,'Actual OCR must read the source before this proof'
+            page.get_by_role('checkbox',name='scanned-budget.pdf',exact=True).check()
+            page.locator('#question').fill('What is the annual budget? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=30000)
+            until=time.monotonic()+30
+            while not marker.exists() and time.monotonic()<until:page.wait_for_timeout(50)
+            assert marker.exists(),'Real native context did not reach the controlled computation boundary'
+            if mode=='after':
+                expect(page.locator('#history .answer-text')).not_to_have_text('')
+            if mutation=='delete':
+                item.get_by_role('button',name='Удалить документ',exact=True).click()
+                expect(page.locator('#history')).to_contain_text('Источник удалён',timeout=15000)
+                expect(page.locator('#history')).to_contain_text('Прерван',timeout=15000)
+            else:
+                page.locator('#document-correction textarea').fill(original.replace('100','10'))
+                page.get_by_role('button',name='Сохранить исправления',exact=True).click()
+                ready(page,'scanned-budget.pdf',timeout=45)
+                expect(page.locator('#history')).to_contain_text('OCR исправлен',timeout=15000)
+            release.touch()
+            if mutation=='correction':
+                expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
+            page.locator('#history .answer-passport summary').click()
+            expect(page.locator('#history .answer-passport')).to_contain_text('100')
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at LIMIT 1''',(email,)).fetchone()
+                assert row['state']==('completed' if mutation=='correction' else 'interrupted')
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(row['id'],)).fetchall()
+                if messages:
+                    assert messages[0]['excluded'] and list(messages[0]['source_flags'].values())==['corrected' if mutation=='correction' else 'deleted']
+                else:assert mutation=='delete' and mode=='before'
+                if mode=='before':assert not messages and not row['answer_text']
+                else:assert messages and row['answer_text']
+                old_request=row['id']
+            if mutation=='delete':
+                page.locator('#document-upload input').set_input_files({'name':'current-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 10 euros.'})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'current-budget.txt')
+                page.get_by_role('checkbox',name='current-budget.txt',exact=True).check()
+            page.locator('#question').fill('What is the annual budget now? Cite the source.')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history article').last).to_contain_text('Завершён',timeout=30000)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
+                    WHERE a.email=%s ORDER BY r.created_at DESC LIMIT 1''',(email,)).fetchone()
+                assert str(old_request) not in row['passport']['history_requests']
+>               assert all('100' not in value['text'] for value in row['passport']['passed'])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError
+
+backend/tests/browser/test_invalidation.py:143: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete]
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-delete]
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-correction]
+======================== 3 failed in 197.12s (0:03:17) =========================

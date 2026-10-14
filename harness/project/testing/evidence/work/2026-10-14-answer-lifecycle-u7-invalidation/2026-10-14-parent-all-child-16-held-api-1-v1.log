@@ -1,0 +1,11 @@
+INFO:     Started server process [60525]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:57210 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59251 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "PATCH /api/accounts/52df0423-9516-4e28-a2c3-25838a3ceedf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "POST /api/accounts/logout HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60525]

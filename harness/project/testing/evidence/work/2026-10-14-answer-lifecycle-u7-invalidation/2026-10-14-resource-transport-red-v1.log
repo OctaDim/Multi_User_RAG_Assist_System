@@ -1,0 +1,114 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items / 1 deselected / 6 selected
+
+backend/tests/test_invalidation.py FFFFFF                                [100%]
+
+=================================== FAILURES ===================================
+______ test_role_downgrade_closes_prepared_admin_response[/api/accounts] _______
+
+environment = {'admin': {'id': UUID('d237befa-b612-4221-89c0-1e3125d9bee2'), 'session_id': UUID('d6220a34-5e82-4072-a16f-f0da7de6889...ersation': UUID('d66a2d0a-0fa1-4c76-86cd-fc120e92801d'), 'document': UUID('dbee825c-1cca-4a83-ac84-b69f619ff4a5'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_role_downgrade_closes_pre0')
+route = '/api/accounts'
+
+    @pytest.mark.parametrize('route',['/api/accounts','/api/settings'])
+    def test_role_downgrade_closes_prepared_admin_response(environment,tmp_path,route):
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],route,environment['super_admin']['token'])
+            wait_marker(held)
+            mutation=clients[1].patch('/api/accounts/'+str(environment['super_admin']['id']),
+                json={'role':'user'},headers={'Authorization':'Bearer '+environment['super_admin']['token']})
+            assert mutation.status_code==200
+            release.touch()
+            data=receive_all(peer)
+>           assert b'"max_active"' not in data and str(environment['admin']['id']).encode() not in data
+E           assert (b'"max_active"' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:34:55 GMT\r\nserver: uvicorn\r\ncontent-length: 408\r\ncontent-type: ap...b612-4221-89c0-1e3125d9bee2","email":null,"role":"admin","verified":true,"active":true,"disabled":false,"paid":false}]' and b'd237befa-b612-4221-89c0-1e3125d9bee2' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:34:55 GMT\r\nserver: uvicorn\r\ncontent-length: 408\r\ncontent-type: ap...b612-4221-89c0-1e3125d9bee2","email":null,"role":"admin","verified":true,"active":true,"disabled":false,"paid":false}]')
+E            +  where b'd237befa-b612-4221-89c0-1e3125d9bee2' = <built-in method encode of str object at 0x7885f0943b90>()
+E            +    where <built-in method encode of str object at 0x7885f0943b90> = 'd237befa-b612-4221-89c0-1e3125d9bee2'.encode
+E            +      where 'd237befa-b612-4221-89c0-1e3125d9bee2' = str(UUID('d237befa-b612-4221-89c0-1e3125d9bee2'))
+
+backend/tests/test_invalidation.py:89: AssertionError
+______ test_role_downgrade_closes_prepared_admin_response[/api/settings] _______
+
+environment = {'admin': {'id': UUID('38a7db1a-f6fe-490f-9e25-09ea42fcc5e5'), 'session_id': UUID('822522f0-b7c9-42fc-ba32-96a989d34e2...ersation': UUID('fdace935-1ebe-436f-87d9-7e4751790c4b'), 'document': UUID('8b67aff7-ab9b-47f5-99ce-ec1bed1ef9b6'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_role_downgrade_closes_pre1')
+route = '/api/settings'
+
+    @pytest.mark.parametrize('route',['/api/accounts','/api/settings'])
+    def test_role_downgrade_closes_prepared_admin_response(environment,tmp_path,route):
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],route,environment['super_admin']['token'])
+            wait_marker(held)
+            mutation=clients[1].patch('/api/accounts/'+str(environment['super_admin']['id']),
+                json={'role':'user'},headers={'Authorization':'Bearer '+environment['super_admin']['token']})
+            assert mutation.status_code==200
+            release.touch()
+            data=receive_all(peer)
+>           assert b'"max_active"' not in data and str(environment['admin']['id']).encode() not in data
+E           assert (b'"max_active"' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:34:57 GMT\r\nserver: uvicorn\r\ncontent-length: 303\r\ncontent-type: ap...end":"onnxruntime-cpu","quantization":"INT8"},"revision":0,"applied_revision":0,"mutable":["max_active","step_width"]}')
+
+backend/tests/test_invalidation.py:89: AssertionError
+____ test_deleted_document_closes_prepared_original_png_and_json[original] _____
+
+environment = {'admin': {'id': UUID('7b963945-0eb8-40cc-87e1-48e632df24d6'), 'session_id': UUID('5171ad98-3187-4fe3-aefd-aabb75a2bb9...ersation': UUID('493253df-9724-4d6b-8e68-fa39986751ab'), 'document': UUID('32cbf54a-6dfe-42c0-8129-7fbe2f57c863'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_deleted_document_closes_p0')
+format = 'original'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+>       import pymupdf
+E       ModuleNotFoundError: No module named 'pymupdf'
+
+backend/tests/test_invalidation.py:94: ModuleNotFoundError
+_______ test_deleted_document_closes_prepared_original_png_and_json[png] _______
+
+environment = {'admin': {'id': UUID('b4f24874-5a53-4028-ae23-46bab90511a6'), 'session_id': UUID('bec3360f-6a4f-4273-8c24-41d79089dac...ersation': UUID('7edecc9f-6af8-43d6-920a-89cd49eec482'), 'document': UUID('18e527b0-5563-48c1-8138-6c5af3639cae'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_deleted_document_closes_p1')
+format = 'png'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+>       import pymupdf
+E       ModuleNotFoundError: No module named 'pymupdf'
+
+backend/tests/test_invalidation.py:94: ModuleNotFoundError
+______ test_deleted_document_closes_prepared_original_png_and_json[json] _______
+
+environment = {'admin': {'id': UUID('0f40f4fb-cadf-4d46-9f5b-048fd063e35f'), 'session_id': UUID('5091a006-6b05-4259-a472-862ef750aa0...ersation': UUID('6e021cf5-ce65-43fc-974f-e4f11765ac07'), 'document': UUID('74e818f2-b6a0-477a-9844-642777c3ef7f'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_deleted_document_closes_p2')
+format = 'json'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+>       import pymupdf
+E       ModuleNotFoundError: No module named 'pymupdf'
+
+backend/tests/test_invalidation.py:94: ModuleNotFoundError
+______________ test_account_view_is_freshly_serialized_at_handoff ______________
+
+environment = {'admin': {'id': UUID('478ccd37-4f2a-4dc3-a708-0e4adca6c829'), 'session_id': UUID('f4ffc469-bd93-43a9-a7ac-d288f14c0b3...ersation': UUID('9990720d-a0e8-45d9-9fe5-04845af7a9dc'), 'document': UUID('e122bd35-d598-4e9f-a463-0d1188283d2b'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-transport-red-1/test_account_view_is_freshly_s0')
+
+    def test_account_view_is_freshly_serialized_at_handoff(environment,tmp_path):
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],'/api/accounts/me',environment['user']['token']);wait_marker(held)
+            response=clients[1].patch('/api/accounts/'+str(environment['user']['id']),json={'role':'admin'},
+                headers={'Authorization':'Bearer '+environment['super_admin']['token']})
+            assert response.status_code==200
+            release.touch();data=receive_all(peer)
+>           assert b'"role":"admin"' in data and b'"role":"user"' not in data
+E           assert (b'"role":"admin"' in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:35:00 GMT\r\nserver: uvicorn\r\ncontent-length: 208\r\ncontent-type: ap...ed":true,"active":true,"disabled":false,"paid":false},"conversations":[{"id":"9990720d-a0e8-45d9-9fe5-04845af7a9dc"}]}')
+
+backend/tests/test_invalidation.py:117: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_role_downgrade_closes_prepared_admin_response[/api/accounts]
+FAILED backend/tests/test_invalidation.py::test_role_downgrade_closes_prepared_admin_response[/api/settings]
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[original]
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[png]
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[json]
+FAILED backend/tests/test_invalidation.py::test_account_view_is_freshly_serialized_at_handoff
+======================= 6 failed, 1 deselected in 8.17s ========================

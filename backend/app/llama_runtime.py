@@ -8,6 +8,38 @@ from threading import Event, Lock
 import llama_cpp as native
 
 
+def tokenize_vocab(vocab, text):
+    data = text.encode('utf-8')
+    capacity = len(data) + 16
+    while True:
+        buffer = (native.llama_token * capacity)()
+        size = native.llama_tokenize(vocab, data, len(data), buffer, capacity, True, True)
+        if size >= 0:
+            return list(buffer[:size])
+        capacity = -size
+
+
+class Vocabulary:
+    """Exact pinned tokenizer for admission; no weights or generation contexts."""
+    def __init__(self, model_path):
+        native.llama_backend_init()
+        params = native.llama_model_default_params()
+        params.vocab_only = True
+        params.n_gpu_layers = 0
+        self.model = native.llama_model_load_from_file(os.fsencode(model_path), params)
+        if not self.model:
+            raise RuntimeError('Could not load native vocabulary')
+        self.vocab = native.llama_model_get_vocab(self.model)
+
+    def tokenize(self, text):
+        return tokenize_vocab(self.vocab, text)
+
+    def close(self):
+        native.llama_model_free(self.model)
+        self.model = None
+        # Backend state is process-wide; another runtime can still own it.
+
+
 class LlamaRuntime:
     def __init__(self, model_path, config):
         self.config = config.get("generation", config)
@@ -25,17 +57,10 @@ class LlamaRuntime:
         self.vocab = native.llama_model_get_vocab(self.model)
 
     def tokenize(self, text):
-        data = text.encode("utf-8")
         with self._lock:
             if self._closed:
                 raise RuntimeError("Runtime is closed")
-            capacity = len(data) + 16
-            while True:
-                buffer = (native.llama_token * capacity)()
-                size = native.llama_tokenize(self.vocab, data, len(data), buffer, capacity, True, True)
-                if size >= 0:
-                    return list(buffer[:size])
-                capacity = -size
+            return tokenize_vocab(self.vocab, text)
 
     def allocate(self, request_id, tokens):
         with self._lock:

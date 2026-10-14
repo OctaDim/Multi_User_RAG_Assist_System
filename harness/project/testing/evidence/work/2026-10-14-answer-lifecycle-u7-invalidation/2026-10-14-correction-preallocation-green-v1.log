@@ -1,0 +1,53 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 24 items / 23 deselected / 1 selected
+
+backend/tests/test_invalidation.py F                                     [100%]
+
+=================================== FAILURES ===================================
+_ test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation _
+
+environment = {'admin': {'id': UUID('d5e32ecd-a6c4-470b-a774-cee8bdfe1455'), 'session_id': UUID('07d217b3-fb1d-4871-9aaf-6ec63702215...ersation': UUID('0c24bd80-0964-4dc0-abc8-0d7e81d32390'), 'document': UUID('822fae8f-2b7d-48e1-ab25-42bbb86c5a6d'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_4c2e7c92da8c4fe78ff19a9de22dec9c) at 0x76976b32f110>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x76976b32eae0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76976bb58470>
+
+    async def test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation(environment,connection,rag_pool,monkeypatch):
+        import asyncio
+        from app import sources
+        from app.rag import GuardedSaver
+        from app.generation import Coordinator
+        from conftest import seed_revision
+        from test_source_contract import send
+>       from test_scheduler import TokenRuntime
+
+backend/tests/test_invalidation.py:265: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+backend/tests/test_scheduler.py:10: in <module>
+    from test_rag_context import ContractEmbedder
+backend/.venv/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:186: in exec_module
+    exec(co, module.__dict__)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    import asyncio
+    import os
+    from uuid import uuid4
+    
+    import numpy as np
+    import pytest
+    
+    from app import answers, sources
+    from app.auth import AccessError
+>   from app.rag import E5Embedder, GuardedSaver, build_graph, pack_context, run_graph
+E   ImportError: cannot import name 'build_graph' from 'app.rag' (/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/rag.py)
+
+backend/tests/test_rag_context.py:10: ImportError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation
+======================= 1 failed, 23 deselected in 1.59s =======================

@@ -1,0 +1,104 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items / 4 deselected / 3 selected
+
+backend/tests/test_invalidation.py FFF                                   [100%]
+
+=================================== FAILURES ===================================
+____ test_deleted_document_closes_prepared_original_png_and_json[original] _____
+
+environment = {'admin': {'id': UUID('43693109-7033-4c8a-addc-b6d3f49991d8'), 'session_id': UUID('2c64438b-6c16-4931-9f29-2350861a43b...ersation': UUID('28987844-477a-48b9-80c1-f17ec76f6e92'), 'document': UUID('cc9ddf09-4e1d-43c9-b073-3368307c18cf'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-source-red-2/test_deleted_document_closes_p0')
+format = 'original'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+        from io import BytesIO
+        from PIL import Image,ImageDraw
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            headers={'Authorization':'Bearer '+environment['user']['token']}
+            image=Image.new('RGB',(320,160),'white');ImageDraw.Draw(image).text((20,20),'PRIVATE ORIGINAL 100',fill='black')
+            pdf=BytesIO();image.save(pdf,format='PDF');content=pdf.getvalue()
+            admitted=clients[1].post('/api/documents/uploads',headers=headers,json={'files':[{'name':'private.pdf','size':len(content)}]})
+            identifier=admitted.json()['documents'][0]['id']
+            assert clients[1].put(f'/api/documents/{identifier}/original',headers=headers,content=content).status_code==200
+            route=f'/api/documents/{identifier}/'+('pages/1/original' if format=='png' else 'original')
+            if format=='json':route='/api/documents'
+            peer=paused_get(ports[0],route,environment['user']['token']);wait_marker(held)
+            assert clients[1].delete(f'/api/documents/{identifier}',headers=headers).status_code==200
+            release.touch();data=receive_all(peer)
+            if format=='json':assert identifier.encode() not in data,'Deleted source remained in prepared library JSON'
+>           else:assert (b'\x89PNG' if format=='png' else b'%PDF') not in data,'Deleted original escaped after source fence'
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Deleted original escaped after source fence
+E           assert b'%PDF' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:35:34 GMT\r\nserver: uvicorn\r\ncache-control: no-store\r\ncontent-type...\n0000000087 00000 n \n0000002888 00000 n \ntrailer\n<<\n/Root 4 0 R\n/Size 7\n/Info 6 0 R\n>>\nstartxref\n2970\n%%EOF'
+
+backend/tests/test_invalidation.py:109: AssertionError
+_______ test_deleted_document_closes_prepared_original_png_and_json[png] _______
+
+environment = {'admin': {'id': UUID('080910ed-2d56-4e57-beb0-53374b5babd2'), 'session_id': UUID('de0daa0a-9396-4096-b71e-76fea8284f1...ersation': UUID('b7b0b17a-8cf4-4db1-a8e9-1e1fdb4099ce'), 'document': UUID('1e607100-7d88-40b2-8ef7-ff098d31b0c9'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-source-red-2/test_deleted_document_closes_p1')
+format = 'png'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+        from io import BytesIO
+        from PIL import Image,ImageDraw
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            headers={'Authorization':'Bearer '+environment['user']['token']}
+            image=Image.new('RGB',(320,160),'white');ImageDraw.Draw(image).text((20,20),'PRIVATE ORIGINAL 100',fill='black')
+            pdf=BytesIO();image.save(pdf,format='PDF');content=pdf.getvalue()
+            admitted=clients[1].post('/api/documents/uploads',headers=headers,json={'files':[{'name':'private.pdf','size':len(content)}]})
+            identifier=admitted.json()['documents'][0]['id']
+            assert clients[1].put(f'/api/documents/{identifier}/original',headers=headers,content=content).status_code==200
+            route=f'/api/documents/{identifier}/'+('pages/1/original' if format=='png' else 'original')
+            if format=='json':route='/api/documents'
+            peer=paused_get(ports[0],route,environment['user']['token']);wait_marker(held)
+            assert clients[1].delete(f'/api/documents/{identifier}',headers=headers).status_code==200
+            release.touch();data=receive_all(peer)
+            if format=='json':assert identifier.encode() not in data,'Deleted source remained in prepared library JSON'
+>           else:assert (b'\x89PNG' if format=='png' else b'%PDF') not in data,'Deleted original escaped after source fence'
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Deleted original escaped after source fence
+E           assert b'\x89PNG' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:35:36 GMT\r\nserver: uvicorn\r\ncache-control: no-store\r\ncontent-leng...%\x10\x02\x00\x004%\x10\x02\x00\x004%\x10\x02\x00\x004\xf5_J\xb9\xc4\xee\xac\x0b\xc6\xb9\x00\x00\x00\x00IEND\xaeB`\x82'
+
+backend/tests/test_invalidation.py:109: AssertionError
+______ test_deleted_document_closes_prepared_original_png_and_json[json] _______
+
+environment = {'admin': {'id': UUID('9c24841f-a120-4133-890c-c512ef3558d3'), 'session_id': UUID('385823a0-4ecf-4c29-b9f7-3d105e4ac3f...ersation': UUID('eef9fcae-48da-4000-a1a8-17a14f8378f4'), 'document': UUID('059bcab3-91a3-4a65-92f0-d045262b36bf'), ...}
+tmp_path = PosixPath('/tmp/u7-worker-source-red-2/test_deleted_document_closes_p2')
+format = 'json'
+
+    @pytest.mark.parametrize('format',['original','png','json'])
+    def test_deleted_document_closes_prepared_original_png_and_json(environment,tmp_path,format):
+        from io import BytesIO
+        from PIL import Image,ImageDraw
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            headers={'Authorization':'Bearer '+environment['user']['token']}
+            image=Image.new('RGB',(320,160),'white');ImageDraw.Draw(image).text((20,20),'PRIVATE ORIGINAL 100',fill='black')
+            pdf=BytesIO();image.save(pdf,format='PDF');content=pdf.getvalue()
+            admitted=clients[1].post('/api/documents/uploads',headers=headers,json={'files':[{'name':'private.pdf','size':len(content)}]})
+            identifier=admitted.json()['documents'][0]['id']
+            assert clients[1].put(f'/api/documents/{identifier}/original',headers=headers,content=content).status_code==200
+            route=f'/api/documents/{identifier}/'+('pages/1/original' if format=='png' else 'original')
+            if format=='json':route='/api/documents'
+            peer=paused_get(ports[0],route,environment['user']['token']);wait_marker(held)
+            assert clients[1].delete(f'/api/documents/{identifier}',headers=headers).status_code==200
+            release.touch();data=receive_all(peer)
+>           if format=='json':assert identifier.encode() not in data,'Deleted source remained in prepared library JSON'
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Deleted source remained in prepared library JSON
+E           assert b'a7529386-0a68-4c25-b641-d506202ac16e' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:35:38 GMT\r\nserver: uvicorn\r\ncontent-length: 395\r\ncontent-type: ap...e9d7acb26958cb8199a0ee97f4ccd924d0aa5405cda66fa324d5a","mode":"complete","published_revision":null}],"readonly":false}'
+E            +  where b'a7529386-0a68-4c25-b641-d506202ac16e' = <built-in method encode of str object at 0x7c4a41318670>()
+E            +    where <built-in method encode of str object at 0x7c4a41318670> = 'a7529386-0a68-4c25-b641-d506202ac16e'.encode
+
+backend/tests/test_invalidation.py:108: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[original]
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[png]
+FAILED backend/tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[json]
+======================= 3 failed, 4 deselected in 7.63s ========================

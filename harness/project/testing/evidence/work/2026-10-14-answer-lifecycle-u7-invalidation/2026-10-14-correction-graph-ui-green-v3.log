@@ -1,0 +1,1438 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 43 items / 35 deselected / 8 selected
+
+backend/tests/test_invalidation.py FFFF                                  [ 50%]
+backend/tests/test_rag_context.py FFF                                    [ 87%]
+backend/tests/test_frontend_reducer.py .                                 [100%]
+
+=================================== FAILURES ===================================
+_________ test_correction_marks_request_snapshot_and_notifies_all_tabs _________
+
+environment = {'admin': {'id': UUID('95bbadad-10d6-444a-85d6-688564b38bd3'), 'session_id': UUID('f36c114c-6cfd-4f42-85c5-987faf0bab5...ersation': UUID('bebf4dcc-d743-481e-baa7-ac32f3700ba1'), 'document': UUID('eae2101a-d6a6-41f6-9a2b-e669098eee90'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_d2bec70d0e2743728e6022d13ce28922) at 0x78570eba3e00>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x78570ebd5dc0>
+
+    async def test_correction_marks_request_snapshot_and_notifies_all_tabs(environment,connection,rag_pool):
+        from app import answers,sources,events
+        from conftest import seed_revision
+        from test_source_contract import send
+        from test_rag_context import run,complete
+>       request=await send(connection,environment);await run(rag_pool,request)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78570edeb650>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+____ test_prepared_snapshot_retains_old_quote_with_current_correction_flags ____
+
+environment = {'admin': {'id': UUID('58a89152-3dc7-4bd2-8778-83328c74501a'), 'session_id': UUID('42e3f42c-f810-4f63-9d55-9ac5bd5ee1b...ersation': UUID('a2be90ae-dc64-4e0d-9202-8f67dd9f8d18'), 'document': UUID('d1e00a44-dd71-4824-aa33-7ee06e0dde88'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_a72a2d78cb1a446a961a28f5249830aa) at 0x78570d9c9d00>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-2' at 0x78570d9cb890>
+tmp_path = PosixPath('/tmp/u7-worker-correction-green-3/test_prepared_snapshot_retains0')
+
+    async def test_prepared_snapshot_retains_old_quote_with_current_correction_flags(environment,connection,rag_pool,tmp_path):
+        import asyncio
+        from app import sources
+        from test_source_contract import send
+        from test_rag_context import run,complete
+        from conftest import seed_revision
+>       request=await send(connection,environment);await run(rag_pool,request)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78570d9cbb90>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+_ test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation _
+
+fut = <coroutine object Event.wait at 0x78570d882180>, timeout = 10
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x78570dd9c0e0 [unset]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/locks.py:212: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+environment = {'admin': {'id': UUID('551f0b6c-2d67-4d8b-acc7-bdbcf47e3d23'), 'session_id': UUID('33659f0e-8e40-45d3-8637-6d6b3ae81e8...ersation': UUID('2d23c902-74b4-4ece-9e1e-e912797d1aef'), 'document': UUID('c78c5f7f-dbdc-4e0c-85fb-a00594737e1b'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_fcb53e5da0ca4ae296d50adfb6e6ae02) at 0x78570d888da0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-3' at 0x78570d888710>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x78570d9c93d0>
+
+    async def test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation(environment,connection,rag_pool,monkeypatch):
+        import asyncio
+        from app import sources
+        from app.rag import GuardedSaver
+        from app.generation import Coordinator
+        from conftest import seed_revision
+        from test_source_contract import send
+        from test_scheduler import TokenRuntime
+        from test_rag_context import ContractEmbedder
+        request=await send(connection,environment)
+        prepared,release=asyncio.Event(),asyncio.Event()
+        original=GuardedSaver.aput_writes
+        async def held_write(self,config,writes,task_id,task_path=''):
+            if any(channel=='prompt' for channel,_ in writes):
+                prepared.set();await release.wait()
+            return await original(self,config,writes,task_id,task_path)
+        monkeypatch.setattr(GuardedSaver,'aput_writes',held_write)
+        coordinator=Coordinator(rag_pool,1,TokenRuntime(),ContractEmbedder())
+        task=asyncio.create_task(coordinator.prepare_next())
+        try:
+>           await asyncio.wait_for(prepared.wait(),10)
+
+backend/tests/test_invalidation.py:278: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x78570d683280>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/timeouts.py:115: TimeoutError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+___ test_correction_of_prior_history_after_admission_keeps_current_question ____
+
+environment = {'admin': {'id': UUID('1a090480-70b6-4fe9-9166-7a0e510db495'), 'session_id': UUID('7b25373f-c450-4edf-9ea9-0f3197feb2e...ersation': UUID('ac408c41-677b-4867-bd57-e283a0ede140'), 'document': UUID('eaf3e530-a41b-4145-856f-a594a12d18ec'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_402d29b5fafb4b52aa6b389e699cc915) at 0x78570d9caea0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-4' at 0x78570d9c8d40>
+
+    async def test_correction_of_prior_history_after_admission_keeps_current_question(environment,connection,rag_pool):
+        from app import sources
+        from app.generation import Coordinator
+        from conftest import seed_revision
+        from test_source_contract import send
+        from test_rag_context import run,complete,ContractEmbedder
+        from test_scheduler import TokenRuntime
+>       previous=await send(connection,environment);await run(rag_pool,previous);await complete(connection,previous,'OLD HISTORY 100')
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_invalidation.py:300: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78572938fb90>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+_______ test_actual_async_graph_commits_fragments_before_model_callback ________
+
+environment = {'admin': {'id': UUID('bad4364a-79b4-4c03-8472-d9ed7088d601'), 'session_id': UUID('92d7ed7e-c278-4e13-a3f8-965301ce2e5...ersation': UUID('7b64db50-2082-4e43-9b34-c6154d56d9d2'), 'document': UUID('abbf343e-039f-420e-86f0-62c69d7f63ca'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_06daa2d9205e4ecaa1dff21011c5784b) at 0x78570d9cbaa0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-5' at 0x78570d887f50>
+
+    async def test_actual_async_graph_commits_fragments_before_model_callback(environment, connection, rag_pool):
+        request = await send(connection, environment)
+        calls = []
+    
+        async def generate(state):
+            # This independent connection sees the committed early event before any token.
+            async with rag_pool.connection() as independent:
+                events = await (await independent.execute('SELECT kind FROM events WHERE request_id=%s ORDER BY id', (request['id'],))).fetchall()
+                dependencies = await (await independent.execute('SELECT * FROM request_sources WHERE request_id=%s', (request['id'],))).fetchall()
+            assert [value['kind'] for value in events] == ['accepted', 'fragments']
+            assert dependencies[0]['revision_id'] == environment['revision']
+            calls.append(state['prompt'])
+            return 'The budget is 100 euros.'
+    
+>       state = await run(rag_pool, request, generate=generate)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_rag_context.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78572616eb40>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+____ test_delayed_checkpoint_and_pending_writes_are_denied_after_correction ____
+
+environment = {'admin': {'id': UUID('696147e6-8d6f-4e15-ac3c-7d8930d6e327'), 'session_id': UUID('ca34e782-7b5e-49c7-bb53-00511db2650...ersation': UUID('ac207011-8806-4a3b-a24d-ab85fa3857e3'), 'document': UUID('1ca250ef-aa40-49b4-aeab-f92a4e70408d'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_1b32b8ea5e0746fda77518040d578873) at 0x78570d887380>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-6' at 0x78570d8866c0>
+
+    async def test_delayed_checkpoint_and_pending_writes_are_denied_after_correction(environment, connection, rag_pool):
+        request = await send(connection, environment)
+>       await run(rag_pool, request)
+
+backend/tests/test_rag_context.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78570d886ff0>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+____ test_correction_before_late_complete_marks_original_without_cancelling ____
+
+environment = {'admin': {'id': UUID('f3fbb25e-329c-43ea-ab7e-6c83014d8bde'), 'session_id': UUID('88b5905b-668d-4549-b092-d4114772fda...ersation': UUID('c5f3762a-bfe1-4fdc-be5e-7fd9fb124845'), 'document': UUID('c6aa5152-ca3a-40fb-82b2-395052f66fe6'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_f327372884aa4e11942267315fcdf639) at 0x78570d884b60>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-7' at 0x78570d884c50>
+
+    async def test_correction_before_late_complete_marks_original_without_cancelling(environment, connection, rag_pool):
+        request = await send(connection, environment)
+>       await run(rag_pool, request)
+
+backend/tests/test_rag_context.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/test_rag_context.py:37: in run
+    return await run_graph(pool, request['id'], request['execution_epoch'], embedder or ContractEmbedder(), tokenize, generate=generate, min_similarity=min_similarity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/app/rag.py:224: in run_graph
+    async with saver.guard(preparing=True) as (connection, _):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/contextlib.py:210: in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <app.rag.GuardedSaver object at 0x78570d885dc0>, config = None
+
+    @asynccontextmanager
+    async def guard(self, config=None, *, preparing=False):
+        async with self.pool.connection() as connection, connection.transaction():
+            service = await lock_service(connection)
+            if self.token:
+                actor = await principal(connection, self.token)
+                if actor['id'] != self.binding['owner_id']:
+                    raise AccessError('not_found', 404)
+            origin_actor = await originating_session(connection, self.binding['request_id'])
+            if self.token and actor['id'] != origin_actor['id']:
+                raise AccessError('not_found', 404)
+            actor = origin_actor
+            documents = await (await connection.execute(
+                '''SELECT d.* FROM documents d WHERE d.id IN
+                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
+                   ORDER BY d.id FOR SHARE''',
+                (self.binding['request_id'], self.binding['request_id']),
+            )).fetchall()
+            from app.events import origin
+            await origin(connection, self.binding['request_id'])
+            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
+            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
+            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
+                ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
+                raise AccessError('stale_context', 409)
+            if config and config.get('configurable', {}).get('thread_id') != stored['thread_id']:
+                raise AccessError('invalid_graph_identity', 403)
+            if (request['owner_id'] != actor['id'] or request['conversation_id'] != stored['conversation_id']
+                or conversation['owner_id'] != actor['id']
+                or any(document['owner_id'] != actor['id'] for document in documents)):
+                raise AccessError('not_found', 404)
+            if request['state'] not in UNFINISHED:
+                raise AccessError('terminal_request', 409)
+            if not service['healthy'] or service['epoch'] != stored['execution_epoch'] or request['execution_epoch'] != stored['execution_epoch']:
+                raise AccessError('lost_execution', 409)
+            if (actor['context_epoch'] != stored['account_epoch'] or request['context_epoch'] != stored['context_epoch']
+                or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
+                raise AccessError('stale_context', 409)
+            invalid = await (await connection.execute(
+                '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
+                   ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
+                   WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
+            )).fetchone()
+            if invalid and not preparing:
+                raise AccessError('stale_source', 409)
+>           if preparing and any(document['deleted'] for document in documents if document['id'] in
+                {row['document_id'] for row in await (await connection.execute('SELECT document_id FROM request_sources WHERE request_id=%s',(request['id'],))).fetchall()}):
+E               TypeError: 'async_generator' object is not iterable
+
+backend/app/rag.py:99: TypeError
+----------------------------- Captured stderr call -----------------------------
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_correction_marks_request_snapshot_and_notifies_all_tabs
+FAILED backend/tests/test_invalidation.py::test_prepared_snapshot_retains_old_quote_with_current_correction_flags
+FAILED backend/tests/test_invalidation.py::test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation
+FAILED backend/tests/test_invalidation.py::test_correction_of_prior_history_after_admission_keeps_current_question
+FAILED backend/tests/test_rag_context.py::test_actual_async_graph_commits_fragments_before_model_callback
+FAILED backend/tests/test_rag_context.py::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction
+FAILED backend/tests/test_rag_context.py::test_correction_before_late_complete_marks_original_without_cancelling
+================= 7 failed, 1 passed, 35 deselected in 18.30s ==================

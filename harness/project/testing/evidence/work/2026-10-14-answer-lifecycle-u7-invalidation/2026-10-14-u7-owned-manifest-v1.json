@@ -1,0 +1,920 @@
+{
+  "created_utc": "2026-10-14T11:22:16.824693+00:00",
+  "base": "2f6597e276282f1a394495e5d60bdd1c817d682a",
+  "source_paths": [
+    "backend/app/answers.py",
+    "backend/app/api/tabs.py",
+    "backend/app/auth.py",
+    "backend/app/events.py",
+    "backend/app/generation.py",
+    "backend/app/handoff.py",
+    "backend/app/llama_runtime.py",
+    "backend/app/main.py",
+    "backend/app/rag.py",
+    "backend/app/sources.py",
+    "backend/tests/runtime/test_production_runtime.py",
+    "backend/tests/test_accounts.py",
+    "backend/tests/test_documents.py",
+    "backend/tests/test_frontend_reducer.py",
+    "backend/tests/test_http.py",
+    "backend/tests/test_rag_context.py",
+    "backend/tests/test_service_recovery.py",
+    "backend/tests/browser/test_invalidation.py",
+    "backend/tests/live_http.py",
+    "backend/tests/test_invalidation.py",
+    "frontend/src/conversations.js"
+  ],
+  "owned_paths": [
+    "backend/app/answers.py",
+    "backend/app/api/tabs.py",
+    "backend/app/auth.py",
+    "backend/app/events.py",
+    "backend/app/generation.py",
+    "backend/app/handoff.py",
+    "backend/app/llama_runtime.py",
+    "backend/app/main.py",
+    "backend/app/rag.py",
+    "backend/app/sources.py",
+    "backend/tests/browser/test_invalidation.py",
+    "backend/tests/live_http.py",
+    "backend/tests/runtime/test_production_runtime.py",
+    "backend/tests/test_accounts.py",
+    "backend/tests/test_documents.py",
+    "backend/tests/test_frontend_reducer.py",
+    "backend/tests/test_http.py",
+    "backend/tests/test_invalidation.py",
+    "backend/tests/test_rag_context.py",
+    "backend/tests/test_service_recovery.py",
+    "frontend/src/conversations.js",
+    "harness/project/docs/plans/2026-10-13-answer-lifecycle-transport-notes.md",
+    "harness/project/handoffs/2026-10-14-answer-lifecycle-u7-continuation.md",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-advisory-successor-denied-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-backpressure-correction-green-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-document-worker-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-generation-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-document-worker-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-generation-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-document-worker-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-generation-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-budget-ui-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-graph-ui-green-v3.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-graph-ui-preflight-green-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-green-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-red-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-prior-history-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-delivery-projections-budget-green-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-delivery-projections-budget-green-v3.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-focused-delivery-context-green-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-clock-session-green-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-natural-expiry-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-snapshot-cursor-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-share-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-update-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-login-preflight-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-predecessor-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-recovery-characterization-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-recovery-vocabulary-green-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-successor-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-01-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-02-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-03-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-04-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-05-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-06-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-07-first-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-08-second-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-09-healthy-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-10-healthy-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-11-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-12-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-13-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-14-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-15-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-16-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-17-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-18-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-19-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-20-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-21-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-22-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-23-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-24-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-25-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-26-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-27-unconfirmed-record-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-28-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-29-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-30-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-31-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-32-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-33-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-34-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-35-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-36-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-37-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-38-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-39-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-40-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-41-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-42-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-43-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-44-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-45-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-46-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-47-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-48-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-49-state-recovery-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-50-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-51-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-52-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-53-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-54-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-55-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-56-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-57-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-58-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-59-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-60-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-61-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-62-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-63-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-64-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-65-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-66-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-67-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-68-competing-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-69-first-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-70-second-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-71-unreaped-successor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-72-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-73-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-74-held-api-0-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-75-held-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-76-process-api-1-restarted-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-77-process-api-1-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-78-process-api-2-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-79-process-supervisor-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-80-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-81-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-logs-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-baseline-test-inventory-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-api-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-document-worker-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-generation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-review-and-manual-v1.md",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-physical-successor-denied-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-prepared-json-revoke-green-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-prepared-json-revoke-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-projections-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-backpressure-characterization-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-login-diagnosis-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-green-v3.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-green-v4.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-resource-transport-green-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-resource-transport-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-source-transport-red-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-sse-transport-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-state-recovery-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-terminal-races-characterization-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-transport-context-accounts-green-v5.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-transport-context-accounts-green-v6.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-bounded-packet.md",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-ui-source-status-red-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-ui-stale-status-red-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-unconfirmed-record-v2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-changed-files-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-proof-files-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-run-results-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/README.human.md",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-all-application-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-all-harness-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-deleted-desktop-v1.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-deleted-mobile-v1.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-desktop-v1.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-infrastructure-v1.py",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-mobile-v1.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-result-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-scanned-budget-v1.pdf",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-transcript-v1.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-source-before-all-v1.json",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-owned-manifest-v1.json"
+  ],
+  "hashes": [
+    {
+      "path": "backend/app/answers.py",
+      "sha256": "71bf5dbdf4362bdc4174a8111c6a80ef59ee6ff25535cc8fa1c97ec19dd9acae"
+    },
+    {
+      "path": "backend/app/api/tabs.py",
+      "sha256": "8669eba974eef94378407ead8da672374a9a2ec67f26d46498309facbef3177d"
+    },
+    {
+      "path": "backend/app/auth.py",
+      "sha256": "ed4e335d5464442865ef44c2708de57e426b8b65732818ae7ce83db0d9175a4e"
+    },
+    {
+      "path": "backend/app/events.py",
+      "sha256": "62b9380b4e0e5fc13a3d53d95f5e5f1abc02a8cb3a13beded0f6907653fc843b"
+    },
+    {
+      "path": "backend/app/generation.py",
+      "sha256": "568de411ded9a1c425197c9065e3f82ed988a4e61f3789d71baa2d7760bffc05"
+    },
+    {
+      "path": "backend/app/handoff.py",
+      "sha256": "9e86822be246fae43d3383be68d46f380e793ec7fd204840f6cf30b49fbe141a"
+    },
+    {
+      "path": "backend/app/llama_runtime.py",
+      "sha256": "64397ba4a2ea08d7774c428c279d14a4ac6a513956f888c96b8556a68cf1f811"
+    },
+    {
+      "path": "backend/app/main.py",
+      "sha256": "d6b689f6ea66f62a2b8207424e1cfbb84d2e0340083f5256baab3d2c2843a2fe"
+    },
+    {
+      "path": "backend/app/rag.py",
+      "sha256": "0fa235ff24195c8ee542bca7259dea74fb004d3a6724ee6ba12656571bfd6891"
+    },
+    {
+      "path": "backend/app/sources.py",
+      "sha256": "c9892eefafe201c94cdcabab7ec0947fae63b22a405000d3e81bba36f74b3046"
+    },
+    {
+      "path": "backend/tests/browser/test_invalidation.py",
+      "sha256": "a4c65dac3511924ae98ec1c756e776b598f0201b09e82b6b2aa828d2476eaa4c"
+    },
+    {
+      "path": "backend/tests/live_http.py",
+      "sha256": "645e3db1b399d04bc49c54550f11a68f72a93fb81126b7a25ff873bb209079dd"
+    },
+    {
+      "path": "backend/tests/runtime/test_production_runtime.py",
+      "sha256": "8da05d3a8d812121e0d5690fdca340ce856f5804ead0f7cf13509f393b14c5db"
+    },
+    {
+      "path": "backend/tests/test_accounts.py",
+      "sha256": "0b77bd289bf99d6b137f20d96bbd7e54b40056acb3c203d0b21615aad9333e93"
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "sha256": "f837fd447bb3f944c5189784864ee220e2329a7a3f73ba6a61cdf9baba3cb71a"
+    },
+    {
+      "path": "backend/tests/test_frontend_reducer.py",
+      "sha256": "a148485f11e240e378b0c7c3715744a1bd8a517d88559557ce6a2d26217910db"
+    },
+    {
+      "path": "backend/tests/test_http.py",
+      "sha256": "5b255ffefdc15668f5fc75e96aa2c847ba5eef35d0c70eafd8ae1a7732043ee4"
+    },
+    {
+      "path": "backend/tests/test_invalidation.py",
+      "sha256": "ac32a48eaf3e4a4e612d72af03b8967d6653568fe33ac75c3c87cdf701a62b05"
+    },
+    {
+      "path": "backend/tests/test_rag_context.py",
+      "sha256": "dcf731972d6e685555b10609553f13a591decb2dc26283fc22c1df19b96e2a81"
+    },
+    {
+      "path": "backend/tests/test_service_recovery.py",
+      "sha256": "7e61d6eace67634aa22bc3f181e851c199d7dc9aae152120ce7b3df68ea4571c"
+    },
+    {
+      "path": "frontend/src/conversations.js",
+      "sha256": "4daf4b8394fec9e776f22b929e676f55e99e6153dea9681da59ceabed88e7255"
+    },
+    {
+      "path": "harness/project/docs/plans/2026-10-13-answer-lifecycle-transport-notes.md",
+      "sha256": "551aae690f762f98b809195072723131a79d385e87ac8b6752ac3ce4ae0f6dfe"
+    },
+    {
+      "path": "harness/project/handoffs/2026-10-14-answer-lifecycle-u7-continuation.md",
+      "sha256": "a4bbfd9c867c87441cf798d4ec2ad21ea128d167ac06293d759cc6f0e2408d5d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-advisory-successor-denied-v2.log",
+      "sha256": "ff2db161da47affa8558006664776a88d34d01c59c538b8d41de1fad7f4922c8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-backpressure-correction-green-v2.log",
+      "sha256": "290b1b90e1ac07f421a88a651e40ad02a382b4dd4e2f7203adf3a59a4aad08f1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-document-worker-v4.log",
+      "sha256": "afb3c3e79dd4c2234761a8ad2a4b506dbb70b0d995ac00eb05109c71e7d8d474"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-generation-v4.log",
+      "sha256": "5b8c869c7bbae61483af98b7d2cba32c55e5edf88f9ed2bcfb3d7e1039058246"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-document-worker-v4.log",
+      "sha256": "cc3a9b136ef2b193288242f3471ece44405f32aa5598edb3ec56277523a7755e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-generation-v4.log",
+      "sha256": "c3040fe251bdc968460a87e4b3aa6e3d29b1850a3f689af204f92853811a34fa"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-document-worker-v4.log",
+      "sha256": "4a9f0fe75e95e962e7c2f0341198c445aae031c374a6e83f96564c514163debc"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-generation-v4.log",
+      "sha256": "9f2365ea1ed6f68dc4d60fb2d6aa63225a79ffa37be1915349754733fdbbd245"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-budget-ui-red-v1.log",
+      "sha256": "bd8ef3e1a87227eea3a1c3f4c38c2d7e08bc2fc384ec30ff65010ef7230f9167"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-graph-ui-green-v3.log",
+      "sha256": "a2010651c874661e3f7afcb48f905dbbbf2b6fe43446edb415b064e7e4f546ee"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-graph-ui-preflight-green-v4.log",
+      "sha256": "77323ccfbb17ca03220b4db0be67aa03a6f72905c55483dfe3d8c0afb6c9b4ac"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-green-v1.log",
+      "sha256": "6ee8132308e90c4923934fc1b76c8ddaf59d6e82e4a98a2d29f1141014388425"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-red-v1.log",
+      "sha256": "ecb042d7e1c9a1ee9f0db71719533ad5211914b7745b8435d8d49d06418d92e7"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-preallocation-red-v2.log",
+      "sha256": "707084cea9ce43562a75eda820940e233269e9f2d932c2312db3f91099b17246"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-correction-prior-history-red-v1.log",
+      "sha256": "a1d16708919dcdf3a1757d43c5027f79ca9de22527baedde4be6d519b24123ba"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-delivery-projections-budget-green-v2.log",
+      "sha256": "d55b854b397f0ab1c097f4ce09befa9425113abe4e059de3b6f2b2eb629d4035"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-delivery-projections-budget-green-v3.log",
+      "sha256": "42ff59e6757eea6a8a79b60bf3a6ed6988ee15870d7fd408dc6856ac3972b517"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-focused-delivery-context-green-v4.log",
+      "sha256": "1381dce451b042741e3df4c469004f430fdad52bd24dab6348adba3f0f4ace25"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-clock-session-green-v1.log",
+      "sha256": "f07730ca602102cf392fa734409dd4b9b3f00040d40caf744f13822f13e7f5c0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-natural-expiry-red-v1.log",
+      "sha256": "049ef98df0208f9b7be0cb793e5a1f1ad5229eeb516530972192de025355ea63"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-handoff-snapshot-cursor-red-v1.log",
+      "sha256": "0999a5d58d700870e17f518b8de739f31c279653ea054526b7fe32390c756a66"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-share-v2.log",
+      "sha256": "b03f87136e48aaed898baedbad66503650720a29aee1a6513a8eb0053d284485"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-update-v2.log",
+      "sha256": "b400223858363ef0189a7e1f02b406c26ec8dd80e8456927a7dbbe29880c341c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-login-preflight-red-v1.log",
+      "sha256": "e0c6ec7d3be47d103806a4a2d464aaa2c16d1c30efd13a3cabe73badf92633f9"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-predecessor-v2.log",
+      "sha256": "f34f8d4a708afdc50ecd45b87d0eb85df771ec833db1b0974bdec957c161182d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-recovery-characterization-v1.log",
+      "sha256": "3e6d2680755d351b59df58c9db24e67ea1af271f283b94c6ed00ae341fdfec21"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-recovery-vocabulary-green-v2.log",
+      "sha256": "979adb27956f55aac416519c6638ff84e80777983bc9ccb8499545780f3a5ece"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-successor-v2.log",
+      "sha256": "720279da87d7bb111b566522be503ec6274d496d17f6bfbc6515ccaa149001d1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-01-api-0-v1.log",
+      "sha256": "ad6995bb27c1ef284514853e6aec9aeaee9096e12b40928e849537c6b3912a67"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-02-api-1-v1.log",
+      "sha256": "7961aa062a7c1bc45634d8f1889a0815504aacc21ed4768faf7c70887b49ff03"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-03-held-api-0-v1.log",
+      "sha256": "cbcab6192db64d6014479e64783d8b336a9fd86d6a7f67f2c957c197d7698813"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-04-held-api-1-v1.log",
+      "sha256": "1829300687b9976a912c69e87968c158b60b77efeb10943b4f42088bd5c72d27"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-05-document-worker-v1.log",
+      "sha256": "7074828a0abf9551884df0f9244ab575793ad3f2fdfcc7c69a2bdfeec7715f46"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-06-generation-v1.log",
+      "sha256": "045aeb82f5eec3354b0755f9c94b0a217506e0c3be8a234df84e7dc0d3375277"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-07-first-v1.log",
+      "sha256": "f2501c1cc0ba1f850e332bac7dd9b37adcf019839a7b95c4f778237f83171d07"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-08-second-v1.log",
+      "sha256": "d00451fc61b409cc8cef34117024efc112aa40ffa1cce0e12395a657bb528e50"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-09-healthy-supervisor-v1.log",
+      "sha256": "ce8a4e365d5e6ff603cbac6bd0e04526fb5a683b378e04f782e8395160843b0d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-10-healthy-supervisor-v1.log",
+      "sha256": "2ddfffbeaa795f2d49d4ccda9631ccee7ec214e216a3192aad39e81a765d81ca"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-11-held-api-0-v1.log",
+      "sha256": "387e1c8688740356437b269bf6ed4d8ce353fb63853e61ea00c1d93932999d48"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-12-held-api-1-v1.log",
+      "sha256": "392d3dd11048c6321d357c1e8c251d374dff36d2c932586f6445c20d4a483154"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-13-held-api-0-v1.log",
+      "sha256": "43060ea801118df39093757385fcd83108e0ac223fa955fdd2d7a8e4319ad35b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-14-held-api-1-v1.log",
+      "sha256": "29c94d6d1579e9e66b0d006a854dc5b0a3e7eca8e54fa6db88f974b00030a05d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-15-held-api-0-v1.log",
+      "sha256": "3f6bedea36686ea1fb733e8b0dff15724f546743d8fd8c1b9f145d2edb3cb575"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-16-held-api-1-v1.log",
+      "sha256": "7ac2a0f2486e8ec8128ddbc4bb326b215e5d42af86f19ffcea67d496fa75c192"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-17-document-worker-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-18-generation-v1.log",
+      "sha256": "4122e1ccedeb4ab5891e22cf657fbd0915faff757871566f26058f90ecd40c3d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-19-held-api-0-v1.log",
+      "sha256": "0aa767180a00f0d2a4b357a2de84f689d5a105a6439983c557e83a66fbacffcd"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-20-held-api-1-v1.log",
+      "sha256": "ef6ab46a5632becf5a3d645a3a62d57c0c5e9e2f36ff9b1d6c3ffb4af0c4e423"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-21-held-api-0-v1.log",
+      "sha256": "181fa7d9abc9be3eedc50ce4f19e62a77a92bc100315442e5a0296f975e9c9f6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-22-held-api-1-v1.log",
+      "sha256": "2544ce8962ea77c4ac9272e9d90a1a0020fc28847a0e031266cc40ad0266ab41"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-23-held-api-0-v1.log",
+      "sha256": "11db1671bf5d9fd7bff667648510a6187ed72bb0c0b9d90b266ce41716a97991"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-24-held-api-1-v1.log",
+      "sha256": "b674c6c70dee0bc59000e2d6deea213380892464d7cdfee2d2bcdbbb528a745d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-25-held-api-0-v1.log",
+      "sha256": "c210865bc8389c2df53bfadf39a7509c248462926a6b3bcebf699d42a77aa19c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-26-held-api-1-v1.log",
+      "sha256": "2479455742bd3f0962e74a6c4ff2cf63bde4e829bcf58e978df62e4c7991d577"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-27-unconfirmed-record-v1.log",
+      "sha256": "a67ff8c26d4bef504a5a933c2713b1e4e56c14e5cd9c995c2b98ae949f79040b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-28-held-api-0-v1.log",
+      "sha256": "3bf72aa12dcf04e524a29d802ed2493b0eab0349f2da69ec6515e2a31005f517"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-29-held-api-1-v1.log",
+      "sha256": "138266ba75913a34ccf08e976e1a6c55db2ec75b929eb2f58d54f704a8e9f51c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-30-held-api-0-v1.log",
+      "sha256": "f307df0765c4e479809849883f436a530ecd6f4dea1a627a9cbf1d8cd6332fdc"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-31-held-api-1-v1.log",
+      "sha256": "99539c898575fdae0ac8fe822bd407bd7975ed56688c1b557a16d5a8aede9c24"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-32-document-worker-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-33-generation-v1.log",
+      "sha256": "c51cfcfa1c6fd7ada98451a91b3a54837eb4357ea5bfba332310523d24571ed8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-34-held-api-0-v1.log",
+      "sha256": "b3145514f44d5e4d524ba21e03acb59cf4fdb2f38fde76659378365c3bf4c9c1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-35-held-api-1-v1.log",
+      "sha256": "ffde1c79003eb12d56a0cf4553c0ae06790390404a3f13f43daa978bcc13f75c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-36-held-api-0-v1.log",
+      "sha256": "c9bc02d6de88458c0907363f0810010072c30e3ecee7f03f27234a1000005f47"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-37-held-api-1-v1.log",
+      "sha256": "e38e41c59a7f405fcf85d30c123c070e5202e8abebfbd87b7bbbcff2847b9d21"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-38-held-api-0-v1.log",
+      "sha256": "d6052beda7b4aefbf4a9a47d2f93c793099449840ac9be2bc9a8cb5e7765f639"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-39-held-api-1-v1.log",
+      "sha256": "3644a46ac5c06093f4f9b3f1a43db854ad858460e18f0f2b725ce2547b9e0029"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-40-held-api-0-v1.log",
+      "sha256": "fc484e494841acd979cd1bd495e969ea0b47a36a87322d434c03353f691734d7"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-41-held-api-1-v1.log",
+      "sha256": "c8158ba1c0bfa5eacd2805acf7e9112d4c3380463643867126215ad54f3bc0ec"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-42-held-api-0-v1.log",
+      "sha256": "27b18ff5046abe6747a13695d071dd3d8bb8bff968035a25784d37f6355c9377"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-43-held-api-1-v1.log",
+      "sha256": "fc6c4a42d792f6bf1cb7dc9182304ea55465ea4a392ec0fc3b908be4506091c0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-44-held-api-0-v1.log",
+      "sha256": "c69e73efd7bcd99adc762edb76f839a152892d8e978d4fd4abcd77d733955fb0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-45-held-api-1-v1.log",
+      "sha256": "3477d2cd91f84887b92bde7c50c6096de35eae39379387f32651d330efd32a16"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-46-held-api-0-v1.log",
+      "sha256": "85974f23ff60a4de2e49b2b9ea68aca30b1dc553989bf06a1e1cfac207d4809b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-47-held-api-1-v1.log",
+      "sha256": "204c89f486af5f6b4aa9cea191f0b9c62a1e9107f2aa2ff8b1fad6ae9137d83e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-48-document-worker-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-49-state-recovery-v1.log",
+      "sha256": "5eb9ea1c5230ed1426e2a635a3079e1a18eb388f74aec8521bd4346a02ae8f2c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-50-document-worker-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-51-generation-v1.log",
+      "sha256": "0f925bcc8040fb2f69005ae792c3bcbe419fcb7a610b486072e5587d98170d5e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-52-document-worker-v1.log",
+      "sha256": "bd3943382e8ef75230e34842201ea642b5b6cef86894fb45c9b1579ebaa750ec"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-53-generation-v1.log",
+      "sha256": "5bb139d95ec6d006e357bb1cb5eff60b35453a9c405a6bf5fd84447a54bece93"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-54-document-worker-v1.log",
+      "sha256": "d8686be7a2ea9f6f984c04b6933a382238181b53a39b2bb2c1baf74e3a02b570"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-55-generation-v1.log",
+      "sha256": "00a9a98533aedbb79b55943caad967332aa3197ba5450f260f42d878f72acf8d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-56-document-worker-v1.log",
+      "sha256": "f68299565d28a12667d51a7393e8e6cb05e17a44bad62708bbab5da129a6b829"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-57-generation-v1.log",
+      "sha256": "7b43b2aa5f076a68936629803b1c44420fbb1da9cd1d70ab9d49fb4fd613faa1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-58-held-api-0-v1.log",
+      "sha256": "1b69edc9dba3e3e630d8f8207f09b4f58e7777cc50a3976bf00b211aeffdafa6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-59-held-api-1-v1.log",
+      "sha256": "23bd46b039e3100407906b8e3b790015993215f61b90451bc6083c5ef802ae97"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-60-held-api-0-v1.log",
+      "sha256": "16d36b1f10309ab8f0d573d0eef402c69364c18cf1b913c7a80920fcd73caa0a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-61-held-api-1-v1.log",
+      "sha256": "7d019d45fa496b2c07bb0410b5953f2ebf83a322c53b9251d89ad83975ce7b8e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-62-held-api-0-v1.log",
+      "sha256": "29b0be92ed5508d191fe14784e64e4da3fe6d3f38ec083f2b93d80d40a74bd00"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-63-held-api-1-v1.log",
+      "sha256": "e863c47bcfd3a3120de2729b4417160e31c53f49c5c056e0881742992adea4f5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-64-held-api-0-v1.log",
+      "sha256": "a4eb6f827fd509e8cb765e49770cd86d6add25a6e586487f2da36b6173c4d5bf"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-65-held-api-1-v1.log",
+      "sha256": "aa308cc50cfc50a3324b410a6ca84809d84270e98fe03e6106cdfcf9169e8d26"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-66-held-api-0-v1.log",
+      "sha256": "76774a954e7697f871b1c1392f34827429e7deae1050a71d701819c629743822"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-67-held-api-1-v1.log",
+      "sha256": "e3f85b5f61a4cbc3adebf605bbee9035188012280a506f0e24956433520fdf51"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-68-competing-supervisor-v1.log",
+      "sha256": "bca10d6a1635d29a65e55813460ab40190a4954b4822039fedfae3454589c8e6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-69-first-supervisor-v1.log",
+      "sha256": "cda1bb05de86c5ea46eefa4ea517bda41a604c926a90ff25bd0c9ab608a3379c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-70-second-supervisor-v1.log",
+      "sha256": "f3b9e801a55c0f037118d7daa37a3658022f9ca3d26cf97caea0d283912ae70a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-71-unreaped-successor-v1.log",
+      "sha256": "a0175d90b3de31be90f776451ce46bb9f01d5490d6896648d86f5b03a5888d11"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-72-held-api-0-v1.log",
+      "sha256": "7d7939f5a96b2c37dbbef683195cda36a536f73408f10c761a8c22ae712a0853"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-73-held-api-1-v1.log",
+      "sha256": "bb142ad8d31d6e7c2f2dd8d54de09280caafeea55a56c0813a92681203115214"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-74-held-api-0-v1.log",
+      "sha256": "6d25f365bedb32edec198d65d14f4fe147faa8de660cda296a3ed072454e7f07"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-75-held-api-1-v1.log",
+      "sha256": "caffa9bff5d5a0481e555ea673ea62a44a460af900761ce9340d05bd50498891"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-76-process-api-1-restarted-v1.log",
+      "sha256": "9d8abca72d78103429b30862d3c9066da7de299da75c7cbbd09e75649597031c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-77-process-api-1-v1.log",
+      "sha256": "e93f6f2bdc403b3293f70d4055586f668ffd6f80fbd656cc16bb0757c65e6f74"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-78-process-api-2-v1.log",
+      "sha256": "00644b635e954bf157fb77a927330e94c72d1af943e59e296f9a38b427a42faa"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-79-process-supervisor-v1.log",
+      "sha256": "8f5704a0649e2069ff41aa44836d75f9eec74a08f4baa025e76b5ea61e1c49b2"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-80-document-worker-v1.log",
+      "sha256": "059b45b462351dfdd4608561d9c4cee2283c9afbd820835f975354636256746a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-81-document-worker-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-all-child-logs-v1.json",
+      "sha256": "8e979f1c69d4146e2b08558c062dfe16eaec5dceb43588660f8b284b0446125a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-baseline-test-inventory-v1.json",
+      "sha256": "0161ad7bcc7d3cdc9d1df0d1b41a636f131781be5e2450fdac57004c5365c422"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-api-v1.log",
+      "sha256": "2420f4bbc91cc041b96f7946f10bc106d02743a1e5166569380e96f2b6a1ac70"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-document-worker-v1.log",
+      "sha256": "2e4ae25a9b5041a0af2271d203fa951ee953b85adb42ef7bbd5aa30b3252fc26"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-manual-invalidation-generation-v1.log",
+      "sha256": "0b2d55765e5931bbeb569b6f71494bc0ec0ecfea2911e79758b2125c2a938d24"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-parent-review-and-manual-v1.md",
+      "sha256": "fecf3a0c222b3b6ad3b3afef8d293644f98de08046e919f0dbf355bfc5781d6e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-physical-successor-denied-v2.log",
+      "sha256": "2a6743bb58f7f32b29a6dccb5b2b4a384105b48eaa5659a21c7fe0c6e627b269"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-prepared-json-revoke-green-v1.log",
+      "sha256": "048270b3d9aacfa9a480059dc21547d6890beae337729a6102ffddb4a991f1a6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-prepared-json-revoke-red-v1.log",
+      "sha256": "5e6d460ee10cc008bee5e0e31841f9c5eaf0fe0aabb3701d2e3112a7cbb865df"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-projections-red-v1.log",
+      "sha256": "bcd2a6d73ac531393ea382fc0ac549f1e08a71b7eaaabc10c2ff864596b9249f"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-backpressure-characterization-v1.log",
+      "sha256": "459fb2b96ede148dc5d1e4b95e0c3f932b3366c313fc0d3c083ce54e83344517"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-login-diagnosis-v2.log",
+      "sha256": "56879f5dbf44fb5e7b44402906a88a1f253777a204da89d627b5096e6f6f24ec"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-green-v3.log",
+      "sha256": "a5aef57a9911e5b33838937ed5124784c0f650847bc9aba15cdfcce04f233d6a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-green-v4.log",
+      "sha256": "6a53337b4ec169fe2921222e6c2075d5cab5e711f104f04a97cab8068ee1c090"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-real-browser-ocr-invalidation-v1.log",
+      "sha256": "781edcd77ee26b9f418ae5ab10ddb84b3bfab253dfe0392f7af162d7c0f35dc4"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-resource-transport-green-v1.log",
+      "sha256": "07501597010c78e3a0359aa0ff270b8469b44aed77d2834d6714485ee7fb16d1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-resource-transport-red-v1.log",
+      "sha256": "ad1e49417320264773bbd1ebef89ab934c80533ffc14ab312b8f48d304084261"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-source-transport-red-v2.log",
+      "sha256": "98ccd3da218595b3cf23e3178e823acb39c4fe3a2b9e24ede2db1ec46dc54582"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-sse-transport-red-v1.log",
+      "sha256": "c651cd9cc22c687212976bf097f154eefd8b8cdba310231b94d2f31df2d602e5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-state-recovery-v2.log",
+      "sha256": "f14ed0e139ed0e0c65012f3242cdba3edb975ed61093bdb611a1e6157fc99cc1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-terminal-races-characterization-v1.log",
+      "sha256": "292544f163a56b101d9903119823055d8f9103b7c62bde33da0017ef2feceefe"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-transport-context-accounts-green-v5.log",
+      "sha256": "e1373421ff2144b69b96f9942278091e69f82b05a8de8989795110b86718fd45"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-transport-context-accounts-green-v6.log",
+      "sha256": "cad99e365c1129e61958cf2006308497c3998ae5c116f9782a3e9dbcf5fe6e78"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-bounded-packet.md",
+      "sha256": "10a21b141fd5829e93510896245a95cbfd185457bf82a6d80b4514cb9dfd7af0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md",
+      "sha256": "9cd33fcb04ea83ca9871cd45a3b5db8ef54109896e4af6f5cbe4ec4300192090"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-ui-source-status-red-v2.log",
+      "sha256": "72d17167e460bce313d2fbaf6321763279967372b769751a298e9f5d3d9d7fb9"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-ui-stale-status-red-v1.log",
+      "sha256": "9fe7ab57649905fdcab62f6cabe98b7a69f68c91aa67611d2340cc5a5e4ec3ef"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-unconfirmed-record-v2.log",
+      "sha256": "a67ff8c26d4bef504a5a933c2713b1e4e56c14e5cd9c995c2b98ae949f79040b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-changed-files-v1.json",
+      "sha256": "c50ad4b01f0e76edda780407ee3aef233738d684a079bfb29a236e29269c0428"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-proof-files-v1.json",
+      "sha256": "dc944c1e1ef7964974efd080c5e9b1160c2780e992d16ad774f19d21865e34af"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-worker-run-results-v1.json",
+      "sha256": "b7832d4a2755e374dcc5f704b0712601d86b6cf0d8ae24c88537ec9caba69935"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/README.human.md",
+      "sha256": "8fa457c94aa15c0e56e829dc2e70ced3f43ac9417ae44823853fb2bf7c5e17cc"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-all-application-v1.log",
+      "sha256": "e2e541a31284e885c28913d706546e4bfccb6e1f5316a4a15ced509ad05566d9"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-all-harness-v1.log",
+      "sha256": "4e2d29dc01599356c65426cfba297f8e6f2a62b1b170e6f1eb2e74d2a2b2bf03"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-deleted-desktop-v1.png",
+      "sha256": "580de058b00ac0d7c4a88ecf6a5ab6bf81bd542a24783ec89fab75d22820b090"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-deleted-mobile-v1.png",
+      "sha256": "223132a27a09b5d147141fe9ed9c7c3c3d3460599e09ae0acf5911429e5ef903"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-desktop-v1.png",
+      "sha256": "dfd281041952721d146d5d24f6e60a3b3b9bf6dd9498a06ef99cf5b0ab885e3c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-infrastructure-v1.py",
+      "sha256": "e4653aaf3444a17fabd635bc938386d9ef14983d500d24b4c31f4af949e06a52"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-mobile-v1.png",
+      "sha256": "8560fdb34338a423eb83aab1ff7729ab0a4c2d7090e3c24386cdf20d69799f21"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-result-v1.json",
+      "sha256": "675984316f4abfc9f80d1180b6fe8772c98ecd1f791df904b802effdfc542f6a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-scanned-budget-v1.pdf",
+      "sha256": "eade1d0c787c73fd2feec6a1a45d1d74e01b03d51004168b4d9f098ee156c910"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-manual-invalidation-transcript-v1.log",
+      "sha256": "63ae0835252ebcbd578e6a1f3f3af183f1a11d11b173be7aebfed8a07f739eda"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/parent-source-before-all-v1.json",
+      "sha256": "8f378c3506da1a84fb777f01f2dbd0e9c93592a54c612f099dc9391af20f1d6b"
+    }
+  ],
+  "verification": {
+    "application": {
+      "passed": 201,
+      "seconds": 1003.78,
+      "skip_ignore_deselection": false
+    },
+    "harness": {
+      "passed": 168,
+      "seconds": 25.46,
+      "skip_ignore_deselection": false
+    }
+  },
+  "manifest_self_hash": "not included to avoid circular hash"
+}

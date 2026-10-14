@@ -1,0 +1,162 @@
+[
+  {
+    "file": "2026-10-14-backpressure-correction-green-v2.log",
+    "result": "1 failed, 5 passed, 18 deselected in 62.70s (0:01:02)",
+    "sha256": "290b1b90e1ac07f421a88a651e40ad02a382b4dd4e2f7203adf3a59a4aad08f1"
+  },
+  {
+    "file": "2026-10-14-budget-ui-red-v1.log",
+    "result": "2 failed, 18 deselected in 1.42s",
+    "sha256": "bd8ef3e1a87227eea3a1c3f4c38c2d7e08bc2fc384ec30ff65010ef7230f9167"
+  },
+  {
+    "file": "2026-10-14-correction-graph-ui-green-v3.log",
+    "result": "7 failed, 1 passed, 35 deselected in 18.30s",
+    "sha256": "a2010651c874661e3f7afcb48f905dbbbf2b6fe43446edb415b064e7e4f546ee"
+  },
+  {
+    "file": "2026-10-14-correction-graph-ui-preflight-green-v4.log",
+    "result": "9 passed, 38 deselected in 18.97s",
+    "sha256": "77323ccfbb17ca03220b4db0be67aa03a6f72905c55483dfe3d8c0afb6c9b4ac"
+  },
+  {
+    "file": "2026-10-14-correction-preallocation-green-v1.log",
+    "result": "1 failed, 23 deselected in 1.59s",
+    "sha256": "6ee8132308e90c4923934fc1b76c8ddaf59d6e82e4a98a2d29f1141014388425"
+  },
+  {
+    "file": "2026-10-14-correction-preallocation-red-v1.log",
+    "result": "1 failed, 18 deselected in 12.40s",
+    "sha256": "ecb042d7e1c9a1ee9f0db71719533ad5211914b7745b8435d8d49d06418d92e7"
+  },
+  {
+    "file": "2026-10-14-correction-preallocation-red-v2.log",
+    "result": "1 failed, 23 deselected in 2.65s",
+    "sha256": "707084cea9ce43562a75eda820940e233269e9f2d932c2312db3f91099b17246"
+  },
+  {
+    "file": "2026-10-14-correction-prior-history-red-v1.log",
+    "result": "1 failed, 24 deselected in 3.34s",
+    "sha256": "a1d16708919dcdf3a1757d43c5027f79ca9de22527baedde4be6d519b24123ba"
+  },
+  {
+    "file": "2026-10-14-delivery-projections-budget-green-v2.log",
+    "result": "2 failed, 21 passed, 1 warning in 51.81s",
+    "sha256": "d55b854b397f0ab1c097f4ce09befa9425113abe4e059de3b6f2b2eb629d4035"
+  },
+  {
+    "file": "2026-10-14-delivery-projections-budget-green-v3.log",
+    "result": "23 passed in 42.10s",
+    "sha256": "42ff59e6757eea6a8a79b60bf3a6ed6988ee15870d7fd408dc6856ac3972b517"
+  },
+  {
+    "file": "2026-10-14-focused-delivery-context-green-v4.log",
+    "result": "36 passed in 110.94s (0:01:50)",
+    "sha256": "1381dce451b042741e3df4c469004f430fdad52bd24dab6348adba3f0f4ace25"
+  },
+  {
+    "file": "2026-10-14-handoff-clock-session-green-v1.log",
+    "result": "7 failed, 6 passed, 22 deselected in 18.23s",
+    "sha256": "f07730ca602102cf392fa734409dd4b9b3f00040d40caf744f13822f13e7f5c0"
+  },
+  {
+    "file": "2026-10-14-handoff-natural-expiry-red-v1.log",
+    "result": "1 failed, 34 deselected in 4.90s",
+    "sha256": "049ef98df0208f9b7be0cb793e5a1f1ad5229eeb516530972192de025355ea63"
+  },
+  {
+    "file": "2026-10-14-handoff-snapshot-cursor-red-v1.log",
+    "result": "1 failed, 29 deselected in 7.99s",
+    "sha256": "0999a5d58d700870e17f518b8de739f31c279653ea054526b7fe32390c756a66"
+  },
+  {
+    "file": "2026-10-14-login-preflight-red-v1.log",
+    "result": "1 failed, 3 deselected in 1.74s",
+    "sha256": "e0c6ec7d3be47d103806a4a2d464aaa2c16d1c30efd13a3cabe73badf92633f9"
+  },
+  {
+    "file": "2026-10-14-native-recovery-characterization-v1.log",
+    "result": "5 passed in 39.30s",
+    "sha256": "3e6d2680755d351b59df58c9db24e67ea1af271f283b94c6ed00ae341fdfec21"
+  },
+  {
+    "file": "2026-10-14-native-recovery-vocabulary-green-v2.log",
+    "result": "6 passed, 5 deselected in 41.84s",
+    "sha256": "979adb27956f55aac416519c6638ff84e80777983bc9ccb8499545780f3a5ece"
+  },
+  {
+    "file": "2026-10-14-projections-red-v1.log",
+    "result": "2 failed, 8 deselected in 2.17s",
+    "sha256": "bcd2a6d73ac531393ea382fc0ac549f1e08a71b7eaaabc10c2ff864596b9249f"
+  },
+  {
+    "file": "2026-10-14-real-backpressure-characterization-v1.log",
+    "result": "5 failed, 19 deselected in 102.03s (0:01:42)",
+    "sha256": "459fb2b96ede148dc5d1e4b95e0c3f932b3366c313fc0d3c083ce54e83344517"
+  },
+  {
+    "file": "2026-10-14-real-browser-login-diagnosis-v2.log",
+    "result": "1 failed, 2 deselected in 15.57s",
+    "sha256": "56879f5dbf44fb5e7b44402906a88a1f253777a204da89d627b5096e6f6f24ec"
+  },
+  {
+    "file": "2026-10-14-real-browser-ocr-invalidation-green-v3.log",
+    "result": "3 failed in 197.12s (0:03:17)",
+    "sha256": "a5aef57a9911e5b33838937ed5124784c0f650847bc9aba15cdfcce04f233d6a"
+  },
+  {
+    "file": "2026-10-14-real-browser-ocr-invalidation-green-v4.log",
+    "result": "3 passed in 192.49s (0:03:12)",
+    "sha256": "6a53337b4ec169fe2921222e6c2075d5cab5e711f104f04a97cab8068ee1c090"
+  },
+  {
+    "file": "2026-10-14-real-browser-ocr-invalidation-v1.log",
+    "result": "3 failed in 47.83s",
+    "sha256": "781edcd77ee26b9f418ae5ab10ddb84b3bfab253dfe0392f7af162d7c0f35dc4"
+  },
+  {
+    "file": "2026-10-14-resource-transport-green-v1.log",
+    "result": "7 passed in 15.77s",
+    "sha256": "07501597010c78e3a0359aa0ff270b8469b44aed77d2834d6714485ee7fb16d1"
+  },
+  {
+    "file": "2026-10-14-resource-transport-red-v1.log",
+    "result": "6 failed, 1 deselected in 8.17s",
+    "sha256": "ad1e49417320264773bbd1ebef89ab934c80533ffc14ab312b8f48d304084261"
+  },
+  {
+    "file": "2026-10-14-source-transport-red-v2.log",
+    "result": "3 failed, 4 deselected in 7.63s",
+    "sha256": "98ccd3da218595b3cf23e3178e823acb39c4fe3a2b9e24ede2db1ec46dc54582"
+  },
+  {
+    "file": "2026-10-14-sse-transport-red-v1.log",
+    "result": "6 failed, 11 deselected in 14.72s",
+    "sha256": "c651cd9cc22c687212976bf097f154eefd8b8cdba310231b94d2f31df2d602e5"
+  },
+  {
+    "file": "2026-10-14-terminal-races-characterization-v1.log",
+    "result": "4 passed, 30 deselected in 7.24s",
+    "sha256": "292544f163a56b101d9903119823055d8f9103b7c62bde33da0017ef2feceefe"
+  },
+  {
+    "file": "2026-10-14-transport-context-accounts-green-v5.log",
+    "result": "68 passed, 2 deselected in 176.24s (0:02:56)",
+    "sha256": "e1373421ff2144b69b96f9942278091e69f82b05a8de8989795110b86718fd45"
+  },
+  {
+    "file": "2026-10-14-transport-context-accounts-green-v6.log",
+    "result": "69 passed, 2 deselected in 177.20s (0:02:57)",
+    "sha256": "cad99e365c1129e61958cf2006308497c3998ae5c116f9782a3e9dbcf5fe6e78"
+  },
+  {
+    "file": "2026-10-14-ui-source-status-red-v2.log",
+    "result": "1 failed, 1 deselected in 0.09s",
+    "sha256": "72d17167e460bce313d2fbaf6321763279967372b769751a298e9f5d3d9d7fb9"
+  },
+  {
+    "file": "2026-10-14-ui-stale-status-red-v1.log",
+    "result": "1 failed, 1 deselected in 0.26s",
+    "sha256": "9fe7ab57649905fdcab62f6cabe98b7a69f68c91aa67611d2340cc5a5e4ec3ef"
+  }
+]

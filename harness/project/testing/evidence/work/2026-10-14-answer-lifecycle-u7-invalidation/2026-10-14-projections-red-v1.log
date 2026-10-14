@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items / 8 deselected / 2 selected
+
+backend/tests/test_invalidation.py FF                                    [100%]
+
+=================================== FAILURES ===================================
+______________ test_deduplicated_completed_ack_contains_citations ______________
+
+environment = {'admin': {'id': UUID('b4102bea-26fe-4cb3-a881-7b24534c9e48'), 'session_id': UUID('06d09bec-872f-4a42-99e8-4c5cfb6b693...ersation': UUID('e1d64d7b-d954-45f2-8d5f-f01fe8ffc48c'), 'document': UUID('4ab080f0-9d92-44fc-bdb2-9a69eee657e7'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_208ba91f73e74d78ad390f1d67764aa6) at 0x7bdfdf588dd0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7bdfdf589610>
+
+    async def test_deduplicated_completed_ack_contains_citations(environment,connection,rag_pool):
+        from uuid import uuid4
+        from app import answers
+        from test_rag_context import run,complete
+        key=uuid4()
+        async def send():
+            return await answers.admit(connection,environment['user']['token'],environment['conversation'],key,
+                'What is the annual budget?',[environment['document']],environment['tab'],environment['proof'])
+        request=await send();await run(rag_pool,request);await complete(connection,request,'100 euros [source:1]')
+        snapshot=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+>       assert (await send())['citations']==snapshot['requests'][0]['citations']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'citations'
+
+backend/tests/test_invalidation.py:144: KeyError
+_________ test_correction_marks_request_snapshot_and_notifies_all_tabs _________
+
+environment = {'admin': {'id': UUID('525e9625-fb44-4f98-9ece-21818fcaf843'), 'session_id': UUID('0d899087-13c1-4245-a354-773be821560...ersation': UUID('e5e8d811-4e77-4854-a6d6-a039a123861b'), 'document': UUID('695e2260-a875-4822-931f-be79d9a66bb5'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_ff0afa244c134b2ea57d7f0c1f4067fd) at 0x7bdfdf589460>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-2' at 0x7bdfc5593e60>
+
+    async def test_correction_marks_request_snapshot_and_notifies_all_tabs(environment,connection,rag_pool):
+        from app import answers,sources,events
+        from conftest import seed_revision
+        from test_source_contract import send
+        from test_rag_context import run,complete
+        request=await send(connection,environment);await run(rag_pool,request)
+        await complete(connection,request,'100 euros [source:1]')
+        before=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+        revision,_=await seed_revision(connection,environment['document'],text='The budget is 10 euros.',attach=False)
+        await sources.change_source(connection,environment['user']['token'],environment['document'],revision_id=revision)
+        after=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+        projected=after['requests'][0]
+>       assert projected['source_flags']=={str(environment['document']):'corrected'} and projected['excluded']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_flags'
+
+backend/tests/test_invalidation.py:159: KeyError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_deduplicated_completed_ack_contains_citations
+FAILED backend/tests/test_invalidation.py::test_correction_marks_request_snapshot_and_notifies_all_tabs
+======================= 2 failed, 8 deselected in 2.17s ========================

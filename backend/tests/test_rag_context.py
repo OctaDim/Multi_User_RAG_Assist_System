@@ -7,7 +7,7 @@ import pytest
 
 from app import answers, sources
 from app.auth import AccessError
-from app.rag import E5Embedder, GuardedSaver, build_graph, pack_context, run_graph
+from app.rag import E5Embedder, GuardedSaver, pack_context, run_graph
 from app.sources import validate_citations
 from conftest import seed_revision
 from test_source_contract import send

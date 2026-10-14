@@ -1,0 +1,17 @@
+INFO:     Started server process [60860]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:59678 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60577 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60585 - "GET /api/documents/dfee099f-d514-43fc-b1f9-2c1bd22a59ed/original HTTP/1.1" 200 OK
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_f4cfe025a19f492c81531c10bd5b28f2) at 0x7c0c70481d30>: sending query failed: another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_f4cfe025a19f492c81531c10bd5b28f2) at 0x7c0c70481d30>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7c0c70481d30>
+INFO:     127.0.0.1:60585 - "GET /api/tabs/3da6864e-7fd4-4704-af49-cc909817873b/events HTTP/1.1" 401 Unauthorized
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_f4cfe025a19f492c81531c10bd5b28f2) at 0x7c0c7024cfb0>: Explicit rollback() forbidden within a Transaction context. (Either raise Rollback() or allow an exception to propagate out of the context.)
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_f4cfe025a19f492c81531c10bd5b28f2) at 0x7c0c7024cfb0>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7c0c7024cfb0>
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60860]

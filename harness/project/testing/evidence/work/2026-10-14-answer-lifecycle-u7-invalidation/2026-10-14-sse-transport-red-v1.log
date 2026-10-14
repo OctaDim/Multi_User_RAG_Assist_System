@@ -1,0 +1,307 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 17 items / 11 deselected / 6 selected
+
+backend/tests/test_invalidation.py FFFFFF                                [100%]
+
+=================================== FAILURES ===================================
+____ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-delete] ____
+
+environment = {'admin': {'id': UUID('1790729c-8cdc-4e5b-a01b-ec65f082e1ae'), 'session_id': UUID('b661fa0d-05fc-4a2c-86af-fa9dcfbb71f...ersation': UUID('e249c350-e387-4ec8-9891-8a77b55750d3'), 'document': UUID('4f5e9884-f025-469c-83fe-9e9fba1d5bf0'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_56dd6f266c524b639538bcbc731dbb5a) at 0x7854c6779be0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7854c6779fd0>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r0')
+invalidation = 'delete', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'The annual budget is 100 euros.' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:37 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...eleted", "version": 4, "excluded": true, "source_flags": {"4f5e9884-f025-469c-83fe-9e9fba1d5bf0": "deleted"}}}\n\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+__ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-connection] __
+
+environment = {'admin': {'id': UUID('7036a016-6afe-4562-94cb-9e6dd00798fa'), 'session_id': UUID('7a2b491f-7b22-405f-9a2b-54e6876e652...ersation': UUID('587d1c02-a369-4a1c-968f-1e7f29d1d7ac'), 'document': UUID('c3b2040b-ad6a-4bd1-b28b-9efdc4e080d3'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_f0516dae655d4d4f9aee01d1549952e6) at 0x7854c67797f0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-2' at 0x7854ac4aaf30>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r1')
+invalidation = 'connection', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'The annual budget is 100 euros.' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:40 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...9348126cfdf"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}}\n\n\r\n0\r\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+____ test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-proof] _____
+
+environment = {'admin': {'id': UUID('eb8ccebf-9773-46f8-a8ea-3b4ff49f685c'), 'session_id': UUID('bef3f292-5421-403a-8e9a-73873d92eb2...ersation': UUID('4f9437f1-e989-4bd2-b297-a085156b163b'), 'document': UUID('429463e0-9ab3-4148-9803-c04a025e0aa0'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_5cc57b51743542558bcbab5943aeaf0c) at 0x7854ac4ab740>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-3' at 0x7854abbe86b0>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r2')
+invalidation = 'proof', kind = 'fragments'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'The annual budget is 100 euros.' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:42 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...cf7f079744f"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}}\n\n\r\n0\r\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+_____ test_prepared_sse_and_replay_rechecks_source_and_tab[output-delete] ______
+
+environment = {'admin': {'id': UUID('5d3c6d22-759f-479b-9b3f-3e73c0990029'), 'session_id': UUID('135fad1f-4f21-4f6e-9573-d3e692c3cb9...ersation': UUID('8c894070-7733-4cba-bde2-168f6864ab03'), 'document': UUID('7fb7d183-3771-478f-a2d5-5c942ce994ee'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_03589091b0f84b0eab2017fe4624bf21) at 0x7854c677a900>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-4' at 0x7854c677a9f0>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r3')
+invalidation = 'delete', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'UNDISPATCHED PRIVATE TOKEN' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:44 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...eleted", "version": 5, "excluded": true, "source_flags": {"7fb7d183-3771-478f-a2d5-5c942ce994ee": "deleted"}}}\n\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+___ test_prepared_sse_and_replay_rechecks_source_and_tab[output-connection] ____
+
+environment = {'admin': {'id': UUID('ce61f84f-b82c-49ff-9718-6c1d63207a02'), 'session_id': UUID('b72ac50e-9f89-4309-999e-c5ffc36791c...ersation': UUID('fbfc05c7-cf65-4127-9cb4-b1646a2816ca'), 'document': UUID('41d912b7-8b4f-42f0-83f9-8f62038da23d'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_3c2897bfc6184eda82d948f940e38f83) at 0x7854abbeb260>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-5' at 0x7854abbe8da0>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r4')
+invalidation = 'connection', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'UNDISPATCHED PRIVATE TOKEN' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:47 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...cb4-b1646a2816ca", "kind": "output", "payload": {"text": "UNDISPATCHED PRIVATE TOKEN", "version": 3}}\n\n\r\n0\r\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+______ test_prepared_sse_and_replay_rechecks_source_and_tab[output-proof] ______
+
+environment = {'admin': {'id': UUID('c63d34f3-28fa-403b-a51b-1697d6f7074d'), 'session_id': UUID('f5b1df28-ed13-4cb3-8ec3-a97afdca863...ersation': UUID('6c39a34b-e056-444e-9e11-7cb5128c01f6'), 'document': UUID('390033cf-d1b9-4a97-b136-8f2462e055ea'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_f0a03c539fd7450bae770e5896b8fe1e) at 0x7854aba4dd90>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-6' at 0x7854aba4f260>
+tmp_path = PosixPath('/tmp/u7-worker-sse-red-1/test_prepared_sse_and_replay_r5')
+invalidation = 'proof', kind = 'output'
+
+    @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
+    @pytest.mark.parametrize('kind',['fragments','output'])
+    async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+        import asyncio
+        from app import answers,sources,auth
+        from test_source_contract import send
+        from test_rag_context import run
+        request=await send(connection,environment);await run(rag_pool,request)
+        if kind=='output':
+            async with connection.transaction():
+                await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+                await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+                updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
+                await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        with held_apis(environment,tmp_path) as (ports,clients,held,release):
+            peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
+                f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
+            await asyncio.to_thread(wait_marker,held)
+            if invalidation=='delete':
+                await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            else:
+                async with connection.transaction():
+                    await auth.lock_service(connection)
+                    column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
+                    await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+            release.touch()
+            def bounded_receive():
+                data=b'';peer.settimeout(.6)
+                try:
+                    while chunk:=peer.recv(65536):data+=chunk
+                except socket.timeout:pass
+                finally:peer.close()
+                return data
+            data=await asyncio.to_thread(bounded_receive)
+            forbidden=b'UNDISPATCHED PRIVATE TOKEN' if kind=='output' else b'The annual budget is 100 euros.'
+>           assert forbidden not in data,'Previously read private event escaped its source/tab fence'
+E           AssertionError: Previously read private event escaped its source/tab fence
+E           assert b'UNDISPATCHED PRIVATE TOKEN' not in b'HTTP/1.1 200 OK\r\ndate: Wed, 14 Oct 2026 09:40:49 GMT\r\nserver: uvicorn\r\ncache-control: no-cache\r\nx-accel-buff...e11-7cb5128c01f6", "kind": "output", "payload": {"text": "UNDISPATCHED PRIVATE TOKEN", "version": 3}}\n\n\r\n0\r\n\r\n'
+
+backend/tests/test_invalidation.py:205: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-delete]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-connection]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-proof]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-delete]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-connection]
+FAILED backend/tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-proof]
+====================== 6 failed, 11 deselected in 14.72s =======================

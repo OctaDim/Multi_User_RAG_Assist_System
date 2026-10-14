@@ -1,4 +1,4 @@
-from fastapi.testclient import TestClient
+from live_http import LiveClient as TestClient
 from app.main import app
 
 
@@ -44,3 +44,15 @@ def test_api_lifespan_restart_preserves_overrides_and_applied_revision(environme
         values = restarted.get("/api/settings", headers=headers).json()
         assert values["values"]["max_active"] == 6 and values["revision"] == 1
         assert values["applied_revision"] == 0
+
+
+def test_login_preflight_is_public_and_keeps_exact_cors_origin(environment,monkeypatch):
+    from app.main import create_app
+    monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+    monkeypatch.setenv('RAG_FRONTEND_ORIGIN','http://127.0.0.1:54321')
+    with TestClient(create_app()) as client:
+        response=client.options('/api/accounts/login',headers={'Origin':'http://127.0.0.1:54321',
+            'Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'content-type'})
+        assert response.status_code==200
+        assert response.headers['access-control-allow-origin']=='http://127.0.0.1:54321'
+        assert response.text=='OK'

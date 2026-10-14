@@ -155,3 +155,22 @@ def test_partial_allocation_is_freed_on_sampler_failure(runtime, monkeypatch):
     with pytest.raises(RuntimeError, match="sampler"):
         runtime.allocate("failed-allocation", runtime.tokenize(prompt("OK")))
     assert len(freed) == 1
+
+
+def test_admission_vocabulary_matches_loaded_model_and_preserves_live_context(runtime):
+    from app.llama_runtime import Vocabulary
+    from app.rag import pack_context
+    vocabulary=Vocabulary(os.environ['RAG_MODEL_PATH'])
+    context=runtime.allocate('vocabulary-survivor',runtime.tokenize(prompt('Answer OK.')))
+    try:
+        for question in ('Budget 100 euros?', 'Бюджет 100 евро?', 'Budget 100 Euro?', 'Бюджет 100 євро?'):
+            packed=pack_context(question,[],[],vocabulary.tokenize)
+            assert packed['tokens']==runtime.tokenize(packed['prompt'])
+            assert len(packed['tokens'])+256<=4096
+    finally:
+        vocabulary.close()
+    try:
+        assert context.advance()['phase']=='prefill'
+        assert context.context is not None
+    finally:
+        context.close()

@@ -1,0 +1,58 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items / 2 deselected / 1 selected
+
+backend/tests/browser/test_invalidation.py U7 browser console: Access to fetch at 'http://127.0.0.1:57410/api/accounts/login' from origin 'http://127.0.0.1:57856' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+U7 failed HTTP: POST http://127.0.0.1:57410/api/accounts/login net::ERR_FAILED
+U7 browser console: Failed to load resource: net::ERR_FAILED
+U7 login status: Не удалось выполнить действие.
+F
+
+=================================== FAILURES ===================================
+_ test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...e-release'), PosixPath('/tmp/u7-worker-real-browser-login-2/test_real_ocr_mutation_preserv0/generation.log'), 'before')
+environment = {'admin': {'id': UUID('25cb3597-6ab3-4600-bf9e-a2e228b6b2df'), 'session_id': UUID('19d3ced5-d1af-4ac0-857d-98930ea114e...ersation': UUID('16ae0143-b1bf-445e-992d-50691cbe92e1'), 'document': UUID('ab7d8d57-fbd8-4f0f-92db-3c10616579f2'), ...}
+mutation = 'delete'
+
+    @pytest.mark.parametrize('paused_native_browser,mutation',[
+        ('before','delete'),('after','delete'),('after','correction')],indirect=['paused_native_browser'])
+    def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused_native_browser,environment,mutation):
+        ((browser,mailbox,frontend,api_url),_,_),marker,release,log_path,mode=paused_native_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();email='u7-real-'+mutation+'-'+str(marker.parent.name)+'@owned.test'
+            register(page,mailbox,frontend,email)
+            page.on('console',lambda message:print('U7 browser console:',message.text,flush=True))
+            page.on('requestfailed',lambda request:print('U7 failed HTTP:',request.method,request.url,request.failure,flush=True))
+>           try:login(page,email)
+                ^^^^^^^^^^^^^^^^^
+
+backend/tests/browser/test_invalidation.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:57856/'>
+email = 'u7-real-delete-test_real_ocr_mutation_preserv0@owned.test'
+
+    def login(page, email):
+        form = page.locator('#login')
+        form.locator('[name=email]').fill(email)
+        form.locator('[name=password]').fill(PASSWORD)
+        form.get_by_role('button', name='Войти', exact=True).click()
+>       expect(page.locator('#workspace')).to_be_visible()
+E       AssertionError: Locator expected to be visible
+E       Actual value: False 
+E       Call log:
+E         - LocatorAssertions.to_be_visible with timeout 5000ms
+E         -   - waiting for locator("#workspace")
+E         -     9 × locator resolved to <section hidden="" id="workspace">…</section>
+E         -       - unexpected value "hidden"
+
+backend/tests/browser/test_accounts.py:108: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete]
+======================= 1 failed, 2 deselected in 15.57s =======================

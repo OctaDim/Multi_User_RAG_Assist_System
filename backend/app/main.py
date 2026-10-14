@@ -16,6 +16,7 @@ from app.api import accounts, answers, documents, settings, tabs
 from app.events import deadlines
 from app.auth import AccessError
 from app.db import database_url
+from app.handoff import GuardedH11Protocol, HandoffMiddleware
 
 
 @asynccontextmanager
@@ -50,6 +51,7 @@ def create_app():
                                allow_methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
                                allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof',
                                               'X-Connection-Epoch', 'X-Heartbeat-Challenge', 'Last-Event-ID'])
+    application.add_middleware(HandoffMiddleware)
     for router in (accounts.router, answers.router, documents.router, settings.router, tabs.router):
         application.include_router(router)
     application.add_exception_handler(AccessError, access_error)
@@ -65,4 +67,4 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
-    uvicorn.run("app.main:app", host=args.host, port=args.port)
+    uvicorn.run("app.main:app", host=args.host, port=args.port, http=GuardedH11Protocol, loop='asyncio')

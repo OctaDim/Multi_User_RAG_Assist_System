@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/tmp/u7-worker-native-final-2/test_real_supervisor_reaps_nat0/supervisor-launcher.py", line 8, in <module>
+    generation.main()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 466, in main
+    asyncio.run(start())
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 464, in start
+    await supervisor.run()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 341, in run
+    raise RuntimeError('Generation supervisor already owns this service')
+RuntimeError: Generation supervisor already owns this service

@@ -1,0 +1,90 @@
+{
+  "created": "2026-10-14",
+  "purpose": "U7 application raw subprocess proof copies; originals preserved",
+  "files": [
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv0/generation.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-generation-v4.log",
+      "sha256": "5b8c869c7bbae61483af98b7d2cba32c55e5edf88f9ed2bcfb3d7e1039058246",
+      "bytes": 211522
+    },
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv0/document-worker.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case0-document-worker-v4.log",
+      "sha256": "afb3c3e79dd4c2234761a8ad2a4b506dbb70b0d995ac00eb05109c71e7d8d474",
+      "bytes": 823
+    },
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv1/generation.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-generation-v4.log",
+      "sha256": "c3040fe251bdc968460a87e4b3aa6e3d29b1850a3f689af204f92853811a34fa",
+      "bytes": 211948
+    },
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv1/document-worker.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case1-document-worker-v4.log",
+      "sha256": "cc3a9b136ef2b193288242f3471ece44405f32aa5598edb3ec56277523a7755e",
+      "bytes": 823
+    },
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv2/generation.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-generation-v4.log",
+      "sha256": "9f2365ea1ed6f68dc4d60fb2d6aa63225a79ffa37be1915349754733fdbbd245",
+      "bytes": 217468
+    },
+    {
+      "source": "/tmp/u7-worker-real-browser-4/test_real_ocr_mutation_preserv2/document-worker.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-browser-case2-document-worker-v4.log",
+      "sha256": "4a9f0fe75e95e962e7c2f0341198c445aae031c374a6e83f96564c514163debc",
+      "bytes": 823
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_application_service_lock_0/healthy-supervisor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-share-v2.log",
+      "sha256": "b03f87136e48aaed898baedbad66503650720a29aee1a6513a8eb0053d284485",
+      "bytes": 56490
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_application_service_lock_1/healthy-supervisor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-healthy-update-v2.log",
+      "sha256": "b400223858363ef0189a7e1f02b406c26ec8dd80e8456927a7dbbe29880c341c",
+      "bytes": 56490
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_real_supervisor_reaps_nat0/first-supervisor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-predecessor-v2.log",
+      "sha256": "f34f8d4a708afdc50ecd45b87d0eb85df771ec833db1b0974bdec957c161182d",
+      "bytes": 100970
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_real_supervisor_reaps_nat0/competing-supervisor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-advisory-successor-denied-v2.log",
+      "sha256": "ff2db161da47affa8558006664776a88d34d01c59c538b8d41de1fad7f4922c8",
+      "bytes": 1300
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_real_supervisor_reaps_nat0/unreaped-successor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-physical-successor-denied-v2.log",
+      "sha256": "2a6743bb58f7f32b29a6dccb5b2b4a384105b48eaa5659a21c7fe0c6e627b269",
+      "bytes": 1447
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_real_supervisor_reaps_nat0/second-supervisor.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-native-successor-v2.log",
+      "sha256": "720279da87d7bb111b566522be503ec6274d496d17f6bfbc6515ccaa149001d1",
+      "bytes": 56490
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_live_predecessor_record_b0/unconfirmed-record.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-unconfirmed-record-v2.log",
+      "sha256": "a67ff8c26d4bef504a5a933c2713b1e4e56c14e5cd9c995c2b98ae949f79040b",
+      "bytes": 1564
+    },
+    {
+      "source": "/tmp/u7-worker-native-final-2/test_real_coordinator_recovery0/state-recovery.log",
+      "preserved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-state-recovery-v2.log",
+      "sha256": "f14ed0e139ed0e0c65012f3242cdba3edb975ed61093bdb611a1e6157fc99cc1",
+      "bytes": 56490
+    }
+  ]
+}

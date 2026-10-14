@@ -31,3 +31,26 @@ console.log('Real reducer and draft store preserved newer accepted state against
     result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
         input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
     assert result.returncode==0, result.stdout+result.stderr
+
+
+def test_source_status_event_marks_original_without_replacing_quote():
+    script=r'''import assert from 'node:assert/strict';
+globalThis.document={querySelector:()=>({content:'http://127.0.0.1:8000'})};
+globalThis.sessionStorage={getItem:()=>null,removeItem:()=>{}};
+const {Conversations}=await import('./frontend/src/conversations.js');
+const request={id:'answer',version:3,state:'generating',answer_text:'100 euros [source:1]',citations:[{quote:'100'}]};
+const controller=Object.create(Conversations.prototype);
+controller.current=()=>true;controller.render=()=>{};controller.selected='room';controller.cursor=2;
+controller.histories=new Map([['room',{requests:[request],messages:[]}]]);
+await controller.receive({id:3,kind:'source_status',conversation_id:'room',request_id:'answer',payload:{
+ version:4,state:'generating',source_flags:{document:'corrected'},excluded:true}});
+assert.deepEqual(request.source_flags,{document:'corrected'});
+assert.equal(request.excluded,true);assert.equal(request.state,'generating');
+assert.equal(request.answer_text,'100 euros [source:1]');assert.equal(request.citations[0].quote,'100');
+await controller.receive({id:4,kind:'output',conversation_id:'room',request_id:'answer',payload:{
+ version:3,text:'stale',source_flags:{},excluded:false}});
+assert.deepEqual(request.source_flags,{document:'corrected'});assert.equal(request.excluded,true);
+'''
+    result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
+        input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
+    assert result.returncode==0,result.stdout+result.stderr
