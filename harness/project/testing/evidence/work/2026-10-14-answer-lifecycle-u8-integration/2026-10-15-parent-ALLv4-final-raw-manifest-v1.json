@@ -1,0 +1,583 @@
+[
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/actual-finished-pages.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-actual-finished-pages.jsonl",
+    "bytes": 12615,
+    "sha256": "d34fc0fa3252877ebaafddf58714bf92171b18ad5886dadab1459872920e02b6"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/actual-page-16-failure-report.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-actual-page-16-failure-report.png",
+    "bytes": 124326,
+    "sha256": "ad1a21278bba26e5f61d082cf488393ee0607788df034f1291787f1b7b8d24c0"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-generation.log",
+    "bytes": 1759181,
+    "sha256": "f9e9013a5ba8108f5f300337f820a7400f7e5dfcc63aefc085d78aebdc687c40"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/trace-generation.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-trace-generation.py",
+    "bytes": 817,
+    "sha256": "0068c0280c6252338437ca5d218772dfc6eb6308984ca256ee4c4b16688b0cf7"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-document-worker.log",
+    "bytes": 56607,
+    "sha256": "753970f225d141a3aad70e6835f9296cac31b7c73d7d8fee101977393fe01cd7"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/whole-file-failed-report.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-whole-file-failed-report.png",
+    "bytes": 140229,
+    "sha256": "ff9c2d90812512ec439dde9b9b1c6383c495a0561b2ff5f896beb173e3c7387e"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/actual-twenty-page-original.pdf",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-actual-twenty-page-original.pdf",
+    "bytes": 388728,
+    "sha256": "8acc4a45622b04288e473fd76a787bfa9b39f6aeaa306abe08df4fc5185db93c"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/fault-documents.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-fault-documents.py",
+    "bytes": 846,
+    "sha256": "c016a27c0f3adaea5dc347d1780a7aa97b8fd2a16a6f01f217cf558b47c6db75"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-api-2.log",
+    "bytes": 352,
+    "sha256": "2b8e3ec501cba8e624295bba1c30681d187113e9fd7f03003b0747b041deb6f4"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-api-first.log",
+    "bytes": 319324,
+    "sha256": "28fe28dcf4003864643fd84167d2d70da06f2cd5b8977b3d8ec4f2aedf4efa82"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/originals/cda67268-1ef9-4ed5-8f86-298fee967395.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-originals--cda67268-1ef9-4ed5-8f86-298fee967395.original",
+    "bytes": 388728,
+    "sha256": "8acc4a45622b04288e473fd76a787bfa9b39f6aeaa306abe08df4fc5185db93c"
+  },
+  {
+    "case": "test_actual_twenty_page_failur0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur0/originals/5d78383c-106a-47aa-bacd-c9e715efbb0c.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur0-originals--5d78383c-106a-47aa-bacd-c9e715efbb0c.original",
+    "bytes": 38,
+    "sha256": "7a56f512987affcc83d728bb161559facbe9fde3ad93ae3ac73a9c5028d0c69c"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/actual-finished-pages.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-actual-finished-pages.jsonl",
+    "bytes": 30060,
+    "sha256": "96f0a5e0ecd5db6a57bbbb71f080a87a64124363d036a56b12c94e22a39b6bb8"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/actual-page-16-failure-report.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-actual-page-16-failure-report.png",
+    "bytes": 118078,
+    "sha256": "2fc270d7507c0d85e0f941a387ba59b1ebdf730c09015ad52143a202acc9e146"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-generation.log",
+    "bytes": 1126681,
+    "sha256": "4d24356802f3fe54675f6dc70c9a1152404939af1dbcad208949ef6731f33e99"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/trace-generation.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-trace-generation.py",
+    "bytes": 817,
+    "sha256": "0068c0280c6252338437ca5d218772dfc6eb6308984ca256ee4c4b16688b0cf7"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-document-worker.log",
+    "bytes": 20160,
+    "sha256": "1405d621994c772659665ebd75a2a1173c2d454421ec2e62cfefe7d729282930"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/whole-file-failed-report.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-whole-file-failed-report.png",
+    "bytes": 140229,
+    "sha256": "ff9c2d90812512ec439dde9b9b1c6383c495a0561b2ff5f896beb173e3c7387e"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/actual-twenty-page-original.pdf",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-actual-twenty-page-original.pdf",
+    "bytes": 388728,
+    "sha256": "261fb0d9be6f342086375edd3e25b555c51c5bcff79b2be9432a74c3c815a739"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/fault-documents.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-fault-documents.py",
+    "bytes": 846,
+    "sha256": "69b3bec6a5415bbce43ff9c24091509860453744557f28b484f7904ca143c58b"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-api-2.log",
+    "bytes": 352,
+    "sha256": "34f7d7110ba91c3db8bc69b3158bf7aede9aa515a47ab373e353521a536e94e1"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-api-first.log",
+    "bytes": 196334,
+    "sha256": "57c411c1936122b4855f3a2ee59e3ed7474f8d6b426588dc6e9da5c4920ff351"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/originals/4dfe3c9f-cf5d-44f7-96ba-c0653aa17798.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-originals--4dfe3c9f-cf5d-44f7-96ba-c0653aa17798.original",
+    "bytes": 38,
+    "sha256": "7a56f512987affcc83d728bb161559facbe9fde3ad93ae3ac73a9c5028d0c69c"
+  },
+  {
+    "case": "test_actual_twenty_page_failur1",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_twenty_page_failur1/originals/2310d66a-dd77-40cd-a2ca-3441ee2c2d88.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_twenty_page_failur1-originals--2310d66a-dd77-40cd-a2ca-3441ee2c2d88.original",
+    "bytes": 388728,
+    "sha256": "261fb0d9be6f342086375edd3e25b555c51c5bcff79b2be9432a74c3c815a739"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/actual-pre-recognition-masks.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-actual-pre-recognition-masks.jsonl",
+    "bytes": 3976,
+    "sha256": "d62b7ab827cd09ac7dcd4faf742a8a305836f3898c600d35a3e2332cf0768942"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/actual-printed-four-language-results.json",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-actual-printed-four-language-results.json",
+    "bytes": 36494,
+    "sha256": "8d205b17ffa0cfd8a1e8eb02450234562db0f5b77c6e27ce4e7e62889f012327"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-document-worker.log",
+    "bytes": 7042,
+    "sha256": "3dd86284e39610061bc292656ea3d901ea2064f179e47d48ae146ae802db198d"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/actual-printed-texts.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-actual-printed-texts.jsonl",
+    "bytes": 6992,
+    "sha256": "311e17db8b462199954aa6bec326873248e59ad4cc30974222be216dfbf457d3"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/observe-masks.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-observe-masks.py",
+    "bytes": 2451,
+    "sha256": "fc9723beea9a15a0c6c26a552626483c2be2a731b93a6180094ced31d66c3eaa"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-api-first.log",
+    "bytes": 63399,
+    "sha256": "460b822e9751038b0fdb2a7c008e3131294b3dd944c4abb85f66114a6f1c66b1"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/originals/df544690-a457-4381-8c77-4b3acb4126df.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-originals--df544690-a457-4381-8c77-4b3acb4126df.original",
+    "bytes": 209316,
+    "sha256": "9584f556bbe78569bc771010866b5ad7b7ac8046427bfa3ef713811eea9f09a6"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/originals/8ec8f975-44ea-4945-9c88-c660081e664a.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-originals--8ec8f975-44ea-4945-9c88-c660081e664a.original",
+    "bytes": 13722,
+    "sha256": "e3ecf263febb7a02d91dd1eaea64660341d7071e64d99e859aff7ca4699a3b3b"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/originals/235c8429-1a1a-4cde-a037-6e0df1be3ece.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-originals--235c8429-1a1a-4cde-a037-6e0df1be3ece.original",
+    "bytes": 61008,
+    "sha256": "1a5d566352a67124d928725b19fa74ee04dcee3f30b1b11674d4788cb176321f"
+  },
+  {
+    "case": "test_actual_four_language_prin0",
+    "source": "/tmp/rag-u8-all-application-v4/test_actual_four_language_prin0/originals/4fae2b87-89a1-4925-8fbb-99137c7e02e3.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_actual_four_language_prin0-originals--4fae2b87-89a1-4925-8fbb-99137c7e02e3.original",
+    "bytes": 47843,
+    "sha256": "050dde0538c44cfba08611e2cf754f8a8b8c665c13ae2f25c5468105f6d70503"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/actual-pre-recognition-masks.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-actual-pre-recognition-masks.jsonl",
+    "bytes": 15563,
+    "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/genuine-handwriting-results.json",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-genuine-handwriting-results.json",
+    "bytes": 18834,
+    "sha256": "fd4bb35d09fdf38488754986e32889f0141783b13497bb39f97a560dc6d0a1b6"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-document-worker.log",
+    "bytes": 15259,
+    "sha256": "9300ca60b89f39c9d93d22bc8c3fe2e64b2053bccc965498562b760554bf4ee8"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/actual-printed-texts.jsonl",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-actual-printed-texts.jsonl",
+    "bytes": 12289,
+    "sha256": "a8afb522b9609dce054b30016201764330ab36b06a78dcfe1a5abcd332356deb"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/observe-masks.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-observe-masks.py",
+    "bytes": 2451,
+    "sha256": "d897e65599f9f81c65772cb791fd92f65b0c832a54e2995ce410be3a5af39082"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-api-first.log",
+    "bytes": 85630,
+    "sha256": "7c3051570073be854d3e44c8081707d7e9d4160b2fc7fbda2d787b02bc4caaa5"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/f256a3b6-abca-46d2-8d09-68388b3178d9.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--f256a3b6-abca-46d2-8d09-68388b3178d9.original",
+    "bytes": 16479,
+    "sha256": "822dfeba0ca6c08badd6b0fa7c1099b91ed42a7844444cfd71ed3b530edc9d1a"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/fa251074-7cb3-4f27-aeec-928c07b131d8.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--fa251074-7cb3-4f27-aeec-928c07b131d8.original",
+    "bytes": 15842,
+    "sha256": "7f296f7ace9afd7fdd6d676534b21f5691999f839f63c55ced8d0a4a0509cfad"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/c974e646-2d1d-4913-89b8-ab68bbe1107a.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--c974e646-2d1d-4913-89b8-ab68bbe1107a.original",
+    "bytes": 592208,
+    "sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/ead4fc9c-09ea-4d18-8bd0-37f228215483.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--ead4fc9c-09ea-4d18-8bd0-37f228215483.original",
+    "bytes": 14052,
+    "sha256": "a1b156166d90c214887639492c1182fed9921c8c3df787f5d76e1e0c38197099"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/c3620293-cddd-43f8-9630-e66fa5284ebc.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--c3620293-cddd-43f8-9630-e66fa5284ebc.original",
+    "bytes": 592208,
+    "sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/3adf920c-befb-490f-b169-ddba282e4ec3.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--3adf920c-befb-490f-b169-ddba282e4ec3.original",
+    "bytes": 16479,
+    "sha256": "822dfeba0ca6c08badd6b0fa7c1099b91ed42a7844444cfd71ed3b530edc9d1a"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/8c5afb52-1992-4b3c-a97d-10247792e854.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--8c5afb52-1992-4b3c-a97d-10247792e854.original",
+    "bytes": 14052,
+    "sha256": "a1b156166d90c214887639492c1182fed9921c8c3df787f5d76e1e0c38197099"
+  },
+  {
+    "case": "test_genuine_four_language_han0",
+    "source": "/tmp/rag-u8-all-application-v4/test_genuine_four_language_han0/originals/7965733a-0721-4dce-af94-4a6ec768c9f5.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_genuine_four_language_han0-originals--7965733a-0721-4dce-af94-4a6ec768c9f5.original",
+    "bytes": 15842,
+    "sha256": "7f296f7ace9afd7fdd6d676534b21f5691999f839f63c55ced8d0a4a0509cfad"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-generation.log",
+    "bytes": 767973,
+    "sha256": "989858ed568a7f16aa9435e11aeb40742720b82cac6439c091c7ccc582887082"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/trace-generation.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-trace-generation.py",
+    "bytes": 817,
+    "sha256": "0068c0280c6252338437ca5d218772dfc6eb6308984ca256ee4c4b16688b0cf7"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-document-worker.log",
+    "bytes": 3781,
+    "sha256": "9ff4865b0c70dd2bd94a9edce7a04d51126abbedc88cbef5b11b815379c0718f"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-api-2.log",
+    "bytes": 73280,
+    "sha256": "5e9c79ef0e2a0da2ed5db709ba6bb692969f9cb2d81e62e3bb21e8c434764c3d"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-api-first.log",
+    "bytes": 185795,
+    "sha256": "0f45d1d2f9bc96bf5c64c871e3dac5d27ee77ca8f20b42b235311d1cf43aad39"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/54e9ea3c-2940-4126-82cb-2ad5430adf93.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--54e9ea3c-2940-4126-82cb-2ad5430adf93.original",
+    "bytes": 5220,
+    "sha256": "7468664e9b0ba9ae4a138f7afd142a4f2647ba92cd4edbba962c4d1630104bcd"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/b1736809-0a3c-4605-ad43-d8adf2089434.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--b1736809-0a3c-4605-ad43-d8adf2089434.original",
+    "bytes": 5220,
+    "sha256": "7c82ac55680513746b408a89a59be0054e52c8ab764c090a98eeb0fded0cdb8b"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/9b7910b8-92d0-40f5-8a3c-7d1435ff06b9.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--9b7910b8-92d0-40f5-8a3c-7d1435ff06b9.original",
+    "bytes": 5220,
+    "sha256": "fe2698b47584bffc0536aad49915b578b08e9e8ea398c915c2a0fad73b55750b"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/04ffae0c-4abf-4455-a396-7f9831e166e4.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--04ffae0c-4abf-4455-a396-7f9831e166e4.original",
+    "bytes": 5220,
+    "sha256": "1c93f1c2a289a70f581be1019557b06e839118460c8f4d2938f9ae111f5ac6f8"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/66e48bc9-bba9-4521-881a-ae1c7bcff6cf.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--66e48bc9-bba9-4521-881a-ae1c7bcff6cf.original",
+    "bytes": 5220,
+    "sha256": "04914378e1ca6bb25d8b588ba427b7c589d26317a94e7eb6cf52e15af53ac5ff"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/9963b974-2e07-4984-9d0b-5bab38e1d8b7.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--9963b974-2e07-4984-9d0b-5bab38e1d8b7.original",
+    "bytes": 209316,
+    "sha256": "9584f556bbe78569bc771010866b5ad7b7ac8046427bfa3ef713811eea9f09a6"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/71f244b8-ca03-4902-b6a8-4031dd50fc0e.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--71f244b8-ca03-4902-b6a8-4031dd50fc0e.original",
+    "bytes": 5220,
+    "sha256": "712d0293475df343e3d468ef25ac9bf4b1fd763b1c26a9bc252cf00b8974bfdd"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/7308214c-d76d-447a-9421-76b09bdcf371.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--7308214c-d76d-447a-9421-76b09bdcf371.original",
+    "bytes": 5220,
+    "sha256": "8aa1edf59a6cfdfafeb0f915daf363ecf05e7d58fcdb798e5fb01f9b2402724f"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/47825851-9f93-4899-95f7-b9ee631eee3d.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--47825851-9f93-4899-95f7-b9ee631eee3d.original",
+    "bytes": 5220,
+    "sha256": "eb08aae7d7c7bb0977e8f09e1855f9e904e2de9b437c8dea35088d11907a6dca"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/18f48fce-7d72-4c04-a21a-ba57e546d206.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--18f48fce-7d72-4c04-a21a-ba57e546d206.original",
+    "bytes": 5220,
+    "sha256": "c368375f789de7aa793dd7bf153ef6cfac89e810ddf9d5c8c6e1f7afac77e362"
+  },
+  {
+    "case": "test_thirty_real_accounts_ten_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_thirty_real_accounts_ten_0/originals/895c0ff3-52f2-4af1-8058-9ade428e7f23.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_thirty_real_accounts_ten_0-originals--895c0ff3-52f2-4af1-8058-9ade428e7f23.original",
+    "bytes": 5220,
+    "sha256": "7255f4bff6926c3b51b674c831df778890b04b61622ff6723537ba9d95ad033f"
+  },
+  {
+    "case": "test_two_http_processes_share_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_two_http_processes_share_0/process-api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_two_http_processes_share_0-process-api-2.log",
+    "bytes": 82406,
+    "sha256": "54bb2ff22318fc9d5b5a11a8bf3970db2de914ee308165bf7aa4a7203838e5a2"
+  },
+  {
+    "case": "test_two_http_processes_share_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_two_http_processes_share_0/process-api-1-restarted.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_two_http_processes_share_0-process-api-1-restarted.log",
+    "bytes": 1370,
+    "sha256": "c5d68ea98671e8e69c4bd8e923d7ddac7732f50e8370a0c5711c9c2830e82945"
+  },
+  {
+    "case": "test_two_http_processes_share_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_two_http_processes_share_0/process-api-1.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_two_http_processes_share_0-process-api-1.log",
+    "bytes": 87530,
+    "sha256": "eee12ff849804a635f7b9604556e0baf10b89cc4dac37d8bb16742a32ab953a3"
+  },
+  {
+    "case": "test_two_http_processes_share_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_two_http_processes_share_0/process-supervisor.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_two_http_processes_share_0-process-supervisor.log",
+    "bytes": 904440,
+    "sha256": "7828c387227f88dffcae353b5574b8df238c2e16d075320357bc8486a983f528"
+  },
+  {
+    "case": "test_two_http_processes_share_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_two_http_processes_share_0/trace-generation.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_two_http_processes_share_0-trace-generation.py",
+    "bytes": 438,
+    "sha256": "df74ddeb33eb1af3d04c4661cb84ec02eaf07277aeb59f619311bbda5a56ef00"
+  },
+  {
+    "case": "test_anonymous_unverified_inac0",
+    "source": "/tmp/rag-u8-all-application-v4/test_anonymous_unverified_inac0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_anonymous_unverified_inac0-document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "case": "test_anonymous_unverified_inac0",
+    "source": "/tmp/rag-u8-all-application-v4/test_anonymous_unverified_inac0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_anonymous_unverified_inac0-api-first.log",
+    "bytes": 13906,
+    "sha256": "ea702b1768fd67efabfa1dfaf602b6d03a25f1309422a9abae2e8efe095fb074"
+  },
+  {
+    "case": "test_anonymous_unverified_inac0",
+    "source": "/tmp/rag-u8-all-application-v4/test_anonymous_unverified_inac0/originals/f58be706-6315-48d0-91f4-d4124ac1eeba.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_anonymous_unverified_inac0-originals--f58be706-6315-48d0-91f4-d4124ac1eeba.original",
+    "bytes": 29,
+    "sha256": "342d6393ddb1cf6aa6281ac58c34acf651d84ab32369b5d90e1a839e1b62dd25"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/native-worker.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-native-worker.py",
+    "bytes": 906,
+    "sha256": "33bedf7adeed419a632dd1d8f3a84ae59444aca190b45ee349078d943ee6683e"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-generation.log",
+    "bytes": 228901,
+    "sha256": "fe05734f7f5c4f59728d578b28883473d2dca1c207b79b89b2522dcdfe3141b4"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-api-2.log",
+    "bytes": 352,
+    "sha256": "1cd5d149f17d7c93e99dda7ec535a965a6951c2741e867b3c7a734411c20e432"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-api-first.log",
+    "bytes": 21275,
+    "sha256": "157024990590b35269fc1fe31fc3f722346c2597630eb5c7489c889e53c0847a"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/native-supervisor.py",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-native-supervisor.py",
+    "bytes": 310,
+    "sha256": "ac0b3c36ed6fe8363de62de76938cbf9120b6c2467a8a64fccd9a4717512b7e3"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/settings-after-real-restart.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-settings-after-real-restart.png",
+    "bytes": 231621,
+    "sha256": "20a09bdbc50480f0277b710d332bf53fb58bbfc2e3b6330e948fca5609b1a97e"
+  },
+  {
+    "case": "test_real_ui_hot_settings_and_0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_ui_hot_settings_and_0/originals/6276bea1-2e1d-4f6a-8103-16677f091c74.original",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_ui_hot_settings_and_0-originals--6276bea1-2e1d-4f6a-8103-16677f091c74.original",
+    "bytes": 31,
+    "sha256": "b6a01ff7cebeed3ada61f81f0e5f776fd98f2f81f7485ad12a547e31874d9832"
+  },
+  {
+    "case": "test_real_super_admin_settings0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_super_admin_settings0/settings-desktop.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_super_admin_settings0-settings-desktop.png",
+    "bytes": 171876,
+    "sha256": "25f8884bbe8222ade1d6baa4a81f951bd60716f785b18dc949130845ceeb32e1"
+  },
+  {
+    "case": "test_real_super_admin_settings0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_super_admin_settings0/settings-mobile.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_super_admin_settings0-settings-mobile.png",
+    "bytes": 158465,
+    "sha256": "555fce8e10ba8ac9e28c06d542005287bc286e14f6e8766551fa37219c5d184f"
+  },
+  {
+    "case": "test_real_super_admin_settings0",
+    "source": "/tmp/rag-u8-all-application-v4/test_real_super_admin_settings0/api-first.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-test_real_super_admin_settings0-api-first.log",
+    "bytes": 4652,
+    "sha256": "c0e94d83c4c11940c7fb29c1cfede2ed85147d9a7f896d36d615d6721423caef"
+  }
+]

@@ -1,0 +1,13 @@
+# U8 independent native OCR candidate research
+
+Status: source research only. No weights downloaded, native model loaded, production selection changed, or accuracy gate accepted by this parent probe.
+
+The accepted generator provenance pins `unsloth/Qwen3.5-2B-GGUF` revision `f6d5376be1edb4d416d56da11e5397a961aca8ae`. Its public tree API confirms matching `mmproj-F16.gguf`, 668227264 bytes, LFS SHA256 `7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7`. The original generator can remain byte-identical during an isolated OCR probe. [Converter artifact](https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/blob/main/mmproj-F16.gguf).
+
+Installed `llama_cpp/lib/libmtmd.so` contains `clip_graph_qwen3vl` build/type symbols. Installed `MTMDChatHandler` reads the model chat template and exposes image input. This supports trying the existing native route; it does not establish successful projector loading or Cyrillic handwriting recognition. No Qwen projector is installed in the current model directory. Upstream documents separate text-model/projector loading through libmtmd. [Native documentation](https://github.com/ggml-org/llama.cpp/blob/master/docs/multimodal.md).
+
+The National Archives of Finland publishes its own handwriting ONNX model: revision `ee69702c72c1a84b1d478f3b0ef494819ff9bc83`, separate encoder/decoder (about 1.22 GB each), tokenizer and configuration files. It targets Russian historical handwritten lines. Authors normalize historical `і` to `и` in training labels and warn about other languages; Belarusian correctness cannot be inferred. Existing ORT/tokenizers make a framework-free probe conceivable, but adaptation and memory use remain untested. [Author model](https://huggingface.co/Kansallisarkisto/cyrillic-large-handwritten), [Author ONNX artifact](https://huggingface.co/Kansallisarkisto/cyrillic-large-handwritten-onnx/tree/main).
+
+The small metadata probe records source URLs and exact values in `2026-10-14-parent-qwen-cyrillic-primary-metadata-v1.json`. Preprocessor/generation URLs used `main` and must be re-read at the pinned revision before candidate execution. Image configuration is RGB, 182×1022, bicubic, CHW, /255 and ImageNet normalization. Generation configuration has BOS/start 1, EOS 2, padding 0, four beams, maximum length 128, no-repeat trigrams and no KV cache. A different decoding implementation requires its own calibration; author metrics do not prove these genuine U8 inputs.
+
+Do not replace failed Russian/Belarusian inputs, normalize recognized text into known answers, or claim alphabet coverage as accuracy. Permission masking remains before every recognizer.

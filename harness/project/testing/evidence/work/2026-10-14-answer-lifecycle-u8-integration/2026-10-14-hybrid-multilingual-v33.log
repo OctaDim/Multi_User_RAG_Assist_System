@@ -1,0 +1,71 @@
+{"language": "en", "expected_legible_source": ["dreams", "langston", "hughes"], "recognized": "Dreams\n—Langston Hughes\n", "missing": [], "actual_words": ["dreams", "langston", "hughes"], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "91aa732e14b034ed497fb152892e11479ea995643f0ac22273514946fdd13eea"}
+{"language": "ru", "expected_legible_source": ["август"], "recognized": "август\n", "missing": [], "actual_words": ["август"], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "65ff6d62dd4237fbe8ede5cac746ea91b0bd683689e6b438bd1c59a174a7a3ab"}
+{"language": "de", "expected_legible_source": ["die", "seerose", "blüht", "auf", "dem", "teich"], "recognized": "Die Seerose blüht auf dem Teich.\n", "missing": [], "actual_words": ["die", "seerose", "blüht", "auf", "dem", "teich"], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "c35429dc027e937fd7e517053e99d9367c86dcedbedbfe200b41e7e66316cb44"}
+{"language": "be", "expected_legible_source": ["беларусы", "крыўду", "людзьмі"], "recognized": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь.\nБеларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!\nФаксіміле верша, які знаходзіцца\nу музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.\n", "missing": ["беларусы", "людзьмі"], "actual_words": ["а", "кіто", "там", "ідзе", "а", "хто", "там", "ідзе", "у", "аграрніста", "такій", "грамадзе", "беларусь", "беларусь", "а", "што", "яны", "імяць", "на", "хурых", "плагах", "на", "руках", "у", "крыві", "на", "магах", "у", "папках", "свога", "крыўду", "а", "каму", "це", "няжучы", "гэта", "крыўду", "куды", "це", "імяць", "на", "паказ", "сваё", "на", "сём", "чалі", "а", "чаю", "це", "гаго", "захачелась", "ім", "палардзаным", "век", "ім", "глухім", "слоткім", "слоўным", "звацца", "факсіміле", "верша", "які", "знаходзіцца", "у", "музеї", "я", "купалы", "верш", "напісаны", "ў", "1905", "1907", "гг"], "accuracy_errors_permitted": true, "contract": "harness/project/decisions/2026-10-14-printed-and-handwritten-ocr-models-contract.md", "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"}
+F
+=================================== FAILURES ===================================
+___ test_genuine_four_language_handwriting_publication_and_permission_masks ____
+
+real_document_browser = ((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-lin...User_RAG_Ass...>, PosixPath('/tmp/rag-u8-hybrid-multilingual-v33/test_genuine_four_language_han0/document-worker.log'))
+tmp_path = PosixPath('/tmp/rag-u8-hybrid-multilingual-v33/test_genuine_four_language_han0')
+
+    def test_genuine_four_language_handwriting_publication_and_permission_masks(real_document_browser,tmp_path):
+        (browser,mailbox,frontend,_),worker,log=real_document_browser
+        samples=[('en',raster_pdf(ENGLISH),['dreams','langston','hughes']),
+                 ('ru',raster_pdf(FIXTURES/'handwritten-ru-august.png'),['август']),
+                 ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die','seerose','blüht','auf','dem','teich']),
+                 ('be',(FIXTURES/'handwritten-be-kupala.pdf').read_bytes(),['беларусы','крыўду','людзьмі'])]
+        contexts=[browser.new_context() for _ in range(2)]
+        records=[]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            register(owner,mailbox,frontend,'u8-genuine-handwriting@owned.test');login(owner,'u8-genuine-handwriting@owned.test')
+            for language,content,expected in samples:
+                name=f'genuine-{language}.pdf'
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=ready(owner,name,timeout=240)
+                item.get_by_role('button',name='Открыть документ',exact=True).click()
+                text=owner.locator('#document-correction textarea').input_value()
+                missing=[word for word in expected if word not in text.casefold()]
+                records.append({'language':language,'expected_legible_source':expected,'recognized':text,'missing':missing,'actual_words':re.findall(r'\w+',text.casefold()),
+                    'accuracy_errors_permitted':language=='be','contract':CONTRACT if language=='be' else None,
+                    'original_sha256':hashlib.sha256(content).hexdigest()})
+                print(json.dumps(records[-1],ensure_ascii=False),flush=True)
+            # Independent source GT was recorded before recognition. Retain every
+            # raw result even if a candidate fails one language.
+            result_path=tmp_path/'genuine-handwriting-results.json'
+            result_path.write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
+            admin.reload()
+            card=admin.locator('article').filter(has=admin.locator('form[data-account="u8-genuine-handwriting@owned.test"]'))
+            card.locator('summary').click()
+            policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов').click()
+            expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            for language,content,forbidden in samples:
+                name=f'forbidden-{language}.pdf'
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))
+                expect(item).to_contain_text('OCR рукописей не разрешён')
+                item.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+                item=ready(owner,name,timeout=240);item.get_by_role('button',name='Открыть документ',exact=True).click()
+                text=owner.locator('#document-correction textarea').input_value()
+                assert 'Рукописный текст пропущен.' in text, {'language':language,'recognized':text}
+                assert all(word not in text.casefold() for word in forbidden),{'language':language,'recognized':text}
+            assert worker.poll() is None
+            printed=[json.loads(line) for line in (tmp_path/'actual-printed-texts.jsonl').read_text().splitlines()]
+            footer=json.loads((BACKEND.parent/'harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-be-printed-footer-independent-gt-v1.json').read_text())['printed_footer_exact']
+            expected_footer=re.findall(r'\w+',footer.casefold())
+            assert len(printed)==8
+            assert all(not row['printed_text'] for index,row in enumerate(printed) if index%4!=3),printed
+>           assert all(re.findall(r'\w+',printed[index]['printed_text'].casefold())==expected_footer for index in [3,7]),printed
+E           AssertionError: [{'mode': 'complete', 'printed_text': ''}, {'mode': 'complete', 'printed_text': ''}, {'mode': 'complete', 'printed_tex...05–1907 гг.'}, {'mode': 'skip_handwriting', 'printed_text': ''}, {'mode': 'skip_handwriting', 'printed_text': ''}, ...]
+E           assert False
+E            +  where False = all(<generator object test_genuine_four_language_handwriting_publication_and_permission_masks.<locals>.<genexpr> at 0x705285b927a0>)
+
+backend/tests/integration/test_multilingual_documents.py:125: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_multilingual_documents.py::test_genuine_four_language_handwriting_publication_and_permission_masks
+1 failed in 330.15s (0:05:30)

@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_actual_document_boundaries.py {"proof": "actual_issuer_partial_upload_failed_file_selected_scope", "request_id": "53a1ae68-621c-4619-9641-9de7e24ff3af", "ready": 1, "selected": 3, "unready": 2, "worker_log": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/document-worker.log", "generation_log": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/generation.log"}
+.
+
+============================== 1 passed in 42.31s ==============================

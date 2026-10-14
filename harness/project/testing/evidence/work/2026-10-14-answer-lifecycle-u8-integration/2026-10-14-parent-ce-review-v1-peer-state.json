@@ -1,0 +1,23 @@
+{
+  "job_id": "20261014T181108Z-e7fdde9d",
+  "target": "claude",
+  "route": "claude",
+  "host_harness": "codex",
+  "host_family": "codex",
+  "start_epoch": 1792001468,
+  "peer_deadline_secs": 1210,
+  "model_requested": "script editorial Claude Opus mapping; exact id pending receipt",
+  "effort_requested": "high",
+  "started": true,
+  "local_adversarial_removed": true,
+  "no_status_poll_until_local_returns_collected": true,
+  "outcome": "in-process-fallback",
+  "coverage": "adversarial lens: in-process fallback (cross-model peer not run: shared prerequisite jq is not installed)",
+  "model_actual": "unverified",
+  "effort_actual": "unverified",
+  "receipt_supported": false,
+  "independence_verified": false,
+  "diagnostic": "[cross-model] jq not installed; skipping",
+  "terminal_state": "done",
+  "verified_result_exit": 3
+}

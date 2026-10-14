@@ -1,0 +1,30 @@
+{
+  "closed_exec_handles": [
+    48211,
+    42638,
+    80845,
+    31953,
+    98017,
+    69237,
+    48129
+  ],
+  "known_owned_PIDs": {
+    "OCR_publisher": 143538,
+    "native_generation_child": 143583,
+    "native_PG_keeper_backend": 143578,
+    "API2": 143539,
+    "PG_postmaster": 143449
+  },
+  "known_PID_absence": {
+    "OCR_publisher": true,
+    "native_generation_child": true,
+    "native_PG_keeper_backend": true,
+    "API2": true,
+    "PG_postmaster": true
+  },
+  "PG_handle_owner_list": [],
+  "PG_postmaster_pid_file_absent": true,
+  "remaining_owned_role_processes": [],
+  "browser_historical_PID": "not separately captured; exact live Playwright Chrome/driver scan empty plus successful fixture context/browser teardown",
+  "scope": "host /proc before parent starts native/manual work; no TERM/KILL or DB mutation performed"
+}

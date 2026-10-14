@@ -1,0 +1,144 @@
+{
+  "scope": "focused current-code parent headed manual verification after review fixes; supplements immutable18-step v1",
+  "input_freeze": "2026-10-14-parent-final-input-freeze-v2.json",
+  "steps": [
+    {
+      "step": "fresh operator invitation/register/mailbox verify/login through real UI",
+      "passed": true
+    },
+    {
+      "step": "current settings preview/save/inert release/reload persisted6/2 revision1",
+      "passed": true
+    },
+    {
+      "step": "fresh ordinary owner register/verify/login in distinct real browser context",
+      "passed": true
+    },
+    {
+      "step": "actual current-code TXT upload/publication/original source UI",
+      "passed": true
+    },
+    {
+      "step": "actual native current-prompt answer100/Alice and exact source citation0-58 through UI link",
+      "passed": true
+    },
+    {
+      "step": "current mobile390 keyboard navigation, no horizontal overflow or unwanted submit",
+      "passed": true
+    },
+    {
+      "step": "current-code logout clears private history and draft",
+      "passed": true
+    }
+  ],
+  "browser_version": "131.0.6778.33",
+  "page_errors": [],
+  "requests": [
+    {
+      "id": "159c8683-906c-4e2d-a707-cf99ebfd870d",
+      "state": "completed",
+      "answer_text": "The annual budget is 100 euros, and it is approved by Alice [source:1].",
+      "passport": {
+        "found": [
+          {
+            "id": "fb9c9297-f1c7-4e3d-8554-3b96b8809a8b",
+            "kind": "printed",
+            "mode": "complete",
+            "name": "2026-10-14-parent-manual-v2-budget-source.txt",
+            "page": 1,
+            "text": "The annual budget is 100 euros. Alice approves the budget.",
+            "span_end": 58,
+            "similarity": 0.8642956872074514,
+            "span_start": 0,
+            "coordinates": {},
+            "document_id": "4eb38293-015f-4d46-a3ad-0e78053b37f1",
+            "limitations": [],
+            "revision_id": "8197165b-e1df-466c-8a17-7d2b909edafb"
+          }
+        ],
+        "passed": [
+          {
+            "id": "fb9c9297-f1c7-4e3d-8554-3b96b8809a8b",
+            "kind": "printed",
+            "mode": "complete",
+            "name": "2026-10-14-parent-manual-v2-budget-source.txt",
+            "page": 1,
+            "text": "The annual budget is 100 euros. Alice approves the budget.",
+            "span_end": 58,
+            "similarity": 0.8642956872074514,
+            "span_start": 0,
+            "coordinates": {},
+            "document_id": "4eb38293-015f-4d46-a3ad-0e78053b37f1",
+            "limitations": [],
+            "revision_id": "8197165b-e1df-466c-8a17-7d2b909edafb"
+          }
+        ],
+        "excluded": [],
+        "selected": [
+          "4eb38293-015f-4d46-a3ad-0e78053b37f1"
+        ],
+        "available": [
+          {
+            "mode": "complete",
+            "name": "2026-10-14-parent-manual-v2-budget-source.txt",
+            "document_id": "4eb38293-015f-4d46-a3ad-0e78053b37f1",
+            "limitations": [],
+            "revision_id": "8197165b-e1df-466c-8a17-7d2b909edafb"
+          }
+        ],
+        "history_requests": [],
+        "history_dependencies": [],
+        "insufficient_evidence": false
+      }
+    }
+  ],
+  "settings": {
+    "revision": 1,
+    "applied_revision": 1,
+    "overrides": {
+      "max_active": 6,
+      "step_width": 2
+    }
+  },
+  "accounts": [
+    {
+      "email": "u8-parent-v2-operator@owned.test",
+      "role": "super_admin",
+      "verified": true,
+      "active": true,
+      "disabled": false,
+      "paid": false
+    },
+    {
+      "email": "u8-parent-v2-owner@owned.test",
+      "role": "user",
+      "verified": true,
+      "active": true,
+      "disabled": false,
+      "paid": false
+    }
+  ],
+  "owned_resource_pids": [
+    178199,
+    178211,
+    178212,
+    178213,
+    178243,
+    178293,
+    178304,
+    178311,
+    178312,
+    178344,
+    178367,
+    178408,
+    178532,
+    178533
+  ],
+  "corrections": [
+    {
+      "operation": "read-only inspection SQL",
+      "error": "UndefinedColumn: citations is not a requests column",
+      "correction": "SELECT only existing id,state,answer_text,passport; citation itself observed through actual UI link and exact quote"
+    }
+  ]
+}

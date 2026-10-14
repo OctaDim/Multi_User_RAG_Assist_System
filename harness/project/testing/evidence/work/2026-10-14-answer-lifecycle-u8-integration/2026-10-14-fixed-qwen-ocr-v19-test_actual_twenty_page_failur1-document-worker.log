@@ -1,0 +1,780 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 92 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 169 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 381 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 286 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 73 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 82 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 321 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 278 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 77 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 85 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 327 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 299 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 73 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 120 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 323 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 240 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 86 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 86 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 328 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 249 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 88 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 91 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 328 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 215 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 68 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 81 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 299 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 242 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 71 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 106 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 312 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 186 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 76 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 89 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 316 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 240 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 79 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 84 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 292 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 265 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 68 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 132 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 331 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 274 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 71 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 80 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 345 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 272 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 72 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 142 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 322 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 272 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 69 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 77 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 293 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 250 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 3
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=96, ny=96)
+clip_encode: output embedding shape [2048, 9, 1]
+image slice encoded in 71 ms
+decoding image batch 1/1, n_tokens_batch = 9
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 9 new tokens
+image decoded (batch 1/1) in 84 ms
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 69 after 4 for sequence 0 with 63 new tokens
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 22
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=704, ny=64)
+clip_encode: output embedding shape [2048, 44, 1]
+image slice encoded in 299 ms
+decoding image batch 1/1, n_tokens_batch = 44
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 44 new tokens
+image decoded (batch 1/1) in 218 ms
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 88 after 4 for sequence 0 with 63 new tokens

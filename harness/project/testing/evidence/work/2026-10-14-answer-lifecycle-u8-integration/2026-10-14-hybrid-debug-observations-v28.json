@@ -1,0 +1,25 @@
+{
+  "status": "not_accepted",
+  "v23": {
+    "pid": 116524,
+    "exit": 143,
+    "observation": "all native threads futex, eventloop epoll; SIGINT failed to release; exact TERM reaped"
+  },
+  "v25": {
+    "pid": 116969,
+    "exit": 143,
+    "single_original_paddle_constructor": true,
+    "baseline_test_unchanged": true,
+    "observation": "same cancellation stall; eager-Qwen hypothesis falsified; faulthandler stack in HeldCancellation.release.wait20"
+  },
+  "v26": {
+    "pid": 117345,
+    "exit": 143,
+    "actual_native_callback_and_close_tasks_returned": true,
+    "rss_after_close_kib": 113264,
+    "observation": "instrumented direct asyncio baseline coroutine returned native cancellation and close; Python process then stuck in shutdown, exact TERM reaped; diagnostic only"
+  },
+  "v24_profile": "Actual both pinned model/projector paths and SHA verified, both llama contexts physically None after close: PASS",
+  "masking_test_correction": "Initial threshold<180 included gray graph-paper ruling and neutral RU border. Independent viewed originals justify black EN<100 and red RU chroma>20 reference masks; no original/GT altered. v27 genuine original EN+RU hand-pixel masking PASS.",
+  "v28": "unchanged baseline under escalated actual environment running"
+}

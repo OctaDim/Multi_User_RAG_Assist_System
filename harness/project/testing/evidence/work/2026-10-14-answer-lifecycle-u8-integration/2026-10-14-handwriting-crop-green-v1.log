@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/test_document_ocr.py [0;93m2026-10-14 14:39:38.564806421 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+{'proof': 'actual_small_handwriting_detection', 'size': (370, 120), 'regions': [{'bbox': [2, 0, 191, 70], 'detection_confidence': 0.9370757937431335}, {'bbox': [75, 63, 358, 120], 'detection_confidence': 0.8835065960884094}]}
+.
+
+============================== 1 passed in 3.77s ===============================

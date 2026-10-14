@@ -1,0 +1,400 @@
+.{"proof": "actual_issued_account_revocation", "phase": "queued", "request_id": "d2199109-cf2c-442a-b4bd-f412d7d54ac0", "prefix": "", "refusals": [{"api": "http://127.0.0.1:59088", "path": "/api/conversations/931c5efe-0aae-4bbf-85f7-76c75e8e6929", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:59088", "path": "/api/tabs/26dffd07-466c-48f0-8d95-682fe24b796c/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:58652", "path": "/api/conversations/931c5efe-0aae-4bbf-85f7-76c75e8e6929", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:58652", "path": "/api/tabs/26dffd07-466c-48f0-8d95-682fe24b796c/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}], "native_allocations": 0}
+.{"proof": "actual_issued_account_revocation", "phase": "streaming", "request_id": "ba36b7ca-3b19-4ed6-aee6-4a239f0df28a", "prefix": "The annual budget", "refusals": [{"api": "http://127.0.0.1:59910", "path": "/api/conversations/735afbb4-f318-452f-b65f-6107f7670736", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:59910", "path": "/api/tabs/5ff513a6-b0b2-4e96-b7ce-efbf37b90f18/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:57764", "path": "/api/conversations/735afbb4-f318-452f-b65f-6107f7670736", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:57764", "path": "/api/tabs/5ff513a6-b0b2-4e96-b7ce-efbf37b90f18/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}], "native_allocations": 1}
+.{"proof": "actual_tokenizer_pre_admission_refusal_draft_reload", "actual_question_tokens": 5002, "new_explicit_question_completed": true}
+.{"proof": "actual_completed_native_output_isolation", "results": [{"owner": "u8-isolated-0@owned.test", "answer": "The annual budget is 100 euros [source:1].", "passport": {"found": [{"id": "8809d3e7-3e18-4dd0-8c54-615882ff933b", "kind": "printed", "mode": "complete", "name": "budget-0.txt", "page": 1, "text": "The annual budget is 100 euros.", "span_end": 31, "similarity": 0.8190524578094482, "span_start": 0, "coordinates": {}, "document_id": "2cbd04dd-403d-47f0-b372-570765ca9842", "limitations": [], "revision_id": "9bae0567-c646-4ce5-83ba-d58202a10b51"}], "passed": [{"id": "8809d3e7-3e18-4dd0-8c54-615882ff933b", "kind": "printed", "mode": "complete", "name": "budget-0.txt", "page": 1, "text": "The annual budget is 100 euros.", "span_end": 31, "similarity": 0.8190524578094482, "span_start": 0, "coordinates": {}, "document_id": "2cbd04dd-403d-47f0-b372-570765ca9842", "limitations": [], "revision_id": "9bae0567-c646-4ce5-83ba-d58202a10b51"}], "excluded": [], "selected": ["2cbd04dd-403d-47f0-b372-570765ca9842"], "available": [{"mode": "complete", "name": "budget-0.txt", "document_id": "2cbd04dd-403d-47f0-b372-570765ca9842", "limitations": [], "revision_id": "9bae0567-c646-4ce5-83ba-d58202a10b51"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}, {"owner": "u8-isolated-1@owned.test", "answer": "The annual budget is 200 euros [source:1].", "passport": {"found": [{"id": "3f110f04-6a4a-4458-972c-e5d51f71273a", "kind": "printed", "mode": "complete", "name": "budget-1.txt", "page": 1, "text": "The annual budget is 200 euros.", "span_end": 31, "similarity": 0.8280526399612427, "span_start": 0, "coordinates": {}, "document_id": "cb01fa40-eb67-467e-906e-10df92a662b3", "limitations": [], "revision_id": "7578cc9a-9004-4af8-8a58-2c4afa74317a"}], "passed": [{"id": "3f110f04-6a4a-4458-972c-e5d51f71273a", "kind": "printed", "mode": "complete", "name": "budget-1.txt", "page": 1, "text": "The annual budget is 200 euros.", "span_end": 31, "similarity": 0.8280526399612427, "span_start": 0, "coordinates": {}, "document_id": "cb01fa40-eb67-467e-906e-10df92a662b3", "limitations": [], "revision_id": "7578cc9a-9004-4af8-8a58-2c4afa74317a"}], "excluded": [], "selected": ["cb01fa40-eb67-467e-906e-10df92a662b3"], "available": [{"mode": "complete", "name": "budget-1.txt", "document_id": "cb01fa40-eb67-467e-906e-10df92a662b3", "limitations": [], "revision_id": "7578cc9a-9004-4af8-8a58-2c4afa74317a"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}]}
+.F{"proof": "actual_issued_native_terminal", "outcome": "stop_during_grace", "request_id": "3f9e964f-ee96-4a88-823f-cb6911285a34", "state": "interrupted", "origin_deadline": "2026-10-14 18:33:40.454237+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:59362", "http://127.0.0.1:57320"], "explicit_followup": "f206964c-6091-40a7-aa0f-191113b80828", "native_log": "/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa1/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_before", "request_id": "cc17d226-3cf9-43c4-9e0c-7afa30315f7a", "state": "failed", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:58934", "http://127.0.0.1:57556"], "explicit_followup": "4deb5c00-5426-4d3f-91d7-f3f750b87e6d", "native_log": "/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa2/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_during_grace", "request_id": "61f460ca-195e-41c1-955e-f10e40775094", "state": "failed", "origin_deadline": "2026-10-14 18:34:41.214981+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:57240", "http://127.0.0.1:57802"], "explicit_followup": "691b18b8-3946-4d31-981b-6b0f4b721668", "native_log": "/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa3/generation.log"}
+.FF{"proof": "actual_ui_settings_production_restart", "before_epoch": 1, "after_epoch": 2, "max_active": 6, "step_width": 2, "revision": 1, "completed_history_preserved": "7db8bca8-031e-4f54-a2e0-81ded8a217dc", "native_log": "/tmp/rag-u8-independent-gates-v38/test_real_ui_hot_settings_and_0/generation.log"}
+.F
+=================================== FAILURES ===================================
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...terminal_pa0/generation.log'), [<Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>], ...)
+environment = {'dsn': 'user=postgres dbname=u8_ab5d5f430afc455f884e97eb9a374c0e host=/tmp/rag-u8-independent-gates-v38/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa0')
+outcome = 'complete_during_grace'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log,processes,launcher,second_api=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        second=urlsplit(second_api);observer_proxy=CutProxy((second.hostname,second.port))
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy);through_proxy(observer,observer_proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            origin_deadline=None;completed_observed=None
+            if 'grace' in outcome:
+                proxy.cut()
+                until=time.monotonic()+5
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    while origin_deadline is None:
+                        origin_deadline=connection.execute('SELECT deadline FROM tabs WHERE id=%s',(row['origin_tab'],)).fetchone()[0]
+                        assert time.monotonic()<until,'Real origin disconnect was not observed'
+                        if origin_deadline is None:observer.wait_for_timeout(50)
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=10000)
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    completed_observed=connection.execute('SELECT clock_timestamp()').fetchone()[0]
+                assert completed_observed<origin_deadline,'Completion was not observed during the actual stored grace interval'
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                # R35 applies after real service recovery. This supervisor exits
+                # on a dead coordinator; there is deliberately no automatic retry.
+                processes[0].wait(20)
+                assert processes[0].returncode!=0
+                assert not Path(f'/proc/{old_pid}').exists()
+                with native_log.open('ab') as stream:
+                    replacement=subprocess.Popen([sys.executable,str(launcher)],cwd=BACKEND,env=os.environ.copy(),stdout=stream,stderr=subprocess.STDOUT)
+                processes.append(replacement)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+            # A new request is only sent by this explicit UI operation. It must
+            # build a fresh checkpoint from admissible history across API2.
+            observer.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            observer.locator('#question').fill('What is the annual budget now?')
+            observer.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(observer.locator('#history article').last).to_contain_text('Завершён',timeout=60000)
+            followup=current(environment)
+>           assert followup['id']!=identifier
+E           AssertionError: assert UUID('cc261182-569f-4daf-90a1-d2a5c99fcaa7') != UUID('cc261182-569f-4daf-90a1-d2a5c99fcaa7')
+
+backend/tests/integration/test_terminal_lifecycle.py:208: AssertionError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...ects/Multi_User_RAG_Assist...>, <Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>], ...)
+environment = {'dsn': 'user=postgres dbname=u8_b858481747bf442a9235e393838acb9e host=/tmp/rag-u8-independent-gates-v38/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa4')
+outcome = 'crash_before'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log,processes,launcher,second_api=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        second=urlsplit(second_api);observer_proxy=CutProxy((second.hostname,second.port))
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy);through_proxy(observer,observer_proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            origin_deadline=None;completed_observed=None
+            if 'grace' in outcome:
+                proxy.cut()
+                until=time.monotonic()+5
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    while origin_deadline is None:
+                        origin_deadline=connection.execute('SELECT deadline FROM tabs WHERE id=%s',(row['origin_tab'],)).fetchone()[0]
+                        assert time.monotonic()<until,'Real origin disconnect was not observed'
+                        if origin_deadline is None:observer.wait_for_timeout(50)
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=10000)
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    completed_observed=connection.execute('SELECT clock_timestamp()').fetchone()[0]
+                assert completed_observed<origin_deadline,'Completion was not observed during the actual stored grace interval'
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                # R35 applies after real service recovery. This supervisor exits
+                # on a dead coordinator; there is deliberately no automatic retry.
+                processes[0].wait(20)
+                assert processes[0].returncode!=0
+                assert not Path(f'/proc/{old_pid}').exists()
+                with native_log.open('ab') as stream:
+                    replacement=subprocess.Popen([sys.executable,str(launcher)],cwd=BACKEND,env=os.environ.copy(),stdout=stream,stderr=subprocess.STDOUT)
+                processes.append(replacement)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+            # A new request is only sent by this explicit UI operation. It must
+            # build a fresh checkpoint from admissible history across API2.
+            observer.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            observer.locator('#question').fill('What is the annual budget now?')
+            observer.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(observer.locator('#history article').last).to_contain_text('Завершён',timeout=60000)
+E           AssertionError: Locator expected to contain text 'Завершён'
+E           Actual value: What is the annual budget?Прерван: Сервис генерации остановилсяОтвет моделиПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 60000ms
+E             -   - waiting for locator("#history article").last
+E             -     63 × locator resolved to <article data-request="aba61d47-29f8-40fb-9e1c-6d3b0021d3ef">…</article>
+E             -        - unexpected value "What is the annual budget?Прерван: Сервис генерации остановилсяОтвет моделиПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ"
+
+backend/tests/integration/test_terminal_lifecycle.py:206: AssertionError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...ects/Multi_User_RAG_Assist...>, <Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>], ...)
+environment = {'dsn': 'user=postgres dbname=u8_dad0fbbe57c240ec8791e85be8123f4c host=/tmp/rag-u8-independent-gates-v38/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-independent-gates-v38/test_actual_native_terminal_pa5')
+outcome = 'crash_after'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log,processes,launcher,second_api=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        second=urlsplit(second_api);observer_proxy=CutProxy((second.hostname,second.port))
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy);through_proxy(observer,observer_proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            origin_deadline=None;completed_observed=None
+            if 'grace' in outcome:
+                proxy.cut()
+                until=time.monotonic()+5
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    while origin_deadline is None:
+                        origin_deadline=connection.execute('SELECT deadline FROM tabs WHERE id=%s',(row['origin_tab'],)).fetchone()[0]
+                        assert time.monotonic()<until,'Real origin disconnect was not observed'
+                        if origin_deadline is None:observer.wait_for_timeout(50)
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=10000)
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    completed_observed=connection.execute('SELECT clock_timestamp()').fetchone()[0]
+                assert completed_observed<origin_deadline,'Completion was not observed during the actual stored grace interval'
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                # R35 applies after real service recovery. This supervisor exits
+                # on a dead coordinator; there is deliberately no automatic retry.
+                processes[0].wait(20)
+                assert processes[0].returncode!=0
+                assert not Path(f'/proc/{old_pid}').exists()
+                with native_log.open('ab') as stream:
+                    replacement=subprocess.Popen([sys.executable,str(launcher)],cwd=BACKEND,env=os.environ.copy(),stdout=stream,stderr=subprocess.STDOUT)
+                processes.append(replacement)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+            # A new request is only sent by this explicit UI operation. It must
+            # build a fresh checkpoint from admissible history across API2.
+            observer.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            observer.locator('#question').fill('What is the annual budget now?')
+            observer.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(observer.locator('#history article').last).to_contain_text('Завершён',timeout=60000)
+E           AssertionError: Locator expected to contain text 'Завершён'
+E           Actual value: What is the annual budget?Прерван: Сервис генерации остановилсяОтвет моделиThe annual budgetПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 60000ms
+E             -   - waiting for locator("#history article").last
+E             -     63 × locator resolved to <article data-request="8c8af599-1c06-4c28-9043-7b3ec61b805d">…</article>
+E             -        - unexpected value "What is the annual budget?Прерван: Сервис генерации остановилсяОтвет моделиThe annual budgetПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ"
+
+backend/tests/integration/test_terminal_lifecycle.py:206: AssertionError
+_____ test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels _____
+
+real_document_browser = ((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-lin...i_User_RAG_Ass...>, PosixPath('/tmp/rag-u8-independent-gates-v38/test_actual_four_language_prin0/document-worker.log'))
+tmp_path = PosixPath('/tmp/rag-u8-independent-gates-v38/test_actual_four_language_prin0')
+
+    def test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels(real_document_browser,tmp_path):
+        (browser,mailbox,frontend,api),worker,log=real_document_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-printed-four-languages@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+            policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов',exact=True).click()
+            expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            package=BytesIO()
+            with ZipFile(package,'w') as archive:
+                archive.writestr('word/document.xml','<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:p><w:r><w:t>Original DOCX body.</w:t></w:r></w:p></w:document>')
+                archive.writestr('word/media/mixed.png',(PROOF/'mixed-real-title-fixture-v1.png').read_bytes())
+            samples=[('four-language.pdf',(PROOF/'printed-four-languages-v1.pdf').read_bytes(),False),
+                     ('mixed-four-language.pdf',(PROOF/'mixed-real-title-fixture-v1.pdf').read_bytes(),True),
+                     ('mixed-four-language.docx',package.getvalue(),True)]
+            gt=json.loads((PROOF/'printed-four-languages-v1.json').read_text())['expected_lines']
+            expected_words=re.findall(r'\w+',' '.join(gt).casefold());records=[]
+            for name,content,has_hand in samples:
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/octet-stream','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))
+                if name.endswith('.pdf') or has_hand:
+>                   expect(item).to_contain_text('OCR рукописей не разрешён')
+E                   AssertionError: Locator expected to contain text 'OCR рукописей не разрешён'
+E                   Actual value: mixed-four-language.docxОжидает обработкиУдалить документ 
+E                   Call log:
+E                     - LocatorAssertions.to_contain_text with timeout 5000ms
+E                     -   - waiting for locator("#documents li").filter(has=get_by_text("mixed-four-language.docx", exact=True))
+E                     -     7 × locator resolved to <li data-document="f255cccf-853d-49a7-b506-68f92348f89a">…</li>
+E                     -       - unexpected value "mixed-four-language.docxОжидает обработкиУдалить документ"
+
+backend/tests/integration/test_actual_printed_documents.py:46: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after]
+FAILED backend/tests/integration/test_actual_printed_documents.py::test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels
+4 failed, 9 passed in 588.54s (0:09:48)

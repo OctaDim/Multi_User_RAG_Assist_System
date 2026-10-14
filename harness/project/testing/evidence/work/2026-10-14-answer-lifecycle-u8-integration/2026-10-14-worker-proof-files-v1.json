@@ -1,0 +1,80 @@
+[
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-1/test_thirty_real_accounts_ten_0/generation.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-1-test_thirty_real_accounts_ten_0-generation.log",
+    "size": 721714,
+    "sha256": "e61e98e09201859b6f6e76737abb18e4b2e04fad2e985ba2bacc0f6d7b407c3a"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-1/test_thirty_real_accounts_ten_0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-1-test_thirty_real_accounts_ten_0-document-worker.log",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-1/test_thirty_real_accounts_ten_0/api-2.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-1-test_thirty_real_accounts_ten_0-api-2.log",
+    "size": 62212,
+    "sha256": "5fbd39cbc3d5da327c041084da07a164ad5ab838e73e48cac7de2401aeafbd7f"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-2/test_thirty_real_accounts_ten_0/generation.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-2-test_thirty_real_accounts_ten_0-generation.log",
+    "size": 706442,
+    "sha256": "ff4f358393db6cc75b42207bf64b970d53a4285788856211a014a1970928ed26"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-2/test_thirty_real_accounts_ten_0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-2-test_thirty_real_accounts_ten_0-document-worker.log",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-load-2/test_thirty_real_accounts_ten_0/api-2.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-load-2-test_thirty_real_accounts_ten_0-api-2.log",
+    "size": 62212,
+    "sha256": "2d045bbb12b42fca938d529be067122a819344ef3647ee6c58219136c04a8476"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/generation.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_frozen_thirty_questions_u0-generation.log",
+    "size": 2045788,
+    "sha256": "2c3a98009c43f4a3b5484762ead6abd4de5bc110456cda05e776f02eeda38a83"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_frozen_thirty_questions_u0-document-worker.log",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/api-2.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_frozen_thirty_questions_u0-api-2.log",
+    "size": 6830,
+    "sha256": "b004fc7fe9119bbd899c0035264479d565c3098ccec0b9db8b3ca790a7f18b81"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/control-results.json",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_frozen_thirty_questions_u0-control-results.json",
+    "size": 331771,
+    "sha256": "d75c9e0735aa4d8850a82680c40004c7038f0511bb3bed013fbc4a5156a326cc"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_thirty_real_accounts_ten_0/generation.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_thirty_real_accounts_ten_0-generation.log",
+    "size": 685248,
+    "sha256": "28c78ab25ec52ed71a510feb0c19f932f3f38a0b65755ad868fed587a153d176"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_thirty_real_accounts_ten_0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_thirty_real_accounts_ten_0-document-worker.log",
+    "size": 1655,
+    "sha256": "81382441911e231971fdab2498b9beeb06146d6729a8c65d04b0eb37d14e023b"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-quality-3/test_thirty_real_accounts_ten_0/api-2.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-quality-3-test_thirty_real_accounts_ten_0-api-2.log",
+    "size": 62212,
+    "sha256": "aeff47bf4547d158cc168a808a2dafcb2efe6e37e15a08f7452bf0be5ea85eef"
+  }
+]

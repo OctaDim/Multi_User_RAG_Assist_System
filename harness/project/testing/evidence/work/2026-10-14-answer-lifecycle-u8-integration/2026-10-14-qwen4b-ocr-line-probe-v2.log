@@ -1,0 +1,109 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 11
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=352, ny=64)
+clip_encode: output embedding shape [2560, 22, 1]
+image slice encoded in 1361 ms
+decoding image batch 1/1, n_tokens_batch = 22
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 22 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 22 new tokens
+image decoded (batch 1/1) in 348 ms
+find_slot: non-consecutive token position 55 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 55 after 4 for sequence 0 with 41 new tokens
+{"language": "be-line-2", "original_size": [361, 78], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "беларусы.", "usage": {"prompt_tokens": 56, "completion_tokens": 6, "total_tokens": 62}, "finish": "stop", "seconds": 9.257718092998402, "independent_gt": ["Беларусы"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 16
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=512, ny=96)
+clip_encode: output embedding shape [2560, 48, 1]
+image slice encoded in 651 ms
+decoding image batch 1/1, n_tokens_batch = 48
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+image decoded (batch 1/1) in 518 ms
+find_slot: non-consecutive token position 60 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 60 after 4 for sequence 0 with 41 new tokens
+{"language": "be-line-5", "original_size": [520, 90], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "Своё крыльч", "usage": {"prompt_tokens": 61, "completion_tokens": 6, "total_tokens": 67}, "finish": "stop", "seconds": 2.6103758299977926, "independent_gt": ["Сваю", "крыўду"], "missing": ["Сваю", "крыўду"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 17
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=544, ny=96)
+clip_encode: output embedding shape [2560, 51, 1]
+image slice encoded in 334 ms
+decoding image batch 1/1, n_tokens_batch = 51
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 51 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 51 new tokens
+image decoded (batch 1/1) in 547 ms
+find_slot: non-consecutive token position 61 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 61 after 4 for sequence 0 with 41 new tokens
+{"language": "be-line-8", "original_size": [541, 93], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "На счет часов.", "usage": {"prompt_tokens": 62, "completion_tokens": 4, "total_tokens": 66}, "finish": "stop", "seconds": 2.0316762949987606, "independent_gt": ["На", "свет", "цэлы"], "missing": ["свет", "цэлы"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 20
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=640, ny=96)
+clip_encode: output embedding shape [2560, 60, 1]
+image slice encoded in 409 ms
+decoding image batch 1/1, n_tokens_batch = 60
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 60 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 60 new tokens
+image decoded (batch 1/1) in 640 ms
+find_slot: non-consecutive token position 64 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 64 after 4 for sequence 0 with 41 new tokens
+{"language": "be-line-11", "original_size": [634, 103], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "слюзьмі звацца!", "usage": {"prompt_tokens": 65, "completion_tokens": 8, "total_tokens": 73}, "finish": "stop", "seconds": 2.6904631780016643, "independent_gt": ["людзьмі", "звацца"], "missing": ["людзьмі"]}
+Native candidate closed: True

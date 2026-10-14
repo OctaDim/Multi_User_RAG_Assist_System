@@ -1,0 +1,998 @@
+{
+  "version": 2,
+  "acceptance": "NOT COMPLETE; serial continuation required",
+  "coverage_semantics": "This table names exact executable nodes and explicitly distinguishes issuer/publisher proof from seeded/component support. Every OPEN entry remains open until direct run/evidence is added. Baseline U1–U7 accepted proofs stay immutable; parent owns final complete unfiltered gates.",
+  "gate_status": {
+    "G1": "accepted U1–U7 native; U8 joint v6 pending",
+    "G2": "chosen actual Playwright1.49.1 Chromium131.0.6778.33 only; U6 actual close/restore/duplicate evidence, other engines/platforms untested",
+    "G3": "actual UI SMTP issuer/roles/paidFalse matrix GREEN v4; lifecycle-specific gaps explicit",
+    "G4": "RED: unchanged genuine RU/BE handwriting fails current production OCR; unadopted Paddle1.5/1.6/PP-OCRv5/Qwen2B/Qwen4B candidates preserve known negative BE anchors. Printed four-language PDF/DOCX/masks and whole20page failures still need actual proof.",
+    "G5": "Actual independent staticFrontend+2API+Pgvector+native coordinator+supervisor+E5/OCR joint GREENv6 and transportGREENv8; terminal2API/futureprompt extension authored UNRUN; final manual/ALL gates pending."
+  },
+  "actors": [
+    "A1 actual UI SMTP verified owner",
+    "A2 independently issued tabs/proofs",
+    "A3 production API/coordinator/publisher"
+  ],
+  "flows": {
+    "F1": {
+      "title": "Question to answer",
+      "requirements": "R1–R8, R17–R19, R28–R30, R32–R34",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F2": {
+      "title": "Shared conversation",
+      "requirements": "R8, R9, R19, R22",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F3": {
+      "title": "Connection recovery",
+      "requirements": "R11–R16, R20",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F4": {
+      "title": "Stop, access loss or source deletion",
+      "requirements": "R10, R11, R16–R18, R31",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F5": {
+      "title": "Generation failure and service recovery",
+      "requirements": "R8, R9, R11, R20–R22, R35",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F6": {
+      "title": "Navigate to another conversation",
+      "requirements": "R2, R5, R12–R16, R23, R24",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    },
+    "F7": {
+      "title": "Restore an unsent draft",
+      "requirements": "R9, R25–R27",
+      "status": "Constituent requirement evidence above; all open integration gaps remain open"
+    }
+  },
+  "examples": [
+    {
+      "id": "AE1",
+      "title": "Early result",
+      "covers": "R1, R3–R5",
+      "expected": "Генерация ожидает допуска; найденные разрешённые фрагменты уже доступны владельцу, и запрос продолжает путь F1 без дополнительного подтверждения.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_fragments_precede_answer_without_waiting_for_history_read"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE2",
+      "title": "Two different questions",
+      "covers": "R8, R9",
+      "expected": "Две вкладки одновременно отправляют разные вопросы; сервер принимает один, второй не добавляется в историю или очередь и остаётся черновиком с отказом «В беседе уже выполняется запрос».",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout",
+        "backend/tests/test_admission.py::test_concurrent_different_questions_accept_exactly_one"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE3",
+      "title": "Waiting request stopped",
+      "covers": "R8–R10",
+      "expected": "Владелец отменяет ожидающий запрос; он покидает очередь, не начинает генерацию, беседа освобождается и вкладки могут отправить следующий вопрос.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+        "backend/tests/test_scheduler.py::test_stop_wins_dequeue_and_late_computed_token_is_not_committed"
+      ],
+      "proof_scope": "30 real accounts,10 active owners,13 requests,12 distinct contexts/1queued, fair3 then2steps, global shrink and measured OCR/native compute overlap; passport input isolation only, unfinished load answers not quality-certified",
+      "status": "Actual issuer/publisher/native GREEN v6; caller final gates pending",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log"
+      ]
+    },
+    {
+      "id": "AE4",
+      "title": "Partial output stopped",
+      "covers": "R9–R11, R16",
+      "expected": "Владелец останавливает начатый ответ; выданный текст сохраняется как прерванный и не попадает в контекст следующего ответа.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_logical_stop_does_not_release_physical_slot_until_ack",
+        "backend/tests/test_rag_context.py::test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE5",
+      "title": "Initiating tab recovers",
+      "covers": "R12, R13, R19",
+      "expected": "Соединение инициирующей вкладки восстановлено через 5 секунд после обнаружения обрыва; она получает накопленный текст того же запроса, без второго вопроса или запуска.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout",
+        "backend/tests/test_stream_recovery.py::test_same_native_context_continues_through_reconnect_and_dedupe"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE6",
+      "title": "Another tab stays connected",
+      "covers": "R9, R11, R12, R14",
+      "expected": "Инициирующая вкладка не вернулась за 10 секунд, но другая вкладка подключена; незавершённый запрос отменяется для всех вкладок, черновики сохраняются и отправка разблокируется.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE7",
+      "title": "Answer completes during recovery wait",
+      "covers": "R12, R15",
+      "expected": "Ответ завершился через 6 секунд ожидания восстановления; он остаётся завершённым и не меняется на «Прервано» по истечении таймера.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE8",
+      "title": "Stop during recovery wait",
+      "covers": "R10–R12, R16",
+      "expected": "При действующем ожидании восстановления поступает допустимая остановка; отмена не ждёт остаток таймера.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE9",
+      "title": "Access revoked",
+      "covers": "R16, R17",
+      "expected": "Во время ожидания или выдачи аккаунт административно блокируется; новые защищённые операции и дальнейшая выдача прекращаются без ожидания таймера R12.",
+      "nodes": [
+        "backend/tests/browser/test_accounts.py::test_actual_ui_smtp_roles_block_soft_delete_and_logout",
+        "backend/tests/test_invalidation.py::test_real_database_output_races_account_revoke_without_late_publication"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "OPEN; existence is not executable success",
+      "evidence": []
+    },
+    {
+      "id": "AE10",
+      "title": "Isolation and service limits",
+      "covers": "R1, R5, R17",
+      "expected": "При дефолтах R5 тринадцатый запрос ждёт допуска, активные контексты разных пользователей не смешиваются, а за шаг продвигается не более трёх запросов справедливым образом.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+        "backend/tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings"
+      ],
+      "proof_scope": "30 real accounts,10 active owners,13 requests,12 distinct contexts/1queued, fair3 then2steps, global shrink and measured OCR/native compute overlap; passport input isolation only, unfinished load answers not quality-certified",
+      "status": "Actual issuer/publisher/native GREEN v6; caller final gates pending",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log"
+      ]
+    },
+    {
+      "id": "AE11",
+      "title": "Incomplete selected library",
+      "covers": "R1, R6, R7",
+      "expected": "Часть выбранных документов не готова; паспорт сообщает ограничение фактического поиска, а поиск не расширяется на остальные документы пользователя.",
+      "nodes": [
+        "backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope",
+        "backend/tests/test_rag_context.py::test_not_ready_selected_and_unmatched_ready_sources_are_distinct"
+      ],
+      "proof_scope": "Three selected, one whole ready TXT, interrupted original and invalid PDF excluded; no expansion, real native answer",
+      "status": "Actual twoAPI/issuer/publisher partial+failed selected scope GREEN v11; caller final gates pending",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ]
+    },
+    {
+      "id": "AE12",
+      "title": "Removed source and next question",
+      "covers": "R11, R18",
+      "expected": "Источник старого ответа удалён и ранее отменённый ответ сохранён; следующий вопрос не получает удалённые сведения или прерванный текст через историю контекста, checkpoints или резюме.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE13",
+      "title": "Repeated operation",
+      "covers": "R8, R19",
+      "expected": "Повтор отправки той же операции не создаёт второе сообщение или второй запуск; намеренно новый вопрос после завершения или отмены является новой операцией.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation",
+        "backend/tests/test_admission.py::test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE14",
+      "title": "Return after cancellation",
+      "covers": "R11, R14, R20",
+      "expected": "Владелец возвращается после отмены; история сохраняет прерванный текст, но генерация не возобновляется до явной отправки нового вопроса.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE15",
+      "title": "Foreign conversation",
+      "covers": "R1, R10, R17",
+      "expected": "Другой обычный пользователь обращается напрямую к чужой беседе или её остановке; сервер отказывает, не раскрывая вопрос, фрагменты или ответ владельца.",
+      "nodes": [
+        "backend/tests/integration/test_actual_authority.py::test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix",
+        "backend/tests/test_admission.py::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Actual issuer matrix GREEN v4; component stop-authorization support and final gates pending",
+      "evidence": [
+        "2026-10-14-publisher-authority-v4.log"
+      ]
+    },
+    {
+      "id": "AE16",
+      "title": "Failure after partial output",
+      "covers": "R8, R9, R11, R20–R22",
+      "expected": "Модель выдала часть текста и завершилась с ошибкой; ошибка видна, ресурсы освобождены, вкладки могут отправить новый вопрос, частичный текст исключён из последующего контекста, повторного запуска нет.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE17",
+      "title": "Failure before first token",
+      "covers": "R8, R9, R21, R22",
+      "expected": "Локальная генерация завершается ошибкой до первого токена; частичный ответ не создаётся, ошибка видна и беседа освобождается без повторной попытки.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_failed_native_allocation_releases_reservation_without_empty_answer"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE18",
+      "title": "Failure during recovery wait",
+      "covers": "R11, R12, R20–R22",
+      "expected": "Во время ожидания восстановления инициирующей вкладки генерация завершается ошибкой; завершение не ждёт таймера, а восстановление вкладки не запускает запрос заново.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE19",
+      "title": "Navigate while answer runs",
+      "covers": "R2, R5, R23, R24",
+      "expected": "Запрос A ожидает или генерируется, владелец смотрит B в той же подключённой вкладке; запрос A продолжает работу без таймера отмены, его текст не появляется как ответ B, при возвращении виден текущий результат A.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE20",
+      "title": "Disconnect after navigation",
+      "covers": "R12–R14, R23, R24",
+      "expected": "После перехода из A в B соединение инициирующей вкладки реально прерывается; для незавершённого запроса A действует ожидание восстановления по R12 и последующая отмена по R14.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE21",
+      "title": "Separate conversation drafts",
+      "covers": "R25",
+      "expected": "В A набран один неотправленный вопрос, затем в B другой; переключение между A и B восстанавливает соответствующий текст, без его подмены или автоматической отправки.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE22",
+      "title": "Independent tab drafts",
+      "covers": "R9, R25",
+      "expected": "Две вкладки имеют разные черновики одной беседы; переключение бесед в первой восстанавливает её собственный текст и не меняет черновик второй вкладки.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ]
+    },
+    {
+      "id": "AE23",
+      "title": "Refresh restores drafts",
+      "covers": "R25, R26",
+      "expected": "В A и B набраны разные неотправленные вопросы; после обновления страницы в той же вкладке открытие каждой беседы восстанавливает её текст, без добавления вопроса в историю или очередь.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE24",
+      "title": "Refresh preserves tab independence",
+      "covers": "R9, R26",
+      "expected": "Две вкладки имеют разные черновики одной беседы; обновление первой восстанавливает её собственный текст и не меняет текст второй.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE25",
+      "title": "Closing removes drafts",
+      "covers": "R25–R27",
+      "expected": "В A и B набраны разные неотправленные вопросы; после закрытия вкладки и следующего открытия приложения оба черновика не восстанавливаются.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts",
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_browser_restart_does_not_restore_closed_conversation_drafts"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE26",
+      "title": "Closing preserves other tab and history",
+      "covers": "R2, R9, R12–R16, R27",
+      "expected": "Две вкладки имеют разные черновики одной беседы; закрытие первой удаляет только её черновики, сохраняя текст второй и серверную историю. Незавершённый запрос закрытой инициирующей вкладки обрабатывается по R12–R16.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE27",
+      "title": "Lower limit preserves active requests",
+      "covers": "R5, R28",
+      "expected": "При 10 активных запросах супер-администратор уменьшает лимит до 6; все 10 продолжают свой жизненный цикл, без отмены или приостановки из-за изменения лимита, а новые ждут допуска.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits"
+      ],
+      "proof_scope": "30 real accounts,10 active owners,13 requests,12 distinct contexts/1queued, fair3 then2steps, global shrink and measured OCR/native compute overlap; passport input isolation only, unfinished load answers not quality-certified",
+      "status": "Actual issuer/publisher/native GREEN v6; caller final gates pending",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log"
+      ]
+    },
+    {
+      "id": "AE28",
+      "title": "Admission at the new limit",
+      "covers": "R5, R28",
+      "expected": "После уменьшения лимита до 6 при 6 активных ожидающий запрос ещё не допускается; когда остаётся 5 активных, допускается один, соблюдая новый предел 6.",
+      "nodes": [
+        "backend/tests/test_scheduler.py::test_saved_shrink_during_allocation_applies_before_next_admission",
+        "backend/tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings"
+      ],
+      "proof_scope": "component-only genuine-issuer integration extension remains open",
+      "status": "OPEN; existence is not executable success",
+      "evidence": []
+    },
+    {
+      "id": "AE29",
+      "title": "Saved override after restart",
+      "covers": "R5, R29",
+      "expected": "В файле лимит активных запросов 12, super_admin сохраняет 6; после перезапуска действует 6, без сброса к файловому значению.",
+      "nodes": [
+        "backend/tests/integration/test_actual_settings_restart.py::test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides",
+        "backend/tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models",
+        "backend/tests/test_http.py::test_api_lifespan_restart_preserves_overrides_and_applied_revision"
+      ],
+      "proof_scope": "Epoch1→2, stored override1, real allocations max6/promoted step2, prior completed answer preserved; baseline4/8/false UI read-only GREEN v6",
+      "status": "Actual UI/default12/3/save6/2/real supervisor restart/native allocation GREEN v10; current secondAPI fixture extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE30",
+      "title": "File default without override",
+      "covers": "R29",
+      "expected": "Для настройки нет сохранённого переопределения; при запуске применяется её значение из конфигурационного файла.",
+      "nodes": [
+        "backend/tests/integration/test_actual_settings_restart.py::test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides",
+        "backend/tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models",
+        "backend/tests/test_settings.py::test_saved_overrides_survive_repeated_controlled_migration"
+      ],
+      "proof_scope": "Epoch1→2, stored override1, real allocations max6/promoted step2, prior completed answer preserved; baseline4/8/false UI read-only GREEN v6",
+      "status": "Actual UI/default12/3/save6/2/real supervisor restart/native allocation GREEN v10; current secondAPI fixture extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE31",
+      "title": "No ready available sources",
+      "covers": "R1, R8, R25, R30",
+      "expected": "Все выбранные документы ещё обрабатываются или исключены; отправка показывает причину и сохраняет текст черновиком, без нового сообщения, очереди, генерации или занятия беседы. Поиск не расширяется.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE32",
+      "title": "Sources become ready later",
+      "covers": "R25, R30",
+      "expected": "После отказа по R30 документ становится готовым; вопрос сам не отправляется. Владелец явно отправляет сохранённый черновик, и при выполнении условий приёма запрос следует F1.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE33",
+      "title": "Used source deleted during output",
+      "covers": "R11, R16, R18, R20, R31",
+      "expected": "Во время ответа удалён использованный источник; поток прекращается без ожидания R12, ресурсы и беседа освобождаются. Уже выданный текст сохраняется как «Прервано» с отметкой удалённого источника, исключается из будущего контекста, автоматического повторного запуска нет.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE34",
+      "title": "Used source deleted before first token",
+      "covers": "R8, R18, R31",
+      "expected": "Использованный источник удалён после приёма, но до первого токена; незавершённый запрос останавливается без выдачи ответа на его основе, частичный ответ не создаётся и ресурсы освобождаются.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE35",
+      "title": "One page fails the document",
+      "covers": "R1, R30, R32",
+      "expected": "Из 20 страниц извлечены 15, на пяти сбой; весь документ недоступен для поиска/чтения готового источника, его 15 страниц не попадают в ответ. Ошибки файла и страниц видны в отдельном отчёте; успешные другие файлы пачки доступны. Если готовых источников больше нет, вопрос отклоняется по R30.",
+      "nodes": [
+        "backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor",
+        "backend/tests/test_documents.py::test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file",
+        "backend/tests/test_source_contract.py::test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor"
+      ],
+      "proof_scope": "v11 invalidPDF-before-pages only supports whole invalid exclusion. New page-failure hook is failure-only after15 actual OCR completions in normal/explicit skip mode. Later17–20 pages unprocessed, do not claim5 executed failures. Separate error-report UI path currently absent and remains open",
+      "status": "OPEN; actual20page15native successes/page16failure proof authored UNRUN",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ]
+    },
+    {
+      "id": "AE36",
+      "title": "Incomplete file is not a source",
+      "covers": "R1, R32",
+      "expected": "Передача файла прервалась; неполный файл не публикуется как готовый документ и не выдаётся для чтения, поиска или контекста. Причина показана в отчёте; полностью загруженный и успешно обработанный документ публикуется целиком.",
+      "nodes": [
+        "backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope",
+        "backend/tests/test_documents.py::test_actual_original_upload_is_not_a_ready_source",
+        "backend/tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded"
+      ],
+      "proof_scope": "component-only genuine-issuer integration extension remains open",
+      "status": "Actual interrupted socket upload exclusion GREEN v11; caller final gates pending",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ]
+    },
+    {
+      "id": "AE37",
+      "title": "OCR correction preserves history and excludes context",
+      "covers": "R18, R33",
+      "expected": "Старый ответ процитировал OCR-число «100», затем владелец исправил его на «10»; старый ответ и цитата «100» сохраняются с отметкой об исправлении. При следующем вопросе этот ответ не передаётся напрямую и не возвращается через checkpoints/сводки; оригинал неизменен, автоматической перепроверки или переписывания истории нет.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context",
+        "backend/tests/test_rag_context.py::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE38",
+      "title": "Cancelled mixed PDF is not a source",
+      "covers": "R1, R30, R34",
+      "expected": "Владелец ранее отменил смешанный PDF после предупреждения RAG-61; файл не опубликован. При отправке вопроса он не используется как источник; если других готовых источников нет, действует R30.",
+      "nodes": [
+        "backend/tests/browser/test_documents.py::test_ui_permission_choice_actual_native_pdf_and_unchanged_original"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE39",
+      "title": "Ready mixed PDF with explicit skips",
+      "covers": "R1, R6, R7, R32, R34",
+      "expected": "Смешанный PDF полностью готов в выбранном владельцем режиме печатного текста с блоками пропусков по RAG-61. При вопросе печатный текст смешанной страницы доступен поиску/RAG, ограничения видны в паспорте; ответ не приписывает содержание пропущенным рукописям.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ]
+    },
+    {
+      "id": "AE40",
+      "title": "Failed skip-mode document is not a source",
+      "covers": "R1, R30, R32, R34",
+      "expected": "При обработке PDF в режиме пропуска рукописей произошёл технический сбой одной страницы, весь документ не опубликован по RAG-59/RAG-61. При вопросе удачные страницы не используются поиском/RAG; при отсутствии других готовых источников действует R30.",
+      "nodes": [
+        "backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor",
+        "backend/tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded"
+      ],
+      "proof_scope": "v11 invalidPDF-before-pages only supports whole invalid exclusion. New page-failure hook is failure-only after15 actual OCR completions in normal/explicit skip mode. Later17–20 pages unprocessed, do not claim5 executed failures. Separate error-report UI path currently absent and remains open",
+      "status": "OPEN; actual20page15native successes/page16failure proof authored UNRUN",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ]
+    },
+    {
+      "id": "AE41",
+      "title": "Crash after saved partial output",
+      "covers": "R8, R9, R11, R20, R35",
+      "expected": "До аварии записана часть ответа, активное состояние потеряно. После восстановления во всех вкладках запрос отмечен как прерванный с причиной, записанный текст остаётся в истории вне контекста/checkpoints/сводок; беседа и ресурсы освобождены. Автоматического запуска нет, владелец явно отправляет вопрос как новую операцию.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_supervisor_reaps_native_process_before_replacement"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE42",
+      "title": "Crash before first token",
+      "covers": "R8, R9, R20, R35",
+      "expected": "Принятый запрос потерял активное состояние до первого токена, включая ожидание. После восстановления вопрос отмечен как прерванный, пустой частичный ответ не создан, беседа освобождена и запрос не запускается автоматически.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    },
+    {
+      "id": "AE43",
+      "title": "Completed answer survives restart",
+      "covers": "R2, R35",
+      "expected": "Ответ завершён и сохранён до перезапуска; после восстановления он остаётся завершённым в общей серверной истории. Запрос не становится прерванным и повторная генерация не запускается.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed"
+      ],
+      "proof_scope": "v10 genuine singleAPI owners/documents/native tokens and real process crash/restart, or injected failure-only native exception; physical release/partial exclusion/completed history retained. Current test adds secondAPI observer and fresh checkpoint prompt assertion, not yet executed",
+      "status": "Actual issuer/native behavior GREEN v10; final twoAPI and explicit-followup prompt extension UNRUN",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log"
+      ]
+    }
+  ],
+  "requirements": {
+    "R1": {
+      "examples": [
+        "AE1",
+        "AE10",
+        "AE11",
+        "AE15",
+        "AE31",
+        "AE35",
+        "AE36",
+        "AE38",
+        "AE39",
+        "AE40"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R2": {
+      "examples": [
+        "AE19",
+        "AE26",
+        "AE43"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R3": {
+      "examples": [
+        "AE1"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R4": {
+      "examples": [
+        "AE1"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R5": {
+      "examples": [
+        "AE1",
+        "AE10",
+        "AE19",
+        "AE27",
+        "AE28",
+        "AE29"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R6": {
+      "examples": [
+        "AE11",
+        "AE39"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R7": {
+      "examples": [
+        "AE11",
+        "AE39"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R8": {
+      "examples": [
+        "AE2",
+        "AE3",
+        "AE13",
+        "AE16",
+        "AE17",
+        "AE31",
+        "AE34",
+        "AE41",
+        "AE42"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R9": {
+      "examples": [
+        "AE2",
+        "AE3",
+        "AE4",
+        "AE6",
+        "AE16",
+        "AE17",
+        "AE22",
+        "AE24",
+        "AE26",
+        "AE41",
+        "AE42"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R10": {
+      "examples": [
+        "AE3",
+        "AE4",
+        "AE8",
+        "AE15"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R11": {
+      "examples": [
+        "AE4",
+        "AE6",
+        "AE8",
+        "AE12",
+        "AE14",
+        "AE16",
+        "AE18",
+        "AE33",
+        "AE41"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R12": {
+      "examples": [
+        "AE5",
+        "AE6",
+        "AE7",
+        "AE8",
+        "AE18",
+        "AE20",
+        "AE26"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R13": {
+      "examples": [
+        "AE5",
+        "AE20",
+        "AE26"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R14": {
+      "examples": [
+        "AE6",
+        "AE14",
+        "AE20",
+        "AE26"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R15": {
+      "examples": [
+        "AE7",
+        "AE26"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R16": {
+      "examples": [
+        "AE4",
+        "AE8",
+        "AE9",
+        "AE26",
+        "AE33"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R17": {
+      "examples": [
+        "AE9",
+        "AE10",
+        "AE15"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R18": {
+      "examples": [
+        "AE12",
+        "AE33",
+        "AE34",
+        "AE37"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R19": {
+      "examples": [
+        "AE5",
+        "AE13"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R20": {
+      "examples": [
+        "AE14",
+        "AE16",
+        "AE18",
+        "AE33",
+        "AE41",
+        "AE42"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R21": {
+      "examples": [
+        "AE16",
+        "AE17",
+        "AE18"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R22": {
+      "examples": [
+        "AE16",
+        "AE17",
+        "AE18"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R23": {
+      "examples": [
+        "AE19",
+        "AE20"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R24": {
+      "examples": [
+        "AE19",
+        "AE20"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R25": {
+      "examples": [
+        "AE21",
+        "AE22",
+        "AE23",
+        "AE25",
+        "AE31",
+        "AE32"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R26": {
+      "examples": [
+        "AE23",
+        "AE24",
+        "AE25"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R27": {
+      "examples": [
+        "AE25",
+        "AE26"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R28": {
+      "examples": [
+        "AE27",
+        "AE28"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R29": {
+      "examples": [
+        "AE29",
+        "AE30"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R30": {
+      "examples": [
+        "AE31",
+        "AE32",
+        "AE35",
+        "AE38",
+        "AE40"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R31": {
+      "examples": [
+        "AE33",
+        "AE34"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R32": {
+      "examples": [
+        "AE35",
+        "AE36",
+        "AE39",
+        "AE40"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R33": {
+      "examples": [
+        "AE37"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R34": {
+      "examples": [
+        "AE38",
+        "AE39",
+        "AE40"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    },
+    "R35": {
+      "examples": [
+        "AE41",
+        "AE42",
+        "AE43"
+      ],
+      "status": "See constituent direct evidence/open limitations"
+    }
+  }
+}

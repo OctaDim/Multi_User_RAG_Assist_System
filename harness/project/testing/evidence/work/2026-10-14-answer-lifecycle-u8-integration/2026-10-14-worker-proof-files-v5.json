@@ -1,0 +1,32 @@
+[
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_frozen_thirty_questions_u0/generation.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_frozen_thirty_questions_u0-generation.log",
+    "sha256": "08f4c7ab9127f7fe44463bb1aa8965666eda7460e0a762512daf1c391fa2cafd"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_frozen_thirty_questions_u0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_frozen_thirty_questions_u0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_frozen_thirty_questions_u0/api-2.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_frozen_thirty_questions_u0-api-2.log",
+    "sha256": "1c74175294cdc36fbcad15aa45e3dcd9bf6ff30623d2df5c2c495329653e2fdd"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_frozen_thirty_questions_u0/control-results.json",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_frozen_thirty_questions_u0-control-results.json",
+    "sha256": "5c5b1119ab35dcd67eb3a439889a9a240f10e5cba51848e2ebac1277d988b28a"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_genuine_four_language_han0/document-worker.log",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_genuine_four_language_han0-document-worker.log",
+    "sha256": "d447bc2b75c08ebe3433eeaf717e26bc0bc81d0930cee3d97ca18c98ea976e01"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-quality-handwriting-5/test_genuine_four_language_han0/genuine-handwriting-results.json",
+    "saved": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-quality-handwriting-v5-test_genuine_four_language_han0-genuine-handwriting-results.json",
+    "sha256": "e1e56c1221361330b38fe7667dc2622c4479b4fdf8f929a491547c539f154ac6"
+  }
+]

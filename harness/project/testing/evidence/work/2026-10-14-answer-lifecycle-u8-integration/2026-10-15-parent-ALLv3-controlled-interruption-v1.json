@@ -1,0 +1,69 @@
+{
+  "reason": "Confirmed fixture API port collision; partial ALLv3 cannot pass. Two SIGINT did not terminate pytest; stop owned services and pytest before fixture fix. Not a completed application ALL gate.",
+  "pytest_pid": 210555,
+  "owned_descendants": [
+    {
+      "pid": 210555,
+      "ppid": 210552,
+      "name": "pytest"
+    },
+    {
+      "pid": 218551,
+      "ppid": 210555,
+      "name": "rag-api"
+    },
+    {
+      "pid": 218556,
+      "ppid": 210555,
+      "name": "node"
+    },
+    {
+      "pid": 218567,
+      "ppid": 218556,
+      "name": "chrome"
+    },
+    {
+      "pid": 218574,
+      "ppid": 218567,
+      "name": "chrome"
+    },
+    {
+      "pid": 218575,
+      "ppid": 218567,
+      "name": "chrome"
+    },
+    {
+      "pid": 218595,
+      "ppid": 218574,
+      "name": "chrome"
+    },
+    {
+      "pid": 218596,
+      "ppid": 218567,
+      "name": "chrome"
+    },
+    {
+      "pid": 218597,
+      "ppid": 218575,
+      "name": "chrome"
+    },
+    {
+      "pid": 218691,
+      "ppid": 218575,
+      "name": "chrome"
+    },
+    {
+      "pid": 218709,
+      "ppid": 218575,
+      "name": "chrome"
+    },
+    {
+      "pid": 218756,
+      "ppid": 218575,
+      "name": "chrome"
+    }
+  ],
+  "owned_postgres_pid": 210580,
+  "all_application_complete": false,
+  "source_changes_before_exit": false
+}

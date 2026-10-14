@@ -1,0 +1,2209 @@
+INFO:     Started server process [233091]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:57288 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58241 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60745 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "OPTIONS /api/conversations/7a3298d3-f2c6-4c55-b011-67c4eb22a252 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "GET /api/conversations/7a3298d3-f2c6-4c55-b011-67c4eb22a252 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "OPTIONS /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "OPTIONS /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "GET /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "OPTIONS /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60757 - "OPTIONS /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60775 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60775 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60785 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "OPTIONS /api/conversations/eb9677b1-b1df-49e5-884d-764f6845ea16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "GET /api/conversations/eb9677b1-b1df-49e5-884d-764f6845ea16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "OPTIONS /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60789 - "GET /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "OPTIONS /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60785 - "OPTIONS /api/documents/9b7910b8-92d0-40f5-8a3c-7d1435ff06b9/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60785 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "PUT /api/documents/9b7910b8-92d0-40f5-8a3c-7d1435ff06b9/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60797 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60811 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "OPTIONS /api/conversations/180f83f8-1403-4306-b932-acc9d66a13bc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "GET /api/conversations/180f83f8-1403-4306-b932-acc9d66a13bc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "OPTIONS /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60817 - "GET /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "OPTIONS /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60771 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60821 - "OPTIONS /api/documents/18f48fce-7d72-4c04-a21a-ba57e546d206/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "PUT /api/documents/18f48fce-7d72-4c04-a21a-ba57e546d206/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60811 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60797 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/conversations/3f39ea9c-8c9e-4136-882a-eb6144d3fcaa HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/conversations/3f39ea9c-8c9e-4136-882a-eb6144d3fcaa HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58003 - "GET /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "OPTIONS /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58005 - "OPTIONS /api/documents/895c0ff3-52f2-4af1-8058-9ade428e7f23/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "PUT /api/documents/895c0ff3-52f2-4af1-8058-9ade428e7f23/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57999 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58005 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60821 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58027 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/conversations/8c7946ec-465b-4d23-96d1-949f94d161bd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/conversations/8c7946ec-465b-4d23-96d1-949f94d161bd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58023 - "GET /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "OPTIONS /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58037 - "OPTIONS /api/documents/66e48bc9-bba9-4521-881a-ae1c7bcff6cf/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58009 - "PUT /api/documents/66e48bc9-bba9-4521-881a-ae1c7bcff6cf/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60803 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58037 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58005 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "OPTIONS /api/conversations/878ea9b3-81b6-4172-bc61-af010bfe5692 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "GET /api/conversations/878ea9b3-81b6-4172-bc61-af010bfe5692 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58043 - "GET /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58049 - "OPTIONS /api/documents/71f244b8-ca03-4902-b6a8-4031dd50fc0e/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "PUT /api/documents/71f244b8-ca03-4902-b6a8-4031dd50fc0e/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58061 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58077 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58037 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "OPTIONS /api/conversations/1210a52c-33e3-4a3b-a1bd-dac43d161e88 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "GET /api/conversations/1210a52c-33e3-4a3b-a1bd-dac43d161e88 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "OPTIONS /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "GET /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "OPTIONS /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59753 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58083 - "OPTIONS /api/documents/04ffae0c-4abf-4455-a396-7f9831e166e4/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "PUT /api/documents/04ffae0c-4abf-4455-a396-7f9831e166e4/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59743 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59759 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58045 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59765 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59773 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59777 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "OPTIONS /api/conversations/69a65f40-9e88-46a1-ba4c-8c41c079d0ca HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59793 - "GET /api/conversations/69a65f40-9e88-46a1-ba4c-8c41c079d0ca HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "OPTIONS /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59793 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59771 - "GET /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59793 - "OPTIONS /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59793 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59793 - "OPTIONS /api/documents/b1736809-0a3c-4605-ad43-d8adf2089434/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "PUT /api/documents/b1736809-0a3c-4605-ad43-d8adf2089434/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59793 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59807 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58083 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59831 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "OPTIONS /api/conversations/db57904b-7029-4284-a0b8-45390e483fbf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "GET /api/conversations/db57904b-7029-4284-a0b8-45390e483fbf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "OPTIONS /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59815 - "GET /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "OPTIONS /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58055 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59813 - "OPTIONS /api/documents/47825851-9f93-4899-95f7-b9ee631eee3d/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "PUT /api/documents/47825851-9f93-4899-95f7-b9ee631eee3d/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59847 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59853 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59765 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59021 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "OPTIONS /api/conversations/41c05f2d-fe38-422c-ae38-36a3ef111e54 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59023 - "GET /api/conversations/41c05f2d-fe38-422c-ae38-36a3ef111e54 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59023 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "OPTIONS /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59023 - "GET /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "OPTIONS /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59033 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59047 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59855 - "OPTIONS /api/documents/54e9ea3c-2940-4126-82cb-2ad5430adf93/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "PUT /api/documents/54e9ea3c-2940-4126-82cb-2ad5430adf93/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59059 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59841 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59097 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "OPTIONS /api/conversations/5cc7fb22-b02e-4552-beb0-915d846e9811 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59101 - "GET /api/conversations/5cc7fb22-b02e-4552-beb0-915d846e9811 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59069 - "GET /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59101 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59113 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59125 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59101 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59101 - "OPTIONS /api/documents/7308214c-d76d-447a-9421-76b09bdcf371/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "PUT /api/documents/7308214c-d76d-447a-9421-76b09bdcf371/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59101 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59127 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59135 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59867 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59157 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59159 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59137 - "OPTIONS /api/conversations/ab2e50aa-fc5a-428b-a3a1-04b1b3adab60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59167 - "GET /api/conversations/ab2e50aa-fc5a-428b-a3a1-04b1b3adab60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59179 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59209 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59219 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/conversations/e116594f-aafe-4de6-9fc0-75345474e448 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59223 - "GET /api/conversations/e116594f-aafe-4de6-9fc0-75345474e448 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "OPTIONS /api/tabs/26d27afd-14b4-465c-b56d-73608a967091/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59223 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "GET /api/tabs/26d27afd-14b4-465c-b56d-73608a967091/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59197 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59223 - "OPTIONS /api/tabs/26d27afd-14b4-465c-b56d-73608a967091/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59223 - "POST /api/tabs/26d27afd-14b4-465c-b56d-73608a967091/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59085 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59231 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59245 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59273 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59261 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60875 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "OPTIONS /api/conversations/07eb199d-881d-400d-89a3-07d6ab6db1a9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60879 - "GET /api/conversations/07eb199d-881d-400d-89a3-07d6ab6db1a9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60883 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60879 - "OPTIONS /api/tabs/070060f2-82f7-47e2-8073-5e3c66a92555/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59271 - "GET /api/tabs/070060f2-82f7-47e2-8073-5e3c66a92555/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59261 - "OPTIONS /api/tabs/070060f2-82f7-47e2-8073-5e3c66a92555/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60879 - "POST /api/tabs/070060f2-82f7-47e2-8073-5e3c66a92555/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59157 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60887 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60913 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60915 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "OPTIONS /api/conversations/4c05ccba-1179-46be-8cd0-f057bdf2b879 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60925 - "GET /api/conversations/4c05ccba-1179-46be-8cd0-f057bdf2b879 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "OPTIONS /api/tabs/7f83ee76-87f5-41df-a0d8-961596699f03/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60925 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60907 - "GET /api/tabs/7f83ee76-87f5-41df-a0d8-961596699f03/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60925 - "OPTIONS /api/tabs/7f83ee76-87f5-41df-a0d8-961596699f03/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60891 - "POST /api/tabs/7f83ee76-87f5-41df-a0d8-961596699f03/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60927 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59111 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60959 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60969 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "OPTIONS /api/conversations/bb910b69-bdee-4ac4-b41a-7419d467dbe6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60973 - "GET /api/conversations/bb910b69-bdee-4ac4-b41a-7419d467dbe6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "OPTIONS /api/tabs/e87e6ac5-36fe-4b8f-9862-9329ddff7fa8/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60973 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60939 - "GET /api/tabs/e87e6ac5-36fe-4b8f-9862-9329ddff7fa8/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60973 - "OPTIONS /api/tabs/e87e6ac5-36fe-4b8f-9862-9329ddff7fa8/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60937 - "POST /api/tabs/e87e6ac5-36fe-4b8f-9862-9329ddff7fa8/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56909 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60983 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60993 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60993 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60993 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60993 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60993 - "OPTIONS /api/conversations/f801d174-c8e6-49f0-b60c-3f0d8ef35f9c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56953 - "GET /api/conversations/f801d174-c8e6-49f0-b60c-3f0d8ef35f9c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56977 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:56967 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56985 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "OPTIONS /api/conversations/01915c2f-67e2-49d0-963c-6d193873b033 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56995 - "GET /api/conversations/01915c2f-67e2-49d0-963c-6d193873b033 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "OPTIONS /api/tabs/ae602638-546a-49d8-8a8e-f11ffdb3bcab/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56995 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56999 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56967 - "GET /api/tabs/ae602638-546a-49d8-8a8e-f11ffdb3bcab/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56995 - "OPTIONS /api/tabs/ae602638-546a-49d8-8a8e-f11ffdb3bcab/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56975 - "POST /api/tabs/ae602638-546a-49d8-8a8e-f11ffdb3bcab/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57031 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57037 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57049 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57059 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "OPTIONS /api/conversations/fffce2ec-6f93-49b1-8524-f54613112e15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "GET /api/conversations/fffce2ec-6f93-49b1-8524-f54613112e15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "OPTIONS /api/tabs/1d4b6a62-237a-490e-924b-e063dc4ccc79/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57019 - "GET /api/tabs/1d4b6a62-237a-490e-924b-e063dc4ccc79/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57013 - "OPTIONS /api/tabs/1d4b6a62-237a-490e-924b-e063dc4ccc79/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "POST /api/tabs/1d4b6a62-237a-490e-924b-e063dc4ccc79/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59973 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60019 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60029 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60041 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "OPTIONS /api/conversations/772343a5-1def-4c16-bc8c-2baffaf990b0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60045 - "GET /api/conversations/772343a5-1def-4c16-bc8c-2baffaf990b0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "OPTIONS /api/tabs/283750ef-154f-429c-8fe2-800422fcb2fe/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60045 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60003 - "GET /api/tabs/283750ef-154f-429c-8fe2-800422fcb2fe/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60045 - "OPTIONS /api/tabs/283750ef-154f-429c-8fe2-800422fcb2fe/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59989 - "POST /api/tabs/283750ef-154f-429c-8fe2-800422fcb2fe/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60061 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60067 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60077 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60085 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "OPTIONS /api/conversations/557ac4a0-562c-47bb-b615-36f994225a16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60091 - "GET /api/conversations/557ac4a0-562c-47bb-b615-36f994225a16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60091 - "OPTIONS /api/tabs/f6386dad-efbb-4c75-93be-72175d015ca5/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "GET /api/tabs/f6386dad-efbb-4c75-93be-72175d015ca5/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60067 - "OPTIONS /api/tabs/f6386dad-efbb-4c75-93be-72175d015ca5/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60091 - "POST /api/tabs/f6386dad-efbb-4c75-93be-72175d015ca5/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60097 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60107 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60121 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60127 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "OPTIONS /api/conversations/6854cf5a-e9a9-4281-9939-932dbee4bad3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60133 - "GET /api/conversations/6854cf5a-e9a9-4281-9939-932dbee4bad3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "OPTIONS /api/tabs/9d51e7a9-22a1-4f6b-b67e-50a1c7e02a61/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60133 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60101 - "GET /api/tabs/9d51e7a9-22a1-4f6b-b67e-50a1c7e02a61/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60133 - "OPTIONS /api/tabs/9d51e7a9-22a1-4f6b-b67e-50a1c7e02a61/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/tabs/9d51e7a9-22a1-4f6b-b67e-50a1c7e02a61/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60147 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60163 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60175 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60153 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60183 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "OPTIONS /api/conversations/80696ae2-4c77-4302-ae8f-3839b37f13d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60199 - "GET /api/conversations/80696ae2-4c77-4302-ae8f-3839b37f13d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60199 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "OPTIONS /api/tabs/1897f4ec-693a-45c7-8a6c-eab343303cf7/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60199 - "GET /api/tabs/1897f4ec-693a-45c7-8a6c-eab343303cf7/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "OPTIONS /api/tabs/1897f4ec-693a-45c7-8a6c-eab343303cf7/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60153 - "POST /api/tabs/1897f4ec-693a-45c7-8a6c-eab343303cf7/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60205 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60207 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60103 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60235 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60241 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60257 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "OPTIONS /api/conversations/db19315c-a051-4316-9bb0-d4be47e188b9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60265 - "GET /api/conversations/db19315c-a051-4316-9bb0-d4be47e188b9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "OPTIONS /api/tabs/341a3f4f-fb04-474d-a1f5-6d87688b4692/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60265 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60231 - "GET /api/tabs/341a3f4f-fb04-474d-a1f5-6d87688b4692/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60265 - "OPTIONS /api/tabs/341a3f4f-fb04-474d-a1f5-6d87688b4692/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "POST /api/tabs/341a3f4f-fb04-474d-a1f5-6d87688b4692/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58881 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58895 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58915 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58931 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58935 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "OPTIONS /api/conversations/012a50be-5731-429d-af75-87ad3c474b6a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58949 - "GET /api/conversations/012a50be-5731-429d-af75-87ad3c474b6a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58949 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "OPTIONS /api/tabs/54b13d0e-ba69-49dc-a775-9722853b9946/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58949 - "GET /api/tabs/54b13d0e-ba69-49dc-a775-9722853b9946/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58907 - "OPTIONS /api/tabs/54b13d0e-ba69-49dc-a775-9722853b9946/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "POST /api/tabs/54b13d0e-ba69-49dc-a775-9722853b9946/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58969 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:58951 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58983 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "OPTIONS /api/conversations/3ac3fc61-3a95-4698-8066-5b257a32b1d4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58999 - "GET /api/conversations/3ac3fc61-3a95-4698-8066-5b257a32b1d4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "OPTIONS /api/tabs/57e94334-98e6-4053-8d5d-2b50c124faa6/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "GET /api/tabs/57e94334-98e6-4053-8d5d-2b50c124faa6/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58999 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "OPTIONS /api/tabs/57e94334-98e6-4053-8d5d-2b50c124faa6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58965 - "POST /api/tabs/57e94334-98e6-4053-8d5d-2b50c124faa6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59021 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59043 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59047 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59049 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59063 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "OPTIONS /api/conversations/fe1e4037-039f-48ab-9525-c7257781e055 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59079 - "GET /api/conversations/fe1e4037-039f-48ab-9525-c7257781e055 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59079 - "OPTIONS /api/tabs/eaae5ffb-2517-44cb-8557-cb40de5899c1/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59041 - "GET /api/tabs/eaae5ffb-2517-44cb-8557-cb40de5899c1/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59027 - "OPTIONS /api/tabs/eaae5ffb-2517-44cb-8557-cb40de5899c1/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59079 - "POST /api/tabs/eaae5ffb-2517-44cb-8557-cb40de5899c1/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59093 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59123 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59127 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59139 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59155 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "OPTIONS /api/conversations/824f242c-35d1-4150-aab8-caf489490dec HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59163 - "GET /api/conversations/824f242c-35d1-4150-aab8-caf489490dec HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "OPTIONS /api/tabs/3aa980cd-9e24-484d-8409-80f36b9edf56/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59107 - "GET /api/tabs/3aa980cd-9e24-484d-8409-80f36b9edf56/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59163 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "OPTIONS /api/tabs/3aa980cd-9e24-484d-8409-80f36b9edf56/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59111 - "POST /api/tabs/3aa980cd-9e24-484d-8409-80f36b9edf56/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59181 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59213 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59225 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59233 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59237 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "OPTIONS /api/conversations/c0ef92dd-a111-4e54-9bd5-3452628f5436 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59241 - "GET /api/conversations/c0ef92dd-a111-4e54-9bd5-3452628f5436 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "OPTIONS /api/tabs/a2ceb992-ef08-445e-87a3-db3f01aaa086/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "GET /api/tabs/a2ceb992-ef08-445e-87a3-db3f01aaa086/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59241 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "OPTIONS /api/tabs/a2ceb992-ef08-445e-87a3-db3f01aaa086/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "POST /api/tabs/a2ceb992-ef08-445e-87a3-db3f01aaa086/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60445 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60485 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60497 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60503 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "OPTIONS /api/conversations/97b5a212-f75b-418c-8001-1e1d10265d8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60517 - "GET /api/conversations/97b5a212-f75b-418c-8001-1e1d10265d8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "OPTIONS /api/tabs/23442ef7-fc9a-4236-903d-3e662a7fbdaf/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60517 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "GET /api/tabs/23442ef7-fc9a-4236-903d-3e662a7fbdaf/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60517 - "OPTIONS /api/tabs/23442ef7-fc9a-4236-903d-3e662a7fbdaf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60457 - "POST /api/tabs/23442ef7-fc9a-4236-903d-3e662a7fbdaf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60533 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59237 - "OPTIONS /api/conversations/180f83f8-1403-4306-b932-acc9d66a13bc/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60549 - "OPTIONS /api/conversations/8c7946ec-465b-4d23-96d1-949f94d161bd/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60563 - "OPTIONS /api/conversations/1210a52c-33e3-4a3b-a1bd-dac43d161e88/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60575 - "OPTIONS /api/conversations/db57904b-7029-4284-a0b8-45390e483fbf/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "OPTIONS /api/conversations/5cc7fb22-b02e-4552-beb0-915d846e9811/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+print_info: file type   = Q4_K - Medium
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q6_K:   17 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+print_info: file format = GGUF V3 (latest)
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+init_tokenizer: initializing tokenizer for type 2
+init_tokenizer: initializing tokenizer for type 2
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+INFO:     127.0.0.1:60575 - "POST /api/conversations/db57904b-7029-4284-a0b8-45390e483fbf/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60549 - "POST /api/conversations/8c7946ec-465b-4d23-96d1-949f94d161bd/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59237 - "POST /api/conversations/180f83f8-1403-4306-b932-acc9d66a13bc/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60563 - "POST /api/conversations/1210a52c-33e3-4a3b-a1bd-dac43d161e88/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60591 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60595 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+INFO:     127.0.0.1:60599 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60601 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:60563 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "POST /api/conversations/5cc7fb22-b02e-4552-beb0-915d846e9811/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60605 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60611 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60623 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60627 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60639 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60653 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60669 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60683 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60689 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60701 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57393 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57397 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57401 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57405 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57409 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57411 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "OPTIONS /api/conversations/847393d9-4362-4c5b-84b8-3757311cb184/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+INFO:     127.0.0.1:57421 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57433 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60689 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+INFO:     127.0.0.1:57441 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+INFO:     127.0.0.1:57419 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:60579 - "POST /api/conversations/847393d9-4362-4c5b-84b8-3757311cb184/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57447 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57461 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57471 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57495 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57509 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57521 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57535 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57547 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59565 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59567 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59577 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59593 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57489 - "OPTIONS /api/documents/9963b974-2e07-4984-9d0b-5bab38e1d8b7/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "PUT /api/documents/9963b974-2e07-4984-9d0b-5bab38e1d8b7/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59609 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59625 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59639 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60579 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59643 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59567 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59649 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57489 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59659 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59665 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59669 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59591 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59607 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59629 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59613 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59645 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59567 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59651 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59667 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59681 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59693 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59697 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59699 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59709 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59715 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59729 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59735 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59651 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59667 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59681 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59609 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59627 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59639 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59647 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59735 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59663 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59665 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59595 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59681 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59675 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59677 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58803 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58813 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58821 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58815 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58847 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58861 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58873 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59675 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59677 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58803 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58813 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58815 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58821 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58847 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58861 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58873 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59675 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59677 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58439 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58447 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58463 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58473 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58487 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58497 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58873 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59675 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59677 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58505 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58519 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58525 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58529 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58545 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58885 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58569 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58497 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58581 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58587 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58595 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57487 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57493 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57501 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57513 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57459 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57529 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57541 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57547 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57529 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57513 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57541 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57459 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57487 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57493 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57547 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57501 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57541 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57443 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57459 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57487 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57529 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57513 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57493 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57501 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57547 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60491 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60515 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60553 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60537 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60507 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60557 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60527 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60563 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57543 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60577 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57547 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60491 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59837 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59849 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59865 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59897 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59925 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60491 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59849 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59837 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59865 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59897 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59925 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59935 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59855 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59831 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59849 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59865 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59897 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59837 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59925 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58905 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59849 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58909 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58919 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58945 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58939 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58961 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58963 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58909 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59895 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58919 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58933 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58939 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58945 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58953 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59867 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59917 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59921 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58919 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58909 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59933 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59943 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59959 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59961 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59967 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59975 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59977 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59985 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58485 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58479 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58489 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58501 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58515 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58521 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58549 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59985 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58485 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58489 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58479 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58501 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58515 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58521 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58549 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58565 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60413 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60419 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60423 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60431 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60433 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60441 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60451 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60459 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58557 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60473 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60489 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60491 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60505 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60527 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60539 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60515 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60551 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60555 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58591 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58601 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60505 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60555 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60527 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60551 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60515 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58591 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60505 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58635 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58637 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60551 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60555 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58653 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58669 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58677 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58591 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60045 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60057 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60077 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60089 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58669 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60107 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60109 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60117 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60123 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60077 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58669 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60107 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60109 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60123 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60117 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60073 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58163 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58177 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60099 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60103 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60107 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58205 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58219 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58189 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58163 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58223 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58177 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58627 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58613 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58239 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58247 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58249 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60445 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60461 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60465 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60477 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60481 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58177 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60485 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58239 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60497 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60509 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60445 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60461 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60519 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60547 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60557 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58233 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60587 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60581 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60591 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60607 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57641 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57633 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57651 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57655 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57669 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60567 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57673 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57693 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57695 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57705 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57633 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57651 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57655 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57669 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57687 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57693 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57673 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57725 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58295 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "OPTIONS /api/answers/50affc0b-8686-4924-adc8-15d5830b89ef/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "POST /api/answers/50affc0b-8686-4924-adc8-15d5830b89ef/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "OPTIONS /api/answers/eb4c2d7c-bbc5-4650-9230-e341b9d361fa/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58297 - "POST /api/answers/eb4c2d7c-bbc5-4650-9230-e341b9d361fa/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58297 - "OPTIONS /api/answers/c9b56da5-0773-401f-855f-0b80352d025c/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "POST /api/answers/c9b56da5-0773-401f-855f-0b80352d025c/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57633 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57719 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60535 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58307 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58321 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58333 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58349 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57693 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57673 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58365 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58373 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58383 - "POST /api/tabs/0befc251-f68b-4790-b730-acd6bfc83963/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58395 - "POST /api/tabs/742adfae-b8ef-444e-b2f8-bbefd6f7eecf/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58403 - "POST /api/tabs/98d900d3-fe01-4cbc-8bf7-159050e7eefc/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58415 - "POST /api/tabs/088d069d-bac8-4d10-93a1-e59b526eaa41/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58423 - "POST /api/tabs/454857d9-8929-4d81-a56b-086438fe2e2f/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58437 - "POST /api/tabs/ea655c5f-d3f7-4edc-b965-3f6d5987d102/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58451 - "POST /api/tabs/349be3ae-2f0e-48a5-bee6-929d58b5e26b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58467 - "POST /api/tabs/8bca2ef7-6de1-4298-bb89-3d8727821028/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58477 - "POST /api/tabs/2900d5af-4eb7-4d88-998b-8d8c90da6a74/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58519 - "OPTIONS /api/answers/48ef103c-abae-4607-aaa5-5472bc40cf28/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58533 - "OPTIONS /api/answers/83f6ea26-0ea5-4e47-87a0-96424f1447e7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58519 - "OPTIONS /api/answers/ee9944ac-5ca4-4016-86f7-c98227665da2/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58395 - "POST /api/answers/50affc0b-8686-4924-adc8-15d5830b89ef/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58505 - "POST /api/answers/c9b56da5-0773-401f-855f-0b80352d025c/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58489 - "POST /api/answers/eb4c2d7c-bbc5-4650-9230-e341b9d361fa/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58533 - "POST /api/answers/48ef103c-abae-4607-aaa5-5472bc40cf28/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58519 - "POST /api/answers/83f6ea26-0ea5-4e47-87a0-96424f1447e7/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58395 - "POST /api/answers/ee9944ac-5ca4-4016-86f7-c98227665da2/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60311 - "POST /api/tabs/56f1b173-d08b-4b5f-b99d-386e001061a6/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60325 - "POST /api/tabs/5312fe97-d945-440a-9607-9c3a25b508ff/heartbeat HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [233091]

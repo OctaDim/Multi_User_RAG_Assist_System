@@ -1,0 +1,125 @@
+{
+  "result": "3PASS1FAIL1672.42s",
+  "contract_at_collection": "RAG66; later67superseded, rawretained",
+  "normal_page_failure": "full actualPASS15+fault16; no17to20execution",
+  "joint_failure": "120-second ready timeout; DB failure state not captured, cannot distinguish duration/error retrospectively;12nativecontexts/fair/hot/computeOCRoverlap passed, PSS/AE28 not reached",
+  "production_changed_during_run": false,
+  "files": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_hancurrent-actual-pre-recognition-masks.jsonl",
+      "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_hancurrent-genuine-handwriting-results.json",
+      "sha256": "1a7fb645b2197d780951687a007a1cd734a260698fd9700dbdf6472b7d40de99"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_hancurrent-document-worker.log",
+      "sha256": "86ad1c3f012ccb3159f954b7b65c283366ddad46a9feb80d52d7dda3ff85e988"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_hancurrent-actual-printed-texts.jsonl",
+      "sha256": "cc783569c3deed6afd00ec680c2d36f057853fb6694d90f5cd31d37ca85a4c24"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-actual-finished-pages.jsonl",
+      "sha256": "d34fc0fa3252877ebaafddf58714bf92171b18ad5886dadab1459872920e02b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-actual-page-16-failure-report.png",
+      "sha256": "08f649a13fe6112ac27f602603d0587d3616ec4ca73f43c5ab2a629caa22f3b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-generation.log",
+      "sha256": "c31005cb8e2b77352f14c6e2cc68ee8c1d08d7bafc1e62cc1da575bf1492c918"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-document-worker.log",
+      "sha256": "64adeb38d402271192895dfbed665c84859994b1355a89fbb5bd481397ee90e7"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-whole-file-failed-report.png",
+      "sha256": "0f71b8b42a475bea9d7b58075e8733dade376f3a3ec79be239e9ef5c3965b631"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-actual-twenty-page-original.pdf",
+      "sha256": "bdef59ebfa0ada0b54dde4d8a9073c5daf331f5fd512e5e065704b2f8add5fd2"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failurcurrent-api-2.log",
+      "sha256": "ec395d65e66a496510904fed75055e926e5c31002d811089abfca077d4bb2df0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_0-generation.log",
+      "sha256": "cf1fb5b127668eefb9d6579468740ec1245e2522b4ca623f6825db07c705ec9b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_0-document-worker.log",
+      "sha256": "a60a4ba0973fbedaf1860255d777891f4c34ef651ab98444df0774ff87332d37"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_0-api-2.log",
+      "sha256": "3d244c463929f66359509711bcf6fee89f587968061e3b46a7719b2015780893"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-actual-finished-pages.jsonl",
+      "sha256": "d34fc0fa3252877ebaafddf58714bf92171b18ad5886dadab1459872920e02b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-actual-page-16-failure-report.png",
+      "sha256": "08f649a13fe6112ac27f602603d0587d3616ec4ca73f43c5ab2a629caa22f3b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-generation.log",
+      "sha256": "c31005cb8e2b77352f14c6e2cc68ee8c1d08d7bafc1e62cc1da575bf1492c918"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-document-worker.log",
+      "sha256": "64adeb38d402271192895dfbed665c84859994b1355a89fbb5bd481397ee90e7"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-whole-file-failed-report.png",
+      "sha256": "0f71b8b42a475bea9d7b58075e8733dade376f3a3ec79be239e9ef5c3965b631"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-actual-twenty-page-original.pdf",
+      "sha256": "bdef59ebfa0ada0b54dde4d8a9073c5daf331f5fd512e5e065704b2f8add5fd2"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_actual_twenty_page_failur0-api-2.log",
+      "sha256": "ec395d65e66a496510904fed75055e926e5c31002d811089abfca077d4bb2df0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_current-generation.log",
+      "sha256": "cf1fb5b127668eefb9d6579468740ec1245e2522b4ca623f6825db07c705ec9b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_current-document-worker.log",
+      "sha256": "a60a4ba0973fbedaf1860255d777891f4c34ef651ab98444df0774ff87332d37"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_thirty_real_accounts_ten_current-api-2.log",
+      "sha256": "3d244c463929f66359509711bcf6fee89f587968061e3b46a7719b2015780893"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-postgrescurrent-.handle_pids.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-actual-pre-recognition-masks.jsonl",
+      "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-genuine-handwriting-results.json",
+      "sha256": "1a7fb645b2197d780951687a007a1cd734a260698fd9700dbdf6472b7d40de99"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-document-worker.log",
+      "sha256": "86ad1c3f012ccb3159f954b7b65c283366ddad46a9feb80d52d7dda3ff85e988"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-actual-printed-texts.jsonl",
+      "sha256": "cc783569c3deed6afd00ec680c2d36f057853fb6694d90f5cd31d37ca85a4c24"
+    }
+  ]
+}

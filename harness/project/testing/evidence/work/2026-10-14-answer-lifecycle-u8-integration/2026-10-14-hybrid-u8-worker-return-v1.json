@@ -1,0 +1,323 @@
+{
+  "status": "complete",
+  "meaning": "This serial implementation/focused-verification delegation completed; U8 NOT ACCEPTED and u_ids_completed stays empty until parent full gates.",
+  "plan_path": "harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md",
+  "changed_files_this_leaf": [
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/config/ocr.toml",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/app.js",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/conversations.js",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_document_ocr.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_service_ownership_lease.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_multilingual_documents.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_page_failure.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_printed_documents.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_lifecycle_gaps.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_answer_lifecycle.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_terminal_lifecycle.py"
+  ],
+  "carried_prior_authorized_U8_changes_not_restarted": [
+    "backend/app/document_worker.py",
+    "backend/app/rag.py",
+    "frontend/index.html",
+    "backend/tests/test_documents.py",
+    "backend/tests/runtime/test_production_runtime.py",
+    "integration authority/document_boundaries/settings_restart/transport modules and frozen30/UDHR/genuine handwriting fixtures; see prior handoffs"
+  ],
+  "u_ids_attempted": [
+    "U8"
+  ],
+  "u_ids_completed": [],
+  "verification_results": [
+    {
+      "id": "v38",
+      "nodes": [
+        "test_documents unchanged permission/detection barrier",
+        "integration/test_actual_lifecycle_gaps.py (genuine queued+streaming revoke, actual5002token refusal, native completed outputisolation)",
+        "integration/test_actual_settings_restart.py unchanged",
+        "integration/test_terminal_lifecycle.py",
+        "integration/test_actual_printed_documents.py"
+      ],
+      "result": "9passed4failed588.54s; AE9both/refusal/output/historicalcaption/settingsrestart PASS; terminal3observation failures and DOCXwrongchoice failed, subsequently fixed",
+      "evidence": "2026-10-14-independent-gates-v38.log"
+    },
+    {
+      "id": "v39",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_terminal_lifecycle.py backend/tests/integration/test_actual_printed_documents.py backend/tests/integration/test_actual_page_failure.py -q -s --basetemp=/tmp/rag-u8-terminal-print-pages-v39",
+      "result": "6passed3failed1260.49s; ALL6terminal2API/freshprompt+checkpoint PASS; wrongDOCXscope test +finite420pagebounds failed at5normal/9skip",
+      "evidence": "2026-10-14-terminal-print-pages-v39.log"
+    },
+    {
+      "id": "v40",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/test_document_ocr.py backend/tests/integration/test_multilingual_documents.py backend/tests/integration/test_actual_printed_documents.py backend/tests/integration/test_actual_page_failure.py -q -s --basetemp=/tmp/rag-u8-ocr-printed-pages-v40",
+      "result": "15passed1failed2456.46s;12OCRnodes inclUNCHANGEDPaddleabort/realQwenabort/profile/mask/union PASS, genuine8uploadsunderthen66PASS, printed4langPDF/mixedPDF/DOCXnativeimageLOC/original PASS, skip15faultreport/refusal/neighbour PASS; normal15wholeexclusion/refusal/report PASS buthealthyneighbour failed afterrealownershipstalled",
+      "evidence": "2026-10-14-ocr-printed-pages-v40.log"
+    },
+    {
+      "id": "v41",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest 'backend/tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[within-confirmed-lease]' -q -s --basetemp=/tmp/rag-u8-real-ownership-red-v41",
+      "result": "1failed6.03s causalRED beforegenerationedit:0.8sPGrowLock, epoch2/healthy4.99lease/grantedadvisoryowner butnativealreadyreaped",
+      "evidence": "2026-10-14-real-ownership-red-v41.log"
+    },
+    {
+      "id": "v42",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/test_service_ownership_lease.py backend/tests/test_service_recovery.py -q -s --basetemp=/tmp/rag-u8-ownership-green-v42",
+      "result": "7passed43.23s; NEW2delay/loss andALL5UNCHANGEDrealservice-recovery/fence/predecessor tests PASS; seededcomponent scope, notissueracceptance",
+      "evidence": "2026-10-14-ownership-green-v42.log"
+    },
+    {
+      "id": "v43",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_multilingual_documents.py 'backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits' 'backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]' -q -s --basetemp=/tmp/rag-u8-joint-normal-pages-v43",
+      "result": "3passed1failed1672.42s; then66policy +genuine8uploadswithtypedactualhand/printed/rawSHA/Qwen[2,1,1,2,0,0,0,0] PASS; normal15fault/report/wholeexclusion/refusal/neighbour native10 FULLPASS afterleasefix; joint120ready timeout(noPSS/AE28then)",
+      "evidence": "2026-10-14-joint-normal-pages-v43.log"
+    },
+    {
+      "id": "v44",
+      "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_multilingual_documents.py::test_current_be_word_permissions_are_strict_outside_exact_model_and_source_type backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits -q -s --basetemp=/tmp/rag-u8-joint67-v44",
+      "result": "2passed311.55s; latest67strictword/model/mixed-policy assertions, actual30accounts10owners12contexts1queued/fair3→2/physical6then5freshadmission/bothrealOCRpublication/12-context memory sample/allreleaseACKs PASS",
+      "evidence": "2026-10-14-joint67-v44.log"
+    },
+    {
+      "id": "RAG67 retainedactual43 reevaluation",
+      "result": "purepolicyPASS; NOT native rerun. Exactlyprintedworddifferencesў→у andмузеі→музеї permitted; allotherfooterwordsexact, actualfourSHAs/sourceGT/sourcewordtypes andrawretained",
+      "evidence": "2026-10-14-rag67-retained-actual43-word-reevaluation-v1.json"
+    },
+    {
+      "id": "finalformalDOCXpackaging",
+      "result": "localZIPCRC/XML/productiondocx_parts PASS; unchangedprintedPNG/bodytext. Exactnewarchive actualupload/originalSHA pendingmandatoryparentALL; NOT native rerun",
+      "evidence": "2026-10-14-formal-four-language-docx-v1.docx.json"
+    }
+  ],
+  "verification_evidence": [
+    {
+      "unit": "U8",
+      "behavior_changed": true,
+      "behavior_changes": [
+        "Printed original PaddleSpotting/LOC + handwriting fixedQwen/F16, bothsafeabort/close; abandonedQwenprinted removed",
+        ".model historicalPaddle maintained; originalforeground beforemask, knownDfine boxesexpandedtoentireintersectingoriginalink, missedcursiveunion evenwithotherhand; genuineoverlapregionunion preservinghonestcoords/confidencerecords",
+        "settings sameform input/submit handlerreplacement; terminalfragment historicalcaption/state signature",
+        "causallyproven premature0.5ownershipquerywatchdog replaced withfinite remainingbudget fromlastsuccessfulquery sendtime+same5slease; ownership/fence/reap/noautoretry unchanged"
+      ],
+      "existing_tests_inspected": [
+        "all original backend/tests/test_document_ocr.py baselinebodies/LOCparser",
+        "backend/tests/test_documents.py detection-permission override(self,image) andwholepublication guards",
+        "all backend/tests/test_service_recovery.py originalbodies",
+        "existing terminal/settings/joint/printed/transport integration and browser account/document helpers"
+      ],
+      "tests_added_or_changed": [
+        "backend/tests/test_document_ocr.py",
+        "backend/tests/test_service_ownership_lease.py",
+        "backend/tests/integration/test_multilingual_documents.py",
+        "backend/tests/integration/test_actual_page_failure.py",
+        "backend/tests/integration/test_actual_printed_documents.py",
+        "backend/tests/integration/test_actual_lifecycle_gaps.py",
+        "backend/tests/integration/test_answer_lifecycle.py",
+        "backend/tests/integration/test_terminal_lifecycle.py",
+        "NEW workersourcefreezes/rawreceipts/coverage-v3"
+      ],
+      "tests_used_unchanged": [
+        "Original LOCparser+test_actual_native_abort_and_close_wait_for_c_return andsmallhandlen2 body",
+        "Original test_documents detect_then_revoke(self,image) permissionbarrier",
+        "ALL5 test_service_recovery cases (incl SHARE/UPDATE service locks, actual PGconnectionloss, unreaped predecessor blocking/Cpartial)",
+        "Actualsettingsrestart testbody; frozen30 corpus/GT/controls/model assets/pinned libraries"
+      ],
+      "red_or_characterization": [
+        "v21-22 allQwen/profile+mask RED; v27 correctedindependentlymeasured genuine black/red ink maskPASS",
+        "sandboxv23/v25/v26 futex/shutdownnegatives preserved; SAMEunchangedPaddleabort escalatedv28/v40 PASS",
+        "v29 wrongBEprinted-empty assertion/13overlapcrop/time negative; v30 genuine overlapRED→v31regionunionGREEN",
+        "v33 strictBEfooterRED underthen64; crop/scale/contrast/genericcondition candidates34-36 NOTBUILT; historicalGT/rawunchanged",
+        "v37 queued-preparation/historicalcaption observations RED; actualindependentbehavioursGREENv38",
+        "v38 oldterminalcard/pre-admissionlease observers+D OCXunsupportedchoiceRED→all6terminalGREENv39",
+        "v39 420 hardwarebound insufficient at5/9realpages; finite1500 reaches15each",
+        "v40 realownershipstalled midlongOCR thenhealthyneighbour RED; retrospectivependingquerycauseunknown",
+        "v41 causalactualPGwithinlease rowwait butearlyphysicalreap RED→finitelease-derivedbound7realtestsGREENv42",
+        "v43 strengthenedjoint120readytimeoutRED→finite300/diagnostic/12sampleassert actualGREENv44"
+      ],
+      "verification_commands_and_results": [
+        {
+          "id": "v38",
+          "nodes": [
+            "test_documents unchanged permission/detection barrier",
+            "integration/test_actual_lifecycle_gaps.py (genuine queued+streaming revoke, actual5002token refusal, native completed outputisolation)",
+            "integration/test_actual_settings_restart.py unchanged",
+            "integration/test_terminal_lifecycle.py",
+            "integration/test_actual_printed_documents.py"
+          ],
+          "result": "9passed4failed588.54s; AE9both/refusal/output/historicalcaption/settingsrestart PASS; terminal3observation failures and DOCXwrongchoice failed, subsequently fixed",
+          "evidence": "2026-10-14-independent-gates-v38.log"
+        },
+        {
+          "id": "v39",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_terminal_lifecycle.py backend/tests/integration/test_actual_printed_documents.py backend/tests/integration/test_actual_page_failure.py -q -s --basetemp=/tmp/rag-u8-terminal-print-pages-v39",
+          "result": "6passed3failed1260.49s; ALL6terminal2API/freshprompt+checkpoint PASS; wrongDOCXscope test +finite420pagebounds failed at5normal/9skip",
+          "evidence": "2026-10-14-terminal-print-pages-v39.log"
+        },
+        {
+          "id": "v40",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/test_document_ocr.py backend/tests/integration/test_multilingual_documents.py backend/tests/integration/test_actual_printed_documents.py backend/tests/integration/test_actual_page_failure.py -q -s --basetemp=/tmp/rag-u8-ocr-printed-pages-v40",
+          "result": "15passed1failed2456.46s;12OCRnodes inclUNCHANGEDPaddleabort/realQwenabort/profile/mask/union PASS, genuine8uploadsunderthen66PASS, printed4langPDF/mixedPDF/DOCXnativeimageLOC/original PASS, skip15faultreport/refusal/neighbour PASS; normal15wholeexclusion/refusal/report PASS buthealthyneighbour failed afterrealownershipstalled",
+          "evidence": "2026-10-14-ocr-printed-pages-v40.log"
+        },
+        {
+          "id": "v41",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest 'backend/tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[within-confirmed-lease]' -q -s --basetemp=/tmp/rag-u8-real-ownership-red-v41",
+          "result": "1failed6.03s causalRED beforegenerationedit:0.8sPGrowLock, epoch2/healthy4.99lease/grantedadvisoryowner butnativealreadyreaped",
+          "evidence": "2026-10-14-real-ownership-red-v41.log"
+        },
+        {
+          "id": "v42",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/test_service_ownership_lease.py backend/tests/test_service_recovery.py -q -s --basetemp=/tmp/rag-u8-ownership-green-v42",
+          "result": "7passed43.23s; NEW2delay/loss andALL5UNCHANGEDrealservice-recovery/fence/predecessor tests PASS; seededcomponent scope, notissueracceptance",
+          "evidence": "2026-10-14-ownership-green-v42.log"
+        },
+        {
+          "id": "v43",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_multilingual_documents.py 'backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits' 'backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]' -q -s --basetemp=/tmp/rag-u8-joint-normal-pages-v43",
+          "result": "3passed1failed1672.42s; then66policy +genuine8uploadswithtypedactualhand/printed/rawSHA/Qwen[2,1,1,2,0,0,0,0] PASS; normal15fault/report/wholeexclusion/refusal/neighbour native10 FULLPASS afterleasefix; joint120ready timeout(noPSS/AE28then)",
+          "evidence": "2026-10-14-joint-normal-pages-v43.log"
+        },
+        {
+          "id": "v44",
+          "command": "UV_CACHE_DIR=/tmp/rag-answer-lifecycle-uv-cache RAG_MODEL_PATH=$PWD/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf RAG_E5_DIR=$PWD/backend/.venv/rag-native-models/e5 RAG_OCR_DIR=$PWD/backend/.venv/rag-native-models/ocr uv run --frozen --project backend pytest backend/tests/integration/test_multilingual_documents.py::test_current_be_word_permissions_are_strict_outside_exact_model_and_source_type backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits -q -s --basetemp=/tmp/rag-u8-joint67-v44",
+          "result": "2passed311.55s; latest67strictword/model/mixed-policy assertions, actual30accounts10owners12contexts1queued/fair3→2/physical6then5freshadmission/bothrealOCRpublication/12-context memory sample/allreleaseACKs PASS",
+          "evidence": "2026-10-14-joint67-v44.log"
+        },
+        {
+          "id": "RAG67 retainedactual43 reevaluation",
+          "result": "purepolicyPASS; NOT native rerun. Exactlyprintedworddifferencesў→у andмузеі→музеї permitted; allotherfooterwordsexact, actualfourSHAs/sourceGT/sourcewordtypes andrawretained",
+          "evidence": "2026-10-14-rag67-retained-actual43-word-reevaluation-v1.json"
+        },
+        {
+          "id": "finalformalDOCXpackaging",
+          "result": "localZIPCRC/XML/productiondocx_parts PASS; unchangedprintedPNG/bodytext. Exactnewarchive actualupload/originalSHA pendingmandatoryparentALL; NOT native rerun",
+          "evidence": "2026-10-14-formal-four-language-docx-v1.docx.json"
+        }
+      ],
+      "deliberate_exceptions": [
+        "No worker finalunfiltered app/harness/manual/fresh30reviews/canonicalcommit: explicitparentownership, stillmandatory",
+        "RAG67 currentraw reevaluation uses genuineimmutable43outputs andindependentGT; freshnative8uploadslefttoparentALL, clearlyNOTnewnativeexecution",
+        "FinalgenuineOOXMLDOCXpackaging locallychecked, samealready-testednativePNG/body; exactnewarchivefreshupload/SHA pendingparentALL",
+        "Only15successfulpages thenfailure16executed per20pagefile; NEVERclaims17-20 orfiveexecutedfailures",
+        "Mixedsamecropwordtype negative ispolicycomponent example, NOTnative mixedROIacceptance",
+        "Unfinished12contextloadanswers notquality-certified; separate completedowner-output isolationv38; frozen30 answer/citationsemanticgate remainsstrict",
+        "MemoryPSS/swaponlytwoactualnativeprocesses excludesAPI/browser/PG; significantSWAPobserved, nofitsRAM/latencySLAclaim",
+        "Priorautomatic-review cleanuprejection resolvedwithverifiedownedTERM-only/native/normalpg_ctl; immutablev29receipt, nounresolvedpermissionblocker"
+      ],
+      "considered_not_built": [
+        "singleprintedforegroundcrop/scale/contrast/genericSpottinglanguage conditioning: requiredproofdidnotestablishneed/success, no productionpath",
+        "PaddleOCR-recognitiontask/footerfurthercalibration stoppedonexplicitusersteering",
+        "new foreground detectorargument/statewrapper avoidedbecauseunchanged two-argumentpermissionbarrier mustremainvalid",
+        "no4B/9Bdownload/calibration, models/framework/browser replacement, fallback/retry/newmode/interface"
+      ]
+    }
+  ],
+  "implementation_engine_binding": null,
+  "requested_route": "native Codex, inherited route",
+  "actual_route": "native Codex; no external harness/engine/fallback",
+  "requested_model": "inherited native model, no override",
+  "actual_model": "unverified provider servedidentity; inherited native route, no override",
+  "requested_effort": null,
+  "fallback_reason": null,
+  "run_id": null,
+  "source_kind": "plan",
+  "source_digest": "a8aa22842c61f6e6a23dcf99f2314e8730458894cfa130eff120c38e9a72f435",
+  "ocr_models": {
+    "printed": {
+      "name": "PaddleOCR-VL1.5 ORIGINAL",
+      "weight_sha256": "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+      "projector_sha256": "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87",
+      "task": "genuineSpotting/LOC"
+    },
+    "handwriting": {
+      "name": "Qwen3.5-2B Q4_K_M matchingF16",
+      "weight_sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "projector_sha256": "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+    },
+    "latest_permission_contract": "RAG67, actualsourcewordtype+exactmodel/projector; no transcriptnormalization"
+  },
+  "unit_receipts": [
+    {
+      "unit": "U8",
+      "route": "native",
+      "model": "inherited/nooverride; OCRactual4SHApinsverified",
+      "detached_processes": "allownedexec handlesclosed",
+      "integration": "focusedproofsgreenasnamed; parentfinalALL/manual/fresh30pending",
+      "verification": "NEWcoverage-v3 andv44raw/sourcefreeze; preservev1/v2/historicalnegatives",
+      "canonical_commits": [],
+      "canonical_commit_reason": "ExplicitparentexclusiveGit/deliveryownership overrides skillstandalonecommit tail",
+      "cleanup": "EXPLICIT source/test/fixture/native/API/browser/PG release sent; exactresource receipt attached"
+    }
+  ],
+  "plan_checkpoint": null,
+  "blockers": [],
+  "recovery_path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration",
+  "settled_decision_conflicts": [],
+  "behavior_change": true,
+  "standalone_shipping_skipped": true,
+  "ownership_release": {
+    "closed_exec_handles": [
+      48211,
+      42638,
+      80845,
+      31953,
+      98017,
+      69237,
+      48129
+    ],
+    "known_owned_PIDs": {
+      "OCR_publisher": 143538,
+      "native_generation_child": 143583,
+      "native_PG_keeper_backend": 143578,
+      "API2": 143539,
+      "PG_postmaster": 143449
+    },
+    "known_PID_absence": {
+      "OCR_publisher": true,
+      "native_generation_child": true,
+      "native_PG_keeper_backend": true,
+      "API2": true,
+      "PG_postmaster": true
+    },
+    "PG_handle_owner_list": [],
+    "PG_postmaster_pid_file_absent": true,
+    "remaining_owned_role_processes": [],
+    "browser_historical_PID": "not separately captured; exact live Playwright Chrome/driver scan empty plus successful fixture context/browser teardown",
+    "scope": "host /proc before parent starts native/manual work; no TERM/KILL or DB mutation performed"
+  },
+  "no_worker_source_or_native_actions_after_release": true,
+  "parent_next": [
+    "tinyreviewedcleanup andfullysettledsourcefreeze",
+    "ALL accumulatedapp201+new +allactiveharness168+legitnew withoutskips",
+    "fresh67eightuploads andformalDOCXexactfinalarchive",
+    "independentmanualbrowser+all30semantic/citationaudits",
+    "freshreviews andcanonicalcommits/delivery"
+  ],
+  "plan_DoD_rechecked": "U8/R1-R35/A1-A3/F1-F7/AE1-AE43,Verification,DoD re-openedbeforefinalreturn; historicalacceptedU1-U7 not restarted; parentfinalgatesremainrequired",
+  "changed_files": [
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/config/ocr.toml",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/app.js",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/conversations.js",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_document_ocr.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_service_ownership_lease.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_multilingual_documents.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_page_failure.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_printed_documents.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_lifecycle_gaps.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_answer_lifecycle.py",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_terminal_lifecycle.py"
+  ],
+  "canonical_commits": [],
+  "new_evidence_artifacts": [
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-executable-coverage-v3.json",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v44-resource-release-receipt.json",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-rag67-retained-actual43-word-reevaluation-v1.json",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-formal-four-language-docx-v1.docx",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-formal-four-language-docx-v1.docx.json",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v44-source-freeze.json",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-joint67-v44.log",
+    "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-hybrid-u8-worker-return-v1.json"
+  ]
+}

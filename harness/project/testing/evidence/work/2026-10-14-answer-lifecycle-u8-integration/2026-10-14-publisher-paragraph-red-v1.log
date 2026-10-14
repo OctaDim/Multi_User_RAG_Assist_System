@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/test_documents.py F
+
+=================================== FAILURES ===================================
+___ test_real_publisher_preserves_complete_short_paragraphs_and_exact_spans ____
+
+environment = {'admin': {'id': UUID('8247b746-0717-45f9-b65c-d58022f5cd4e'), 'session_id': UUID('cff968a0-9911-4343-b585-aa18c083428...ersation': UUID('8ab5df41-effc-4715-843b-3a48a70cb6b0'), 'document': UUID('d3a97105-fd6a-439f-8fd4-7c4fde4e0e4b'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x73b154134710>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73b15411be30>
+tmp_path = PosixPath('/tmp/rag-u8-worker-paragraph-red-1/test_real_publisher_preserves_0')
+
+    async def test_real_publisher_preserves_complete_short_paragraphs_and_exact_spans(environment,rag_pool,monkeypatch,tmp_path):
+        import os
+        from app.document_worker import DocumentWorker
+        from app.rag import E5Embedder
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn']);monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        paragraphs=['The permitted annual budget is 100 euros. '*12,
+                    'The exception applies only to non-political crimes. '*9,
+                    'Everyone has the right to a nationality. '*8]
+        text='\n\n'.join(paragraphs);content=text.encode()
+        with TestClient(create_app()) as client:
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'paragraphs.txt','size':len(content)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+            try:
+                assert await worker.process_one()
+                async with rag_pool.connection() as connection:
+                    chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
+                assert ''.join(row['text'] for row in chunks)==text
+                for paragraph in paragraphs:
+>                   assert any(paragraph in row['text'] for row in chunks),chunks
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: [{'text': 'The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. The permitted annual budget is 100 euros. \n\nThe exception applies only to non-political crimes. The exception applies only to non-political crimes. The exception applies only to non-political crimes. The exception applies only to non-political crimes. The exception applies only to non-political crimes. The exception applies only to non-', 'span_start': 0, 'span_end': 800}, {'text': 'political crimes. The exception applies only to non-political crimes. The exception applies only to non-political crimes. The exception applies only to non-political crimes. \n\nEveryone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. Everyone has the right to a nationality. ', 'span_start': 800, 'span_end': 1304}]
+
+backend/tests/test_documents.py:315: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_real_publisher_preserves_complete_short_paragraphs_and_exact_spans
+============================== 1 failed in 4.05s ===============================

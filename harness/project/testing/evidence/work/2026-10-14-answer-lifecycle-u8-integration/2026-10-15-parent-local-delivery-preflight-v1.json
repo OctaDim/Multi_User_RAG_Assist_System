@@ -1,0 +1,19 @@
+{
+  "base_commit": "122554c808d34ccb1ea679891efb58102b61a1a6",
+  "initial_exact_staged_snapshot_count": 790,
+  "initial_all_staged_blobs_equal_raw_worktree": true,
+  "source_whitespace_check": {
+    "exact_owned_paths": 49,
+    "exit": 0
+  },
+  "raw_evidence_whitespace": "Full gitdiffcheck finds original trailing spaces in native/test logs. Preserve raw evidence bytes by explicit user contract; do not alter completed logs to satisfy a source-format advisory. Source-only whitespace check passed.",
+  "tests": {
+    "application": 245,
+    "harness": 168,
+    "fresh_semantic_citation": 30
+  },
+  "resource_receipt": "2026-10-15-parent-final-ALLv4-resource-release-v1.json",
+  "input_integrity_receipt": "2026-10-15-parent-final-ALLv4-integrity-check-v1.json",
+  "no_active_git_hooks": true,
+  "delivery": "Exact local U8commit; no push/PR/merge/deploy. This preflight is added as one extra named record after the verified790file snapshot."
+}

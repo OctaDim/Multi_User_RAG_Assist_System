@@ -1,0 +1,1574 @@
+[
+  {
+    "name": "four-language.pdf",
+    "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n",
+    "regions": [
+      {
+        "end": 17,
+        "bbox": [
+          76.8,
+          93.80000000000001,
+          470.40000000000003,
+          131.6
+        ],
+        "kind": "printed",
+        "text": "Document OCR test",
+        "start": 0,
+        "polygon": [
+          [
+            76.8,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            131.6
+          ],
+          [
+            76.8,
+            131.6
+          ]
+        ]
+      },
+      {
+        "end": 49,
+        "bbox": [
+          73.2,
+          212.79999999999998,
+          714,
+          259
+        ],
+        "kind": "printed",
+        "text": "The annual budget is 100 euros.",
+        "start": 18,
+        "polygon": [
+          [
+            73.2,
+            212.79999999999998
+          ],
+          [
+            714,
+            212.79999999999998
+          ],
+          [
+            714,
+            259
+          ],
+          [
+            73.2,
+            259
+          ]
+        ]
+      },
+      {
+        "end": 87,
+        "bbox": [
+          76.8,
+          333.2,
+          833.9999999999999,
+          378
+        ],
+        "kind": "printed",
+        "text": "Der Jahreshaushalt betraegt 100 Euro.",
+        "start": 50,
+        "polygon": [
+          [
+            76.8,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            378
+          ],
+          [
+            76.8,
+            378
+          ]
+        ]
+      },
+      {
+        "end": 123,
+        "bbox": [
+          76.8,
+          452.2,
+          885.6,
+          498.4
+        ],
+        "kind": "printed",
+        "text": "Годовой бюджет составляет 100 евро.",
+        "start": 88,
+        "polygon": [
+          [
+            76.8,
+            452.2
+          ],
+          [
+            885.6,
+            452.2
+          ],
+          [
+            885.6,
+            498.4
+          ],
+          [
+            76.8,
+            498.4
+          ]
+        ]
+      },
+      {
+        "end": 155,
+        "bbox": [
+          76.8,
+          572.5999999999999,
+          799.2,
+          618.8
+        ],
+        "kind": "printed",
+        "text": "Гадавы бюджэт складае 100 еўра.",
+        "start": 124,
+        "polygon": [
+          [
+            76.8,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            618.8
+          ],
+          [
+            76.8,
+            618.8
+          ]
+        ]
+      }
+    ],
+    "words_and_punctuation": [
+      {
+        "source": "Document",
+        "raw": "Document",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "OCR",
+        "raw": "OCR",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "test",
+        "raw": "test",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "The",
+        "raw": "The",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "annual",
+        "raw": "annual",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "budget",
+        "raw": "budget",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "is",
+        "raw": "is",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "euros",
+        "raw": "euros",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Der",
+        "raw": "Der",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Jahreshaushalt",
+        "raw": "Jahreshaushalt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "betraegt",
+        "raw": "betraegt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Euro",
+        "raw": "Euro",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Годовой",
+        "raw": "Годовой",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджет",
+        "raw": "бюджет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "составляет",
+        "raw": "составляет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "евро",
+        "raw": "евро",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Гадавы",
+        "raw": "Гадавы",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджэт",
+        "raw": "бюджэт",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "складае",
+        "raw": "складае",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "еўра",
+        "raw": "еўра",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      }
+    ],
+    "original_sha256": "1a5d566352a67124d928725b19fa74ee04dcee3f30b1b11674d4788cb176321f"
+  },
+  {
+    "name": "mixed-four-language.pdf",
+    "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\nРукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\nРукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\n",
+    "regions": [
+      {
+        "end": 17,
+        "bbox": [
+          76.8,
+          93.80000000000001,
+          470.40000000000003,
+          131.6
+        ],
+        "kind": "printed",
+        "text": "Document OCR test",
+        "start": 0,
+        "polygon": [
+          [
+            76.8,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            131.6
+          ],
+          [
+            76.8,
+            131.6
+          ]
+        ]
+      },
+      {
+        "end": 49,
+        "bbox": [
+          73.2,
+          212.79999999999998,
+          714,
+          257.6
+        ],
+        "kind": "printed",
+        "text": "The annual budget is 100 euros.",
+        "start": 18,
+        "polygon": [
+          [
+            73.2,
+            212.79999999999998
+          ],
+          [
+            714,
+            212.79999999999998
+          ],
+          [
+            714,
+            257.6
+          ],
+          [
+            73.2,
+            257.6
+          ]
+        ]
+      },
+      {
+        "end": 87,
+        "bbox": [
+          76.8,
+          333.2,
+          833.9999999999999,
+          378
+        ],
+        "kind": "printed",
+        "text": "Der Jahreshaushalt betraegt 100 Euro.",
+        "start": 50,
+        "polygon": [
+          [
+            76.8,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            378
+          ],
+          [
+            76.8,
+            378
+          ]
+        ]
+      },
+      {
+        "end": 123,
+        "bbox": [
+          76.8,
+          452.2,
+          885.6,
+          497
+        ],
+        "kind": "printed",
+        "text": "Годовой бюджет составляет 100 евро.",
+        "start": 88,
+        "polygon": [
+          [
+            76.8,
+            452.2
+          ],
+          [
+            885.6,
+            452.2
+          ],
+          [
+            885.6,
+            497
+          ],
+          [
+            76.8,
+            497
+          ]
+        ]
+      },
+      {
+        "end": 155,
+        "bbox": [
+          76.8,
+          572.5999999999999,
+          799.2,
+          617.4
+        ],
+        "kind": "printed",
+        "text": "Гадавы бюджэт складае 100 еўра.",
+        "start": 124,
+        "polygon": [
+          [
+            76.8,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            617.4
+          ],
+          [
+            76.8,
+            617.4
+          ]
+        ]
+      },
+      {
+        "end": 235,
+        "bbox": [
+          104,
+          783,
+          458,
+          908
+        ],
+        "kind": "skip",
+        "text": "Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей",
+        "start": 156,
+        "reason": "handwriting_permission",
+        "coordinate_source": "dfine_layout_and_original_ink",
+        "detection_confidence": 0.8997588157653809
+      },
+      {
+        "end": 315,
+        "bbox": [
+          252,
+          916,
+          795,
+          1034
+        ],
+        "kind": "skip",
+        "text": "Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей",
+        "start": 236,
+        "reason": "handwriting_permission",
+        "coordinate_source": "dfine_layout_and_original_ink",
+        "detection_confidence": 0.7245213985443115
+      }
+    ],
+    "words_and_punctuation": [
+      {
+        "source": "Document",
+        "raw": "Document",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "OCR",
+        "raw": "OCR",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "test",
+        "raw": "test",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "The",
+        "raw": "The",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "annual",
+        "raw": "annual",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "budget",
+        "raw": "budget",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "is",
+        "raw": "is",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "euros",
+        "raw": "euros",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Der",
+        "raw": "Der",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Jahreshaushalt",
+        "raw": "Jahreshaushalt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "betraegt",
+        "raw": "betraegt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Euro",
+        "raw": "Euro",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Годовой",
+        "raw": "Годовой",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджет",
+        "raw": "бюджет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "составляет",
+        "raw": "составляет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "евро",
+        "raw": "евро",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Гадавы",
+        "raw": "Гадавы",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджэт",
+        "raw": "бюджэт",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "складае",
+        "raw": "складае",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "еўра",
+        "raw": "еўра",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      }
+    ],
+    "original_sha256": "9584f556bbe78569bc771010866b5ad7b7ac8046427bfa3ef713811eea9f09a6"
+  },
+  {
+    "name": "printed-four-language.docx",
+    "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n",
+    "regions": [
+      {
+        "end": 17,
+        "bbox": [
+          76.8,
+          93.80000000000001,
+          470.40000000000003,
+          131.6
+        ],
+        "kind": "printed",
+        "text": "Document OCR test",
+        "start": 0,
+        "polygon": [
+          [
+            76.8,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            131.6
+          ],
+          [
+            76.8,
+            131.6
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 49,
+        "bbox": [
+          73.2,
+          212.79999999999998,
+          714,
+          259
+        ],
+        "kind": "printed",
+        "text": "The annual budget is 100 euros.",
+        "start": 18,
+        "polygon": [
+          [
+            73.2,
+            212.79999999999998
+          ],
+          [
+            714,
+            212.79999999999998
+          ],
+          [
+            714,
+            259
+          ],
+          [
+            73.2,
+            259
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 87,
+        "bbox": [
+          76.8,
+          333.2,
+          833.9999999999999,
+          378
+        ],
+        "kind": "printed",
+        "text": "Der Jahreshaushalt betraegt 100 Euro.",
+        "start": 50,
+        "polygon": [
+          [
+            76.8,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            378
+          ],
+          [
+            76.8,
+            378
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 123,
+        "bbox": [
+          76.8,
+          452.2,
+          885.6,
+          498.4
+        ],
+        "kind": "printed",
+        "text": "Годовой бюджет составляет 100 евро.",
+        "start": 88,
+        "polygon": [
+          [
+            76.8,
+            452.2
+          ],
+          [
+            885.6,
+            452.2
+          ],
+          [
+            885.6,
+            498.4
+          ],
+          [
+            76.8,
+            498.4
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 155,
+        "bbox": [
+          76.8,
+          572.5999999999999,
+          799.2,
+          618.8
+        ],
+        "kind": "printed",
+        "text": "Гадавы бюджэт складае 100 еўра.",
+        "start": 124,
+        "polygon": [
+          [
+            76.8,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            572.5999999999999
+          ],
+          [
+            799.2,
+            618.8
+          ],
+          [
+            76.8,
+            618.8
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      }
+    ],
+    "words_and_punctuation": [
+      {
+        "source": "Document",
+        "raw": "Document",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "OCR",
+        "raw": "OCR",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "test",
+        "raw": "test",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "The",
+        "raw": "The",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "annual",
+        "raw": "annual",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "budget",
+        "raw": "budget",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "is",
+        "raw": "is",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "euros",
+        "raw": "euros",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Der",
+        "raw": "Der",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Jahreshaushalt",
+        "raw": "Jahreshaushalt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "betraegt",
+        "raw": "betraegt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Euro",
+        "raw": "Euro",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Годовой",
+        "raw": "Годовой",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджет",
+        "raw": "бюджет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "составляет",
+        "raw": "составляет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "евро",
+        "raw": "евро",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Гадавы",
+        "raw": "Гадавы",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджэт",
+        "raw": "бюджэт",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "складае",
+        "raw": "складае",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "еўра",
+        "raw": "еўра",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      }
+    ],
+    "original_sha256": "050dde0538c44cfba08611e2cf754f8a8b8c665c13ae2f25c5468105f6d70503"
+  },
+  {
+    "name": "gray-printed-four-language.docx",
+    "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n",
+    "regions": [
+      {
+        "end": 17,
+        "bbox": [
+          76.8,
+          93.80000000000001,
+          470.40000000000003,
+          131.6
+        ],
+        "kind": "printed",
+        "text": "Document OCR test",
+        "start": 0,
+        "polygon": [
+          [
+            76.8,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            93.80000000000001
+          ],
+          [
+            470.40000000000003,
+            131.6
+          ],
+          [
+            76.8,
+            131.6
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 49,
+        "bbox": [
+          72,
+          212.79999999999998,
+          714,
+          259
+        ],
+        "kind": "printed",
+        "text": "The annual budget is 100 euros.",
+        "start": 18,
+        "polygon": [
+          [
+            72,
+            212.79999999999998
+          ],
+          [
+            714,
+            212.79999999999998
+          ],
+          [
+            714,
+            259
+          ],
+          [
+            72,
+            259
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 87,
+        "bbox": [
+          76.8,
+          333.2,
+          833.9999999999999,
+          379.40000000000003
+        ],
+        "kind": "printed",
+        "text": "Der Jahreshaushalt betraegt 100 Euro.",
+        "start": 50,
+        "polygon": [
+          [
+            76.8,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            333.2
+          ],
+          [
+            833.9999999999999,
+            379.40000000000003
+          ],
+          [
+            76.8,
+            379.40000000000003
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 123,
+        "bbox": [
+          76.8,
+          452.2,
+          885.6,
+          498.4
+        ],
+        "kind": "printed",
+        "text": "Годовой бюджет составляет 100 евро.",
+        "start": 88,
+        "polygon": [
+          [
+            76.8,
+            452.2
+          ],
+          [
+            885.6,
+            452.2
+          ],
+          [
+            885.6,
+            498.4
+          ],
+          [
+            76.8,
+            498.4
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      },
+      {
+        "end": 155,
+        "bbox": [
+          76.8,
+          572.5999999999999,
+          800.4000000000001,
+          618.8
+        ],
+        "kind": "printed",
+        "text": "Гадавы бюджэт складае 100 еўра.",
+        "start": 124,
+        "polygon": [
+          [
+            76.8,
+            572.5999999999999
+          ],
+          [
+            800.4000000000001,
+            572.5999999999999
+          ],
+          [
+            800.4000000000001,
+            618.8
+          ],
+          [
+            76.8,
+            618.8
+          ]
+        ],
+        "source_part": "word/media/printed.png"
+      }
+    ],
+    "words_and_punctuation": [
+      {
+        "source": "Document",
+        "raw": "Document",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "OCR",
+        "raw": "OCR",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "test",
+        "raw": "test",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "The",
+        "raw": "The",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "annual",
+        "raw": "annual",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "budget",
+        "raw": "budget",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "is",
+        "raw": "is",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "euros",
+        "raw": "euros",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "en",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Der",
+        "raw": "Der",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Jahreshaushalt",
+        "raw": "Jahreshaushalt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "betraegt",
+        "raw": "betraegt",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Euro",
+        "raw": "Euro",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "de",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Годовой",
+        "raw": "Годовой",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджет",
+        "raw": "бюджет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "составляет",
+        "raw": "составляет",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "евро",
+        "raw": "евро",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "ru",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "Гадавы",
+        "raw": "Гадавы",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "бюджэт",
+        "raw": "бюджэт",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "складае",
+        "raw": "складае",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "100",
+        "raw": "100",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": "еўра",
+        "raw": "еўра",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      },
+      {
+        "source": ".",
+        "raw": ".",
+        "language": "be",
+        "source_kind": "printed",
+        "permitted_difference": false,
+        "exception": null
+      }
+    ],
+    "original_sha256": "e3ecf263febb7a02d91dd1eaea64660341d7071e64d99e859aff7ca4699a3b3b"
+  }
+]

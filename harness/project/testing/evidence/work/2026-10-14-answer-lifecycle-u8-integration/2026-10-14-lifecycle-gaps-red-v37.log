@@ -1,0 +1,136 @@
+FF{"proof": "actual_issued_account_revocation", "phase": "streaming", "request_id": "a3c6ef27-9785-4a88-9512-992a49338b77", "prefix": "The annual budget", "refusals": [{"api": "http://127.0.0.1:58602", "path": "/api/conversations/5a1f3447-0ab3-4852-b439-7eb1e570e2dd", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:58602", "path": "/api/tabs/ba945063-edbf-43d0-9202-6fea2dc4a24b/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:57606", "path": "/api/conversations/5a1f3447-0ab3-4852-b439-7eb1e570e2dd", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"api": "http://127.0.0.1:57606", "path": "/api/tabs/ba945063-edbf-43d0-9202-6fea2dc4a24b/events", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}], "native_allocations": 1}
+.{"proof": "actual_tokenizer_pre_admission_refusal_draft_reload", "actual_question_tokens": 5002, "new_explicit_question_completed": true}
+.F
+=================================== FAILURES ===================================
+___________ test_revocation_after_detection_cannot_start_recognition ___________
+
+environment = {'admin': {'id': UUID('f8e5089d-1292-4b51-b9dc-d94ea5db99f4'), 'session_id': UUID('6ddf3d1f-c86b-44c2-ade2-8801b8a4201...ersation': UUID('ede3a4ef-ed4c-4bd0-8437-4d82d27531bc'), 'document': UUID('03ef8ea1-4bea-4bdb-b9b3-6770a301e4b7'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7833e29d1370>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7833e29d1250>
+tmp_path = PosixPath('/tmp/rag-u8-lifecycle-gaps-red-v37/test_revocation_after_detectio0')
+
+    async def test_revocation_after_detection_cannot_start_recognition(environment, rag_pool, monkeypatch, tmp_path):
+        import os
+        from pathlib import Path
+        from app.document_worker import DocumentWorker
+        from app.rag import E5Embedder
+        from app.ocr import DocumentOCR
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+        monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        admin={'Authorization':'Bearer '+environment['admin']['token']}
+        pdf=(Path(__file__).resolve().parents[2]/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf').read_bytes()
+        calls=[]
+        original_detector=DocumentOCR.detect_handwriting
+        with TestClient(create_app()) as client:
+            policy_url='/api/documents/policies/'+str(environment['user']['id'])
+            value=client.get(policy_url,headers=headers).json()
+            def detect_then_revoke(ocr,image):
+                regions=original_detector(ocr,image)
+                response=client.patch(policy_url,headers=admin,json={'limits':value['limits'],'permissions':value['permissions']|{'handwriting':False}})
+                assert response.status_code==200
+                return regions
+            def forbidden_recognition(*args):
+                calls.append('recognition_started_after_revocation')
+                raise AssertionError('Negative probe blocks forbidden recognition; no successful OCR is mocked')
+            monkeypatch.setattr(DocumentOCR,'detect_handwriting',detect_then_revoke)
+            monkeypatch.setattr(DocumentOCR,'recognize',forbidden_recognition)
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'mixed.pdf','size':len(pdf)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=pdf).status_code==200
+            worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+            try:
+                assert await worker.process_one()
+                assert calls==[]
+                row=next(row for row in client.get('/api/documents',headers=headers).json()['documents'] if row['id']==document)
+>               assert row['state']=='awaiting_choice' and not row['ready']
+E               AssertionError: assert ('failed' == 'awaiting_choice'
+E                 
+E                 - awaiting_choice
+E                 + failed)
+
+backend/tests/test_documents.py:219: AssertionError
+_ test_issued_owner_revocation_during_actual_queue_and_native_stream[after-queued] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...evocation_d0/generation.log'), [<Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>], ...)
+environment = {'dsn': 'user=postgres dbname=u8_63a68b7c9ff24b65b40a2f70ab4f1062 host=/tmp/rag-u8-lifecycle-gaps-red-v37/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-lifecycle-gaps-red-v37/test_issued_owner_revocation_d0')
+phase = 'queued'
+
+    @pytest.mark.parametrize('controlled_native_browser,phase',[('after','queued'),('after','streaming')],indirect=['controlled_native_browser'])
+    def test_issued_owner_revocation_during_actual_queue_and_native_stream(controlled_native_browser,environment,tmp_path,phase):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log,_,_,second_api=controlled_native_browser
+        contexts=[browser.new_context() for _ in range(3)]
+        try:
+            admin,holder,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            if phase=='queued':
+                form=admin.locator('#global-settings');form.locator('[name=max_active]').fill('1')
+                form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
+                form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
+                expect(admin.locator('#status')).to_contain_text('Ревизия 1 сохранена')
+                register(holder,mailbox,frontend,'u8-revoke-holder@owned.test');login(holder,'u8-revoke-holder@owned.test')
+                upload(holder,'holder.txt','The annual budget is 100 euros.')
+            email='u8-revoked@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            upload(owner,'revoked-owner.txt','The annual budget is 200 euros.')
+            armed.touch()
+            active=holder if phase=='queued' else owner
+            active.locator('#question').fill('What is the annual budget?')
+            active.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+45
+            while not marker.exists():
+                assert time.monotonic()<until;owner.wait_for_timeout(50)
+            if phase=='queued':
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+20
+            while True:
+                row=current(environment)
+                if row and row['state']==('queued' if phase=='queued' else 'generating') and (phase=='queued' or row['answer_text']):break
+>               assert time.monotonic()<until;owner.wait_for_timeout(50)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               assert 28963.863625731 < 28963.850560043
+E                +  where 28963.863625731 = <built-in function monotonic>()
+E                +    where <built-in function monotonic> = time.monotonic
+
+backend/tests/integration/test_actual_lifecycle_gaps.py:54: AssertionError
+_ test_actual_native_completed_outputs_are_isolated_between_issued_owners[after] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...completed_o0/generation.log'), [<Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>], ...)
+environment = {'dsn': 'user=postgres dbname=u8_f14c65d2964d43119aeaedcd9a75583a host=/tmp/rag-u8-lifecycle-gaps-red-v37/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-lifecycle-gaps-red-v37/test_actual_native_completed_o0')
+
+    @pytest.mark.parametrize('controlled_native_browser',['after'],indirect=True)
+    def test_actual_native_completed_outputs_are_isolated_between_issued_owners(controlled_native_browser,environment,tmp_path):
+        ((browser,mailbox,frontend,_),_,_),_,_,_,native_log,_,_,_=controlled_native_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            pages=[context.new_page() for context in contexts]
+            for index,page in enumerate(pages):
+                register(page,mailbox,frontend,f'u8-isolated-{index}@owned.test');login(page,f'u8-isolated-{index}@owned.test')
+                upload(page,f'budget-{index}.txt',f'The annual budget is {(index+1)*100} euros.')
+            for page in pages:
+                page.locator('#question').fill('What is the annual budget?');page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            for page in pages:expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                rows=connection.execute('SELECT r.*,a.email FROM requests r JOIN accounts a ON a.id=r.owner_id ORDER BY a.email').fetchall()
+            assert len(rows)==2
+            for index,row in enumerate(rows):
+                expected=str((index+1)*100);foreign=str((2-index)*100)
+                assert expected in row['answer_text'] and foreign not in row['answer_text'],row['answer_text']
+                assert all(expected in span['text'] and foreign not in span['text'] for span in row['passport']['passed'])
+                pages[index].locator('.answer-passport summary').click()
+>               expect(pages[index].locator('#early-fragments')).to_contain_text('последнего вопроса')
+E               AssertionError: Locator expected to contain text 'последнего вопроса'
+E               Actual value: Найденные основанияbudget-0.txt · Страница 1 · Передан моделиThe annual budget is 100 euros. 
+E               Call log:
+E                 - LocatorAssertions.to_contain_text with timeout 5000ms
+E                 -   - waiting for locator("#early-fragments")
+E                 -     9 × locator resolved to <section id="early-fragments" aria-label="Ранние фрагменты источников">…</section>
+E                 -       - unexpected value "Найденные основанияbudget-0.txt · Страница 1 · Передан моделиThe annual budget is 100 euros."
+
+backend/tests/integration/test_actual_lifecycle_gaps.py:143: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_revocation_after_detection_cannot_start_recognition
+FAILED backend/tests/integration/test_actual_lifecycle_gaps.py::test_issued_owner_revocation_during_actual_queue_and_native_stream[after-queued]
+FAILED backend/tests/integration/test_actual_lifecycle_gaps.py::test_actual_native_completed_outputs_are_isolated_between_issued_owners[after]
+3 failed, 2 passed in 114.16s (0:01:54)

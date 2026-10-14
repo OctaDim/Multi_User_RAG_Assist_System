@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+backend/tests/test_documents.py ...
+backend/tests/integration/test_actual_authority.py {"proof": "actual_issuer_r17_matrix", "anonymous": [{"path": "/api/conversations/d6f03c82-3f4c-4097-991e-d64e10fd8834", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177/original", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}], "foreign": [{"path": "/api/conversations/d6f03c82-3f4c-4097-991e-d64e10fd8834", "status": 404, "body": "{\"error\":\"not_found\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177", "status": 404, "body": "{\"error\":\"not_found\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177/original", "status": 404, "body": "{\"error\":\"not_found\"}"}], "unverified_login": 403, "state_denials": {"disabled": [{"path": "/api/conversations/d6f03c82-3f4c-4097-991e-d64e10fd8834", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177/original", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}], "active": [{"path": "/api/conversations/d6f03c82-3f4c-4097-991e-d64e10fd8834", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}, {"path": "/api/documents/4e6d87f8-b1c2-4a1d-b6ee-10db07903177/original", "status": 401, "body": "{\"error\":\"unauthenticated\"}"}]}, "paid_false_allowed": true}
+.
+
+============================== 4 passed in 21.86s ==============================

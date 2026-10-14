@@ -1,0 +1,1772 @@
+{
+  "owned_supervisor_pid": 135855,
+  "spawn": {
+    "event": "native_spawn",
+    "pid": 135893,
+    "keeper_pid": 135892,
+    "epoch": 1
+  },
+  "scope": "read-only actual live skip-page process, not retroactive cause of normal-mode failure",
+  "samples": [
+    {
+      "monotonic": 33436.133653114,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.070104",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.927921"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.24 avg60=1.93 avg300=2.00 total=360170316\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=22.30 avg60=10.78 avg300=7.31 total=474597174\nfull avg10=21.36 avg60=9.90 avg300=6.61 total=426751332",
+        "io": "some avg10=21.25 avg60=11.04 avg300=12.69 total=1341312668\nfull avg10=19.74 avg60=9.75 avg300=11.22 total=1189028631"
+      }
+    },
+    {
+      "monotonic": 33436.386389451,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.018985",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.980452"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.24 avg60=1.93 avg300=2.00 total=360182457\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=22.30 avg60=10.78 avg300=7.31 total=474761563\nfull avg10=21.36 avg60=9.90 avg300=6.61 total=426907619",
+        "io": "some avg10=21.25 avg60=11.04 avg300=12.69 total=1341468924\nfull avg10=19.74 avg60=9.75 avg300=11.22 total=1189173638"
+      }
+    },
+    {
+      "monotonic": 33436.637910303,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.066865",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.932856"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.24 avg60=1.93 avg300=2.00 total=360186560\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=22.30 avg60=10.78 avg300=7.31 total=474948144\nfull avg10=21.36 avg60=9.90 avg300=6.61 total=427085282",
+        "io": "some avg10=21.25 avg60=11.04 avg300=12.69 total=1341649347\nfull avg10=19.74 avg60=9.75 avg300=11.22 total=1189342059"
+      }
+    },
+    {
+      "monotonic": 33436.889980859,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.096377",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.903243"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360190898\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=475141137\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=427269289",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1341839686\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1189519967"
+      }
+    },
+    {
+      "monotonic": 33437.142678924,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.039179",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.960323"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360202794\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=475302904\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=427422316",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1341993784\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1189661744"
+      }
+    },
+    {
+      "monotonic": 33437.395546346,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.087912",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.911537"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360207816\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=475493888\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=427604389",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1342174567\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1189830753"
+      }
+    },
+    {
+      "monotonic": 33437.647143309,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.034127",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.965638"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360215167\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=475677848\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=427779591",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1342349203\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1189994204"
+      }
+    },
+    {
+      "monotonic": 33437.900347979,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.083974",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.915798"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360229636\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=475846718\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=427940491",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1342504270\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1190140060"
+      }
+    },
+    {
+      "monotonic": 33438.154398968,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.028651",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.968587"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360240603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=476026071\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=428111567",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1342672241\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1190297271"
+      }
+    },
+    {
+      "monotonic": 33438.406002542,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.078729",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.920828"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360250981\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=476204306\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=428281891",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1342839696\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1190455151"
+      }
+    },
+    {
+      "monotonic": 33438.657590033,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.024711",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.974997"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.38 avg60=1.96 avg300=2.01 total=360256095\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=30.39 avg60=12.62 avg300=7.72 total=476399561\nfull avg10=28.90 avg60=11.64 avg300=7.00 total=428468898",
+        "io": "some avg10=29.53 avg60=12.87 avg300=13.06 total=1343024299\nfull avg10=27.21 avg60=11.42 avg300=11.56 total=1190629291"
+      }
+    },
+    {
+      "monotonic": 33438.908413785,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.072169",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.927616"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360265281\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=476579228\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=428641571",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1343196189\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1190790139"
+      }
+    },
+    {
+      "monotonic": 33439.15976863,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.076137",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.923667"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360270843\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=476770921\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=428827251",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1343377741\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1190962776"
+      }
+    },
+    {
+      "monotonic": 33439.410647845,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.009513",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.990324"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360278293\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=476942773\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=428988506",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1343551604\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191122589"
+      }
+    },
+    {
+      "monotonic": 33439.662134806,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.045442",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.954295"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360284619\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=477081589\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=429119887",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1343688524\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191249602"
+      }
+    },
+    {
+      "monotonic": 33439.914516984,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.093340",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.906240"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360292792\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=477273429\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=429304689",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1343871701\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191422405"
+      }
+    },
+    {
+      "monotonic": 33440.166079768,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.037349",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.962216"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360302877\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=477458637\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=429480724",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1344046734\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191585961"
+      }
+    },
+    {
+      "monotonic": 33440.417053816,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.085073",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.914776"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360308913\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=477644181\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=429658126",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1344222928\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191750855"
+      }
+    },
+    {
+      "monotonic": 33440.66844892,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.031566",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.968089"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.49 avg60=2.00 avg300=2.01 total=360312247\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=37.75 avg60=14.53 avg300=8.16 total=477840556\nfull avg10=35.80 avg60=13.45 avg300=7.41 total=429847173",
+        "io": "some avg10=36.32 avg60=14.64 avg300=13.43 total=1344420921\nfull avg10=33.51 avg60=13.08 avg300=11.90 total=1191938701"
+      }
+    },
+    {
+      "monotonic": 33440.919974891,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.059871",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.939762"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360317387\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=478046761\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=430046448",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1344614600\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1192121333"
+      }
+    },
+    {
+      "monotonic": 33441.171181591,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.064372",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.935359"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360321929\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=478245049\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=430236619",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1344813000\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1192307687"
+      }
+    },
+    {
+      "monotonic": 33441.422130115,
+      "keeper": {
+        "pid": 135892,
+        "state": "active",
+        "wait_event_type": "LWLock",
+        "wait_event": "WALWrite",
+        "blocking_pids": [],
+        "query_age_seconds": "0.008271",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.889241"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360326350\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=478452298\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=430436037",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345006993\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1192490264"
+      }
+    },
+    {
+      "monotonic": 33441.673518533,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.017420",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.982394"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360330986\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=478652938\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=430628992",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345197640\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1192668848"
+      }
+    },
+    {
+      "monotonic": 33441.924982348,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.064752",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.934961"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360335520\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=478859055\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=430827942",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345392128\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1192852607"
+      }
+    },
+    {
+      "monotonic": 33442.176190405,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.008904",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.990856"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360340183\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=479065759\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=431025884",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345589651\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1193037009"
+      }
+    },
+    {
+      "monotonic": 33442.427574326,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.054446",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.945211"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360344203\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=479271162\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=431221534",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345787172\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1193221259"
+      }
+    },
+    {
+      "monotonic": 33442.67886854,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.102170",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.897681"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.40 avg60=2.00 avg300=2.01 total=360348290\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=43.95 avg60=16.41 avg300=8.59 total=479474669\nfull avg10=41.64 avg60=15.24 avg300=7.82 total=431416946",
+        "io": "some avg10=42.24 avg60=16.42 avg300=13.81 total=1345980765\nfull avg10=39.22 avg60=14.78 avg300=12.27 total=1193402471"
+      }
+    },
+    {
+      "monotonic": 33442.930464094,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.046445",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.953261"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360354198\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479688662\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431619965",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346182337\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193587283"
+      }
+    },
+    {
+      "monotonic": 33443.181495998,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.081354",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.918433"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360357412\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740864\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669027",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346237496\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193637333"
+      }
+    },
+    {
+      "monotonic": 33443.432860623,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.027259",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.972533"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360357914\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740888\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669048",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346238126\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193637914"
+      }
+    },
+    {
+      "monotonic": 33443.684308102,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.074774",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.924976"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360358200\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740888\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669048",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346238783\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193638536"
+      }
+    },
+    {
+      "monotonic": 33443.935270697,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.018042",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.981873"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360358533\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740893\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669054",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346239461\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193639189"
+      }
+    },
+    {
+      "monotonic": 33444.186230717,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.063786",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.936072"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360358925\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740893\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669054",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346240102\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193639734"
+      }
+    },
+    {
+      "monotonic": 33444.437478734,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.008669",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.991092"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360359742\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740894\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669054",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346240896\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193640414"
+      }
+    },
+    {
+      "monotonic": 33444.688416884,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.055931",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.943850"
+      },
+      "pressure": {
+        "cpu": "some avg10=2.14 avg60=1.96 avg300=2.01 total=360359844\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=50.66 avg60=18.52 avg300=9.09 total=479740901\nfull avg10=48.22 avg60=17.29 avg300=8.30 total=431669061",
+        "io": "some avg10=48.54 avg60=18.40 avg300=14.24 total=1346241148\nfull avg10=45.15 avg60=16.65 avg300=12.67 total=1193640656"
+      }
+    },
+    {
+      "monotonic": 33444.939731756,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.001562",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.998211"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360360570\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479740922\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431669080",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346241981\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193641291"
+      }
+    },
+    {
+      "monotonic": 33445.190949205,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.049067",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.950578"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360360875\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479740922\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431669080",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346242580\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193641853"
+      }
+    },
+    {
+      "monotonic": 33445.441837091,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.096683",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.903165"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360361310\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479740922\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431669080",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346243251\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193642465"
+      }
+    },
+    {
+      "monotonic": 33445.693278409,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.041753",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.958003"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360362701\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479743952\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431672108",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346246177\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193644920"
+      }
+    },
+    {
+      "monotonic": 33445.944261692,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.089273",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.910593"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360362911\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479743953\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431672109",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346246625\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193645345"
+      }
+    },
+    {
+      "monotonic": 33446.201434462,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.040793",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.958879"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360363108\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479749801\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431677666",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346259126\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193656806"
+      }
+    },
+    {
+      "monotonic": 33446.452400206,
+      "keeper": {
+        "pid": 135892,
+        "state": "active",
+        "wait_event_type": "IO",
+        "wait_event": "WALSync",
+        "blocking_pids": [],
+        "query_age_seconds": "0.000749",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.998976"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360367675\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479822383\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431736054",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346337086\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193718900"
+      }
+    },
+    {
+      "monotonic": 33446.703205473,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.048409",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.951430"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.75 avg60=1.90 avg300=1.99 total=360367979\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=42.57 avg60=18.11 avg300=9.07 total=479822596\nfull avg10=40.57 avg60=16.92 avg300=8.29 total=431736267",
+        "io": "some avg10=40.83 avg60=18.00 avg300=14.18 total=1346338219\nfull avg10=38.06 avg60=16.30 avg300=12.63 total=1193719948"
+      }
+    },
+    {
+      "monotonic": 33446.954475677,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.095622",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.904084"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360368047\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479822596\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431736267",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346338613\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193720329"
+      }
+    },
+    {
+      "monotonic": 33447.205281119,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.037290",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.962539"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360368324\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479822596\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431736267",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346339234\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193720916"
+      }
+    },
+    {
+      "monotonic": 33447.456553509,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.084359",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.915354"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360369818\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479834821\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431748250",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346357926\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193738540"
+      }
+    },
+    {
+      "monotonic": 33447.707713749,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.015116",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.984649"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360375974\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479840903\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431753461",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346369834\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193749255"
+      }
+    },
+    {
+      "monotonic": 33447.95873408,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.062651",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.937140"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360378732\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479841260\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431753818",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346371601\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193750970"
+      }
+    },
+    {
+      "monotonic": 33448.209544848,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.008674",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.991157"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360379376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479841275\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431753827",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346371987\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193751297"
+      }
+    },
+    {
+      "monotonic": 33448.460347875,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.056801",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.943025"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360379551\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479841304\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431753856",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346372288\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193751582"
+      }
+    },
+    {
+      "monotonic": 33448.711242584,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.002662",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.997125"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.44 avg60=1.84 avg300=1.98 total=360380206\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=35.58 avg60=17.65 avg300=9.03 total=479841344\nfull avg10=33.77 avg60=16.47 avg300=8.25 total=431753895",
+        "io": "some avg10=34.16 avg60=17.54 avg300=14.12 total=1346372984\nfull avg10=31.71 avg60=15.87 avg300=12.56 total=1193752231"
+      }
+    },
+    {
+      "monotonic": 33448.962064807,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.050759",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.949108"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360381011\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843757\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756250",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346376135\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193755251"
+      }
+    },
+    {
+      "monotonic": 33449.213296314,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.098747",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.900998"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360381207\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843757\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756250",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346376501\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193755590"
+      }
+    },
+    {
+      "monotonic": 33449.464869929,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.044392",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.955283"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360381684\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843757\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756250",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346377363\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193756353"
+      }
+    },
+    {
+      "monotonic": 33449.715666505,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.092687",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.907155"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360382032\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843773\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756266",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346377953\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193756909"
+      }
+    },
+    {
+      "monotonic": 33449.966834032,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.038198",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.961496"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360382356\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843789\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756282",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346378495\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193757425"
+      }
+    },
+    {
+      "monotonic": 33450.218276341,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.084835",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.914686"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360382703\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843942\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756435",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346379271\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193758155"
+      }
+    },
+    {
+      "monotonic": 33450.46916302,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.031879",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.967906"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360383067\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843963\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756455",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346379958\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193758807"
+      }
+    },
+    {
+      "monotonic": 33450.720516751,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.080239",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.919440"
+      },
+      "pressure": {
+        "cpu": "some avg10=1.17 avg60=1.77 avg300=1.96 total=360383217\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=29.32 avg60=17.10 avg300=8.98 total=479843986\nfull avg10=27.65 avg60=15.93 avg300=8.19 total=431756479",
+        "io": "some avg10=28.15 avg60=17.00 avg300=14.03 total=1346380384\nfull avg10=26.14 avg60=15.38 avg300=12.48 total=1193759199"
+      }
+    },
+    {
+      "monotonic": 33450.971421917,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.026938",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.972881"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360383645\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479843986\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756479",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346381127\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193759852"
+      }
+    },
+    {
+      "monotonic": 33451.222394722,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.072028",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.927671"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360383895\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844020\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756512",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346381638\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193760328"
+      }
+    },
+    {
+      "monotonic": 33451.473248104,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.015087",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.984713"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360383986\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844021\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756512",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346381899\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193760578"
+      }
+    },
+    {
+      "monotonic": 33451.724394241,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.063331",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.936429"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360384177\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844172\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756664",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346382314\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193760961"
+      }
+    },
+    {
+      "monotonic": 33451.97540742,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.007420",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.992384"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360384497\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844172\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756664",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346382857\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193761443"
+      }
+    },
+    {
+      "monotonic": 33452.226793646,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.054684",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.945015"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360384763\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844172\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756664",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346383379\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193761915"
+      }
+    },
+    {
+      "monotonic": 33452.477746984,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.100372",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.899415"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360385081\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844172\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756664",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346383814\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193762314"
+      }
+    },
+    {
+      "monotonic": 33452.728969723,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.046036",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.953691"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.96 avg60=1.72 avg300=1.95 total=360385412\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=24.00 avg60=16.54 avg300=8.91 total=479844227\nfull avg10=22.64 avg60=15.40 avg300=8.14 total=431756714",
+        "io": "some avg10=23.05 avg60=16.44 avg300=13.93 total=1346384530\nfull avg10=21.41 avg60=14.88 avg300=12.40 total=1193762962"
+      }
+    },
+    {
+      "monotonic": 33452.980945108,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.093504",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.906019"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360385633\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479844227\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431756714",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346384913\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193763303"
+      }
+    },
+    {
+      "monotonic": 33453.232074624,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.039370",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.960387"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360385923\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479844227\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431756714",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346385399\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193763745"
+      }
+    },
+    {
+      "monotonic": 33453.483094827,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.086943",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.912819"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360388236\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479845109\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431757589",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346387101\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193765333"
+      }
+    },
+    {
+      "monotonic": 33453.734321395,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.008253",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.991482"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360390560\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479854029\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431766164",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346398908\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193776302"
+      }
+    },
+    {
+      "monotonic": 33453.985256384,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.054155",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.945658"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360391132\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479856173\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431768291",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346403298\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193780554"
+      }
+    },
+    {
+      "monotonic": 33454.236135688,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.100645",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.899174"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360391243\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479856173\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431768291",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346403698\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193780927"
+      }
+    },
+    {
+      "monotonic": 33454.4873698,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.038426",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.961420"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360404772\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479860561\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431772467",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346463422\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193819128"
+      }
+    },
+    {
+      "monotonic": 33454.73878809,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.082976",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.916762"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.79 avg60=1.66 avg300=1.94 total=360405161\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=19.66 avg60=16.00 avg300=8.85 total=479860826\nfull avg10=18.54 avg60=14.90 avg300=8.08 total=431772724",
+        "io": "some avg10=18.87 avg60=15.90 avg300=13.83 total=1346464246\nfull avg10=17.53 avg60=14.39 avg300=12.31 total=1193819904"
+      }
+    },
+    {
+      "monotonic": 33454.989562179,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.029069",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.970777"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.64 avg60=1.60 avg300=1.92 total=360405303\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=16.09 avg60=15.48 avg300=8.79 total=479860826\nfull avg10=15.18 avg60=14.41 avg300=8.02 total=431772724",
+        "io": "some avg10=16.18 avg60=15.51 avg300=13.77 total=1346464619\nfull avg10=14.71 avg60=13.98 avg300=12.24 total=1193820265"
+      }
+    },
+    {
+      "monotonic": 33455.240826467,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.077225",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.922483"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.64 avg60=1.60 avg300=1.92 total=360405417\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=16.09 avg60=15.48 avg300=8.79 total=479860827\nfull avg10=15.18 avg60=14.41 avg300=8.02 total=431772725",
+        "io": "some avg10=16.18 avg60=15.51 avg300=13.77 total=1346465225\nfull avg10=14.71 avg60=13.98 avg300=12.24 total=1193820846"
+      }
+    },
+    {
+      "monotonic": 33455.491649334,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.022352",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.977428"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.64 avg60=1.60 avg300=1.92 total=360406487\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=16.09 avg60=15.48 avg300=8.79 total=479892011\nfull avg10=15.18 avg60=14.41 avg300=8.02 total=431803092",
+        "io": "some avg10=16.18 avg60=15.51 avg300=13.77 total=1346496054\nfull avg10=14.71 avg60=13.98 avg300=12.24 total=1193850708"
+      }
+    },
+    {
+      "monotonic": 33455.743048729,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.070068",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.929616"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.64 avg60=1.60 avg300=1.92 total=360407052\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=16.09 avg60=15.48 avg300=8.79 total=479902007\nfull avg10=15.18 avg60=14.41 avg300=8.02 total=431813079",
+        "io": "some avg10=16.18 avg60=15.51 avg300=13.77 total=1346505495\nfull avg10=14.71 avg60=13.98 avg300=12.24 total=1193860126"
+      }
+    },
+    {
+      "monotonic": 33455.994170616,
+      "keeper": {
+        "pid": 135892,
+        "state": "idle",
+        "wait_event_type": "Client",
+        "wait_event": "ClientRead",
+        "blocking_pids": [],
+        "query_age_seconds": "0.016690",
+        "query": "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=$1"
+      },
+      "lease": {
+        "epoch": 1,
+        "healthy": true,
+        "remaining_seconds": "4.983076"
+      },
+      "pressure": {
+        "cpu": "some avg10=0.64 avg60=1.60 avg300=1.92 total=360407998\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+        "memory": "some avg10=16.09 avg60=15.48 avg300=8.79 total=479917447\nfull avg10=15.18 avg60=14.41 avg300=8.02 total=431828277",
+        "io": "some avg10=16.18 avg60=15.51 avg300=13.77 total=1346521508\nfull avg10=14.71 avg60=13.98 avg300=12.24 total=1193875772"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "created": "2026-10-14",
+  "controls_sha256": "bdc9f2fe89b1dfe27082056ce16a653642fea8753bc5833f1b7c036a7259faed",
+  "status": "source-grounded morphology correction; complete factual/semantic audit remains mandatory",
+  "replacements": {
+    "bel-14": [
+      "прыстанішч"
+    ],
+    "bel-4": [
+      "ганд",
+      "раб"
+    ]
+  },
+  "notes": [
+    "BE гандлю рабамі is grammatical inflection of frozen source гандаль рабамі; retains both trade/slave concepts.",
+    "A Supported Claim heading with real facts is not the earlier fact-free copied example; all responses remain subject to semantic review."
+  ]
+}

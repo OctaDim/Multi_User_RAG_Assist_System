@@ -1,0 +1,23 @@
+{
+  "before_verdict": {
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": "concurrency"
+  },
+  "classification_changes": [],
+  "outcome_counts": {
+    "outcome": "verdicts",
+    "batches": 1,
+    "selected": 4,
+    "confirmed": 4,
+    "rejected": 0,
+    "unresolved": 0,
+    "malformed": 0,
+    "failed": 0,
+    "shortcut_skipped": 0,
+    "bound_exceeded": false,
+    "protected_subject_reclassifications": 0,
+    "reason": "One bounded validator batch returned all four well-formed verdicts. Each is confirmed on inspected code or isolated arithmetic; native/browser incidence of the specific defect was not measured. Confirmation grants no local apply authority."
+  }
+}

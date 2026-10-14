@@ -1,0 +1,14 @@
+{
+  "source": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+  "observed_on": "2026-10-14",
+  "section": "PaddleOCR-VL-1.5-0.9B Usage with transformers",
+  "spotting_input_recipe": {
+    "resize_condition": "both original dimensions are below 1500 pixels",
+    "scale": 2,
+    "resampling": "LANCZOS",
+    "spotting_max_pixels_in_official_example": 1605632,
+    "trained_task_prompt": "Spotting:"
+  },
+  "scope": "Primary documentation for bounded input calibration, not a passing recognition receipt. No generic language-conditioned Spotting prompt is documented in this example.",
+  "contract": "RAG-64: original fixed Paddle model/projector bytes remain unchanged; any preprocessing must use image/layout alone, mask handwriting before recognition, preserve genuine LOC and map coordinates to original pixels. Existing modified-projector candidate remains unadopted."
+}

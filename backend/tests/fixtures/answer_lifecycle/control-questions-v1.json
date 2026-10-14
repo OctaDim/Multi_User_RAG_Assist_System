@@ -1,0 +1,380 @@
+{
+  "created": "2026-10-14",
+  "status": "frozen before any answer evaluation",
+  "acceptance": "All 30 correct; concept checks are necessary, semantic/factual audit of every raw answer remains required, no tolerated errors.",
+  "questions": [
+    {
+      "id": "eng-1",
+      "language": "eng",
+      "article": 1,
+      "question": "How does Article 1 describe all human beings at birth?",
+      "expected_source_answer": "Article 1 All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.",
+      "required_concepts": [
+        "free",
+        "equal",
+        "dignity",
+        "rights"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-3",
+      "language": "eng",
+      "article": 3,
+      "question": "Which three rights does Article 3 give everyone?",
+      "expected_source_answer": "Article 3 Everyone has the right to life, liberty and the security of person.",
+      "required_concepts": [
+        "life",
+        "liberty",
+        "security"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-4",
+      "language": "eng",
+      "article": 4,
+      "question": "What does Article 4 prohibit in all forms?",
+      "expected_source_answer": "Article 4 No one shall be held in slavery or servitude; slavery and the slave trade shall be prohibited in all their forms.",
+      "required_concepts": [
+        "slavery",
+        "slave trade"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-5",
+      "language": "eng",
+      "article": 5,
+      "question": "What treatment does Article 5 forbid?",
+      "expected_source_answer": "Article 5 No one shall be subjected to torture or to cruel, inhuman or degrading treatment or punishment.",
+      "required_concepts": [
+        "torture"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-9",
+      "language": "eng",
+      "article": 9,
+      "question": "What arbitrary actions does Article 9 forbid?",
+      "expected_source_answer": "Article 9 No one shall be subjected to arbitrary arrest, detention or exile.",
+      "required_concepts": [
+        "arrest",
+        "detention",
+        "exile"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-14",
+      "language": "eng",
+      "article": 14,
+      "question": "What may a persecuted person seek in other countries according to Article 14?",
+      "expected_source_answer": "Article 14 Everyone has the right to seek and to enjoy in other countries asylum from persecution. This right may not be invoked in the case of prosecutions genuinely arising from non‐political crimes or from acts contrary to the purposes and principles of the United Nations.",
+      "required_concepts": [
+        "asylum"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-15",
+      "language": "eng",
+      "article": 15,
+      "question": "What right does Article 15 grant everyone?",
+      "expected_source_answer": "Article 15 Everyone has the right to a nationality. No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality.",
+      "required_concepts": [
+        "nationality"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "eng-24",
+      "language": "eng",
+      "article": 24,
+      "question": "What does Article 24 say about holidays?",
+      "expected_source_answer": "Article 24 Everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay.",
+      "required_concepts": [
+        "pay"
+      ],
+      "document": "udhr-eng.txt"
+    },
+    {
+      "id": "rus-1",
+      "language": "rus",
+      "article": 1,
+      "question": "Какими рождаются все люди согласно статье 1?",
+      "expected_source_answer": "Статья 1 Все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства.",
+      "required_concepts": [
+        "свобод",
+        "равн",
+        "достоинств",
+        "прав"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-3",
+      "language": "rus",
+      "article": 3,
+      "question": "Какие три права человека названы в статье 3?",
+      "expected_source_answer": "Статья 3 Каждый человек имеет право на жизнь, на свободу и на личную неприкосновенность.",
+      "required_concepts": [
+        "жизн",
+        "свобод",
+        "неприкосновен"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-4",
+      "language": "rus",
+      "article": 4,
+      "question": "Что запрещается во всех видах согласно статье 4?",
+      "expected_source_answer": "Статья 4 Никто не должен содержаться в рабстве или в подневольном состоянии; рабство и работорговля запрещаются во всех их видах.",
+      "required_concepts": [
+        "рабств",
+        "работорговл"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-5",
+      "language": "rus",
+      "article": 5,
+      "question": "Какое обращение запрещает статья 5?",
+      "expected_source_answer": "Статья 5 Никто не должен подвергаться пыткам или жестоким, бесчеловечным или унижающим его достоинство обращению и наказанию.",
+      "required_concepts": [
+        "пытк"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-9",
+      "language": "rus",
+      "article": 9,
+      "question": "Какие произвольные действия запрещает статья 9?",
+      "expected_source_answer": "Статья 9 Никто не может быть подвергнут произвольному аресту, задержанию или изгнанию.",
+      "required_concepts": [
+        "арест",
+        "задержан",
+        "изгнан"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-14",
+      "language": "rus",
+      "article": 14,
+      "question": "Что вправе искать человек от преследования согласно статье 14?",
+      "expected_source_answer": "Статья 14 Каждый человек имеет право искать убежища от преследования в других странах и пользоваться этим убежищем. Это право не может быть использовано в случае преследования, в действительности основанного на совершении неполитического преступления, или деяния, противоречащего целям и принципам Организации Объединенных Наций.",
+      "required_concepts": [
+        "убежищ"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-15",
+      "language": "rus",
+      "article": 15,
+      "question": "Какое право есть у каждого человека согласно статье 15?",
+      "expected_source_answer": "Статья 15 Каждый человек имеет право на гражданство. Никто не может быть произвольно лишен своего гражданства или права изменить свое гражданство.",
+      "required_concepts": [
+        "гражданств"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "rus-24",
+      "language": "rus",
+      "article": 24,
+      "question": "Что статья 24 предусматривает относительно отпуска?",
+      "expected_source_answer": "Статья 24 Каждый человек имеет право на отдых и досуг, включая право на разумное ограничение рабочего дня и на оплачиваемый периодический отпуск.",
+      "required_concepts": [
+        "оплач"
+      ],
+      "document": "udhr-rus.txt"
+    },
+    {
+      "id": "bel-1",
+      "language": "bel",
+      "article": 1,
+      "question": "Якімі нараджаюцца ўсе людзі паводле артыкула 1?",
+      "expected_source_answer": "Артыкул 1. Усе людзі нараджаюцца свабоднымі і роўнымі ў сваёй годнасці і правах. Яны надзелены розумам і сумленнем і павінны ставіцца адзін да аднаго ў духу брацтва.",
+      "required_concepts": [
+        "свабод",
+        "роўн",
+        "годнасц",
+        "прав"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-3",
+      "language": "bel",
+      "article": 3,
+      "question": "Якія тры правы мае кожны чалавек паводле артыкула 3?",
+      "expected_source_answer": "Артыкул 3. Кожны чалавека мае права на жыццё, на свабоду і на асабістую недатыкальнасць.",
+      "required_concepts": [
+        "жыцц",
+        "свабод",
+        "недатыкальн"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-4",
+      "language": "bel",
+      "article": 4,
+      "question": "Што забараняецца ва ўсіх выглядах паводле артыкула 4?",
+      "expected_source_answer": "Артыкул 4. Ніхто не павінен утрымлівацца ў рабстве або ў паднявольным стане; рабства і гандаль рабамі забараняюцца ва ўсіх іх выглядах.",
+      "required_concepts": [
+        "рабств",
+        "гандаль раб"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-5",
+      "language": "bel",
+      "article": 5,
+      "question": "Якое абыходжанне забараняе артыкул 5?",
+      "expected_source_answer": "Артыкул 5. Ні над кім не павінны ўчыняцца катаванні або жорсткія, бесчалавечныя або ўніжаючыя яго годнасць абыходжанне і пакаранне.",
+      "required_concepts": [
+        "катаван"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-9",
+      "language": "bel",
+      "article": 9,
+      "question": "Якія самавольныя дзеянні забараняе артыкул 9?",
+      "expected_source_answer": "Артыкул 9. Ні над кім не павінны ўчыняцца самавольны арышт, затрыманне або выгнанне.",
+      "required_concepts": [
+        "арышт",
+        "затрыман",
+        "выгнан"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-14",
+      "language": "bel",
+      "article": 14,
+      "question": "Што чалавек мае права шукаць ад праследавання паводле артыкула 14?",
+      "expected_source_answer": "Артыкул 14. Кожны чалавек мае права шукаць прыстанішча ад праследавання ў іншых краінах і карыстацца гэтым прыстанішчам. Гэта права не можа быць выкарыстана ў выпадку праследавання, сапраўды заснаванага на ўчыненні непалітычнага злачынства, або дзеяння, што супярэчыць мэтам і прынцыпам Арганізацыі Абʼяднаных Нацый.",
+      "required_concepts": [
+        "прытул"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "bel-15",
+      "language": "bel",
+      "article": 15,
+      "question": "Якое права мае кожны чалавек паводле артыкула 15?",
+      "expected_source_answer": "Артыкул 15. Кожны чалавек мае права на грамадзянства. Ніхто не можа быць самавольна пазбаўлены свайго грамадзянства або права змяніць сваё грамадзянства.",
+      "required_concepts": [
+        "грамадзянств"
+      ],
+      "document": "udhr-bel.txt"
+    },
+    {
+      "id": "deu_1996-1",
+      "language": "deu_1996",
+      "article": 1,
+      "question": "Wie werden alle Menschen nach Artikel 1 geboren?",
+      "expected_source_answer": "Artikel 1 Alle Menschen sind frei und gleich an Würde und Rechten geboren. Sie sind mit Vernunft und Gewissen begabt und sollen einander im Geist der Brüderlichkeit begegnen.",
+      "required_concepts": [
+        "frei",
+        "gleich",
+        "würde",
+        "rechten"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-3",
+      "language": "deu_1996",
+      "article": 3,
+      "question": "Welche drei Rechte nennt Artikel 3?",
+      "expected_source_answer": "Artikel 3 Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person.",
+      "required_concepts": [
+        "leben",
+        "freiheit",
+        "sicherheit"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-4",
+      "language": "deu_1996",
+      "article": 4,
+      "question": "Was verbietet Artikel 4 in allen Formen?",
+      "expected_source_answer": "Artikel 4 Niemand darf in Sklaverei oder Leibeigenschaft gehalten werden; Sklaverei und Sklavenhandel sind in allen ihren Formen verboten.",
+      "required_concepts": [
+        "sklaverei",
+        "sklavenhandel"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-5",
+      "language": "deu_1996",
+      "article": 5,
+      "question": "Welche Behandlung verbietet Artikel 5?",
+      "expected_source_answer": "Artikel 5 Niemand darf der Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe unterworfen werden.",
+      "required_concepts": [
+        "folter"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-9",
+      "language": "deu_1996",
+      "article": 9,
+      "question": "Welche willkürlichen Maßnahmen verbietet Artikel 9?",
+      "expected_source_answer": "Artikel 9 Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden.",
+      "required_concepts": [
+        "festgenommen",
+        "haft",
+        "landes"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-14",
+      "language": "deu_1996",
+      "article": 14,
+      "question": "Was dürfen Verfolgte nach Artikel 14 in anderen Ländern suchen?",
+      "expected_source_answer": "Artikel 14 Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen. Dieses Recht kann nicht in Anspruch genommen werden im Falle einer Strafverfolgung, die tatsächlich auf Grund von Verbrechen nichtpolitischer Art oder auf Grund von Handlungen erfolgt, die gegen die Ziele und Grundsätze der Vereinten Nationen verstoßen.",
+      "required_concepts": [
+        "asyl"
+      ],
+      "document": "udhr-deu_1996.txt"
+    },
+    {
+      "id": "deu_1996-15",
+      "language": "deu_1996",
+      "article": 15,
+      "question": "Welches Recht hat jeder nach Artikel 15?",
+      "expected_source_answer": "Artikel 15 Jeder hat das Recht auf eine Staatsangehörigkeit. Niemandem darf seine Staatsangehörigkeit willkürlich entzogen noch das Recht versagt werden, seine Staatsangehörigkeit zu wechseln.",
+      "required_concepts": [
+        "staatsangehörigkeit"
+      ],
+      "document": "udhr-deu_1996.txt"
+    }
+  ],
+  "corpus_hashes": {
+    "udhr-rus.xml": "4d91ee6b21c4f2fd26bae1a62b6f2922b2a33335b1559ccfaea29bdaf2ec2972",
+    "udhr-eng.xml": "df73275821449df4db2b164e59bda812c834d80cacc8792a6f41d6fc331ce204",
+    "udhr-bel.xml": "c20dec1fbb2b291467d0f7d0885929f3ea65553f3fa791a499c5547636389113",
+    "udhr-bel.txt": "798b0d1d63a5742adf4c0f7cf8745008da0a6dba631dfde834c3890705a07a7a",
+    "udhr-provenance.json": "f35d3a0ee9b450206c2cea1a73933f22c65832a9ce9e8edc5cdcae2e3cb8c1db",
+    "udhr-deu_1996.xml": "c9cdfc09db8e9dac2f6571a51a87178c6d8bce80f0db888ca23fdf002179a917",
+    "udhr-rus.txt": "5163ff2e053fec173011445324b242c747cd0ffbb3b5223ca1cce46d0691c64b",
+    "udhr-deu_1996.txt": "f592cf0746c33fbd764092cf153f883f806dc32bf3c82372c9c974f96ec38160",
+    "udhr-eng.txt": "e18c92c59d409a902785da1a156797ca14816561a5f494f42ac87fbb2dcf2f00"
+  }
+}

@@ -1,0 +1,84 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_transport_lifecycle.py F
+
+=================================== FAILURES ===================================
+_ test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after] _
+
+paused_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../native-release'), PosixPath('/tmp/rag-u8-worker-transport-7/test_actual_two_tab_admission_0/generation.log'), 'after')
+environment = {'dsn': 'user=postgres dbname=u8_7ff8bfd2cb394a7e870df9aef51a7795 host=/tmp/rag-u8-worker-transport-7/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-transport-7/test_actual_two_tab_admission_0')
+
+    @pytest.mark.parametrize('paused_native_browser',['after'],indirect=True)
+    def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(paused_native_browser,environment,tmp_path):
+        ((browser,mailbox,frontend,first),_,_),marker,release,native_log,_=paused_native_browser
+        api_log=tmp_path/'api-2.log'
+        with api_log.open('xb') as stream:
+            process=subprocess.Popen([str(BACKEND/'.venv/bin/rag-api'),'--port','0'],cwd=BACKEND,
+                env=os.environ.copy(),stdout=stream,stderr=subprocess.STDOUT)
+            proxies=[];context=browser.new_context()
+            try:
+                until=time.monotonic()+15
+                while True:
+                    match=re.search(r'Uvicorn running on (http://127\.0\.0\.1:\d+)',api_log.read_text())
+                    if match:break
+                    assert process.poll() is None and time.monotonic()<until,api_log.read_text()
+                    time.sleep(.05)
+                second=match.group(1)
+                for api in [first,second]:
+                    parsed=urlsplit(api);proxies.append(CutProxy((parsed.hostname,parsed.port)))
+                pages=[context.new_page(),context.new_page()]
+                origins=[through_proxy(page,proxy) for page,proxy in zip(pages,proxies)]
+                email='u8-proxy-owner@owned.test'
+                register(pages[0],mailbox,frontend,email);login(pages[0],email)
+                pages[0].locator('#document-upload input').set_input_files({'name':'proxy-budget.txt','mimeType':'text/plain',
+                    'buffer':b'The annual budget is 100 euros.'})
+                pages[0].get_by_role('button',name='Загрузить документы',exact=True).click();ready(pages[0],'proxy-budget.txt')
+                pages[1].goto(frontend);login(pages[1],email)
+                credentials=[]
+                for index,page in enumerate(pages):
+                    page.locator('#question').fill(f'Independent unsent tab draft {index}')
+                    page.get_by_role('checkbox',name='proxy-budget.txt',exact=True).check()
+                    credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
+                        tab:JSON.parse(sessionStorage.getItem('rag:tab')),conversation:sessionStorage.getItem('rag:conversation'),
+                        document:document.querySelector('#question-sources input:checked').value})'''))
+                    expect(page.locator('#answer-connection')).to_contain_text('Соединение установлено')
+                requests=[{'base':origins[index],'token':actor['token'],'proof':actor['tab']['proof'],'conversation':actor['conversation'],
+                    'body':{'operation_key':str(uuid4()),'question':['What is the annual budget?','What is the approved annual budget?'][index],
+                        'tab_id':actor['tab']['id'],'document_ids':[actor['document']]}} for index,actor in enumerate(credentials)]
+                replies=pages[0].evaluate('''async rows=>await Promise.all(rows.map(async row=>{
+                    const response=await fetch(row.base+'/api/conversations/'+row.conversation+'/answers',{method:'POST',
+                        headers:{Authorization:'Bearer '+row.token,'X-Tab-Proof':row.proof,'Content-Type':'application/json'},body:JSON.stringify(row.body)});
+                    return {status:response.status,body:await response.json()};}))''',requests)
+                assert sorted(row['status'] for row in replies)==[200,409],replies
+                winner=next(index for index,row in enumerate(replies) if row['status']==200)
+                owner,observer=pages[winner],pages[1-winner];proxy=proxies[winner]
+                request_id=replies[winner]['body']['id'];conversation=credentials[winner]['conversation']
+                expect(owner.locator('#history article')).to_have_count(1)
+                expect(observer.locator('#history article')).to_have_count(1)
+                until=time.monotonic()+30
+                while not marker.exists():
+                    assert time.monotonic()<until;owner.wait_for_timeout(50)
+                expect(owner.locator('#history .answer-text')).not_to_have_text('')
+                prefix=owner.locator('#history .answer-text').inner_text()
+                proxy.cut();owner.wait_for_timeout(5000);proxy.enabled=True
+                expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+>               expect(owner.locator('#history .answer-text')).to_have_text(prefix)
+E               AssertionError: Locator expected to have text 'The approved'
+E               Actual value: The approved annual 
+E               Call log:
+E                 - LocatorAssertions.to_have_text with timeout 5000ms
+E                 -   - waiting for locator("#history .answer-text")
+E                 -     9 × locator resolved to <p class="answer-text">The approved annual</p>
+E                 -       - unexpected value "The approved annual"
+
+backend/tests/integration/test_transport_lifecycle.py:181: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after]
+============================== 1 failed in 34.55s ==============================

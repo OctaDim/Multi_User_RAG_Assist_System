@@ -1,0 +1,190 @@
+{
+  "input": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-direct-source-negative-v1-control-results.json",
+  "input_sha256": "c42a847ff73db1cf9ec5d7adc845f40cf86e2cb8fb61b02dd55fbb5779e9c795",
+  "review": "Parent read all30 questions/rawanswers independently against frozen expected text and actual passedsource excerpts; no matcher/input/output modifications",
+  "mechanical_correct": 28,
+  "accepted_after_review": 26,
+  "final_ACCEPTANCE": false,
+  "rows": [
+    {
+      "id": "eng-1",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-3",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-4",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-5",
+      "semantic_and_citation_acceptance": false,
+      "reason": "Claims Article5 prohibition includes slavery/slave trade; supplied Article5 does not contain that attribution.",
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-9",
+      "semantic_and_citation_acceptance": false,
+      "reason": "Adds unrequested framework claim linking unrelated prohibitions; violates direct-answer/no-background contract.",
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-14",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-15",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "eng-24",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-1",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-3",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-4",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-5",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-9",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-14",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-15",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "rus-24",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-1",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-3",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-4",
+      "semantic_and_citation_acceptance": false,
+      "reason": "Omits slave trade from complete supplied Article4.",
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-5",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-9",
+      "semantic_and_citation_acceptance": false,
+      "reason": "Uses source9 despite only2passed excerpts; no authorized citation.",
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-14",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "bel-15",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-1",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-3",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-4",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-5",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-9",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-14",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    },
+    {
+      "id": "deu_1996-15",
+      "semantic_and_citation_acceptance": true,
+      "reason": null,
+      "exact_passed_source_spans_and_present_citation_geometry": true
+    }
+  ]
+}

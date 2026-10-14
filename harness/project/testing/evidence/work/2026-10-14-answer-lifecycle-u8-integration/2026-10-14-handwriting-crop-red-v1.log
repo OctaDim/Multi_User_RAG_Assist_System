@@ -1,0 +1,37 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/test_document_ocr.py [0;93m2026-10-14 14:38:55.210097222 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+F
+
+=================================== FAILURES ===================================
+____ test_real_small_handwriting_crop_is_detected_before_permission_masking ____
+
+    def test_real_small_handwriting_crop_is_detected_before_permission_masking():
+        """Actual pinned detector, genuine raster; recognition is never run to classify."""
+        import os
+        import onnxruntime as ort
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        root = Path(os.environ['RAG_OCR_DIR'])/'dfine'
+        detector = DocumentOCR.__new__(DocumentOCR)
+        detector.config = json.loads((root/'config.json').read_text())
+        options = ort.SessionOptions(); options.intra_op_num_threads=2; options.inter_op_num_threads=1
+        detector.detector = ort.InferenceSession(str(root/'model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
+        image = Image.open(PROOF/'real-handwritten-title-author-input-v1.png').convert('RGB')
+        regions = detector.detect_handwriting(image)
+        # Both actual handwritten lines must be covered; recognizing first and
+        # redacting afterward cannot discharge the permission contract.
+>       assert len(regions) == 2, regions
+               ^^^^^^^^^^^^^^^^^
+E       AssertionError: []
+
+backend/tests/test_document_ocr.py:62: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_real_small_handwriting_crop_is_detected_before_permission_masking
+============================== 1 failed in 3.58s ===============================

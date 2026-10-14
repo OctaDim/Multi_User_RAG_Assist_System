@@ -1,0 +1,17 @@
+{
+  "created": "2026-10-14",
+  "purpose": "Unadopted official Spotting profile candidate; original pinned model asset unchanged",
+  "source": "backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf",
+  "candidate": "/tmp/rag-u8-worker-spotting-1605632-mmproj.gguf",
+  "official_guide": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+  "key": "clip.vision.image_max_pixels",
+  "before": 1003520,
+  "after": 1605632,
+  "offset": 1491,
+  "changed_byte_offsets": [
+    1492,
+    1493
+  ],
+  "sha256_original": "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87",
+  "sha256_candidate": "67b597dea106314827fa9782ce4b2fa09ed9efe640314608525be2cd289fa49c"
+}

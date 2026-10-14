@@ -1,0 +1,183 @@
+.FFFFFFF.F                                                               [100%]
+=================================== FAILURES ===================================
+_____________ test_single_color_ink_reaches_printed_page_text[128] _____________
+
+gray = 128
+
+    @pytest.mark.parametrize('gray',[0,128,240])
+    def test_single_color_ink_reaches_printed_page_text(gray):
+        from PIL import Image,ImageDraw
+        from app.ocr import DocumentOCR,ink_mask
+        image=Image.new('RGB',(80,30),'white')
+        ImageDraw.Draw(image).text((5,5),'Budget',fill=(gray,gray,gray),font_size=12)
+        # Crisp embedded PNG: exactly one foreground level, no antialias levels.
+        image=image.convert('L').point(lambda value:gray if value<245 else 255).convert('RGB')
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        ocr.recognize=lambda image,cancelled:[{'kind':'printed','text':'Budget','bbox':[5,5,60,20]}]
+>       assert ink_mask(image).any()
+               ^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/test_document_ocr.py:22: AssertionError
+_____________ test_single_color_ink_reaches_printed_page_text[240] _____________
+
+gray = 240
+
+    @pytest.mark.parametrize('gray',[0,128,240])
+    def test_single_color_ink_reaches_printed_page_text(gray):
+        from PIL import Image,ImageDraw
+        from app.ocr import DocumentOCR,ink_mask
+        image=Image.new('RGB',(80,30),'white')
+        ImageDraw.Draw(image).text((5,5),'Budget',fill=(gray,gray,gray),font_size=12)
+        # Crisp embedded PNG: exactly one foreground level, no antialias levels.
+        image=image.convert('L').point(lambda value:gray if value<245 else 255).convert('RGB')
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        ocr.recognize=lambda image,cancelled:[{'kind':'printed','text':'Budget','bbox':[5,5,60,20]}]
+>       assert ink_mask(image).any()
+               ^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/test_document_ocr.py:22: AssertionError
+_ test_complete_page_preserves_printed_columns_when_inserting_handwriting[False] _
+
+handwritten = False
+
+    @pytest.mark.parametrize('handwritten',[False,True])
+    def test_complete_page_preserves_printed_columns_when_inserting_handwriting(handwritten):
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        lines=[{'kind':'printed','text':text,'bbox':bbox} for text,bbox in [
+            ('Left top',[0,0,40,10]),('Left bottom',[0,40,40,50]),
+            ('Right top',[60,0,100,10]),('Right bottom',[60,40,100,50])]]
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.recognize=lambda image,cancelled:lines
+        ocr.transcribe=lambda image,cancelled:'Note'
+        image=Image.new('RGB',(100,60),'white')
+        prepared={'image':image,'original':image,'printed_ink':True,'mode':'complete','skips':[],
+                  'handwriting':[{'kind':'handwritten','bbox':[0,20,40,30]}] if handwritten else []}
+        page=ocr.finish_page(prepared,None)
+>       assert page['text']==('Left top\nNote\nLeft bottom\nRight top\nRight bottom\n' if handwritten
+                              else 'Left top\nLeft bottom\nRight top\nRight bottom\n')
+E       AssertionError
+
+backend/tests/test_document_ocr.py:41: AssertionError
+_ test_complete_page_preserves_printed_columns_when_inserting_handwriting[True] _
+
+handwritten = True
+
+    @pytest.mark.parametrize('handwritten',[False,True])
+    def test_complete_page_preserves_printed_columns_when_inserting_handwriting(handwritten):
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        lines=[{'kind':'printed','text':text,'bbox':bbox} for text,bbox in [
+            ('Left top',[0,0,40,10]),('Left bottom',[0,40,40,50]),
+            ('Right top',[60,0,100,10]),('Right bottom',[60,40,100,50])]]
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.recognize=lambda image,cancelled:lines
+        ocr.transcribe=lambda image,cancelled:'Note'
+        image=Image.new('RGB',(100,60),'white')
+        prepared={'image':image,'original':image,'printed_ink':True,'mode':'complete','skips':[],
+                  'handwriting':[{'kind':'handwritten','bbox':[0,20,40,30]}] if handwritten else []}
+        page=ocr.finish_page(prepared,None)
+>       assert page['text']==('Left top\nNote\nLeft bottom\nRight top\nRight bottom\n' if handwritten
+                              else 'Left top\nLeft bottom\nRight top\nRight bottom\n')
+E       AssertionError
+
+backend/tests/test_document_ocr.py:41: AssertionError
+_ test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[die Seerose bl\xfcht auf dem Teich.] _
+
+raw = 'die Seerose blüht auf dem Teich.'
+
+    @pytest.mark.parametrize('raw',['die Seerose blüht auf dem Teich.','Die Seerose blüht auf dem Teich?',
+                                   'Die Seerose blüht auf dem Teich','Die Seerose blüht auf dem Teich. extra'])
+    def test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text(raw):
+>       assert strict_ocr_tokens(raw)!=strict_ocr_tokens('Die Seerose blüht auf dem Teich.')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/integration/test_multilingual_documents.py:37: AssertionError
+_ test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich?] _
+
+raw = 'Die Seerose blüht auf dem Teich?'
+
+    @pytest.mark.parametrize('raw',['die Seerose blüht auf dem Teich.','Die Seerose blüht auf dem Teich?',
+                                   'Die Seerose blüht auf dem Teich','Die Seerose blüht auf dem Teich. extra'])
+    def test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text(raw):
+>       assert strict_ocr_tokens(raw)!=strict_ocr_tokens('Die Seerose blüht auf dem Teich.')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/integration/test_multilingual_documents.py:37: AssertionError
+_ test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich] _
+
+raw = 'Die Seerose blüht auf dem Teich'
+
+    @pytest.mark.parametrize('raw',['die Seerose blüht auf dem Teich.','Die Seerose blüht auf dem Teich?',
+                                   'Die Seerose blüht auf dem Teich','Die Seerose blüht auf dem Teich. extra'])
+    def test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text(raw):
+>       assert strict_ocr_tokens(raw)!=strict_ocr_tokens('Die Seerose blüht auf dem Teich.')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/integration/test_multilingual_documents.py:37: AssertionError
+________ test_real_settings_late_refresh_cannot_replace_completed_save _________
+
+real_account_browser = (<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-linu...version=131.0.6778.33>, <mailbox.Mailbox object at 0x78f4f89d2b10>, 'http://127.0.0.1:57698', 'http://127.0.0.1:57770')
+tmp_path = PosixPath('/tmp/rag-u8-review-fixes-red-v1/test_real_settings_late_refres0')
+
+    def test_real_settings_late_refresh_cannot_replace_completed_save(real_account_browser,tmp_path):
+        browser,mailbox,frontend,_=real_account_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();operator(page,mailbox,frontend)
+            form=page.locator('#global-settings')
+            expect(form.locator('[name=max_active]')).to_have_value('12')
+            form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
+            form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
+            page.evaluate('''() => {
+                const original=window.fetch;
+                window.holdSettings=true;
+                window.fetch=async(...args)=>{
+                    const response=await original(...args);
+                    if(window.holdSettings && String(args[0]).endsWith('/api/settings') && args[1]?.method==='GET'){
+                        window.holdSettings=false;
+                        const value=await response.clone().json();
+                        const read=response.json.bind(response);
+                        response.json=async()=>{
+                            const result=await read();
+                            setTimeout(()=>window.staleSettingsProcessed=true,0);
+                            return result;
+                        };
+                        return await new Promise(resolve=>window.heldSettings={value,release:()=>resolve(response)});
+                    }
+                    return response;
+                };
+            }''')
+            form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
+            page.wait_for_function('window.heldSettings?.value.revision===0')
+            form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
+            expect(form.locator('.settings-revision')).to_contain_text('Сохранена ревизия 1.')
+            page.evaluate('window.heldSettings.release()')
+            page.wait_for_function('window.staleSettingsProcessed===true')
+>           expect(form.locator('.settings-revision')).to_contain_text('Сохранена ревизия 1.')
+E           AssertionError: Locator expected to contain text 'Сохранена ревизия 1.'
+E           Actual value: Сохранена ревизия 0. Применена: 0. 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 5000ms
+E             -   - waiting for locator("#global-settings").locator(".settings-revision")
+E             -     9 × locator resolved to <p class="settings-revision">Сохранена ревизия 0. Применена: 0.</p>
+E             -       - unexpected value "Сохранена ревизия 0. Применена: 0."
+
+backend/tests/integration/test_actual_settings_restart.py:53: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[128]
+FAILED backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[240]
+FAILED backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[False]
+FAILED backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[True]
+FAILED backend/tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[die Seerose bl\xfcht auf dem Teich.]
+FAILED backend/tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich?]
+FAILED backend/tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich]
+FAILED backend/tests/integration/test_actual_settings_restart.py::test_real_settings_late_refresh_cannot_replace_completed_save
+8 failed, 2 passed in 12.41s

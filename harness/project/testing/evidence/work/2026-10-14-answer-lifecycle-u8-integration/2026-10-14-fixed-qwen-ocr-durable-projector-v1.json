@@ -1,0 +1,10 @@
+{
+  "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/mmproj-F16.gguf",
+  "bytes": 668227264,
+  "sha256": "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7",
+  "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/f6d5376be1edb4d416d56da11e5397a961aca8ae/mmproj-F16.gguf",
+  "source": "/tmp/rag-u8-worker-qwen-ocr-projector-F16.gguf",
+  "repository_revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+  "original_assets": "not overwritten",
+  "contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md"
+}

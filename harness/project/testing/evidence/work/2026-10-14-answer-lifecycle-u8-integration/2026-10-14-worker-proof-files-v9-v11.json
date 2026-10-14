@@ -1,0 +1,207 @@
+[
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa0-generation.log",
+    "sha256": "a60dad48b045a18f0b02418105f7307e9f571141ed2a3127831544b9d9bb48f7"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa1/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa1-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa1/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa1-generation.log",
+    "sha256": "a63f89363f1e7c83428fc9267c003ebfecfd86d0806098bc90e6a2b175ebf5c0"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa2/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa2-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa2/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa2-generation.log",
+    "sha256": "f49cab6d4483ce9f8a0227bb2df91ce3db730bf5dfae56ed2b0d1ba3386a39d0"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa3/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa3-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa3/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa3-generation.log",
+    "sha256": "dcd442aa494bb0f4864dde48a5d6d506df9ef2cc417dfa2946c7d1da3f545899"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa4/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa4-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa4/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa4-generation.log",
+    "sha256": "ca97325ad87ee865c79de050dfc20b13f2ae1ce2a2d3f657727c34ad7120684c"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa5/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa5-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa5/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_actual_native_terminal_pa5-generation.log",
+    "sha256": "1bd3691e099be1f6fdf458efaf02bad0ce56f5965bb7cb0c9f94c6517a558240"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_frozen_thirty_questions_u0-api-2.log",
+    "sha256": "e20f7e9224d08c121438daf86151d9802aece45f71893c935cdde70f06fb3052"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/control-results.json",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_frozen_thirty_questions_u0-control-results.json",
+    "sha256": "e3060132c3f7df025dc3ccb7c47bfcd7c6195388995dc6df0b263b86ee7b99a4"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_frozen_thirty_questions_u0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-quality-9-test_frozen_thirty_questions_u0-generation.log",
+    "sha256": "832ef25b502d208d2a182b7b6eb508740941f1e3886f54992a0a5696ab6e5d7a"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa0-generation.log",
+    "sha256": "9d1c788fd5cdcab6829aa76e3156aec016eab4d8d6b68c948f354789d57e3727"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa0/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa0-terminal.png",
+    "sha256": "6184ff1198dfa67ef3e3ddc0667748d322422c0bff089d8f3123c30ad1f23a4b"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa1/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa1-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa1/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa1-generation.log",
+    "sha256": "a4d61ca06aa4349bd93540386f2cf6dd828eb3d7a3978660fa4f7092e3e46b1e"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa1/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa1-terminal.png",
+    "sha256": "e4c0f7fdbb1867c942f56c57037dc64b775a7f6fd6a98284d03ec99af8ef3746"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa2/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa2-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa2/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa2-generation.log",
+    "sha256": "a3d0c8c05998238131e82fb75f909e389bbe76e1c3d0d1d142cd92eeee7cfce7"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa2/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa2-terminal.png",
+    "sha256": "019cceec64ec86161bfcb777faa1f6193dccc330cc7a9d5c75107f527c043df5"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa3/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa3-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa3/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa3-generation.log",
+    "sha256": "1201810f3329427b44f5d5e7b9041de61b60aba7b5f196890db5ab55864ff806"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa3/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa3-terminal.png",
+    "sha256": "23d5779a156ee0a846687956bc3ba76cdabad1af3fdfef4dee5db03e77848426"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa4/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa4-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa4/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa4-generation.log",
+    "sha256": "ac2aa67e0e496c74f9b941041e6f0e9e32c178503ddb6c6aff25fcf69585274e"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa4/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa4-terminal.png",
+    "sha256": "01a2fc746d943d8cb93939adfc49dc329f420b042bc2578980f92b2411f48416"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa5/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa5-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa5/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa5-generation.log",
+    "sha256": "387623c2600a3104a034364a1ea30d6779261e203ab42d8ad771c18597d9cc39"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa5/terminal.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_actual_native_terminal_pa5-terminal.png",
+    "sha256": "05487a64aaee4f8a8748e567b3f269c161ea4af6430200c8429521d6fb5f8c9c"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_real_ui_hot_settings_and_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_real_ui_hot_settings_and_0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_real_ui_hot_settings_and_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_real_ui_hot_settings_and_0-generation.log",
+    "sha256": "bb116b0f932721ce4069c05aabb62e8f72141de997f19f0c8de715550700adbf"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-terminal-document-restart-10/test_real_ui_hot_settings_and_0/settings-after-real-restart.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-terminal-document-restart-10-test_real_ui_hot_settings_and_0-settings-after-real-restart.png",
+    "sha256": "3dba1f9b1221a352ff3677cd997d953de9c1ca0bc250ac6b86c215b9d51d7cda"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-document-boundary-11-test_real_partial_upload_and_f0-api-2.log",
+    "sha256": "4f450cbfa6fdcb91c6a83a6c7f62f3f8d4d48dbd35401c02be2f0de4c926f967"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-document-boundary-11-test_real_partial_upload_and_f0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-document-boundary-11-test_real_partial_upload_and_f0-generation.log",
+    "sha256": "30af7ca29d78f1ec094264dd93c0794bf2d775e27dc3dde8d940195b829d6695"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-document-boundary-11/test_real_partial_upload_and_f0/whole-source-result.json",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-document-boundary-11-test_real_partial_upload_and_f0-whole-source-result.json",
+    "sha256": "83fc494c34ef0860d16c2fa85949400a1d7de1f45416e3b7353beff7e9aec403"
+  }
+]

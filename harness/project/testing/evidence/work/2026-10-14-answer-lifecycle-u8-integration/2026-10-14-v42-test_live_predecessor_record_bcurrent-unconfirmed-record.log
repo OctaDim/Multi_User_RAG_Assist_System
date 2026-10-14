@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 478, in <module>
+    main()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 474, in main
+    asyncio.run(start())
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 472, in start
+    await supervisor.run()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 349, in run
+    self.acquire_fence(service['runtime_id'])
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 309, in acquire_fence
+    raise RuntimeError('Predecessor reap is unconfirmed; replacement blocked')
+RuntimeError: Predecessor reap is unconfirmed; replacement blocked

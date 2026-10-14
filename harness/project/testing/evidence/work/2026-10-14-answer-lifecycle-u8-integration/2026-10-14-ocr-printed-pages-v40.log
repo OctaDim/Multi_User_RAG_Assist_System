@@ -1,0 +1,134 @@
+......{'proof': 'actual_small_handwriting_detection', 'size': (370, 120), 'regions': [{'kind': 'handwritten', 'bbox': [2, 0, 191, 70], 'detection_confidence': 0.9370757937431335, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [75, 60, 358, 120], 'detection_confidence': 0.8835065960884094, 'coordinate_source': 'dfine_layout_and_original_ink'}]}
+.mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+decode: removing memory module entries for seq_id = 0, pos = [0, +inf)
+Actual native abort callback entered C; context close waited for C return before physical free.
+.{'proof': 'actual_RAG64_paddle_printed_qwen_handwriting_profiles'}
+.{'proof': 'original_EN_RU_all_ink_masked_before_printed_recognition', 'detected': [{'kind': 'handwritten', 'bbox': [122, 94, 322, 173], 'detection_confidence': 0.9323845505714417, 'coordinate_source': 'dfine_layout'}, {'kind': 'handwritten', 'bbox': [205, 160, 489, 233], 'detection_confidence': 0.7240681648254395, 'coordinate_source': 'dfine_layout'}], 'regions': [{'kind': 'handwritten', 'bbox': [122, 94, 322, 173], 'detection_confidence': 0.9323845505714417, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [205, 160, 489, 233], 'detection_confidence': 0.7240681648254395, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [624, 423, 1090, 583], 'detection_source': 'connected_ink', 'coordinate_source': 'original_ink_component'}]}
+.mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 15
+image_tokens->ny = 5
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+decode: removing memory module entries for seq_id = 0, pos = [0, +inf)
+{'proof': 'actual_Qwen_F16_handwriting_abort_C_return_both_contexts_close', 'rss_during_actual_handwriting_bytes': 4342951936}
+.{'proof': 'actual_BE_ink_region_union_preserves_printed_footer', 'regions': [{'kind': 'handwritten', 'bbox': [21, 60, 1158, 302], 'coordinate_source': 'original_ink_region_union', 'detections': [{'kind': 'handwritten', 'bbox': [437, 162, 847, 302], 'detection_confidence': 0.9216524958610535, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [24, 67, 1158, 299], 'detection_confidence': 0.9210832118988037, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [21, 60, 1154, 299], 'detection_confidence': 0.9187881946563721, 'coordinate_source': 'dfine_layout_and_original_ink'}]}, {'kind': 'handwritten', 'bbox': [10, 233, 1200, 940], 'coordinate_source': 'original_ink_region_union', 'detections': [{'kind': 'handwritten', 'bbox': [347, 792, 1055, 940], 'detection_confidence': 0.932685911655426, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [15, 714, 1200, 938], 'detection_confidence': 0.9013844132423401, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [13, 701, 1055, 938], 'detection_confidence': 0.9168084263801575, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [374, 588, 929, 728], 'detection_confidence': 0.9057670831680298, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [10, 507, 1197, 938], 'detection_confidence': 0.8789066076278687, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [925, 487, 1169, 643], 'detection_confidence': 0.7875928282737732, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [14, 422, 1197, 938], 'detection_confidence': 0.8781881928443909, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [402, 380, 928, 493], 'detection_confidence': 0.9026705622673035, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [13, 296, 1199, 938], 'detection_confidence': 0.8947923183441162, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [11, 233, 1199, 938], 'detection_confidence': 0.9065799713134766, 'coordinate_source': 'dfine_layout_and_original_ink'}]}]}
+.{"language": "en", "expected_legible_source": ["dreams", "langston", "hughes"], "recognized": "Dreams\n—Langston Hughes\n", "missing": [], "actual_words": ["dreams", "langston", "hughes"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "0ef7db9c6960e2cd0c3a4bcbf2ec9444522a7b3ace61ce5440ff0cb572c9654c"}
+{"language": "ru", "expected_legible_source": ["август"], "recognized": "август\n", "missing": [], "actual_words": ["август"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "9ecb53d0b7fe92fd22064e0ed2de1af116cf19d8053d0ba12e704c68b1dc975b"}
+{"language": "de", "expected_legible_source": ["die", "seerose", "blüht", "auf", "dem", "teich"], "recognized": "Die Seerose blüht auf dem Teich.\n", "missing": [], "actual_words": ["die", "seerose", "blüht", "auf", "dem", "teich"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "5d766216495efe1bc0b239c17536dca2bf002ea93f555eab33ee3c141dfb3f93"}
+{"language": "be", "expected_legible_source": ["беларусы", "крыўду", "людзьмі"], "recognized": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь.\nБеларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!\nФаксіміле верша, які знаходзіцца\nу музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.\n", "missing": ["беларусы", "людзьмі"], "actual_words": ["а", "кіто", "там", "ідзе", "а", "хто", "там", "ідзе", "у", "аграрніста", "такій", "грамадзе", "беларусь", "беларусь", "а", "што", "яны", "імяць", "на", "хурых", "плагах", "на", "руках", "у", "крыві", "на", "магах", "у", "папках", "свога", "крыўду", "а", "каму", "це", "няжучы", "гэта", "крыўду", "куды", "це", "імяць", "на", "паказ", "сваё", "на", "сём", "чалі", "а", "чаю", "це", "гаго", "захачелась", "ім", "палардзаным", "век", "ім", "глухім", "слоткім", "слоўным", "звацца", "факсіміле", "верша", "які", "знаходзіцца", "у", "музеї", "я", "купалы", "верш", "напісаны", "ў", "1905", "1907", "гг"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"}
+{"proof": "actual_ui_issuer_four_language_handwriting_and_pre_recognition_masks", "results": "/tmp/rag-u8-ocr-printed-pages-v40/test_genuine_four_language_han0/genuine-handwriting-results.json", "worker_log": "/tmp/rag-u8-ocr-printed-pages-v40/test_genuine_four_language_han0/document-worker.log"}
+.{"proof": "actual_issued_four_language_Paddle_pdf_docx_originals_true_LOC_forbidden_hand_pixels", "results": [{"name": "four-language.pdf", "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n", "regions": [{"end": 17, "bbox": [76.8, 93.80000000000001, 470.40000000000003, 131.6], "kind": "printed", "text": "Document OCR test", "start": 0, "polygon": [[76.8, 93.80000000000001], [470.40000000000003, 93.80000000000001], [470.40000000000003, 131.6], [76.8, 131.6]]}, {"end": 49, "bbox": [73.2, 212.79999999999998, 714, 259], "kind": "printed", "text": "The annual budget is 100 euros.", "start": 18, "polygon": [[73.2, 212.79999999999998], [714, 212.79999999999998], [714, 259], [73.2, 259]]}, {"end": 87, "bbox": [76.8, 333.2, 833.9999999999999, 378], "kind": "printed", "text": "Der Jahreshaushalt betraegt 100 Euro.", "start": 50, "polygon": [[76.8, 333.2], [833.9999999999999, 333.2], [833.9999999999999, 378], [76.8, 378]]}, {"end": 123, "bbox": [76.8, 452.2, 885.6, 498.4], "kind": "printed", "text": "Годовой бюджет составляет 100 евро.", "start": 88, "polygon": [[76.8, 452.2], [885.6, 452.2], [885.6, 498.4], [76.8, 498.4]]}, {"end": 155, "bbox": [76.8, 572.5999999999999, 799.2, 618.8], "kind": "printed", "text": "Гадавы бюджэт складае 100 еўра.", "start": 124, "polygon": [[76.8, 572.5999999999999], [799.2, 572.5999999999999], [799.2, 618.8], [76.8, 618.8]]}], "original_sha256": "1a5d566352a67124d928725b19fa74ee04dcee3f30b1b11674d4788cb176321f"}, {"name": "mixed-four-language.pdf", "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\nРукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\nРукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\n", "regions": [{"end": 17, "bbox": [76.8, 93.80000000000001, 470.40000000000003, 131.6], "kind": "printed", "text": "Document OCR test", "start": 0, "polygon": [[76.8, 93.80000000000001], [470.40000000000003, 93.80000000000001], [470.40000000000003, 131.6], [76.8, 131.6]]}, {"end": 49, "bbox": [73.2, 212.79999999999998, 714, 257.6], "kind": "printed", "text": "The annual budget is 100 euros.", "start": 18, "polygon": [[73.2, 212.79999999999998], [714, 212.79999999999998], [714, 257.6], [73.2, 257.6]]}, {"end": 87, "bbox": [76.8, 333.2, 833.9999999999999, 378], "kind": "printed", "text": "Der Jahreshaushalt betraegt 100 Euro.", "start": 50, "polygon": [[76.8, 333.2], [833.9999999999999, 333.2], [833.9999999999999, 378], [76.8, 378]]}, {"end": 123, "bbox": [76.8, 452.2, 885.6, 497], "kind": "printed", "text": "Годовой бюджет составляет 100 евро.", "start": 88, "polygon": [[76.8, 452.2], [885.6, 452.2], [885.6, 497], [76.8, 497]]}, {"end": 155, "bbox": [76.8, 572.5999999999999, 799.2, 617.4], "kind": "printed", "text": "Гадавы бюджэт складае 100 еўра.", "start": 124, "polygon": [[76.8, 572.5999999999999], [799.2, 572.5999999999999], [799.2, 617.4], [76.8, 617.4]]}, {"end": 235, "bbox": [104, 783, 458, 908], "kind": "skip", "text": "Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей", "start": 156, "reason": "handwriting_permission", "coordinate_source": "dfine_layout_and_original_ink", "detection_confidence": 0.8997588157653809}, {"end": 315, "bbox": [252, 916, 795, 1034], "kind": "skip", "text": "Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей", "start": 236, "reason": "handwriting_permission", "coordinate_source": "dfine_layout_and_original_ink", "detection_confidence": 0.7245213985443115}], "original_sha256": "9584f556bbe78569bc771010866b5ad7b7ac8046427bfa3ef713811eea9f09a6"}, {"name": "printed-four-language.docx", "text": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n", "regions": [{"end": 17, "bbox": [76.8, 93.80000000000001, 470.40000000000003, 131.6], "kind": "printed", "text": "Document OCR test", "start": 0, "polygon": [[76.8, 93.80000000000001], [470.40000000000003, 93.80000000000001], [470.40000000000003, 131.6], [76.8, 131.6]], "source_part": "word/media/printed.png"}, {"end": 49, "bbox": [73.2, 212.79999999999998, 714, 259], "kind": "printed", "text": "The annual budget is 100 euros.", "start": 18, "polygon": [[73.2, 212.79999999999998], [714, 212.79999999999998], [714, 259], [73.2, 259]], "source_part": "word/media/printed.png"}, {"end": 87, "bbox": [76.8, 333.2, 833.9999999999999, 378], "kind": "printed", "text": "Der Jahreshaushalt betraegt 100 Euro.", "start": 50, "polygon": [[76.8, 333.2], [833.9999999999999, 333.2], [833.9999999999999, 378], [76.8, 378]], "source_part": "word/media/printed.png"}, {"end": 123, "bbox": [76.8, 452.2, 885.6, 498.4], "kind": "printed", "text": "Годовой бюджет составляет 100 евро.", "start": 88, "polygon": [[76.8, 452.2], [885.6, 452.2], [885.6, 498.4], [76.8, 498.4]], "source_part": "word/media/printed.png"}, {"end": 155, "bbox": [76.8, 572.5999999999999, 799.2, 618.8], "kind": "printed", "text": "Гадавы бюджэт складае 100 еўра.", "start": 124, "polygon": [[76.8, 572.5999999999999], [799.2, 572.5999999999999], [799.2, 618.8], [76.8, 618.8]], "source_part": "word/media/printed.png"}], "original_sha256": "550e86c4f4e5ba1c6203df83b22656bb6e005d604e54ccd6a8dee8745b6c92aa"}], "worker_log": "/tmp/rag-u8-ocr-printed-pages-v40/test_actual_four_language_prin0/document-worker.log"}
+.F{"proof": "actual_twenty_page_atomic_failure", "skip": true, "completed_actual_native_pages": 15, "failure_page": 16, "original_sha256": "7a0189284c2b95a070dfe75a3e08f6948fd857b290acf6314626290dc0ec3ed4", "request_id": "57523e37-6b28-4dad-92b5-5d619d5d7e7f", "passport": {"found": [{"id": "3014b2d1-505c-448b-86f0-d9d1e5eaa9f8", "kind": "printed", "mode": "complete", "name": "healthy-neighbor.txt", "page": 1, "text": "The current annual budget is 10 euros.", "span_end": 38, "similarity": 0.8238901495933533, "span_start": 0, "coordinates": {}, "document_id": "763a2bb0-59cf-4ba4-a0a2-23ffd47ac293", "limitations": [], "revision_id": "68153913-5fe7-401e-aa4e-15f092a6014a"}], "passed": [{"id": "3014b2d1-505c-448b-86f0-d9d1e5eaa9f8", "kind": "printed", "mode": "complete", "name": "healthy-neighbor.txt", "page": 1, "text": "The current annual budget is 10 euros.", "span_end": 38, "similarity": 0.8238901495933533, "span_start": 0, "coordinates": {}, "document_id": "763a2bb0-59cf-4ba4-a0a2-23ffd47ac293", "limitations": [], "revision_id": "68153913-5fe7-401e-aa4e-15f092a6014a"}], "excluded": [], "selected": ["763a2bb0-59cf-4ba4-a0a2-23ffd47ac293"], "available": [{"mode": "complete", "name": "healthy-neighbor.txt", "document_id": "763a2bb0-59cf-4ba4-a0a2-23ffd47ac293", "limitations": [], "revision_id": "68153913-5fe7-401e-aa4e-15f092a6014a"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}
+.
+=================================== FAILURES ===================================
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...-2.log'), 'generation': PosixPath('/tmp/rag-u8-ocr-printed-pages-v40/test_actual_twenty_page_failur0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_5deefeb4f54843b28ba669bb7305efd1 host=/tmp/rag-u8-ocr-printed-pages-v40/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-ocr-printed-pages-v40/test_actual_twenty_page_failur0')
+skip = False
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            # Measured fixed CPU models take about 70–80 seconds per complete
+            # page here. Keep a finite bound sufficient for fifteen real pages.
+            deadline=time.monotonic()+1500
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click();owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=30)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+            assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+            if skip:
+                assert all(page['mode']=='skip_handwriting' and page['skips'] and 'Рукописный текст пропущен.' in page['text'] for page in pages),pages
+                assert all('dreams' not in page['text'].casefold() and 'hughes' not in page['text'].casefold() for page in pages)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                bad_row=connection.execute("SELECT d.*,f.state,f.failure_page,f.mode,f.original_sha256 FROM documents d JOIN document_files f ON f.document_id=d.id WHERE f.name='twenty-mixed.pdf'").fetchone()
+                assert not bad_row['ready'] and not bad_row['published_revision'] and bad_row['failure_page']==16 and bad_row['state']=='failed'
+                assert bad_row['original_sha256']==hashlib.sha256(content).hexdigest()
+                assert not connection.execute('SELECT 1 FROM available_source_revisions WHERE document_id=%s',(bad_row['id'],)).fetchone()
+                assert connection.execute('SELECT count(*) AS n FROM document_page_texts p JOIN source_revisions r ON r.id=p.revision_id WHERE r.document_id=%s',(bad_row['id'],)).fetchone()['n']==15
+            for checkbox in owner.locator('#question-sources input').all():checkbox.uncheck()
+            # Failed files are deliberately absent from selectable ready sources.
+            assert owner.get_by_role('checkbox',name='twenty-mixed.pdf',exact=True).count()==0
+            api=integrated_browser[0][0][3]
+            refused=owner.evaluate('''async ({api,document})=>{
+                const tab=JSON.parse(sessionStorage.getItem('rag:tab'));
+                const response=await fetch(api+'/api/conversations/'+sessionStorage.getItem('rag:conversation')+'/answers',{
+                    method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential'),
+                        'X-Tab-Proof':tab.proof,'Content-Type':'application/json'},
+                    body:JSON.stringify({operation_key:crypto.randomUUID(),question:'What is the annual budget?',
+                        document_ids:[document],tab_id:tab.id})});
+                return {status:response.status,body:await response.json()};
+            }''',{'api':api,'document':str(bad_row['id'])})
+            assert refused=={'status':409,'body':{'error':'no_ready_sources'}},refused
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(owner.locator('#status')).to_contain_text('Нет готовых источников')
+            expect(owner.locator('#question')).to_have_value('What is the annual budget?')
+            expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+            owner.get_by_role('checkbox',name='healthy-neighbor.txt',exact=True).check()
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+E           AssertionError: Locator expected to contain text 'Завершён'
+E           Actual value: <element(s) not found> 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 60000ms
+E             -   - waiting for locator("#history article")
+
+backend/tests/integration/test_actual_page_failure.py:139: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]
+1 failed, 15 passed in 2456.46s (0:40:56)

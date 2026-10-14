@@ -1,0 +1,12 @@
+{
+  "scope": "formal OOXML archive/XML/production docx_parts check only; no native rerun; parent ALL must freshupload exactfinalarchive",
+  "artifact": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-formal-four-language-docx-v1.docx",
+  "sha256": "aae8f1dd2c66aeb7c5ab4e852534861e5b7db6047b4009807e0e63d1f94c3156",
+  "printed_image_bytes_unchanged": true,
+  "body_text_unchanged": true,
+  "actual_publisher_format_and_nativeimage_proof": "v40 historicalminimalarchive, samePNG andwordGT",
+  "parts": [
+    "word/document.xml",
+    "word/media/printed.png"
+  ]
+}

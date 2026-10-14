@@ -1,0 +1,155 @@
+{
+  "scope": "Independent parent-driven manual headed Chromium browser walkthrough through production UI/SMTP/operator CLI/native services; no e2e actor or workflow function called",
+  "contract": "RAG-67",
+  "browser_version": "131.0.6778.33",
+  "fresh_initial_database": "asserted zero accounts/documents before any UI activity",
+  "created_real_accounts": 3,
+  "created_real_documents": 5,
+  "steps": [
+    {
+      "step": "initial manual invitation misuse",
+      "passed": false,
+      "cause": "operator CLI returns URL; I inserted whole URL into token field; application rejected invalid invitation correctly"
+    },
+    {
+      "step": "same-document invite hash navigation required reload after initial misuse",
+      "passed": true,
+      "observation": "reload loaded invitation fragment; ordinary registration accepted"
+    },
+    {
+      "step": "fresh operator URL invitation + browser registration + actual SMTP mailbox click + login",
+      "passed": true
+    },
+    {
+      "step": "draft filled before newly requested conversation ACK",
+      "passed": false,
+      "cause": "manual selected wrong conversation during pending creation; source draft remains in original conversation storage"
+    },
+    {
+      "step": "owner SMTP verification and role isolation; source conversation draft survives refresh with no request",
+      "passed": true
+    },
+    {
+      "step": "actual TXT publication + selected personal source + native Qwen answer + opened source passport",
+      "passed": true,
+      "fragment": "The annual budget is 100 euros. The coordinator is Alice.",
+      "visible_history": "What is the annual budget?\n\nЗавершён\n\nОтвет модели\n\nThe annual budget is 100 euros. [1]\n\nПаспорт источников\n\nВыбрано: manual-budget.txt\n\nДоступно для поиска: manual-budget.txt\n\nНайдено фрагментов: 1. Передано модели: 1.\n\nФрагмент [1]: manual-budget.txt · Страница 1 · символы 0–57\nThe annual budget is 100 euros. The coordinator is Alice.\nЦитата [1]: manual-budget.txt · Страница 1\nThe annual budget is 100 euros. The coordinator is Alice."
+    },
+    {
+      "step": "actual native-tokenizer oversize refusal preserves draft on refresh and adds no history",
+      "passed": true,
+      "observed_refusal": "Вопрос превышает доступный контекст модели; черновик сохранён"
+    },
+    {
+      "step": "new explicit short question after refusal completes actual native answer Alice",
+      "passed": true
+    },
+    {
+      "step": "superadmin preview and save global6/2 limits; applied revision1 visible; read-only generation/embedding parameters exposed",
+      "passed": true,
+      "settings_text": "Сохранена ревизия 1. Применена: 1.\n\nМодель генерации\nАктивные запросы\nЗапросы за шаг\nКонтекст запроса\nПотоки генерации\nПотоки обработки prompt\nThinking\n\nЭмбеддинги: multilingual-e5-small, onnxruntime-cpu, INT8. Параметры модели и эмбеддингов требуют перезапуска и доступны только для просмотра.\n\nПредпросмотр изменения\nОбновить применение настроек"
+    },
+    {
+      "step": "actual printed four-language PDF uploaded through UI and recognized by pinned Paddle",
+      "passed": true,
+      "independently_viewed_source_gt": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.",
+      "raw_visible_transcript": "Document OCR test\nThe annual budget is 100 euros.\nDer Jahreshaushalt betraegt 100 Euro.\nГодовой бюджет составляет 100 евро.\nГадавы бюджэт складае 100 еўра.\n",
+      "comparison": "exact source words including punctuation; whitespace separation ignored"
+    },
+    {
+      "step": "download after library refresh cleared document viewer",
+      "passed": false,
+      "cause": "manual must reopen selected document before its download button is available"
+    },
+    {
+      "step": "real malformed PDF processing failure opens separate report dialog with file/stage/page/cause/whole-document exclusion",
+      "passed": true,
+      "report": "Отчёт об обработке документа\n\nФайл: manual-broken.pdf\n\nЭтап: обработка документа\n\nСтраница: не определена\n\nПричина: Не удалось обработать документ.\n\nДокумент целиком недоступен для поиска.\n\nЗакрыть отчёт"
+    },
+    {
+      "step": "download original through authenticated UI button; original bytes preserved",
+      "passed": true
+    },
+    {
+      "step": "390px mobile layout has no horizontal overflow; keyboard moves question to submit control without sending",
+      "passed": true,
+      "focused_control": "send-question"
+    },
+    {
+      "step": "genuine original RU handwriting raster placed unchanged on PDF; actual Qwen2B/Q4/F16 output equals independent source word август",
+      "passed": true,
+      "raw_transcription": "август\n",
+      "comparison": "exact source word; final document newline retained",
+      "source_pdf": "2026-10-14-parent-manual-genuine-RU-input-v1.pdf"
+    },
+    {
+      "step": "admin revoked handwriting OCR; owner explicitly selected printed-only PDF; handwritten word absent, visible skip block and source overlay, no auto question",
+      "passed": true,
+      "raw_visible_transcript": "Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\n"
+    },
+    {
+      "step": "administrative account block immediately denies next protected UI operation and clears private document/report UI",
+      "passed": true
+    },
+    {
+      "step": "explicit admin unblock then fresh login restores unchanged completed history",
+      "passed": true
+    },
+    {
+      "step": "registered but unverified real actor denied login/protected workspace",
+      "passed": true
+    },
+    {
+      "step": "logout clears private draft/history/document UI; no browser pageerrors across operator/owner flows",
+      "passed": true
+    },
+    {
+      "step": "read-only evidence confirms real eligible owner paid=False and only two completed requests",
+      "passed": true,
+      "owner_flags": [
+        "user",
+        true,
+        true,
+        false,
+        false
+      ],
+      "request_states": [
+        [
+          "completed",
+          2
+        ]
+      ]
+    }
+  ],
+  "observed_manual_corrections": [
+    "whole invitation URL was initially put in token field; app rejected it; invitation link loaded on reload",
+    "draft typed during new-conversation ACK remained in old source conversation and was verified there after refresh",
+    "passport filename checked only after expanding its details",
+    "oversize expected label corrected to actual context-limit message",
+    "read-only document diagnostic used nonexistent name column; abandoned; actual UI was already ready",
+    "download viewer reopened after upload refreshed library",
+    "one-word handwriting comparison treats final document newline as formatting and retains raw output"
+  ],
+  "operator_pageerrors": [],
+  "owner_pageerrors": [],
+  "input_freeze": "2026-10-14-parent-final-input-freeze-v1.json",
+  "owned_pids_before_teardown": [
+    149278,
+    149290,
+    149291,
+    149292,
+    149322,
+    149368,
+    149379,
+    149386,
+    149387,
+    149419,
+    149444,
+    149482,
+    149821,
+    150595,
+    150596
+  ],
+  "teardown": "pending explicit stack.close and PID absence verification; separate receipt follows",
+  "full_unfiltered_application_tests": "not yet run"
+}

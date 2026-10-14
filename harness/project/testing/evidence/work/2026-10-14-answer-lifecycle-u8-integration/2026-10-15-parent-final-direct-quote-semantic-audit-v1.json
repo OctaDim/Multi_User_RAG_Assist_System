@@ -1,0 +1,161 @@
+{
+  "input": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-final-direct-quote-v1-control-results.json",
+  "sha256": "3b2e5ebd14c8a8559da544272d34a122090332f49c4acd39c287a38652f6ca24",
+  "review": "Parent independently read all30 raw answers and questions against frozen expected source facts; no extra unsupported claims or missing requested facts. Existing matched source corpus slices and exact citation geometry verified. OCR exceptions not used for answer/citation acceptance.",
+  "mechanical_correct": 30,
+  "semantic_and_citation_correct": 30,
+  "targeted_quality_pass": true,
+  "final_ALL_pass": false,
+  "rows": [
+    {
+      "id": "eng-1",
+      "accepted": true,
+      "request_id": "ad9c2e2c-ce6c-44e0-9229-1eafbc69fad0"
+    },
+    {
+      "id": "eng-3",
+      "accepted": true,
+      "request_id": "15d1f110-9a83-4267-bdc0-83b8af4d6d93"
+    },
+    {
+      "id": "eng-4",
+      "accepted": true,
+      "request_id": "415b9966-2691-4017-8af7-45c9440df588"
+    },
+    {
+      "id": "eng-5",
+      "accepted": true,
+      "request_id": "04f9be96-b52f-4cd5-bc6e-8ac2d71ef866"
+    },
+    {
+      "id": "eng-9",
+      "accepted": true,
+      "request_id": "8bd7d5fe-2d6b-4ea9-8c1d-e35ea0e59348"
+    },
+    {
+      "id": "eng-14",
+      "accepted": true,
+      "request_id": "789ff07f-7a74-4d63-917f-732a7ab48c2c"
+    },
+    {
+      "id": "eng-15",
+      "accepted": true,
+      "request_id": "297f1a5f-49fe-46bc-8950-1216005d2b36"
+    },
+    {
+      "id": "eng-24",
+      "accepted": true,
+      "request_id": "fd2bf792-3a50-47dd-8424-4398a8c07601"
+    },
+    {
+      "id": "rus-1",
+      "accepted": true,
+      "request_id": "28521aed-5f4b-4c93-8429-858412afc0dc"
+    },
+    {
+      "id": "rus-3",
+      "accepted": true,
+      "request_id": "5b0b11cd-8068-41cb-8a1c-b8eef43dca9e"
+    },
+    {
+      "id": "rus-4",
+      "accepted": true,
+      "request_id": "d4a323d2-2357-4baa-90fc-2d9ef47d0672"
+    },
+    {
+      "id": "rus-5",
+      "accepted": true,
+      "request_id": "9d9ffc64-904a-4179-9648-a27255c8b669"
+    },
+    {
+      "id": "rus-9",
+      "accepted": true,
+      "request_id": "b22dfc63-a48e-41c3-a350-09fcc69b7aad"
+    },
+    {
+      "id": "rus-14",
+      "accepted": true,
+      "request_id": "c272fddd-b1ec-4b1e-899d-0118a49b9af7"
+    },
+    {
+      "id": "rus-15",
+      "accepted": true,
+      "request_id": "90185082-311c-42b2-97d7-8f8f57527099"
+    },
+    {
+      "id": "rus-24",
+      "accepted": true,
+      "request_id": "874939c8-d61c-4cb0-be1a-20f29ba9cd1b"
+    },
+    {
+      "id": "bel-1",
+      "accepted": true,
+      "request_id": "2615e575-0b57-40c9-9b2b-e13a738e2c16"
+    },
+    {
+      "id": "bel-3",
+      "accepted": true,
+      "request_id": "f6fbfb5b-d29f-40be-9455-694c50c30c0f"
+    },
+    {
+      "id": "bel-4",
+      "accepted": true,
+      "request_id": "08fb28eb-91a7-4a51-864e-5a0724477b61"
+    },
+    {
+      "id": "bel-5",
+      "accepted": true,
+      "request_id": "f38a53b4-7de3-4f91-81f4-cbd6f5bb42d3"
+    },
+    {
+      "id": "bel-9",
+      "accepted": true,
+      "request_id": "488a6f6b-3f17-4f89-af55-e143082bd3be"
+    },
+    {
+      "id": "bel-14",
+      "accepted": true,
+      "request_id": "9fc5f69b-5217-4895-b60e-0f57ddc3a5b6"
+    },
+    {
+      "id": "bel-15",
+      "accepted": true,
+      "request_id": "a8340593-5be9-4fa0-ac63-477164129ec3"
+    },
+    {
+      "id": "deu_1996-1",
+      "accepted": true,
+      "request_id": "4c074cf4-ce7b-44bf-864b-f988b01586f4"
+    },
+    {
+      "id": "deu_1996-3",
+      "accepted": true,
+      "request_id": "77eb0422-c4c8-4182-9d7c-9b80ad33dbde"
+    },
+    {
+      "id": "deu_1996-4",
+      "accepted": true,
+      "request_id": "8cd24fd2-9a28-4779-9f34-5538f13f8c8d"
+    },
+    {
+      "id": "deu_1996-5",
+      "accepted": true,
+      "request_id": "11eeba16-7458-497a-a4d1-b49ffe89b2dc"
+    },
+    {
+      "id": "deu_1996-9",
+      "accepted": true,
+      "request_id": "45b2562f-606c-413b-a62e-07d4ad27a3cc"
+    },
+    {
+      "id": "deu_1996-14",
+      "accepted": true,
+      "request_id": "1795264c-6745-4536-b4fa-52492cb54299"
+    },
+    {
+      "id": "deu_1996-15",
+      "accepted": true,
+      "request_id": "88cc4909-5040-43ff-88ce-4fbc5ac75e76"
+    }
+  ]
+}

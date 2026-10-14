@@ -1,0 +1,105 @@
+{"control": "eng-1", "answer": "Article 1 describes all human beings at birth as being born free and equal in dignity and rights. This is stated verbatim in the provided source:\n\n\"Article 1 All human beings are born free and equal in dignity and rights.\" [source:1]", "failures": []}
+{"control": "eng-3", "answer": "Based on the provided excerpts, Article 3 grants everyone the right to life, liberty, and security of person.\n\n[source:2]", "failures": []}
+{"control": "eng-4", "answer": "Article 4 prohibits slavery and the slave trade in all their forms.\n\n[source:2]", "failures": []}
+{"control": "eng-5", "answer": "Article 5 forbids subjecting a person to torture or to cruel, inhuman or degrading treatment or punishment. This prohibition applies to all forms of such treatment, including slavery and the slave trade. [source:2]", "failures": []}
+{"control": "eng-9", "answer": "Article 9 forbids arbitrary arrest, detention, or exile. This right is protected under the framework of human rights that includes the prohibition of slavery and the right to life and liberty.\n\n[source:1]", "failures": []}
+{"control": "eng-14", "answer": "According to Article 14, a persecuted person may seek asylum in other countries. This right may not be invoked in the case of prosecutions genuinely arising from non‐political crimes or from acts contrary to the purposes and principles of the United Nations. [source:1]", "failures": []}
+{"control": "eng-15", "answer": "Article 15 grants everyone the right to a nationality. No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality. [source:1]", "failures": []}
+{"control": "eng-24", "answer": "Article 24 states that everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay. [source:1]", "failures": []}
+{"control": "rus-1", "answer": "Согласно статье 1, все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства.\n\n[source:1]", "failures": []}
+{"control": "rus-3", "answer": "В статье 3 человека названы три права: право на жизнь, право на свободу и право на личную неприкосновенность.\n\n[source:1]", "failures": []}
+{"control": "rus-4", "answer": "Согласно статье 4, запрещается содержание в рабстве или в подневольном состоянии, а также рабство и работорговля во всех их видах.\n\n[source:1]", "failures": []}
+{"control": "rus-5", "answer": "Статья 5 запрещает подвергать человека пыткам или жестоким, бесчеловечным или унижающим его достоинство обращению и наказанию. [source:1]", "failures": []}
+{"control": "rus-9", "answer": "Статья 9 запрещает произвольный арест, задержанию или изгнанию. Это подтверждается цитатой: «Никто не может быть подвергнут произвольному аресту, задержанию или изгнанию.» [source:1]", "failures": []}
+{"control": "rus-14", "answer": "Согласно статье 14, каждый человек вправе искать убежища от преследования в других странах. Это право не может быть использовано в случае преследования, основанного на совершении неполитического преступления или деяния, противоречащего целям и принципам Организации Объединенных Наций.\n\n[source:1]", "failures": []}
+{"control": "rus-15", "answer": "Согласно статье 15, каждый человек имеет право на гражданство, и никто не может быть произвольно лишен своего гражданства или права изменить свое гражданство [source:2].", "failures": []}
+{"control": "rus-24", "answer": "Статья 24 предусматривает право на отдых и досуг, включая право на разумное ограничение рабочего дня и на оплачиваемый периодический отпуск.\n\n[source:1]", "failures": []}
+{"control": "bel-1", "answer": "Усе людзі нараджаюцца свабоднымі і роўнымі ў сваёй годнасці і правах, надзеленымі розумам і сумленнем, і павінны ставіцца адзін да аднаго ў духу брацтва [source:1].", "failures": []}
+{"control": "bel-3", "answer": "Паводле артыкула 3, кожны чалавек мае права на жыццё, на свабоду і на асабістую недатыкальнасць.\n\n[source:1]", "failures": []}
+{"control": "bel-4", "answer": "Ва ўсіх выглядах забараняецца ўтрымлівацца ў рабстве або ў паднявольным стане.\n\n[source:1]", "failures": [{"missing_concepts": ["ганд"]}]}
+{"control": "bel-5", "answer": "Артыкул 5 забараняе ўчыненне катаванняў або жорсткіх, бесчалавечных або ўніжаючых яго годнасць абыходжанне і пакаранне.\n\n[source:1]", "failures": []}
+{"control": "bel-9", "answer": "На аснове выдзельных крыніц, артыкул 9 забараняе ўчыненне самавольнага арышту, затрымання або выгнання.\n\n[source:9]", "failures": ["no source citation"]}
+{"control": "bel-14", "answer": "Чалавек мае права шукаць прыстанішча ад праследавання ў іншых краінах, калі праследаванне не заснавана на ўчыненні непалітычнага злачынства або дзеяннях, што супярэчаць мэтам і прынцыпам Арганізацыі Аб'яднаных Нацый. Гэта права не можа быць выкарыстана ў такіх выпадках [source:1].", "failures": []}
+{"control": "bel-15", "answer": "Кожны чалавек мае права на грамадзянства, ніхто не можа быць самавольна пазбаўлены свайго грамадзянства або права змяніць сваё грамадзянства [source:1].", "failures": []}
+{"control": "deu_1996-1", "answer": "Alle Menschen sind frei und gleich an Würde und Rechten geboren, wie in Artikel 1 festgelegt: \"Artikel 1 Alle Menschen sind frei und gleich an Würde und Rechten geboren.\" [source:1]", "failures": []}
+{"control": "deu_1996-3", "answer": "Artikel 3 besagt, dass jeder das Recht auf Leben, Freiheit und Sicherheit der Person hat.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-4", "answer": "Artikel 4 verbietet Sklaverei und Sklavenhandel in allen ihren Formen.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-5", "answer": "Artikel 5 verbietet Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-9", "answer": "Artikel 9 verbietet willkürliche Festnahmen, Haft und Verweisung des Landes. Dies wird durch die folgenden Zitate aus der Quelle bestätigt:\n\n\"Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden.\" [source:1]", "failures": []}
+{"control": "deu_1996-14", "answer": "Verfolgte haben das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen. [source:1]", "failures": []}
+{"control": "deu_1996-15", "answer": "Jeder hat das Recht auf eine Staatsangehörigkeit. Niemandem darf seine Staatsangehörigkeit willkürlich entzogen noch das Recht versagt werden, seine Staatsangehörigkeit zu wechseln. [source:1]", "failures": []}
+{"proof": "predeclared_thirty_real_document_questions", "results": "/tmp/rag-u8-parent-direct-source-native-v1/test_frozen_thirty_questions_u0/control-results.json", "errors": [{"id": "bel-4", "failures": [{"missing_concepts": ["\u0433\u0430\u043d\u0434"]}]}, {"id": "bel-9", "failures": ["no source citation"]}]}
+F
+=================================== FAILURES ===================================
+_________ test_frozen_thirty_questions_use_real_multilingual_documents _________
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-parent-direct-source-native-v1/test_frozen_thirty_questions_u0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_e9c2461244a8439da59706513b658f7a host=/tmp/rag-u8-parent-direct-source-native-v1/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-parent-direct-source-native-v1/test_frozen_thirty_questions_u0')
+
+    def test_frozen_thirty_questions_use_real_multilingual_documents(integrated_browser, environment, tmp_path):
+        ((browser,mailbox,frontend,first),_,_),second,logs=integrated_browser
+        fixtures=BACKEND/'tests/fixtures/answer_lifecycle'
+        controls_path=fixtures/'control-questions-v1.json'
+        controls=json.loads(controls_path.read_text())
+        matchers=json.loads((fixtures/'control-matchers-v5.json').read_text())
+        assert hashlib.sha256(controls_path.read_bytes()).hexdigest()==matchers['controls_sha256']
+        for name,digest in controls['corpus_hashes'].items():
+            assert hashlib.sha256((fixtures/name).read_bytes()).hexdigest()==digest
+        assert len(controls['questions'])==30
+        context=browser.new_context();results=[];errors=[]
+        try:
+            page=context.new_page();register(page,mailbox,frontend,'u8-quality@owned.test');login(page,'u8-quality@owned.test')
+            files=sorted({item['document'] for item in controls['questions']})
+            page.locator('#document-upload input').set_input_files([str(fixtures/name) for name in files])
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            for name in files:ready(page,name,timeout=45)
+            for index,item in enumerate(controls['questions']):
+                if index:page.get_by_role('button',name='Новая беседа',exact=True).click()
+                for checkbox in page.locator('#question-sources input').all():checkbox.uncheck()
+                page.get_by_role('checkbox',name=item['document'],exact=True).check()
+                page.locator('#question').fill(item['question'])
+                page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(page.locator('#history article')).to_have_count(1)
+                expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    row=connection.execute('SELECT * FROM requests ORDER BY created_at DESC LIMIT 1').fetchone()
+                    binding=connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s',(row['id'],)).fetchone()
+                async def saved_prompt():
+                    from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+                    async with await psycopg.AsyncConnection.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                        value=await AsyncPostgresSaver(connection).aget_tuple({'configurable':{'thread_id':binding['thread_id']}})
+                        return value.checkpoint['channel_values']['prompt']
+                with ThreadPoolExecutor(max_workers=1) as executor:prompt=executor.submit(asyncio.run,saved_prompt()).result(15)
+                answer=row['answer_text'];passed=row['passport']['passed']
+                concepts=matchers['replacements'].get(item['id'],item['required_concepts'])
+                missing=[concept for concept in concepts if concept.casefold() not in answer.casefold()]
+                missing.extend(' OR '.join(group) for group in matchers.get('alternatives',{}).get(item['id'],[])
+                    if not any(value.casefold() in answer.casefold() for value in group))
+                snapshot=page.evaluate('''async ({url,conversation}) => (await (await fetch(url+'/api/conversations/'+conversation,
+                    {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json())''',
+                    {'url':second,'conversation':str(row['conversation_id'])})
+                citations=next(value['citations'] for value in snapshot['requests'] if value['id']==str(row['id']))
+                failures=[]
+                if missing:failures.append({'missing_concepts':missing})
+                if not passed:failures.append('no retrieved/passed evidence')
+                if not citations:failures.append('no source citation')
+                if any(citation['document_id'] not in set(map(str,row['scope'])) for citation in citations):failures.append('citation outside selected scope')
+                if failures:errors.append({'id':item['id'],'failures':failures})
+                result={'id':item['id'],'question':item['question'],'expected':item['expected_source_answer'],
+                        'answer':answer,'passport':row['passport'],'citations':citations,'prompt':prompt,'failures':failures,
+                        'request_id':str(row['id']),'state':row['state'],'semantic_audit':'pending caller review'}
+                results.append(result)
+                print(json.dumps({'control':item['id'],'answer':answer,'failures':failures},ensure_ascii=False),flush=True)
+            output=tmp_path/'control-results.json'
+            output.write_text(json.dumps({'controls_sha256':matchers['controls_sha256'],'results':results,
+                'total':30,'mechanical_correct':30-len(errors),'errors':errors,'semantic_audit':'pending caller review'},ensure_ascii=False,indent=2)+'\n')
+            print(json.dumps({'proof':'predeclared_thirty_real_document_questions','results':str(output),'errors':errors}),flush=True)
+>           assert not errors, errors
+                   ^^^^^^^^^^
+E           AssertionError: [{'id': 'bel-4', 'failures': [{'missing_concepts': ['ганд']}]}, {'id': 'bel-9', 'failures': ['no source citation']}]
+
+backend/tests/integration/test_answer_lifecycle.py:464: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_frozen_thirty_questions_use_real_multilingual_documents
+1 failed in 309.60s (0:05:09)

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/rag-u8-worker-download-ocr16-v1.py", line 11, in <module>
+    actual=hashlib.file_digest(path.open('rb'),'sha256').hexdigest();assert path.stat().st_size==size and actual==digest,(name,actual)
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('PaddleOCR-VL-1.6-GGUF.gguf', 'f3ae46ec885050acf4b3d31944431e1fd90d50664fb09126af4a3c050ba14ee8')

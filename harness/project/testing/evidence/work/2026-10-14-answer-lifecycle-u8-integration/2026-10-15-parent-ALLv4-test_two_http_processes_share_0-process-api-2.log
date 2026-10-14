@@ -1,0 +1,1068 @@
+INFO:     Started server process [235399]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:57766 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60483 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60485 - "GET /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60493 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60505 - "POST /api/conversations/1a71f33a-61fd-4475-b068-4599653012b9/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:60519 - "POST /api/conversations/4ca27fdb-c540-4d92-aa5e-726c8d40a821/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:60529 - "POST /api/conversations/42b948c7-7902-4fc5-acbf-19ffa8cfee15/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:58827 - "POST /api/conversations/a4d356e8-1661-4f78-96d4-ca5b51d210b7/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58839 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:58851 - "POST /api/conversations/5bd20243-bdc1-4844-a971-206f158fbc09/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:58861 - "POST /api/conversations/2cbbeda1-7dca-4cda-8729-6eeb44c2f458/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:58867 - "POST /api/conversations/f0ddd477-d3ad-47d6-9374-4eb13c1a56e3/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58877 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57247 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57253 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57255 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57263 - "GET /api/conversations/a0e764df-7966-4af4-8a5b-bc4388a064e4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57271 - "POST /api/answers/cbcff71a-12af-4c47-b8bf-b3aa25333dcd/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57283 - "POST /api/answers/bd56836a-e07a-4a68-a3ff-eddc0ed4fc51/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57293 - "POST /api/answers/2160266b-5cdd-4f44-82cb-f7bbd6da37db/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57303 - "POST /api/answers/f2ed3c44-7785-4dce-adee-7fa56b63980f/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57691 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57703 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57717 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57733 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57739 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57751 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57763 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57779 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57783 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57793 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57805 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57811 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:57815 - "POST /api/conversations/55edbb94-bea8-4ffb-9bc9-dc4fcf5f3119/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:57821 - "POST /api/conversations/56e2c322-4b37-4f49-999d-a7221f03fd81/answers HTTP/1.1" 200 OK
+llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+llama_model_loader: - kv  41:                          general.file_type u32              = 15
+llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+llama_model_loader: - type  f32:  133 tensors
+llama_model_loader: - type q8_0:   36 tensors
+llama_model_loader: - type q4_K:   98 tensors
+llama_model_loader: - type q5_K:   36 tensors
+llama_model_loader: - type q6_K:   17 tensors
+print_info: file format = GGUF V3 (latest)
+print_info: file type   = Q4_K - Medium
+print_info: file size   = 1.18 GiB (5.40 BPW) 
+init_tokenizer: initializing tokenizer for type 2
+load: 0 unused tokens
+load: control token: 248075 '<tts_text_bos_single>' is not marked as EOG
+load: control token: 248073 '<tts_text_bos>' is not marked as EOG
+load: control token: 248072 '<tts_pad>' is not marked as EOG
+load: control token: 248071 '<|audio_end|>' is not marked as EOG
+load: control token: 248061 '<|fim_middle|>' is not marked as EOG
+load: control token: 248055 '<|vision_pad|>' is not marked as EOG
+load: control token: 248052 '<|quad_end|>' is not marked as EOG
+load: control token: 248049 '<|box_start|>' is not marked as EOG
+load: control token: 248048 '<|object_ref_end|>' is not marked as EOG
+load: control token: 248045 '<|im_start|>' is not marked as EOG
+load: control token: 248057 '<|video_pad|>' is not marked as EOG
+load: control token: 248070 '<|audio_start|>' is not marked as EOG
+load: control token: 248056 '<|image_pad|>' is not marked as EOG
+load: control token: 248054 '<|vision_end|>' is not marked as EOG
+load: control token: 248060 '<|fim_prefix|>' is not marked as EOG
+load: control token: 248050 '<|box_end|>' is not marked as EOG
+load: control token: 248074 '<tts_text_eod>' is not marked as EOG
+load: control token: 248053 '<|vision_start|>' is not marked as EOG
+load: control token: 248062 '<|fim_suffix|>' is not marked as EOG
+load: control token: 248047 '<|object_ref_start|>' is not marked as EOG
+load: control token: 248051 '<|quad_start|>' is not marked as EOG
+load: control token: 248076 '<|audio_pad|>' is not marked as EOG
+load: printing all EOG tokens:
+load:   - 248044 ('<|endoftext|>')
+load:   - 248046 ('<|im_end|>')
+load:   - 248063 ('<|fim_pad|>')
+load:   - 248064 ('<|repo_name|>')
+load:   - 248065 ('<|file_sep|>')
+load: special tokens cache size = 33
+load: token to piece cache size = 1.7581 MB
+print_info: arch                  = qwen35
+print_info: vocab_only            = 1
+print_info: no_alloc              = 0
+print_info: vocab type            = BPE
+print_info: n_vocab               = 248320
+print_info: n_merges              = 247587
+print_info: BOS token             = 11 ','
+print_info: EOS token             = 248046 '<|im_end|>'
+print_info: EOT token             = 248046 '<|im_end|>'
+print_info: PAD token             = 248055 '<|vision_pad|>'
+print_info: LF token              = 198 'Ċ'
+print_info: FIM PRE token         = 248060 '<|fim_prefix|>'
+print_info: FIM SUF token         = 248062 '<|fim_suffix|>'
+print_info: FIM MID token         = 248061 '<|fim_middle|>'
+print_info: FIM PAD token         = 248063 '<|fim_pad|>'
+print_info: FIM REP token         = 248064 '<|repo_name|>'
+print_info: FIM SEP token         = 248065 '<|file_sep|>'
+print_info: EOG token             = 248044 '<|endoftext|>'
+print_info: EOG token             = 248046 '<|im_end|>'
+print_info: EOG token             = 248063 '<|fim_pad|>'
+print_info: EOG token             = 248064 '<|repo_name|>'
+print_info: EOG token             = 248065 '<|file_sep|>'
+print_info: max token length      = 256
+llama_model_load: vocab only - skipping tensors
+INFO:     127.0.0.1:57835 - "POST /api/conversations/1b0e77d4-8496-47fb-9340-bf0794a6f37d/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57839 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58679 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58693 - "GET /api/conversations/a0e764df-7966-4af4-8a5b-bc4388a064e4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58703 - "POST /api/tabs/ac65933f-9d91-42b6-a083-f03fb961a790/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58717 - "POST /api/answers/cbcff71a-12af-4c47-b8bf-b3aa25333dcd/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58725 - "POST /api/answers/bd56836a-e07a-4a68-a3ff-eddc0ed4fc51/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58739 - "POST /api/answers/2160266b-5cdd-4f44-82cb-f7bbd6da37db/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58743 - "POST /api/answers/f2ed3c44-7785-4dce-adee-7fa56b63980f/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58759 - "POST /api/answers/11399184-81fc-4c92-9194-75016f67ef87/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58765 - "POST /api/answers/9fbee5d1-9d50-4eba-bdf1-843db9e3c3a1/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58771 - "POST /api/answers/6ac5c200-1302-4e9b-9af4-aa4f5dadb49e/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58775 - "POST /api/answers/8df376e7-d1ad-4ae0-83a9-a8fae870c8cf/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58783 - "POST /api/answers/ee2a7117-e436-4384-b8e7-aca34e2a9b5e/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "POST /api/answers/9fd64691-c4cf-46fe-9de6-830a18da9ac5/stop HTTP/1.1" 200 OK
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_99ac30b87f694e60a0b30b9429d828ed) at 0x7a2a5fbca060>: sending query failed: another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=test_99ac30b87f694e60a0b30b9429d828ed) at 0x7a2a5fbca060>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7a2a5fbca060>
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [235399]

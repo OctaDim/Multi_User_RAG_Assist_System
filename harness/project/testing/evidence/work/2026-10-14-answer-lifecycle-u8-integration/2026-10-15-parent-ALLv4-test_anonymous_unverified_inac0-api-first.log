@@ -1,0 +1,160 @@
+INFO:     Started server process [227679]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58772 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60921 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60929 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60947 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "OPTIONS /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60947 - "OPTIONS /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60945 - "GET /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60947 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "POST /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60947 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60967 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/tabs/a9d28892-e3a0-4222-a51c-b73b5c05fe3d/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60981 - "GET /api/tabs/a9d28892-e3a0-4222-a51c-b73b5c05fe3d/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "OPTIONS /api/tabs/a9d28892-e3a0-4222-a51c-b73b5c05fe3d/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "POST /api/tabs/a9d28892-e3a0-4222-a51c-b73b5c05fe3d/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/documents/uploads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "POST /api/documents/uploads HTTP/1.1" 201 Created
+INFO:     127.0.0.1:60983 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "PUT /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60991 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 200 OK
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_b2187dea6bd3499c83003552bdd0a861) at 0x7cb11c326f90>: sending query failed: another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_b2187dea6bd3499c83003552bdd0a861) at 0x7cb11c326f90>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7cb11c326f90>
+INFO:     127.0.0.1:60991 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60983 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60967 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56925 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:56925 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "OPTIONS /api/conversations/e5b8dee8-71ab-4432-9660-14c1e405a485 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57839 - "GET /api/conversations/e5b8dee8-71ab-4432-9660-14c1e405a485 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "OPTIONS /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57843 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57851 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57851 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56939 - "OPTIONS /api/tabs/69973903-8975-4fc5-8e35-93e6afff9160/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56925 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57855 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57839 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57843 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57851 - "GET /api/tabs/69973903-8975-4fc5-8e35-93e6afff9160/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57843 - "OPTIONS /api/tabs/69973903-8975-4fc5-8e35-93e6afff9160/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57839 - "POST /api/tabs/69973903-8975-4fc5-8e35-93e6afff9160/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57859 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57859 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57863 - "POST /api/accounts/login HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:60947 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60947 - "GET /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "POST /api/tabs/b77c1e0c-90fd-4c86-bcce-454b02d1425b/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "OPTIONS /api/accounts/15940431-72a9-442b-9329-04cddcdffed2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "PATCH /api/accounts/15940431-72a9-442b-9329-04cddcdffed2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "OPTIONS /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57869 - "OPTIONS /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57881 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60951 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60929 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60967 - "GET /api/accounts/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60929 - "PATCH /api/accounts/15940431-72a9-442b-9329-04cddcdffed2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/tabs/4c49b485-73f4-4c4f-8f0f-1f63caaad6fe/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60991 - "GET /api/tabs/4c49b485-73f4-4c4f-8f0f-1f63caaad6fe/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "OPTIONS /api/tabs/4c49b485-73f4-4c4f-8f0f-1f63caaad6fe/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "POST /api/tabs/4c49b485-73f4-4c4f-8f0f-1f63caaad6fe/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60951 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57881 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57869 - "GET /api/documents/f58be706-6315-48d0-91f4-d4124ac1eeba/original HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60929 - "PATCH /api/accounts/15940431-72a9-442b-9329-04cddcdffed2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "GET /api/accounts/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60929 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "PATCH /api/accounts/15940431-72a9-442b-9329-04cddcdffed2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/conversations/60084e20-961d-48c5-9a7f-c2b46bb3f06a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60929 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60967 - "GET /api/conversations/3e84545f-a39c-4120-b9c8-87c04c00fe45 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "OPTIONS /api/tabs/20b521ad-740d-49de-9dc2-3531d2d27270/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60983 - "GET /api/tabs/20b521ad-740d-49de-9dc2-3531d2d27270/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "OPTIONS /api/tabs/20b521ad-740d-49de-9dc2-3531d2d27270/heartbeat HTTP/1.1" 200 OK
+error ignored in rollback of <psycopg.AsyncTransaction (rolled_back_with_error) [ACTIVE] (user=postgres database=u8_b2187dea6bd3499c83003552bdd0a861) at 0x7cb11d5e4290>: sending query failed: another command is already in progress
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_b2187dea6bd3499c83003552bdd0a861) at 0x7cb11c4da6f0>: sending query failed: another command is already in progress
+another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_b2187dea6bd3499c83003552bdd0a861) at 0x7cb11c4da6f0>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x7cb11c4da6f0>
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [227679]

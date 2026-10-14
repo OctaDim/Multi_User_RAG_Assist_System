@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_answer_lifecycle.py {"proof": "real_issuer_settings_ui", "origins": ["http://127.0.0.1:58840", "http://127.0.0.1:56910"], "saved_revision": 1, "read_only_direct_write_status": 422, "screenshots": "/tmp/rag-u8-worker-settings-green-1/test_real_super_admin_settings0"}
+.
+
+============================== 1 passed in 8.92s ===============================

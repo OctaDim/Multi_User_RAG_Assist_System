@@ -1,0 +1,10 @@
+{
+  "source_sha256": {
+    "backend/app/generation.py": "b97f28fff1fdb74c97c57687841681919e418dbbfb69f658b52088e3bdc9c439",
+    "backend/tests/test_service_ownership_lease.py": "24438d32cbfbf83a1d61062437aba7ec86df26da7421c4c0fd31e5eaec92b956",
+    "backend/tests/test_service_recovery.py": "7e61d6eace67634aa22bc3f181e851c199d7dc9aae152120ce7b3df68ea4571c"
+  },
+  "baseline_test_bodies_modified": false,
+  "bound": "last successful ownership-query sendtime plus same5slease; await remainingbudget, noretry/fence changes",
+  "v41": "observedhealthyownership at0.8s butchildreaped; v40 retrospectivewaitcause unknown"
+}

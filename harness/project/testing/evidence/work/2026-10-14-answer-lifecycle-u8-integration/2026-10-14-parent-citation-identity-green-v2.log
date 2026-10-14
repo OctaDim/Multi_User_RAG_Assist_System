@@ -1,0 +1,28 @@
+.E
+==================================== ERRORS ====================================
+_ ERROR at setup of test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments _
+
+    @pytest.fixture(scope='module')
+    def qwen_tokenize():
+        import llama_cpp as native
+    
+        native.llama_backend_init()
+        params = native.llama_model_default_params()
+        params.vocab_only = True
+        params.n_gpu_layers = 0
+>       model = native.llama_model_load_from_file(os.fsencode(os.environ['RAG_MODEL_PATH']), params)
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_rag_context.py:295: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = environ({'CODEX_CI': '1', 'CODEX_HOME': '/home/octadim/.codex', 'CODEX_PERMISSION_PROFILE': ':workspace', 'CODEX_REMOT...'tests/test_rag_context.py::test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments (setup)'})
+key = 'RAG_MODEL_PATH'
+
+>   ???
+E   KeyError: 'RAG_MODEL_PATH'
+
+<frozen os>:714: KeyError
+=========================== short test summary info ============================
+ERROR backend/tests/test_rag_context.py::test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments
+1 passed, 1 error in 1.15s

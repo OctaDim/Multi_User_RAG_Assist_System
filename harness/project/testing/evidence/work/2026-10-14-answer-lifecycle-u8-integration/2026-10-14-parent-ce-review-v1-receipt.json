@@ -1,0 +1,202 @@
+{
+  "run_id": "20261014-180301-33f78c23",
+  "mode": "agent",
+  "review_result_preserved_verbatim": true,
+  "four_confirmed_unapplied": true,
+  "external_peer_not_run": "shared jq missing; required in-process fallback completed",
+  "no_outstanding_jobs": true,
+  "manifest": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-files.txt",
+      "sha256": "c4b8468e71c0464cea4df9639fce88d23b734cfbb573d8bc1ee4d4eede7bc8fd"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-performance.md",
+      "sha256": "aa89bf1dc5808fb9e65fbe54feade905398e538239a30355de591a6b5a17d7af"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-security.md",
+      "sha256": "67dadf90f6633b73db58fe9db0110ac0038bd67e0261827a72c227a776945642"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-adversarial-reviewer.md",
+      "sha256": "83d32d439e55911205aa2e74bef758dc8246687158ed738759a2b6ebcbdb1c67"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validator-prompt.md",
+      "sha256": "ed0b5560c682b06b20cb77900122bbdf22e92040abf462765d0b1f6ce88bc3e6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-mechanical-findings.json",
+      "sha256": "0a47b195d7296cac873d3ffc8efd7566d10be29ababc61f87936d84fd347cf5a"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validator-input.json",
+      "sha256": "666f9842b4d06b57cfa05b03f90e527efabcc703d8c888cc5cd1c57409222e0c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-julik-frontend-races.json",
+      "sha256": "6ff35b5113969f7d43cb340b1361e1493c6da41721a07cc827cb32c942311ccd"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-reliability.json",
+      "sha256": "42a5acf194c69d27c722d72c8a18f75b845395ef23e0848ef56621b391d4e122"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-stages.jsonl",
+      "sha256": "c545124ca1ed3cf7b2603400c93dd250a318814ff2cf75bc33c926c8590e3d1c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-maintainability.md",
+      "sha256": "c4fde835858a31a040ab33feba546fd5a2cf2347f3065956ccd56b99a18937dc"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-invocation.json",
+      "sha256": "ad96a8224ae25430b64dbdfc8509bdf4228836b553b193984f9729e62d0e62bd"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-raw-returns.json",
+      "sha256": "bcba97d2acad46bd9ff9723057464d852514428fb10deb97dc1533b9c6ad741f"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-reliability.md",
+      "sha256": "e16d4131ec43df7d11dbd49b3c452c471efe7e04d5310fcea4ea3e402a2400b7"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-review.json",
+      "sha256": "6018770f4c883cef3eb7710dd86de953482c1e19112735d6e0f7b87294b5c0f9"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-security.json",
+      "sha256": "f47b611bcddf51812a4ac93557f14bd0bc707aae24dc28736cb269d80f1b3aff"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-project-standards.json",
+      "sha256": "345b9cc8abef03fc7859699a638120bee75a37a2888a2caef4e0ecf6ac9b42df"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-diff.patch",
+      "sha256": "53cc8ed509ccf9eb5ee993a61726f8c1c7098cd9a6880442b6d0b6d99aff7261"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-metadata.json",
+      "sha256": "2664f241ea38f60ef72b10020da8cba48f879a68aef41f4ac80f6a2e2e2a558f"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-peer-state.json",
+      "sha256": "fd79294f27a687a937b64906a29fa69d71c44eaa7808b250560811b437c4cb11"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-finish-input.json",
+      "sha256": "f0762d404334e65437929bbc0ee8c828456ba3dba98adac9920fc8351b428ef2"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-maintainability.json",
+      "sha256": "edaf8ced696ea3fe0e7dbbcfe40899a43103ff325c6fe326689788735a39d1cb"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-actionable-findings.json",
+      "sha256": "a65c53f653971a6405730fbd691f360440534fc012687871b9f2b919bddfd459"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-advisory-outputs.json",
+      "sha256": "3034fac74733e5db38bf51a4c58c5ed71dc1923f7eed57ffd016b6f225eee18d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validator-launch-bound.json",
+      "sha256": "0704a9990b6f24a5fc926bbdf879a6abf87e6a0e4a476b374f524ebf8a19ee76"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validator-outcome.json",
+      "sha256": "334c5acb7373903173241ba05e3fe228b88b91acb7fca1be366c2ebb1b6a363b"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-correctness.md",
+      "sha256": "ced8b07ccb45d6ac387a097af8e3fd1ad683564ece25653e2055a3666b46a3ab"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-criteria-map.json",
+      "sha256": "f277e8a26154ebc819c64ad63443d59edbe725ebf2421462b18e0fad5a85553d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-selected-roster.json",
+      "sha256": "c918a9c2c20adbed65747531423b13f0dbb3169488f2aa94cdd848c322b8f548"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-untracked.txt",
+      "sha256": "124a4dfcee4ace1e12f487f257eb821b46ef0b9b527e4ded2e43c79e52d3a093"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-synthesized-findings.json",
+      "sha256": "69f7c2d70bd6914f96771d8a63d6fcfe0bcde81174bf5d1db99b8e6191c002e2"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-project-standards.md",
+      "sha256": "702527d8a9a49e951245f469e48aa5e3c940a237719f5d4243d3d982cdaea6c9"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-intent-and-requirements.json",
+      "sha256": "a490c481d8530479c68340eabce9ac8f3b15d32765e0c7c924f8b7f86a4fc339"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-julik-frontend-races.md",
+      "sha256": "e2096bec545cff0c0fb2188a8f5c4e8cc531720b111257d24ad02450119645d0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-source-detail-map.json",
+      "sha256": "538c5a80f4b0f1850a8fd29db4ae90364572c28d7c430c32fc23103accd65439"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-prompt-testing.md",
+      "sha256": "1c77e20b569485a61731db89dff6edcd281a9010f581821d52c85060b1743a2c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-adversarial-reviewer.json",
+      "sha256": "bec4aa7f3305b2d63d797ec0ae8759ede752cdb078fd7026b97c03c31c332d66"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-settlements-orchestrator-only.json",
+      "sha256": "e453e8168d148316f3a9f0a12a2eb3fca43cd98043450c98c0d35be4f5146237"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-testing.json",
+      "sha256": "78ac2667a55b0e09a89cc9f2dd34ac2eff784a3340f9f43bd54315cde2567b96"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-performance.json",
+      "sha256": "939cb770defd098056e20bb1482968ba51c241084e3d60cca58e17c3d850a5b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-adversarial-review-constraints.md",
+      "sha256": "64a6e8fef8c6df86c5f4a4c090c3123c200ed511ab5c4c32c805920420cf9a82"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validation-classification.json",
+      "sha256": "e99c30e34c0a4b2fd1c19943955d2d3f3a1f182a0074e253146d20cf2a0b6337"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-correctness.json",
+      "sha256": "b58ecd1ae2d9be41191b0728cdc36697869e8be509c42a079a6811983dfa1bc8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-validator-verdicts.json",
+      "sha256": "46bec01797617fd90959fddb441d78177391e583ef0bdbe1c40f0aa76f91b331"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-fast-pass.json",
+      "sha256": "18f37cd9333ed84878e73153890c0db91e422620728bbee2e1fd0a14291a55c0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-adversarial-review-brief.md",
+      "sha256": "7b7e81fbff7d1a55ea4477115c0b877082ff4e0b773d745d29b49f468317d6e4"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-plan-for-reviewers.md",
+      "sha256": "6f403af46851dd4c955a47fb75acad41b415f2eba021ef4a136df033446b661c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ce-review-v1-scope.json",
+      "sha256": "6be9f84a5bb286b46e9d58fcf4128745b88f57971688b53aff3864457b9d7ed7"
+    }
+  ]
+}

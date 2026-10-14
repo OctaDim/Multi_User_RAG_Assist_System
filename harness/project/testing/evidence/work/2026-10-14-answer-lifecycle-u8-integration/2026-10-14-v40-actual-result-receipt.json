@@ -1,0 +1,162 @@
+{
+  "exit_code": 1,
+  "actual_result": "15 passed,1failed2456.46s",
+  "normal_pages_completed": 15,
+  "skip_pages_completed": 15,
+  "fault_page": 16,
+  "pages17_to20_executed": false,
+  "normal_failure": "healthy-neighbour native answer absent after observed supervisor ownershipstalled; report/DB whole-exclusion/originalSHA/failed-only409/UIzero-ready-draft-history checks passed",
+  "skip_mode": "full actual proof PASS including healthyneighbour10",
+  "new_service_test_authored_during_run": "NOT collected/executed",
+  "production_changed_during_run": false,
+  "files": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_hancurrent-actual-pre-recognition-masks.jsonl",
+      "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_hancurrent-genuine-handwriting-results.json",
+      "sha256": "38dd4c95882c7024de5b5d61fda4067a2c73ed5c35f55d2b6bc60b3bb8f59487"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_hancurrent-document-worker.log",
+      "sha256": "c1467fd676ff387edf532a3965b37fcbeb719265a0ce499d5c35f3b4705cd015"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_hancurrent-actual-printed-texts.jsonl",
+      "sha256": "d9bf32e2872c75ffa2444127eb9119b3f609b7c6079cab181150e4badb06f3e5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-actual-finished-pages.jsonl",
+      "sha256": "96f0a5e0ecd5db6a57bbbb71f080a87a64124363d036a56b12c94e22a39b6bb8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-actual-page-16-failure-report.png",
+      "sha256": "affc73a7728cf5407c686372591df3242e3e5d2b7f8d9ca7293950a1d78e2f98"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-generation.log",
+      "sha256": "e7b8f77d9f6bd13038d029857ee510adb059a0b7699d9328c1aa33b924cf4ab1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-document-worker.log",
+      "sha256": "0e67066b3856ab09d7261b91a774a035b858d33986c4850ab6a51a1372fe49d5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-whole-file-failed-report.png",
+      "sha256": "0f71b8b42a475bea9d7b58075e8733dade376f3a3ec79be239e9ef5c3965b631"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-actual-twenty-page-original.pdf",
+      "sha256": "7a0189284c2b95a070dfe75a3e08f6948fd857b290acf6314626290dc0ec3ed4"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failurcurrent-api-2.log",
+      "sha256": "7be2f430bae3255a6ab7389a484d1ac72db1e5c637386b254846a6a6efb4c3f6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_prin0-actual-pre-recognition-masks.jsonl",
+      "sha256": "721d04304792b62782db5829655e632ac4f137f1d3b692360c966da4a040ab64"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_prin0-actual-printed-four-language-results.json",
+      "sha256": "99add4d937e655be98f8b1dc48b8e97029847d0f3bb076b04fc518855f6daceb"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_prin0-document-worker.log",
+      "sha256": "fb0be4fffbd2bfcd067fe74252d1cee7115609c8160468bdaebec58bfd6968d6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_prin0-actual-printed-texts.jsonl",
+      "sha256": "0d3234e4218ad120c4ddcfc8f83d5e4747287a2e0303ca0b6664e79dad980665"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_princurrent-actual-pre-recognition-masks.jsonl",
+      "sha256": "721d04304792b62782db5829655e632ac4f137f1d3b692360c966da4a040ab64"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_princurrent-actual-printed-four-language-results.json",
+      "sha256": "99add4d937e655be98f8b1dc48b8e97029847d0f3bb076b04fc518855f6daceb"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_princurrent-document-worker.log",
+      "sha256": "fb0be4fffbd2bfcd067fe74252d1cee7115609c8160468bdaebec58bfd6968d6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_four_language_princurrent-actual-printed-texts.jsonl",
+      "sha256": "0d3234e4218ad120c4ddcfc8f83d5e4747287a2e0303ca0b6664e79dad980665"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-actual-finished-pages.jsonl",
+      "sha256": "d34fc0fa3252877ebaafddf58714bf92171b18ad5886dadab1459872920e02b6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-actual-page-16-failure-report.png",
+      "sha256": "ad1a21278bba26e5f61d082cf488393ee0607788df034f1291787f1b7b8d24c0"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-generation.log",
+      "sha256": "7e51873f12e14a9a1fc689b32e5bf768cba0ee3892a56b434041aa2d83970dfb"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-document-worker.log",
+      "sha256": "c394526a0366a8155fa4cccf4ef20590132a7f2ac5f08063fe17c2f7e68f0d80"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-actual-twenty-page-original.pdf",
+      "sha256": "fab4810bf4f5d43ea0b97acdd7b5439fc29cea34c12874cf0847d3e11150c5c6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur0-api-2.log",
+      "sha256": "5829f4f5b8b974d52cf530c6469a737fe4fa1544ea54e1831de8703c85bb107c"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-postgrescurrent-.handle_pids.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_han0-actual-pre-recognition-masks.jsonl",
+      "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_han0-genuine-handwriting-results.json",
+      "sha256": "38dd4c95882c7024de5b5d61fda4067a2c73ed5c35f55d2b6bc60b3bb8f59487"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_han0-document-worker.log",
+      "sha256": "c1467fd676ff387edf532a3965b37fcbeb719265a0ce499d5c35f3b4705cd015"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_genuine_four_language_han0-actual-printed-texts.jsonl",
+      "sha256": "d9bf32e2872c75ffa2444127eb9119b3f609b7c6079cab181150e4badb06f3e5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-actual-finished-pages.jsonl",
+      "sha256": "96f0a5e0ecd5db6a57bbbb71f080a87a64124363d036a56b12c94e22a39b6bb8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-actual-page-16-failure-report.png",
+      "sha256": "affc73a7728cf5407c686372591df3242e3e5d2b7f8d9ca7293950a1d78e2f98"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-generation.log",
+      "sha256": "e7b8f77d9f6bd13038d029857ee510adb059a0b7699d9328c1aa33b924cf4ab1"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-document-worker.log",
+      "sha256": "0e67066b3856ab09d7261b91a774a035b858d33986c4850ab6a51a1372fe49d5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-whole-file-failed-report.png",
+      "sha256": "0f71b8b42a475bea9d7b58075e8733dade376f3a3ec79be239e9ef5c3965b631"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-actual-twenty-page-original.pdf",
+      "sha256": "7a0189284c2b95a070dfe75a3e08f6948fd857b290acf6314626290dc0ec3ed4"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v40-test_actual_twenty_page_failur1-api-2.log",
+      "sha256": "7be2f430bae3255a6ab7389a484d1ac72db1e5c637386b254846a6a6efb4c3f6"
+    }
+  ]
+}

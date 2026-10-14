@@ -1,0 +1,76 @@
+{
+  "created": "2026-10-14",
+  "algorithm": "For each frozen question language/article list: XML article itertext, collapse XML whitespace, join articles with two newlines, final newline. No model output used.",
+  "records": [
+    {
+      "language": "eng",
+      "source_xml": "backend/tests/fixtures/answer_lifecycle/udhr-eng.xml",
+      "source_sha256": "df73275821449df4db2b164e59bda812c834d80cacc8792a6f41d6fc331ce204",
+      "selected_articles": [
+        1,
+        3,
+        4,
+        5,
+        9,
+        14,
+        15,
+        24
+      ],
+      "uploaded_txt": "backend/tests/fixtures/answer_lifecycle/udhr-eng.txt",
+      "txt_sha256": "e18c92c59d409a902785da1a156797ca14816561a5f494f42ac87fbb2dcf2f00",
+      "scope": "Selected verbatim article excerpts uploaded as a complete TXT file; not a full official declaration PDF/XML."
+    },
+    {
+      "language": "rus",
+      "source_xml": "backend/tests/fixtures/answer_lifecycle/udhr-rus.xml",
+      "source_sha256": "4d91ee6b21c4f2fd26bae1a62b6f2922b2a33335b1559ccfaea29bdaf2ec2972",
+      "selected_articles": [
+        1,
+        3,
+        4,
+        5,
+        9,
+        14,
+        15,
+        24
+      ],
+      "uploaded_txt": "backend/tests/fixtures/answer_lifecycle/udhr-rus.txt",
+      "txt_sha256": "5163ff2e053fec173011445324b242c747cd0ffbb3b5223ca1cce46d0691c64b",
+      "scope": "Selected verbatim article excerpts uploaded as a complete TXT file; not a full official declaration PDF/XML."
+    },
+    {
+      "language": "bel",
+      "source_xml": "backend/tests/fixtures/answer_lifecycle/udhr-bel.xml",
+      "source_sha256": "c20dec1fbb2b291467d0f7d0885929f3ea65553f3fa791a499c5547636389113",
+      "selected_articles": [
+        1,
+        3,
+        4,
+        5,
+        9,
+        14,
+        15
+      ],
+      "uploaded_txt": "backend/tests/fixtures/answer_lifecycle/udhr-bel.txt",
+      "txt_sha256": "798b0d1d63a5742adf4c0f7cf8745008da0a6dba631dfde834c3890705a07a7a",
+      "scope": "Selected verbatim article excerpts uploaded as a complete TXT file; not a full official declaration PDF/XML."
+    },
+    {
+      "language": "deu_1996",
+      "source_xml": "backend/tests/fixtures/answer_lifecycle/udhr-deu_1996.xml",
+      "source_sha256": "c9cdfc09db8e9dac2f6571a51a87178c6d8bce80f0db888ca23fdf002179a917",
+      "selected_articles": [
+        1,
+        3,
+        4,
+        5,
+        9,
+        14,
+        15
+      ],
+      "uploaded_txt": "backend/tests/fixtures/answer_lifecycle/udhr-deu_1996.txt",
+      "txt_sha256": "f592cf0746c33fbd764092cf153f883f806dc32bf3c82372c9c974f96ec38160",
+      "scope": "Selected verbatim article excerpts uploaded as a complete TXT file; not a full official declaration PDF/XML."
+    }
+  ]
+}

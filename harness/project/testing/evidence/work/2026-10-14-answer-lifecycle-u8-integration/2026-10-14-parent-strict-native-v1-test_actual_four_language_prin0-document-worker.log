@@ -1,0 +1,140 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 30891 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 1577 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 140 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 184 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 161 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 224 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 213 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 177 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 216 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 200 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 197 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 33915 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2165 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 166 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 138 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 191 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 150 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 190 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 166 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 207 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 184 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 201 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 32227 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2003 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 149 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 246 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 218 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 207 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 250 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 186 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 226 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 244 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 192 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 30851 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 1351 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 225 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 155 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 240 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 176 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 212 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 206 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 217 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 212 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 215 ms

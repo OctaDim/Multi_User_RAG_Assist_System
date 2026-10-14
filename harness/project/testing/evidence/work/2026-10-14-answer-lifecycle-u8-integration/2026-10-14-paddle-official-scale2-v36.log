@@ -1,0 +1,20 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 23
+image_tokens->ny = 7
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=644, ny=196)
+clip_encode: output embedding shape [1024, 161, 1]
+image slice encoded in 1921 ms
+decoding image batch 1/2, n_tokens_batch = 128
+image decoded (batch 1/2) in 144 ms
+decoding image batch 2/2, n_tokens_batch = 33
+image decoded (batch 2/2) in 41 ms
+{"task": "Spotting:", "source": "actual_pre_masked_original_foreground_crop_v34", "preprocessing": "official modelcard LANCZOS2x when both input dimensions<1500", "lines": [{"kind": "printed", "text": "Факсіміле верша, які знаходзіцца", "bbox": [21.000000000000004, 22.36, 576.0, 57.276], "polygon": [[21.000000000000004, 22.36], [576.0, 22.36], [576.0, 57.276], [21.000000000000004, 57.276]]}, {"kind": "printed", "text": "y музеї Я. Купалы.", "bbox": [21.000000000000004, 64.328, 333.6, 102.512], "polygon": [[21.000000000000004, 64.328], [333.6, 64.328], [333.6, 102.512], [21.000000000000004, 102.512]]}, {"kind": "printed", "text": "Верш напісаны ў 1905–1907 гг.", "bbox": [21.000000000000004, 106.468, 541.8000000000001, 139.83599999999998], "polygon": [[21.000000000000004, 106.468], [541.8000000000001, 106.468], [541.8000000000001, 139.83599999999998], [21.000000000000004, 139.83599999999998]]}], "text": "Факсіміле верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг."}

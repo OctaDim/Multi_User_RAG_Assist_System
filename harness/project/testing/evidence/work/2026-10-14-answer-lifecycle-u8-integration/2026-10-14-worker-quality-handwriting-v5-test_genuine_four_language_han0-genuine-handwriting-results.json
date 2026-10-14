@@ -1,0 +1,43 @@
+[
+  {
+    "language": "en",
+    "expected_legible_source": [
+      "dreams",
+      "hughes"
+    ],
+    "recognized": "Dreams\n-Langston Hughes\n",
+    "missing": []
+  },
+  {
+    "language": "ru",
+    "expected_legible_source": [
+      "август"
+    ],
+    "recognized": "abrycm\n",
+    "missing": [
+      "август"
+    ]
+  },
+  {
+    "language": "de",
+    "expected_legible_source": [
+      "die seerose blüht auf dem teich"
+    ],
+    "recognized": "Die Seerose blüht auf dem Teich.\n",
+    "missing": []
+  },
+  {
+    "language": "be",
+    "expected_legible_source": [
+      "беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "recognized": "A timo mou igre, A timo mau igre.\nY arproueni mai maxoi upouage?-\nTearpyele.\nA umo eau usayub na xugue nverox,\nHa pyx y kabi, u uara x y anuxx?\nClare Kauy'y\nA nauy-ye uereyub zamy kpaiey.\nA kygar-ye uereyu u naka z elaco?-\nHa chem uas u.\nA rano-ya, rano zaxauasac im\nNarappycanu ber, iu zuyix, cemun,\nCrogzeli Zauza.!\nФаксіміле верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905—1907 гг.\n",
+    "missing": [
+      "беларусы",
+      "крыўду",
+      "людзьмі"
+    ]
+  }
+]

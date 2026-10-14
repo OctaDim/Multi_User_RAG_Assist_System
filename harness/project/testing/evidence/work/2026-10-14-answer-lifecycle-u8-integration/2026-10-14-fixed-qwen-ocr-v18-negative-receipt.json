@@ -1,0 +1,16 @@
+{
+  "status": "NOT ACCEPTED",
+  "exit": 1,
+  "passed": 9,
+  "failed": 4,
+  "seconds": 269.65,
+  "source_freeze_unchanged": true,
+  "raw": "2026-10-14-fixed-qwen-ocr-green-v18.log",
+  "sha256": "befa6d5ba6a8e06b3f8e61df89052c5199b2b66a8c6a63802b4968902b357ae2",
+  "findings": [
+    "Detector-only crops drop real printed budget100",
+    "Independent handwriting score selection needed; RU empty/no skip",
+    "Logout observation raced async logout completion"
+  ],
+  "contract": "../../../../decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md"
+}

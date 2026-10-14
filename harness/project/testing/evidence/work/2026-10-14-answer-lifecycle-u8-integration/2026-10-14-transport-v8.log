@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_transport_lifecycle.py {"proof": "genuine_two_api_proxy_tab_lifecycle", "request_id": "6c9ecf0a-0948-4f97-b0ba-1a93765dd080", "winner": 0, "recovered_after_seconds": 5, "observer_stayed_connected": true, "saved_prefix": "The annual budget", "native_log": "/tmp/rag-u8-worker-transport-8/test_actual_two_tab_admission_0/generation.log"}
+.
+
+============================== 1 passed in 56.82s ==============================

@@ -1,0 +1,223 @@
+{
+  "input": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-ALLv4-fresh-thirty-control-results.json",
+  "input_sha256": "aa53f07a0cf89f03162be3cc9ac25832e631993a50a7b89ab7b27559fc5bca7d",
+  "run": "unfiltered ALLapplicationv4",
+  "review": "Parent independently read every raw answer and question against frozen expected primary source facts; all requested facts supported, no unrelated claims, all citations cover exact expected primary paragraph. OCR exceptions not applied to RAG answer/citation acceptance.",
+  "mechanical_correct": 30,
+  "semantic_correct": 30,
+  "exact_citation_and_source_checks": 30,
+  "fresh_final_thirty_pass": true,
+  "whole_ALL_running": true,
+  "rows": [
+    {
+      "id": "eng-1",
+      "request_id": "817b2de0-f247-4618-a679-72d86adf6bbf",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-3",
+      "request_id": "24c59f54-6846-4c51-a62c-329fabb7bd95",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-4",
+      "request_id": "80ebc130-d1ae-4959-9dca-7a280cea1b60",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-5",
+      "request_id": "b5a29592-134c-4352-b04d-e8f7f9c40a77",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-9",
+      "request_id": "ef809281-0593-4322-bc0f-cd5a51fa7ac7",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-14",
+      "request_id": "f307d2a6-b6c0-48d8-82fe-a7c235c36cd3",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-15",
+      "request_id": "814adca0-48d6-417c-975c-f76dc4cd4592",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "eng-24",
+      "request_id": "9c1fb7cd-150b-41fa-a6e2-a95678de6ebd",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-1",
+      "request_id": "d129ca04-79a3-4cd1-b314-cd4012a2c0cb",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-3",
+      "request_id": "3d319a7e-77eb-48cb-9d04-bd1e36b79a94",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-4",
+      "request_id": "79d0a324-e781-4fa4-8187-66d0b67faa5e",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-5",
+      "request_id": "84c90445-436e-491f-9635-2500c6b641da",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-9",
+      "request_id": "15a8d2f6-961b-45ed-b371-8c7c144fa217",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-14",
+      "request_id": "71cbc0c1-4a05-43ee-9627-4591a52941b9",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-15",
+      "request_id": "8d0bdd96-7de0-44ba-a8a8-175e5d408e0b",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "rus-24",
+      "request_id": "688d1d69-9d4a-45b9-b311-863ae7c83690",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-1",
+      "request_id": "cb28a8b3-b875-46e8-b0f4-d9ade9107789",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-3",
+      "request_id": "c88f8c75-58c7-4809-9878-dd7ead63b15c",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-4",
+      "request_id": "96fb678d-b83a-4c6c-afdd-80fc3fa83fc0",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-5",
+      "request_id": "8e844f34-3f84-4361-9266-e4c3af16f4e0",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-9",
+      "request_id": "bbbfa7f1-558e-4ca4-a2e5-5f96dc409dca",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-14",
+      "request_id": "1c7500fe-ad8d-4d23-a455-218b39cc7a3f",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "bel-15",
+      "request_id": "6dbb7756-5c69-4e4f-be40-037b9d566eee",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-1",
+      "request_id": "8ab2db74-b590-476c-8db2-23e50d4d2d76",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-3",
+      "request_id": "53a16de7-0ba7-431c-83ab-71de27e475af",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-4",
+      "request_id": "e209b98b-5fe3-4d82-b966-707cfad0a539",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-5",
+      "request_id": "bd779674-ca54-4a1b-aaf1-6c812640832b",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-9",
+      "request_id": "2fa680e3-ddf8-4b35-ae9c-4e66a77139f9",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-14",
+      "request_id": "818dd4b5-8499-4f2f-822b-5b26f64d6284",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    },
+    {
+      "id": "deu_1996-15",
+      "request_id": "daa76d6e-9019-4358-a398-bed5c5ae6fd1",
+      "semantically_correct": true,
+      "correct_cited_primary_paragraph": true,
+      "source_and_citation_geometry_exact": true
+    }
+  ]
+}

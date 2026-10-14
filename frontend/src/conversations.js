@@ -9,6 +9,7 @@ const labels = {accepted:'Принят', searching:'Поиск', queued:'Ожи�
 const reasons = {user_stop:'Остановлен пользователем', tab_timeout:'Соединение вкладки потеряно',
   execution_lost:'Сервис генерации остановился', source_deleted:'Источник удалён',
   unauthenticated:'Сессия завершилась', access_denied:'Доступ закрыт',
+  account_changed:'Права аккаунта изменились', session_ended:'Сессия завершилась',
   search_error:'Не удалось подготовить источники', generation_error:'Не удалось сформировать ответ',
   context_limit:'Достигнут предел контекста', cancelled:'Обработка остановлена', error:'Ошибка обработки'};
 
@@ -260,12 +261,13 @@ export class Conversations {
       }
     }
     const latest = value.requests[value.requests.length-1];
-    const signature = JSON.stringify(latest.passport || {});
+    const signature = JSON.stringify([latest.passport || {},latest.state]);
     if (this.fragmentSignature !== signature || this.fragmentConversation !== this.selected) {
       this.fragmentSignature = signature; this.fragmentConversation = this.selected;
       $('early-fragments').replaceChildren();
       if (latest.passport?.passed) {
-        $('early-fragments').append(textElement('h2', 'Найденные основания'));
+        $('early-fragments').append(textElement('h2', unfinished.has(latest.state) ? 'Найденные основания' : 'Сохранённые основания последнего вопроса'));
+        if (!unfinished.has(latest.state)) $('early-fragments').append(textElement('p', `Состояние последнего вопроса: ${labels[latest.state] || latest.state}.`));
         for (const fragment of latest.passport.found) {
           const index = latest.passport.passed.findIndex(value => value.id === fragment.id);
           $('early-fragments').append(textElement('p',`${this.documentName(fragment.document_id,fragment.name)} · Страница ${fragment.page} · ${index>=0 ? 'Передан модели' : 'Не передан модели из-за объёма контекста'}`), textElement('blockquote', fragment.text));
@@ -288,7 +290,7 @@ export class Conversations {
       if (this.selected === identifier) $('question').value = this.drafts.get(identifier).text;
     } catch (error) {
       if (!this.current()) return;
-      if (['conversation_busy','no_ready_sources','invalid_scope','coordinator_unavailable','tab_disconnected','invalid_input'].includes(error.message)) this.drafts.rejected(identifier, pending.body.operation_key);
+      if (['conversation_busy','no_ready_sources','invalid_scope','coordinator_unavailable','tab_disconnected','invalid_input','context_too_large','tokenizer_unavailable'].includes(error.message)) this.drafts.rejected(identifier, pending.body.operation_key);
       this.reportError(error);
     } finally {this.sending.delete(identifier); this.render();}
   }

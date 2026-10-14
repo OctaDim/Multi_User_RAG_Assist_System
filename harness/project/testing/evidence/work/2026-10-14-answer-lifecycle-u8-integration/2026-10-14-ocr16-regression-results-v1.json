@@ -1,0 +1,52 @@
+[
+  {
+    "language": "ru",
+    "profile": "official-1.6-1605632-spotting",
+    "prompt": "Spotting:",
+    "original_size": [
+      472,
+      159
+    ],
+    "processed_size": [
+      944,
+      318
+    ],
+    "text": "abryem",
+    "raw_special": "abryem<|LOC_40|><|LOC_0|><|LOC_999|><|LOC_0|><|LOC_999|><|LOC_1000|><|LOC_40|><|LOC_1000|>",
+    "finish": "stop",
+    "valid_spotting": true,
+    "expected_independent_gt": [
+      "август"
+    ],
+    "missing": [
+      "август"
+    ]
+  },
+  {
+    "language": "be",
+    "profile": "official-1.6-1605632-spotting",
+    "prompt": "Spotting:",
+    "original_size": [
+      1200,
+      1610
+    ],
+    "processed_size": [
+      1200,
+      1610
+    ],
+    "text": "A. Ximo mou igze, A ximo mou igze.\ny arpouniemai manai yauugge?-\nTernaryte.\nA wmo eua uayub na xuyux nexo,\nHa pyx y kpi, u uax y uayx?\nA noay-ye uay uay y y\nA kuqw-ye uayue u na xu eao?-\nHa elem uas u.\nA rano-ye, rano zaxauasai iu\nNarapqyeauu kex, iu zuyxiu, eomui\nChogzuli Zauua!\nΦακίμιλε βερμα, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісані ў 1905–1907 гг.",
+    "raw_special": "A. Ximo mou igze, A ximo mou igze.<|LOC_40|><|LOC_45|><|LOC_935|><|LOC_45|><|LOC_935|><|LOC_100|><|LOC_40|><|LOC_100|>\ny arpouniemai manai yauugge?-<|LOC_40|><|LOC_92|><|LOC_953|><|LOC_92|><|LOC_953|><|LOC_146|><|LOC_40|><|LOC_146|>\nTernaryte.<|LOC_395|><|LOC_138|><|LOC_675|><|LOC_138|><|LOC_675|><|LOC_179|><|LOC_395|><|LOC_179|>\nA wmo eua uayub na xuyux nexo,<|LOC_27|><|LOC_184|><|LOC_985|><|LOC_184|><|LOC_985|><|LOC_231|><|LOC_27|><|LOC_231|>\nHa pyx y kpi, u uax y uayx?<|LOC_34|><|LOC_219|><|LOC_988|><|LOC_219|><|LOC_988|><|LOC_277|><|LOC_34|><|LOC_277|>\nA noay-ye uay uay y y<|LOC_35|><|LOC_302|><|LOC_941|><|LOC_302|><|LOC_941|><|LOC_361|><|LOC_35|><|LOC_361|>\nA kuqw-ye uayue u na xu eao?-<|LOC_27|><|LOC_356|><|LOC_963|><|LOC_356|><|LOC_963|><|LOC_408|><|LOC_27|><|LOC_408|>\nHa elem uas u.<|LOC_325|><|LOC_395|><|LOC_756|><|LOC_395|><|LOC_756|><|LOC_441|><|LOC_325|><|LOC_441|>\nA rano-ye, rano zaxauasai iu<|LOC_27|><|LOC_448|><|LOC_852|><|LOC_448|><|LOC_852|><|LOC_493|><|LOC_27|><|LOC_493|>\nNarapqyeauu kex, iu zuyxiu, eomui<|LOC_30|><|LOC_488|><|LOC_988|><|LOC_488|><|LOC_988|><|LOC_542|><|LOC_30|><|LOC_542|>\nChogzuli Zauua!<|LOC_340|><|LOC_524|><|LOC_848|><|LOC_524|><|LOC_848|><|LOC_577|><|LOC_340|><|LOC_577|>\nΦακίμιλε βερμα, які знаходзіцца<|LOC_65|><|LOC_690|><|LOC_298|><|LOC_690|><|LOC_298|><|LOC_701|><|LOC_65|><|LOC_701|>\ny музеї Я. Купалы.<|LOC_65|><|LOC_704|><|LOC_197|><|LOC_704|><|LOC_197|><|LOC_715|><|LOC_65|><|LOC_715|>\nВерш напісані ў 1905–1907 гг.<|LOC_65|><|LOC_717|><|LOC_283|><|LOC_717|><|LOC_283|><|LOC_730|><|LOC_65|><|LOC_730|>",
+    "finish": "stop",
+    "valid_spotting": true,
+    "expected_independent_gt": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "missing": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ]
+  }
+]

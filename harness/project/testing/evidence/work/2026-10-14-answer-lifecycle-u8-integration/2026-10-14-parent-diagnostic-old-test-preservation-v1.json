@@ -1,0 +1,9 @@
+{
+  "base": "122554c808d34ccb1ea679891efb58102b61a1a6",
+  "baseline_named_tests_preserved_unchanged": {
+    "backend/tests": 144,
+    "harness/common/testing/tests": 72
+  },
+  "recursive_AST_including_test_class_methods": true,
+  "scope": "active harness testpaths from pytest.ini; historical inbox candidate tests excluded from active count, not edited"
+}

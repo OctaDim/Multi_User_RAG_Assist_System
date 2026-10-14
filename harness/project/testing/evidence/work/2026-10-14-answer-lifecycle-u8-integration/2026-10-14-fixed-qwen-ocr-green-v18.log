@@ -1,0 +1,274 @@
+......{'proof': 'actual_small_handwriting_detection', 'size': (370, 120), 'regions': [{'kind': 'handwritten', 'bbox': [2, 0, 191, 70], 'detection_confidence': 0.9370757937431335}, {'kind': 'handwritten', 'bbox': [75, 63, 358, 120], 'detection_confidence': 0.8835065960884094}]}
+.mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 13
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+decode: removing memory module entries for seq_id = 0, pos = [0, +inf)
+Actual native abort callback entered C; context close waited for C return before physical free.
+.{'proof': 'actual_fixed_qwen2b_f16_ocr_profile', 'model': '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf', 'projector': '/tmp/rag-u8-worker-qwen-ocr-projector-F16.gguf'}
+.FFF{"language": "en", "expected_legible_source": ["dreams", "hughes"], "recognized": "Dreams\n—Langston Hughes\n", "missing": [], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "0c03da8131476d02f42892ae28438677653cbb9dd648aee92fdf1f15a7f13372"}
+{"language": "ru", "expected_legible_source": ["август"], "recognized": "", "missing": ["август"], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "704256faeac9f606c64cf7d797a8909e4c3b68d93cd266ba0cbba530b11be065"}
+{"language": "de", "expected_legible_source": ["die seerose blüht auf dem teich"], "recognized": "Die Seerose blüht auf dem Teich.\n", "missing": [], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "891e2a80d9f83f3d4fe47410f396707d59cc31772a7d4742d78eaa69c5611566"}
+{"language": "be", "expected_legible_source": ["беларусы", "крыўду", "людзьмі"], "recognized": "А. Хто там ідзе, а хто там іде\nУ агрономіста такій громаді? -\nбеларусы.\nА что яны ищущь на жудых плечах,\nНа руках у краві, на ногах у ланцях?\nСвоей крышей\nА каму-це можучы гэта крыіду\nбо\nцель\nА куда-де имеется на показ?\nНа сём час ие.\nА маю-це, паго захацелаць ім\nПалардужным век, ім глухім, слотый\nсходзьмі звацца!\n", "missing": ["крыўду", "людзьмі"], "accuracy_errors_permitted": true, "contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md", "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"}
+F
+=================================== FAILURES ===================================
+_ test_real_partial_upload_and_failed_file_never_expand_selected_source_scope __
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_real_partial_upload_and_f0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_b0b85191a2204548b7b2206a08cffe01 host=/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_real_partial_upload_and_f0')
+
+    def test_real_partial_upload_and_failed_file_never_expand_selected_source_scope(integrated_browser,environment,tmp_path):
+        ((browser,mailbox,frontend,api),worker,worker_log),_,logs=integrated_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();register(page,mailbox,frontend,'u8-whole-source@owned.test');login(page,'u8-whole-source@owned.test')
+            page.locator('#document-upload input').set_input_files([
+                {'name':'whole-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'},
+                {'name':'broken.pdf','mimeType':'application/pdf','buffer':b'%PDF-1.7\nIncomplete invalid original with no pages'}])
+            page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'whole-budget.txt')
+            bad=page.locator('#documents li').filter(has=page.get_by_text('broken.pdf',exact=True))
+            deadline=time.monotonic()+30
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert time.monotonic()<deadline,bad.inner_text()
+                page.get_by_role('button',name='Обновить статусы документов',exact=True).click();page.wait_for_timeout(100)
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=page.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('broken.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: не определена')
+            expect(report).to_contain_text('Причина: Не удалось обработать документ.')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            page.screenshot(path=str(tmp_path/'failed-file-report-desktop.png'),full_page=True)
+            page.set_viewport_size({'width':375,'height':900})
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+            page.screenshot(path=str(tmp_path/'failed-file-report-mobile.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            expect(report).not_to_be_visible()
+            page.set_viewport_size({'width':1280,'height':900})
+            token=page.evaluate("sessionStorage.getItem('rag:credential')")
+            admitted=page.evaluate('''async ({api,token}) => (await (await fetch(api+'/api/documents/uploads',{method:'POST',
+                headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({files:[{name:'interrupted.txt',size:64}]})})).json())''',{'api':api,'token':token})
+            identifier=admitted['documents'][0]['id']
+            parsed=urlsplit(api)
+            with socket.create_connection((parsed.hostname,parsed.port),timeout=10) as stream:
+                headers=f'PUT /api/documents/{identifier}/original HTTP/1.1\r\nHost: {parsed.netloc}\r\nAuthorization: Bearer {token}\r\nContent-Length: 64\r\nContent-Type: application/octet-stream\r\n\r\n'
+                stream.sendall(headers.encode()+b'partial');stream.shutdown(socket.SHUT_RDWR)
+            deadline=time.monotonic()+15
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                while True:
+                    interrupted=connection.execute('SELECT d.*,f.state,f.error,f.original_sha256 FROM documents d JOIN document_files f ON f.document_id=d.id WHERE d.id=%s',(identifier,)).fetchone()
+                    if interrupted['state']=='failed':break
+                    assert time.monotonic()<deadline,interrupted;page.wait_for_timeout(50)
+                assert not interrupted['ready'] and not interrupted['published_revision'] and not interrupted['original_sha256']
+                files=connection.execute('SELECT d.id,f.name,d.ready,d.published_revision FROM documents d JOIN document_files f ON f.document_id=d.id ORDER BY f.created_at').fetchall()
+                assert len(files)==3 and sum(row['ready'] for row in files)==1
+            statuses=page.evaluate('''async ({api,token,id}) => await Promise.all(['','/original'].map(async suffix =>
+                (await fetch(api+'/api/documents/'+id+suffix,{headers:{Authorization:'Bearer '+token}})).status))''',{'api':api,'token':token,'id':identifier})
+            assert statuses==[409,409],statuses
+            actor=page.evaluate('''() => ({tab:JSON.parse(sessionStorage.getItem('rag:tab')),conversation:sessionStorage.getItem('rag:conversation')})''')
+            operation={'operation_key':str(uuid4()),'question':'What is the annual budget?','tab_id':actor['tab']['id'],'document_ids':[str(row['id']) for row in files]}
+            response=page.evaluate('''async ({api,token,actor,operation}) => {
+                const response=await fetch(api+'/api/conversations/'+actor.conversation+'/answers',{method:'POST',
+                headers:{Authorization:'Bearer '+token,'X-Tab-Proof':actor.tab.proof,'Content-Type':'application/json'},body:JSON.stringify(operation)});
+                return {status:response.status,body:await response.json()};}''',{'api':api,'token':token,'actor':actor,'operation':operation})
+            assert response['status']==200,response
+            expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                row=connection.execute('SELECT * FROM requests WHERE id=%s',(response['body']['id'],)).fetchone()
+                good=str(next(file['id'] for file in files if file['ready']))
+                assert {entry['document_id'] for entry in row['passport']['passed']}=={good},row['passport']
+                assert len(row['passport']['selected'])==3 and len(row['passport']['available'])==1,row['passport']
+                assert len(row['passport']['excluded'])==2,row['passport']
+                assert '100' in row['answer_text']
+            (tmp_path/'whole-source-result.json').write_text(json.dumps({'request_id':str(row['id']),'passport':row['passport'],'answer':row['answer_text'],'interrupted_upload':identifier},default=str,ensure_ascii=False,indent=2)+'\n')
+            assert worker.poll() is None
+            # A closed report must not retain another owner's filename in the DOM.
+            page.get_by_role('button',name='Выйти',exact=True).click()
+>           assert page.locator('#document-report').inner_text()==''
+E           AssertionError: assert 'Отчёт об обр...Закрыть отчёт' == ''
+E             
+E             + Отчёт об обработке документаФайл: broken.pdfЭтап: обработка документаСтраница: не определенаПричина: Не удалось обработать документ.Документ целиком недоступен для поиска.Закрыть отчёт
+
+backend/tests/integration/test_actual_document_boundaries.py:84: AssertionError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_actual_twenty_page_failur0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_14deea7cbdf141d1b73e88b7e505ada7 host=/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_actual_twenty_page_failur0')
+skip = False
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click();owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=30)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+>           assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+E           AssertionError: [{'mode': 'complete', 'regions': [{'bbox': [258, 186, 590, 306], 'coordinate_source': 'dfine_layout', 'detection_confi... 'detection_confidence': 0.8822129368782043, 'end': 23, ...}], 'skips': [], 'text': 'Dreams
+E             —Langston Hughes
+E             '}, ...]
+E           assert (15 == 15 and False)
+E            +  where 15 = len([{'mode': 'complete', 'regions': [{'bbox': [258, 186, 590, 306], 'coordinate_source': 'dfine_layout', 'detection_confi... 'detection_confidence': 0.8822129368782043, 'end': 23, ...}], 'skips': [], 'text': 'Dreams\n—Langston Hughes\n'}, ...])
+E            +  and   False = all(<generator object test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor.<locals>.<genexpr> at 0x7128f01ce260>)
+
+backend/tests/integration/test_actual_page_failure.py:106: AssertionError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_actual_twenty_page_failur1/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_4ccf91fa119b4bdeb5dbc7e4b28f3ac0 host=/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_actual_twenty_page_failur1')
+skip = True
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click();owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=30)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+>           assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+E           AssertionError: [{'mode': 'skip_handwriting', 'regions': [{'bbox': [395, 316, 905, 427], 'detection_confidence': 0.8822129368782043, '...тся разрешение OCR рукописей
+E             Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей
+E             '}, ...]
+E           assert (15 == 15 and False)
+E            +  where 15 = len([{'mode': 'skip_handwriting', 'regions': [{'bbox': [395, 316, 905, 427], 'detection_confidence': 0.8822129368782043, '...тся разрешение OCR рукописей\nРукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей\n'}, ...])
+E            +  and   False = all(<generator object test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor.<locals>.<genexpr> at 0x7128f0165490>)
+
+backend/tests/integration/test_actual_page_failure.py:106: AssertionError
+___ test_genuine_four_language_handwriting_publication_and_permission_masks ____
+
+real_document_browser = ((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-lin...G_Ass...>, PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_genuine_four_language_han0/document-worker.log'))
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-18/test_genuine_four_language_han0')
+
+    def test_genuine_four_language_handwriting_publication_and_permission_masks(real_document_browser,tmp_path):
+        (browser,mailbox,frontend,_),worker,log=real_document_browser
+        samples=[('en',raster_pdf(ENGLISH),['dreams','hughes']),
+                 ('ru',raster_pdf(FIXTURES/'handwritten-ru-august.png'),['август']),
+                 ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die seerose blüht auf dem teich']),
+                 ('be',(FIXTURES/'handwritten-be-kupala.pdf').read_bytes(),['беларусы','крыўду','людзьмі'])]
+        contexts=[browser.new_context() for _ in range(2)]
+        records=[]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            register(owner,mailbox,frontend,'u8-genuine-handwriting@owned.test');login(owner,'u8-genuine-handwriting@owned.test')
+            for language,content,expected in samples:
+                name=f'genuine-{language}.pdf'
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=ready(owner,name,timeout=180)
+                item.get_by_role('button',name='Открыть документ',exact=True).click()
+                text=owner.locator('#document-correction textarea').input_value()
+                missing=[word for word in expected if word not in text.casefold()]
+                records.append({'language':language,'expected_legible_source':expected,'recognized':text,'missing':missing,
+                    'accuracy_errors_permitted':language=='be','contract':CONTRACT if language=='be' else None,
+                    'original_sha256':hashlib.sha256(content).hexdigest()})
+                print(json.dumps(records[-1],ensure_ascii=False),flush=True)
+            # Independent source GT was recorded before recognition. Retain every
+            # raw result even if a candidate fails one language.
+            result_path=tmp_path/'genuine-handwriting-results.json'
+            result_path.write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
+            admin.reload()
+            card=admin.locator('article').filter(has=admin.locator('form[data-account="u8-genuine-handwriting@owned.test"]'))
+            card.locator('summary').click()
+            policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов').click()
+            expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            for language,content,forbidden in samples:
+                name=f'forbidden-{language}.pdf'
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))
+                expect(item).to_contain_text('OCR рукописей не разрешён')
+                item.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+                item=ready(owner,name,timeout=180);item.get_by_role('button',name='Открыть документ',exact=True).click()
+                text=owner.locator('#document-correction textarea').input_value()
+>               assert 'Рукописный текст пропущен.' in text, {'language':language,'recognized':text}
+E               AssertionError: {'language': 'ru', 'recognized': ''}
+E               assert 'Рукописный текст пропущен.' in ''
+
+backend/tests/integration/test_multilingual_documents.py:113: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]
+FAILED backend/tests/integration/test_multilingual_documents.py::test_genuine_four_language_handwriting_publication_and_permission_masks
+4 failed, 9 passed in 269.65s (0:04:29)

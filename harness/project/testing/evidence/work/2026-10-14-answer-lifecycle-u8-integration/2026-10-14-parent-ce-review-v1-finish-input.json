@@ -1,0 +1,217 @@
+{
+  "run_id": "20261014-180301-33f78c23",
+  "run_dir": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23",
+  "skill_dir": "/home/octadim/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.30.5/skills/ce-code-review",
+  "docs_root": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/docs",
+  "mode": {
+    "agent": true,
+    "apply_local": false,
+    "grouping": "auto",
+    "depth": "full"
+  },
+  "invocation": {
+    "arguments": "base:122554c808d34ccb1ea679891efb58102b61a1a6 plan:harness/project/docs/plans/2026-10-13-0244-feat-rag-answer-lifecycle-plan.md mode:agent depth:full (ce-work ship gate)",
+    "constraints": [
+      "каждый этап U должен прогонять все предыдущие регрессионные тесты, включая все тесты harness.",
+      "после каждого этапа U, прогонять все регрессионные тесты и все тесты harness, чтобы видеть, что новый код не сломал старый код или файлы",
+      "реальные тестовые компоненты нужно будет создать через e2e тесты и вручную через реальный интерфейс в браузере, как это будут делать пользователи сервиса",
+      "Динамическую память сохраняй внутри harness.",
+      "AGENTS.md принадлежит пользователю; разрешено только восстановление указанных ниже ссылок.",
+      "По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.",
+      "Текущий PaddleOCR-VL 1.5 — печатный белорусский: Только замены «ў» → «у» или её вариантов с надстрочными знаками и/или «і/i» → варианты с надстрочными знаками. Остальные ошибки запрещены.",
+      "Текущий Qwen3.5-2B Q4_K_M + F16 — рукописный белорусский: Ошибки распознавания белорусских слов допускаются.",
+      "Будущая более мощная рукописная OCR-модель: Ошибки рукописи запрещены без нового явного согласия пользователя.",
+      "Будущая более мощная печатная OCR-модель: Ошибки печатного текста запрещены без нового явного согласия пользователя.",
+      "В смешанной области каждое слово оценивается отдельно: печатное получает только применимый печатный допуск, рукописное — только применимый рукописный. Общая рамка, один OCR-кроп или выбор распознавателя не меняют фактический тип слова и не переносят допуск между типами.",
+      "Новые модели не наследуют исключения автоматически. Основной печатный OCR — Paddle, рукописный — Qwen.",
+      "Сырые результаты и эталоны сохраняются; разрешённые расхождения явно отмечаются без скрытого исправления.",
+      "This review is report-only. Parent frozen native ALL is running; no leaf may run native, pytest, browsers, servers or edit project source; ordinary review artifacts only. No push, PR, merge or deploy authorized."
+    ]
+  },
+  "scope": {
+    "mode": "standalone",
+    "base": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "diff_a": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "diff_b": null,
+    "pr": {
+      "number": null,
+      "url": null,
+      "title": null,
+      "body": null,
+      "base_ref_name": null,
+      "head_ref_oid": null,
+      "head_ref": null,
+      "base_ref": null,
+      "has_prior_comments": false
+    },
+    "branch": "octadim/create-plan-1",
+    "head_sha": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "files": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/files.txt",
+    "diff": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/diff.patch",
+    "tree_is_reviewed_head": true,
+    "untracked_excluded": [
+      "harness/project/handoffs/",
+      "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/"
+    ]
+  },
+  "intent": {
+    "summary": "Verify the integrated RAG answer lifecycle with actual accounts, browser, PostgreSQL, two APIs, document publisher and native runtime. Separate printed Paddle1.5 and handwritten Qwen2B/Q4/F16, preserve original geometry and raw OCR, and assess RAG67 permissions per actual source word and exact model/projector. Keep existing history/access/ownership fencing and physical resource cleanup correct under contention; settings/error/refusal UI and frozen30 factual answers are within scope.",
+    "confidence": "explicit"
+  },
+  "plan": {
+    "path": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/plan-for-reviewers.md",
+    "source": "explicit",
+    "requirements": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18",
+      "R19",
+      "R20",
+      "R21",
+      "R22",
+      "R23",
+      "R24",
+      "R25",
+      "R26",
+      "R27",
+      "R28",
+      "R29",
+      "R30",
+      "R31",
+      "R32",
+      "R33",
+      "R34",
+      "R35"
+    ],
+    "implementation_units": [
+      "U1",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6",
+      "U7",
+      "U8"
+    ],
+    "settled_decisions": [
+      "- **Сохранение прерванного текста.** Governs R11. (session-settled: user-directed — chosen over deleting partial output: сохранение видимого результата без его использования как основания следующего ответа.)",
+      "- **Ошибка завершается без автоматического повтора.** Governs R11, R20–R22. (session-settled: user-directed — chosen over one automatic retry: сохранение частичного результата и явная отправка нового вопроса пользователем.)",
+      "- **Переключение беседы сохраняет выполняющийся запрос.** Governs R23, R24. (session-settled: user-directed — chosen over immediate cancellation on navigation: сохранение результата в исходной беседе при переключении.)",
+      "- **Переключение сохраняет черновик исходной беседы.** Governs R25. (session-settled: user-directed — chosen over clearing the draft on navigation: восстановление набранного текста при возвращении в беседу.)",
+      "- **Обновление страницы сохраняет черновики этой вкладки.** Governs R26. (session-settled: user-directed — chosen over clearing drafts on refresh: восстановление отдельных текстов бесед без отправки вопроса.)",
+      "- **Закрытие вкладки удаляет её черновики.** Governs R27. (session-settled: user-directed — chosen over restoring drafts on the next app opening: хранение неотправленного текста ограничено сроком открытой вкладки.)",
+      "- **Уменьшение лимита сохраняет уже активные запросы.** Governs R5, R28. (session-settled: user-directed — chosen over pausing or cancelling excess active requests: новое ограничение действует на дальнейший допуск.)",
+      "- **Сохранённые настройки переживают перезапуск.** Governs R29. (session-settled: user-directed — chosen over resetting admin changes to file defaults on restart: сохранённые переопределения имеют приоритет.)",
+      "- **Без готовых источников вопрос сохраняется черновиком.** Governs R30. (session-settled: user-directed — chosen over storing the question with an explanatory result in history: отказ до приёма, без генерации.)",
+      "- **Удаление использованного источника останавливает текущий запрос.** Governs R11, R16, R18, R31. (session-settled: user-directed — chosen over completing the current answer after source deletion: остановка и сохранение частичного текста с обеими отметками.)",
+      "- **Документ доступен только как целиком готовый источник выбранного режима.** Governs R1, R30, R32, R34. (session-settled: user-directed — chosen over searching successfully extracted pages of a failed document: атомарная готовность всего файла.)",
+      "- **OCR-правки сохраняют первоначальную историю.** Governs R18, R33. (session-settled: user-directed — chosen over keeping affected answers in subsequent context: старые ответы и цитаты видимы с отметкой, но не передаются в будущий контекст.)",
+      "- **Пропуск рукописей требует явного выбора владельца.** Governs R6, R7, R32, R34. (session-settled: user-directed — chosen over rejecting every mixed PDF without handwriting permission: предупреждение и выбор отмены либо печатного текста с блоками пропусков.)",
+      "- **Потеря серверного состояния прерывает запрос без повтора.** Governs R8, R9, R11, R20, R35. (session-settled: user-directed — chosen over automatically restarting the question: сохранённый частичный ответ и повторная отправка владельцем.)"
+    ]
+  },
+  "roster": {
+    "selected": [
+      {
+        "reviewer": "correctness",
+        "tier": "session",
+        "reason": "Always required; source geometry, prompt/source/history and lease logic"
+      },
+      {
+        "reviewer": "project-standards",
+        "tier": "mid-tier",
+        "reason": "Root AGENTS.md and CLAUDE.md instruction criteria apply; no CODING_STANDARDS found"
+      },
+      {
+        "reviewer": "testing",
+        "tier": "mid-tier",
+        "reason": "New real integration fixtures, native fault hooks, frozen30 and RAG67 source-word acceptance"
+      },
+      {
+        "reviewer": "maintainability",
+        "tier": "mid-tier",
+        "reason": "297 executable non-test changed lines and structural dual-recognizer OCR pipeline"
+      },
+      {
+        "reviewer": "security",
+        "tier": "session",
+        "reason": "User-supplied image handling, handwriting entitlement masks and private UI across logout/owner changes"
+      },
+      {
+        "reviewer": "performance",
+        "tier": "mid-tier",
+        "reason": "Full-image connected-component loops, mask copies, dual native model resources and publisher chunk transforms"
+      },
+      {
+        "reviewer": "reliability",
+        "tier": "mid-tier",
+        "reason": "Conservative ownership heartbeat deadlines, cancellation, physical close/reap and document failures"
+      },
+      {
+        "reviewer": "julik-frontend-races",
+        "tier": "mid-tier",
+        "reason": "Async settings refresh/save, history fragment rendering, refusal drafts and report clearing"
+      },
+      {
+        "reviewer": "adversarial-reviewer",
+        "tier": "session",
+        "reason": "Required in-process fallback: shared jq absent, external recipient did not review"
+      }
+    ],
+    "standards": {
+      "criteria": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "fallback_named": true,
+      "not_run_reason": null
+    },
+    "packs": {
+      "roots": [],
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "collection": {
+    "returns": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/raw-returns.json",
+    "unstructured_returns": [],
+    "failed_reviewers": [],
+    "bound_exceeded": [],
+    "fast_pass": {
+      "emitted_preliminary": false,
+      "candidates": []
+    }
+  },
+  "peer": {
+    "selected": true,
+    "target": "claude",
+    "route": "claude",
+    "preference_source": "default",
+    "outcome": "in-process-fallback",
+    "artifact": null,
+    "coverage": "adversarial lens: in-process fallback (cross-model peer not run: shared prerequisite jq is not installed)"
+  },
+  "coverage_notes": [
+    "Standards use root AGENTS.md and CLAUDE.md fallback: no CODING_STANDARDS found.",
+    "Review scope is U8 current checkout against accepted U7 HEAD; U1–U7 remain accepted prerequisites.",
+    "Untracked ordinary evidence and handoff paths are excluded from reviewed diff; immutable evidence can be read as verification context.",
+    "Parent all168 active harness passed; unfiltered actual application ALL is running, no final acceptance claim. Fresh frozen30 human factual/citation audit pending.",
+    "External peer did not review: shared jq missing. Requested Claude editorial Opus/high; actual model/effort unverified, receipt_supported false, independence_verified false. Terminal consumed job directory removed. Required in-process adversarial fallback completed.",
+    "Complete excluded untracked inventory: /tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/untracked.txt; complete criteria-to-file mapping: /tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/criteria-map.json"
+  ]
+}

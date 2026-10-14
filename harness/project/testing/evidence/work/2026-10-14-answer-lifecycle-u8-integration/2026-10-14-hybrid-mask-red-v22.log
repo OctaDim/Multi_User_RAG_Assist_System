@@ -1,0 +1,37 @@
+[0;93m2026-10-14 17:44:43.826926835 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+F
+=================================== FAILURES ===================================
+_________ test_original_english_and_missed_russian_ink_are_both_masked _________
+
+    def test_original_english_and_missed_russian_ink_are_both_masked():
+        import os
+        import onnxruntime as ort
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        root=Path(os.environ['RAG_OCR_DIR'])/'dfine'
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.config=json.loads((root/'config.json').read_text())
+        options=ort.SessionOptions();options.intra_op_num_threads=2;options.inter_op_num_threads=1
+        ocr.detector=ort.InferenceSession(str(root/'model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
+        en=Image.open(PROOF/'real-handwritten-title-author-input-v1.png').convert('RGB')
+        ru=Image.open(Path(__file__).parent/'fixtures/answer_lifecycle/handwritten-ru-august.png').convert('RGB')
+        image=Image.new('RGB',(1200,700),'white');image.paste(en,(130,100));image.paste(ru,(620,420))
+        detected=ocr.detect_text_regions(image)
+        assert detected and not any(row['bbox'][1]>=420 for row in detected),detected
+        prepared=ocr.prepare_image(image,'skip_handwriting')
+        # Full original raster extents include paper; test every original ink pixel,
+        # including the missed Russian component and the English boundary fragments.
+        import numpy as np
+        for original,(x,y) in [(en,(130,100)),(ru,(620,420))]:
+            gray=np.asarray(original.convert('L'));ink=gray<180
+            masked=np.asarray(prepared['image'].crop((x,y,x+original.width,y+original.height)))
+>           assert np.all(masked[ink]==255), {'origin':(x,y),'remaining':int(np.count_nonzero(masked[ink]!=255)), 'regions':prepared['handwriting']}
+E           AssertionError: {'origin': (130, 100), 'regions': [{'bbox': [122, 94, 322, 173], 'coordinate_source': 'dfine_layout', 'detection_confi...rdinate_source': 'dfine_layout', 'detection_confidence': 0.7240681648254395, 'kind': 'handwritten'}], 'remaining': 234}
+E           assert np.False_
+E            +  where np.False_ = <function all at 0x7950b434c6f0>(array([[181, 179, 156],\n       [255, 255, 255],\n       [175, 173, 150],\n       ...,\n       [255, 255, 255],\n       [255, 255, 255],\n       [255, 255, 255]], shape=(3426, 3), dtype=uint8) == 255)
+E            +    where <function all at 0x7950b434c6f0> = <module 'numpy' from '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/numpy/__init__.py'>.all
+
+backend/tests/test_document_ocr.py:149: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_original_english_and_missed_russian_ink_are_both_masked
+1 failed in 3.85s

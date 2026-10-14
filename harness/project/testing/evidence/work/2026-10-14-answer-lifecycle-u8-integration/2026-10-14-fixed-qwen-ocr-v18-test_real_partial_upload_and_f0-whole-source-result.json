@@ -1,0 +1,62 @@
+{
+  "request_id": "9a821474-4c39-459e-9af8-a70c2e963652",
+  "passport": {
+    "found": [
+      {
+        "id": "f597f6fa-4ea1-488d-bee8-4046808fb12d",
+        "kind": "printed",
+        "mode": "complete",
+        "name": "whole-budget.txt",
+        "page": 1,
+        "text": "The annual budget is 100 euros.",
+        "span_end": 31,
+        "similarity": 0.8190524578094482,
+        "span_start": 0,
+        "coordinates": {},
+        "document_id": "caf469ef-cde6-43c0-ac9b-2d808a6d042e",
+        "limitations": [],
+        "revision_id": "92b08633-0847-4907-a074-fc5866acf96c"
+      }
+    ],
+    "passed": [
+      {
+        "id": "f597f6fa-4ea1-488d-bee8-4046808fb12d",
+        "kind": "printed",
+        "mode": "complete",
+        "name": "whole-budget.txt",
+        "page": 1,
+        "text": "The annual budget is 100 euros.",
+        "span_end": 31,
+        "similarity": 0.8190524578094482,
+        "span_start": 0,
+        "coordinates": {},
+        "document_id": "caf469ef-cde6-43c0-ac9b-2d808a6d042e",
+        "limitations": [],
+        "revision_id": "92b08633-0847-4907-a074-fc5866acf96c"
+      }
+    ],
+    "excluded": [
+      "3c8fc86e-54d5-41b7-bf84-7950ffd62fca",
+      "ecd7208c-b377-4f33-a339-330888bf2b57"
+    ],
+    "selected": [
+      "3c8fc86e-54d5-41b7-bf84-7950ffd62fca",
+      "caf469ef-cde6-43c0-ac9b-2d808a6d042e",
+      "ecd7208c-b377-4f33-a339-330888bf2b57"
+    ],
+    "available": [
+      {
+        "mode": "complete",
+        "name": "whole-budget.txt",
+        "document_id": "caf469ef-cde6-43c0-ac9b-2d808a6d042e",
+        "limitations": [],
+        "revision_id": "92b08633-0847-4907-a074-fc5866acf96c"
+      }
+    ],
+    "history_requests": [],
+    "history_dependencies": [],
+    "insufficient_evidence": false
+  },
+  "answer": "The annual budget is 100 euros [source:1].",
+  "interrupted_upload": "ecd7208c-b377-4f33-a339-330888bf2b57"
+}

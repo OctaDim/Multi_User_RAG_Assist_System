@@ -1,0 +1,13 @@
+[0;93m2026-10-14 17:45:54.564959484 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+......{'proof': 'actual_small_handwriting_detection', 'size': (370, 120), 'regions': [{'kind': 'handwritten', 'bbox': [2, 0, 191, 70], 'detection_confidence': 0.9370757937431335, 'coordinate_source': 'dfine_layout_and_original_ink'}, {'kind': 'handwritten', 'bbox': [75, 60, 358, 120], 'detection_confidence': 0.8835065960884094, 'coordinate_source': 'dfine_layout_and_original_ink'}]}
+.mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+

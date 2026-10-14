@@ -1,0 +1,15 @@
+{
+  "v42": "7actualPG/nativecomponent tests PASS43.23s, alloldservice-recoverybodiesunchanged",
+  "source_sha256": {
+    "backend/app/generation.py": "b97f28fff1fdb74c97c57687841681919e418dbbfb69f658b52088e3bdc9c439",
+    "backend/app/ocr.py": "e407905c517b7f2677d06ef5c4d601384a8de67071c578c3cf41b3a25f5c2acd",
+    "backend/config/ocr.toml": "a6a740200ae718f6f22a0d56508daea53e44d94d3d5b142d4899a9c74ddf268c",
+    "backend/tests/integration/test_multilingual_documents.py": "1cacb80c06028a5690dbce6bd9f908f383e14b6b42e5f5fc36a8efa0b587c6cd",
+    "backend/tests/integration/test_answer_lifecycle.py": "c4d55ba9edfea383b17292a2fe1effe7848af0fbf998c39268f524036a431095",
+    "backend/tests/integration/test_actual_page_failure.py": "f9a1aac2d79ebba77f0d4c8e06548066e2dc7af644888450f2fea05c86316c99"
+  },
+  "contract": "RAG66",
+  "v43_scope": "glyphpolicy + actualtyped8uploads +30issuedaccountsjoint12contextsAE28nativePSS + normal15pagesfault16rerun",
+  "production_source_changes_during_v42": false,
+  "multilingual_test_changed_during_v42": "notcollectedbyv42"
+}

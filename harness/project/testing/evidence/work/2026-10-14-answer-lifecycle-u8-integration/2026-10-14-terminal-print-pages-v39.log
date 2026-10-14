@@ -1,0 +1,148 @@
+{"proof": "actual_issued_native_terminal", "outcome": "complete_during_grace", "request_id": "641cbb7e-08df-4cd5-8773-eff70cb63a13", "state": "completed", "origin_deadline": "2026-10-14 18:44:17.395713+03:00", "completed_observed": "2026-10-14 18:44:15.288004+03:00", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:57292", "http://127.0.0.1:58838"], "explicit_followup": "16c939cf-d4c5-4d73-bb5b-9dff6677bce8", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa0/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "stop_during_grace", "request_id": "1af13ee5-f22a-4163-8085-fa6e6bcf4b3d", "state": "interrupted", "origin_deadline": "2026-10-14 18:45:02.450286+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:58416", "http://127.0.0.1:57356"], "explicit_followup": "714cdf12-90f9-462d-b2b1-b236f9c4c43a", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa1/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_before", "request_id": "1c35a9eb-07d3-4e45-b28c-6e41f57748c1", "state": "failed", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:60556", "http://127.0.0.1:58678"], "explicit_followup": "f11c0e14-cdca-4be5-8075-b55d9ff4f249", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa2/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_during_grace", "request_id": "faf3787a-3d08-431d-9dae-1e513e0628d4", "state": "failed", "origin_deadline": "2026-10-14 18:46:02.302527+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:57254", "http://127.0.0.1:56980"], "explicit_followup": "f40067b7-c2cf-43f9-a0bc-554f5bc4b543", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa3/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "crash_before", "request_id": "f4fe669d-99a6-43f8-8696-f822630db3e1", "state": "interrupted", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "", "completed_history": "a832e80d-6b6a-47a2-b03d-85c66c7a8ac4", "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:57806", "http://127.0.0.1:58458"], "explicit_followup": "727ad4de-ea89-4de8-bd9e-7b375570c948", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa4/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "crash_after", "request_id": "d692ff74-130d-48cf-9a0c-ac27b75d642a", "state": "interrupted", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": "504f92db-faa0-4682-b616-f5202155f8d6", "no_retry_allocation_count": 1, "api_origins": ["http://127.0.0.1:57040", "http://127.0.0.1:56996"], "explicit_followup": "44c52a0b-9847-463a-a897-67d41bfdfd3a", "native_log": "/tmp/rag-u8-terminal-print-pages-v39/test_actual_native_terminal_pa5/generation.log"}
+.FFF
+=================================== FAILURES ===================================
+_____ test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels _____
+
+real_document_browser = ((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-lin...ser_RAG_Ass...>, PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_four_language_prin0/document-worker.log'))
+tmp_path = PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_four_language_prin0')
+
+    def test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels(real_document_browser,tmp_path):
+        (browser,mailbox,frontend,api),worker,log=real_document_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-printed-four-languages@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+            policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов',exact=True).click()
+            expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            package=BytesIO()
+            with ZipFile(package,'w') as archive:
+                archive.writestr('word/document.xml','<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:p><w:r><w:t>Original DOCX body.</w:t></w:r></w:p></w:document>')
+                archive.writestr('word/media/mixed.png',(PROOF/'mixed-real-title-fixture-v1.png').read_bytes())
+            samples=[('four-language.pdf',(PROOF/'printed-four-languages-v1.pdf').read_bytes(),False),
+                     ('mixed-four-language.pdf',(PROOF/'mixed-real-title-fixture-v1.pdf').read_bytes(),True),
+                     ('mixed-four-language.docx',package.getvalue(),True)]
+            gt=json.loads((PROOF/'printed-four-languages-v1.json').read_text())['expected_lines']
+            expected_words=re.findall(r'\w+',' '.join(gt).casefold());records=[]
+            for name,content,has_hand in samples:
+                owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/octet-stream','buffer':content})
+                owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+                item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))
+                if name.endswith('.pdf') or has_hand:
+                    until=time.monotonic()+30
+                    while 'OCR рукописей не разрешён' not in item.inner_text():
+>                       assert worker.poll() is None and time.monotonic()<until,item.inner_text()
+E                       AssertionError: mixed-four-language.docx
+E                         
+E                         Обработка неуспешна
+E                         
+E                         Разрешение на эту обработку отозвано. · страница 2
+E                         
+E                         Открыть отчёт об обработкеУдалить документ
+E                       assert (None is None and 30323.902995702 < 30323.884390366)
+E                        +  where None = poll()
+E                        +    where poll = <Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>.poll
+E                        +  and   30323.902995702 = <built-in function monotonic>()
+E                        +    where <built-in function monotonic> = time.monotonic
+
+backend/tests/integration/test_actual_printed_documents.py:49: AssertionError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...log'), 'generation': PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_twenty_page_failur0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_3626bd7765f24054b6e5992dff4d9198 host=/tmp/rag-u8-terminal-print-pages-v39/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_twenty_page_failur0')
+skip = False
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+>               assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+E               AssertionError: twenty-mixed.pdf
+E                 
+E                 Обрабатывается
+E                 
+E                 Удалить документ
+E               assert (None is None and 30760.25960648 < 30759.979829901)
+E                +  where None = poll()
+E                +    where poll = <Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>.poll
+E                +  and   30760.25960648 = <built-in function monotonic>()
+E                +    where <built-in function monotonic> = time.monotonic
+
+backend/tests/integration/test_actual_page_failure.py:91: AssertionError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...log'), 'generation': PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_twenty_page_failur1/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_0e2b3f5e3fc4458c811c9d2ddbfb1cb9 host=/tmp/rag-u8-terminal-print-pages-v39/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-terminal-print-pages-v39/test_actual_twenty_page_failur1')
+skip = True
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+>               assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+E               AssertionError: twenty-mixed.pdf
+E                 
+E                 Обрабатывается
+E                 
+E                 Удалить документ
+E               assert (None is None and 31203.004664917 < 31202.976496569)
+E                +  where None = poll()
+E                +    where poll = <Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...>.poll
+E                +  and   31203.004664917 = <built-in function monotonic>()
+E                +    where <built-in function monotonic> = time.monotonic
+
+backend/tests/integration/test_actual_page_failure.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_actual_printed_documents.py::test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]
+3 failed, 6 passed in 1260.49s (0:21:00)

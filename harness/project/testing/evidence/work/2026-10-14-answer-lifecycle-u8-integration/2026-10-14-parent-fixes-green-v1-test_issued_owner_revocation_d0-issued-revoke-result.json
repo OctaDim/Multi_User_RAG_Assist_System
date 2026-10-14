@@ -1,0 +1,33 @@
+{
+  "proof": "actual_issued_account_revocation",
+  "phase": "queued",
+  "request_id": "856969a4-9dd9-4a9e-af9b-5fda1ff8b2cf",
+  "prefix": "",
+  "refusals": [
+    {
+      "api": "http://127.0.0.1:59738",
+      "path": "/api/conversations/06498d08-589a-4913-94d7-b5094f4f08e4",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:59738",
+      "path": "/api/tabs/cef5f73f-41be-4734-b916-34a19eda4059/events",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:57410",
+      "path": "/api/conversations/06498d08-589a-4913-94d7-b5094f4f08e4",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:57410",
+      "path": "/api/tabs/cef5f73f-41be-4734-b916-34a19eda4059/events",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    }
+  ],
+  "native_allocations": 0
+}

@@ -1,0 +1,16 @@
+[
+  "- **Сохранение прерванного текста.** Governs R11. (session-settled: user-directed — chosen over deleting partial output: сохранение видимого результата без его использования как основания следующего ответа.)",
+  "- **Ошибка завершается без автоматического повтора.** Governs R11, R20–R22. (session-settled: user-directed — chosen over one automatic retry: сохранение частичного результата и явная отправка нового вопроса пользователем.)",
+  "- **Переключение беседы сохраняет выполняющийся запрос.** Governs R23, R24. (session-settled: user-directed — chosen over immediate cancellation on navigation: сохранение результата в исходной беседе при переключении.)",
+  "- **Переключение сохраняет черновик исходной беседы.** Governs R25. (session-settled: user-directed — chosen over clearing the draft on navigation: восстановление набранного текста при возвращении в беседу.)",
+  "- **Обновление страницы сохраняет черновики этой вкладки.** Governs R26. (session-settled: user-directed — chosen over clearing drafts on refresh: восстановление отдельных текстов бесед без отправки вопроса.)",
+  "- **Закрытие вкладки удаляет её черновики.** Governs R27. (session-settled: user-directed — chosen over restoring drafts on the next app opening: хранение неотправленного текста ограничено сроком открытой вкладки.)",
+  "- **Уменьшение лимита сохраняет уже активные запросы.** Governs R5, R28. (session-settled: user-directed — chosen over pausing or cancelling excess active requests: новое ограничение действует на дальнейший допуск.)",
+  "- **Сохранённые настройки переживают перезапуск.** Governs R29. (session-settled: user-directed — chosen over resetting admin changes to file defaults on restart: сохранённые переопределения имеют приоритет.)",
+  "- **Без готовых источников вопрос сохраняется черновиком.** Governs R30. (session-settled: user-directed — chosen over storing the question with an explanatory result in history: отказ до приёма, без генерации.)",
+  "- **Удаление использованного источника останавливает текущий запрос.** Governs R11, R16, R18, R31. (session-settled: user-directed — chosen over completing the current answer after source deletion: остановка и сохранение частичного текста с обеими отметками.)",
+  "- **Документ доступен только как целиком готовый источник выбранного режима.** Governs R1, R30, R32, R34. (session-settled: user-directed — chosen over searching successfully extracted pages of a failed document: атомарная готовность всего файла.)",
+  "- **OCR-правки сохраняют первоначальную историю.** Governs R18, R33. (session-settled: user-directed — chosen over keeping affected answers in subsequent context: старые ответы и цитаты видимы с отметкой, но не передаются в будущий контекст.)",
+  "- **Пропуск рукописей требует явного выбора владельца.** Governs R6, R7, R32, R34. (session-settled: user-directed — chosen over rejecting every mixed PDF without handwriting permission: предупреждение и выбор отмены либо печатного текста с блоками пропусков.)",
+  "- **Потеря серверного состояния прерывает запрос без повтора.** Governs R8, R9, R11, R20, R35. (session-settled: user-directed — chosen over automatically restarting the question: сохранённый частичный ответ и повторная отправка владельцем.)"
+]

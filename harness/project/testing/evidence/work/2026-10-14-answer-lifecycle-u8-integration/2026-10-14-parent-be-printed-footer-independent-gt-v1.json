@@ -1,0 +1,10 @@
+{
+  "source_pdf": "backend/tests/fixtures/answer_lifecycle/handwritten-be-kupala.pdf",
+  "source_pdf_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5",
+  "previous_independent_raster": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-be-handwriting-source-inspection-v1.png",
+  "raster_sha256": "2e300619c1b3fa26a054804ea39eb3276ff1386e3da887c403cf8fd51ae3c254",
+  "method": "Parent visual reading of existing independently rendered ORIGINAL raster; no model output consulted. Footer is printed Belarusian and is outside the permitted handwritten-error exception.",
+  "printed_footer_exact": "Факсіміле верша, які знаходзіцца\nў музеі Я. Купалы.\nВерш напісаны ў 1905–1907 гг.",
+  "contract": "RAG-64",
+  "scope": "Separate source-grounded printed footer supplement. Original fixtures, previous GT records and frozen30 controls unchanged."
+}

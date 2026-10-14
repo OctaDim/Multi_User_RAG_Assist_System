@@ -1,0 +1,28 @@
+[0;93m2026-10-14 18:03:58.297664549 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+F
+=================================== FAILURES ===================================
+_____ test_genuine_be_expanded_regions_do_not_duplicate_the_same_ink_crop ______
+
+    def test_genuine_be_expanded_regions_do_not_duplicate_the_same_ink_crop():
+        import os
+        import onnxruntime as ort
+        from app.ocr import DocumentOCR,render_pdf_page
+        root=Path(os.environ['RAG_OCR_DIR'])/'dfine'
+        ocr=DocumentOCR.__new__(DocumentOCR);ocr.config=json.loads((root/'config.json').read_text())
+        options=ort.SessionOptions();options.intra_op_num_threads=2;options.inter_op_num_threads=1
+        ocr.detector=ort.InferenceSession(str(root/'model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
+        image=render_pdf_page(Path(__file__).parent/'fixtures/answer_lifecycle/handwritten-be-kupala.pdf',1)
+        regions=ocr.detect_handwriting(image)
+        for index,left in enumerate(regions):
+            a=left['bbox']
+            for right in regions[index+1:]:
+                b=right['bbox'];overlap=max(0,min(a[2],b[2])-max(a[0],b[0]))*max(0,min(a[3],b[3])-max(a[1],b[1]))
+>               assert overlap<.8*min((a[2]-a[0])*(a[3]-a[1]),(b[2]-b[0])*(b[3]-b[1])),regions
+E               AssertionError: [{'bbox': [21, 60, 1154, 299], 'coordinate_source': 'dfine_layout_and_original_ink', 'detection_confidence': 0.9187881...nate_source': 'dfine_layout_and_original_ink', 'detection_confidence': 0.9026705622673035, 'kind': 'handwritten'}, ...]
+E               assert 262160 < (0.8 * 263088)
+E                +  where 263088 = min(((1154 - 21) * (299 - 60)), ((1158 - 24) * (299 - 67)))
+
+backend/tests/test_document_ocr.py:203: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_genuine_be_expanded_regions_do_not_duplicate_the_same_ink_crop
+1 failed in 5.03s

@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_answer_lifecycle.py F
+
+=================================== FAILURES ===================================
+_______ test_real_super_admin_settings_preview_apply_and_readonly_models _______
+
+real_account_browser = (<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-linu...version=131.0.6778.33>, <mailbox.Mailbox object at 0x7578b0d75c10>, 'http://127.0.0.1:56938', 'http://127.0.0.1:60980')
+environment = {'dsn': 'user=postgres dbname=u8_d9ad90a6280a4a3fa4afc7c2f6589a16 host=/tmp/rag-u8-worker-settings-red-1/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-settings-red-1/test_real_super_admin_settings0')
+
+    def test_real_super_admin_settings_preview_apply_and_readonly_models(real_account_browser, environment, tmp_path):
+        browser, mailbox, frontend, api_url = real_account_browser
+        context = browser.new_context()
+        try:
+            page = context.new_page()
+            operator(page, mailbox, frontend)
+            form = page.locator('#global-settings')
+>           expect(form).to_be_visible()
+E           AssertionError: Locator expected to be visible
+E           Actual value: <element(s) not found> 
+E           Call log:
+E             - LocatorAssertions.to_be_visible with timeout 5000ms
+E             -   - waiting for locator("#global-settings")
+
+backend/tests/integration/test_answer_lifecycle.py:54: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models
+============================== 1 failed in 11.98s ==============================

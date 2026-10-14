@@ -1,0 +1,98 @@
+[
+  {
+    "language": "be-line-2",
+    "original_size": [
+      361,
+      78
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "беларусы.",
+    "usage": {
+      "prompt_tokens": 56,
+      "completion_tokens": 6,
+      "total_tokens": 62
+    },
+    "finish": "stop",
+    "seconds": 9.257718092998402,
+    "independent_gt": [
+      "Беларусы"
+    ],
+    "missing": []
+  },
+  {
+    "language": "be-line-5",
+    "original_size": [
+      520,
+      90
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "Своё крыльч",
+    "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 6,
+      "total_tokens": 67
+    },
+    "finish": "stop",
+    "seconds": 2.6103758299977926,
+    "independent_gt": [
+      "Сваю",
+      "крыўду"
+    ],
+    "missing": [
+      "Сваю",
+      "крыўду"
+    ]
+  },
+  {
+    "language": "be-line-8",
+    "original_size": [
+      541,
+      93
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "На счет часов.",
+    "usage": {
+      "prompt_tokens": 62,
+      "completion_tokens": 4,
+      "total_tokens": 66
+    },
+    "finish": "stop",
+    "seconds": 2.0316762949987606,
+    "independent_gt": [
+      "На",
+      "свет",
+      "цэлы"
+    ],
+    "missing": [
+      "свет",
+      "цэлы"
+    ]
+  },
+  {
+    "language": "be-line-11",
+    "original_size": [
+      634,
+      103
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "слюзьмі звацца!",
+    "usage": {
+      "prompt_tokens": 65,
+      "completion_tokens": 8,
+      "total_tokens": 73
+    },
+    "finish": "stop",
+    "seconds": 2.6904631780016643,
+    "independent_gt": [
+      "людзьмі",
+      "звацца"
+    ],
+    "missing": [
+      "людзьмі"
+    ]
+  }
+]

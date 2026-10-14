@@ -1,0 +1,657 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items
+
+backend/tests/integration/test_terminal_lifecycle.py FFFFFF
+backend/tests/integration/test_answer_lifecycle.py {"control": "eng-1", "answer": "Article 1 describes all human beings at birth as being born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood. [source:1]", "failures": []}
+{"control": "eng-3", "answer": "Based on the provided source excerpts, Article 3 states that everyone has the right to life, liberty, and the security of person.\n\n[source:2]", "failures": []}
+{"control": "eng-4", "answer": "Based on the provided excerpts, Article 4 prohibits slavery and the slave trade in all their forms.\n\nArticle 4 No one shall be held in slavery or servitude; slavery and the slave trade shall be prohibited in all their forms. [source:2]", "failures": []}
+{"control": "eng-5", "answer": "Article 5 forbids torture and cruel, inhuman, or degrading treatment or punishment [source:2].", "failures": []}
+{"control": "eng-9", "answer": "Article 9 forbids arbitrary arrest, detention, or exile. [source:1]", "failures": []}
+{"control": "eng-14", "answer": "According to Article 14, a persecuted person may seek asylum in other countries. [source:1]", "failures": []}
+{"control": "eng-15", "answer": "Article 15 grants everyone the right to a nationality. No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality. [source:1]", "failures": []}
+{"control": "eng-24", "answer": "Article 24 states that everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay. [source:1]", "failures": []}
+{"control": "rus-1", "answer": "Согласно статье 1, все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства [source:1].", "failures": []}
+{"control": "rus-3", "answer": "В статье 3 названы три права человека: право на жизнь, право на свободу и право на личную неприкосновенность.\n\n[source:1]", "failures": []}
+{"control": "rus-4", "answer": "Согласно статье 4, запрещается содержаться в рабстве или в подневольном состоянии, а также рабство и работорговля во всех их видах [source:1].", "failures": []}
+{"control": "rus-5", "answer": "Статья 5 запрещает подвергать человека пыткам или жестоким, бесчеловечным или унижающим его достоинство обращению и наказанию.\n\n[source:1]", "failures": []}
+{"control": "rus-9", "answer": "Статья 9 запрещает произвольный арест, задержанию или изгнанию.\n\n[source:1]", "failures": []}
+{"control": "rus-14", "answer": "Согласно статье 14, человек вправе искать убежища от преследования в других странах и пользоваться этим убежищем [source:1].", "failures": []}
+{"control": "rus-15", "answer": "Согласно статье 15 источника [source:2], каждый человек имеет право на гражданство. Никто не может быть произвольно лишен своего гражданства или права изменить свое гражданство.", "failures": []}
+{"control": "rus-24", "answer": "Статья 24 предусматривает право на отдых и досуг, включая право на разумное ограничение рабочего дня и на оплачиваемый периодический отпуск.\n\n[source:1]", "failures": []}
+{"control": "bel-1", "answer": "Усе людзі нараджаюцца свабоднымі і роўнымі ў сваёй годнасці і правах [source:1].", "failures": []}
+{"control": "bel-3", "answer": "Паводле артыкула 3 з выкарыстаных крыніц, кожны чалавек мае права на:\n1. жыццё\n2. свабоду\n3. асабістую недатыкальнасць\n\n[source:1]", "failures": []}
+{"control": "bel-4", "answer": "Ва ўсіх выглядах забараняецца ўтрымлівацца ў рабстве або ў паднявольным стане [source:1].\n\nТаксама забараняюцца рабства і гандаль рабамі [source:1].", "failures": []}
+{"control": "bel-5", "answer": "На аснове выдзельных звестак з выкарыстаных крыніц, артыкул 5 забараняе ўчыненне катаванняў або жорсткіх, бесчалавечных або ўніжаючых годнасць чалавека абыходжанне і пакаранне.\n\n[source:1]", "failures": []}
+{"control": "bel-9", "answer": "Самавольныя дзеянні, якія забараняе артыкул 9, з'яўляюцца: самавольны арышт, затрыманне або выгнанне [source:1].", "failures": []}
+{"control": "bel-14", "answer": "Чалавек мае права шукаць прыстанішча ад праследавання ў іншых краінах і карыстацца гэтым прыстанішчам. Гэта права не можа быць выкарыстана ў выпадку праследавання, сапраўды заснаванага на ўчыненні непалітычнага злачынства, або дзеяння, што супярэчыць мэтам і прынцыпам Арганізацыі Абʼяднаных Нацый [source:1].", "failures": []}
+{"control": "bel-15", "answer": "Кожны чалавек мае права на грамадзянства. Ніхто не можа быць самавольна пазбаўлены свайго грамадзянства або права змяніць сваё грамадзянства [source:1].", "failures": []}
+{"control": "deu_1996-1", "answer": "Alle Menschen sind frei und gleich an Würde und Rechten geboren. Sie sind mit Vernunft und Gewissen begabt und sollen einander im Geist der Brüderlichkeit begegnen. [source:1]", "failures": []}
+{"control": "deu_1996-3", "answer": "Basierend auf den bereitgestellten Quellen nennt Artikel 3 drei Rechte:\n\n1.  Das Recht auf Leben [source:1]\n2.  Das Recht auf Freiheit [source:1]\n3.  Das Recht auf Sicherheit der Person [source:1]\n\nDies wird durch die Formulierung \"Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person\" in der Quelle [source:1] bestätigt.", "failures": []}
+{"control": "deu_1996-4", "answer": "Artikel 4 verbietet Sklaverei und Sklavenhandel in allen ihren Formen.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-5", "answer": "Artikel 5 verbietet Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe. [source:1]", "failures": []}
+{"control": "deu_1996-9", "answer": "Artikel 9 verbietet willkürliche Festnahmen, Haft und Verweisung des Landes.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-14", "answer": "Verfolgte haben das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen [source:1].", "failures": []}
+{"control": "deu_1996-15", "answer": "Jeder hat das Recht auf eine Staatsangehörigkeit. [source:1]", "failures": []}
+{"proof": "predeclared_thirty_real_document_questions", "results": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/control-results.json", "errors": []}
+.
+
+=================================== FAILURES ===================================
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa0/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa0/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_9413285f016c43d1a72394fd859d6961 host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa0')
+outcome = 'complete_during_grace'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+>           owner.screenshot(path=str(tmp_path/'terminal.png'),full_page=True)
+
+backend/tests/integration/test_terminal_lifecycle.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:9766: in screenshot
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py:789: in screenshot
+    encoded_binary = await self._channel.send("screenshot", params)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7891dc14afc0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7891deeb2f20>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+E           Call log:
+E             - taking page screenshot
+E             -   - waiting for fonts to load...
+E             -   - fonts loaded
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[after-stop_during_grace] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa1/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa1/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_ddc2e80e81f042279008afcc039b7913 host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa1')
+outcome = 'stop_during_grace'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+>           owner.screenshot(path=str(tmp_path/'terminal.png'),full_page=True)
+
+backend/tests/integration/test_terminal_lifecycle.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:9766: in screenshot
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py:789: in screenshot
+    encoded_binary = await self._channel.send("screenshot", params)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7891da38cc20>
+cb = <function Channel.send.<locals>.<lambda> at 0x7891d89bf6a0>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+E           Call log:
+E             - taking page screenshot
+E             -   - waiting for fonts to load...
+E             -   - fonts loaded
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_before-error_before] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa2/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa2/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_008bf45acf6a484d90099b5379108dd2 host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa2')
+outcome = 'error_before'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+>           owner.screenshot(path=str(tmp_path/'terminal.png'),full_page=True)
+
+backend/tests/integration/test_terminal_lifecycle.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:9766: in screenshot
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py:789: in screenshot
+    encoded_binary = await self._channel.send("screenshot", params)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7891d89c7fe0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7891d895dd00>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+E           Call log:
+E             - taking page screenshot
+E             -   - waiting for fonts to load...
+E             -   - fonts loaded
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_after-error_during_grace] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa3/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa3/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_fb84412f4a6b40168e237b646f06f65e host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa3')
+outcome = 'error_during_grace'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+                expect(card).to_contain_text('Прерван',timeout=20000)
+                until=time.monotonic()+30
+                while Path(f'/proc/{old_pid}').exists():
+                    assert time.monotonic()<until,'Old native process not reaped';observer.wait_for_timeout(50)
+                assert current(environment,completed_id)['state']=='completed'
+                assert current(environment,completed_id)['answer_text']==completed_text
+                assert sum(row['event']=='native_allocate' and row['request']==str(completed_id) for row in records(native_log))==1
+            row=current(environment,identifier)
+            expected='completed' if outcome=='complete_during_grace' else 'failed' if outcome.startswith('error') else 'interrupted'
+            assert row['state']==expected,row
+            if expected!='completed':assert row['answer_text']==prefix
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                messages=connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'",(identifier,)).fetchall()
+                if not prefix and expected!='completed':assert not messages
+                elif expected!='completed':assert len(messages)==1 and messages[0]['excluded']
+                assert connection.execute('SELECT count(*) AS n FROM requests').fetchone()['n']==(2 if completed_id else 1)
+            expect(observer.locator('#question')).to_have_value('Independent observer draft')
+            proxy.enabled=True
+            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            assert sum(row['event']=='native_allocate' and row['request']==str(identifier) for row in records(native_log))==1
+            if not outcome.startswith('crash'):
+                until=time.monotonic()+20
+                while not any(row['event']=='native_release' and row['request']==str(identifier) for row in records(native_log)):
+                    assert time.monotonic()<until,'Physical context release not acknowledged';observer.wait_for_timeout(50)
+>           owner.screenshot(path=str(tmp_path/'terminal.png'),full_page=True)
+
+backend/tests/integration/test_terminal_lifecycle.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:9766: in screenshot
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py:789: in screenshot
+    encoded_binary = await self._channel.send("screenshot", params)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7891d89e3a10>
+cb = <function Channel.send.<locals>.<lambda> at 0x7891d9a91b20>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+E           Call log:
+E             - taking page screenshot
+E             -   - waiting for fonts to load...
+E             -   - fonts loaded
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa4/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa4/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_47eb0cf0f6c449ba834fac445b608a32 host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa4')
+outcome = 'crash_before'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+>               expect(card).to_contain_text('Прерван',timeout=20000)
+E               AssertionError: Locator expected to contain text 'Прерван'
+E               Actual value: What is the annual budget?Ответ формируетсяОтвет моделиПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ 
+E               Call log:
+E                 - LocatorAssertions.to_contain_text with timeout 20000ms
+E                 -   - waiting for locator("#history article").last
+E                 -     24 × locator resolved to <article data-request="9235bf10-3e52-44c0-8b1a-a51324fe3d75">…</article>
+E                 -        - unexpected value "What is the annual budget?Ответ формируетсяОтвет моделиПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ"
+
+backend/tests/integration/test_terminal_lifecycle.py:139: AssertionError
+_ test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after] _
+
+controlled_native_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li..._pa5/native-armed'), PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa5/generation.log'))
+environment = {'dsn': 'user=postgres dbname=u8_d1e13ca4887c4ee594bcbc1b36f5f3af host=/tmp/rag-u8-worker-terminal-quality-9/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-terminal-quality-9/test_actual_native_terminal_pa5')
+outcome = 'crash_after'
+
+    @pytest.mark.parametrize('controlled_native_browser,outcome',[
+        ('after','complete_during_grace'),('after','stop_during_grace'),
+        ('fault_before','error_before'),('fault_after','error_during_grace'),
+        ('before','crash_before'),('after','crash_after')],indirect=['controlled_native_browser'])
+    def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_native_browser,environment,tmp_path,outcome):
+        ((browser,mailbox,frontend,api),_,_),marker,release,armed,native_log=controlled_native_browser
+        parsed=urlsplit(api);proxy=CutProxy((parsed.hostname,parsed.port));context=browser.new_context()
+        try:
+            owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy)
+            email=f'u8-terminal-{outcome}@owned.test'
+            register(owner,mailbox,frontend,email);login(owner,email)
+            owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+            owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+            # A completed real answer must survive the same recovery event.
+            completed_id=None
+            if outcome.startswith('crash'):
+                owner.locator('#question').fill('What is the annual budget?')
+                owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
+            observer.goto(frontend);login(observer,email)
+            observer.locator('#question').fill('Independent observer draft')
+            armed.touch()
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            until=time.monotonic()+40
+            while not marker.exists():
+                assert time.monotonic()<until,native_log.read_text()[-2000:]
+                owner.wait_for_timeout(50)
+            row=current(environment);identifier=row['id'];prefix=row['answer_text']
+            assert bool(prefix)==('before' not in outcome),(outcome,prefix)
+            card=observer.locator('#history article').last
+            expect(card).to_contain_text('Ответ формируется',timeout=10000)
+            if 'grace' in outcome:proxy.cut()
+            if outcome=='complete_during_grace':
+                observer.wait_for_timeout(6000);release.touch()
+                expect(card).to_contain_text('Завершён',timeout=3500)
+                observer.wait_for_timeout(6000)
+                assert current(environment,identifier)['state']=='completed'
+            elif outcome=='stop_during_grace':
+                start=time.monotonic();card.get_by_role('button',name='Остановить ответ',exact=True).click()
+                expect(card).to_contain_text('Прерван',timeout=2000)
+                assert time.monotonic()-start<3
+                release.touch()
+            elif outcome.startswith('error'):
+                release.touch();expect(card).to_contain_text('Ошибка',timeout=15000)
+            else:
+                old_pid=next(row['pid'] for row in records(native_log) if row['event']=='native_spawn')
+                os.kill(old_pid,signal.SIGKILL)
+>               expect(card).to_contain_text('Прерван',timeout=20000)
+E               AssertionError: Locator expected to contain text 'Прерван'
+E               Actual value: What is the annual budget?Ответ формируетсяОтвет моделиThe annual budgetПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ 
+E               Call log:
+E                 - LocatorAssertions.to_contain_text with timeout 20000ms
+E                 -   - waiting for locator("#history article").last
+E                 -     24 × locator resolved to <article data-request="a5638544-44c6-411c-bdff-3b6f41336cba">…</article>
+E                 -        - unexpected value "What is the annual budget?Ответ формируетсяОтвет моделиThe annual budgetПаспорт источниковВыбрано: terminal-budget.txtДоступно для поиска: terminal-budget.txtНайдено фрагментов: 1. Передано модели: 1.Использована история: 1 прежних ответов. Её источники: terminal-budget.txtФрагмент [1]: terminal-budget.txt · Страница 1 · символы 0–31The annual budget is 100 euros.Остановить ответ"
+
+backend/tests/integration/test_terminal_lifecycle.py:139: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-stop_during_grace]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_before-error_before]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_after-error_during_grace]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before]
+FAILED backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after]
+=================== 6 failed, 1 passed in 625.83s (0:10:25) ====================

@@ -1,0 +1,163 @@
+{
+  "status": "PASS quality subgate only; overall U8 NOT COMPLETE",
+  "source": "/tmp/rag-u8-worker-terminal-quality-9/test_frozen_thirty_questions_u0/control-results.json",
+  "raw_sha256": "e3060132c3f7df025dc3ccb7c47bfcd7c6195388995dc6df0b263b86ee7b99a4",
+  "controls_sha256": "bdc9f2fe89b1dfe27082056ce16a653642fea8753bc5833f1b7c036a7259faed",
+  "review": "Parent independently read all30 questions, frozen expected facts and complete actual answers; exact source/citation mapping additionally checked above. Minor grammar awkwardness in RU9/BE4/BE5/DE5 does not change factual content. Asylum questions ask the right itself; omission of unasked exceptions is not an error.",
+  "total": 30,
+  "semantic_correct": 30,
+  "citation_correct": 30,
+  "overall_limits": "Same combined pytest run had6 terminal test failures, separate G4 handwriting unresolved. Final unfiltered suite and fresh output audit still required.",
+  "records": [
+    {
+      "id": "eng-1",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-3",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-4",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-5",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-9",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-14",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-15",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "eng-24",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-1",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-3",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-4",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-5",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-9",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-14",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-15",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "rus-24",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-1",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-3",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-4",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-5",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-9",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-14",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "bel-15",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-1",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-3",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-4",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-5",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-9",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-14",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    },
+    {
+      "id": "deu_1996-15",
+      "semantic_factual_review": "PASS: answers the frozen question with source-supported facts; no unsupported additional factual claim",
+      "citations": "PASS: exact passed span and original TXT offsets; expected source article present"
+    }
+  ]
+}

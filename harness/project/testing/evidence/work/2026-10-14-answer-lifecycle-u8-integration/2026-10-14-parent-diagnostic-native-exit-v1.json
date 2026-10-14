@@ -1,0 +1,29 @@
+{
+  "command": [
+    "xvfb-run",
+    "-a",
+    "uv",
+    "run",
+    "--project",
+    "backend",
+    "--frozen",
+    "--cache-dir",
+    "/tmp/rag-answer-lifecycle-uv-cache",
+    "pytest",
+    "-c",
+    "backend/pyproject.toml",
+    "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+    "backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]",
+    "backend/tests/integration/test_answer_lifecycle.py::test_frozen_thirty_questions_use_real_multilingual_documents",
+    "--basetemp",
+    "/tmp/rag-u8-parent-diagnostic-native-v1",
+    "-q",
+    "-s",
+    "--assert=plain"
+  ],
+  "exit_code": 1,
+  "seconds": 1808.62,
+  "log": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-diagnostic-native-v1.log",
+  "purpose": "Three failed ALLv2 acceptance cases with unchanged thresholds and added observations; numeric source identity and generic complete-clause prompt fix",
+  "final_ALL": false
+}

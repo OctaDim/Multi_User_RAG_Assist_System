@@ -374,6 +374,9 @@ class Supervisor:
             start_write = None
             os.set_blocking(ready_read, False)
             ready = False
+            loop = asyncio.get_running_loop()
+            lease_seconds = 5
+            ownership_deadline = loop.time() + lease_seconds
             while not self.stopping.is_set():
                 if self.child.poll() is not None:
                     raise RuntimeError('Native coordinator exited; service requires recovery')
@@ -382,12 +385,17 @@ class Supervisor:
                         ready = os.read(ready_read, 1) == b'1'
                     except BlockingIOError:
                         pass
-                query = "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+interval '5 seconds' WHERE id=1 AND epoch=%s" if ready else 'SELECT 1'
-                heartbeat = asyncio.create_task(connection.execute(query, (self.epoch,) if ready else None))
-                done, _ = await asyncio.wait({heartbeat}, timeout=0.5)
+                query = "UPDATE coordinator_lease SET healthy_until=clock_timestamp()+%s*interval '1 second' WHERE id=1 AND epoch=%s" if ready else 'SELECT 1'
+                renewal_started = loop.time()
+                heartbeat = asyncio.create_task(connection.execute(query, (lease_seconds,self.epoch) if ready else None))
+                # A delayed query is bounded by the confirmed lease, not a
+                # shorter unrelated watchdog. Start time conservatively bounds
+                # the earliest possible server renewal, including WAL waits.
+                done, _ = await asyncio.wait({heartbeat}, timeout=max(0,ownership_deadline-renewal_started))
                 if not done:
                     raise RuntimeError('Coordinator ownership connection stalled')
                 heartbeat.result()
+                ownership_deadline = renewal_started + lease_seconds
                 await asyncio.sleep(0.1)
         finally:
             # Reap first, even when DB cleanup or a cancelled query cannot complete.

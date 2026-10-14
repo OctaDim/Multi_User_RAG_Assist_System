@@ -1,0 +1,33 @@
+{
+  "status": "primary source candidate metadata only; no weights/native/accuracy proof",
+  "repository": "unsloth/Qwen3.5-9B-GGUF",
+  "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+  "url": "https://huggingface.co/api/models/unsloth/Qwen3.5-9B-GGUF/tree/3885219b6810b007914f3a7950a8d1b469d598a5",
+  "assets": [
+    {
+      "type": "file",
+      "oid": "111d9180ac190fcfea6f515887e3c1716ba1bba8",
+      "size": 5680522464,
+      "lfs": {
+        "oid": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
+        "size": 5680522464,
+        "pointerSize": 135
+      },
+      "xetHash": "a8adfeb2dd607e6cc691d367f2c42a54209705ff24bf18f4dd1d4fc98966dcca",
+      "path": "Qwen3.5-9B-Q4_K_M.gguf"
+    },
+    {
+      "type": "file",
+      "oid": "61292b58497f29a508a84d26ee135d60c0aeb62b",
+      "size": 918166080,
+      "lfs": {
+        "oid": "f70dc3509053962b0d0d3ee8a7eacebf5d60aa560cad78254ae8698516ae029f",
+        "size": 918166080,
+        "pointerSize": 134
+      },
+      "xetHash": "0cc157cdf78d01127d898fcd88262e4845e16ef29078ad330c5ef5c018b5311c",
+      "path": "mmproj-F16.gguf"
+    }
+  ],
+  "generator_scope": "Existing2B generator remains unchanged;9B is candidate for isolated OCR only."
+}

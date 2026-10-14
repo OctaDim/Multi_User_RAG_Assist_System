@@ -1,0 +1,52 @@
+[
+  {
+    "language": "en",
+    "expected_legible_source": [
+      "dreams",
+      "hughes"
+    ],
+    "recognized": "Сегодняшняя дата: 2017-09-25\nDreams\n—Langston Hughes\n",
+    "missing": [],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "f170a81bafc44634b247dd4ed3f5b99fb54f8927fc7f48fd9c7b7e97c32990c8"
+  },
+  {
+    "language": "ru",
+    "expected_legible_source": [
+      "август"
+    ],
+    "recognized": "ВЫБЕРИТЕ\nавгуст\n",
+    "missing": [],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "f8f9915c61dd82cc0657c4488c90e3523221493b9865b5bbf5e256bc22e1e667"
+  },
+  {
+    "language": "de",
+    "expected_legible_source": [
+      "die seerose blüht auf dem teich"
+    ],
+    "recognized": "Die Seerose blüht auf dem Teich.\n",
+    "missing": [],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "a02dd6c1c1c303430d9306d1124a13fd6b1df5b2a6a0d0f7789bfe94310839d8"
+  },
+  {
+    "language": "be",
+    "expected_legible_source": [
+      "беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "recognized": "ВЫСШЕЕ ОБЩЕЕ ОБРАЗОВАНИЕ\nСвет\nА. Хто там ідзе, а хто там іде\nСвет\nВЫБЕРИТЕ\nСМИ\nУ агрономіста такій громаді? -\nПРИЛОЖЕНИЕ\nСвет\nбеларусы.\n.\nПРИЛОЖЕНИЕ\nА что яны ищущь на жудых плечах,\nНа руках у краві, на ногах у ланцях?\nСвоей крышей\n.\nВЫ\nА каму-це можучы гэта крыіду\nбо\nцель\nА куда-де имеется на показ?\nНа сём час ие.\nСвет\nА маю-це, паго захацелаць ім\nВЫ\nПалардужным век, ім глухім, слотый\nСвет\nсходзьмі звацца!\n.\nСвет\nС\nВЫСШЕЕ ОБЩЕЕ ОБРАЗОВАНИЕ\nВЫСШЕЕ ОБЩЕЕ АКАДЕМИЧЕСКОЕ УЧРЕЖДЕНИЕ\nНАУК И ТЕХНИКИ\nФаксиміле верша, які знаходзіцца ў музеі Я. Купалы. Верш напісаны ў 1905–1907 гг.\n",
+    "missing": [
+      "крыўду",
+      "людзьмі"
+    ],
+    "accuracy_errors_permitted": true,
+    "contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md",
+    "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"
+  }
+]

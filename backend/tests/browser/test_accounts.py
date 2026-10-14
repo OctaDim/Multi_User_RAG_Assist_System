@@ -3,7 +3,7 @@
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import os
 from pathlib import Path
-import socket
+import re
 import subprocess
 import sys
 from threading import Thread
@@ -25,10 +25,7 @@ PASSWORD = 'A long owned browser password'
 
 @pytest.fixture
 def real_account_browser(environment, monkeypatch, tmp_path):
-    with socket.socket() as reservation:
-        reservation.bind(('127.0.0.1', 0))
-        api_port = reservation.getsockname()[1]
-    api_url = f'http://127.0.0.1:{api_port}'
+    api_url = None
     monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path/'originals'))
 
     class Static(SimpleHTTPRequestHandler):
@@ -53,13 +50,23 @@ def real_account_browser(environment, monkeypatch, tmp_path):
     static_thread = Thread(target=static.serve_forever, daemon=True)
     static_thread.start()
     api_process = None
+    api_log = None
     try:
         with Mailbox() as mailbox:
             mailbox.configure(monkeypatch, frontend_url)
             monkeypatch.setenv('RAG_DATABASE_URL', environment['dsn'])
-            api_process = subprocess.Popen([str(BACKEND / '.venv/bin/rag-api'), '--port', str(api_port)], cwd=BACKEND,
-                                           env=os.environ.copy(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            api_log = (tmp_path/'api-first.log').open('xb')
+            api_process = subprocess.Popen([str(BACKEND / '.venv/bin/rag-api'), '--port', '0'], cwd=BACKEND,
+                                           env=os.environ.copy(), stdout=api_log, stderr=subprocess.STDOUT)
             deadline = time.monotonic() + 15
+            while api_url is None:
+                match = re.search(r'Uvicorn running on (http://127\.0\.0\.1:\d+)',(tmp_path/'api-first.log').read_text())
+                if match:
+                    api_url = match.group(1)
+                    break
+                if api_process.poll() is not None or time.monotonic() >= deadline:
+                    raise RuntimeError('Owned D1 API did not bind')
+                time.sleep(.05)
             while True:
                 try:
                     with urlopen(f'{api_url}/openapi.json', timeout=.5):
@@ -82,6 +89,8 @@ def real_account_browser(environment, monkeypatch, tmp_path):
             except subprocess.TimeoutExpired:
                 api_process.kill()
                 api_process.wait(timeout=10)
+        if api_log is not None:
+            api_log.close()
         static.shutdown()
         static.server_close()
         static_thread.join()

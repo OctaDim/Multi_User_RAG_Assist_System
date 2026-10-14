@@ -1,0 +1,29 @@
+{
+  "command": [
+    "xvfb-run",
+    "-a",
+    "uv",
+    "run",
+    "--project",
+    "backend",
+    "--frozen",
+    "--cache-dir",
+    "/tmp/rag-answer-lifecycle-uv-cache",
+    "pytest",
+    "-c",
+    "backend/pyproject.toml",
+    "backend/tests",
+    "--basetemp",
+    "/tmp/rag-u8-all-application-v3",
+    "-q",
+    "-s",
+    "--assert=plain"
+  ],
+  "exit_code": 143,
+  "seconds": 991.22,
+  "log": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-all-application-v3.log",
+  "unfiltered": true,
+  "filters_skips_ignores_deselections_requested": false,
+  "contract": "RAG-67",
+  "input_freeze": "2026-10-15-parent-final-input-freeze-v3.json"
+}

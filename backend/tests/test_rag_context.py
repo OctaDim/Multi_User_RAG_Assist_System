@@ -22,6 +22,18 @@ def contract_tokenize(text):
     return list(text.encode())
 
 
+def test_source_tag_separates_citation_number_from_internal_fragment_identity():
+    import re
+    from xml.etree import ElementTree
+    fragment={'id':'5218f694-cbc0-4ff8-a13a-bfeddb2fc0f5','page':1,'span_start':0,'span_end':7,'text':'Budget.'}
+    packed=pack_context('Budget?',[],[fragment],contract_tokenize)
+    opening=re.search(r'<source\b([^>]*)>',packed['prompt']).group(1)
+    attributes=ElementTree.fromstring('<source'+opening+'/>').attrib
+    assert attributes['id']=='1'
+    assert attributes['trace_id']==fragment['id']
+    assert attributes['citation']=='[source:1]'
+
+
 async def saver_for(pool, connection, request, token=None):
     binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request['id'],))).fetchone()
     return GuardedSaver(pool, binding, token=token)

@@ -1,0 +1,29 @@
+{
+  "status": "negative completed individual case; parent ALLv2 still running",
+  "actual_native_finished_pages": 2,
+  "page16_report_screenshot_created": false,
+  "cause_not_yet_established": true,
+  "full_pytest_traceback_pending": true,
+  "manifest": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ALLv2-first-page-case-negative-actual-finished-pages.jsonl",
+      "sha256": "d05b9f6033720884a7d146fc37940ab3f77890660f3b2e76bbf8869bb788b353"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ALLv2-first-page-case-negative-generation.log",
+      "sha256": "e1df2042ee30ffed3275a4d01b0d8acb8f38ebb60cc6ca6b22c74d9e98300f58"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ALLv2-first-page-case-negative-document-worker.log",
+      "sha256": "dda8ca247005c2f80ee3d8b7629ec3ba11133357b302591964114cbd34de13f6"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ALLv2-first-page-case-negative-actual-twenty-page-original.pdf",
+      "sha256": "80ca36b63a1c9bdfe536c73fdc056bc3da05b8f35168712aa8c430c0c5961a18"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-ALLv2-first-page-case-negative-api-2.log",
+      "sha256": "5d6513d10c3cdfd2ba9e68f817f514e315e8b980a5f2e2aaa63da7ced3d589ff"
+    }
+  ]
+}

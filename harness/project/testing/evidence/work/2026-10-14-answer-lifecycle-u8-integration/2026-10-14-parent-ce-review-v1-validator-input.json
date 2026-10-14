@@ -1,0 +1,359 @@
+{
+  "run_id": "20261014-180301-33f78c23",
+  "run_dir": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23",
+  "skill_dir": "/home/octadim/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.30.5/skills/ce-code-review",
+  "selected_findings": [
+    {
+      "#": 1,
+      "autofix_class": "gated_auto",
+      "confidence": 100,
+      "evidence": [
+        "backend/app/ocr.py:93 --     return (gray<245) & (gray<=int(variance.argmax()))",
+        "backend/app/ocr.py:88 --     histogram=np.bincount(gray[gray<245].ravel(),minlength=256).astype(float)",
+        "backend/app/ocr.py:92 --     variance=(moment[-1]*weight-moment*weight[-1])**2/np.maximum(weight*(weight[-1]-weight),1)",
+        "For white plus gray-128 input, the sole histogram bin is 128: below it weight=moment=0, and at/above it weight=H and moment=128H. Every numerator is zero, argmax is 0, and the returned mask contains no pixels.",
+        "backend/app/ocr.py:281 --                 'handwriting':handwriting,'skips':skips,'mode':mode,'printed_ink':bool(printed_foreground.any())}",
+        "backend/app/ocr.py:284 --         lines=self.recognize(prepared['image'],cancelled) if prepared['printed_ink'] else []",
+        "backend/app/document_worker.py:226-237 -- DOCX image bytes are converted to RGB, passed to prepare_image(...,'complete'), then recognized and staged; lines 242-245 publish a successful revision without requiring nonempty page text."
+      ],
+      "file": "backend/app/ocr.py",
+      "first_evidence": "backend/app/ocr.py:93 --     return (gray<245) & (gray<=int(variance.argmax()))",
+      "independent_reviewers": [
+        "correctness"
+      ],
+      "line": 93,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Before calculating the variance, detect a histogram with exactly one occupied bin and return the gray<245 foreground mask (equivalently threshold at that occupied bin). Keep the existing all-white case. Verify a white-background embedded DOCX PNG whose text pixels all have grayscale value 128 reaches recognition and publishes its text rather than an empty page.",
+      "title": "Single-color gray ink is silently discarded",
+      "why_it_matters": "A supported DOCX image containing crisp gray or colored text on white can publish with an empty OCR page even though its text is visible. When every foreground pixel has the same nonzero grayscale value, the background-excluding histogram has one occupied bin, every variance is zero, and argmax selects threshold zero; printed_ink therefore becomes false and the printed recognizer is skipped. Handling the singleton histogram explicitly preserves these pixels while retaining the existing threshold behavior for ordinary multilevel scans."
+    },
+    {
+      "#": 2,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+        "backend/tests/integration/test_multilingual_documents.py:230-233 -- exact=row['actual_words']==row['expected_legible_source']; assert exact or exception=='current_Qwen_BE_handwriting',records; row.update({'identity':identity,'acceptance':'exact' if exact else 'user_permitted_current_model_difference', 'exception':exception,'contract':CONTRACT if exception else None})",
+        "backend/tests/integration/test_multilingual_documents.py:153 -- ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die','seerose','blüht','auf','dem','teich']),",
+        "backend/tests/fixtures/answer_lifecycle/handwriting-primary-provenance-v1.json:15 -- \"text\": \"Die Seerose blüht auf dem Teich.\"",
+        "Constructed sequence: the actual model returns 'die seerose blüht auf dem teich?'; casefold plus \\w+ returns ['die','seerose','blüht','auf','dem','teich']; the German be_exception returns None, but exact is True, so the acceptance assertion passes and the evidence record says exact. This is a mechanical guard-fidelity failure, not a claim that the current native run produced this text.",
+        "backend/tests/integration/test_actual_printed_documents.py:66 -- assert re.findall(r'\\w+',text.casefold())==expected_words,{'name':name,'recognized':page['text'],'expected':gt}",
+        "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md:7 -- **По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.**"
+      ],
+      "file": "backend/tests/integration/test_multilingual_documents.py",
+      "first_evidence": "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+      "independent_reviewers": [
+        "adversarial"
+      ],
+      "line": 228,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "adversarial"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Replace the casefold()/\\w+ equality used for strict OCR acceptance with case- and punctuation-preserving source tokens or complete independently recorded source strings, allowing only layout whitespace differences explicitly handled by the existing page composition. Use the committed German ground_truth.text and faithful independent EN/RU/printed ground truths; preserve the existing per-word Paddle Belarusian glyph exception and current Qwen Belarusian handwriting exception. Add a small matcher regression proving that a case change and a period-to-question-mark change fail strict acceptance, then rerun the actual OCR integration gates without changing the originals or old raw records.",
+      "title": "OCR acceptance reports forbidden transcription differences as exact",
+      "why_it_matters": "The new OCR acceptance mechanism can pass and label a German, English or Russian transcription as exact after the model changes capitalization or punctuation, although RAG-67 grants no such exception. For the committed German ground truth 'Die Seerose blüht auf dem Teich.', the different output 'die seerose blüht auf dem teich?' becomes the same case-folded word array, reaches exact=True and requires no user permission. The printed PDF/DOCX gate uses the same lossy comparison, so a wrong punctuation mark can also pass that gate. Comparing independently transcribed tokens while retaining case and punctuation prevents these differences from silently receiving an undeclared allowance."
+    },
+    {
+      "#": 3,
+      "autofix_class": "gated_auto",
+      "confidence": 75,
+      "evidence": [
+        "backend/app/ocr.py:291 --             lines.sort(key=lambda line:(line['bbox'][1],line['bbox'][0]))",
+        "backend/app/ocr.py:285-291 -- The sort is inside mode=='complete' but outside the handwriting loop, so it executes for complete pages with an empty handwriting list.",
+        "backend/app/ocr.py:58 --         lines.append({'kind':'printed','text':text,'bbox':bbox,'polygon':polygon})",
+        "backend/app/ocr.py:67 --     # Keep the recognizer's printed reading order and insert omissions in their column.",
+        "backend/app/ocr.py:76-81 -- compose_page builds the stored text and span offsets in the incoming blocks' order.",
+        "backend/app/document_worker.py:211-216,227-237 -- Actual PDF and embedded DOCX OCR results flow from finish_page into stage_page and document publication; embedded DOCX images explicitly use complete mode."
+      ],
+      "file": "backend/app/ocr.py",
+      "first_evidence": "backend/app/ocr.py:291 --             lines.sort(key=lambda line:(line['bbox'][1],line['bbox'][0]))",
+      "independent_reviewers": [
+        "correctness"
+      ],
+      "line": 291,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Remove the unconditional global y/x sort from finish_page. Preserve the printed lines' returned sequence; insert transcribed handwriting into the corresponding overlapping column using the geometry-based insertion already used by compose_page for skip blocks. At minimum, purely printed complete pages must retain their recognizer order. Verify both a two-column printed page and a mixed page whose handwritten insertion must not reorder the remaining printed lines.",
+      "title": "Complete OCR interleaves printed columns",
+      "why_it_matters": "A two-column printed page processed in complete mode loses Paddle's reading order, even when there is no handwriting. For returned lines ordered left-top, left-bottom, right-top, right-bottom, the new y/x sort publishes left-top, right-top, left-bottom, right-bottom, mixing the text of separate columns in the document view and source spans. Retaining the recognizer's printed sequence and inserting handwriting within its column avoids changing correct printed page order."
+    },
+    {
+      "#": 4,
+      "autofix_class": "gated_auto",
+      "confidence": 75,
+      "evidence": [
+        "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+        "frontend/src/app.js:45-57: perform disables only the supplied control; refresh and save remain independently usable, allowing their GET/PATCH operations to overlap.",
+        "frontend/src/api.js:14 -- if (token() !== credential) throw new Error('session_changed'); This protects account changes but does not order same-session settings reads.",
+        "backend/app/settings.py:27-31: GET captures current settings in a transaction; no frontend ordering constraint exists on delivery of that captured response. Lines 40-43 commit a newer revision and audit the PATCH.",
+        "frontend/src/app.js:336-339 builds the preview from every mutable field; line 349 PATCHes the resulting full proposal.",
+        "backend/tests/integration/test_answer_lifecycle.py:95-124 and 238-252 exercise sequential preview/save/refresh rather than delaying an older refresh response past a completed save."
+      ],
+      "file": "frontend/src/app.js",
+      "first_evidence": "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+      "independent_reviewers": [
+        "julik-frontend-races"
+      ],
+      "line": 309,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Give settings rendering a monotonically increasing request generation: capture it before each GET and discard the response unless it remains current. Invalidate outstanding reads when a PATCH starts, and keep refresh/save serialized while that PATCH and its follow-up read finish. Add a browser scenario that holds a revision-0 refresh response, saves and renders revision 1, then releases the older response and verifies the form still shows revision 1 and its limits. This needs only local state, no new dependency.",
+      "title": "Fence overlapping settings reads against completed saves",
+      "why_it_matters": "The administrator can see the old global limits and old saved revision after successfully saving new values. Click refresh while a preview is ready, then save: the refresh GET can capture revision 0, the PATCH and its follow-up GET can render revision 1, and the delayed first GET then unconditionally replaces the form with revision 0. A subsequent preview submits both mutable values from that stale form, potentially restoring an old limit when the administrator only intended to change the other field."
+    }
+  ],
+  "findings": [
+    {
+      "#": 1,
+      "autofix_class": "gated_auto",
+      "confidence": 100,
+      "evidence": [
+        "backend/app/ocr.py:93 --     return (gray<245) & (gray<=int(variance.argmax()))",
+        "backend/app/ocr.py:88 --     histogram=np.bincount(gray[gray<245].ravel(),minlength=256).astype(float)",
+        "backend/app/ocr.py:92 --     variance=(moment[-1]*weight-moment*weight[-1])**2/np.maximum(weight*(weight[-1]-weight),1)",
+        "For white plus gray-128 input, the sole histogram bin is 128: below it weight=moment=0, and at/above it weight=H and moment=128H. Every numerator is zero, argmax is 0, and the returned mask contains no pixels.",
+        "backend/app/ocr.py:281 --                 'handwriting':handwriting,'skips':skips,'mode':mode,'printed_ink':bool(printed_foreground.any())}",
+        "backend/app/ocr.py:284 --         lines=self.recognize(prepared['image'],cancelled) if prepared['printed_ink'] else []",
+        "backend/app/document_worker.py:226-237 -- DOCX image bytes are converted to RGB, passed to prepare_image(...,'complete'), then recognized and staged; lines 242-245 publish a successful revision without requiring nonempty page text."
+      ],
+      "file": "backend/app/ocr.py",
+      "first_evidence": "backend/app/ocr.py:93 --     return (gray<245) & (gray<=int(variance.argmax()))",
+      "independent_reviewers": [
+        "correctness"
+      ],
+      "line": 93,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Before calculating the variance, detect a histogram with exactly one occupied bin and return the gray<245 foreground mask (equivalently threshold at that occupied bin). Keep the existing all-white case. Verify a white-background embedded DOCX PNG whose text pixels all have grayscale value 128 reaches recognition and publishes its text rather than an empty page.",
+      "title": "Single-color gray ink is silently discarded",
+      "why_it_matters": "A supported DOCX image containing crisp gray or colored text on white can publish with an empty OCR page even though its text is visible. When every foreground pixel has the same nonzero grayscale value, the background-excluding histogram has one occupied bin, every variance is zero, and argmax selects threshold zero; printed_ink therefore becomes false and the printed recognizer is skipped. Handling the singleton histogram explicitly preserves these pixels while retaining the existing threshold behavior for ordinary multilevel scans."
+    },
+    {
+      "#": 2,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+        "backend/tests/integration/test_multilingual_documents.py:230-233 -- exact=row['actual_words']==row['expected_legible_source']; assert exact or exception=='current_Qwen_BE_handwriting',records; row.update({'identity':identity,'acceptance':'exact' if exact else 'user_permitted_current_model_difference', 'exception':exception,'contract':CONTRACT if exception else None})",
+        "backend/tests/integration/test_multilingual_documents.py:153 -- ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die','seerose','blüht','auf','dem','teich']),",
+        "backend/tests/fixtures/answer_lifecycle/handwriting-primary-provenance-v1.json:15 -- \"text\": \"Die Seerose blüht auf dem Teich.\"",
+        "Constructed sequence: the actual model returns 'die seerose blüht auf dem teich?'; casefold plus \\w+ returns ['die','seerose','blüht','auf','dem','teich']; the German be_exception returns None, but exact is True, so the acceptance assertion passes and the evidence record says exact. This is a mechanical guard-fidelity failure, not a claim that the current native run produced this text.",
+        "backend/tests/integration/test_actual_printed_documents.py:66 -- assert re.findall(r'\\w+',text.casefold())==expected_words,{'name':name,'recognized':page['text'],'expected':gt}",
+        "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md:7 -- **По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.**"
+      ],
+      "file": "backend/tests/integration/test_multilingual_documents.py",
+      "first_evidence": "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+      "independent_reviewers": [
+        "adversarial"
+      ],
+      "line": 228,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "adversarial"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Replace the casefold()/\\w+ equality used for strict OCR acceptance with case- and punctuation-preserving source tokens or complete independently recorded source strings, allowing only layout whitespace differences explicitly handled by the existing page composition. Use the committed German ground_truth.text and faithful independent EN/RU/printed ground truths; preserve the existing per-word Paddle Belarusian glyph exception and current Qwen Belarusian handwriting exception. Add a small matcher regression proving that a case change and a period-to-question-mark change fail strict acceptance, then rerun the actual OCR integration gates without changing the originals or old raw records.",
+      "title": "OCR acceptance reports forbidden transcription differences as exact",
+      "why_it_matters": "The new OCR acceptance mechanism can pass and label a German, English or Russian transcription as exact after the model changes capitalization or punctuation, although RAG-67 grants no such exception. For the committed German ground truth 'Die Seerose blüht auf dem Teich.', the different output 'die seerose blüht auf dem teich?' becomes the same case-folded word array, reaches exact=True and requires no user permission. The printed PDF/DOCX gate uses the same lossy comparison, so a wrong punctuation mark can also pass that gate. Comparing independently transcribed tokens while retaining case and punctuation prevents these differences from silently receiving an undeclared allowance."
+    },
+    {
+      "#": 3,
+      "autofix_class": "gated_auto",
+      "confidence": 75,
+      "evidence": [
+        "backend/app/ocr.py:291 --             lines.sort(key=lambda line:(line['bbox'][1],line['bbox'][0]))",
+        "backend/app/ocr.py:285-291 -- The sort is inside mode=='complete' but outside the handwriting loop, so it executes for complete pages with an empty handwriting list.",
+        "backend/app/ocr.py:58 --         lines.append({'kind':'printed','text':text,'bbox':bbox,'polygon':polygon})",
+        "backend/app/ocr.py:67 --     # Keep the recognizer's printed reading order and insert omissions in their column.",
+        "backend/app/ocr.py:76-81 -- compose_page builds the stored text and span offsets in the incoming blocks' order.",
+        "backend/app/document_worker.py:211-216,227-237 -- Actual PDF and embedded DOCX OCR results flow from finish_page into stage_page and document publication; embedded DOCX images explicitly use complete mode."
+      ],
+      "file": "backend/app/ocr.py",
+      "first_evidence": "backend/app/ocr.py:291 --             lines.sort(key=lambda line:(line['bbox'][1],line['bbox'][0]))",
+      "independent_reviewers": [
+        "correctness"
+      ],
+      "line": 291,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Remove the unconditional global y/x sort from finish_page. Preserve the printed lines' returned sequence; insert transcribed handwriting into the corresponding overlapping column using the geometry-based insertion already used by compose_page for skip blocks. At minimum, purely printed complete pages must retain their recognizer order. Verify both a two-column printed page and a mixed page whose handwritten insertion must not reorder the remaining printed lines.",
+      "title": "Complete OCR interleaves printed columns",
+      "why_it_matters": "A two-column printed page processed in complete mode loses Paddle's reading order, even when there is no handwriting. For returned lines ordered left-top, left-bottom, right-top, right-bottom, the new y/x sort publishes left-top, right-top, left-bottom, right-bottom, mixing the text of separate columns in the document view and source spans. Retaining the recognizer's printed sequence and inserting handwriting within its column avoids changing correct printed page order."
+    },
+    {
+      "#": 4,
+      "autofix_class": "gated_auto",
+      "confidence": 75,
+      "evidence": [
+        "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+        "frontend/src/app.js:45-57: perform disables only the supplied control; refresh and save remain independently usable, allowing their GET/PATCH operations to overlap.",
+        "frontend/src/api.js:14 -- if (token() !== credential) throw new Error('session_changed'); This protects account changes but does not order same-session settings reads.",
+        "backend/app/settings.py:27-31: GET captures current settings in a transaction; no frontend ordering constraint exists on delivery of that captured response. Lines 40-43 commit a newer revision and audit the PATCH.",
+        "frontend/src/app.js:336-339 builds the preview from every mutable field; line 349 PATCHes the resulting full proposal.",
+        "backend/tests/integration/test_answer_lifecycle.py:95-124 and 238-252 exercise sequential preview/save/refresh rather than delaying an older refresh response past a completed save."
+      ],
+      "file": "frontend/src/app.js",
+      "first_evidence": "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+      "independent_reviewers": [
+        "julik-frontend-races"
+      ],
+      "line": 309,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Give settings rendering a monotonically increasing request generation: capture it before each GET and discard the response unless it remains current. Invalidate outstanding reads when a PATCH starts, and keep refresh/save serialized while that PATCH and its follow-up read finish. Add a browser scenario that holds a revision-0 refresh response, saves and renders revision 1, then releases the older response and verifies the form still shows revision 1 and its limits. This needs only local state, no new dependency.",
+      "title": "Fence overlapping settings reads against completed saves",
+      "why_it_matters": "The administrator can see the old global limits and old saved revision after successfully saving new values. Click refresh while a preview is ready, then save: the refresh GET can capture revision 0, the PATCH and its follow-up GET can render revision 1, and the delayed first GET then unconditionally replaces the form with revision 0. A subsequent preview submits both mutable values from that stale form, potentially restoring an old limit when the administrator only intended to change the other field."
+    }
+  ],
+  "selected_count": 4,
+  "shortcut_skipped_count": 0,
+  "skip_count": 0,
+  "skip_evidence_basis": "No finding has both an ordinary review and an independence_verified adversarial-provider peer; the only adversarial review is the in-process fallback.",
+  "normal_cap": 8,
+  "batch_order": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "scope": {
+    "mode": "standalone",
+    "base": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "diff_a": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "diff_b": null,
+    "pr": {
+      "number": null,
+      "url": null,
+      "title": null,
+      "body": null,
+      "base_ref_name": null,
+      "head_ref_oid": null,
+      "head_ref": null,
+      "base_ref": null,
+      "has_prior_comments": false
+    },
+    "branch": "octadim/create-plan-1",
+    "head_sha": "122554c808d34ccb1ea679891efb58102b61a1a6",
+    "files": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/files.txt",
+    "diff": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/diff.patch",
+    "tree_is_reviewed_head": true,
+    "untracked_excluded": [
+      "harness/project/handoffs/",
+      "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/"
+    ]
+  },
+  "intent": {
+    "summary": "Verify the integrated RAG answer lifecycle with actual accounts, browser, PostgreSQL, two APIs, document publisher and native runtime. Separate printed Paddle1.5 and handwritten Qwen2B/Q4/F16, preserve original geometry and raw OCR, and assess RAG67 permissions per actual source word and exact model/projector. Keep existing history/access/ownership fencing and physical resource cleanup correct under contention; settings/error/refusal UI and frozen30 factual answers are within scope.",
+    "confidence": "explicit"
+  },
+  "invocation_constraints": [
+    "каждый этап U должен прогонять все предыдущие регрессионные тесты, включая все тесты harness.",
+    "после каждого этапа U, прогонять все регрессионные тесты и все тесты harness, чтобы видеть, что новый код не сломал старый код или файлы",
+    "реальные тестовые компоненты нужно будет создать через e2e тесты и вручную через реальный интерфейс в браузере, как это будут делать пользователи сервиса",
+    "Динамическую память сохраняй внутри harness.",
+    "AGENTS.md принадлежит пользователю; разрешено только восстановление указанных ниже ссылок.",
+    "По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.",
+    "Текущий PaddleOCR-VL 1.5 — печатный белорусский: Только замены «ў» → «у» или её вариантов с надстрочными знаками и/или «і/i» → варианты с надстрочными знаками. Остальные ошибки запрещены.",
+    "Текущий Qwen3.5-2B Q4_K_M + F16 — рукописный белорусский: Ошибки распознавания белорусских слов допускаются.",
+    "Будущая более мощная рукописная OCR-модель: Ошибки рукописи запрещены без нового явного согласия пользователя.",
+    "Будущая более мощная печатная OCR-модель: Ошибки печатного текста запрещены без нового явного согласия пользователя.",
+    "В смешанной области каждое слово оценивается отдельно: печатное получает только применимый печатный допуск, рукописное — только применимый рукописный. Общая рамка, один OCR-кроп или выбор распознавателя не меняют фактический тип слова и не переносят допуск между типами.",
+    "Новые модели не наследуют исключения автоматически. Основной печатный OCR — Paddle, рукописный — Qwen.",
+    "Сырые результаты и эталоны сохраняются; разрешённые расхождения явно отмечаются без скрытого исправления.",
+    "This review is report-only. Parent frozen native ALL is running; no leaf may run native, pytest, browsers, servers or edit project source; ordinary review artifacts only. No push, PR, merge or deploy authorized."
+  ],
+  "plan": {
+    "path": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/plan-for-reviewers.md",
+    "source": "explicit",
+    "requirements": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18",
+      "R19",
+      "R20",
+      "R21",
+      "R22",
+      "R23",
+      "R24",
+      "R25",
+      "R26",
+      "R27",
+      "R28",
+      "R29",
+      "R30",
+      "R31",
+      "R32",
+      "R33",
+      "R34",
+      "R35"
+    ],
+    "implementation_units": [
+      "U1",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6",
+      "U7",
+      "U8"
+    ]
+  },
+  "source_artifacts": [
+    "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/correctness.json",
+    "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/julik-frontend-races.json",
+    "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/adversarial-reviewer.json"
+  ],
+  "synthesized_findings": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/synthesized-findings.json"
+}

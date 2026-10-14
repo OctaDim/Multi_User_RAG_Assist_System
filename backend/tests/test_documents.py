@@ -292,6 +292,58 @@ async def test_long_unicode_original_has_no_silent_embedding_tail_loss(environme
             assert not worker.embedder.tokenizer.encode('passage: '+chunk['text']).overflowing
 
 
+async def test_real_publisher_preserves_complete_short_paragraphs_and_exact_spans(environment,rag_pool,monkeypatch,tmp_path):
+    import os
+    from app.document_worker import DocumentWorker
+    from app.rag import E5Embedder
+    monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn']);monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+    headers={'Authorization':'Bearer '+environment['user']['token']}
+    paragraphs=['The permitted annual budget is 100 euros. '*12,
+                'The exception applies only to non-political crimes. '*9,
+                'Everyone has the right to a nationality. '*8]
+    text='\n\n'.join(paragraphs);content=text.encode()
+    with TestClient(create_app()) as client:
+        document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'paragraphs.txt','size':len(content)}]}).json()['documents'][0]['id']
+        assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+        worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+        try:
+            assert await worker.process_one()
+            async with rag_pool.connection() as connection:
+                chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
+            assert ''.join(row['text'] for row in chunks)==text
+            for paragraph in paragraphs:
+                assert any(paragraph in row['text'] for row in chunks),chunks
+            assert all(text[row['span_start']:row['span_end']]==row['text'] for row in chunks)
+            assert client.get('/api/documents/'+document+'/original',headers=headers).content==content
+        finally:worker.close()
+
+
+async def test_short_unrelated_paragraphs_have_separate_searchable_spans(environment,rag_pool,monkeypatch,tmp_path):
+    import os
+    from app.document_worker import DocumentWorker
+    from app.rag import E5Embedder
+    monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn']);monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+    paragraphs=['The library budget is 100 euros.',
+                'The exception applies only to non-political crimes.',
+                'Everyone has the right to a nationality.']
+    text='\n\n'.join(paragraphs);content=text.encode()
+    headers={'Authorization':'Bearer '+environment['user']['token']}
+    with TestClient(create_app()) as client:
+        document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'separate-paragraphs.txt','size':len(content)}]}).json()['documents'][0]['id']
+        assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+        worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+        try:
+            assert await worker.process_one()
+            async with rag_pool.connection() as connection:
+                chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
+            assert len(chunks)==len(paragraphs)
+            assert ''.join(row['text'] for row in chunks)==text
+            assert all(row['text'].strip()==paragraph for row,paragraph in zip(chunks,paragraphs))
+            assert all(text[row['span_start']:row['span_end']]==row['text'] for row in chunks)
+            assert client.get('/api/documents/'+document+'/original',headers=headers).content==content
+        finally:worker.close()
+
+
 async def test_docx_headers_footnotes_and_body_are_all_published(environment,rag_pool,monkeypatch,tmp_path):
     import os
     from io import BytesIO

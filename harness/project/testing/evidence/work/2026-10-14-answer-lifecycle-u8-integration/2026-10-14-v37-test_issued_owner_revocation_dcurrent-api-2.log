@@ -1,0 +1,12 @@
+INFO:     Started server process [122551]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:57606 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58543 - "OPTIONS /api/conversations/5a1f3447-0ab3-4852-b439-7eb1e570e2dd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58543 - "GET /api/conversations/5a1f3447-0ab3-4852-b439-7eb1e570e2dd HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58543 - "OPTIONS /api/tabs/ba945063-edbf-43d0-9202-6fea2dc4a24b/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58551 - "GET /api/tabs/ba945063-edbf-43d0-9202-6fea2dc4a24b/events HTTP/1.1" 401 Unauthorized
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [122551]

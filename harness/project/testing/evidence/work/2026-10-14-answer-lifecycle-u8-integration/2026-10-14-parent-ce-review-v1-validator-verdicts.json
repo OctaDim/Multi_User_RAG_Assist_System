@@ -1,0 +1,28 @@
+{
+  "verdicts": [
+    {
+      "#": 1,
+      "status": "confirmed",
+      "protected_subject": null,
+      "reason": "For white-background input whose foreground pixels all have gray value 128, isolated arithmetic reproduces threshold 0 in the newly added ink_mask (ocr.py:85–93), so prepare_image/finish_page (270–284) skips printed recognition and the supported DOCX-image caller publishes empty text (document_worker.py:226–245); incidence in actual uploaded documents was not measured."
+    },
+    {
+      "#": 2,
+      "status": "confirmed",
+      "protected_subject": null,
+      "reason": "The newly added handwriting gate (test_multilingual_documents.py:228–233) and printed gate (test_actual_printed_documents.py:44,66) discard case and punctuation, and isolated evaluation confirms that the committed German source “Die Seerose blüht auf dem Teich.” and differing output “die seerose blüht auf dem teich?” pass equal word arrays without any RAG-67 exception; incidence of such differences in native output was not measured."
+    },
+    {
+      "#": 3,
+      "status": "confirmed",
+      "protected_subject": null,
+      "reason": "When the recognizer returns valid column-major printed lines, the newly introduced complete-mode sort (ocr.py:283–291) interleaves them even with no handwriting, as reproduced with left-top/left-bottom/right-top/right-bottom coordinates, and compose_page plus stage_page persist that reordered text (ocr.py:65–81; document_worker.py:121–124), whereas base 122554c preserved the sequence; native incidence of column-major output was not measured."
+    },
+    {
+      "#": 4,
+      "status": "confirmed",
+      "protected_subject": "concurrency",
+      "reason": "In the newly added settings UI, refresh and save disable separate controls (app.js:45–57,347–353), each settings GET unconditionally replaces the form (308–311), and api.js:14 guards only credential changes, so a same-session GET capturing revision 0 before PATCH commits revision 1 (settings.py:27–43) can render after the post-save GET and restore stale values; this response ordering is reachable through those controls but browser incidence was not measured."
+    }
+  ]
+}

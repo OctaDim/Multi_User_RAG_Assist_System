@@ -92,6 +92,28 @@ def test_real_eos_and_incremental_russian_utf8(runtime):
         context.close()
 
 
+def test_real_source_answer_uses_facts_instead_of_citation_example(runtime):
+    """Calibration only; the separate frozen30 acceptance uses real publishers."""
+    from app.rag import pack_context
+    source = {'id':'calibration-budget', 'page':1, 'span_start':0, 'span_end':34,
+              'text':'The annual budget is 100 euros.'}
+    packed = pack_context('What is the annual budget?', [], [source], runtime.tokenize)
+    context = runtime.allocate('source-answer-calibration', packed['tokens'])
+    output=[]
+    try:
+        for _ in range(512):
+            result=context.advance(); output.append(result['text'])
+            if result['done']: break
+        text=''.join(output)
+        print({'proof':'native_source_answer_calibration','question':'What is the annual budget?',
+               'source':source['text'],'answer':text,'reason':result['reason']},flush=True)
+        assert result['reason']=='eos'
+        assert '100' in text and 'euro' in text.lower() and '[source:1]' in text
+        assert 'supported claim' not in text.lower()
+    finally:
+        context.close()
+
+
 def test_actual_token_budget_has_no_prompt_clamp(runtime):
     tokens = runtime.tokenize(prompt("Контекст " * 5000))
     assert len(tokens) > 4096

@@ -1,0 +1,31 @@
+{
+  "scope": "real PostgreSQL delay and native physical lifetime; seeded component environment",
+  "delay_seconds": 5.5,
+  "actual_elapsed_seconds": 5.506117702003394,
+  "owner": {
+    "event": "native_spawn",
+    "pid": 137726,
+    "keeper_pid": 137725,
+    "epoch": 2
+  },
+  "initial_lease": {
+    "epoch": 2,
+    "remaining": "4.960476"
+  },
+  "observed_pending_query": {
+    "pid": 137725,
+    "state": "active",
+    "wait_event_type": "Lock",
+    "wait_event": "transactionid",
+    "blockers": [
+      137715
+    ]
+  },
+  "granted_advisory_locks": 1,
+  "after_lease": {
+    "epoch": 2,
+    "healthy": false
+  },
+  "native_child_alive": false,
+  "supervisor_poll": null
+}

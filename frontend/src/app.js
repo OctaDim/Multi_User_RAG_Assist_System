@@ -5,6 +5,7 @@ import {Conversations, textElement} from './conversations.js';
 const $ = id => document.getElementById(id);
 const documentURLs = new Set();
 let conversations;
+let settingsRead = 0;
 const messages = {
   invalid_credentials: 'Неверный email или пароль.',
   access_denied: 'Доступ закрыт. Подтвердите email или обратитесь к администратору.',
@@ -19,8 +20,16 @@ const messages = {
   no_ready_sources: 'Нет готовых источников в выбранной области. Вопрос сохранён как черновик.',
   conversation_busy: 'В этой беседе уже выполняется запрос. Черновик сохранён.',
   coordinator_unavailable: 'Сервис ответов сейчас недоступен. Черновик сохранён.',
+  context_too_large: 'Вопрос превышает доступный контекст модели. Сократите вопрос; текст сохранён как черновик.',
+  tokenizer_unavailable: 'Не удалось проверить объём вопроса. Сервис модели временно недоступен; черновик сохранён.',
+  invalid_settings: 'Укажите положительные целые значения изменяемых настроек. Параметры перезапуска доступны только для просмотра.',
   document_not_ready: 'Документ ещё не готов. Обновите его статус после обработки.',
   document_worker_lost: 'Обработка прервана из-за остановки сервиса. Оригинал сохранён; автоматического повтора нет.',
+  document_processing_failed: 'Не удалось обработать документ.',
+  upload_failed: 'Загрузка документа не завершена.',
+  invalid_utf8: 'Текст документа не является корректным UTF-8.',
+  invalid_docx: 'Структура файла DOCX повреждена.',
+  pdf_page_limit: 'Число страниц PDF превышает разрешённый предел.',
   document_format_forbidden: 'Загрузка этого формата не разрешена для вашей учётной записи.',
   document_permission_revoked: 'Разрешение на эту обработку отозвано.',
   file_size_limit: 'Файл превышает допустимый размер.',
@@ -50,6 +59,8 @@ async function perform(operation, control) {
 }
 
 function showAuthentication() {
+  $('document-report').close();
+  $('document-report').replaceChildren();
   conversations?.close(); conversations = undefined;
   $('authentication').hidden = false;
   $('workspace').hidden = true;
@@ -57,6 +68,8 @@ function showAuthentication() {
   $('history').replaceChildren();
   $('conversations').replaceChildren();
   $('accounts').replaceChildren();
+  $('global-settings').replaceChildren();
+  $('generation-settings').hidden = true;
   clearDocumentView();
   $('documents').replaceChildren();
   $('document-upload').reset();
@@ -71,6 +84,8 @@ async function showWorkspace() {
   await conversations.initialize(current.conversations);
   $('administration').hidden = current.account.role === 'user';
   if (current.account.role !== 'user') await showAccounts(current.account.role);
+  $('generation-settings').hidden = current.account.role !== 'super_admin';
+  if (current.account.role === 'super_admin') await showSettings();
   await showLibrary();
 }
 
@@ -84,6 +99,8 @@ async function showLibrary(ownerId) {
   const result = await api(ownerId ? `/documents/admin/${ownerId}/library` : '/documents');
   if (!result.readonly) conversations?.sources(result.documents);
   clearDocumentView();
+  $('document-report').close();
+  $('document-report').replaceChildren();
   $('document-upload').hidden = result.readonly;
   $('documents').replaceChildren();
   const labels = {receiving:'Загрузка',queued:'Ожидает обработки',processing:'Обрабатывается',awaiting_choice:'Нужен выбор режима',ready:'Готов',failed:'Обработка неуспешна',cancelled:'Отменён'};
@@ -92,6 +109,10 @@ async function showLibrary(ownerId) {
     item.dataset.document = file.id;
     item.append(textElement('strong',file.name),textElement('p',labels[file.state]));
     if (file.error) item.append(textElement('p',`${messages[file.error] || file.error}${file.failure_page ? ` · страница ${file.failure_page}` : ''}`));
+    if (file.state==='failed') {
+      const report=textElement('button','Открыть отчёт об обработке');report.type='button';
+      report.addEventListener('click',()=>showDocumentReport(file));item.append(report);
+    }
     if (file.ready) {
       const open = textElement('button','Открыть документ');
       open.type='button';
@@ -113,6 +134,22 @@ async function showLibrary(ownerId) {
     }
     $('documents').append(item);
   }
+}
+
+function showDocumentReport(file) {
+  const report=$('document-report');
+  const uploadFailure=['upload_failed','upload_incomplete','file_size_mismatch'].includes(file.error);
+  report.replaceChildren(
+    textElement('h3','Отчёт об обработке документа'),
+    textElement('p',`Файл: ${file.name}`),
+    textElement('p',`Этап: ${uploadFailure ? 'загрузка документа' : 'обработка документа'}`),
+    textElement('p',`Страница: ${file.failure_page || 'не определена'}`),
+    textElement('p',`Причина: ${messages[file.error] || file.error || 'Не удалось обработать документ.'}`),
+    textElement('p',file.ready ? 'Новая ревизия не опубликована; ранее готовая ревизия остаётся доступна.' : 'Документ целиком недоступен для поиска.'),
+  );
+  if (file.mode==='skip_handwriting') report.append(textElement('p','Режим: только печатный текст; рукописные участки пропущены.'));
+  const close=textElement('button','Закрыть отчёт');close.type='button';
+  close.addEventListener('click',()=>report.close());report.append(close);report.showModal();
 }
 
 async function showDocument(file,readonly) {
@@ -267,6 +304,61 @@ async function showAccounts(actorRole) {
     }
     $('accounts').append(card);
   }
+}
+
+async function showSettings() {
+  const reading = ++settingsRead;
+  const value = await api('/settings');
+  if (reading !== settingsRead) return;
+  const form = $('global-settings');
+  form.replaceChildren();
+  const revision = textElement('p', `Сохранена ревизия ${value.revision}. ${value.applied_revision === value.revision ? 'Применена' : 'Ожидает применения'}: ${value.applied_revision}.`);
+  revision.className = 'settings-revision';
+  form.append(revision);
+  const labels = {max_active:'Активные запросы', step_width:'Запросы за шаг', model:'Модель генерации',
+    n_ctx:'Контекст запроса', n_threads:'Потоки генерации', n_threads_batch:'Потоки обработки prompt', thinking:'Thinking'};
+  for (const [key, current] of Object.entries(value.values)) {
+    const label = textElement('label', labels[key] || key);
+    const input = document.createElement('input'); input.name = key;
+    input.type = value.mutable.includes(key) ? 'number' : 'text';
+    input.value = String(current); input.disabled = !value.mutable.includes(key);
+    if (!input.disabled) {input.min = '1'; input.step = '1'; input.required = true;}
+    label.append(input); form.append(label);
+  }
+  form.append(textElement('p', `Эмбеддинги: ${value.embedding.model}, ${value.embedding.backend}, ${value.embedding.quantization}. Параметры модели и эмбеддингов требуют перезапуска и доступны только для просмотра.`));
+  const preview = textElement('div', ''); preview.className = 'settings-preview'; preview.setAttribute('aria-live','polite');
+  const inspect = textElement('button', 'Предпросмотр изменения'); inspect.type = 'submit';
+  const save = textElement('button', 'Сохранить глобальные настройки'); save.type = 'button'; save.hidden = true;
+  const refresh = textElement('button', 'Обновить применение настроек'); refresh.type = 'button';
+  let proposed;
+  form.oninput = () => {proposed = undefined; save.hidden = true; preview.replaceChildren();};
+  form.onsubmit = event => {
+    event.preventDefault();
+    perform(async () => {
+      proposed = {};
+      for (const key of value.mutable) {
+        const number = Number(form.elements[key].value);
+        if (!Number.isSafeInteger(number) || number < 1) throw new Error('invalid_settings');
+        proposed[key] = number;
+      }
+      preview.replaceChildren(textElement('p', 'Область действия: весь сервис, все API-процессы.'));
+      for (const key of value.mutable) preview.append(textElement('p', `${labels[key]}: ${value.values[key]} → ${proposed[key]}`));
+      preview.append(textElement('p', 'Уменьшение лимита сохраняет уже активные ответы; новые ждут свободного места. Новые значения действуют после применения координатором и сохраняются после перезапуска. Скорость выдачи и расход памяти при новых значениях неизвестны.'));
+      save.hidden = false;
+    }, inspect);
+  };
+  save.addEventListener('click', () => perform(async () => {
+    if (!proposed) return;
+    ++settingsRead;
+    form.inert = true;
+    try {
+      const saved = await api('/settings','PATCH',proposed);
+      status(`Ревизия ${saved.revision} сохранена. Применённая ревизия: ${saved.applied_revision}.`);
+      await showSettings();
+    } finally { form.inert = false; }
+  },save));
+  refresh.addEventListener('click', () => perform(showSettings,refresh));
+  form.append(inspect, preview, save, refresh);
 }
 
 for (const name of ['register', 'login']) {

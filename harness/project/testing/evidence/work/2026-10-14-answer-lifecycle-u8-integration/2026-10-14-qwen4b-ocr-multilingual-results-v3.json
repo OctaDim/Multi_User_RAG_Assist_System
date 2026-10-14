@@ -1,0 +1,189 @@
+[
+  {
+    "language": "ru",
+    "original_size": [
+      472,
+      159
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "август",
+    "usage": {
+      "prompt_tokens": 103,
+      "completion_tokens": 3,
+      "total_tokens": 106
+    },
+    "finish": "stop",
+    "seconds": 8.637320290999924,
+    "independent_gt": [
+      "август"
+    ],
+    "missing": []
+  },
+  {
+    "language": "be",
+    "original_size": [
+      1200,
+      1610
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "А хто там ідзе, я хто там ідзе\nУ агромістай такой грамадзе?—\nбеларусы.\n\nЯ што вам маюць на жудых пляках,\nНа руках у крыві, на ногях у ланцях?\nСваго крыжуй!\n\nА кому-це ідуць готу крыжуй\nўсяго?\nА куда-це ідучы паказваюць?—\nНа свет час іх.\n\nА чало-ца, чаго захачалася ім\nПалардусаным век, ім глухім, слотаім\nсладзьмі звацца!",
+    "usage": {
+      "prompt_tokens": 138,
+      "completion_tokens": 153,
+      "total_tokens": 291
+    },
+    "finish": "stop",
+    "seconds": 83.29019744100151,
+    "independent_gt": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "missing": [
+      "крыўду",
+      "людзьмі"
+    ]
+  },
+  {
+    "language": "de",
+    "original_size": [
+      4020,
+      436
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "Die Seerose blüht auf dem Teich.",
+    "usage": {
+      "prompt_tokens": 214,
+      "completion_tokens": 12,
+      "total_tokens": 226
+    },
+    "finish": "stop",
+    "seconds": 56.597094564000145,
+    "independent_gt": [
+      "Die Seerose blüht auf dem Teich"
+    ],
+    "missing": []
+  },
+  {
+    "language": "en",
+    "original_size": [
+      370,
+      120
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "Dreams\n—Langston Hughes",
+    "usage": {
+      "prompt_tokens": 100,
+      "completion_tokens": 7,
+      "total_tokens": 107
+    },
+    "finish": "stop",
+    "seconds": 2.6761583240004256,
+    "independent_gt": [
+      "Dreams",
+      "Langston Hughes"
+    ],
+    "missing": []
+  },
+  {
+    "language": "be-line-2",
+    "original_size": [
+      361,
+      78
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "беларусы.",
+    "usage": {
+      "prompt_tokens": 99,
+      "completion_tokens": 6,
+      "total_tokens": 105
+    },
+    "finish": "stop",
+    "seconds": 2.1588690739990852,
+    "independent_gt": [
+      "Беларусы"
+    ],
+    "missing": []
+  },
+  {
+    "language": "be-line-5",
+    "original_size": [
+      520,
+      90
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "Своё крыўг",
+    "usage": {
+      "prompt_tokens": 104,
+      "completion_tokens": 6,
+      "total_tokens": 110
+    },
+    "finish": "stop",
+    "seconds": 2.535322970001289,
+    "independent_gt": [
+      "Сваю",
+      "крыўду"
+    ],
+    "missing": [
+      "Сваю",
+      "крыўду"
+    ]
+  },
+  {
+    "language": "be-line-8",
+    "original_size": [
+      541,
+      93
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "На счет часов.",
+    "usage": {
+      "prompt_tokens": 105,
+      "completion_tokens": 4,
+      "total_tokens": 109
+    },
+    "finish": "stop",
+    "seconds": 2.390602253999532,
+    "independent_gt": [
+      "На",
+      "свет",
+      "цэлы"
+    ],
+    "missing": [
+      "свет",
+      "цэлы"
+    ]
+  },
+  {
+    "language": "be-line-11",
+    "original_size": [
+      634,
+      103
+    ],
+    "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.",
+    "thinking": false,
+    "text": "сходзьмі з'яцца!",
+    "usage": {
+      "prompt_tokens": 108,
+      "completion_tokens": 9,
+      "total_tokens": 117
+    },
+    "finish": "stop",
+    "seconds": 3.2458559810002043,
+    "independent_gt": [
+      "людзьмі",
+      "звацца"
+    ],
+    "missing": [
+      "людзьмі",
+      "звацца"
+    ]
+  }
+]

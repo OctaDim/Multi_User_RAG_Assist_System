@@ -1,0 +1,62 @@
+F
+=================================== FAILURES ===================================
+_ test_real_partial_upload_and_failed_file_never_expand_selected_source_scope __
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...i-2.log'), 'generation': PosixPath('/tmp/rag-u8-worker-report-red-15/test_real_partial_upload_and_f0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_241351a29d894296a8f6361ae2216e0f host=/tmp/rag-u8-worker-report-red-15/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-report-red-15/test_real_partial_upload_and_f0')
+
+    def test_real_partial_upload_and_failed_file_never_expand_selected_source_scope(integrated_browser,environment,tmp_path):
+        ((browser,mailbox,frontend,api),worker,worker_log),_,logs=integrated_browser
+        context=browser.new_context()
+        try:
+            page=context.new_page();register(page,mailbox,frontend,'u8-whole-source@owned.test');login(page,'u8-whole-source@owned.test')
+            page.locator('#document-upload input').set_input_files([
+                {'name':'whole-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'},
+                {'name':'broken.pdf','mimeType':'application/pdf','buffer':b'%PDF-1.7\nIncomplete invalid original with no pages'}])
+            page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'whole-budget.txt')
+            bad=page.locator('#documents li').filter(has=page.get_by_text('broken.pdf',exact=True))
+            deadline=time.monotonic()+30
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert time.monotonic()<deadline,bad.inner_text()
+                page.get_by_role('button',name='Обновить статусы документов',exact=True).click();page.wait_for_timeout(100)
+>           bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+
+backend/tests/integration/test_actual_document_boundaries.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15450: in click
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:156: in click
+    return await self._frame.click(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:488: in click
+    await self._channel.send("click", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7d3dcf354440>
+cb = <function Channel.send.<locals>.<lambda> at 0x7d3dcffcd300>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+E           Call log:
+E             - waiting for locator("#documents li").filter(has=get_by_text("broken.pdf", exact=True)).get_by_role("button", name="Открыть отчёт об обработке", exact=True)
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope
+1 failed in 54.02s

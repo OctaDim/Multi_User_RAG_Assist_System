@@ -1,0 +1,26 @@
+{
+  "all_recorded_owned_resources_absent": true,
+  "pids": [
+    178199,
+    178211,
+    178212,
+    178213,
+    178243,
+    178293,
+    178304,
+    178311,
+    178312,
+    178344,
+    178367,
+    178408,
+    178532,
+    178533
+  ],
+  "service_exit_codes": [
+    -15,
+    -15,
+    0
+  ],
+  "postmaster_pidfile_absent": true,
+  "postgres_owned_handles_after_cleanup": "<pgserver.utils.DiskList object at 0x79b48ec3c410>"
+}

@@ -1,0 +1,29 @@
+{
+  "v39": {
+    "exit_code": 1,
+    "terminal_passed": 6,
+    "printed_pdf_passed": 2,
+    "docx_wrong_test_expectation": true,
+    "native_page_completions": {
+      "whole_pdf": 5,
+      "explicit_print_only": 9
+    },
+    "failure": "finite420 deadline expired before fifteen successes"
+  },
+  "source_sha256": {
+    "backend/app/ocr.py": "e407905c517b7f2677d06ef5c4d601384a8de67071c578c3cf41b3a25f5c2acd",
+    "backend/config/ocr.toml": "a6a740200ae718f6f22a0d56508daea53e44d94d3d5b142d4899a9c74ddf268c",
+    "backend/tests/test_document_ocr.py": "c2f79309d36f44533308c904f096c3fb776da5c1d0db201abe3f2d87580602a7",
+    "backend/tests/integration/test_multilingual_documents.py": "beed23597f2b3ab26d4e04edb8bdb6e0bc49d54d28de6c82779ff269ca1ec36e",
+    "backend/tests/integration/test_actual_printed_documents.py": "7702ddd3080d434cc63f926784e6f77fabe704b415ce80aa06324fe21819ed20",
+    "backend/tests/integration/test_actual_page_failure.py": "f9a1aac2d79ebba77f0d4c8e06548066e2dc7af644888450f2fea05c86316c99",
+    "backend/tests/integration/test_answer_lifecycle.py": "c4d55ba9edfea383b17292a2fe1effe7848af0fbf998c39268f524036a431095",
+    "frontend/src/app.js": "78a1bd7f5bf3006ed314eef610a92dfc2498b1e29c5da082f9e626ae267daced",
+    "frontend/src/conversations.js": "7faa8d20e0fe1d4cc6173360ad2c537062e67e784ddf9a827f931c2fc9e5b8b3"
+  },
+  "latest_contract": "RAG66",
+  "v40": {
+    "page_wait_seconds": 1500,
+    "production_changes_since_v39": false
+  }
+}

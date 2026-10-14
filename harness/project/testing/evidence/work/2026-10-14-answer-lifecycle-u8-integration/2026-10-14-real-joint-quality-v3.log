@@ -1,0 +1,247 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+backend/tests/integration/test_answer_lifecycle.py {"load_states": {"4f4906c5-fb68-4e8a-a4bb-0a054e38f306": "generating", "6d2ce44b-d8b4-4575-8005-a858481a3cec": "generating", "42fb7ef8-8bfa-4ceb-8338-23ac0673acde": "generating", "5971a761-4272-4b36-8e53-c54a4e901ff3": "generating", "a3f288a7-db42-4b69-be79-78c211786c3b": "generating", "a27b892d-cb96-4a05-a71e-23f372e8a71f": "generating", "0a2dd6f2-a7b4-4337-996e-5c72d7d5657a": "queued", "562eefaf-1a61-4bd2-baad-e3f2c792ad71": "generating", "3c87a6dc-d157-4d71-91b8-8e2b360d73e9": "generating", "4abd0a15-35f2-4c42-8110-b45405f10f29": "generating", "90d3cc2b-f9c5-4078-8618-b10ae3c45485": "generating", "e597629f-884e-4a73-878c-0e1369170eb0": "generating", "8945816e-72f6-40c7-8276-ef57dc069e90": "generating"}}
+F{"control": "eng-1", "answer": "Based on the provided excerpts, Article 1 describes all human beings at birth as being born free and equal in dignity and rights.\n\n**Supported Claim:**\nArticle 1 states that all human beings are born free and equal in dignity and rights.\n\n**Citation:**\n[source:1]\n\n**Conclusion:**\nAccording to the text, every human being possesses inherent dignity and rights from birth, regardless of their status or citizenship.", "failures": ["copied citation example"]}
+{"control": "eng-3", "answer": "Based on the provided source excerpts, Article 3 states that everyone has the right to **life**, **liberty**, and **the security of person**.\n\n[source:1]", "failures": []}
+{"control": "eng-4", "answer": "Based on the provided excerpts, Article 4 prohibits slavery and the slave trade in all their forms.\n\n**Supported Claim:**\nArticle 4 states that \"No one shall be held in slavery or servitude; slavery and the slave trade shall be prohibited in all their forms.\" [source:1]\n\n**Conclusion:**\nArticle 4 specifically prohibits slavery and the slave trade in all their forms.", "failures": ["copied citation example"]}
+{"control": "eng-5", "answer": "Based on the provided excerpts, Article 5 forbids **torture** and **cruel, inhuman or degrading treatment or punishment**.\n\n**Supported Claim:**\nArticle 5 explicitly states that \"No one shall be subjected to torture or to cruel, inhuman or degrading treatment or punishment.\" [source:1]\n\n**Conclusion:**\nThe specific treatment forbidden by Article 5 is torture and cruel, inhuman, or degrading treatment or punishment.", "failures": ["copied citation example"]}
+{"control": "eng-9", "answer": "Based on the provided excerpts, Article 9 forbids arbitrary actions regarding a person's freedom of movement and residence. Specifically, it prohibits:\n\n*   **Arbitrary arrest**\n*   **Arbitrary detention**\n*   **Arbitrary exile**\n\nThese actions are defined as \"arbitrary\" in the context of the United Nations Charter, meaning they are not based on objective criteria or legal procedures but are instead applied without justification or due process.\n\n**Conclusion:**\nArticle 9 forbids arbitrary arrest, detention, or exile.\n\n**Citation:**\n[source:1]", "failures": []}
+{"control": "eng-14", "answer": "According to Article 14 of the excerpt provided, a persecuted person may seek and enjoy asylum in other countries. Specifically, the text states: \"Everyone has the right to seek and to enjoy in other countries asylum from persecution.\"\n\n[source:1]", "failures": []}
+{"control": "eng-15", "answer": "Based on the provided excerpts, Article 15 grants everyone the right to a nationality. It further specifies that no one shall be arbitrarily deprived of this nationality nor denied the right to change it.\n\n**Supported Claim:**\nArticle 15 grants everyone the right to a nationality. No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality. [source:1]", "failures": ["copied citation example"]}
+{"control": "eng-24", "answer": "Based on the provided excerpts, Article 24 states that everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay.\n\n[source:1]", "failures": []}
+{"control": "rus-1", "answer": "Согласно статье 1, все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства.\n\n[source:1]", "failures": []}
+{"control": "rus-3", "answer": "В статье 3, согласно предоставленным источникам, названы три права человека:\n\n1.  Право на жизнь.\n2.  Право на свободу.\n3.  Право на личную неприкосновенность.\n\nЭто подтверждается следующим текстом из источника: «Статья 3 Каждый человек имеет право на жизнь, на свободу и на личную неприкосновенность.» [source:1]", "failures": []}
+{"control": "rus-4", "answer": "Согласно статье 4, запрещается содержание в рабстве или в подневольном состоянии, а также работорговля во всех их видах.\n\n[source:1]", "failures": []}
+{"control": "rus-5", "answer": "Согласно статье 5, запрещается подвергать человека пыткам или жестоким, бесчеловечным или унижающим его достоинство обращениям и наказанию.\n\n[source:1]", "failures": []}
+{"control": "rus-9", "answer": "Согласно предоставленным источникам, статья 9 запрещает следующие произвольные действия:\n\n*   Произвольный арест\n*   Задержания\n*   Изгнание\n\nЭти действия запрещены, так как они не могут быть произвольными, что подразумевает отсутствие законных оснований и соблюдения процедуры.\n\n**[source:1]**", "failures": []}
+{"control": "rus-14", "answer": "Согласно статье 14 источника, каждый человек имеет право искать убежища от преследования в других странах и пользоваться этим убежищем.\n\n[source:1]", "failures": []}
+{"control": "rus-15", "answer": "Согласно статье 15 источника, каждому человеку есть право на гражданство.\n\n[source:2]", "failures": []}
+{"control": "rus-24", "answer": "Согласно предоставленным источникам, статья 24 предусматривает право каждого человека на отдых и досуг. В частности, она гарантирует право на разумное ограничение рабочего дня и на оплачиваемый периодический отпуск.\n\n[source:1]", "failures": []}
+{"control": "bel-1", "answer": "Паводле артыкула 1, усе людзі нараджаюцца свабоднымі і роўнымі ў сваёй годнасці і правах. Яны надзелены розумам і сумленнем і павінны ставіцца адзін да аднаго ў духу брацтва.\n\n[source:1]", "failures": []}
+{"control": "bel-3", "answer": "Паводле артыкула 3, кожны чалавек мае права на:\n1. Жыццё.\n2. Свободу.\n3. Асабістую недатыкальнасць.\n\n[source:1]", "failures": [{"missing_concepts": ["свабод"]}]}
+{"control": "bel-4", "answer": "Паводле артыкула 4, які змяшчаецца ў выданні, забараняецца ўтрымлівацца ў рабстве або ў паднявольным стане. Таксама забараняюцца ўсе выгляды рабства і гандлю рабамі.\n\n[source:1]", "failures": [{"missing_concepts": ["гандаль раб"]}]}
+{"control": "bel-5", "answer": "На аснове выдзельных звестак з выкарыстаных крыніц, артыкул 5 забараняе ўчыненне такіх дзеянняў: катаванні, жорсткія, бесчалавечныя або ўніжаючыя годнасць чалавека абыходжанне і пакаранне.\n\n[source:1]", "failures": []}
+{"control": "bel-9", "answer": "На аснове выдзельных звестак з выкарыстаных крыніц, артыкул 9 забараняе ўчыненне наступных самавольных дзеянняў:\n\n*   Самавольны арышт [source:1]\n*   Затрыманне [source:1]\n*   Выгнанне [source:1]\n\nТаксама ў выдзельных звестках адзначана, што ніхто не павінен утрымлівацца ў рабстве або ў паднявольным стане [source:1], што азначае, што рабства і гандаль рабамі таксама забараняюцца [source:1]. Аднак у канкрэтным абазначэнні артыкула 9 згадваецца толькі арышт, затрыманне і выгнанне.\n\n**Адказ:** Самавольны арышт, затрыманне і выгнанне.", "failures": []}
+{"control": "bel-14", "answer": "Чалавек мае права шукаць прыстанішча ад праследавання ў іншых краінах і карыстацца гэтым прыстанішчам [source:1]. Гэта права не можа быць выкарыстана ў выпадку праследавання, сапраўдныя дзеянні якога не з'яўляюцца згоднымі з Арганізацыяй Аб'яднаных Нацый [source:2].", "failures": []}
+{"control": "bel-15", "answer": "Паводле артыкула 15, кожны чалавек мае права на грамадзянства. Ніхто не можа быць самавольна пазбаўлены свайго грамадзянства або права змяніць сваё грамадзянства.\n\n[excerpt number=\"1\"]", "failures": ["no source citation"]}
+{"control": "deu_1996-1", "answer": "Alle Menschen werden nach Artikel 1 geboren frei und gleich an Würde und Rechten. Sie sind mit Vernunft und Gewissen begabt und sollen einander im Geist der Brüderlichkeit begegnen.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-3", "answer": "Basierend auf den bereitgestellten Quellen sind die drei Rechte, die in Artikel 3 genannt werden, wie folgt:\n\n1.  **Das Recht auf Leben**\n2.  **Die Freiheit**\n3.  **Die Sicherheit der Person**\n\nDies wird in der Quelle [source:1] explizit vermerkt: \"Artikel 3 Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person.\"", "failures": []}
+{"control": "deu_1996-4", "answer": "Artikel 4 verbietet Sklaverei und Sklavenhandel in allen ihren Formen.\n\n[excerpt 1] Artikel 4 Niemand darf in Sklaverei oder Leibeigenschaft gehalten werden; Sklaverei und Sklavenhandel sind in allen ihren Formen verboten.", "failures": ["no source citation"]}
+{"control": "deu_1996-5", "answer": "Artikel 5 verbietet Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe.\n\n[source:1]", "failures": []}
+{"control": "deu_1996-9", "answer": "Artikel 9 verbietet willkürliche Maßnahmen, die folgende Personen betreffen:\n\n- **Jemandem die Freiheit zu entziehen** (durch Festnehmen).\n- **Jemandem in Haft zu halten**.\n- **Jemandem das Land zu verweisen** (insbesondere im Kontext von Asyl oder Verfolgung).\n\nDiese Maßnahmen sind als willkürlich definiert, da sie ohne rechtlichen Grund oder auf Basis von Verbrechen nichtpolitischer Art erfolgen dürfen.\n\n**Zitierte Fakten aus den Quellen:**\n- [source:2] \"Artikel 9 Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden.\"", "failures": []}
+{"control": "deu_1996-14", "answer": "Basierend auf den bereitgestellten Quellen können Verfolgte nach Artikel 14 das Recht haben, in anderen Ländern vor Verfolgung **Asyl zu suchen und zu genießen**.\n\nDies wird in der folgenden Abschrift bestätigt:\n> \"Artikel 14 Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen.\"\n\nEs wird jedoch in der Abschrift nicht spezifiziert, welche Art von Asyl oder welche spezifischen Verfolgungsgründe (wie Religion, Nationalität, politischer Standpunkt, etc.) dieses Recht umfassen. Die Quellen beschränken sich auf die allgemeine Formulierung des Rechts auf Asyl.\n\n**Zusammenfassung der Fakten aus den Quellen:**\n*   **Recht:** Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen.\n*   **Beschränkung:** Dieses Recht kann nicht in Anspruch genommen werden im Falle einer Strafverfolgung (laut Abschrift).\n*   **Unbekanntes:** Die spezifischen Kategorien von Verfolgung, die dieses Recht ausschließen, sind in den vorliegenden Exzerten nicht detailliert aufgeführt.\n\n**Fazit:**\nNach Artikel 14 dürfen Verfolgte in anderen Ländern Asyl suchen, wobei das Recht nicht in Anspruch genommen werden kann, wenn es sich um eine Strafverfolgung handelt. Die genauen Ausnahmen oder die Definition des Schutzbedarfs sind in den vorliegenden Texten nicht explizit genannt.", "failures": ["no source citation"]}
+{"control": "deu_1996-15", "answer": "Nach Artikel 15 jeder hat das Recht auf eine **Staatsangehörigkeit**.\n\n[excerpt:28458f48-a958-4466-b4a6-a6208ef03c4d]", "failures": ["no source citation"]}
+{"proof": "predeclared_thirty_real_document_questions", "results": "/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/control-results.json", "errors": [{"id": "eng-1", "failures": ["copied citation example"]}, {"id": "eng-4", "failures": ["copied citation example"]}, {"id": "eng-5", "failures": ["copied citation example"]}, {"id": "eng-15", "failures": ["copied citation example"]}, {"id": "bel-3", "failures": [{"missing_concepts": ["\u0441\u0432\u0430\u0431\u043e\u0434"]}]}, {"id": "bel-4", "failures": [{"missing_concepts": ["\u0433\u0430\u043d\u0434\u0430\u043b\u044c \u0440\u0430\u0431"]}]}, {"id": "bel-15", "failures": ["no source citation"]}, {"id": "deu_1996-4", "failures": ["no source citation"]}, {"id": "deu_1996-14", "failures": ["no source citation"]}, {"id": "deu_1996-15", "failures": ["no source citation"]}]}
+F
+
+=================================== FAILURES ===================================
+_ test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits __
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...2.log'), 'generation': PosixPath('/tmp/rag-u8-worker-joint-quality-3/test_thirty_real_accounts_ten_0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_c9023c89d9ff45d3b16043bf904afed0 host=/tmp/rag-u8-worker-joint-quality-3/postgres0'}
+
+    def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(integrated_browser, environment):
+        ((browser, mailbox, frontend, first), publisher, publisher_log), second, logs = integrated_browser
+        contexts=[]; pages=[]; credentials=[]; operations=[]
+        try:
+            admin_context=browser.new_context();contexts.append(admin_context)
+            admin=admin_context.new_page();operator(admin,mailbox,frontend)
+            for index in range(29):
+                context=browser.new_context();contexts.append(context)
+                page=context.new_page();email=f'u8-load-{index}@owned.test'
+                register(page,mailbox,frontend,email);login(page,email)
+                if index>=10:
+                    context.close();continue
+                # Every ready document comes through the UI and the actual E5 worker.
+                name=f'private-budget-{index}.txt'
+                content=(f'The annual budget for library {index} is {100+index} euros. '
+                         'The budget pays for maintenance of the library and its reading rooms. ')*45
+                page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':content.encode()})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,name,timeout=45)
+                page.get_by_role('checkbox',name=name,exact=True).check()
+                pages.append(page)
+                credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
+                    tab:JSON.parse(sessionStorage.getItem('rag:tab')),
+                    conversation:sessionStorage.getItem('rag:conversation'),
+                    document:document.querySelector('#question-sources input:checked').value})'''))
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                assert connection.execute('SELECT count(*) AS n FROM accounts').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM accounts WHERE verified AND NOT paid').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM documents WHERE ready').fetchone()['n']==10
+            # Three owners have a second genuine conversation; all admissions then
+            # run simultaneously through the two real APIs with issued credentials.
+            for index in range(13):
+                actor=credentials[index%10]
+                if index>=10:
+                    conversation=pages[index%10].evaluate('''async ({url,token}) => (await (await fetch(url+'/api/conversations',
+                        {method:'POST',headers:{Authorization:'Bearer '+token}})).json()).id''',{'url':second,'token':actor['token']})
+                else:conversation=actor['conversation']
+                operations.append({'base':first if index%2 else second,'token':actor['token'],'proof':actor['tab']['proof'],
+                    'conversation':conversation,'body':{'operation_key':str(uuid4()),'question':f'What is the annual budget for library {index%10} and its reading rooms? Quote every supplied excerpt in full with citations.',
+                        'document_ids':[actor['document']],'tab_id':actor['tab']['id']}})
+            responses=admin.evaluate('''async operations => await Promise.all(operations.map(async operation => {
+                const response=await fetch(operation.base+'/api/conversations/'+operation.conversation+'/answers',{
+                    method:'POST',headers:{Authorization:'Bearer '+operation.token,'X-Tab-Proof':operation.proof,'Content-Type':'application/json'},body:JSON.stringify(operation.body)});
+                return {status:response.status,body:await response.json()};
+            }))''',operations)
+            assert all(row['status']==200 for row in responses),responses
+            identifiers={row['body']['id'] for row in responses}
+            deadline=time.monotonic()+90
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                allocations=[row for row in trace if row['event']=='native_allocate']
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    states=connection.execute('SELECT state FROM requests').fetchall()
+                if len(allocations)>=12 and sum(row['state']=='queued' for row in states)==1:break
+                assert time.monotonic()<deadline,{name:path.read_text()[-3000:] for name,path in logs.items()}
+                admin.wait_for_timeout(50)
+            assert len(allocations)==12 and len({row['context'] for row in allocations})==12,allocations
+            assert all(row['max_active']==12 for row in allocations)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                requests=connection.execute('SELECT r.*,a.email FROM requests r JOIN accounts a ON a.id=r.owner_id').fetchall()
+                print(json.dumps({'load_states':{str(row['id']):row['state'] for row in requests}}),flush=True)
+                assert len(requests)==13,requests
+                assert sum(row['state']=='queued' for row in requests)==1,[(str(row['id']),row['state']) for row in requests]
+                for row in requests:
+                    expected=int(row['email'].split('@')[0].rsplit('-',1)[1])
+                    assert row['passport']['passed'] and row['passport']['found'],row['passport']
+                    assert all(f'library {expected} ' in item['text'] for item in row['passport']['passed']),row['passport']
+                    assert {item['document_id'] for item in row['passport']['passed']}==set(map(str,row['scope']))
+            steps=[row for row in trace if row['event']=='native_step']
+            assert steps and all(row['step_width']==3 and len(row['promoted'])<=3 for row in steps)
+            expected={row['request'] for row in allocations}
+            deadline=time.monotonic()+30
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                steps=[row for row in trace if row['event']=='native_step']
+                fair=any(len(promoted:= [item['request'] for row in steps[start:start+4] for item in row['promoted']])==12
+                    and set(promoted)==expected for start in range(len(steps)))
+                if fair:break
+                assert time.monotonic()<deadline,'No fair round across the twelve genuine admitted contexts'
+                admin.wait_for_timeout(50)
+            form=admin.locator('#global-settings')
+            form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
+            form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
+            form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
+            expect(admin.locator('#status')).to_contain_text('Ревизия 1 сохранена')
+            deadline=time.monotonic()+30
+            while True:
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    applied=connection.execute('SELECT applied_revision FROM settings').fetchone()[0]==1
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                if applied and any(row['event']=='native_step' and row['revision']==1 for row in trace):break
+                assert time.monotonic()<deadline
+                admin.wait_for_timeout(50)
+            form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
+            expect(form.locator('.settings-revision')).to_contain_text('Применена: 1')
+            trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+            new_steps=[row for row in trace if row['event']=='native_step' and row['revision']==1]
+            assert new_steps and all(row['step_width']==2 and len(row['promoted'])<=2 for row in new_steps)
+            active=set();preserved_excess=False
+            for row in trace:
+                if row['event']=='native_allocate': active.add(row['request'])
+                elif row['event']=='native_release': active.remove(row['request'])
+                elif row['event']=='native_step' and row['revision']==1 and len(active)>6: preserved_excess=True
+            assert preserved_excess, 'Shrink must preserve excess active contexts'
+            # Exercise actual OCR publication while the generation/API/DB workload
+            # is running. This scan is printed calibration, never handwriting proof.
+            from browser.test_invalidation import scanned_budget
+            pages[0].locator('#document-upload input').set_input_files({'name':'joint-scanned-budget.pdf',
+                'mimeType':'application/pdf','buffer':scanned_budget()})
+            pages[0].get_by_role('button',name='Загрузить документы',exact=True).click()
+            deadline=time.monotonic()+45
+            overlap_step=None
+            while True:
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    job=connection.execute("SELECT f.state FROM document_files f WHERE f.name='joint-scanned-budget.pdf'").fetchone()
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                latest=next((row for row in reversed(trace) if row['event']=='native_step' and row['promoted']),None)
+                if job and job['state']=='processing' and latest:
+                    overlap_step=latest['step'];break
+                assert time.monotonic()<deadline,'No real OCR/generation workload overlap'
+                admin.wait_for_timeout(50)
+            ready(pages[0],'joint-scanned-budget.pdf',timeout=120)
+            trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+>           assert any(row['event']=='native_step' and row['step']>overlap_step and
+                any(item['phase']=='token' for item in row['promoted']) for row in trace),'No actual generated tokens during OCR job interval'
+E               AssertionError: No actual generated tokens during OCR job interval
+
+backend/tests/integration/test_answer_lifecycle.py:273: AssertionError
+_________ test_frozen_thirty_questions_use_real_multilingual_documents _________
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...2.log'), 'generation': PosixPath('/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_2e700acea79143a2a27d9846caf3e3a3 host=/tmp/rag-u8-worker-joint-quality-3/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-joint-quality-3/test_frozen_thirty_questions_u0')
+
+    def test_frozen_thirty_questions_use_real_multilingual_documents(integrated_browser, environment, tmp_path):
+        ((browser,mailbox,frontend,first),_,_),second,logs=integrated_browser
+        fixtures=BACKEND/'tests/fixtures/answer_lifecycle'
+        controls_path=fixtures/'control-questions-v1.json'
+        controls=json.loads(controls_path.read_text())
+        matchers=json.loads((fixtures/'control-matchers-v2.json').read_text())
+        assert hashlib.sha256(controls_path.read_bytes()).hexdigest()==matchers['controls_sha256']
+        for name,digest in controls['corpus_hashes'].items():
+            assert hashlib.sha256((fixtures/name).read_bytes()).hexdigest()==digest
+        assert len(controls['questions'])==30
+        context=browser.new_context();results=[];errors=[]
+        try:
+            page=context.new_page();register(page,mailbox,frontend,'u8-quality@owned.test');login(page,'u8-quality@owned.test')
+            files=sorted({item['document'] for item in controls['questions']})
+            page.locator('#document-upload input').set_input_files([str(fixtures/name) for name in files])
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            for name in files:ready(page,name,timeout=45)
+            for index,item in enumerate(controls['questions']):
+                if index:page.get_by_role('button',name='Новая беседа',exact=True).click()
+                for checkbox in page.locator('#question-sources input').all():checkbox.uncheck()
+                page.get_by_role('checkbox',name=item['document'],exact=True).check()
+                page.locator('#question').fill(item['question'])
+                page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+                expect(page.locator('#history article')).to_have_count(1)
+                expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    row=connection.execute('SELECT * FROM requests ORDER BY created_at DESC LIMIT 1').fetchone()
+                    binding=connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s',(row['id'],)).fetchone()
+                async def saved_prompt():
+                    from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+                    async with await psycopg.AsyncConnection.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                        value=await AsyncPostgresSaver(connection).aget_tuple({'configurable':{'thread_id':binding['thread_id']}})
+                        return value.checkpoint['channel_values']['prompt']
+                with ThreadPoolExecutor(max_workers=1) as executor:prompt=executor.submit(asyncio.run,saved_prompt()).result(15)
+                answer=row['answer_text'];passed=row['passport']['passed']
+                concepts=matchers['replacements'].get(item['id'],item['required_concepts'])
+                missing=[concept for concept in concepts if concept.casefold() not in answer.casefold()]
+                snapshot=page.evaluate('''async ({url,conversation}) => (await (await fetch(url+'/api/conversations/'+conversation,
+                    {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json())''',
+                    {'url':second,'conversation':str(row['conversation_id'])})
+                citations=next(value['citations'] for value in snapshot['requests'] if value['id']==str(row['id']))
+                failures=[]
+                if missing:failures.append({'missing_concepts':missing})
+                if not passed:failures.append('no retrieved/passed evidence')
+                if not citations:failures.append('no source citation')
+                if any(citation['document_id'] not in set(map(str,row['scope'])) for citation in citations):failures.append('citation outside selected scope')
+                if 'supported claim' in answer.casefold():failures.append('copied citation example')
+                if failures:errors.append({'id':item['id'],'failures':failures})
+                result={'id':item['id'],'question':item['question'],'expected':item['expected_source_answer'],
+                        'answer':answer,'passport':row['passport'],'citations':citations,'prompt':prompt,'failures':failures,
+                        'request_id':str(row['id']),'state':row['state'],'semantic_audit':'pending caller review'}
+                results.append(result)
+                print(json.dumps({'control':item['id'],'answer':answer,'failures':failures},ensure_ascii=False),flush=True)
+            output=tmp_path/'control-results.json'
+            output.write_text(json.dumps({'controls_sha256':matchers['controls_sha256'],'results':results,
+                'total':30,'mechanical_correct':30-len(errors),'errors':errors,'semantic_audit':'pending caller review'},ensure_ascii=False,indent=2)+'\n')
+            print(json.dumps({'proof':'predeclared_thirty_real_document_questions','results':str(output),'errors':errors}),flush=True)
+>           assert not errors, errors
+                   ^^^^^^^^^^
+E           AssertionError: [{'id': 'eng-1', 'failures': ['copied citation example']}, {'id': 'eng-4', 'failures': ['copied citation example']}, {'id': 'eng-5', 'failures': ['copied citation example']}, {'id': 'eng-15', 'failures': ['copied citation example']}, {'id': 'bel-3', 'failures': [{'missing_concepts': ['свабод']}]}, {'id': 'bel-4', 'failures': [{'missing_concepts': ['гандаль раб']}]}, {'id': 'bel-15', 'failures': ['no source citation']}, {'id': 'deu_1996-4', 'failures': ['no source citation']}, {'id': 'deu_1996-14', 'failures': ['no source citation']}, {'id': 'deu_1996-15', 'failures': ['no source citation']}]
+
+backend/tests/integration/test_answer_lifecycle.py:355: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_frozen_thirty_questions_use_real_multilingual_documents
+======================== 2 failed in 595.65s (0:09:55) =========================

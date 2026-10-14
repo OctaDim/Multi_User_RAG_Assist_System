@@ -1,0 +1,1 @@
+{"command": ["uv", "run", "--project", "backend", "--frozen", "--cache-dir", "/tmp/rag-answer-lifecycle-uv-cache", "pytest", "-c", "pytest.ini", "--basetemp", "/tmp/rag-u8-all-harness-v2", "-q"], "exit_code": 0, "seconds": 25.06, "unfiltered": true}

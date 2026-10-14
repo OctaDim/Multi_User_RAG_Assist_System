@@ -1,0 +1,19 @@
+{
+  "status": "NOT ACCEPTED; superseded user model-role contract",
+  "exit": 1,
+  "passed": 11,
+  "failed": 2,
+  "seconds": 489.7,
+  "raw": "2026-10-14-fixed-qwen-ocr-green-v19.log",
+  "raw_sha256": "1589b2aa1156b28f7f049cdc7a05235828f8faf1f91e434955f02842ef619196",
+  "freeze_unchanged": true,
+  "stopped_by_signal": false,
+  "all_native_and_owned_processes_reaped": true,
+  "two_failures": "UI intentionally offers only ready sources, test incorrectly tried to check nonexistent failed-file checkbox; actual15nativepages and page16wholefailure/report already established percase",
+  "quality_limitations": [
+    "ENnoise crop hallucinates date",
+    "RUnoise crop hallucinatesВЫБЕРИТЕ",
+    "BEhanderrors permitted but backgroundnoise is not printedOCR quality proof"
+  ],
+  "next_contract": "printedPaddleOCRVL1.5/handwrittenQwen3.5-2BQ4_K_MF16; user correction fromparent message"
+}

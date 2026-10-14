@@ -1,0 +1,54 @@
+[
+  {
+    "language": "en",
+    "expected_legible_source": [
+      "dreams",
+      "hughes"
+    ],
+    "recognized": "Dreams\n—Langston Hughes\n",
+    "missing": [],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "0c03da8131476d02f42892ae28438677653cbb9dd648aee92fdf1f15a7f13372"
+  },
+  {
+    "language": "ru",
+    "expected_legible_source": [
+      "август"
+    ],
+    "recognized": "",
+    "missing": [
+      "август"
+    ],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "704256faeac9f606c64cf7d797a8909e4c3b68d93cd266ba0cbba530b11be065"
+  },
+  {
+    "language": "de",
+    "expected_legible_source": [
+      "die seerose blüht auf dem teich"
+    ],
+    "recognized": "Die Seerose blüht auf dem Teich.\n",
+    "missing": [],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "891e2a80d9f83f3d4fe47410f396707d59cc31772a7d4742d78eaa69c5611566"
+  },
+  {
+    "language": "be",
+    "expected_legible_source": [
+      "беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "recognized": "А. Хто там ідзе, а хто там іде\nУ агрономіста такій громаді? -\nбеларусы.\nА что яны ищущь на жудых плечах,\nНа руках у краві, на ногах у ланцях?\nСвоей крышей\nА каму-це можучы гэта крыіду\nбо\nцель\nА куда-де имеется на показ?\nНа сём час ие.\nА маю-це, паго захацелаць ім\nПалардужным век, ім глухім, слотый\nсходзьмі звацца!\n",
+    "missing": [
+      "крыўду",
+      "людзьмі"
+    ],
+    "accuracy_errors_permitted": true,
+    "contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md",
+    "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "changes": "numeric source number and complete relevant clauses; diagnostics only for two unresolved runtime cases",
+  "source_sha256": {
+    "backend/app/rag.py": "a055eedbb81d7029c0ba279eb037344a76b4493225618d31e8638d4beeba79c2",
+    "backend/tests/test_rag_context.py": "badb1d1a02dee1ed09ce3039d1bc8c4a33c752a56c7eb1f2d51ea4a5f28bbb72",
+    "backend/tests/browser/test_accounts.py": "a4557c475ade077f6f18f4e482b00ffbbb66ec031151b55ae9494cacc45f477e",
+    "backend/tests/integration/test_answer_lifecycle.py": "1ece09b7220691789154e139e582c4b898976fb03b6308ac6169427a732ef2ca",
+    "backend/tests/integration/test_actual_page_failure.py": "96527f06370e16bec691ce8654babe0881e761bd5b8b0e8e1f6638868b58c420"
+  },
+  "red_log": "2026-10-14-parent-citation-identity-red-v1.log",
+  "green_log": "2026-10-14-parent-citation-identity-green-v3.log",
+  "green_exit": 0,
+  "green_tests": 2,
+  "green_seconds": 2.78,
+  "old_test_preservation": "2026-10-14-parent-diagnostic-old-test-preservation-v1.json",
+  "native_session": 67903,
+  "native_job_finished": false,
+  "ALL_final_pass": false
+}

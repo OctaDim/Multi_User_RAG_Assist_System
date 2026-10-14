@@ -1,0 +1,149 @@
+[
+  {
+    "language": "en",
+    "expected_legible_source": [
+      "dreams",
+      "langston",
+      "hughes"
+    ],
+    "recognized": "Dreams\n—Langston Hughes\n",
+    "missing": [],
+    "actual_words": [
+      "dreams",
+      "langston",
+      "hughes"
+    ],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "91aa732e14b034ed497fb152892e11479ea995643f0ac22273514946fdd13eea"
+  },
+  {
+    "language": "ru",
+    "expected_legible_source": [
+      "август"
+    ],
+    "recognized": "август\n",
+    "missing": [],
+    "actual_words": [
+      "август"
+    ],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "65ff6d62dd4237fbe8ede5cac746ea91b0bd683689e6b438bd1c59a174a7a3ab"
+  },
+  {
+    "language": "de",
+    "expected_legible_source": [
+      "die",
+      "seerose",
+      "blüht",
+      "auf",
+      "dem",
+      "teich"
+    ],
+    "recognized": "Die Seerose blüht auf dem Teich.\n",
+    "missing": [],
+    "actual_words": [
+      "die",
+      "seerose",
+      "blüht",
+      "auf",
+      "dem",
+      "teich"
+    ],
+    "accuracy_errors_permitted": false,
+    "contract": null,
+    "original_sha256": "c35429dc027e937fd7e517053e99d9367c86dcedbedbfe200b41e7e66316cb44"
+  },
+  {
+    "language": "be",
+    "expected_legible_source": [
+      "беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "recognized": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь.\nБеларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!\nФаксіміле верша, які знаходзіцца\nу музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.\n",
+    "missing": [
+      "беларусы",
+      "людзьмі"
+    ],
+    "actual_words": [
+      "а",
+      "кіто",
+      "там",
+      "ідзе",
+      "а",
+      "хто",
+      "там",
+      "ідзе",
+      "у",
+      "аграрніста",
+      "такій",
+      "грамадзе",
+      "беларусь",
+      "беларусь",
+      "а",
+      "што",
+      "яны",
+      "імяць",
+      "на",
+      "хурых",
+      "плагах",
+      "на",
+      "руках",
+      "у",
+      "крыві",
+      "на",
+      "магах",
+      "у",
+      "папках",
+      "свога",
+      "крыўду",
+      "а",
+      "каму",
+      "це",
+      "няжучы",
+      "гэта",
+      "крыўду",
+      "куды",
+      "це",
+      "імяць",
+      "на",
+      "паказ",
+      "сваё",
+      "на",
+      "сём",
+      "чалі",
+      "а",
+      "чаю",
+      "це",
+      "гаго",
+      "захачелась",
+      "ім",
+      "палардзаным",
+      "век",
+      "ім",
+      "глухім",
+      "слоткім",
+      "слоўным",
+      "звацца",
+      "факсіміле",
+      "верша",
+      "які",
+      "знаходзіцца",
+      "у",
+      "музеї",
+      "я",
+      "купалы",
+      "верш",
+      "напісаны",
+      "ў",
+      "1905",
+      "1907",
+      "гг"
+    ],
+    "accuracy_errors_permitted": true,
+    "contract": "harness/project/decisions/2026-10-14-printed-and-handwritten-ocr-models-contract.md",
+    "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"
+  }
+]

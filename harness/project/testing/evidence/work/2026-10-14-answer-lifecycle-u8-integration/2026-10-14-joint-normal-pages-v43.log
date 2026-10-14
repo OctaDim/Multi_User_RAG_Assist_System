@@ -1,0 +1,166 @@
+.{"language": "en", "expected_legible_source": ["dreams", "langston", "hughes"], "recognized": "Dreams\n—Langston Hughes\n", "missing": [], "actual_words": ["dreams", "langston", "hughes"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "5f71f05d46e2a231c4f63ee0df7dfb0b12e66dca4ceca5a31da2d3073249e844"}
+{"language": "ru", "expected_legible_source": ["август"], "recognized": "август\n", "missing": [], "actual_words": ["август"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "a1acc9281aeb7972d37e3aa0fd9fd9849773eaaaf27cb9f539642cecb8c7509a"}
+{"language": "de", "expected_legible_source": ["die", "seerose", "blüht", "auf", "dem", "teich"], "recognized": "Die Seerose blüht auf dem Teich.\n", "missing": [], "actual_words": ["die", "seerose", "blüht", "auf", "dem", "teich"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "5db6d7602ddc02e0b58e5950c4422388e4c9a8364908e264eddaf023bd520335"}
+{"language": "be", "expected_legible_source": ["беларусы", "крыўду", "людзьмі"], "recognized": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь.\nБеларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!\nФаксіміле верша, які знаходзіцца\nу музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.\n", "missing": ["беларусы", "людзьмі"], "actual_words": ["а", "кіто", "там", "ідзе", "а", "хто", "там", "ідзе", "у", "аграрніста", "такій", "грамадзе", "беларусь", "беларусь", "а", "што", "яны", "імяць", "на", "хурых", "плагах", "на", "руках", "у", "крыві", "на", "магах", "у", "папках", "свога", "крыўду", "а", "каму", "це", "няжучы", "гэта", "крыўду", "куды", "це", "імяць", "на", "паказ", "сваё", "на", "сём", "чалі", "а", "чаю", "це", "гаго", "захачелась", "ім", "палардзаным", "век", "ім", "глухім", "слоткім", "слоўным", "звацца", "факсіміле", "верша", "які", "знаходзіцца", "у", "музеї", "я", "купалы", "верш", "напісаны", "ў", "1905", "1907", "гг"], "source_kind": "handwritten", "acceptance": "pending_actual_identity_and_source_kind", "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"}
+{"proof": "actual_ui_issuer_four_language_handwriting_and_pre_recognition_masks", "results": "/tmp/rag-u8-joint-normal-pages-v43/test_genuine_four_language_han0/genuine-handwriting-results.json", "worker_log": "/tmp/rag-u8-joint-normal-pages-v43/test_genuine_four_language_han0/document-worker.log"}
+.{"load_states": {"f624469d-bc3b-4e5f-9e33-774d7ef99671": "generating", "568122c3-8e50-48d3-8c72-94e3e18ab665": "generating", "48cc1799-7dac-4bbb-a300-4a150195a327": "generating", "1e7cfd1f-aded-447b-b015-aac922fa7a6b": "generating", "7a91bb31-8587-4a13-afef-7689abb6cb6e": "generating", "d5c2c6fe-ce40-4860-b3bd-e78fc466eac3": "generating", "874d430a-92d7-43af-991f-96e82c5f3c77": "generating", "f0dc7571-d6be-4edc-b378-ccfffd1e5979": "generating", "379ebdd8-15ae-4bc2-a4f3-c2b4275c2ee6": "generating", "e30b8dc8-7602-4bf7-b311-a69098f35a5f": "generating", "95769df3-69e6-4153-a306-12407d28a737": "generating", "f1e08be3-ccb3-4b03-be91-210c4f85b657": "generating", "d036f37e-482b-448f-8627-807cedae7096": "queued"}}
+F{"proof": "actual_twenty_page_atomic_failure", "skip": false, "completed_actual_native_pages": 15, "failure_page": 16, "original_sha256": "bdef59ebfa0ada0b54dde4d8a9073c5daf331f5fd512e5e065704b2f8add5fd2", "request_id": "b2e2dbc1-52c8-419e-92ce-10d9bfbe9fb1", "passport": {"found": [{"id": "a585291d-0b46-4562-b7a3-cfb7c6457968", "kind": "printed", "mode": "complete", "name": "healthy-neighbor.txt", "page": 1, "text": "The current annual budget is 10 euros.", "span_end": 38, "similarity": 0.8238901495933533, "span_start": 0, "coordinates": {}, "document_id": "1da69318-5b78-454a-b9f5-3ba9983c15a3", "limitations": [], "revision_id": "1857e5f0-66b9-4b5e-ab22-2dd92edea857"}], "passed": [{"id": "a585291d-0b46-4562-b7a3-cfb7c6457968", "kind": "printed", "mode": "complete", "name": "healthy-neighbor.txt", "page": 1, "text": "The current annual budget is 10 euros.", "span_end": 38, "similarity": 0.8238901495933533, "span_start": 0, "coordinates": {}, "document_id": "1da69318-5b78-454a-b9f5-3ba9983c15a3", "limitations": [], "revision_id": "1857e5f0-66b9-4b5e-ab22-2dd92edea857"}], "excluded": [], "selected": ["1da69318-5b78-454a-b9f5-3ba9983c15a3"], "available": [{"mode": "complete", "name": "healthy-neighbor.txt", "document_id": "1da69318-5b78-454a-b9f5-3ba9983c15a3", "limitations": [], "revision_id": "1857e5f0-66b9-4b5e-ab22-2dd92edea857"}], "history_requests": [], "history_dependencies": [], "insufficient_evidence": false}}
+.
+=================================== FAILURES ===================================
+_ test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits __
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...2.log'), 'generation': PosixPath('/tmp/rag-u8-joint-normal-pages-v43/test_thirty_real_accounts_ten_0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_52b7eb62eb384b3e84fc8876b3bc1b65 host=/tmp/rag-u8-joint-normal-pages-v43/postgres0'}
+
+    def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(integrated_browser, environment):
+        ((browser, mailbox, frontend, first), publisher, publisher_log), second, logs = integrated_browser
+        contexts=[]; pages=[]; credentials=[]; operations=[]
+        try:
+            admin_context=browser.new_context();contexts.append(admin_context)
+            admin=admin_context.new_page();operator(admin,mailbox,frontend)
+            for index in range(29):
+                context=browser.new_context();contexts.append(context)
+                page=context.new_page();email=f'u8-load-{index}@owned.test'
+                register(page,mailbox,frontend,email);login(page,email)
+                if index>=10:
+                    context.close();continue
+                # Every ready document comes through the UI and the actual E5 worker.
+                name=f'private-budget-{index}.txt'
+                content=(f'The annual budget for library {index} is {100+index} euros. '
+                         'The budget pays for maintenance of the library and its reading rooms. ')*45
+                page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':content.encode()})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,name,timeout=45)
+                page.get_by_role('checkbox',name=name,exact=True).check()
+                pages.append(page)
+                credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
+                    tab:JSON.parse(sessionStorage.getItem('rag:tab')),
+                    conversation:sessionStorage.getItem('rag:conversation'),
+                    document:document.querySelector('#question-sources input:checked').value})'''))
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                assert connection.execute('SELECT count(*) AS n FROM accounts').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM accounts WHERE verified AND NOT paid').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM documents WHERE ready').fetchone()['n']==10
+            # Three owners have a second genuine conversation; all admissions then
+            # run simultaneously through the two real APIs with issued credentials.
+            for index in range(13):
+                actor=credentials[index%10]
+                if index>=10:
+                    conversation=pages[index%10].evaluate('''async ({url,token}) => (await (await fetch(url+'/api/conversations',
+                        {method:'POST',headers:{Authorization:'Bearer '+token}})).json()).id''',{'url':second,'token':actor['token']})
+                else:conversation=actor['conversation']
+                operations.append({'base':first if index%2 else second,'token':actor['token'],'proof':actor['tab']['proof'],
+                    'conversation':conversation,'body':{'operation_key':str(uuid4()),'question':f'What is the annual budget for library {index%10} and its reading rooms? Quote every supplied excerpt in full with citations.',
+                        'document_ids':[actor['document']],'tab_id':actor['tab']['id']}})
+            submit='''async operations => await Promise.all(operations.map(async operation => {
+                const response=await fetch(operation.base+'/api/conversations/'+operation.conversation+'/answers',{
+                    method:'POST',headers:{Authorization:'Bearer '+operation.token,'X-Tab-Proof':operation.proof,'Content-Type':'application/json'},body:JSON.stringify(operation.body)});
+                return {status:response.status,body:await response.json()};
+            }))'''
+            responses=admin.evaluate(submit,operations[:10])
+            deadline=time.monotonic()+90
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                if len([row for row in trace if row['event']=='native_allocate'])==10:break
+                assert time.monotonic()<deadline,'Ten genuine owners did not receive native contexts'
+                admin.wait_for_timeout(50)
+            responses.extend(admin.evaluate(submit,operations[10:]))
+            assert all(row['status']==200 for row in responses),responses
+            identifiers={row['body']['id'] for row in responses}
+            deadline=time.monotonic()+90
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                allocations=[row for row in trace if row['event']=='native_allocate']
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    states=connection.execute('SELECT state FROM requests').fetchall()
+                if len(allocations)>=12 and sum(row['state']=='queued' for row in states)==1:break
+                assert time.monotonic()<deadline,{name:path.read_text()[-3000:] for name,path in logs.items()}
+                admin.wait_for_timeout(50)
+            assert len(allocations)==12 and len({row['context'] for row in allocations})==12,allocations
+            assert all(row['max_active']==12 for row in allocations)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                requests=connection.execute('SELECT r.*,a.email FROM requests r JOIN accounts a ON a.id=r.owner_id').fetchall()
+                print(json.dumps({'load_states':{str(row['id']):row['state'] for row in requests}}),flush=True)
+                assert len(requests)==13,requests
+                assert sum(row['state']=='queued' for row in requests)==1,[(str(row['id']),row['state']) for row in requests]
+                for row in requests:
+                    expected=int(row['email'].split('@')[0].rsplit('-',1)[1])
+                    assert row['passport']['passed'] and row['passport']['found'],row['passport']
+                    assert all(f'library {expected} ' in item['text'] for item in row['passport']['passed']),row['passport']
+                    assert {item['document_id'] for item in row['passport']['passed']}==set(map(str,row['scope']))
+            steps=[row for row in trace if row['event']=='native_step']
+            assert steps and all(row['step_width']==3 and len(row['promoted'])<=3 for row in steps)
+            expected={row['request'] for row in allocations}
+            deadline=time.monotonic()+30
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                steps=[row for row in trace if row['event']=='native_step']
+                fair=any(len(promoted:= [item['request'] for row in steps[start:start+4] for item in row['promoted']])==12
+                    and set(promoted)==expected for start in range(len(steps)))
+                if fair:break
+                assert time.monotonic()<deadline,'No fair round across the twelve genuine admitted contexts'
+                admin.wait_for_timeout(50)
+            form=admin.locator('#global-settings')
+            form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
+            form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
+            form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
+            expect(admin.locator('#status')).to_contain_text('Ревизия 1 сохранена')
+            deadline=time.monotonic()+30
+            while True:
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    applied=connection.execute('SELECT applied_revision FROM settings').fetchone()[0]==1
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                if applied and any(row['event']=='native_step' and row['revision']==1 for row in trace):break
+                assert time.monotonic()<deadline
+                admin.wait_for_timeout(50)
+            form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
+            expect(form.locator('.settings-revision')).to_contain_text('Применена: 1')
+            trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+            new_steps=[row for row in trace if row['event']=='native_step' and row['revision']==1]
+            assert new_steps and all(row['step_width']==2 and len(row['promoted'])<=2 for row in new_steps)
+            active=set();preserved_excess=False
+            for row in trace:
+                if row['event']=='native_allocate': active.add(row['request'])
+                elif row['event']=='native_release': active.remove(row['request'])
+                elif row['event']=='native_step' and row['revision']==1 and len(active)>6: preserved_excess=True
+            assert preserved_excess, 'Shrink must preserve excess active contexts'
+            # Exercise actual OCR publication while the generation/API/DB workload
+            # is running. Unchanged source fixture combines four printed languages
+            # and real English handwriting, exercising both fixed OCR contexts.
+            pages[0].locator('#document-upload input').set_input_files({'name':'joint-scanned-budget.pdf',
+                'mimeType':'application/pdf','buffer':(BACKEND.parent/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf').read_bytes()})
+            pages[0].get_by_role('button',name='Загрузить документы',exact=True).click()
+            deadline=time.monotonic()+45
+            overlap_step=None;overlap_confirmed=False
+            while True:
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    job=connection.execute("SELECT f.state FROM document_files f WHERE f.name='joint-scanned-budget.pdf'").fetchone()
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                latest=next((row for row in reversed(trace) if row['event']=='native_step' and row['promoted']),None)
+                if job and job['state']=='processing' and latest:
+                    if overlap_step is None:overlap_step=latest['step']
+                    elif latest['step']>overlap_step:
+                        overlap_confirmed=True;break
+                assert time.monotonic()<deadline,'No real OCR/generation workload overlap'
+                admin.wait_for_timeout(50)
+>           ready(pages[0],'joint-scanned-budget.pdf',timeout=120)
+
+backend/tests/integration/test_answer_lifecycle.py:281: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://127.0.0.1:57662/'>, name = 'joint-scanned-budget.pdf'
+timeout = 120
+
+    def ready(page,name,timeout=20):
+        deadline=time.monotonic()+timeout
+        while time.monotonic()<deadline:
+            page.get_by_role('button',name='Обновить статусы документов').click()
+            item=page.locator('#documents li').filter(has=page.get_by_text(name,exact=True))
+            if item.count() and 'Готов' in item.inner_text():return item
+            page.wait_for_timeout(300)
+>       raise AssertionError('Owned UI document did not become ready: '+name)
+E       AssertionError: Owned UI document did not become ready: joint-scanned-budget.pdf
+
+backend/tests/browser/test_documents.py:36: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits
+1 failed, 3 passed in 1672.42s (0:27:52)

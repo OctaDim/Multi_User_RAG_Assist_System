@@ -1,0 +1,79 @@
+{
+  "local_reviewers": {
+    "correctness": {
+      "reason": "Always required; source geometry, prompt/source/history and lease logic",
+      "tier": "session",
+      "model_override": null,
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-correctness.md"
+    },
+    "project-standards": {
+      "reason": "Root AGENTS.md and CLAUDE.md instruction criteria apply; no CODING_STANDARDS found",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-project-standards.md"
+    },
+    "testing": {
+      "reason": "New real integration fixtures, native fault hooks, frozen30 and RAG67 source-word acceptance",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-testing.md"
+    },
+    "maintainability": {
+      "reason": "297 executable non-test changed lines and structural dual-recognizer OCR pipeline",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-maintainability.md"
+    },
+    "security": {
+      "reason": "User-supplied image handling, handwriting entitlement masks and private UI across logout/owner changes",
+      "tier": "session",
+      "model_override": null,
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-security.md"
+    },
+    "performance": {
+      "reason": "Full-image connected-component loops, mask copies, dual native model resources and publisher chunk transforms",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-performance.md"
+    },
+    "reliability": {
+      "reason": "Conservative ownership heartbeat deadlines, cancellation, physical close/reap and document failures",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-reliability.md"
+    },
+    "julik-frontend-races": {
+      "reason": "Async settings refresh/save, history fragment rendering, refusal drafts and report clearing",
+      "tier": "mid-tier",
+      "model_override": "gpt-6.1-sol",
+      "prompt": "/tmp/compound-engineering-1000/ce-code-review/20261014-180301-33f78c23/prompt-julik-frontend-races.md"
+    },
+    "adversarial-reviewer": {
+      "reason": "Required in-process fallback: shared jq absent, external recipient did not review",
+      "tier": "session",
+      "model_override": null
+    }
+  },
+  "peer": {
+    "job_id": "20261014T181108Z-e7fdde9d",
+    "target": "claude",
+    "route": "claude",
+    "host_harness": "codex",
+    "host_family": "codex",
+    "start_epoch": 1792001468,
+    "peer_deadline_secs": 1210,
+    "model_requested": "script editorial Claude Opus mapping; exact id pending receipt",
+    "effort_requested": "high",
+    "started": true,
+    "local_adversarial_removed": true,
+    "no_status_poll_until_local_returns_collected": true
+  },
+  "skipped": {
+    "api-contract": "No externally consumed route/schema/public signature change",
+    "data-migration": "No migration/schema/backfill change",
+    "agent-native": "Internal native RAG prompt and user UI changed; no agent/tool/automation surface change",
+    "learnings": "No relevant solutions corpus or declared packs",
+    "previous-comments": "No PR metadata/comments",
+    "swift-ios": "No iOS surface"
+  }
+}

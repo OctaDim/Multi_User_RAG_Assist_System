@@ -1,0 +1,8 @@
+{
+  "scope": "After manual teardown, immediately before final ALL application",
+  "source_files_unchanged": 134,
+  "model_assets_unchanged": 9,
+  "native_libraries_unchanged": 5,
+  "changes": [],
+  "manual_resource_release": "2026-10-14-parent-manual-resource-release-v1.json"
+}

@@ -127,7 +127,11 @@ class DocumentWorker:
         for region in spans:
             start = region['start']
             while start < region['end']:
-                part = text[start:min(start+800,region['end'])]
+                end = min(start+800,region['end'])
+                paragraph = text.find('\n\n',start+1,end)
+                if paragraph > start:
+                    end = paragraph+2
+                part = text[start:end]
                 encoded = self.embedder.tokenizer.encode('passage: '+part)
                 if encoded.overflowing:
                     part = part[:max(end for _,end in encoded.offsets)-len('passage: ')]

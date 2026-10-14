@@ -1,0 +1,39 @@
+{
+  "final_ALL": false,
+  "targeted_summary": "2passed1failed1806.41s",
+  "closed_session": 67903,
+  "control_completed_count": 19,
+  "semantic_failures": [
+    "bel-5 added unrelated prohibitions and premise"
+  ],
+  "mechanical_failures": [
+    {
+      "control": "rus-1",
+      "answer": "Согласно статье 1 источника [1], все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства.",
+      "failures": [
+        "no source citation"
+      ]
+    }
+  ],
+  "terminal_failure": "bel-9 answer failed to terminate within unchanged60second browser deadline; raw repetitive invented answer visible in traceback",
+  "copied_files": [
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_thirty_real_accounts_ten_0-generation.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_thirty_real_accounts_ten_0-api-first.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_thirty_real_accounts_ten_0-api-2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_thirty_real_accounts_ten_0-document-worker.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_thirty_real_accounts_ten_0-trace-generation.py",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-generation.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-api-first.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-api-2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-document-worker.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-actual-finished-pages.jsonl",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-actual-page-16-failure-report.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-whole-file-failed-report.png",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_actual_twenty_page_failur0-trace-generation.py",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_frozen_thirty_questions_u0-generation.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_frozen_thirty_questions_u0-api-first.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_frozen_thirty_questions_u0-api-2.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_frozen_thirty_questions_u0-document-worker.log",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-diagnostic-native-v1-test_frozen_thirty_questions_u0-trace-generation.py"
+  ]
+}

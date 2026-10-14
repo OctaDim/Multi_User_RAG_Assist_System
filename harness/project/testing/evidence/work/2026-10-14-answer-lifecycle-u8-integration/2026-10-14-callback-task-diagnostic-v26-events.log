@@ -1,0 +1,39 @@
+26911.736257159 asyncio thread enter <bound method wait of <threading.Event at 0x75cb5f49a660: unset>>
+26911.738947865 wait start 129516326907168 ()
+26911.739072002 set 129516326907168
+26911.739294216 wait end 129516326907168 True
+26911.739529099 wait start 129516337473120 (15,)
+26911.739617729 asyncio thread enter <bound method DocumentOCR.recognize of <app.ocr.DocumentOCR object at 0x75cb76df1010>>
+26911.73984325 wait start 129516315340352 ()
+26911.740031225 set 129516315340352
+26911.740451524 wait end 129516315340352 True
+26913.204865596 task <Task pending name='Task-1' coro=<main() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:34> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()]> cb=[_run_until_complete_cb() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181]> stack [('main', 34)]
+26913.229223571 task <Task pending name='Task-2' coro=<watchdog() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:31>> stack [('<module>', 35), ('run', 195), ('run', 118), ('run_until_complete', 678), ('run_forever', 645), ('_run_once', 1999), ('_run', 88), ('watchdog', 31)]
+26913.237393001 task <Task pending name='Task-3' coro=<to_thread() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:24> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()]>> stack [('to_thread', 24)]
+26914.278638061 task <Task pending name='Task-1' coro=<main() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:34> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()]> cb=[_run_until_complete_cb() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181]> stack [('main', 34)]
+26914.279505408 task <Task pending name='Task-2' coro=<watchdog() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:31>> stack [('<module>', 35), ('run', 195), ('run', 118), ('run_until_complete', 678), ('run_forever', 645), ('_run_once', 1999), ('_run', 88), ('watchdog', 31)]
+26914.280067727 task <Task pending name='Task-3' coro=<to_thread() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:24> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()]>> stack [('to_thread', 24)]
+26915.205051674 set 129516337473120
+26915.209368944 wait start 129516789511184 (20,)
+26915.20956009 wait end 129516337473120 True
+26915.286346236 asyncio thread leave <bound method wait of <threading.Event at 0x75cb5f49a660: set>>
+26915.288593997 task <Task pending name='Task-1' coro=<main() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:34> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[_run_until_complete_cb() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181]> stack [('main', 34)]
+26915.28862226 task <Task pending name='Task-4' coro=<to_thread() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:22>> stack [('to_thread', 22)]
+26915.288651284 task <Task pending name='Task-2' coro=<watchdog() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:31>> stack [('<module>', 35), ('run', 195), ('run', 118), ('run_until_complete', 678), ('run_forever', 645), ('_run_once', 1999), ('_run', 88), ('watchdog', 31)]
+26915.288675028 task <Task pending name='Task-3' coro=<to_thread() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:24> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/futures.py:389, Task.task_wakeup()]>> stack [('to_thread', 24)]
+26915.289116341 asyncio thread enter <bound method DocumentOCR.close of <app.ocr.DocumentOCR object at 0x75cb76df1010>>
+26915.389776999 set 129516728528112
+26915.390564237 set 129516789511184
+26915.401400922 wait end 129516789511184 True
+26915.419622245 set 129516337473120
+26915.419679111 wait start 129516789511184 (20,)
+26915.419706482 wait end 129516789511184 True
+26916.291961969 asyncio thread leave <bound method DocumentOCR.recognize of <app.ocr.DocumentOCR object at 0x75cb76df1010>>
+26916.294604275 asyncio thread leave <bound method DocumentOCR.close of <app.ocr.DocumentOCR object at 0x75cb76df1010>>
+26916.294758663 task <Task pending name='Task-1' coro=<main() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:34> wait_for=<Task finished name='Task-3' coro=<to_thread() done, defined at /tmp/rag-u8-callback-task-diagnostic-v26.py:22> exception=AccessError('document_processing_cancelled')> cb=[_run_until_complete_cb() at /home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py:181]> stack [('main', 34)]
+26916.294797235 task <Task pending name='Task-2' coro=<watchdog() running at /tmp/rag-u8-callback-task-diagnostic-v26.py:31>> stack [('<module>', 35), ('run', 195), ('run', 118), ('run_until_complete', 678), ('run_forever', 645), ('_run_once', 1999), ('_run', 88), ('watchdog', 31)]
+26916.297856078 set 129516728528112
+26916.29789993 set 129516789511184
+26916.311633696 wait start 129516733138080 ()
+26916.312192708 set 129516733138080
+26916.313377387 wait end 129516733138080 True

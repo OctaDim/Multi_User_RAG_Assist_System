@@ -1,0 +1,23 @@
+{
+  "handles": {
+    "7200": 1,
+    "15257": 1,
+    "11398": 1,
+    "50728": 1,
+    "45977": 1
+  },
+  "native_spawn_pids_checked": [
+    111739,
+    108420,
+    108168,
+    112763,
+    109225,
+    111490
+  ],
+  "native_pids_alive": [],
+  "owned_temp_process_args_found": [],
+  "source_frozen_unchanged": true,
+  "source_manifest": "2026-10-14-worker-source-freeze-for-continuation-v20.json",
+  "no_git_mutations": true,
+  "no_active_owned_jobs": true
+}

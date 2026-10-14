@@ -1,0 +1,28 @@
+{
+  "owned_pids": [
+    149278,
+    149290,
+    149291,
+    149292,
+    149322,
+    149368,
+    149379,
+    149386,
+    149387,
+    149419,
+    149444,
+    149482,
+    149821,
+    150595,
+    150596
+  ],
+  "remaining_pids": [],
+  "owned_service_exit_codes": [
+    -15,
+    -15,
+    0
+  ],
+  "pg_postmaster_pid_file_absent": true,
+  "manual_parent_python_remains_only_for_recording": "exits next",
+  "physical_resource_release_verified": true
+}

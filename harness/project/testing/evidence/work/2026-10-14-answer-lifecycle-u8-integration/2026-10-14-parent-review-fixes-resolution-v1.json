@@ -1,0 +1,93 @@
+{
+  "ce_review_result": "2026-10-14-parent-ce-review-v1-review.json",
+  "ce_completed_review_unchanged": true,
+  "source_fixes": {
+    "1": "singleton foreground preserves gray pixels; native gray DOCX publication exact",
+    "2": "strict case/punctuation tokens and independent EN/RU/DE source GT; per-word exact printed roles and only specific Paddle BE exception",
+    "3": "printed order retained; handwritten insertions reuse column geometry; pure handwriting geometry order retained",
+    "4": "settings GET generation fence; PATCH invalidates older reads and makes form inert until completion"
+  },
+  "other_ALL_v1_failures_fixed": [
+    "restored source id metadata for old prompt/passport contract",
+    "revocation test binds issued request from owner UI and waits actual holder allocation, replacing global newest-request assumption"
+  ],
+  "targeted_results": [
+    "14 passed in 51.14s",
+    "2 actual OCR/browser integration tests passed in 546.90s"
+  ],
+  "old_test_bodies_unchanged": {
+    "application": 144,
+    "harness": 72
+  },
+  "final_ALL_pending": true,
+  "native_raw_manifest": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_actual_four_language_prin0-actual-pre-recognition-masks.jsonl",
+      "sha256": "d62b7ab827cd09ac7dcd4faf742a8a305836f3898c600d35a3e2332cf0768942"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_actual_four_language_prin0-actual-printed-four-language-results.json",
+      "sha256": "44291e117ac01910bee702e7c6f1cc49c3f57f28f27d3a330e28dbd78cd08e0d"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_actual_four_language_prin0-document-worker.log",
+      "sha256": "b9ec4ab405a48b2c4e041344cfb9404f3b37adb83345c7d4f41dbf70730109d8"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_actual_four_language_prin0-actual-printed-texts.jsonl",
+      "sha256": "311e17db8b462199954aa6bec326873248e59ad4cc30974222be216dfbf457d3"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_genuine_four_language_han0-actual-pre-recognition-masks.jsonl",
+      "sha256": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_genuine_four_language_han0-genuine-handwriting-results.json",
+      "sha256": "82762f11375b6081576c71d9a16c45d5e6597b28251e225b869dce7b1432c244"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_genuine_four_language_han0-document-worker.log",
+      "sha256": "db328b839f87a1e1f47547ff093abfb5062e2f8aa1297d7642c18221c220e0d5"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-strict-native-v1-test_genuine_four_language_han0-actual-printed-texts.jsonl",
+      "sha256": "a8afb522b9609dce054b30016201764330ab36b06a78dcfe1a5abcd332356deb"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_real_settings_late_refres0-settings-after-stale-real-response.png",
+      "sha256": "730efcb2747f608ea32bb0659576a1fc1d25fbe0b8523d3a7e39e5a620a2761f"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d0-generation.log",
+      "sha256": "5d63a66f57e0a16202fa16d91a067aff650571b13744c77c61b96fad39c13282"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d0-document-worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d0-issued-revoke-result.json",
+      "sha256": "2e6a20728ede7b3cc3d3ecad439e51d82c5245714596503735821b95e98566ad"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d0-api-2.log",
+      "sha256": "4a8e1cab5bf08396d6a893a0f99b90c1e35e4f2c56f7145ddeeb53377b73555e"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d1-generation.log",
+      "sha256": "f0502f19520c6e571940f045babd7a34a954dc44f13220126d763ea4d6d9f278"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d1-document-worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d1-issued-revoke-result.json",
+      "sha256": "8c241de1cc0bffda919f1c61bc022ec8f6a7c6e5b4fca600a57693fa03755a56"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-fixes-green-v1-test_issued_owner_revocation_d1-api-2.log",
+      "sha256": "5b5d2c55f600631631da7024120bd15e36c5df44dffc0470cc95f819961dcf7a"
+    }
+  ]
+}

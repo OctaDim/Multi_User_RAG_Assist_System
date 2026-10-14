@@ -1,0 +1,205 @@
+{
+  "handwriting": [
+    {
+      "language": "en",
+      "expected_legible_source": [
+        "dreams",
+        "langston",
+        "hughes"
+      ],
+      "recognized": "Dreams\n—Langston Hughes\n",
+      "missing": [],
+      "actual_words": [
+        "dreams",
+        "langston",
+        "hughes"
+      ],
+      "source_kind": "handwritten",
+      "acceptance": "exact",
+      "original_sha256": "0ef7db9c6960e2cd0c3a4bcbf2ec9444522a7b3ace61ce5440ff0cb572c9654c",
+      "identity": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ],
+      "exception": null,
+      "contract": null
+    },
+    {
+      "language": "ru",
+      "expected_legible_source": [
+        "август"
+      ],
+      "recognized": "август\n",
+      "missing": [],
+      "actual_words": [
+        "август"
+      ],
+      "source_kind": "handwritten",
+      "acceptance": "exact",
+      "original_sha256": "9ecb53d0b7fe92fd22064e0ed2de1af116cf19d8053d0ba12e704c68b1dc975b",
+      "identity": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ],
+      "exception": null,
+      "contract": null
+    },
+    {
+      "language": "de",
+      "expected_legible_source": [
+        "die",
+        "seerose",
+        "blüht",
+        "auf",
+        "dem",
+        "teich"
+      ],
+      "recognized": "Die Seerose blüht auf dem Teich.\n",
+      "missing": [],
+      "actual_words": [
+        "die",
+        "seerose",
+        "blüht",
+        "auf",
+        "dem",
+        "teich"
+      ],
+      "source_kind": "handwritten",
+      "acceptance": "exact",
+      "original_sha256": "5d766216495efe1bc0b239c17536dca2bf002ea93f555eab33ee3c141dfb3f93",
+      "identity": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ],
+      "exception": null,
+      "contract": null
+    },
+    {
+      "language": "be",
+      "expected_legible_source": [
+        "беларусы",
+        "крыўду",
+        "людзьмі"
+      ],
+      "recognized": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь.\nБеларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!\nФаксіміле верша, які знаходзіцца\nу музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.\n",
+      "missing": [
+        "беларусы",
+        "людзьмі"
+      ],
+      "actual_words": [
+        "а",
+        "кіто",
+        "там",
+        "ідзе",
+        "а",
+        "хто",
+        "там",
+        "ідзе",
+        "у",
+        "аграрніста",
+        "такій",
+        "грамадзе",
+        "беларусь",
+        "беларусь",
+        "а",
+        "што",
+        "яны",
+        "імяць",
+        "на",
+        "хурых",
+        "плагах",
+        "на",
+        "руках",
+        "у",
+        "крыві",
+        "на",
+        "магах",
+        "у",
+        "папках",
+        "свога",
+        "крыўду",
+        "а",
+        "каму",
+        "це",
+        "няжучы",
+        "гэта",
+        "крыўду",
+        "куды",
+        "це",
+        "імяць",
+        "на",
+        "паказ",
+        "сваё",
+        "на",
+        "сём",
+        "чалі",
+        "а",
+        "чаю",
+        "це",
+        "гаго",
+        "захачелась",
+        "ім",
+        "палардзаным",
+        "век",
+        "ім",
+        "глухім",
+        "слоткім",
+        "слоўным",
+        "звацца",
+        "факсіміле",
+        "верша",
+        "які",
+        "знаходзіцца",
+        "у",
+        "музеї",
+        "я",
+        "купалы",
+        "верш",
+        "напісаны",
+        "ў",
+        "1905",
+        "1907",
+        "гг"
+      ],
+      "source_kind": "handwritten",
+      "acceptance": "user_permitted_current_model_difference",
+      "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5",
+      "identity": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ],
+      "exception": "current_Qwen_BE_handwriting",
+      "contract": "harness/project/decisions/2026-10-14-ocr-source-types-and-future-model-permissions.md"
+    }
+  ],
+  "printed_footer": [
+    {
+      "source_kind": "printed",
+      "role": "printed",
+      "identity": [
+        "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+        "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+      ],
+      "original_gt": "Факсіміле верша, які знаходзіцца\nў музеі Я. Купалы.\nВерш напісаны ў 1905–1907 гг.",
+      "raw": "Факсіміле верша, які знаходзіцца у музеї Я. Купалы. Верш напісаны ў 1905–1907 гг.",
+      "exact_match": false,
+      "permitted_difference": true,
+      "exception": "current_Paddle_BE_OCR",
+      "contract": "harness/project/decisions/2026-10-14-ocr-source-types-and-future-model-permissions.md"
+    },
+    {
+      "source_kind": "printed",
+      "role": "printed",
+      "identity": [
+        "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+        "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+      ],
+      "original_gt": "Факсіміле верша, які знаходзіцца\nў музеі Я. Купалы.\nВерш напісаны ў 1905–1907 гг.",
+      "raw": "Факсіміле верша, які знаходзіцца у музеї Я. Купалы. Верш напісаны ў 1905–1907 гг.",
+      "exact_match": false,
+      "permitted_difference": true,
+      "exception": "current_Paddle_BE_OCR",
+      "contract": "harness/project/decisions/2026-10-14-ocr-source-types-and-future-model-permissions.md"
+    }
+  ]
+}

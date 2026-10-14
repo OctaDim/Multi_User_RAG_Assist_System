@@ -1,0 +1,217 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 15
+image_tokens->ny = 5
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=480, ny=160)
+clip_encode: output embedding shape [2560, 75, 1]
+image slice encoded in 574 ms
+decoding image batch 1/1, n_tokens_batch = 75
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 75 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 75 new tokens
+image decoded (batch 1/1) in 1463 ms
+find_slot: non-consecutive token position 59 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 59 after 4 for sequence 0 with 41 new tokens
+{"language": "ru", "original_size": [472, 159], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "август", "usage": {"prompt_tokens": 60, "completion_tokens": 3, "total_tokens": 63}, "finish": "stop", "seconds": 9.60115339999902, "independent_gt": ["август"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 38
+image_tokens->ny = 50
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=1216, ny=1600)
+clip_encode: output embedding shape [2560, 1900, 1]
+image slice encoded in 44140 ms
+decoding image batch 1/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+image decoded (batch 1/15) in 1136 ms
+decoding image batch 2/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 2/15) in 1196 ms
+decoding image batch 3/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 3/15) in 1473 ms
+decoding image batch 4/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 4/15) in 1144 ms
+decoding image batch 5/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 5/15) in 1209 ms
+decoding image batch 6/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 6/15) in 1233 ms
+decoding image batch 7/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 7/15) in 1414 ms
+decoding image batch 8/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 8/15) in 1431 ms
+decoding image batch 9/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 9/15) in 1350 ms
+decoding image batch 10/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 10/15) in 1343 ms
+decoding image batch 11/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 11/15) in 1356 ms
+decoding image batch 12/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 12/15) in 1409 ms
+decoding image batch 13/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 13/15) in 1264 ms
+decoding image batch 14/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 14/15) in 1299 ms
+decoding image batch 15/15, n_tokens_batch = 108
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 108 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 108 new tokens
+image decoded (batch 15/15) in 1121 ms
+find_slot: non-consecutive token position 94 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 94 after 4 for sequence 0 with 41 new tokens
+{"language": "be", "original_size": [1200, 1610], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "А хто там ідзе, я хто там ідзе\nУ агромістай такой грамадзе?—\nбеларусы.\n\nЯ што вам міжуб на жудых пляках,\nНа руках у крыві, на ногях у ланьцях?\nСваго крыўду\n\nА кому-це ідзець гату крыўду\nІсё?\nА куда-це някучы паказвае?—\nНа свет час не.\n\nА чало-ца, чаго захачелае ім\nПалардусаным век, ім глухім, слотай\nслодзьмі званца!\n\nФаксіліле верша, які знаходзіцца\nў музеі Я. Купалы.\nВерш напісаны ў 1905–1907 гг.", "usage": {"prompt_tokens": 95, "completion_tokens": 195, "total_tokens": 290}, "finish": "stop", "seconds": 92.22730246199717, "independent_gt": ["Беларусы", "крыўду", "людзьмі"], "missing": ["людзьмі"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 126
+image_tokens->ny = 14
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=4032, ny=448)
+clip_encode: output embedding shape [2560, 1764, 1]
+image slice encoded in 40048 ms
+decoding image batch 1/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+image decoded (batch 1/14) in 1124 ms
+decoding image batch 2/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 2/14) in 1239 ms
+decoding image batch 3/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 3/14) in 1234 ms
+decoding image batch 4/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 4/14) in 1275 ms
+decoding image batch 5/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 5/14) in 1217 ms
+decoding image batch 6/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 6/14) in 1270 ms
+decoding image batch 7/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 7/14) in 1292 ms
+decoding image batch 8/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 8/14) in 1286 ms
+decoding image batch 9/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 9/14) in 1278 ms
+decoding image batch 10/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 10/14) in 1325 ms
+decoding image batch 11/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 11/14) in 1328 ms
+decoding image batch 12/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 12/14) in 1325 ms
+decoding image batch 13/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 13/14) in 1445 ms
+decoding image batch 14/14, n_tokens_batch = 100
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 100 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 100 new tokens
+image decoded (batch 14/14) in 1104 ms
+find_slot: non-consecutive token position 170 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 170 after 4 for sequence 0 with 41 new tokens
+{"language": "de", "original_size": [4020, 436], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "Die Seerose blüht auf dem Teich.", "usage": {"prompt_tokens": 171, "completion_tokens": 12, "total_tokens": 183}, "finish": "stop", "seconds": 60.37112941899977, "independent_gt": ["Die Seerose blüht auf dem Teich"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 12
+image_tokens->ny = 4
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=384, ny=128)
+clip_encode: output embedding shape [2560, 48, 1]
+image slice encoded in 349 ms
+decoding image batch 1/1, n_tokens_batch = 48
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+image decoded (batch 1/1) in 460 ms
+find_slot: non-consecutive token position 56 after 4 for sequence 0 with 41 new tokens
+find_slot: non-consecutive token position 56 after 4 for sequence 0 with 41 new tokens
+{"language": "en", "original_size": [370, 120], "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.", "thinking": false, "text": "Dreams\n—Langston Hughes", "usage": {"prompt_tokens": 57, "completion_tokens": 7, "total_tokens": 64}, "finish": "stop", "seconds": 2.398627757000213, "independent_gt": ["Dreams", "Langston Hughes"], "missing": []}
+Native candidate closed: True

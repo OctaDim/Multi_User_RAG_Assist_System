@@ -1,0 +1,35 @@
+{
+  "batch": "v29",
+  "status": "interrupted_not_acceptance",
+  "handle_exit": 143,
+  "rejection": "Automatic approval review rejected combined cleanup because PostgreSQL ownership was not established and SIGKILL was possible. Rejected command did not execute.",
+  "verified_ownership": {
+    "postgres_pid": 117935,
+    "data_dir": "/tmp/rag-u8-hybrid-focused-v29/postgres0",
+    "handle_pids": [
+      117706
+    ],
+    "postmaster_pid_matches_argv": true
+  },
+  "safer_cleanup": "TERM-only confirmed descendants; verified supervisor reap; normal pg_ctl -m fast -w stop; then exact pytest TERM",
+  "signals": [
+    "SIGINT pytest117706",
+    "SIGTERM Chrome118891",
+    "SIGTERM Playwright118880",
+    "SIGTERM supervisor118954",
+    "SIGTERM doc118952/API118875/API118953",
+    "normal pg_ctl fast stop",
+    "SIGTERM pytest117706"
+  ],
+  "resources": {
+    "117706": "absent",
+    "117935": "absent",
+    "118880": "absent",
+    "118891": "absent",
+    "118952": "absent",
+    "118954": "absent",
+    "118992": "absent",
+    "118875": "absent",
+    "118953": "absent"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "correctness|backend/app/ocr.py|93|single-color gray ink is silently discarded": {
+    "why_it_matters": "A supported DOCX image containing crisp gray or colored text on white can publish with an empty OCR page even though its text is visible. When every foreground pixel has the same nonzero grayscale value, the background-excluding histogram has one occupied bin, every variance is zero, and argmax selects threshold zero; printed_ink therefore becomes false and the printed recognizer is skipped. Handling the singleton histogram explicitly preserves these pixels while retaining the existing threshold behavior for ordinary multilevel scans.",
+    "evidence": [
+      "backend/app/ocr.py:93 --     return (gray<245) & (gray<=int(variance.argmax()))",
+      "backend/app/ocr.py:88 --     histogram=np.bincount(gray[gray<245].ravel(),minlength=256).astype(float)",
+      "backend/app/ocr.py:92 --     variance=(moment[-1]*weight-moment*weight[-1])**2/np.maximum(weight*(weight[-1]-weight),1)",
+      "For white plus gray-128 input, the sole histogram bin is 128: below it weight=moment=0, and at/above it weight=H and moment=128H. Every numerator is zero, argmax is 0, and the returned mask contains no pixels.",
+      "backend/app/ocr.py:281 --                 'handwriting':handwriting,'skips':skips,'mode':mode,'printed_ink':bool(printed_foreground.any())}",
+      "backend/app/ocr.py:284 --         lines=self.recognize(prepared['image'],cancelled) if prepared['printed_ink'] else []",
+      "backend/app/document_worker.py:226-237 -- DOCX image bytes are converted to RGB, passed to prepare_image(...,'complete'), then recognized and staged; lines 242-245 publish a successful revision without requiring nonempty page text."
+    ]
+  },
+  "correctness|backend/app/ocr.py|291|complete ocr interleaves printed columns": {
+    "why_it_matters": "A two-column printed page processed in complete mode loses Paddle's reading order, even when there is no handwriting. For returned lines ordered left-top, left-bottom, right-top, right-bottom, the new y/x sort publishes left-top, right-top, left-bottom, right-bottom, mixing the text of separate columns in the document view and source spans. Retaining the recognizer's printed sequence and inserting handwriting within its column avoids changing correct printed page order.",
+    "evidence": [
+      "backend/app/ocr.py:291 --             lines.sort(key=lambda line:(line['bbox'][1],line['bbox'][0]))",
+      "backend/app/ocr.py:285-291 -- The sort is inside mode=='complete' but outside the handwriting loop, so it executes for complete pages with an empty handwriting list.",
+      "backend/app/ocr.py:58 --         lines.append({'kind':'printed','text':text,'bbox':bbox,'polygon':polygon})",
+      "backend/app/ocr.py:67 --     # Keep the recognizer's printed reading order and insert omissions in their column.",
+      "backend/app/ocr.py:76-81 -- compose_page builds the stored text and span offsets in the incoming blocks' order.",
+      "backend/app/document_worker.py:211-216,227-237 -- Actual PDF and embedded DOCX OCR results flow from finish_page into stage_page and document publication; embedded DOCX images explicitly use complete mode."
+    ]
+  },
+  "julik-frontend-races|frontend/src/app.js|309|fence overlapping settings reads against completed saves": {
+    "why_it_matters": "The administrator can see the old global limits and old saved revision after successfully saving new values. Click refresh while a preview is ready, then save: the refresh GET can capture revision 0, the PATCH and its follow-up GET can render revision 1, and the delayed first GET then unconditionally replaces the form with revision 0. A subsequent preview submits both mutable values from that stale form, potentially restoring an old limit when the administrator only intended to change the other field.",
+    "evidence": [
+      "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+      "frontend/src/app.js:45-57: perform disables only the supplied control; refresh and save remain independently usable, allowing their GET/PATCH operations to overlap.",
+      "frontend/src/api.js:14 -- if (token() !== credential) throw new Error('session_changed'); This protects account changes but does not order same-session settings reads.",
+      "backend/app/settings.py:27-31: GET captures current settings in a transaction; no frontend ordering constraint exists on delivery of that captured response. Lines 40-43 commit a newer revision and audit the PATCH.",
+      "frontend/src/app.js:336-339 builds the preview from every mutable field; line 349 PATCHes the resulting full proposal.",
+      "backend/tests/integration/test_answer_lifecycle.py:95-124 and 238-252 exercise sequential preview/save/refresh rather than delaying an older refresh response past a completed save."
+    ]
+  },
+  "adversarial|backend/tests/integration/test_multilingual_documents.py|228|ocr acceptance reports forbidden transcription differences as exact": {
+    "why_it_matters": "The new OCR acceptance mechanism can pass and label a German, English or Russian transcription as exact after the model changes capitalization or punctuation, although RAG-67 grants no such exception. For the committed German ground truth 'Die Seerose blüht auf dem Teich.', the different output 'die seerose blüht auf dem teich?' becomes the same case-folded word array, reaches exact=True and requires no user permission. The printed PDF/DOCX gate uses the same lossy comparison, so a wrong punctuation mark can also pass that gate. Comparing independently transcribed tokens while retaining case and punctuation prevents these differences from silently receiving an undeclared allowance.",
+    "evidence": [
+      "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+      "backend/tests/integration/test_multilingual_documents.py:230-233 -- exact=row['actual_words']==row['expected_legible_source']; assert exact or exception=='current_Qwen_BE_handwriting',records; row.update({'identity':identity,'acceptance':'exact' if exact else 'user_permitted_current_model_difference', 'exception':exception,'contract':CONTRACT if exception else None})",
+      "backend/tests/integration/test_multilingual_documents.py:153 -- ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die','seerose','blüht','auf','dem','teich']),",
+      "backend/tests/fixtures/answer_lifecycle/handwriting-primary-provenance-v1.json:15 -- \"text\": \"Die Seerose blüht auf dem Teich.\"",
+      "Constructed sequence: the actual model returns 'die seerose blüht auf dem teich?'; casefold plus \\w+ returns ['die','seerose','blüht','auf','dem','teich']; the German be_exception returns None, but exact is True, so the acceptance assertion passes and the evidence record says exact. This is a mechanical guard-fidelity failure, not a claim that the current native run produced this text.",
+      "backend/tests/integration/test_actual_printed_documents.py:66 -- assert re.findall(r'\\w+',text.casefold())==expected_words,{'name':name,'recognized':page['text'],'expected':gt}",
+      "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md:7 -- **По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.**"
+    ]
+  }
+}

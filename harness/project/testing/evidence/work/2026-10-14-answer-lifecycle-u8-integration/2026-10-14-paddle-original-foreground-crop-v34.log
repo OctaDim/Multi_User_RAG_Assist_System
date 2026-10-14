@@ -1,0 +1,20 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 23
+image_tokens->ny = 7
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=644, ny=196)
+clip_encode: output embedding shape [1024, 161, 1]
+image slice encoded in 1586 ms
+decoding image batch 1/2, n_tokens_batch = 128
+image decoded (batch 1/2) in 2003 ms
+decoding image batch 2/2, n_tokens_batch = 33
+image decoded (batch 2/2) in 67 ms
+{"status": "actual_candidate_not_production", "bbox": [67, 1100, 367, 1186], "ignored_components_count": 31, "selection": "Only original-image foreground threshold, then mask known hand regions; bounding box of components >5 pixels plus12px padding; no GT/input text", "lines": [{"kind": "printed", "text": "Факсіміле верша, які знаходзіцца", "bbox": [10.500000000000002, 11.18, 288.0, 28.638], "polygon": [[10.500000000000002, 11.18], [288.0, 11.18], [288.0, 28.638], [10.500000000000002, 28.638]]}, {"kind": "printed", "text": "y музеї Я. Купалы.", "bbox": [10.500000000000002, 32.164, 166.8, 51.256], "polygon": [[10.500000000000002, 32.164], [166.8, 32.164], [166.8, 51.256], [10.500000000000002, 51.256]]}, {"kind": "printed", "text": "Верш напісаны ў 1905–1907 гг.", "bbox": [10.500000000000002, 53.234, 270.90000000000003, 69.91799999999999], "polygon": [[10.500000000000002, 53.234], [270.90000000000003, 53.234], [270.90000000000003, 69.91799999999999], [10.500000000000002, 69.91799999999999]]}], "text": "Факсіміле верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.", "printed_model": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf", "projector": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf"}

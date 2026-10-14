@@ -1,0 +1,27 @@
+{
+  "command": [
+    "xvfb-run",
+    "-a",
+    "uv",
+    "run",
+    "--project",
+    "backend",
+    "--frozen",
+    "--cache-dir",
+    "/tmp/rag-answer-lifecycle-uv-cache",
+    "pytest",
+    "-c",
+    "backend/pyproject.toml",
+    "backend/tests/integration/test_answer_lifecycle.py::test_frozen_thirty_questions_use_real_multilingual_documents",
+    "--basetemp",
+    "/tmp/rag-u8-parent-direct-source-native-v1",
+    "-q",
+    "-s",
+    "--assert=plain"
+  ],
+  "exit_code": 1,
+  "seconds": 310.63,
+  "log": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-direct-source-native-v1.log",
+  "purpose": "Frozen30 unchanged questions and criteria after observed citation/irrelevant-answer/runaway failures; generic direct-source quotation and exact citation instruction",
+  "final_ALL": false
+}

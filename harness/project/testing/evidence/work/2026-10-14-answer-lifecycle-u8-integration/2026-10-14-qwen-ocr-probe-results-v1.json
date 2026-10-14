@@ -1,0 +1,93 @@
+[
+  {
+    "language": "ru",
+    "original_size": [
+      472,
+      159
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "август",
+    "usage": {
+      "prompt_tokens": 60,
+      "completion_tokens": 3,
+      "total_tokens": 63
+    },
+    "finish": "stop",
+    "seconds": 2.8353510170018126,
+    "independent_gt": [
+      "август"
+    ],
+    "missing": []
+  },
+  {
+    "language": "be",
+    "original_size": [
+      1200,
+      1610
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "А хто там ідзе, а хто там ідзе\nУ агрономістай такой грамадзе? -\nБеларусь.\n\nА што яны інжэрав на жудых плегях,\nНа руках у крыні, на магах у ланцях?\nСваго крыўджу\n\nА кому-це інжэць готу крыўджу\nЙося,\nА куды-це інжэцыя на пакыз есё? -\nНа сём чалі.\n\nА маю-це, гаго захачелась ім\nПалардзаканым век, ім глужім, слотай,\nСлодзьмі звацца!\n\nФаксіміле верша, які знаходзіцца\nў музеі Я. Купалы.\nВерш напісаны ў 1905-1907 гг.",
+    "usage": {
+      "prompt_tokens": 95,
+      "completion_tokens": 213,
+      "total_tokens": 308
+    },
+    "finish": "stop",
+    "seconds": 70.25968293900223,
+    "independent_gt": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "missing": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ]
+  },
+  {
+    "language": "de",
+    "original_size": [
+      4020,
+      436
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "Die Seerose blüht auf dem Teich.",
+    "usage": {
+      "prompt_tokens": 171,
+      "completion_tokens": 11,
+      "total_tokens": 182
+    },
+    "finish": "stop",
+    "seconds": 51.42217030900065,
+    "independent_gt": [
+      "Die Seerose blüht auf dem Teich"
+    ],
+    "missing": []
+  },
+  {
+    "language": "en",
+    "original_size": [
+      370,
+      120
+    ],
+    "prompt": "Transcribe exactly the text visible in this image, preserving its original alphabet, spelling and line breaks. Return only the transcription. Do not translate or explain.",
+    "thinking": false,
+    "text": "Dreams\n—Langston Hughes",
+    "usage": {
+      "prompt_tokens": 57,
+      "completion_tokens": 7,
+      "total_tokens": 64
+    },
+    "finish": "stop",
+    "seconds": 1.3617693740015966,
+    "independent_gt": [
+      "Dreams",
+      "Langston Hughes"
+    ],
+    "missing": []
+  }
+]

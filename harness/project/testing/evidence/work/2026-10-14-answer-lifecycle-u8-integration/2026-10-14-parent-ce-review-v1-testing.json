@@ -1,0 +1,10 @@
+{
+  "reviewer": "testing",
+  "findings": [],
+  "residual_risks": [
+    "The parent unfiltered application ALL run (handle 37795) was still running at review dispatch. This read-only review does not certify its result; final acceptance also needs a semantic/citation audit of that run's fresh frozen30 outputs. The existing parent-thirty-semantic-audit-v9.json is explicitly a historical quality subgate."
+  ],
+  "testing_gaps": [
+    "RAG-67's mixed-word-in-one-crop boundary has only a synthetic helper case (backend/tests/integration/test_multilingual_documents.py:72-75). The actual BE test deliberately keeps the printed footer outside every handwriting crop (lines 204-206, 227), so it does not exercise a genuine crop containing both source types. Add an independently annotated genuine mixed crop and retain actual Qwen raw output, checking printed words strictly and applying the BE handwriting exception only to independently identified handwritten words; the coverage-v3 receipt explicitly labels the current same-crop case as policy-only."
+  ]
+}

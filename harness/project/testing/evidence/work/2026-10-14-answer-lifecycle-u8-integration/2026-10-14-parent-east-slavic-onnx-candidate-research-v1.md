@@ -1,0 +1,11 @@
+# U8 East Slavic recognition candidate research
+
+Date: 2026-10-14. Parent metadata/source-code research only; no download, inference, installation, selection, or production change.
+
+The [Paddle authors' model](https://huggingface.co/PaddlePaddle/eslav_PP-OCRv5_mobile_rec/tree/7553801264d3379d8d2e854971989e5e26c22e03) provides Paddle artifacts, not ONNX. Published parameters SHA-256: `f11057b05d8517868bca505271278973d706600d9dcc184cbcf5c4512091c32b`. Its [pinned inference configuration](https://huggingface.co/PaddlePaddle/eslav_PP-OCRv5_mobile_rec/blob/7553801264d3379d8d2e854971989e5e26c22e03/inference.yml) specifies BGR input, `[3,48,320]` recognition shape, CTC decoding, and a dictionary containing Belarusian і/ў and their capitals.
+
+The [Monkt exporter](https://huggingface.co/monkt/paddleocr-onnx/tree/e354f8b15881682fcf241fc2cd493425c031376d/languages/eslav) publishes `rec.onnx`, `dict.txt`, and `config.json`, credits Paddle2ONNX conversion, and identifies Apache-2.0 licensing. Published ONNX SHA-256: `dc6bf0e855247decce214ba6dae5bc135fa0ad725a5918a7fcfb59fad6c9cdee`. This is an exporter artifact, not an official Paddle ONNX release. Exporter prose specifies RGB/height32, contradicting the canonical BGR/height48 configuration. Inspect actual ORT input/output shapes and dictionary cardinality before using it; conversion parity and handwriting accuracy remain unverified.
+
+[Canonical PaddleX processors](https://github.com/PaddlePaddle/PaddleX/blob/release/3.7/paddlex/inference/models/text_recognition/processors.py) provide the resize/normalization and CTC decoding reference. Normalized channel-first input uses scale1/255 and mean/std0.5; CTC reserves blank0, collapses adjacent duplicate timesteps, and includes a space character. The receiving implementer must inspect the precise implementation and model schema, rather than infer a decoder from this note.
+
+The earlier rejected Monkt page classifier is a different model/task. Its rejection does not establish recognition failure or success for this candidate. Alphabet coverage, upstream metrics, and model-card claims do not replace genuine RU/BE handwriting measurements or whole-document permission/publication tests.

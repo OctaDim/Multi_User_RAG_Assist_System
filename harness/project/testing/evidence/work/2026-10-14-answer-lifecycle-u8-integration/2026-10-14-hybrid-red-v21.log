@@ -1,0 +1,106 @@
+[0;93m2026-10-14 17:44:26.659053471 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+FF
+=================================== FAILURES ===================================
+__________ test_ocr_loads_fixed_paddle_and_qwen_handwriting_profiles ___________
+
+    def test_ocr_loads_fixed_paddle_and_qwen_handwriting_profiles():
+        import hashlib
+        import os
+        from app.ocr import DocumentOCR
+        root=Path(os.environ['RAG_OCR_DIR'])
+        ocr=DocumentOCR()
+        try:
+            for model,weight,projector,weight_hash,projector_hash in [
+                (ocr.model,root/'PaddleOCR-VL-1.5.gguf',root/'PaddleOCR-VL-1.5-mmproj.gguf',
+                 '299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c','e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87'),
+>               (ocr.handwriting_model,Path(os.environ['RAG_MODEL_PATH']),root/'mmproj-F16.gguf',
+                 ^^^^^^^^^^^^^^^^^^^^^
+                 'aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223','7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7')]:
+E                AttributeError: 'DocumentOCR' object has no attribute 'handwriting_model'
+
+backend/tests/test_document_ocr.py:115: AttributeError
+_________ test_original_english_and_missed_russian_ink_are_both_masked _________
+
+    def test_original_english_and_missed_russian_ink_are_both_masked():
+        import os
+        import onnxruntime as ort
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        root=Path(os.environ['RAG_OCR_DIR'])/'dfine'
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.config=json.loads((root/'config.json').read_text())
+        options=ort.SessionOptions();options.intra_op_num_threads=2;options.inter_op_num_threads=1
+        ocr.detector=ort.InferenceSession(str(root/'model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
+        en=Image.open(PROOF/'real-handwritten-title-author-input-v1.png').convert('RGB')
+>       ru=Image.open(Path(__file__).parents[1]/'fixtures/answer_lifecycle/handwritten-ru-august.png').convert('RGB')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_document_ocr.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fp = PosixPath('/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/fixtures/answer_lifecycle/handwritten-ru-august.png')
+mode = 'r', formats = ['PNG']
+
+    def open(
+        fp: StrOrBytesPath | IO[bytes],
+        mode: Literal["r"] = "r",
+        formats: list[str] | tuple[str, ...] | None = None,
+    ) -> ImageFile.ImageFile:
+        """
+        Opens and identifies the given image file.
+    
+        This is a lazy operation; this function identifies the file, but
+        the file remains open and the actual image data is not read from
+        the file until you try to process the data (or call the
+        :py:meth:`~PIL.Image.Image.load` method).  See
+        :py:func:`~PIL.Image.new`. See :ref:`file-handling`.
+    
+        :param fp: A filename (string), os.PathLike object or a file object.
+           The file object must implement ``file.read``,
+           ``file.seek``, and ``file.tell`` methods,
+           and be opened in binary mode. The file object will also seek to zero
+           before reading.
+        :param mode: The mode.  If given, this argument must be "r".
+        :param formats: A list or tuple of formats to attempt to load the file in.
+           This can be used to restrict the set of formats checked.
+           Pass ``None`` to try all supported formats. You can print the set of
+           available formats by running ``python3 -m PIL`` or using
+           the :py:func:`PIL.features.pilinfo` function.
+        :returns: An :py:class:`~PIL.Image.Image` object.
+        :exception FileNotFoundError: If the file cannot be found.
+        :exception PIL.UnidentifiedImageError: If the image cannot be opened and
+           identified.
+        :exception ValueError: If the ``mode`` is not "r", or if a ``StringIO``
+           instance is used for ``fp``.
+        :exception TypeError: If ``formats`` is not ``None``, a list or a tuple.
+        """
+    
+        if mode != "r":
+            msg = f"bad mode {repr(mode)}"  # type: ignore[unreachable]
+            raise ValueError(msg)
+        elif isinstance(fp, io.StringIO):
+            msg = (  # type: ignore[unreachable]
+                "StringIO cannot be used to open an image. "
+                "Binary data must be used instead."
+            )
+            raise ValueError(msg)
+    
+        if formats is None:
+            formats = ID
+        elif not isinstance(formats, (list, tuple)):
+            msg = "formats must be a list or tuple"  # type: ignore[unreachable]
+            raise TypeError(msg)
+    
+        exclusive_fp = False
+        filename: str | bytes = ""
+        if is_path(fp):
+            filename = os.fspath(fp)
+>           fp = builtins.open(filename, "rb")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/fixtures/answer_lifecycle/handwritten-ru-august.png'
+
+backend/.venv/lib/python3.12/site-packages/PIL/Image.py:3639: FileNotFoundError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_ocr_loads_fixed_paddle_and_qwen_handwriting_profiles
+FAILED backend/tests/test_document_ocr.py::test_original_english_and_missed_russian_ink_are_both_masked
+2 failed in 6.85s

@@ -1,0 +1,24 @@
+{
+  "scope": "Independent parent visual ground truth before handwritten OCR evaluation; no model result.",
+  "original_sha1": "18ff5349854b7ec35809d372340724754aef003c",
+  "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5",
+  "render_sha256": "2e300619c1b3fa26a054804ea39eb3276ff1386e3da887c403cf8fd51ae3c254",
+  "render_dimensions": [
+    1600,
+    2147
+  ],
+  "transformation": "pypdfium2 render of original single PDF page; no crop/redraw/text overlay.",
+  "legible_handwritten_lines": [
+    "А хто там ідзе, а хто там ідзе",
+    "Беларусы.",
+    "Сваю крыўду",
+    "На свет цэлы.",
+    "людзьмі звацца!"
+  ],
+  "inspection": "Cursive handwriting contains і and ў. Lower-left explanatory footer is printed. Modern poem transcriptions differ from this autograph and are not exact whole-page ground truth.",
+  "not_proven": [
+    "OCR accuracy",
+    "publication/search integration",
+    "full-page exact transcription"
+  ]
+}

@@ -1,0 +1,359 @@
+[
+  {
+    "language": "ru",
+    "source": "actual word",
+    "size": [
+      472,
+      159
+    ],
+    "text": "abrym",
+    "score": 0.9423805475234985,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "de",
+    "source": "actual sentence",
+    "size": [
+      4020,
+      436
+    ],
+    "text": "Die Serose tlilt ant dm Teich",
+    "score": 0.8730241193853575,
+    "input_shape": [
+      1,
+      3,
+      48,
+      443
+    ],
+    "output_shape": [
+      1,
+      55,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line1",
+    "size": [
+      1087,
+      87
+    ],
+    "text": "A timo mau izse,4 tmo man igre",
+    "score": 0.76651424964269,
+    "input_shape": [
+      1,
+      3,
+      48,
+      600
+    ],
+    "output_shape": [
+      1,
+      75,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line2",
+    "size": [
+      1112,
+      85
+    ],
+    "text": "У arротaй maroй гридrе?-",
+    "score": 0.35954851595064,
+    "input_shape": [
+      1,
+      3,
+      48,
+      628
+    ],
+    "output_shape": [
+      1,
+      78,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line3",
+    "size": [
+      352,
+      69
+    ],
+    "text": "Terapyehe.",
+    "score": 0.7179834097623825,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line4",
+    "size": [
+      1171,
+      77
+    ],
+    "text": "A uno na uaban",
+    "score": 0.36446368268557955,
+    "input_shape": [
+      1,
+      3,
+      48,
+      730
+    ],
+    "output_shape": [
+      1,
+      91,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line5",
+    "size": [
+      1165,
+      82
+    ],
+    "text": "Нa руках у Квнкаан?",
+    "score": 0.42131162944592926,
+    "input_shape": [
+      1,
+      3,
+      48,
+      682
+    ],
+    "output_shape": [
+      1,
+      85,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line6",
+    "size": [
+      511,
+      81
+    ],
+    "text": "Clarp Koa29",
+    "score": 0.488548452203924,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line7",
+    "size": [
+      1099,
+      92
+    ],
+    "text": "A namy-ye weyib romykpigy",
+    "score": 0.44390151619911195,
+    "input_shape": [
+      1,
+      3,
+      48,
+      574
+    ],
+    "output_shape": [
+      1,
+      72,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line8",
+    "size": [
+      1147,
+      86
+    ],
+    "text": "A кyqа-ye yreyнe на naкиз eвaс?",
+    "score": 0.41947462409734726,
+    "input_shape": [
+      1,
+      3,
+      48,
+      641
+    ],
+    "output_shape": [
+      1,
+      80,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line9",
+    "size": [
+      532,
+      84
+    ],
+    "text": "Ha ckem udnae.",
+    "score": 0.7925523945263454,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line10",
+    "size": [
+      1011,
+      78
+    ],
+    "text": "A rar-4e, 2aro зaxana i",
+    "score": 0.5124975578940433,
+    "input_shape": [
+      1,
+      3,
+      48,
+      623
+    ],
+    "output_shape": [
+      1,
+      78,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line11",
+    "size": [
+      1173,
+      89
+    ],
+    "text": "Паларддеами век, им зу, слет",
+    "score": 0.38336399091141565,
+    "input_shape": [
+      1,
+      3,
+      48,
+      633
+    ],
+    "output_shape": [
+      1,
+      79,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line12",
+    "size": [
+      625,
+      94
+    ],
+    "text": "cogba zkansa!",
+    "score": 0.5043159769131587,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line13",
+    "size": [
+      289,
+      28
+    ],
+    "text": "Факсіміле верша, які знаходзіцца",
+    "score": 0.9417768605053425,
+    "input_shape": [
+      1,
+      3,
+      48,
+      496
+    ],
+    "output_shape": [
+      1,
+      62,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line14",
+    "size": [
+      167,
+      27
+    ],
+    "text": " музе Я. Купалы.",
+    "score": 0.6359390132129192,
+    "input_shape": [
+      1,
+      3,
+      48,
+      320
+    ],
+    "output_shape": [
+      1,
+      40,
+      519
+    ]
+  },
+  {
+    "language": "be",
+    "source": "actual spotted line15",
+    "size": [
+      271,
+      28
+    ],
+    "text": "Верш написаны  1905–1907 гг.",
+    "score": 0.7770017715437072,
+    "input_shape": [
+      1,
+      3,
+      48,
+      465
+    ],
+    "output_shape": [
+      1,
+      58,
+      519
+    ]
+  }
+]

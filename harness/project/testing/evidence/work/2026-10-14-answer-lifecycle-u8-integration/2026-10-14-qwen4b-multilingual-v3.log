@@ -1,0 +1,325 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 15
+image_tokens->ny = 5
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=480, ny=160)
+clip_encode: output embedding shape [2560, 75, 1]
+image slice encoded in 569 ms
+decoding image batch 1/1, n_tokens_batch = 75
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 75 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 75 new tokens
+image decoded (batch 1/1) in 1569 ms
+find_slot: non-consecutive token position 102 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 102 after 4 for sequence 0 with 84 new tokens
+{"language": "ru", "original_size": [472, 159], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "август", "usage": {"prompt_tokens": 103, "completion_tokens": 3, "total_tokens": 106}, "finish": "stop", "seconds": 8.637320290999924, "independent_gt": ["август"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 38
+image_tokens->ny = 50
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=1216, ny=1600)
+clip_encode: output embedding shape [2560, 1900, 1]
+image slice encoded in 42662 ms
+decoding image batch 1/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+image decoded (batch 1/15) in 1272 ms
+decoding image batch 2/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 2/15) in 1266 ms
+decoding image batch 3/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 3/15) in 1260 ms
+decoding image batch 4/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 4/15) in 1248 ms
+decoding image batch 5/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 5/15) in 1332 ms
+decoding image batch 6/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 6/15) in 1197 ms
+decoding image batch 7/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 7/15) in 1142 ms
+decoding image batch 8/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 8/15) in 1144 ms
+decoding image batch 9/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 9/15) in 1201 ms
+decoding image batch 10/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 10/15) in 1220 ms
+decoding image batch 11/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 11/15) in 1198 ms
+decoding image batch 12/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 12/15) in 1181 ms
+decoding image batch 13/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 13/15) in 1321 ms
+decoding image batch 14/15, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 14/15) in 1164 ms
+decoding image batch 15/15, n_tokens_batch = 108
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 108 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 108 new tokens
+image decoded (batch 15/15) in 1078 ms
+find_slot: non-consecutive token position 137 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 137 after 4 for sequence 0 with 84 new tokens
+{"language": "be", "original_size": [1200, 1610], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "А хто там ідзе, я хто там ідзе\nУ агромістай такой грамадзе?—\nбеларусы.\n\nЯ што вам маюць на жудых пляках,\nНа руках у крыві, на ногях у ланцях?\nСваго крыжуй!\n\nА кому-це ідуць готу крыжуй\nўсяго?\nА куда-це ідучы паказваюць?—\nНа свет час іх.\n\nА чало-ца, чаго захачалася ім\nПалардусаным век, ім глухім, слотаім\nсладзьмі звацца!", "usage": {"prompt_tokens": 138, "completion_tokens": 153, "total_tokens": 291}, "finish": "stop", "seconds": 83.29019744100151, "independent_gt": ["Беларусы", "крыўду", "людзьмі"], "missing": ["крыўду", "людзьмі"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 126
+image_tokens->ny = 14
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=4032, ny=448)
+clip_encode: output embedding shape [2560, 1764, 1]
+image slice encoded in 37021 ms
+decoding image batch 1/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+image decoded (batch 1/14) in 1121 ms
+decoding image batch 2/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 2/14) in 1120 ms
+decoding image batch 3/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 3/14) in 1094 ms
+decoding image batch 4/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 4/14) in 1097 ms
+decoding image batch 5/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 5/14) in 1177 ms
+decoding image batch 6/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 6/14) in 1136 ms
+decoding image batch 7/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 7/14) in 1177 ms
+decoding image batch 8/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 8/14) in 1398 ms
+decoding image batch 9/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 9/14) in 1284 ms
+decoding image batch 10/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 10/14) in 1258 ms
+decoding image batch 11/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 11/14) in 1249 ms
+decoding image batch 12/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 12/14) in 1274 ms
+decoding image batch 13/14, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 128 new tokens
+image decoded (batch 13/14) in 1299 ms
+decoding image batch 14/14, n_tokens_batch = 100
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 100 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 100 new tokens
+image decoded (batch 14/14) in 1064 ms
+find_slot: non-consecutive token position 213 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 213 after 4 for sequence 0 with 84 new tokens
+{"language": "de", "original_size": [4020, 436], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "Die Seerose blüht auf dem Teich.", "usage": {"prompt_tokens": 214, "completion_tokens": 12, "total_tokens": 226}, "finish": "stop", "seconds": 56.597094564000145, "independent_gt": ["Die Seerose blüht auf dem Teich"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 12
+image_tokens->ny = 4
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=384, ny=128)
+clip_encode: output embedding shape [2560, 48, 1]
+image slice encoded in 342 ms
+decoding image batch 1/1, n_tokens_batch = 48
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+image decoded (batch 1/1) in 481 ms
+find_slot: non-consecutive token position 99 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 99 after 4 for sequence 0 with 84 new tokens
+{"language": "en", "original_size": [370, 120], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "Dreams\n—Langston Hughes", "usage": {"prompt_tokens": 100, "completion_tokens": 7, "total_tokens": 107}, "finish": "stop", "seconds": 2.6761583240004256, "independent_gt": ["Dreams", "Langston Hughes"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 11
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=352, ny=64)
+clip_encode: output embedding shape [2560, 22, 1]
+image slice encoded in 152 ms
+decoding image batch 1/1, n_tokens_batch = 22
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 22 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 22 new tokens
+image decoded (batch 1/1) in 262 ms
+find_slot: non-consecutive token position 98 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 98 after 4 for sequence 0 with 84 new tokens
+{"language": "be-line-2", "original_size": [361, 78], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "беларусы.", "usage": {"prompt_tokens": 99, "completion_tokens": 6, "total_tokens": 105}, "finish": "stop", "seconds": 2.1588690739990852, "independent_gt": ["Беларусы"], "missing": []}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 16
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=512, ny=96)
+clip_encode: output embedding shape [2560, 48, 1]
+image slice encoded in 348 ms
+decoding image batch 1/1, n_tokens_batch = 48
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 48 new tokens
+image decoded (batch 1/1) in 446 ms
+find_slot: non-consecutive token position 103 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 103 after 4 for sequence 0 with 84 new tokens
+{"language": "be-line-5", "original_size": [520, 90], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "Своё крыўг", "usage": {"prompt_tokens": 104, "completion_tokens": 6, "total_tokens": 110}, "finish": "stop", "seconds": 2.535322970001289, "independent_gt": ["Сваю", "крыўду"], "missing": ["Сваю", "крыўду"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 17
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=544, ny=96)
+clip_encode: output embedding shape [2560, 51, 1]
+image slice encoded in 382 ms
+decoding image batch 1/1, n_tokens_batch = 51
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 51 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 51 new tokens
+image decoded (batch 1/1) in 507 ms
+find_slot: non-consecutive token position 104 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 104 after 4 for sequence 0 with 84 new tokens
+{"language": "be-line-8", "original_size": [541, 93], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "На счет часов.", "usage": {"prompt_tokens": 105, "completion_tokens": 4, "total_tokens": 109}, "finish": "stop", "seconds": 2.390602253999532, "independent_gt": ["На", "свет", "цэлы"], "missing": ["свет", "цэлы"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 20
+image_tokens->ny = 3
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=640, ny=96)
+clip_encode: output embedding shape [2560, 60, 1]
+image slice encoded in 426 ms
+decoding image batch 1/1, n_tokens_batch = 60
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 60 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 60 new tokens
+image decoded (batch 1/1) in 613 ms
+find_slot: non-consecutive token position 107 after 4 for sequence 0 with 84 new tokens
+find_slot: non-consecutive token position 107 after 4 for sequence 0 with 84 new tokens
+{"language": "be-line-11", "original_size": [634, 103], "prompt": "Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks, including Cyrillic і, ў, ё and Latin ä, ö, ü, ß when present. Return only the transcription. Do not translate, modernize, correct or explain the text.", "thinking": false, "text": "сходзьмі з'яцца!", "usage": {"prompt_tokens": 108, "completion_tokens": 9, "total_tokens": 117}, "finish": "stop", "seconds": 3.2458559810002043, "independent_gt": ["людзьмі", "звацца"], "missing": ["людзьмі", "звацца"]}
+Native candidate closed: True

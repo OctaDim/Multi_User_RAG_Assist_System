@@ -1,0 +1,402 @@
+{
+  "base_commit": "122554c808d34ccb1ea679891efb58102b61a1a6",
+  "scope": "All tracked test modules from accepted U7 application suite and active harness pytest testpaths. Function inventory supplements final unfiltered regression commands; it does not establish a pass.",
+  "modules": [
+    {
+      "path": "backend/tests/browser/test_accounts.py",
+      "sha256": "ef8763e27a3985b3a57aab8e5d66c73e2080e322cefefb01d2ef3098e9cbe047",
+      "test_functions": [
+        "test_actual_ui_smtp_roles_block_soft_delete_and_logout",
+        "test_exact_cors_and_public_registration_escalation_refusal",
+        "test_invited_registration_retries_actual_smtp_failure"
+      ]
+    },
+    {
+      "path": "backend/tests/browser/test_answer_lifecycle.py",
+      "sha256": "cd1c15cd70241dd1ff5aa18d1b135dcf86937c8b4a7e6f631cb78d62bc4651e4",
+      "test_functions": [
+        "test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources",
+        "test_real_fragments_precede_answer_without_waiting_for_history_read",
+        "test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation",
+        "test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts",
+        "test_actual_browser_restart_does_not_restore_closed_conversation_drafts",
+        "test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts",
+        "test_actual_print_only_pdf_limitations_reach_answer_passport",
+        "test_old_real_snapshot_cannot_erase_new_request_or_current_fragments"
+      ]
+    },
+    {
+      "path": "backend/tests/browser/test_documents.py",
+      "sha256": "18c5481ddec3a8ed343d0da516fe9fb08f94579b69b3f303867c8179e09dcc2e",
+      "test_functions": [
+        "test_ui_smtp_original_text_correction_and_delete",
+        "test_ui_permission_choice_actual_native_pdf_and_unchanged_original"
+      ]
+    },
+    {
+      "path": "backend/tests/browser/test_draft_lifecycle.py",
+      "sha256": "ce81964600d53bf101ae3fc9448900e37ad227e974269329976f649c63670ab7",
+      "test_functions": [
+        "test_reload_keeps_independent_conversation_and_tab_drafts",
+        "test_close_and_new_tab_discards_drafts_without_changing_neighbor",
+        "test_browser_restore_does_not_restore_closed_drafts",
+        "test_opener_has_an_independent_draft",
+        "test_duplicate_has_an_independent_draft_and_tab_identity",
+        "test_browser_restart_restore_discards_closed_drafts"
+      ]
+    },
+    {
+      "path": "backend/tests/browser/test_invalidation.py",
+      "sha256": "a4c65dac3511924ae98ec1c756e776b598f0201b09e82b6b2aa828d2476eaa4c",
+      "test_functions": [
+        "test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ]
+    },
+    {
+      "path": "backend/tests/integration/test_multi_process.py",
+      "sha256": "c70f7479b7fff9cce58eede03fad9a4886359120bb54004371a665b6348acbb8",
+      "test_functions": [
+        "test_two_http_processes_share_native_capacity_fairness_and_hot_settings"
+      ]
+    },
+    {
+      "path": "backend/tests/runtime/test_generation_contract.py",
+      "sha256": "c1a4e850084478982d9e4bdfdf9304a311d8b9789adfe0f6d23658285aa04e39",
+      "test_functions": [
+        "test_native_twelve_contexts_hot_limits_and_fair_steps",
+        "test_native_eos_releases_one_context_without_stalling_another"
+      ]
+    },
+    {
+      "path": "backend/tests/runtime/test_production_runtime.py",
+      "sha256": "8da05d3a8d812121e0d5690fdca340ce856f5804ead0f7cf13509f393b14c5db",
+      "test_functions": [
+        "test_independent_production_contexts_match_u1_prefix",
+        "test_real_eos_and_incremental_russian_utf8",
+        "test_actual_token_budget_has_no_prompt_clamp",
+        "test_abort_and_close_wait_for_real_native_decode",
+        "test_partial_allocation_is_freed_on_sampler_failure",
+        "test_admission_vocabulary_matches_loaded_model_and_preserves_live_context"
+      ]
+    },
+    {
+      "path": "backend/tests/test_accounts.py",
+      "sha256": "0b77bd289bf99d6b137f20d96bbd7e54b40056acb3c203d0b21615aad9333e93",
+      "test_functions": [
+        "test_real_registration_mail_verification_and_login",
+        "test_passwords_validation_roles_and_credentials_do_not_leak",
+        "test_verification_expiry_resend_and_block_are_independent",
+        "test_operator_invitation_roles_admin_boundaries_and_audit",
+        "test_concurrent_registration_has_one_account",
+        "test_resend_links_are_one_use_despite_delivery_order",
+        "test_unchanged_or_increased_access_preserves_session_and_execution",
+        "test_origin_session_and_account_mutations_fence_shared_writes",
+        "test_expired_bootstrap_and_session_are_refused",
+        "test_missing_or_failed_smtp_has_no_verification_bypass"
+      ]
+    },
+    {
+      "path": "backend/tests/test_admission.py",
+      "sha256": "48598ae89eae689bf39dafd9a26c8af841ab3e2091e2b5a074a3d2bded0cf138",
+      "test_functions": [
+        "test_concurrent_different_questions_accept_exactly_one",
+        "test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation",
+        "test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key",
+        "test_no_ready_sources_refuses_without_history_or_late_auto_admission",
+        "test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read",
+        "test_current_account_state_is_checked_on_every_operation",
+        "test_anonymous_or_expired_session_is_denied",
+        "test_failed_transaction_leaves_no_partial_admission",
+        "test_unavailable_coordinator_refuses_before_admission",
+        "test_database_enforces_occupancy_and_owner_operation_uniqueness"
+      ]
+    },
+    {
+      "path": "backend/tests/test_document_ocr.py",
+      "sha256": "608152ef9252e849a3abcf044f11afc8547cbb3493799ee458a2a806845801d6",
+      "test_functions": [
+        "test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting",
+        "test_invalid_or_degenerate_native_coordinates_fail_whole_page",
+        "test_documented_wrapped_locations_are_not_part_of_recognized_text",
+        "test_diagonal_zero_area_polygon_is_rejected",
+        "test_actual_native_abort_and_close_wait_for_c_return"
+      ]
+    },
+    {
+      "path": "backend/tests/test_documents.py",
+      "sha256": "f837fd447bb3f944c5189784864ee220e2329a7a3f73ba6a61cdf9baba3cb71a",
+      "test_functions": [
+        "test_actual_original_upload_is_not_a_ready_source",
+        "test_real_text_publisher_indexes_whole_original",
+        "test_worker_restart_ends_lost_job_without_requeue",
+        "test_revoked_permission_and_account_access_stop_queued_documents",
+        "test_lower_quota_keeps_admitted_upload_and_denies_new_one",
+        "test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume",
+        "test_database_failure_after_atomic_file_link_keeps_original_accounted",
+        "test_real_correction_switches_whole_index_and_preserves_original",
+        "test_revocation_after_detection_cannot_start_recognition",
+        "test_real_pdf_skip_publisher_and_manual_correction",
+        "test_long_unicode_original_has_no_silent_embedding_tail_loss",
+        "test_docx_headers_footnotes_and_body_are_all_published",
+        "test_real_docx_embedded_handwriting_is_processed_before_publication",
+        "test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file"
+      ]
+    },
+    {
+      "path": "backend/tests/test_frontend_reducer.py",
+      "sha256": "a148485f11e240e378b0c7c3715744a1bd8a517d88559557ce6a2d26217910db",
+      "test_functions": [
+        "test_delayed_empty_snapshot_keeps_accepted_request_and_new_draft",
+        "test_source_status_event_marks_original_without_replacing_quote"
+      ]
+    },
+    {
+      "path": "backend/tests/test_http.py",
+      "sha256": "5b255ffefdc15668f5fc75e96aa2c847ba5eef35d0c70eafd8ae1a7732043ee4",
+      "test_functions": [
+        "test_http_rejects_missing_credentials_and_restart_only_settings",
+        "test_http_accepts_one_question_replays_ack_and_stops",
+        "test_api_lifespan_restart_preserves_overrides_and_applied_revision",
+        "test_login_preflight_is_public_and_keeps_exact_cors_origin"
+      ]
+    },
+    {
+      "path": "backend/tests/test_invalidation.py",
+      "sha256": "ac32a48eaf3e4a4e612d72af03b8967d6653568fe33ac75c3c87cdf701a62b05",
+      "test_functions": [
+        "test_role_downgrade_closes_prepared_admin_response",
+        "test_deleted_document_closes_prepared_original_png_and_json",
+        "test_account_view_is_freshly_serialized_at_handoff",
+        "test_generic_asgi_without_private_handoff_fails_closed",
+        "test_deduplicated_completed_ack_contains_citations",
+        "test_correction_marks_request_snapshot_and_notifies_all_tabs",
+        "test_prepared_sse_and_replay_rechecks_source_and_tab",
+        "test_prepared_snapshot_retains_old_quote_with_current_correction_flags",
+        "test_irreducible_native_question_budget_refuses_before_admission",
+        "test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation",
+        "test_correction_of_prior_history_after_admission_keeps_current_question",
+        "test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor",
+        "test_minted_login_token_is_fenced_before_private_body",
+        "test_current_session_fences_prepared_json_but_logout_ack_stays_minimal",
+        "test_natural_session_expiry_during_serialization_closes_unhanded_body",
+        "test_real_database_complete_races_invalidation_with_one_terminal_outcome",
+        "test_real_database_output_races_account_revoke_without_late_publication",
+        "test_stop_old_request_races_new_admission_and_old_pending_writes_cannot_change_new_context",
+        "test_real_socket_backpressure_revocation_holds_no_database_locks",
+        "test_account_revoke_closes_prepared_body_before_real_handoff"
+      ]
+    },
+    {
+      "path": "backend/tests/test_rag_context.py",
+      "sha256": "dcf731972d6e685555b10609553f13a591decb2dc26283fc22c1df19b96e2a81",
+      "test_functions": [
+        "test_actual_async_graph_commits_fragments_before_model_callback",
+        "test_not_ready_selected_and_unmatched_ready_sources_are_distinct",
+        "test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint",
+        "test_transitive_history_provenance_removes_derived_text_and_keeps_ui",
+        "test_delayed_checkpoint_and_pending_writes_are_denied_after_correction",
+        "test_correction_before_late_complete_marks_original_without_cancelling",
+        "test_deselected_source_cannot_reenter_current_model_scope_through_history",
+        "test_every_saver_operation_rechecks_access_identity_and_epochs",
+        "test_malicious_doc_cannot_expand_scope_and_invented_quotes_are_rejected",
+        "test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt",
+        "test_real_e5_mean_pooling_and_real_pgvector_retrieval",
+        "test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments"
+      ]
+    },
+    {
+      "path": "backend/tests/test_resources.py",
+      "sha256": "00bc98aad85f36a69edf08095f0e0ddf678ccb022d9c4d34a0da7c2bd1fa66c0",
+      "test_functions": [
+        "test_installed_package_ignores_an_unrelated_neighbor_config",
+        "test_working_tree_resources_still_load_runtime_and_migrations"
+      ]
+    },
+    {
+      "path": "backend/tests/test_scheduler.py",
+      "sha256": "8ba18e589009e598a6691ec8191746a371e4f08a231f4e7ef55285a416aa02d9",
+      "test_functions": [
+        "test_global_round_robin_and_hot_settings_keep_native_reservations",
+        "test_saved_shrink_during_allocation_applies_before_next_admission",
+        "test_stop_wins_dequeue_and_late_computed_token_is_not_committed",
+        "test_native_error_preserves_only_committed_prefix_without_retry",
+        "test_logical_stop_does_not_release_physical_slot_until_ack",
+        "test_failed_native_allocation_releases_reservation_without_empty_answer",
+        "test_search_state_is_published_before_graph_work"
+      ]
+    },
+    {
+      "path": "backend/tests/test_service_recovery.py",
+      "sha256": "7e61d6eace67634aa22bc3f181e851c199d7dc9aae152120ce7b3df68ea4571c",
+      "test_functions": [
+        "test_application_service_lock_does_not_cancel_healthy_supervisor",
+        "test_real_supervisor_reaps_native_process_before_replacement",
+        "test_live_predecessor_record_blocks_unconfirmed_replacement",
+        "test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed"
+      ]
+    },
+    {
+      "path": "backend/tests/test_settings.py",
+      "sha256": "6178d90a0576c20e74d3bce671c90aa82651241467465e97ecc1d846917c5724",
+      "test_functions": [
+        "test_saved_overrides_survive_repeated_controlled_migration",
+        "test_global_changes_require_super_admin",
+        "test_restart_only_and_invalid_changes_do_not_change_revision"
+      ]
+    },
+    {
+      "path": "backend/tests/test_source_contract.py",
+      "sha256": "80cee120f902ac2d024177a51aa686ab02a21a7fd97c959bc82bce335091c7b9",
+      "test_functions": [
+        "test_ready_flag_without_whole_published_revision_is_rejected",
+        "test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded",
+        "test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor",
+        "test_explicit_ready_skip_mode_retrieves_only_printed_text_with_limitations",
+        "test_owner_and_scope_are_enforced_by_pgvector_not_document_instructions",
+        "test_published_revision_is_immutable_so_ocr_correction_needs_new_identity"
+      ]
+    },
+    {
+      "path": "backend/tests/test_stream_recovery.py",
+      "sha256": "e441a6d68052f433ce67d9cc5a76c2a73301144fcc28b29a78185f338546c21f",
+      "test_functions": [
+        "test_admission_requires_confirmed_connection",
+        "test_idle_expired_tab_lock_does_not_delay_another_origin_deadline",
+        "test_owner_snapshot_preserves_multiple_and_empty_conversations",
+        "test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless",
+        "test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue",
+        "test_terminal_during_grace_is_immediate_and_survives_timeout",
+        "test_background_conversations_and_missing_heartbeat_ack",
+        "test_proof_owner_and_epoch_checks",
+        "test_snapshot_replay_monotonic_and_access_rechecked",
+        "test_snapshot_watermark_waits_for_lower_uncommitted_event",
+        "test_heartbeat_challenge_is_one_use_and_unconfirmed_reconnect_refuses_new_admission",
+        "test_same_native_context_continues_through_reconnect_and_dedupe",
+        "test_delayed_search_callback_cannot_publish_after_deadline",
+        "test_unacknowledged_reconnect_does_not_extend_original_grace",
+        "test_reconnect_and_expiry_race_share_tab_lock",
+        "test_actual_tab_sse_confirmed_on_second_api_and_deadline_survives_first_api_death"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_ensure_entrypoint_links.py",
+      "sha256": "e47e2371dd2f79f3fbf719cd5d75c0c593aaa2c02fd817ec8ae1001021ff1b7c",
+      "test_functions": [
+        "TestEntryPointLinks.test_creates_four_links_and_import_then_preserves_bytes",
+        "TestEntryPointLinks.test_repairs_each_repeated_block_before_index_without_changing_settings",
+        "TestEntryPointLinks.test_only_appends_missing_links_preserving_user_text",
+        "TestEntryPointLinks.test_link_examples_in_code_do_not_count_as_real_links",
+        "TestEntryPointLinks.test_repair_preserves_original_bytes_and_each_files_line_endings",
+        "TestEntryPointLinks.test_valid_crlf_bridge_is_preserved_without_warning_or_repair",
+        "TestEntryPointLinks.test_longer_fence_closers_do_not_turn_examples_into_installed_links",
+        "TestEntryPointLinks.test_unclosed_fence_fails_before_writing_either_entrypoint",
+        "TestEntryPointLinks.test_damaged_package_is_reported_without_creating_dangling_links",
+        "TestEntryPointLinks.test_common_only_creates_neutral_project",
+        "TestEntryPointLinks.test_existing_project_is_not_regenerated_or_exported",
+        "TestEntryPointLinks.test_new_template_categories_apply_only_to_new_project",
+        "TestEntryPointLinks.test_project_only_is_rejected_before_writes",
+        "TestEntryPointLinks.test_unsafe_project_path_is_rejected_without_writes",
+        "TestEntryPointLinks.test_invalid_template_does_not_create_project",
+        "TestEntryPointLinks.test_invalid_entrypoint_prevents_project_creation",
+        "TestEntryPointLinks.test_adds_import_and_warns_about_extra_claude_content_without_deleting_it",
+        "TestEntryPointLinks.test_refuses_symlinked_entrypoint_without_changing_target",
+        "TestEntryPointLinks.test_rules_link_is_restored_with_existing_valid_copies",
+        "TestEntryPointLinks.test_existing_relative_rules_links_are_not_duplicated",
+        "TestEntryPointLinks.test_unsafe_rules_directory_does_not_change_entrypoints",
+        "TestEntryPointLinks.test_deleted_project_recreates_neutral_skeleton_without_history",
+        "TestEntryPointLinks.test_partial_project_missing_entrypoint_fails_without_replacement",
+        "TestEntryPointLinks.test_empty_or_invalid_utf8_resources_refuse_before_input_writes",
+        "TestEntryPointLinks.test_invalid_rule_copies_are_refused_without_automatic_publication",
+        "TestEntryPointLinks.test_personal_nested_rules_and_human_bodies_are_not_canonical_copies",
+        "TestEntryPointLinks.test_complete_block_in_wrong_order_refuses_without_reordering_user_file",
+        "TestEntryPointLinks.test_repeated_block_with_two_missing_links_is_repaired_locally",
+        "TestEntryPointLinks.test_ambiguous_partial_link_list_refuses_without_adding_to_user_list",
+        "TestEntryPointLinks.test_three_custom_user_links_are_not_assumed_to_be_a_generated_block",
+        "TestEntryPointLinks.test_relative_anchored_complete_block_order_is_checked_without_rewriting",
+        "TestEntryPointLinks.test_container_fenced_examples_do_not_supply_startup_connections",
+        "TestEntryPointLinks.test_unclosed_quote_fence_refuses_without_autoclosing",
+        "TestEntryPointLinks.test_unreadable_nested_rule_directory_refuses_before_repairs",
+        "TestEntryPointLinks.test_unsupported_recursive_container_fence_refuses_without_writes"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_entrypoint_notifications.py",
+      "sha256": "00e4f08a16c80208099631c5def098de738f87de61f928062dec948a28056d10",
+      "test_functions": [
+        "TestNotification.test_no_git_binary_or_repository_or_baseline_is_required",
+        "TestNotification.test_instruction_change_is_reported_and_preserved_without_blocking",
+        "TestNotification.test_rules_instruction_added_inside_fence_is_reported_as_a_settings_change",
+        "TestNotification.test_unclosed_historical_fence_does_not_block_repair_of_valid_current_file",
+        "TestNotification.test_extra_bridge_text_warns_without_rewriting_or_blocking",
+        "TestNotification.test_repair_is_announced_and_next_run_has_no_damage_message",
+        "TestNotification.test_repair_message_is_visible_before_the_first_write",
+        "TestNotification.test_rules_repair_is_not_reported_as_a_settings_change",
+        "TestNotification.test_check_installs_no_hooks_or_configuration_and_does_not_block_commit",
+        "TestNotification.test_crlf_link_repair_is_not_reported_as_a_settings_change",
+        "TestNotification.test_atomic_repair_preserves_permissions_and_crlf",
+        "TestNotification.test_parallel_edit_during_planning_is_preserved",
+        "TestNotification.test_concurrent_bridge_edit_after_first_replace_reports_partial_result",
+        "TestNotification.test_atomic_io_failure_preserves_original_and_removes_temporary_file",
+        "TestNotification.test_atomic_repair_preserves_extended_attributes_and_acl"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_entrypoint_portability.py",
+      "sha256": "0309f78b81692c3e65109381fbe8a583e3eb4ce7330167cf0dc3a9aed0f012d5",
+      "test_functions": [
+        "TestPortability.test_startup_command_runs_in_each_clean_mode_without_git",
+        "TestPortability.test_existing_settings_and_startup_command_are_never_rewritten",
+        "TestPortability.test_common_checker_rejects_symlinked_paths_without_writes",
+        "TestPortability.test_required_resource_damage_is_detected",
+        "TestPortability.test_project_only_rejected_without_writes",
+        "TestPortability.test_direct_checker_rejects_its_own_symlinked_path",
+        "TestPortability.test_symlinked_target_root_is_rejected_without_writes"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_harness_symlinks.py",
+      "sha256": "c13c9234984c6e5f01070fe54882b203b1cfdf8d1f577b725fefdc2ed0af4113",
+      "test_functions": [
+        "test_startup_rejects_every_harness_link_before_repair",
+        "test_python_tools_reject_tree_link_before_running_work",
+        "test_native_check_rejects_linked_inputs_and_outputs_before_probe",
+        "test_node_tool_rejects_links_before_access",
+        "test_node_tool_rejects_linked_ancestor_even_before_dotdot",
+        "test_installed_analyzer_rejects_original_target_before_normalizing",
+        "test_native_check_rejects_linked_runtime_directories_before_writes",
+        "test_temp_directory_probe_does_not_write_through_link"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_human_guide_reader.py",
+      "sha256": "cdda851d920e8927ea078f00d7a059087f25be34bb5fa6258268b0bbf319d29b",
+      "test_functions": [
+        "test_rule_reader_rejects_globs_missing_files_and_combined_calls"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_plugin_eval_without_human.py",
+      "sha256": "66f4cbadfa566dacee8ad23e2f2e2d1bed552873ce7eedb20e3c41f35c21a1ea",
+      "test_functions": [
+        "TestHumanFilter.test_installed_analyzer_and_read_guards"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_rule_copies.py",
+      "sha256": "0803d3982259303841338babc33cffd1bc40681c7205f7bd80dd75bae73d2c00",
+      "test_functions": [
+        "TestRuleCopies.test_installed_rule_copies",
+        "TestRuleCopies.test_project_only_rules_are_rejected",
+        "TestRuleCopies.test_copy_drift_is_detected"
+      ]
+    },
+    {
+      "path": "harness/common/testing/tests/test_skills_first_knowledge.py",
+      "sha256": "23123cf3a7b2364345bf0de917b7e11fee5eaa94d3aa0288967c8f8d9ed0c899",
+      "test_functions": [
+        "test_active_skill_resources_and_native_copies_are_complete",
+        "test_active_maps_and_approved_template_have_no_lessons"
+      ]
+    }
+  ]
+}

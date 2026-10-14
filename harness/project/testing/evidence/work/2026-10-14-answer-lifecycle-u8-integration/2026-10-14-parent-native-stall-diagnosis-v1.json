@@ -1,0 +1,301 @@
+{
+  "created_at_utc": "2026-10-14T20:48:26.520872+00:00",
+  "status": "read_only_diagnosis_complete__runtime_causes_not_established",
+  "purpose": "ordinary application diagnosis; new linked addendum to immutable failed ALLv2 run",
+  "delegation": "ce-work/references/review-findings-followup.md broader research; no subagents",
+  "constraints": {
+    "source_writes": false,
+    "test_native_browser_server_jobs_run": false,
+    "test_bodies_modified": false,
+    "acceptance_thresholds_or_R12_deadlines_changed": false,
+    "only_artifact_written": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-native-stall-diagnosis-v1.json"
+  },
+  "startup": {
+    "entrypoint_check": "passed",
+    "rules_read": "all ten recursive Markdown rules excluding README.human.md; truncation reread in complete small calls",
+    "workflow": "same parent-authorized CE task; delegated agents ignore using-superpowers"
+  },
+  "original_run": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-all-application-v2.log",
+  "measured_log_facts": {
+    "test_actual_twenty_page_failur0": {
+      "native_steps": 2317,
+      "allocations": 0,
+      "releases": [],
+      "promoted_prefill_count": 0,
+      "promoted_token_count": 0
+    },
+    "test_thirty_real_accounts_ten_0": {
+      "native_steps": 885,
+      "allocations": 12,
+      "releases": [
+        {
+          "event": "native_release",
+          "request": "9989b6c8-5a3c-4af0-a6d7-de43deab3f39",
+          "epoch": 1,
+          "physical_active": 11,
+          "line": 5826,
+          "last_promoted": {
+            "request": "9989b6c8-5a3c-4af0-a6d7-de43deab3f39",
+            "phase": "prefill",
+            "token": null,
+            "position": 128
+          },
+          "prompt_tokens": 1883
+        },
+        {
+          "event": "native_release",
+          "request": "1f06b0df-7436-46c0-9b0b-91241eefcfeb",
+          "epoch": 1,
+          "physical_active": 10,
+          "line": 5827,
+          "last_promoted": {
+            "request": "1f06b0df-7436-46c0-9b0b-91241eefcfeb",
+            "phase": "prefill",
+            "token": null,
+            "position": 128
+          },
+          "prompt_tokens": 1887
+        },
+        {
+          "event": "native_release",
+          "request": "6275637c-5bee-48f3-91c9-938306351dc7",
+          "epoch": 1,
+          "physical_active": 9,
+          "line": 5828,
+          "last_promoted": {
+            "request": "6275637c-5bee-48f3-91c9-938306351dc7",
+            "phase": "prefill",
+            "token": null,
+            "position": 96
+          },
+          "prompt_tokens": 1877
+        }
+      ],
+      "promoted_prefill_count": 159,
+      "promoted_token_count": 0
+    }
+  },
+  "whole_pdf": {
+    "proven": "Playwright next click waited 30000ms on disabled #refresh-documents. Two finish_page outputs contain exactly correct handwriting title/author and printed 100-euro budget. Generation had 2317 steps and zero allocations/promotions, so this failure is not a crowded generation native-context condition.",
+    "disabled_control_path": [
+      "frontend/src/app.js:221 calls perform(showLibrary, refresh-documents)",
+      "frontend/src/app.js:46-58 disables control before operation and finally reenables after promise settles",
+      "frontend/src/app.js:98-99 awaits api(/documents)",
+      "frontend/src/api.js:10-13 awaits fetch, then response body json/blob; no independent request timeout"
+    ],
+    "localization_limit": "Disabled control proves operation did not reach its finally within click window. It does not distinguish pending fetch, pending response body, browser scheduling/JS execution delay, or backend resource wait.",
+    "missing_observation": "UI uses real_account_browser FIRST API, whose stdout and stderr are DEVNULL (backend/tests/browser/test_accounts.py:72-73). api-2.log belongs to second unused API for this UI. No first API HTTP timing, pool wait, task stacks, browser network timing, or PostgreSQL wait/blocker snapshot exists in inspected evidence.",
+    "not_established": [
+      "deadlock",
+      "pool starvation",
+      "HTTP connection starvation",
+      "native OCR stall",
+      "OOM",
+      "corrupt OCR/cache"
+    ]
+  },
+  "load": {
+    "proven": "12 real contexts were allocated at max_active12; shrink6/step2 preserved excess. Three releases occur at log5826-5828 while prompt positions are128,128,96 against prompt lengths1883,1887,1877. All159 promotions are prefill; no token promotion occurs. At test memory sample only9 contexts remain. Native decode ret2 and compute error1 occur immediately before releases, but request terminal reasons and cancellation initiators are absent.",
+    "release_call_paths": [
+      "Coordinator.cancel_invalid catches guard AccessError then (except terminal/lost execution) finish(interrupted,error.code) and release",
+      "Coordinator.step catches AccessError -> finish(interrupted,error.code) -> release; catches Exception -> finish(failed,generation_error) -> release",
+      "Coordinator.step handles done result -> transition(completed for eos, otherwise interrupted reason) -> release",
+      "Coordinator.admit_ready exceptional allocation cleanup -> release",
+      "Coordinator.close on shutdown -> release"
+    ],
+    "important_control_flow": "Coordinator.release always calls context.cancel before close; llama_runtime abort callback reads its cancellation Event. Consequently decode abort is compatible with application-directed cancellation and cannot establish OOM or native spontaneous model failure. Step trace excludes done/reason and native_release excludes cause; a cancelled prefill can still appear in promoted list before post-compute guard rejects publication.",
+    "presence_path": [
+      "events.origin derives timeout from expired ack_until +10sec grace; explicit deadline also applies",
+      "events.settle transitions unfinished requests to interrupted/tab_timeout when deadline expires",
+      "API SSE heartbeats every5sec; ACK_TIMEOUT15sec/GRACE10sec; frontend receive awaits ordinary heartbeat API call before continuing stream consumption",
+      "Coordinator.guard calls originating_session, source locks, origin, conversation lock, request lock; concurrent watch() reevaluates guards every50ms"
+    ],
+    "missing_observation": "For three released IDs, capture requests.state/reason/version/origin_tab and tabs.connected/confirmed/connection_epoch/ack_until/deadline at first cancellation, plus actual first API heartbeat failures/timing. No such capture exists. Cannot honestly assert tab_timeout from these logs alone.",
+    "not_established": [
+      "tab_timeout as actual cause",
+      "natural answer completion",
+      "model capacity SLA failure",
+      "shrink itself cancelling excess",
+      "OOM",
+      "native decode error as primary cause"
+    ]
+  },
+  "blocking_audit": {
+    "service_barrier": "API requests, SSE reads and H11 authorized handoff all acquire shared or exclusive service_state row first; root snapshots/SSE read/transport handoff use exclusive mode. This is a reachable global serialization point requiring runtime wait measurement, not proof of failure.",
+    "handoff": "GuardedH11Protocol drains network before starting DB transaction; serialize and ready transport send occur under exclusive service row. It rebuilds documents listing and SSE snapshots on same borrowed connection. Inspecting source does not support alleging that network drain itself holds a DB transaction.",
+    "pool": "main creates default AsyncConnectionPool; SSE releases its borrowed connection before yielding; handoff independently borrows at send. Source alone does not prove pool exhaustion.",
+    "lock_order": "Relevant paths generally begin service -> account/session -> documents -> tab -> conversation -> request. No demonstrated inversion/deadlock can be tied to two failed runs without pg_stat_activity/pg_locks evidence.",
+    "ocr": "Document worker guard transactions are separate from to_thread finish_page native calls; no source evidence here establishes long native compute holding the service row."
+  },
+  "smallest_discriminating_next_step": {
+    "owner": "parent alone runs diagnostic/native jobs",
+    "acceptance": "Keep ALL bodies144app/72harness, 12/3 baseline, roles, assertions, R12 deadlines and native workload unchanged.",
+    "method": "Use diagnostic runner/launcher wrappers, without editing acceptance test bodies, to add observations to one unchanged whole-pdf case and one unchanged real load case.",
+    "instrumentation": [
+      "Capture FIRST API stdout/stderr rather than DEVNULL in external Popen wrapper; include per-request start/end monotonic timestamps, route, process and pool.get_stats, omitting auth tokens/proofs/challenges.",
+      "Wrap Coordinator guard catch/finish/release with diagnostic events containing request ID, caller path, AccessError.code or exception type, native done/reason/cancel flag; collect matching request state/reason and tab ack/deadline BEFORE release. Do not change cancellation decisions.",
+      "Independent PostgreSQL observer samples pg_stat_activity pid/application_name/state/wait_event_type/wait_event/xact_start/query_start plus pg_blocking_pids(pid), service/tabs/request locks, requests.state/reason and tab timestamps during the pending window. Redact credentials.",
+      "Browser external observer records request/requestfinished/requestfailed and response-end monotonic timestamps for /documents and /heartbeat plus refresh button disabled transitions. Capture actual JS console errors."
+    ],
+    "decision": "Heartbeat delay + expired tab + interrupted/tab_timeout establishes cancellation route; native failed/generation_error with no prior cancel establishes separate compute error. /documents pending with PostgreSQL blocker proves SQL wait; browser pending with no API arrival and free DB distinguishes browser/network. HTTP end completed but disabled button distinguishes browser execution/render path.",
+    "completion": "Fix only the evidenced cause in original authorized scope, then rerun unchanged affected acceptance gates. No threshold relaxation justified."
+  },
+  "read_references": [
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_page_failure.py",
+      "sha256_at_report_creation": "96527f06370e16bec691ce8654babe0881e761bd5b8b0e8e1f6638868b58c420",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_answer_lifecycle.py",
+      "sha256_at_report_creation": "b94f5a516737e5432ca89a49836b86b8e077b2e0cbec952903c17d3077fe35cb",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/browser/test_accounts.py",
+      "sha256_at_report_creation": "ef8763e27a3985b3a57aab8e5d66c73e2080e322cefefb01d2ef3098e9cbe047",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/browser/test_documents.py",
+      "sha256_at_report_creation": "18c5481ddec3a8ed343d0da516fe9fb08f94579b69b3f303867c8179e09dcc2e",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/app.js",
+      "sha256_at_report_creation": "2b97d193a1fcfe697f4ba90e3ad37c96afd350ee84bc2cf34404368a38b50a2d",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/api.js",
+      "sha256_at_report_creation": "721527b88a5575cadbc79578323ac101e3f3a57e44c5114700adfe53765a1171",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/frontend/src/conversations.js",
+      "sha256_at_report_creation": "7faa8d20e0fe1d4cc6173360ad2c537062e67e784ddf9a827f931c2fc9e5b8b3",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/auth.py",
+      "sha256_at_report_creation": "ed4e335d5464442865ef44c2708de57e426b8b65732818ae7ce83db0d9175a4e",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/events.py",
+      "sha256_at_report_creation": "62b9380b4e0e5fc13a3d53d95f5e5f1abc02a8cb3a13beded0f6907653fc843b",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py",
+      "sha256_at_report_creation": "b97f28fff1fdb74c97c57687841681919e418dbbfb69f658b52088e3bdc9c439",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/llama_runtime.py",
+      "sha256_at_report_creation": "64397ba4a2ea08d7774c428c279d14a4ac6a513956f888c96b8556a68cf1f811",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/handoff.py",
+      "sha256_at_report_creation": "9e86822be246fae43d3383be68d46f380e793ec7fd204840f6cf30b49fbe141a",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/main.py",
+      "sha256_at_report_creation": "d6b689f6ea66f62a2b8207424e1cfbb84d2e0340083f5256baab3d2c2843a2fe",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/api/tabs.py",
+      "sha256_at_report_creation": "8669eba974eef94378407ead8da672374a9a2ec67f26d46498309facbef3177d",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/api/answers.py",
+      "sha256_at_report_creation": "279529afb5d746b45a6f026d10b076edd1e1a92b8c23e2f85ef7f8958f3fb070",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/api/documents.py",
+      "sha256_at_report_creation": "9b6d559d65864966479c2117b607f1dd858226a11044954736a257cb08f46979",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/answers.py",
+      "sha256_at_report_creation": "71bf5dbdf4362bdc4174a8111c6a80ef59ee6ff25535cc8fa1c97ec19dd9acae",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/documents.py",
+      "sha256_at_report_creation": "e1e64481a283a3a6488216cc4b5b2770070157b15e0cc28e6daac094a66d185f",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/document_worker.py",
+      "sha256_at_report_creation": "d4cdff76a30f24046068784dc219ba50672a66a838a9c32e252118278a6423ab",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/db.py",
+      "sha256_at_report_creation": "a9023f28e0c99105e0a0d22c63491c2791d9b45602e33d1c33b08920ea480f23",
+      "inspection": "full or targeted relevant sections/search matches"
+    },
+    {
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-all-application-v2.log",
+      "sha256": "1d7f05c8b95e156798d22fe6905a8ce5c35eeeccd0de03ddbf0d2c4b716b67ef",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_actual_twenty_page_failur0/generation.log",
+      "sha256": "e1df2042ee30ffed3275a4d01b0d8acb8f38ebb60cc6ca6b22c74d9e98300f58",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_actual_twenty_page_failur0/api-2.log",
+      "sha256": "5d6513d10c3cdfd2ba9e68f817f514e315e8b980a5f2e2aaa63da7ced3d589ff",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_actual_twenty_page_failur0/document-worker.log",
+      "sha256": "dda8ca247005c2f80ee3d8b7629ec3ba11133357b302591964114cbd34de13f6",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_thirty_real_accounts_ten_0/generation.log",
+      "sha256": "78958994951398c87a6cba686785d95960aeea43c57603ed74fe52a7ba887247",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_thirty_real_accounts_ten_0/api-2.log",
+      "sha256": "c6689466ad4e8e9773aec543fca9aa356960b27ce4c3d0e1a5b1eafabfcc85c6",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_thirty_real_accounts_ten_0/document-worker.log",
+      "sha256": "66fc343ad2fbf6684caf17f9fe4d994d66107d501a5796b3d1d27024d3bf37b0",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    },
+    {
+      "path": "/tmp/rag-u8-all-application-v2/test_actual_twenty_page_failur0/actual-finished-pages.jsonl",
+      "sha256": "d05b9f6033720884a7d146fc37940ab3f77890660f3b2e76bbf8869bb788b353",
+      "inspection": "targeted lines/tails or parsed native event rows"
+    }
+  ],
+  "instruction_references": [
+    "harness/common/START.md",
+    "harness/project/START.md",
+    ".claude/rules (all10 machine rules)",
+    "harness/common/INDEX.md",
+    "harness/project/INDEX.md",
+    "harness/common/skills/comm-protect-harness-evidence/SKILL.md",
+    "harness/common/skills/comm-protect-harness-evidence/references/operations.md",
+    "harness/common/skills/comm-process-harness-inbox/SKILL.md",
+    "harness/common/skills/comm-process-harness-inbox/references/workflow.md",
+    "harness/common/skills/comm-preserve-harness-knowledge/SKILL.md",
+    "harness/common/skills/comm-preserve-harness-knowledge/references/material-placement.md",
+    "harness/common/skills/comm-preserve-harness-knowledge/references/experience-routing.md",
+    "harness/common/specs/2026-10-06-structure-and-creation-dates.md",
+    "/home/octadim/.codex/plugins/cache/compound-engineering-plugin/compound-engineering/3.30.5/skills/ce-work/references/review-findings-followup.md"
+  ]
+}

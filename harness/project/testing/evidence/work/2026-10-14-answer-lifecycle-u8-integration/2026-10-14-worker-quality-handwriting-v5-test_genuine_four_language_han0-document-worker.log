@@ -1,0 +1,144 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 35
+image_tokens->ny = 35
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=980, ny=980)
+clip_encode: output embedding shape [1024, 1225, 1]
+image slice encoded in 28103 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 1514 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 374 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 271 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 209 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 284 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 309 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 284 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 241 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 389 ms
+decoding image batch 10/10, n_tokens_batch = 73
+image decoded (batch 10/10) in 325 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 35
+image_tokens->ny = 35
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=980, ny=980)
+clip_encode: output embedding shape [1024, 1225, 1]
+image slice encoded in 33308 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2215 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 157 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 206 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 260 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 213 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 192 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 191 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 243 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 209 ms
+decoding image batch 10/10, n_tokens_batch = 73
+image decoded (batch 10/10) in 212 ms
+error ignored in rollback on <psycopg.AsyncConnection [INTRANS] (user=postgres database=u8_8bb75bc374474d12ae08ee7a63ccc174) at 0x76ea10cc6c60>: Explicit rollback() forbidden within a Transaction context. (Either raise Rollback() or allow an exception to propagate out of the context.)
+rolling back returned connection: <psycopg.AsyncConnection [INTRANS] (user=postgres database=u8_8bb75bc374474d12ae08ee7a63ccc174) at 0x76ea10cc6c60>
+rollback failed: ProgrammingError: Explicit rollback() forbidden within a Transaction context. (Either raise Rollback() or allow an exception to propagate out of the context.). Discarding connection <psycopg.AsyncConnection [INTRANS] (user=postgres database=u8_8bb75bc374474d12ae08ee7a63ccc174) at 0x76ea10cc6c60>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x76ea10cc6c60>
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 35
+image_tokens->ny = 35
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=980, ny=980)
+clip_encode: output embedding shape [1024, 1225, 1]
+image slice encoded in 29604 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2154 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 178 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 163 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 160 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 179 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 173 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 235 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 186 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 233 ms
+decoding image batch 10/10, n_tokens_batch = 73
+image decoded (batch 10/10) in 183 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 30
+image_tokens->ny = 41
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=840, ny=1148)
+clip_encode: output embedding shape [1024, 1230, 1]
+image slice encoded in 32111 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2523 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 332 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 268 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 270 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 233 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 273 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 307 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 304 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 325 ms
+decoding image batch 10/10, n_tokens_batch = 78
+image decoded (batch 10/10) in 212 ms

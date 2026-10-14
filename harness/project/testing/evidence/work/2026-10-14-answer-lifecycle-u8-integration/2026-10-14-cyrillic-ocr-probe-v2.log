@@ -1,0 +1,71 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 34
+image_tokens->ny = 11
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=952, ny=308)
+clip_encode: output embedding shape [1024, 374, 1]
+image slice encoded in 5293 ms
+decoding image batch 1/3, n_tokens_batch = 128
+image decoded (batch 1/3) in 101 ms
+decoding image batch 2/3, n_tokens_batch = 128
+image decoded (batch 2/3) in 99 ms
+decoding image batch 3/3, n_tokens_batch = 118
+image decoded (batch 3/3) in 104 ms
+{"language": "ru", "profile": "official-1605632-spotting", "prompt": "Spotting:", "original_size": [472, 159], "processed_size": [944, 318], "text": "abrycm", "raw_special": "abrycm<|LOC_0|><|LOC_0|><|LOC_1000|><|LOC_0|><|LOC_1000|><|LOC_1000|><|LOC_0|><|LOC_1000|>", "finish": "stop", "valid_spotting": true, "expected_independent_gt": ["август"], "missing": ["август"]}
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 39
+image_tokens->ny = 52
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=1092, ny=1456)
+clip_encode: output embedding shape [1024, 2028, 1]
+image slice encoded in 65341 ms
+decoding image batch 1/16, n_tokens_batch = 128
+image decoded (batch 1/16) in 1480 ms
+decoding image batch 2/16, n_tokens_batch = 128
+image decoded (batch 2/16) in 109 ms
+decoding image batch 3/16, n_tokens_batch = 128
+image decoded (batch 3/16) in 109 ms
+decoding image batch 4/16, n_tokens_batch = 128
+image decoded (batch 4/16) in 116 ms
+decoding image batch 5/16, n_tokens_batch = 128
+image decoded (batch 5/16) in 125 ms
+decoding image batch 6/16, n_tokens_batch = 128
+image decoded (batch 6/16) in 138 ms
+decoding image batch 7/16, n_tokens_batch = 128
+image decoded (batch 7/16) in 152 ms
+decoding image batch 8/16, n_tokens_batch = 128
+image decoded (batch 8/16) in 510 ms
+decoding image batch 9/16, n_tokens_batch = 128
+image decoded (batch 9/16) in 186 ms
+decoding image batch 10/16, n_tokens_batch = 128
+image decoded (batch 10/16) in 161 ms
+decoding image batch 11/16, n_tokens_batch = 128
+image decoded (batch 11/16) in 270 ms
+decoding image batch 12/16, n_tokens_batch = 128
+image decoded (batch 12/16) in 163 ms
+decoding image batch 13/16, n_tokens_batch = 128
+image decoded (batch 13/16) in 174 ms
+decoding image batch 14/16, n_tokens_batch = 128
+image decoded (batch 14/16) in 180 ms
+decoding image batch 15/16, n_tokens_batch = 128
+image decoded (batch 15/16) in 196 ms
+decoding image batch 16/16, n_tokens_batch = 108
+image decoded (batch 16/16) in 195 ms
+{"language": "be", "profile": "official-1605632-spotting", "prompt": "Spotting:", "original_size": [1200, 1610], "processed_size": [1200, 1610], "text": "A. timo mou igze, A xmo mau igze.\ny arpouniemai maxoi ypauage?-\nTearpye.\nA wmo ami w.ayub na xgux nexo,\nHa pyx y kabi, no uarao y uansx?\nChap Kauy.\nA nowy-ye uayub zmy kpuey.\nyco?\nA kya-ye uayub no naxs elaco?\nHa elem us ac.\nA rano-ye, rano zaxauasaiu\nNarappyauu kex, iu yxiu, eomui,\nCrogoui Zauua!\nФаксімів верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905—1907 гг.", "raw_special": "A. timo mou igze, A xmo mau igze.<|LOC_37|><|LOC_46|><|LOC_931|><|LOC_46|><|LOC_931|><|LOC_100|><|LOC_37|><|LOC_100|>\ny arpouniemai maxoi ypauage?-<|LOC_37|><|LOC_94|><|LOC_951|><|LOC_94|><|LOC_951|><|LOC_146|><|LOC_37|><|LOC_146|>\nTearpye.<|LOC_394|><|LOC_139|><|LOC_675|><|LOC_139|><|LOC_675|><|LOC_179|><|LOC_394|><|LOC_179|>\nA wmo ami w.ayub na xgux nexo,<|LOC_24|><|LOC_186|><|LOC_985|><|LOC_186|><|LOC_985|><|LOC_229|><|LOC_24|><|LOC_229|>\nHa pyx y kabi, no uarao y uansx?<|LOC_31|><|LOC_223|><|LOC_988|><|LOC_223|><|LOC_988|><|LOC_274|><|LOC_31|><|LOC_274|>\nChap Kauy.<|LOC_355|><|LOC_256|><|LOC_761|><|LOC_256|><|LOC_761|><|LOC_301|><|LOC_355|><|LOC_301|>\nA nowy-ye uayub zmy kpuey.<|LOC_37|><|LOC_306|><|LOC_938|><|LOC_306|><|LOC_938|><|LOC_360|><|LOC_37|><|LOC_360|>\nyco?<|LOC_812|><|LOC_336|><|LOC_938|><|LOC_336|><|LOC_938|><|LOC_369|><|LOC_812|><|LOC_369|>\nA kya-ye uayub no naxs elaco?<|LOC_24|><|LOC_359|><|LOC_963|><|LOC_359|><|LOC_963|><|LOC_407|><|LOC_24|><|LOC_407|>\nHa elem us ac.<|LOC_328|><|LOC_395|><|LOC_755|><|LOC_395|><|LOC_755|><|LOC_441|><|LOC_328|><|LOC_441|>\nA rano-ye, rano zaxauasaiu<|LOC_24|><|LOC_449|><|LOC_851|><|LOC_449|><|LOC_851|><|LOC_494|><|LOC_24|><|LOC_494|>\nNarappyauu kex, iu yxiu, eomui,<|LOC_31|><|LOC_490|><|LOC_991|><|LOC_490|><|LOC_991|><|LOC_540|><|LOC_31|><|LOC_540|>\nCrogoui Zauua!<|LOC_341|><|LOC_523|><|LOC_851|><|LOC_523|><|LOC_851|><|LOC_577|><|LOC_341|><|LOC_577|>\nФаксімів верша, які знаходзіцца<|LOC_66|><|LOC_689|><|LOC_298|><|LOC_689|><|LOC_298|><|LOC_701|><|LOC_66|><|LOC_701|>\ny музеї Я. Купалы.<|LOC_66|><|LOC_703|><|LOC_197|><|LOC_703|><|LOC_197|><|LOC_715|><|LOC_66|><|LOC_715|>\nВерш напісаны ў 1905—1907 гг.<|LOC_66|><|LOC_717|><|LOC_283|><|LOC_717|><|LOC_283|><|LOC_729|><|LOC_66|><|LOC_729|>", "finish": "stop", "valid_spotting": true, "expected_independent_gt": ["Беларусы", "крыўду", "людзьмі"], "missing": ["Беларусы", "крыўду", "людзьмі"]}
+Native OCR context closed: True

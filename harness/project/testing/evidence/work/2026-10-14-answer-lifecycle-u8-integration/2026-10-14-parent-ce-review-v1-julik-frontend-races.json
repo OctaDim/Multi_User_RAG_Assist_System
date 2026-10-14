@@ -1,0 +1,28 @@
+{
+  "reviewer": "julik-frontend-races",
+  "findings": [
+    {
+      "title": "Fence overlapping settings reads against completed saves",
+      "severity": "P2",
+      "file": "frontend/src/app.js",
+      "line": 309,
+      "why_it_matters": "The administrator can see the old global limits and old saved revision after successfully saving new values. Click refresh while a preview is ready, then save: the refresh GET can capture revision 0, the PATCH and its follow-up GET can render revision 1, and the delayed first GET then unconditionally replaces the form with revision 0. A subsequent preview submits both mutable values from that stale form, potentially restoring an old limit when the administrator only intended to change the other field.",
+      "autofix_class": "gated_auto",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "confidence": 75,
+      "evidence": [
+        "frontend/src/app.js:309 -- const value = await api('/settings'); | frontend/src/app.js:311 -- form.replaceChildren(); | frontend/src/app.js:351 -- await showSettings(); | frontend/src/app.js:353 -- refresh.addEventListener('click', () => perform(showSettings,refresh));",
+        "frontend/src/app.js:45-57: perform disables only the supplied control; refresh and save remain independently usable, allowing their GET/PATCH operations to overlap.",
+        "frontend/src/api.js:14 -- if (token() !== credential) throw new Error('session_changed'); This protects account changes but does not order same-session settings reads.",
+        "backend/app/settings.py:27-31: GET captures current settings in a transaction; no frontend ordering constraint exists on delivery of that captured response. Lines 40-43 commit a newer revision and audit the PATCH.",
+        "frontend/src/app.js:336-339 builds the preview from every mutable field; line 349 PATCHes the resulting full proposal.",
+        "backend/tests/integration/test_answer_lifecycle.py:95-124 and 238-252 exercise sequential preview/save/refresh rather than delaying an older refresh response past a completed save."
+      ],
+      "pre_existing": false,
+      "suggested_fix": "Give settings rendering a monotonically increasing request generation: capture it before each GET and discard the response unless it remains current. Invalidate outstanding reads when a PATCH starts, and keep refresh/save serialized while that PATCH and its follow-up read finish. Add a browser scenario that holds a revision-0 refresh response, saves and renders revision 1, then releases the older response and verifies the form still shows revision 1 and its limits. This needs only local state, no new dependency."
+    }
+  ],
+  "residual_risks": [],
+  "testing_gaps": []
+}

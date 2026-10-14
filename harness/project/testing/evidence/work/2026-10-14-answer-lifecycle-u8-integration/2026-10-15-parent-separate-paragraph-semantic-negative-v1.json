@@ -1,0 +1,15 @@
+{
+  "input": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-separate-paragraph-v1-control-results.json",
+  "sha256": "7c61da872c1c8a2dc89927d9a1ced045c1e4a6819a6cb5892aaa4b45c03298f7",
+  "mechanical_correct": 30,
+  "semantic_correct_after_parent_read_all30": 29,
+  "reject": {
+    "eng-9": "Unrequested framework passage introduces several claims about other rights, all cited as source1 that contains only Article9."
+  },
+  "exact_source_slices_and_present_citation_geometry_all30": true,
+  "accepted": false,
+  "actual_targeted_execution_seconds": 403.9,
+  "source_change_red": "2026-10-15-parent-paragraph-spans-red-v1.log",
+  "source_change_green": "2026-10-15-parent-paragraph-spans-green-v1.log",
+  "source_change_green_tests": 4
+}

@@ -1,0 +1,11 @@
+{
+  "source": "/tmp/rag-u8-worker-ocr16-candidate/PaddleOCR-VL-1.6-GGUF-mmproj.gguf",
+  "candidate": "/tmp/rag-u8-worker-ocr16-candidate/PaddleOCR-VL-1.6-spotting-mmproj.gguf",
+  "key": "clip.vision.image_max_pixels",
+  "offset": 1546,
+  "before": 1003520,
+  "after": 1605632,
+  "sha256_original": "204d757d7610d9b3faab10d506d69e5b244e32bf765e2bab2d0167e65e0a058a",
+  "sha256_candidate": "8e011479092c5e82c8c1c2d85d52b9ac48df12183c5c7bc3190190732259db09",
+  "adopted": false
+}

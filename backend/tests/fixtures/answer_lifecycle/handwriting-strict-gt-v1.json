@@ -1,0 +1,26 @@
+[
+  {
+    "language": "en",
+    "source": "harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/real-handwritten-title-author-input-v1.png",
+    "source_sha256": "69cb8a47d1550729c439bc0c67bf54335f57faedc472a69a4cbb0848a016d9ad",
+    "source_kind": "handwritten",
+    "text": "Dreams\n—Langston Hughes",
+    "basis": "Independent parent visual reading: uppercase title/name and the source dash."
+  },
+  {
+    "language": "ru",
+    "source": "backend/tests/fixtures/answer_lifecycle/handwritten-ru-august.png",
+    "source_sha256": "fd1658df6f1842927963335ff7a28bac214b49f13629575e2b681ae62876a686",
+    "source_kind": "handwritten",
+    "text": "август",
+    "basis": "Independent parent visual reading of genuine red lower-case cursive."
+  },
+  {
+    "language": "de",
+    "source": "backend/tests/fixtures/answer_lifecycle/handwritten-de-row5.jpg",
+    "source_sha256": "fa9f64069c972f4e6303c3c9f4dfc49b0697da9c821b526114940f973f1099df",
+    "source_kind": "handwritten",
+    "text": "Die Seerose blüht auf dem Teich.",
+    "basis": "Existing primary provenance text, independently visually checked: initial capitals and final period."
+  }
+]

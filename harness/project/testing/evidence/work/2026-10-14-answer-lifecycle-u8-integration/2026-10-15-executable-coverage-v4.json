@@ -1,0 +1,1361 @@
+{
+  "version": 4,
+  "acceptance": "U8 answer lifecycle integration accepted on final frozen source: full application245PASS, full activeharness168PASS, freshactual30semantic/citationPASS. Local delivery is the commit containing this record. Not automatic acceptance/deployment of the entire MVP.",
+  "coverage_semantics": "New parent final table; v1-v3 and every negative remain immutable. Listed executable nodes exist and were included in the unfiltered245PASS. Component fixtures retain their original proof scopes; G3/G4/G5 rely on the named real issuer/browser/publisher/native integration and parent manual evidence.",
+  "gate_status": {
+    "G1": "Accepted actual fixedmodel/4096ctx/4-and8threads/thinkingfalse;12physicalcontexts,1queued,3perstepfairness/hot6and2/nativecloseACK; simultaneous fixedPaddleandQwen/F16 OCR. Actual native-only memory attached; no latency SLA or RAMfit claim.",
+    "G2": "Accepted selected Playwright1.49.1 Chromium131.0.6778.33 Linux real close/restore/duplicate/opener/restart/drafts and manual desktop/mobile keyboard evidence. Other browsers/platforms untested.",
+    "G3": "Accepted actual CLIinvitation/SMTP/UIregistration/verification/login; anonymous/unverified/inactive/disabled/paidFalse/foreign matrix; real ownerrevocation queued/streaming through2API; no fixtureprincipals promoted.",
+    "G4": "Accepted exact final genuine/rawprintedPDF,mixedprint-onlyPDF,formalDOCX,andgray128DOCX across EN/DE/RU/BE; actualQwenF16handEN/RU/DEstrictGT/currentBEhandwordexception with separatelystrictPaddleBEprintedfooter; originalbytes/masks/no forbiddenhandoff; actualboth15pages/fault16/report/atomicexclusion/neighbor. CurrentRAG67 applied with no hiddenwordfix; completeBEhandbodyGT not claimed.",
+    "G5": "Accepted actual separate staticFrontend/SMTP/PostgreSQL/2HTTPAPI/documentpublisher/nativegeneration/sharedcoordinator; actual30accounts10owners and parent realheadedmanual. No cloudfallback, externaldeployment, merge or PR."
+  },
+  "actors": [
+    "A1 actual UI SMTP verified owner",
+    "A2 independently issued tabs/proofs",
+    "A3 production API/coordinator/publisher"
+  ],
+  "flows": {
+    "F1": {
+      "title": "Question to answer",
+      "requirements": "R1–R8, R17–R19, R28–R30, R32–R34",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F2": {
+      "title": "Shared conversation",
+      "requirements": "R8, R9, R19, R22",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F3": {
+      "title": "Connection recovery",
+      "requirements": "R11–R16, R20",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F4": {
+      "title": "Stop, access loss or source deletion",
+      "requirements": "R10, R11, R16–R18, R31",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F5": {
+      "title": "Generation failure and service recovery",
+      "requirements": "R8, R9, R11, R20–R22, R35",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F6": {
+      "title": "Navigate to another conversation",
+      "requirements": "R2, R5, R12–R16, R23, R24",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    },
+    "F7": {
+      "title": "Restore an unsent draft",
+      "requirements": "R9, R25–R27",
+      "status": "Accepted through associated requirements/examples in finalALLv4 and actual dependency gates."
+    }
+  },
+  "examples": [
+    {
+      "id": "AE1",
+      "title": "Early result",
+      "covers": "R1, R3–R5",
+      "expected": "Генерация ожидает допуска; найденные разрешённые фрагменты уже доступны владельцу, и запрос продолжает путь F1 без дополнительного подтверждения.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_fragments_precede_answer_without_waiting_for_history_read"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE2",
+      "title": "Two different questions",
+      "covers": "R8, R9",
+      "expected": "Две вкладки одновременно отправляют разные вопросы; сервер принимает один, второй не добавляется в историю или очередь и остаётся черновиком с отказом «В беседе уже выполняется запрос».",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout",
+        "backend/tests/test_admission.py::test_concurrent_different_questions_accept_exactly_one"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE3",
+      "title": "Waiting request stopped",
+      "covers": "R8–R10",
+      "expected": "Владелец отменяет ожидающий запрос; он покидает очередь, не начинает генерацию, беседа освобождается и вкладки могут отправить следующий вопрос.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+        "backend/tests/test_scheduler.py::test_stop_wins_dequeue_and_late_computed_token_is_not_committed"
+      ],
+      "proof_scope": "Actualgenuinefreshquestion queues atphysical6 acrossnextnativestep; explicitcloseACK creates5 thennewcontext admitsat6/rev1. Measured12physicalcontexts alongsidebothOCRmodels. Loadanswers unfinished: passports/inputisolation, not quality certification; separate completed-outputisolationv38.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log",
+        "2026-10-14-joint67-v44.log"
+      ],
+      "historical_status": "Actual30issuedaccounts/10owners/12contexts+1queue/fair/hot6-2/BOTHrealOCR/AE28GREENv44; historicalv6alsoGREEN; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE4",
+      "title": "Partial output stopped",
+      "covers": "R9–R11, R16",
+      "expected": "Владелец останавливает начатый ответ; выданный текст сохраняется как прерванный и не попадает в контекст следующего ответа.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_logical_stop_does_not_release_physical_slot_until_ack",
+        "backend/tests/test_rag_context.py::test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE5",
+      "title": "Initiating tab recovers",
+      "covers": "R12, R13, R19",
+      "expected": "Соединение инициирующей вкладки восстановлено через 5 секунд после обнаружения обрыва; она получает накопленный текст того же запроса, без второго вопроса или запуска.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout",
+        "backend/tests/test_stream_recovery.py::test_same_native_context_continues_through_reconnect_and_dedupe"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE6",
+      "title": "Another tab stays connected",
+      "covers": "R9, R11, R12, R14",
+      "expected": "Инициирующая вкладка не вернулась за 10 секунд, но другая вкладка подключена; незавершённый запрос отменяется для всех вкладок, черновики сохраняются и отправка разблокируется.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE7",
+      "title": "Answer completes during recovery wait",
+      "covers": "R12, R15",
+      "expected": "Ответ завершился через 6 секунд ожидания восстановления; он остаётся завершённым и не меняется на «Прервано» по истечении таймера.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE8",
+      "title": "Stop during recovery wait",
+      "covers": "R10–R12, R16",
+      "expected": "При действующем ожидании восстановления поступает допустимая остановка; отмена не ждёт остаток таймера.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE9",
+      "title": "Access revoked",
+      "covers": "R16, R17",
+      "expected": "Во время ожидания или выдачи аккаунт административно блокируется; новые защищённые операции и дальнейшая выдача прекращаются без ожидания таймера R12.",
+      "nodes": [
+        "backend/tests/integration/test_actual_lifecycle_gaps.py::test_issued_owner_revocation_during_actual_queue_and_native_stream",
+        "backend/tests/browser/test_accounts.py::test_actual_ui_smtp_roles_block_soft_delete_and_logout",
+        "backend/tests/test_invalidation.py::test_real_database_output_races_account_revoke_without_late_publication"
+      ],
+      "proof_scope": "ActualUIadmin revoke, sharedterminal/prefix, bothAPIprotected snapshot/replay401 beforegrace; genuinequeuedowner neverallocates, streamingcontextphysicallyreleases, documents/historypreserved.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-independent-gates-v38.log"
+      ],
+      "historical_status": "Actualgenuineissuedqueued+streamingrevocation/twoAPIreplay401/native0-or1allocationGREENv38; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE10",
+      "title": "Isolation and service limits",
+      "covers": "R1, R5, R17",
+      "expected": "При дефолтах R5 тринадцатый запрос ждёт допуска, активные контексты разных пользователей не смешиваются, а за шаг продвигается не более трёх запросов справедливым образом.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+        "backend/tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings"
+      ],
+      "proof_scope": "Actualgenuinefreshquestion queues atphysical6 acrossnextnativestep; explicitcloseACK creates5 thennewcontext admitsat6/rev1. Measured12physicalcontexts alongsidebothOCRmodels. Loadanswers unfinished: passports/inputisolation, not quality certification; separate completed-outputisolationv38.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log",
+        "2026-10-14-joint67-v44.log"
+      ],
+      "historical_status": "Actual30issuedaccounts/10owners/12contexts+1queue/fair/hot6-2/BOTHrealOCR/AE28GREENv44; historicalv6alsoGREEN; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE11",
+      "title": "Incomplete selected library",
+      "covers": "R1, R6, R7",
+      "expected": "Часть выбранных документов не готова; паспорт сообщает ограничение фактического поиска, а поиск не расширяется на остальные документы пользователя.",
+      "nodes": [
+        "backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope",
+        "backend/tests/test_rag_context.py::test_not_ready_selected_and_unmatched_ready_sources_are_distinct"
+      ],
+      "proof_scope": "Three selected, one whole ready TXT, interrupted original and invalid PDF excluded; no expansion, real native answer",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ],
+      "historical_status": "Actual twoAPI/issuer/publisher partial+failed selected scope GREEN v11; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE12",
+      "title": "Removed source and next question",
+      "covers": "R11, R18",
+      "expected": "Источник старого ответа удалён и ранее отменённый ответ сохранён; следующий вопрос не получает удалённые сведения или прерванный текст через историю контекста, checkpoints или резюме.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE13",
+      "title": "Repeated operation",
+      "covers": "R8, R19",
+      "expected": "Повтор отправки той же операции не создаёт второе сообщение или второй запуск; намеренно новый вопрос после завершения или отмены является новой операцией.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation",
+        "backend/tests/test_admission.py::test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE14",
+      "title": "Return after cancellation",
+      "covers": "R11, R14, R20",
+      "expected": "Владелец возвращается после отмены; история сохраняет прерванный текст, но генерация не возобновляется до явной отправки нового вопроса.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE15",
+      "title": "Foreign conversation",
+      "covers": "R1, R10, R17",
+      "expected": "Другой обычный пользователь обращается напрямую к чужой беседе или её остановке; сервер отказывает, не раскрывая вопрос, фрагменты или ответ владельца.",
+      "nodes": [
+        "backend/tests/integration/test_actual_authority.py::test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix",
+        "backend/tests/test_admission.py::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-publisher-authority-v4.log"
+      ],
+      "historical_status": "Actual issuer matrix GREEN v4; component stop-authorization support and final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE16",
+      "title": "Failure after partial output",
+      "covers": "R8, R9, R11, R20–R22",
+      "expected": "Модель выдала часть текста и завершилась с ошибкой; ошибка видна, ресурсы освобождены, вкладки могут отправить новый вопрос, частичный текст исключён из последующего контекста, повторного запуска нет.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE17",
+      "title": "Failure before first token",
+      "covers": "R8, R9, R21, R22",
+      "expected": "Локальная генерация завершается ошибкой до первого токена; частичный ответ не создаётся, ошибка видна и беседа освобождается без повторной попытки.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_scheduler.py::test_failed_native_allocation_releases_reservation_without_empty_answer"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE18",
+      "title": "Failure during recovery wait",
+      "covers": "R11, R12, R20–R22",
+      "expected": "Во время ожидания восстановления инициирующей вкладки генерация завершается ошибкой; завершение не ждёт таймера, а восстановление вкладки не запускает запрос заново.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE19",
+      "title": "Navigate while answer runs",
+      "covers": "R2, R5, R23, R24",
+      "expected": "Запрос A ожидает или генерируется, владелец смотрит B в той же подключённой вкладке; запрос A продолжает работу без таймера отмены, его текст не появляется как ответ B, при возвращении виден текущий результат A.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE20",
+      "title": "Disconnect after navigation",
+      "covers": "R12–R14, R23, R24",
+      "expected": "После перехода из A в B соединение инициирующей вкладки реально прерывается; для незавершённого запроса A действует ожидание восстановления по R12 и последующая отмена по R14.",
+      "nodes": [
+        "backend/tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE21",
+      "title": "Separate conversation drafts",
+      "covers": "R25",
+      "expected": "В A набран один неотправленный вопрос, затем в B другой; переключение между A и B восстанавливает соответствующий текст, без его подмены или автоматической отправки.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE22",
+      "title": "Independent tab drafts",
+      "covers": "R9, R25",
+      "expected": "Две вкладки имеют разные черновики одной беседы; переключение бесед в первой восстанавливает её собственный текст и не меняет черновик второй вкладки.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "Actual issuer/publisher/native prefix, 200/409 admission, 5second recovery, independent drafts/navigation, origin timeout despite connected observer; AE2 frontend refusal caption also accepted U6 actual delayed ACK test",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-transport-v8.log"
+      ],
+      "historical_status": "Actual twoAPI/socket/native GREEN v8; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE23",
+      "title": "Refresh restores drafts",
+      "covers": "R25, R26",
+      "expected": "В A и B набраны разные неотправленные вопросы; после обновления страницы в той же вкладке открытие каждой беседы восстанавливает её текст, без добавления вопроса в историю или очередь.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE24",
+      "title": "Refresh preserves tab independence",
+      "covers": "R9, R26",
+      "expected": "Две вкладки имеют разные черновики одной беседы; обновление первой восстанавливает её собственный текст и не меняет текст второй.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE25",
+      "title": "Closing removes drafts",
+      "covers": "R25–R27",
+      "expected": "В A и B набраны разные неотправленные вопросы; после закрытия вкладки и следующего открытия приложения оба черновика не восстанавливаются.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts",
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_browser_restart_does_not_restore_closed_conversation_drafts"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE26",
+      "title": "Closing preserves other tab and history",
+      "covers": "R2, R9, R12–R16, R27",
+      "expected": "Две вкладки имеют разные черновики одной беседы; закрытие первой удаляет только её черновики, сохраняя текст второй и серверную историю. Незавершённый запрос закрытой инициирующей вкладки обрабатывается по R12–R16.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE27",
+      "title": "Lower limit preserves active requests",
+      "covers": "R5, R28",
+      "expected": "При 10 активных запросах супер-администратор уменьшает лимит до 6; все 10 продолжают свой жизненный цикл, без отмены или приостановки из-за изменения лимита, а новые ждут допуска.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits"
+      ],
+      "proof_scope": "Actualgenuinefreshquestion queues atphysical6 acrossnextnativestep; explicitcloseACK creates5 thennewcontext admitsat6/rev1. Measured12physicalcontexts alongsidebothOCRmodels. Loadanswers unfinished: passports/inputisolation, not quality certification; separate completed-outputisolationv38.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-joint-transport-v6.log",
+        "2026-10-14-joint67-v44.log"
+      ],
+      "historical_status": "Actual30issuedaccounts/10owners/12contexts+1queue/fair/hot6-2/BOTHrealOCR/AE28GREENv44; historicalv6alsoGREEN; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE28",
+      "title": "Admission at the new limit",
+      "covers": "R5, R28",
+      "expected": "После уменьшения лимита до 6 при 6 активных ожидающий запрос ещё не допускается; когда остаётся 5 активных, допускается один, соблюдая новый предел 6.",
+      "nodes": [
+        "backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+        "backend/tests/test_scheduler.py::test_saved_shrink_during_allocation_applies_before_next_admission",
+        "backend/tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings"
+      ],
+      "proof_scope": "Actualgenuinefreshquestion queues atphysical6 acrossnextnativestep; explicitcloseACK creates5 thennewcontext admitsat6/rev1. Measured12physicalcontexts alongsidebothOCRmodels. Loadanswers unfinished: passports/inputisolation, not quality certification; separate completed-outputisolationv38.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-joint67-v44.log"
+      ],
+      "historical_status": "Actual30issuedaccounts/10owners/12contexts+1queue/fair/hot6-2/BOTHrealOCR/AE28GREENv44; historicalv6alsoGREEN; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE29",
+      "title": "Saved override after restart",
+      "covers": "R5, R29",
+      "expected": "В файле лимит активных запросов 12, super_admin сохраняет 6; после перезапуска действует 6, без сброса к файловому значению.",
+      "nodes": [
+        "backend/tests/integration/test_actual_settings_restart.py::test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides",
+        "backend/tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models",
+        "backend/tests/test_http.py::test_api_lifespan_restart_preserves_overrides_and_applied_revision"
+      ],
+      "proof_scope": "Epoch1→2, stored override1, real allocations max6/promoted step2, prior completed answer preserved; baseline4/8/false UI read-only GREEN v6",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-independent-gates-v38.log"
+      ],
+      "historical_status": "ActualtwoAPI/default12-3/save6-2/productionrestart/override/nativeallocationGREENv38; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE30",
+      "title": "File default without override",
+      "covers": "R29",
+      "expected": "Для настройки нет сохранённого переопределения; при запуске применяется её значение из конфигурационного файла.",
+      "nodes": [
+        "backend/tests/integration/test_actual_settings_restart.py::test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides",
+        "backend/tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models",
+        "backend/tests/test_settings.py::test_saved_overrides_survive_repeated_controlled_migration"
+      ],
+      "proof_scope": "Epoch1→2, stored override1, real allocations max6/promoted step2, prior completed answer preserved; baseline4/8/false UI read-only GREEN v6",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-independent-gates-v38.log"
+      ],
+      "historical_status": "ActualtwoAPI/default12-3/save6-2/productionrestart/override/nativeallocationGREENv38; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE31",
+      "title": "No ready available sources",
+      "covers": "R1, R8, R25, R30",
+      "expected": "Все выбранные документы ещё обрабатываются или исключены; отправка показывает причину и сохраняет текст черновиком, без нового сообщения, очереди, генерации или занятия беседы. Поиск не расширяется.",
+      "nodes": [
+        "backend/tests/integration/test_actual_lifecycle_gaps.py::test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history",
+        "backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources"
+      ],
+      "proof_scope": "ActualfixedVocabulary5002tokens>4096; issued-owner422 andemptyhistory/noallocation, originaldraft survivesreload/noautosubmit; explicitlyshorternewquestionnativecompletes. Nativequality controls remainstrict.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md",
+        "2026-10-14-independent-gates-v38.log"
+      ],
+      "historical_status": "Actualtokenizer/refusal/draftGREENv37/v38; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE32",
+      "title": "Sources become ready later",
+      "covers": "R25, R30",
+      "expected": "После отказа по R30 документ становится готовым; вопрос сам не отправляется. Владелец явно отправляет сохранённый черновик, и при выполнении условий приёма запрос следует F1.",
+      "nodes": [
+        "backend/tests/integration/test_actual_lifecycle_gaps.py::test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history",
+        "backend/tests/browser/test_answer_lifecycle.py::test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts"
+      ],
+      "proof_scope": "ActualfixedVocabulary5002tokens>4096; issued-owner422 andemptyhistory/noallocation, originaldraft survivesreload/noautosubmit; explicitlyshorternewquestionnativecompletes. Nativequality controls remainstrict.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md",
+        "2026-10-14-independent-gates-v38.log"
+      ],
+      "historical_status": "Actualtokenizer/refusal/draftGREENv37/v38; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE33",
+      "title": "Used source deleted during output",
+      "covers": "R11, R16, R18, R20, R31",
+      "expected": "Во время ответа удалён использованный источник; поток прекращается без ожидания R12, ресурсы и беседа освобождаются. Уже выданный текст сохраняется как «Прервано» с отметкой удалённого источника, исключается из будущего контекста, автоматического повторного запуска нет.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE34",
+      "title": "Used source deleted before first token",
+      "covers": "R8, R18, R31",
+      "expected": "Использованный источник удалён после приёма, но до первого токена; незавершённый запрос останавливается без выдачи ответа на его основе, частичный ответ не создаётся и ресурсы освобождаются.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE35",
+      "title": "One page fails the document",
+      "covers": "R1, R30, R32",
+      "expected": "Из 20 страниц извлечены 15, на пяти сбой; весь документ недоступен для поиска/чтения готового источника, его 15 страниц не попадают в ответ. Ошибки файла и страниц видны в отдельном отчёте; успешные другие файлы пачки доступны. Если готовых источников больше нет, вопрос отклоняется по R30.",
+      "nodes": [
+        "backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor",
+        "backend/tests/test_documents.py::test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file",
+        "backend/tests/test_source_contract.py::test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor"
+      ],
+      "proof_scope": "20pageoriginal; precisely15nativeOCR completions, controlledfailureat16, pages17-20 NOTexecuted andNOTfiveexecutedfailures.15stagingpagesunpublished/unavailable tosearch/answer; reportactualUI, failedfileabsentreadycheckboxes, issuedfailed-onlyscope409, zero-readyrefusalpreservesdraft/history, healthyneighbourrealanswer10. No pages skipped tofit420: calibratedfinite1500.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log",
+        "2026-10-14-ocr-printed-pages-v40.log",
+        "2026-10-14-joint-normal-pages-v43.log"
+      ],
+      "historical_status": "Actual15nativepages+controlledfault16/atomicexclusion/report/originalSHA/failed-only409/UIzero-readydraft-history/healthyneighbourGREENskipv40,normalv43; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE36",
+      "title": "Incomplete file is not a source",
+      "covers": "R1, R32",
+      "expected": "Передача файла прервалась; неполный файл не публикуется как готовый документ и не выдаётся для чтения, поиска или контекста. Причина показана в отчёте; полностью загруженный и успешно обработанный документ публикуется целиком.",
+      "nodes": [
+        "backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope",
+        "backend/tests/test_documents.py::test_actual_original_upload_is_not_a_ready_source",
+        "backend/tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded"
+      ],
+      "proof_scope": "component-only genuine-issuer integration extension remains open",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log"
+      ],
+      "historical_status": "Actual interrupted socket upload exclusion GREEN v11; caller final gates pending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE37",
+      "title": "OCR correction preserves history and excludes context",
+      "covers": "R18, R33",
+      "expected": "Старый ответ процитировал OCR-число «100», затем владелец исправил его на «10»; старый ответ и цитата «100» сохраняются с отметкой об исправлении. При следующем вопросе этот ответ не передаётся напрямую и не возвращается через checkpoints/сводки; оригинал неизменен, автоматической перепроверки или переписывания истории нет.",
+      "nodes": [
+        "backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context",
+        "backend/tests/test_rag_context.py::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE38",
+      "title": "Cancelled mixed PDF is not a source",
+      "covers": "R1, R30, R34",
+      "expected": "Владелец ранее отменил смешанный PDF после предупреждения RAG-61; файл не опубликован. При отправке вопроса он не используется как источник; если других готовых источников нет, действует R30.",
+      "nodes": [
+        "backend/tests/browser/test_documents.py::test_ui_permission_choice_actual_native_pdf_and_unchanged_original"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE39",
+      "title": "Ready mixed PDF with explicit skips",
+      "covers": "R1, R6, R7, R32, R34",
+      "expected": "Смешанный PDF полностью готов в выбранном владельцем режиме печатного текста с блоками пропусков по RAG-61. При вопросе печатный текст смешанной страницы доступен поиску/RAG, ограничения видны в паспорте; ответ не приписывает содержание пропущенным рукописям.",
+      "nodes": [
+        "backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport"
+      ],
+      "proof_scope": "actual issuer/publisher path exists; final accumulated gate and caller manual pending",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "../2026-10-14-answer-lifecycle-u7-invalidation/2026-10-14-u7-worker-result-v1.md"
+      ],
+      "historical_status": "Accepted prior U6/U7 actual issuer/browser/publisher support; parent final accumulated run pending; see exact node scopes",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE40",
+      "title": "Failed skip-mode document is not a source",
+      "covers": "R1, R30, R32, R34",
+      "expected": "При обработке PDF в режиме пропуска рукописей произошёл технический сбой одной страницы, весь документ не опубликован по RAG-59/RAG-61. При вопросе удачные страницы не используются поиском/RAG; при отсутствии других готовых источников действует R30.",
+      "nodes": [
+        "backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor",
+        "backend/tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded"
+      ],
+      "proof_scope": "20pageoriginal; precisely15nativeOCR completions, controlledfailureat16, pages17-20 NOTexecuted andNOTfiveexecutedfailures.15stagingpagesunpublished/unavailable tosearch/answer; reportactualUI, failedfileabsentreadycheckboxes, issuedfailed-onlyscope409, zero-readyrefusalpreservesdraft/history, healthyneighbourrealanswer10. No pages skipped tofit420: calibratedfinite1500.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-document-boundary-v11.log",
+        "2026-10-14-ocr-printed-pages-v40.log",
+        "2026-10-14-joint-normal-pages-v43.log"
+      ],
+      "historical_status": "Actual15nativepages+controlledfault16/atomicexclusion/report/originalSHA/failed-only409/UIzero-readydraft-history/healthyneighbourGREENskipv40,normalv43; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE41",
+      "title": "Crash after saved partial output",
+      "covers": "R8, R9, R11, R20, R35",
+      "expected": "До аварии записана часть ответа, активное состояние потеряно. После восстановления во всех вкладках запрос отмечен как прерванный с причиной, записанный текст остаётся в истории вне контекста/checkpoints/сводок; беседа и ресурсы освобождены. Автоматического запуска нет, владелец явно отправляет вопрос как новую операцию.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_supervisor_reaps_native_process_before_replacement"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE42",
+      "title": "Crash before first token",
+      "covers": "R8, R9, R20, R35",
+      "expected": "Принятый запрос потерял активное состояние до первого токена, включая ожидание. После восстановления вопрос отмечен как прерванный, пустой частичный ответ не создан, беседа освобождена и запрос не запускается автоматически.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    },
+    {
+      "id": "AE43",
+      "title": "Completed answer survives restart",
+      "covers": "R2, R35",
+      "expected": "Ответ завершён и сохранён до перезапуска; после восстановления он остаётся завершённым в общей серверной истории. Запрос не становится прерванным и повторная генерация не запускается.",
+      "nodes": [
+        "backend/tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history",
+        "backend/tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed"
+      ],
+      "proof_scope": "GenuineSMTPissuedowner/realpublishedsources/twoAPIobserver; realnativeprefix andfailure-onlyhooks before/afteractualcompute, orrealprocesscrash/restart; preservedcompletedhistory, noautoretry, physicalrelease andexplicitfreshprompt/checkpoint exclusion. Completegracecase usesactual6secondboundary. No fabricatedsuccessfuloutput.",
+      "status": "Accepted integrated lifecycle example; listed nodes PASS in final unfiltered ALLv4 with actual dependency gates above; original component scopes retained.",
+      "evidence": [
+        "2026-10-14-terminal-document-restart-v10.log",
+        "2026-10-14-terminal-print-pages-v39.log"
+      ],
+      "historical_status": "ActualtwoAPI/native6terminalcases+explicitnextquestion/prompt/checkpoint/historyGREENv39; parentfinalgatespending",
+      "final_evidence": [
+        "2026-10-15-parent-all-application-v4.log",
+        "2026-10-15-parent-final-ALLv4-integrity-check-v1.json"
+      ]
+    }
+  ],
+  "requirements": {
+    "R1": {
+      "examples": [
+        "AE1",
+        "AE10",
+        "AE11",
+        "AE15",
+        "AE31",
+        "AE35",
+        "AE36",
+        "AE38",
+        "AE39",
+        "AE40"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R2": {
+      "examples": [
+        "AE19",
+        "AE26",
+        "AE43"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R3": {
+      "examples": [
+        "AE1"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R4": {
+      "examples": [
+        "AE1"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R5": {
+      "examples": [
+        "AE1",
+        "AE10",
+        "AE19",
+        "AE27",
+        "AE28",
+        "AE29"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R6": {
+      "examples": [
+        "AE11",
+        "AE39"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R7": {
+      "examples": [
+        "AE11",
+        "AE39"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R8": {
+      "examples": [
+        "AE2",
+        "AE3",
+        "AE13",
+        "AE16",
+        "AE17",
+        "AE31",
+        "AE34",
+        "AE41",
+        "AE42"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R9": {
+      "examples": [
+        "AE2",
+        "AE3",
+        "AE4",
+        "AE6",
+        "AE16",
+        "AE17",
+        "AE22",
+        "AE24",
+        "AE26",
+        "AE41",
+        "AE42"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R10": {
+      "examples": [
+        "AE3",
+        "AE4",
+        "AE8",
+        "AE15"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R11": {
+      "examples": [
+        "AE4",
+        "AE6",
+        "AE8",
+        "AE12",
+        "AE14",
+        "AE16",
+        "AE18",
+        "AE33",
+        "AE41"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R12": {
+      "examples": [
+        "AE5",
+        "AE6",
+        "AE7",
+        "AE8",
+        "AE18",
+        "AE20",
+        "AE26"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R13": {
+      "examples": [
+        "AE5",
+        "AE20",
+        "AE26"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R14": {
+      "examples": [
+        "AE6",
+        "AE14",
+        "AE20",
+        "AE26"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R15": {
+      "examples": [
+        "AE7",
+        "AE26"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R16": {
+      "examples": [
+        "AE4",
+        "AE8",
+        "AE9",
+        "AE26",
+        "AE33"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R17": {
+      "examples": [
+        "AE9",
+        "AE10",
+        "AE15"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R18": {
+      "examples": [
+        "AE12",
+        "AE33",
+        "AE34",
+        "AE37"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R19": {
+      "examples": [
+        "AE5",
+        "AE13"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R20": {
+      "examples": [
+        "AE14",
+        "AE16",
+        "AE18",
+        "AE33",
+        "AE41",
+        "AE42"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R21": {
+      "examples": [
+        "AE16",
+        "AE17",
+        "AE18"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R22": {
+      "examples": [
+        "AE16",
+        "AE17",
+        "AE18"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R23": {
+      "examples": [
+        "AE19",
+        "AE20"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R24": {
+      "examples": [
+        "AE19",
+        "AE20"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R25": {
+      "examples": [
+        "AE21",
+        "AE22",
+        "AE23",
+        "AE25",
+        "AE31",
+        "AE32"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R26": {
+      "examples": [
+        "AE23",
+        "AE24",
+        "AE25"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R27": {
+      "examples": [
+        "AE25",
+        "AE26"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R28": {
+      "examples": [
+        "AE27",
+        "AE28"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R29": {
+      "examples": [
+        "AE29",
+        "AE30"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R30": {
+      "examples": [
+        "AE31",
+        "AE32",
+        "AE35",
+        "AE38",
+        "AE40"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R31": {
+      "examples": [
+        "AE33",
+        "AE34"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R32": {
+      "examples": [
+        "AE35",
+        "AE36",
+        "AE39",
+        "AE40"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R33": {
+      "examples": [
+        "AE37"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R34": {
+      "examples": [
+        "AE38",
+        "AE39",
+        "AE40"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    },
+    "R35": {
+      "examples": [
+        "AE41",
+        "AE42",
+        "AE43"
+      ],
+      "status": "Accepted through associated examples and closed actual dependency gates; see finalALLv4."
+    }
+  },
+  "latest_ocr_contract": "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md",
+  "new_independent_proofs": [
+    {
+      "node": "backend/tests/integration/test_actual_lifecycle_gaps.py::test_actual_native_completed_outputs_are_isolated_between_issued_owners",
+      "evidence": "2026-10-14-independent-gates-v38.log",
+      "scope": "twoactuallyissuedowners/privatepublished100-and200sources/distinctnativecontexts/completedanswers+citation/passportisolation+historicalfragmentcaption"
+    },
+    {
+      "node": "backend/tests/test_document_ocr.py::test_actual_handwriting_abort_and_both_contexts_close_after_c_return",
+      "evidence": "2026-10-14-ocr-printed-pages-v40.log",
+      "scope": "realQwen/F16handCcallback,closewaitsforCreturn,bothcontext/MTMDphysicallyfreed; unchangedPaddleabortalsoPASS"
+    },
+    {
+      "node": "backend/tests/test_service_ownership_lease.py",
+      "evidence": "2026-10-14-ownership-green-v42.log",
+      "scope": "realPG/nativecomponent ONLY seededprincipals; causalwithinlease delay preservesowner, pastlease/realbackendlossreaps/noretry; all5oldservice-recoverybodiesunchangedPASS"
+    },
+    {
+      "node": "backend/tests/integration/test_multilingual_documents.py::test_current_be_word_permissions_are_strict_outside_exact_model_and_source_type",
+      "evidence": "2026-10-14-joint67-v44.log",
+      "scope": "purepolicy67, currentQwenprinted/Paddlehand andfutureidentities strict; mixedsamecrop syntheticpolicy example only, NOT native mixedROI proof"
+    },
+    {
+      "evidence": "2026-10-14-rag67-retained-actual43-word-reevaluation-v1.json",
+      "scope": "retainedactual8uploads4SHA+independentoriginalGT/sourcewordtypes re-evaluatedwithoutnative rerun; preciselyprintedў→у/музеі→музеїpermitted,currenthandBEerrorsallowed,otherfooterwordsstrict; parentALLfresh67required"
+    }
+  ],
+  "negative_history": [
+    "v23/v25 sandboxnativefutexstalls (notfailedselectedmodels; unchangedbaseline passesescalatedv28/v40)",
+    "v29 wrongnewprinted-emptyBEassertion/overlappingcrops/rawpreserved; 13-to2genuineunionREDv30/GREENv31",
+    "strictfooterREDv33 underthen64; scale/contrast/taskcandidates34-36 NOTbuilt; doNOTreinterpretasthenPASS",
+    "v37 policy/queue-observation/historicalcaptionRED, then actualindependentGREENv38",
+    "v38 terminaloldcard/leasehealthobservation + unsupportedDOCXchoice failures; terminalall6GREENv39",
+    "v39 finite420 negative5normal/9skip completions, NOT15; v40 calibrated1500reachesboth15",
+    "v40normal15/report/refusalpassed,buthealthyneighbourfailedafter actualsupervisorownershipstalled; retrospectivewaitcauseunknown",
+    "causalv41 realPGrowLock0.8/validlease+advisoryowner/epochbutnativechildreaped; generationfinitelease-derivedboundGREENv42",
+    "v43strengthenedjoint120readytimeout; nofailureDBstatecaptured then,noPSS/AE28claim; finite300+diagnostics/12sampleassertionactualGREENv44"
+  ],
+  "historical_gate_status": {
+    "G1": "AcceptedU1-U7 and historicaljointv6 actuallyGREEN; NEWv44 actual12contexts+bothfixedOCRmodels/memory/AE28GREEN. No latencySLA or RAMfit claim; measurednativePSS3406717KiB,swap5377748KiB,excludesAPI/browser/PG.",
+    "G2": "chosen actual Playwright1.49.1 Chromium131.0.6778.33 only; U6 actual close/restore/duplicate evidence, other engines/platforms untested",
+    "G3": "Actualissuer matrixv4GREEN; NEWAE9genuinequeued/streaming revoke2API/nativeGREENv38. ParentfinalALL/manualpending.",
+    "G4": "CurrentfixedPaddle+Qwen/F16 realhandEN/RU/DEfullwordGT and8permissionmasksGREENv43 underthen66; NEWstrict67perword reevaluation retainedactualrawPASS, NOT native rerun. Nativeprinted4langPDF/mixedPDF/DOCXimage+LOC/originalsGREENv40; finalDOCXformalOOXMLpackaginglocallychecked, exactfinalarchivefreshupload/SHApendingparentALL. Both15nativepages+fault16/report/whole-exclusion/refusal/neighbour actualGREEN: skipv40,normalv43. Frozen30oldGREEN remains historical; parentfresh30strictauditpending.",
+    "G5": "ActualseparatestaticFrontend/SMTP/2API/PostgreSQL/publisher/native/coordinatorGREENhistoricalv6/v8 plus terminal2API/freshprompt+checkpoint GREEN6casesv39,settingsrestartv38,jointv44. Parentmanual/ALLpending."
+  },
+  "historical_caller_pending": [
+    "unfiltered all accumulated app tests201+new, allactiveharness168+anylegitnew",
+    "freshactual67multilingualandformalDOCX exactfinalarchiveupload/SHA",
+    "independentmanualactualbrowser andall30semantic/citationaudits",
+    "freshreviewsincludinggenerationleasebound andsettledsourcefreeze",
+    "canonicalcommit/push/delivery byparent"
+  ],
+  "caller_pending": [],
+  "final_evidence": {
+    "application": {
+      "tests": 245,
+      "seconds": 4998.81,
+      "log": "2026-10-15-parent-all-application-v4.log"
+    },
+    "harness": {
+      "tests": 168,
+      "seconds": 21.22,
+      "log": "2026-10-15-parent-all-harness-v4.log"
+    },
+    "thirty": "2026-10-15-parent-ALLv4-fresh-thirty-semantic-audit-v1.json",
+    "source_freeze": "2026-10-15-parent-final-input-freeze-v4.json",
+    "integrity": "2026-10-15-parent-final-ALLv4-integrity-check-v1.json",
+    "resources": "2026-10-15-parent-final-ALLv4-resource-release-v1.json",
+    "raw_manifest": "2026-10-15-parent-ALLv4-final-raw-manifest-v1.json",
+    "manual": [
+      "2026-10-14-parent-manual-acceptance-v1.json",
+      "2026-10-14-parent-manual-acceptance-v2.json"
+    ],
+    "review": [
+      "2026-10-14-parent-ce-review-v1-receipt.json",
+      "2026-10-14-parent-review-fixes-resolution-v1.json"
+    ]
+  },
+  "actual_final_joint_memory": {
+    "fixed_two_OCR_models": {
+      "pid": 233168,
+      "Rss_kib": 3061688,
+      "Pss_kib": 2688871,
+      "Swap_kib": 3575024,
+      "SwapPss_kib": 3575024
+    },
+    "twelve_generation_contexts": {
+      "pid": 233215,
+      "Rss_kib": 1678180,
+      "Pss_kib": 1305653,
+      "Swap_kib": 1221188,
+      "SwapPss_kib": 1221188
+    },
+    "scope": "PSS and swap of the two actual native processes; excludes API/browser/PostgreSQL processes",
+    "combined_native_pss_kib": 3994524,
+    "combined_native_swap_kib": 4796212,
+    "actual_physical_contexts_at_sample": {
+      "46f996a6-46ab-4f84-a517-1e545a6de042": 138933266718240,
+      "3ad0aafc-b2bd-41c7-94ff-df6895ad4422": 138933294494416,
+      "48ef103c-abae-4607-aaa5-5472bc40cf28": 138933323405728,
+      "eb4c2d7c-bbc5-4650-9230-e341b9d361fa": 138931674146768,
+      "50affc0b-8686-4924-adc8-15d5830b89ef": 138931690165888,
+      "3ee9798e-01b3-45a5-9555-127e6e3b04fa": 138931718718928,
+      "c9b56da5-0773-401f-855f-0b80352d025c": 138930462644256,
+      "4b206100-f434-4932-9560-9834632f9227": 138930500068832,
+      "d00ea396-fb2b-4be8-a189-4b0f01e2fe6c": 138929781239104,
+      "83f6ea26-0ea5-4e47-87a0-96424f1447e7": 138929807949424,
+      "e6cb803f-a541-46e2-afd4-5d616c430085": 138929834658320,
+      "ee9944ac-5ca4-4016-86f7-c98227665da2": 138928788470464
+    }
+  },
+  "limits": [
+    "Only selected Linux Chromium matrix tested.",
+    "Native-only memory excludes APIs/browser/PostgreSQL; swap used; no numericlatencySLA or confirmedRAMcapacity.",
+    "CurrentBEhandwrittenworderrors expresslyallowed; rawresults/partiallegibleGT preserved; fullBEhandbodyexactness notclaimed.",
+    "Same-crop genuineBEhand+print nativecoverage remains honest softgap; per-wordpolicy/identity/source-kind negatives and actual separate source-type cases tested.",
+    "Old wholePDFrefreshstall and three-contextloss not reproduced in finalALL; underlying oldcause not established; rawnegatives preserved.",
+    "Local answer-lifecycle integration acceptance, not wholeMVP launch."
+  ]
+}

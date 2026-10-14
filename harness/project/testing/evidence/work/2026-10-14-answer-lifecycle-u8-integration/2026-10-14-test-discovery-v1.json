@@ -1,0 +1,747 @@
+[
+  {
+    "path": "backend/tests/browser/test_accounts.py",
+    "name": "test_actual_ui_smtp_roles_block_soft_delete_and_logout",
+    "line": 112
+  },
+  {
+    "path": "backend/tests/browser/test_accounts.py",
+    "name": "test_exact_cors_and_public_registration_escalation_refusal",
+    "line": 183
+  },
+  {
+    "path": "backend/tests/browser/test_accounts.py",
+    "name": "test_invited_registration_retries_actual_smtp_failure",
+    "line": 203
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources",
+    "line": 40
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_real_fragments_precede_answer_without_waiting_for_history_read",
+    "line": 80
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation",
+    "line": 143
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts",
+    "line": 224
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_actual_browser_restart_does_not_restore_closed_conversation_drafts",
+    "line": 289
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts",
+    "line": 322
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_actual_print_only_pdf_limitations_reach_answer_passport",
+    "line": 365
+  },
+  {
+    "path": "backend/tests/browser/test_answer_lifecycle.py",
+    "name": "test_old_real_snapshot_cannot_erase_new_request_or_current_fragments",
+    "line": 405
+  },
+  {
+    "path": "backend/tests/browser/test_documents.py",
+    "name": "test_ui_smtp_original_text_correction_and_delete",
+    "line": 39
+  },
+  {
+    "path": "backend/tests/browser/test_documents.py",
+    "name": "test_ui_permission_choice_actual_native_pdf_and_unchanged_original",
+    "line": 71
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_reload_keeps_independent_conversation_and_tab_drafts",
+    "line": 57
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_close_and_new_tab_discards_drafts_without_changing_neighbor",
+    "line": 74
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_browser_restore_does_not_restore_closed_drafts",
+    "line": 86
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_opener_has_an_independent_draft",
+    "line": 120
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_duplicate_has_an_independent_draft_and_tab_identity",
+    "line": 133
+  },
+  {
+    "path": "backend/tests/browser/test_draft_lifecycle.py",
+    "name": "test_browser_restart_restore_discards_closed_drafts",
+    "line": 154
+  },
+  {
+    "path": "backend/tests/browser/test_invalidation.py",
+    "name": "test_real_ocr_mutation_preserves_original_and_excludes_future_context",
+    "line": 80
+  },
+  {
+    "path": "backend/tests/integration/test_answer_lifecycle.py",
+    "name": "test_real_super_admin_settings_preview_apply_and_readonly_models",
+    "line": 96
+  },
+  {
+    "path": "backend/tests/integration/test_answer_lifecycle.py",
+    "name": "test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+    "line": 151
+  },
+  {
+    "path": "backend/tests/integration/test_answer_lifecycle.py",
+    "name": "test_frozen_thirty_questions_use_real_multilingual_documents",
+    "line": 296
+  },
+  {
+    "path": "backend/tests/integration/test_multi_process.py",
+    "name": "test_two_http_processes_share_native_capacity_fairness_and_hot_settings",
+    "line": 57
+  },
+  {
+    "path": "backend/tests/runtime/test_generation_contract.py",
+    "name": "test_native_twelve_contexts_hot_limits_and_fair_steps",
+    "line": 108
+  },
+  {
+    "path": "backend/tests/runtime/test_generation_contract.py",
+    "name": "test_native_eos_releases_one_context_without_stalling_another",
+    "line": 190
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_independent_production_contexts_match_u1_prefix",
+    "line": 38
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_real_eos_and_incremental_russian_utf8",
+    "line": 74
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_real_source_answer_uses_facts_instead_of_citation_example",
+    "line": 95
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_actual_token_budget_has_no_prompt_clamp",
+    "line": 117
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_abort_and_close_wait_for_real_native_decode",
+    "line": 138
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_partial_allocation_is_freed_on_sampler_failure",
+    "line": 167
+  },
+  {
+    "path": "backend/tests/runtime/test_production_runtime.py",
+    "name": "test_admission_vocabulary_matches_loaded_model_and_preserves_live_context",
+    "line": 182
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_real_registration_mail_verification_and_login",
+    "line": 44
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_passwords_validation_roles_and_credentials_do_not_leak",
+    "line": 69
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_verification_expiry_resend_and_block_are_independent",
+    "line": 88
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_operator_invitation_roles_admin_boundaries_and_audit",
+    "line": 110
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_concurrent_registration_has_one_account",
+    "line": 140
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_resend_links_are_one_use_despite_delivery_order",
+    "line": 150
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_unchanged_or_increased_access_preserves_session_and_execution",
+    "line": 168
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_origin_session_and_account_mutations_fence_shared_writes",
+    "line": 185
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_expired_bootstrap_and_session_are_refused",
+    "line": 227
+  },
+  {
+    "path": "backend/tests/test_accounts.py",
+    "name": "test_missing_or_failed_smtp_has_no_verification_bypass",
+    "line": 238
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_concurrent_different_questions_accept_exactly_one",
+    "line": 30
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation",
+    "line": 55
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key",
+    "line": 67
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_no_ready_sources_refuses_without_history_or_late_auto_admission",
+    "line": 77
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read",
+    "line": 89
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_current_account_state_is_checked_on_every_operation",
+    "line": 103
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_anonymous_or_expired_session_is_denied",
+    "line": 115
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_failed_transaction_leaves_no_partial_admission",
+    "line": 123
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_unavailable_coordinator_refuses_before_admission",
+    "line": 138
+  },
+  {
+    "path": "backend/tests/test_admission.py",
+    "name": "test_database_enforces_occupancy_and_owner_operation_uniqueness",
+    "line": 148
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting",
+    "line": 11
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_invalid_or_degenerate_native_coordinates_fail_whole_page",
+    "line": 27
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_documented_wrapped_locations_are_not_part_of_recognized_text",
+    "line": 33
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_diagonal_zero_area_polygon_is_rejected",
+    "line": 40
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_real_small_handwriting_crop_is_detected_before_permission_masking",
+    "line": 47
+  },
+  {
+    "path": "backend/tests/test_document_ocr.py",
+    "name": "test_actual_native_abort_and_close_wait_for_c_return",
+    "line": 68
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_actual_original_upload_is_not_a_ready_source",
+    "line": 7
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_real_text_publisher_indexes_whole_original",
+    "line": 24
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_worker_restart_ends_lost_job_without_requeue",
+    "line": 52
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_revoked_permission_and_account_access_stop_queued_documents",
+    "line": 79
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_lower_quota_keeps_admitted_upload_and_denies_new_one",
+    "line": 101
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume",
+    "line": 118
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_database_failure_after_atomic_file_link_keeps_original_accounted",
+    "line": 139
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_real_correction_switches_whole_index_and_preserves_original",
+    "line": 157
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_revocation_after_detection_cannot_start_recognition",
+    "line": 186
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_real_pdf_skip_publisher_and_manual_correction",
+    "line": 224
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_long_unicode_original_has_no_silent_embedding_tail_loss",
+    "line": 273
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_docx_headers_footnotes_and_body_are_all_published",
+    "line": 295
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_real_docx_embedded_handwriting_is_processed_before_publication",
+    "line": 319
+  },
+  {
+    "path": "backend/tests/test_documents.py",
+    "name": "test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file",
+    "line": 365
+  },
+  {
+    "path": "backend/tests/test_frontend_reducer.py",
+    "name": "test_delayed_empty_snapshot_keeps_accepted_request_and_new_draft",
+    "line": 6
+  },
+  {
+    "path": "backend/tests/test_frontend_reducer.py",
+    "name": "test_source_status_event_marks_original_without_replacing_quote",
+    "line": 36
+  },
+  {
+    "path": "backend/tests/test_http.py",
+    "name": "test_http_rejects_missing_credentials_and_restart_only_settings",
+    "line": 5
+  },
+  {
+    "path": "backend/tests/test_http.py",
+    "name": "test_http_accepts_one_question_replays_ack_and_stops",
+    "line": 17
+  },
+  {
+    "path": "backend/tests/test_http.py",
+    "name": "test_api_lifespan_restart_preserves_overrides_and_applied_revision",
+    "line": 37
+  },
+  {
+    "path": "backend/tests/test_http.py",
+    "name": "test_login_preflight_is_public_and_keeps_exact_cors_origin",
+    "line": 49
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_role_downgrade_closes_prepared_admin_response",
+    "line": 114
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_deleted_document_closes_prepared_original_png_and_json",
+    "line": 127
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_account_view_is_freshly_serialized_at_handoff",
+    "line": 146
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_generic_asgi_without_private_handoff_fails_closed",
+    "line": 156
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_deduplicated_completed_ack_contains_citations",
+    "line": 166
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_correction_marks_request_snapshot_and_notifies_all_tabs",
+    "line": 182
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_prepared_sse_and_replay_rechecks_source_and_tab",
+    "line": 204
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_prepared_snapshot_retains_old_quote_with_current_correction_flags",
+    "line": 240
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_irreducible_native_question_budget_refuses_before_admission",
+    "line": 258
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation",
+    "line": 269
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_correction_of_prior_history_after_admission_keeps_current_question",
+    "line": 304
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor",
+    "line": 324
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_minted_login_token_is_fenced_before_private_body",
+    "line": 357
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_current_session_fences_prepared_json_but_logout_ack_stays_minimal",
+    "line": 376
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_natural_session_expiry_during_serialization_closes_unhanded_body",
+    "line": 394
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_real_database_complete_races_invalidation_with_one_terminal_outcome",
+    "line": 405
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_real_database_output_races_account_revoke_without_late_publication",
+    "line": 437
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_stop_old_request_races_new_admission_and_old_pending_writes_cannot_change_new_context",
+    "line": 465
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_real_socket_backpressure_revocation_holds_no_database_locks",
+    "line": 500
+  },
+  {
+    "path": "backend/tests/test_invalidation.py",
+    "name": "test_account_revoke_closes_prepared_body_before_real_handoff",
+    "line": 576
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_actual_async_graph_commits_fragments_before_model_callback",
+    "line": 40
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_not_ready_selected_and_unmatched_ready_sources_are_distinct",
+    "line": 66
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint",
+    "line": 80
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_transitive_history_provenance_removes_derived_text_and_keeps_ui",
+    "line": 102
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_delayed_checkpoint_and_pending_writes_are_denied_after_correction",
+    "line": 139
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_correction_before_late_complete_marks_original_without_cancelling",
+    "line": 167
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_deselected_source_cannot_reenter_current_model_scope_through_history",
+    "line": 180
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_every_saver_operation_rechecks_access_identity_and_epochs",
+    "line": 194
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_malicious_doc_cannot_expand_scope_and_invented_quotes_are_rejected",
+    "line": 218
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt",
+    "line": 237
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_real_e5_mean_pooling_and_real_pgvector_retrieval",
+    "line": 256
+  },
+  {
+    "path": "backend/tests/test_rag_context.py",
+    "name": "test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments",
+    "line": 301
+  },
+  {
+    "path": "backend/tests/test_resources.py",
+    "name": "test_installed_package_ignores_an_unrelated_neighbor_config",
+    "line": 7
+  },
+  {
+    "path": "backend/tests/test_resources.py",
+    "name": "test_working_tree_resources_still_load_runtime_and_migrations",
+    "line": 24
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_global_round_robin_and_hot_settings_keep_native_reservations",
+    "line": 73
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_saved_shrink_during_allocation_applies_before_next_admission",
+    "line": 106
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_stop_wins_dequeue_and_late_computed_token_is_not_committed",
+    "line": 132
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_native_error_preserves_only_committed_prefix_without_retry",
+    "line": 163
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_logical_stop_does_not_release_physical_slot_until_ack",
+    "line": 189
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_failed_native_allocation_releases_reservation_without_empty_answer",
+    "line": 212
+  },
+  {
+    "path": "backend/tests/test_scheduler.py",
+    "name": "test_search_state_is_published_before_graph_work",
+    "line": 234
+  },
+  {
+    "path": "backend/tests/test_service_recovery.py",
+    "name": "test_application_service_lock_does_not_cancel_healthy_supervisor",
+    "line": 26
+  },
+  {
+    "path": "backend/tests/test_service_recovery.py",
+    "name": "test_real_supervisor_reaps_native_process_before_replacement",
+    "line": 59
+  },
+  {
+    "path": "backend/tests/test_service_recovery.py",
+    "name": "test_live_predecessor_record_blocks_unconfirmed_replacement",
+    "line": 172
+  },
+  {
+    "path": "backend/tests/test_service_recovery.py",
+    "name": "test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed",
+    "line": 198
+  },
+  {
+    "path": "backend/tests/test_settings.py",
+    "name": "test_saved_overrides_survive_repeated_controlled_migration",
+    "line": 8
+  },
+  {
+    "path": "backend/tests/test_settings.py",
+    "name": "test_global_changes_require_super_admin",
+    "line": 20
+  },
+  {
+    "path": "backend/tests/test_settings.py",
+    "name": "test_restart_only_and_invalid_changes_do_not_change_revision",
+    "line": 27
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_ready_flag_without_whole_published_revision_is_rejected",
+    "line": 17
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded",
+    "line": 32
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor",
+    "line": 43
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_explicit_ready_skip_mode_retrieves_only_printed_text_with_limitations",
+    "line": 56
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_owner_and_scope_are_enforced_by_pgvector_not_document_instructions",
+    "line": 69
+  },
+  {
+    "path": "backend/tests/test_source_contract.py",
+    "name": "test_published_revision_is_immutable_so_ocr_correction_needs_new_identity",
+    "line": 88
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_admission_requires_confirmed_connection",
+    "line": 12
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_idle_expired_tab_lock_does_not_delay_another_origin_deadline",
+    "line": 32
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_owner_snapshot_preserves_multiple_and_empty_conversations",
+    "line": 59
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless",
+    "line": 91
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue",
+    "line": 109
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_terminal_during_grace_is_immediate_and_survives_timeout",
+    "line": 135
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_background_conversations_and_missing_heartbeat_ack",
+    "line": 153
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_proof_owner_and_epoch_checks",
+    "line": 169
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_snapshot_replay_monotonic_and_access_rechecked",
+    "line": 181
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_snapshot_watermark_waits_for_lower_uncommitted_event",
+    "line": 201
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_heartbeat_challenge_is_one_use_and_unconfirmed_reconnect_refuses_new_admission",
+    "line": 242
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_same_native_context_continues_through_reconnect_and_dedupe",
+    "line": 255
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_delayed_search_callback_cannot_publish_after_deadline",
+    "line": 285
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_unacknowledged_reconnect_does_not_extend_original_grace",
+    "line": 301
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_reconnect_and_expiry_race_share_tab_lock",
+    "line": 320
+  },
+  {
+    "path": "backend/tests/test_stream_recovery.py",
+    "name": "test_actual_tab_sse_confirmed_on_second_api_and_deadline_survives_first_api_death",
+    "line": 335
+  }
+]

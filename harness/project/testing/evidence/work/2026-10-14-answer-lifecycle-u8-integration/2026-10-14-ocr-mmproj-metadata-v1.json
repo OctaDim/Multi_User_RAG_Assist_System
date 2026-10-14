@@ -1,0 +1,63 @@
+{
+  "path": "backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf",
+  "gguf_version": 3,
+  "tensors": 443,
+  "metadata": {
+    "general.architecture": "clip",
+    "general.type": "mmproj",
+    "general.name": "PaddleOCR VL 1.5",
+    "general.version": "1.5",
+    "general.basename": "PaddleOCR-VL",
+    "general.size_label": "439M",
+    "general.license": "apache-2.0",
+    "general.base_model.count": 1,
+    "general.base_model.0.name": "ERNIE 4.5 0.3B Paddle",
+    "general.base_model.0.organization": "Baidu",
+    "general.base_model.0.repo_url": "https://huggingface.co/baidu/ERNIE-4.5-0.3B-Paddle",
+    "general.tags": [
+      "ERNIE4.5",
+      "PaddleOCR",
+      "PaddlePaddle",
+      "image-to-text",
+      "ocr",
+      "document-parse",
+      "layout",
+      "table",
+      "formula",
+      "chart",
+      "seal",
+      "spotting",
+      "image-text-to-text"
+    ],
+    "general.languages": [
+      "en",
+      "zh",
+      "multilingual"
+    ],
+    "general.file_type": 32,
+    "clip.has_vision_encoder": true,
+    "clip.vision.projection_dim": 1024,
+    "clip.vision.image_size": 1001,
+    "clip.vision.patch_size": 14,
+    "clip.vision.embedding_length": 1152,
+    "clip.vision.feed_forward_length": 4304,
+    "clip.vision.block_count": 27,
+    "clip.vision.attention.head_count": 16,
+    "clip.vision.image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "clip.vision.image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "clip.projector_type": "paddleocr",
+    "clip.vision.image_max_pixels": 1003520,
+    "clip.vision.image_min_pixels": 112896,
+    "clip.use_gelu": true,
+    "clip.vision.attention.layer_norm_epsilon": 9.999999974752427e-07,
+    "general.quantization_version": 2
+  }
+}

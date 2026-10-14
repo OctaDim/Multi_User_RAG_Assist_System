@@ -1,0 +1,29 @@
+[
+  {
+    "language": "de",
+    "repo": "fhswf/german_handwriting",
+    "revision": "f08067881aafb8ad50f0ca14c1e57314438b79a2",
+    "row": 5,
+    "viewer_url": "https://datasets-server.huggingface.co/rows?dataset=fhswf%2Fgerman_handwriting&config=default&split=train&offset=5&length=1",
+    "asset_url": "https://datasets-server.huggingface.co/cached-assets/fhswf/german_handwriting/--/f08067881aafb8ad50f0ca14c1e57314438b79a2/--/default/train/5/image/image.jpg?Expires=1791982002&Signature=R9kQc~yXwTLMVK~41DnXft~HufnXQiFbwWEKN50E0dH-5AqcO8EgDxJ30U4xLsXC~y-ekr3T11hssmGdnLFWGPkMlyiSlNnrPHRbIxdvbjc9sSeSwDmcRZTXjq5NKHsFLyvTEy3lbJBO4PBl1waQg13fj8khhYCHjZGcc45lmditOYK4sNshx3muwxeRv~blQQ~jsJ9H0T5Mzh2bH8N96GaEeBS0NOfd05xhKk3UhkZQBWzDowN9oyxU9W07Du4T1bG1uk~E-MRnTV6wU169HrmXsDCtnaLTUoedwV3lX5lsrTURF1pPUq~qyayKDaNP4V3Tox7QL-37Su9x1JfV8g__&Key-Pair-Id=K3C0L9WB6U5DUC",
+    "ground_truth": {
+      "image": {
+        "src": "https://datasets-server.huggingface.co/cached-assets/fhswf/german_handwriting/--/f08067881aafb8ad50f0ca14c1e57314438b79a2/--/default/train/5/image/image.jpg?Expires=1791982002&Signature=R9kQc~yXwTLMVK~41DnXft~HufnXQiFbwWEKN50E0dH-5AqcO8EgDxJ30U4xLsXC~y-ekr3T11hssmGdnLFWGPkMlyiSlNnrPHRbIxdvbjc9sSeSwDmcRZTXjq5NKHsFLyvTEy3lbJBO4PBl1waQg13fj8khhYCHjZGcc45lmditOYK4sNshx3muwxeRv~blQQ~jsJ9H0T5Mzh2bH8N96GaEeBS0NOfd05xhKk3UhkZQBWzDowN9oyxU9W07Du4T1bG1uk~E-MRnTV6wU169HrmXsDCtnaLTUoedwV3lX5lsrTURF1pPUq~qyayKDaNP4V3Tox7QL-37Su9x1JfV8g__&Key-Pair-Id=K3C0L9WB6U5DUC",
+        "height": 436,
+        "width": 4020
+      },
+      "text": "Die Seerose blüht auf dem Teich."
+    },
+    "sha256": "fa9f64069c972f4e6303c3c9f4dfc49b0697da9c821b526114940f973f1099df",
+    "path": "backend/tests/fixtures/answer_lifecycle/handwritten-de-row5.jpg"
+  },
+  {
+    "language": "ru",
+    "repo": "ai-forever/htr_datasets",
+    "revision": "d7aaa9704060b546ad5602f71b3c943b30c0f48e",
+    "url": "https://raw.githubusercontent.com/ai-forever/htr_datasets/d7aaa9704060b546ad5602f71b3c943b30c0f48e/IDP-forms/august.png",
+    "ground_truth": "pending visual transcription before OCR",
+    "sha256": "fd1658df6f1842927963335ff7a28bac214b49f13629575e2b681ae62876a686",
+    "path": "backend/tests/fixtures/answer_lifecycle/handwritten-ru-august.png"
+  }
+]

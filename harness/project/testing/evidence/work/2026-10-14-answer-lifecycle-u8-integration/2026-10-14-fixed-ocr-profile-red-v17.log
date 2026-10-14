@@ -1,0 +1,25 @@
+F
+=================================== FAILURES ===================================
+_________ test_ocr_loads_user_fixed_qwen2b_and_matching_f16_projector __________
+
+    def test_ocr_loads_user_fixed_qwen2b_and_matching_f16_projector():
+        import hashlib
+        import os
+        from app.ocr import DocumentOCR
+        expected=Path(os.environ['RAG_MODEL_PATH'])
+        with expected.open('rb') as source:
+            assert hashlib.file_digest(source,'sha256').hexdigest()=='aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223'
+        ocr=DocumentOCR()
+        try:
+>           assert Path(ocr.model.model_path).samefile(expected)
+E           AssertionError: assert False
+E            +  where False = samefile(PosixPath('/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf'))
+E            +    where samefile = PosixPath('/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf').samefile
+E            +      where PosixPath('/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf') = Path('/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf')
+E            +        where '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf' = <llama_cpp.llama.Llama object at 0x712b6e82ff50>.model_path
+E            +          where <llama_cpp.llama.Llama object at 0x712b6e82ff50> = <app.ocr.DocumentOCR object at 0x712b6edc5490>.model
+
+backend/tests/test_document_ocr.py:114: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_ocr_loads_user_fixed_qwen2b_and_matching_f16_projector
+1 failed in 7.89s

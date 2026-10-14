@@ -1,0 +1,72 @@
+[
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_actual_two_tab_admission_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_actual_two_tab_admission_0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_actual_two_tab_admission_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_actual_two_tab_admission_0-generation.log",
+    "sha256": "f449c48541396095ce4bbaa5c7ad5534039988fd30b1dbb57cc4eb4447e3a92d"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_real_super_admin_settings0/settings-desktop.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_real_super_admin_settings0-settings-desktop.png",
+    "sha256": "25f8884bbe8222ade1d6baa4a81f951bd60716f785b18dc949130845ceeb32e1"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_real_super_admin_settings0/settings-mobile.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_real_super_admin_settings0-settings-mobile.png",
+    "sha256": "555fce8e10ba8ac9e28c06d542005287bc286e14f6e8766551fa37219c5d184f"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_thirty_real_accounts_ten_0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_thirty_real_accounts_ten_0-api-2.log",
+    "sha256": "65111300935b1893e019688e9ff24f6fdc77469bbf6cbe4254564b609eb60ce5"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_thirty_real_accounts_ten_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_thirty_real_accounts_ten_0-document-worker.log",
+    "sha256": "16fa42bff9f6142fc81ef19ad96fe262638ba3f06f21f28bd7d08eaa9cbe0bac"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-joint-transport-6/test_thirty_real_accounts_ten_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-joint-transport-6-test_thirty_real_accounts_ten_0-generation.log",
+    "sha256": "b023b896fc73d5ec9ce26ff25d67d1d2a480b9e58c3a5f2cc89a83a4b1ba47ed"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-7/test_actual_two_tab_admission_0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-7-test_actual_two_tab_admission_0-api-2.log",
+    "sha256": "8ff0393a6392859c9f7faa1c4c970296b196dab5ccea887ef64643dc25feb00f"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-7/test_actual_two_tab_admission_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-7-test_actual_two_tab_admission_0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-7/test_actual_two_tab_admission_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-7-test_actual_two_tab_admission_0-generation.log",
+    "sha256": "b14ac3e59b348a13d62664f122106677ac4b1a6ed40845644ceb16b2ddbc8c0b"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-8/test_actual_two_tab_admission_0/api-2.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-8-test_actual_two_tab_admission_0-api-2.log",
+    "sha256": "4685fd407547365ee648c4f983ee55e55ff71f683c511fd222cecaef9bf3886e"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-8/test_actual_two_tab_admission_0/background-after-origin-timeout.png",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-8-test_actual_two_tab_admission_0-background-after-origin-timeout.png",
+    "sha256": "d2c36c875b2ce4d9ca5488ee17807788e51faf22d7dbd72f99fba89b0a20c0ef"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-8/test_actual_two_tab_admission_0/document-worker.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-8-test_actual_two_tab_admission_0-document-worker.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u8-worker-transport-8/test_actual_two_tab_admission_0/generation.log",
+    "copy": "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-worker-transport-8-test_actual_two_tab_admission_0-generation.log",
+    "sha256": "efa8435ffc9ca7ca6d180cad4cefcb0e8e462c8e1be52b02e85afd9af14a9804"
+  }
+]

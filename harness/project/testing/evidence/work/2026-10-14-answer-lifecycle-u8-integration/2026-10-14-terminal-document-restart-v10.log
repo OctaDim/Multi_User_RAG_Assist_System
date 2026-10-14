@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 8 items
+
+backend/tests/integration/test_terminal_lifecycle.py {"proof": "actual_issued_native_terminal", "outcome": "complete_during_grace", "request_id": "ba9f503f-b00c-41bd-9b50-c4156c6b7120", "state": "completed", "origin_deadline": "2026-10-14 16:16:41.393909+03:00", "completed_observed": "2026-10-14 16:16:39.368838+03:00", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa0/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "stop_during_grace", "request_id": "4c72d2f5-e246-4706-a5dc-dae5da60b235", "state": "interrupted", "origin_deadline": "2026-10-14 16:17:22.731619+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa1/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_before", "request_id": "070caa8a-f25e-459c-91b2-be4a289dc26a", "state": "failed", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "", "completed_history": null, "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa2/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "error_during_grace", "request_id": "c630083e-0438-4d24-8daf-1def32d7bf41", "state": "failed", "origin_deadline": "2026-10-14 16:18:13.723740+03:00", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": null, "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa3/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "crash_before", "request_id": "876b130c-e260-4795-a5a8-ceff53ce0327", "state": "interrupted", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "", "completed_history": "cb5596fa-37ba-4632-b742-0236a81981f7", "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa4/generation.log"}
+.{"proof": "actual_issued_native_terminal", "outcome": "crash_after", "request_id": "4487ad58-792f-4db6-8fcc-4a587a957749", "state": "interrupted", "origin_deadline": "None", "completed_observed": "None", "preserved_prefix": "The annual budget", "completed_history": "791dcce3-96f7-4cb6-aa49-17924e3ba866", "no_retry_allocation_count": 1, "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_actual_native_terminal_pa5/generation.log"}
+.
+backend/tests/integration/test_actual_document_boundaries.py E
+backend/tests/integration/test_actual_settings_restart.py {"proof": "actual_ui_settings_production_restart", "before_epoch": 1, "after_epoch": 2, "max_active": 6, "step_width": 2, "revision": 1, "completed_history_preserved": "b25b852f-6024-4ada-84a3-5810e05b3c34", "native_log": "/tmp/rag-u8-worker-terminal-document-restart-10/test_real_ui_hot_settings_and_0/generation.log"}
+.
+
+==================================== ERRORS ====================================
+_ ERROR at setup of test_real_partial_upload_and_failed_file_never_expand_selected_source_scope _
+file /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_actual_document_boundaries.py, line 17
+  def test_real_partial_upload_and_failed_file_never_expand_selected_source_scope(integrated_browser,environment,tmp_path):
+file /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_answer_lifecycle.py, line 49
+  @pytest.fixture
+  def integrated_browser(real_document_browser, environment, tmp_path):
+E       fixture 'real_document_browser' not found
+>       available fixtures: _asyncio_loop_factory, _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, connection, doctest_namespace, environment, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, integrated_browser, monkeypatch, platformdirs_isolated, postgres, pytestconfig, rag_pool, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/integration/test_answer_lifecycle.py:49
+=========================== short test summary info ============================
+ERROR backend/tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope
+==================== 7 passed, 1 error in 212.60s (0:03:32) ====================

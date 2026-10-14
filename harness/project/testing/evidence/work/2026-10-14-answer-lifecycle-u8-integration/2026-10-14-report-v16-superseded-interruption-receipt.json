@@ -1,0 +1,15 @@
+{
+  "status": "NOT ACCEPTED; superseded Paddle run interrupted after user-fixed Qwen2B contract",
+  "command_exit": 1,
+  "source_frozen_unchanged": true,
+  "finished_native_ocr_pages": 9,
+  "separate_failure_report_document_boundary": "PASSED focused case; whole20page cases not established",
+  "new_user_contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md",
+  "raw_log": "2026-10-14-report-green-v16.log",
+  "raw_sha256": "daf196542432aa33e5082cc77ccf164c9d51bd1187bb68b7a6ae0e8a334a8ea5",
+  "old_native_processes": [
+    105823,
+    105863
+  ],
+  "termination": "owned pytest SIGINT followed by fixture cleanup; exactPIDreadcheckrequired"
+}

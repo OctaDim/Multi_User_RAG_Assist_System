@@ -1,0 +1,33 @@
+{"control": "eng-1", "answer": "Article 1 All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood. [source:1]", "failures": []}
+{"control": "eng-3", "answer": "Article 3 Everyone has the right to life, liberty and the security of person. [source:1]", "failures": []}
+{"control": "eng-4", "answer": "Article 4 No one shall be held in slavery or servitude; slavery and the slave trade shall be prohibited in all their forms. [source:1]", "failures": []}
+{"control": "eng-5", "answer": "Article 5 No one shall be subjected to torture or to cruel, inhuman or degrading treatment or punishment. [source:1]", "failures": []}
+{"control": "eng-9", "answer": "No one shall be subjected to arbitrary arrest, detention or exile. [source:1]", "failures": []}
+{"control": "eng-14", "answer": "Everyone has the right to seek and to enjoy in other countries asylum from persecution. This right may not be invoked in the case of prosecutions genuinely arising from non‐political crimes or from acts contrary to the purposes and principles of the United Nations. [source:1]", "failures": []}
+{"control": "eng-15", "answer": "Article 15 Everyone has the right to a nationality. No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality. [source:1]", "failures": []}
+{"control": "eng-24", "answer": "Article 24 Everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay. [source:1]", "failures": []}
+{"control": "rus-1", "answer": "Статья 1 Все люди рождаются свободными и равными в своем достоинстве и правах. Они наделены разумом и совестью и должны поступать в отношении друг друга в духе братства. [source:1]", "failures": []}
+{"control": "rus-3", "answer": "Статья 3 Каждый человек имеет право на жизнь, на свободу и на личную неприкосновенность. [source:1]", "failures": []}
+{"control": "rus-4", "answer": "Статья 4 Никто не должен содержаться в рабстве или в подневольном состоянии; рабство и работорговля запрещаются во всех их видах. [source:1]", "failures": []}
+{"control": "rus-5", "answer": "Статья 5 Никто не должен подвергаться пыткам или жестоким, бесчеловечным или унижающим его достоинство обращению и наказанию. [source:1]", "failures": []}
+{"control": "rus-9", "answer": "Статья 9 Никто не может быть подвергнут произвольному аресту, задержанию или изгнанию. [source:1]", "failures": []}
+{"control": "rus-14", "answer": "Каждый человек имеет право искать убежища от преследования в других странах и пользоваться этим убежищем. Это право не может быть использовано в случае преследования, в действительности основанного на совершении неполитического преступления, или деяния, противоречащего целям и принципам Организации Объединенных Наций. [source:1]", "failures": []}
+{"control": "rus-15", "answer": "Каждый человек имеет право на гражданство. Никто не может быть произвольно лишен своего гражданства или права изменить свое гражданство. [source:1]", "failures": []}
+{"control": "rus-24", "answer": "Каждый человек имеет право на отдых и досуг, включая право на разумное ограничение рабочего дня и на оплачиваемый периодический отпуск. [source:1]", "failures": []}
+{"control": "bel-1", "answer": "Усе людзі нараджаюцца свабоднымі і роўнымі ў сваёй годнасці і правах. Яны надзелены розумам і сумленнем і павінны ставіцца адзін да аднаго ў духу брацтва. [source:1]", "failures": []}
+{"control": "bel-3", "answer": "Кожны чалавек мае права на жыццё, на свабоду і на асабістую недатыкальнасць. [source:1]", "failures": []}
+{"control": "bel-4", "answer": "Ніхто не павінен утрымлівацца ў рабстве або ў паднявольным стане; рабства і гандаль рабамі забараняюцца ва ўсіх іх выглядах. [source:1]", "failures": []}
+{"control": "bel-5", "answer": "Артыкул 5. Ні над кім не павінны ўчыняцца катаванні або жорсткія, бесчалавечныя або ўніжаючыя яго годнасць абыходжанне і пакаранне. [source:1]", "failures": []}
+{"control": "bel-9", "answer": "Артыкул 9. Ні над кім не павінны ўчыняцца самавольны арышт, затрыманне або выгнанне. [source:1]", "failures": []}
+{"control": "bel-14", "answer": "Кожны чалавек мае права шукаць прыстанішча ад праследавання ў іншых краінах і карыстацца гэтым прыстанішчам. Гэта права не можа быць выкарыстана ў выпадку праследавання, сапраўды заснаванага на ўчыненні непалітычнага злачынства, або дзеяння, што супярэчыць мэтам і прынцыпам Арганізацыі Абʼяднаных Нацый. [source:1]", "failures": []}
+{"control": "bel-15", "answer": "Артыкул 15. Кожны чалавек мае права на грамадзянства. Ніхто не можа быць самавольна пазбаўлены свайго грамадзянства або права змяніць сваё грамадзянства. [source:1]", "failures": []}
+{"control": "deu_1996-1", "answer": "Artikel 1 Alle Menschen sind frei und gleich an Würde und Rechten geboren. Sie sind mit Vernunft und Gewissen begabt und sollen einander im Geist der Brüderlichkeit begegnen. [source:1]", "failures": []}
+{"control": "deu_1996-3", "answer": "Artikel 3 Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person. [source:1]", "failures": []}
+{"control": "deu_1996-4", "answer": "Artikel 4 verbietet Sklaverei und Sklavenhandel in allen ihren Formen. [source:1]", "failures": []}
+{"control": "deu_1996-5", "answer": "Artikel 5 verbietet, dass jemand der Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe unterworfen wird. [source:1]", "failures": []}
+{"control": "deu_1996-9", "answer": "Artikel 9 Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden. [source:1]", "failures": []}
+{"control": "deu_1996-14", "answer": "Artikel 14 Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen. Dieses Recht kann nicht in Anspruch genommen werden im Falle einer Strafverfolgung, die tatsächlich auf Grund von Verbrechen nichtpolitischer Art oder auf Grund von Handlungen erfolgt, die gegen die Ziele und Grundsätze der Vereinten Nationen verstoßen. [source:1]", "failures": []}
+{"control": "deu_1996-15", "answer": "Artikel 15 Jeder hat das Recht auf eine Staatsangehörigkeit. Niemandem darf seine Staatsangehörigkeit willkürlich entzogen noch das Recht versagt werden, seine Staatsangehörigkeit zu wechseln. [source:1]", "failures": []}
+{"proof": "predeclared_thirty_real_document_questions", "results": "/tmp/rag-u8-parent-final-direct-quote-native-v1/test_frozen_thirty_questions_u0/control-results.json", "errors": []}
+.
+1 passed in 419.48s (0:06:59)

@@ -1,0 +1,34 @@
+{
+  "created": "2026-10-14",
+  "description": "Unicode transcription of OHCHR translations; original public UN declaration, real corpus not model output",
+  "sources": [
+    {
+      "language": "eng",
+      "url": "https://raw.githubusercontent.com/unicode-org/udhr/588b3f4b2d0467aff54842a4b926551b69d5a66a/data/udhr/udhr_eng.xml",
+      "revision": "588b3f4b2d0467aff54842a4b926551b69d5a66a",
+      "sha256": "df73275821449df4db2b164e59bda812c834d80cacc8792a6f41d6fc331ce204",
+      "path": "backend/tests/fixtures/answer_lifecycle/udhr-eng.xml"
+    },
+    {
+      "language": "rus",
+      "url": "https://raw.githubusercontent.com/unicode-org/udhr/588b3f4b2d0467aff54842a4b926551b69d5a66a/data/udhr/udhr_rus.xml",
+      "revision": "588b3f4b2d0467aff54842a4b926551b69d5a66a",
+      "sha256": "4d91ee6b21c4f2fd26bae1a62b6f2922b2a33335b1559ccfaea29bdaf2ec2972",
+      "path": "backend/tests/fixtures/answer_lifecycle/udhr-rus.xml"
+    },
+    {
+      "language": "bel",
+      "url": "https://raw.githubusercontent.com/unicode-org/udhr/588b3f4b2d0467aff54842a4b926551b69d5a66a/data/udhr/udhr_bel.xml",
+      "revision": "588b3f4b2d0467aff54842a4b926551b69d5a66a",
+      "sha256": "c20dec1fbb2b291467d0f7d0885929f3ea65553f3fa791a499c5547636389113",
+      "path": "backend/tests/fixtures/answer_lifecycle/udhr-bel.xml"
+    },
+    {
+      "language": "deu_1996",
+      "url": "https://raw.githubusercontent.com/unicode-org/udhr/588b3f4b2d0467aff54842a4b926551b69d5a66a/data/udhr/udhr_deu_1996.xml",
+      "revision": "588b3f4b2d0467aff54842a4b926551b69d5a66a",
+      "sha256": "c9cdfc09db8e9dac2f6571a51a87178c6d8bce80f0db888ca23fdf002179a917",
+      "path": "backend/tests/fixtures/answer_lifecycle/udhr-deu_1996.xml"
+    }
+  ]
+}

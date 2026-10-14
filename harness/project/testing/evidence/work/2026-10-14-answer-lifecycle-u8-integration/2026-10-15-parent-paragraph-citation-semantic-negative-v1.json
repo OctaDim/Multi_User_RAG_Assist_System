@@ -1,0 +1,13 @@
+{
+  "input": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-15-parent-paragraph-citation-v1-control-results.json",
+  "sha256": "6f4b60c00a20a2ce744ca5052e50140cf1439af5817ec5e834cc7960ac408759",
+  "mechanical_correct": 30,
+  "semantic_correct_after_parent_read_all30": 28,
+  "reject": {
+    "eng-5": "Wrongly attributes slavery/slave trade prohibition to Article5.",
+    "rus-9": "Adds Article14 asylum restriction to Article9 and cites fragment without Article14."
+  },
+  "exact_source_slices_and_existing_citation_geometry_all30": true,
+  "accepted": false,
+  "followup": "Separate independent source paragraphs; do not weaken matchers or source data."
+}

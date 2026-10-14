@@ -1,0 +1,37 @@
+# U8 continuation — 2026-10-14
+
+Overall plan remains active. U1–U7 accepted; HEAD `122554c808d34ccb1ea679891efb58102b61a1a6`, branch `octadim/create-plan-1`. U8 is not accepted or committed. Do not push, open a PR, deploy, merge, edit the immutable plan, or modify protected harness history.
+
+User requires after every U **all accumulated application regressions with actual models and all active harness tests**, without exclusions. Focused tests below do not substitute for the final U8 unfiltered gates.
+
+Existing worker `/root/u8_integrated_acceptance_implementation` owns production/tests/fixtures and ordinary worker evidence. Parent owns independent audits, parent-prefixed evidence, manual UI, final gates, reviews and commit. No parent production/test edits or competing native workload. Ask the worker for its actual current session before taking over; never poll worker-owned exec sessions. Serialize heavy models on this host.
+
+Mandatory session startup check and ordered instructions were already read in this continuing session. Do not restart them solely after compaction. Never read `README.human.md`. Already chosen native CE route remains authorized; use existing frozen uv environment and Playwright1.49.1/Chromium131. Do not install a second framework/browser stack.
+
+Evidence directory: `harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/`.
+
+Verified focused results:
+
+- Joint/settings v6: two tests passed, transport fixture setup error; unchanged frozen58 files. Real30 accounts,10 active owners,12 genuine native contexts and queued13th, fair stepping, hot6/2, OCR overlapping native prefill computation and physical release. Native prefill is valid generation compute; token-only OCR overlap was an extra erroneous assertion in an earlier run.
+- Transport v8:1 passed56.82s, unchanged58. Genuine twoAPI/proxies, distinct-tab admission,5second origin reconnect, background navigation, observer-connected10second origin timeout, saved prefix and no duplicate allocation. Earlier exact-prefix failure was DOM rendering lag; no output restart inferred.
+- Quality v9: actual frozen30 questions mechanically30/30; parent independently read every question/expected fact/answer and checked every citation against passed fragments and original TXT offsets. Semantic30/30, citation30/30. Raw SHA `e3060132c3f7df025dc3ccb7c47bfcd7c6195388995dc6df0b263b86ee7b99a4`. Parent raw copy and audit are versioned v9; overall U8 explicitly incomplete. Frozen controls SHA `bdc9f2fe89b1dfe27082056ce16a653642fea8753bc5833f1b7c036a7259faed`. Matcher v5 uses explicit German arrest morphology alternatives, unchanged questions/facts/corpus. Final full-suite outputs require a new parent semantic audit.
+- Parent corpus derivation audit reconstructed all4 uploaded TXT bytes from their selected verbatim XML articles; hashes match. These are complete uploaded TXT excerpts, not complete official declarations.
+- Terminal/document/settings restart v10:7 passed,1 setup error212.60s, pending worker formal frozen receipt. Six actual issued-owner/native terminal cases passed: completion before stored origin deadline, stop during grace, faults before/after text, crashes before/after text followed by actual production replacement. Completed history survives; old partial remains excluded and no automatic allocation. Settings actual UI6/2 overrides survive genuine supervisor restart and next allocation. Document-boundary test did not start because imported integrated fixture's nested real_document_browser/real_account_browser were not registered in that module. Parent told worker to fix imports and rerun.
+
+G4 remains open:
+
+- Original PaddleVL1.5 and calibrated1.6 candidates misread genuine RU/BE handwriting as Latin; specialized eslav ONNX also failed. Original pinned weights/libraries remain unchanged.
+- Isolated Qwen2B vision candidate using unchanged selected generator and matching F16 projector loaded successfully and genuinely recognized EN title/author, RU `август`, DE sentence. Original whole Belarusian autograph and4 actual line crops still incorrect; no adoption/accuracy claim.
+- Primary pinned next OCR candidate metadata is parent-qwen4b-ocr-candidate-metadata-v1.json: unsloth/Qwen3.5-4B-GGUF revision `e87f176479d0855a907a41277aca2f8ee7a09523`; Q4_K_M2740937888bytes SHA `00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4`; F16projector672423616bytes SHA `cd88edcf8d031894960bb0c9c5b9b7e1fea6ebee02b9f7ce925a00d12891f864`. Worker download was network-only handle77580 while native v10 ran; ask current status. Parent downloaded no weights or ran native candidate. OCR choice is implementation scope, not fixed by user; selected answer generator2B/E5/limits stay fixed.
+- Preserve same genuine failing originals and independent source GT; no easier replacement, transliteration, answer-aware prompt, synthetic handwriting or fake OCR success. Permission masking precedes every recognizer. Whole-document publication/coordinates/original hashes remain mandatory.
+- Primary Russian handwriting ONNX alternative from National Archives Finland normalizes `і→и` in training; cannot assume Belarusian correctness. Parent research notes/metadata are source-only, not native proof.
+
+Remaining work before U8 acceptance:
+
+1. Worker must finish G4 actual pipeline proof, final executable AE1–43 coverage and genuine-issuer gaps. Parent specifically flagged AE40 actual page failure in print-only mixedPDF after page processing; invalidPDF-before-pages alone does not prove it. Terminal fixture currently singleAPI: parent requested next revision independent secondAPI/observer, per accepted U8Approach4, after frozenv10. AE4/F4 must inspect actual next model prompt after excluded stopped/failed prefix, not only the messages.excluded flag.
+2. Worker settles source and releases native workload. Parent prepared separate headed manual infrastructure in `parent-manual-integration-infrastructure-v1.py` (syntax checked, **not launched**), based on accepted U7 launcher, fresh zeroactors/docs, actual CLI invitation/UI/SMTP/login/upload. Focus new settings UI, genuine4language permission/publication and oversized question draft. Use chosen real OCR environment after selection.
+3. Fresh read-only CE simplification reviews as required, fixes, all accumulated application tests (baseline201 plus new) and all168 harness tests, no filters/skips, relevant files/plan/manifests hashes before/after, immutable raw logs. Baseline parent inventory captures144 app functions and72 harness functions; execution counts are parameterized201/168. Ensure all retained. Final native outputs30 need fresh semantic audit.
+4. Apply standalone ce-code-review with actual completion receipt according to its ordered references; parent read SKILL.md as preparation only and has **not started** its review spine. Final shipping review cannot be replaced by an ad-hoc skim or simplification reviews. Local delivery route because branch has pre-existing unoffered commits; no automatic PR/push.
+5. Exact owned-path staging/commit with escalated auto-review, verify staged blobs equal raw worktree bytes, preserve evidence and immutable plan. Mark whole goal complete only after accepted scope and delivery actually finish.
+
+Do not repeat speculative architecture/OCR reasoning. Use concrete source/raw outcomes, a short tool action, or bounded waits up to60seconds; keep concise Russian progress commentary.

@@ -1,0 +1,23 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_handwriting_only_columns_keep_original_geometry_order __________
+
+    def test_handwriting_only_columns_keep_original_geometry_order():
+        from PIL import Image
+        from app.ocr import DocumentOCR
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.transcribe=lambda image,cancelled:'Left' if image.width==40 else 'Right'
+        image=Image.new('RGB',(100,30),'white')
+        page=ocr.finish_page({'image':image,'original':image,'printed_ink':False,'mode':'complete','skips':[],
+                              'handwriting':[{'kind':'handwritten','bbox':[0,0,40,20]},
+                                             {'kind':'handwritten','bbox':[60,0,100-1,20]}]},None)
+>       assert page['text']=='Left\nRight\n'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/test_document_ocr.py:56: AssertionError
+----------------------------- Captured stderr call -----------------------------
+[0;93m2026-10-14 22:16:45.418996424 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+=========================== short test summary info ============================
+FAILED backend/tests/test_document_ocr.py::test_handwriting_only_columns_keep_original_geometry_order
+1 failed in 0.19s

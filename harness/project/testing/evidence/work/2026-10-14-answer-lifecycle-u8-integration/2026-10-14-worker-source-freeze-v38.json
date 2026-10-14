@@ -1,0 +1,18 @@
+{
+  "status": "candidate_NOT_accepted",
+  "paths": {
+    "backend/app/ocr.py": "e407905c517b7f2677d06ef5c4d601384a8de67071c578c3cf41b3a25f5c2acd",
+    "backend/config/ocr.toml": "a6a740200ae718f6f22a0d56508daea53e44d94d3d5b142d4899a9c74ddf268c",
+    "backend/tests/test_document_ocr.py": "c2f79309d36f44533308c904f096c3fb776da5c1d0db201abe3f2d87580602a7",
+    "backend/tests/integration/test_multilingual_documents.py": "c6114785f43674d3610d70486124d9a8f9e930d91e43e5c083298bc6fe3a38bd",
+    "backend/tests/integration/test_actual_page_failure.py": "3ca5fd779be32274f9383bca65cd5f190a44d328cadb20c32dd87375638dc5f0",
+    "backend/tests/integration/test_actual_lifecycle_gaps.py": "68f7f41ce2673f1014a31c1800cb065cb6d734f0b83b63fb79950640d2791719",
+    "backend/tests/integration/test_actual_printed_documents.py": "5126c3b559653f11887a2fa61aa844277b5f8f772d11e8d653aa047bcdfbea94",
+    "backend/tests/integration/test_answer_lifecycle.py": "dda4e9519f438f052293e4c7638903cbeb13954e3a006567e52f098335e43513",
+    "frontend/src/app.js": "78a1bd7f5bf3006ed314eef610a92dfc2498b1e29c5da082f9e626ae267daced",
+    "frontend/src/conversations.js": "7faa8d20e0fe1d4cc6173360ad2c537062e67e784ddf9a827f931c2fc9e5b8b3"
+  },
+  "v37": "3failed2passed114.16s; streaming revoke and tokenizer refusal PASS; detection override argument and queued hold ordering and historic caption RED before changes",
+  "printed_BE_footer": "RED v33\u2013v36; experimental crop/scale/prompt candidates NOT built; original Spotting and projectors preserved",
+  "active_run": "independent-gates-v38"
+}

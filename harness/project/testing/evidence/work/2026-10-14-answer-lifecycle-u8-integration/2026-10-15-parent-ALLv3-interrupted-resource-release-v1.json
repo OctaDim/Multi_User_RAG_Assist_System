@@ -1,0 +1,9 @@
+{
+  "closed_root_session": 29567,
+  "application_exit": 143,
+  "application_complete": false,
+  "harness_exit": 0,
+  "owned_pid_states": [],
+  "postgres_pidfile_exists": false,
+  "all_running_resources_released": true
+}

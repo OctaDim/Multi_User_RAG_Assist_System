@@ -1,0 +1,40 @@
+E
+==================================== ERRORS ====================================
+_ ERROR at setup of test_genuine_four_language_handwriting_publication_and_permission_masks _
+
+real_account_browser = (<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-linu...version=131.0.6778.33>, <mailbox.Mailbox object at 0x7176ac109580>, 'http://127.0.0.1:57476', 'http://127.0.0.1:57078')
+tmp_path = PosixPath('/tmp/rag-u8-hybrid-multilingual-v32/test_genuine_four_language_han0')
+
+    @pytest.fixture
+    def real_document_browser(real_account_browser,tmp_path):
+        """Observe real prepared pixels before calling the real native recognizer."""
+        hook=tmp_path/'observe-masks.py'
+        hook.write_text(f'''import hashlib,json
+    from pathlib import Path
+    from app.ocr import DocumentOCR
+    original=DocumentOCR.finish_page
+    trace=Path({str(tmp_path/'actual-pre-recognition-masks.jsonl')!r})
+    def finish(self,prepared,cancelled):
+        image=prepared['image']
+        for region in prepared['skips']:
+            x0,y0,x1,y1=region['bbox']
+            assert image.crop((x0,y0,x1,y1)).getextrema()==((255,255),(255,255),(255,255))
+        record={{'mode':prepared['mode'],'image_sha256':hashlib.sha256(image.tobytes()).hexdigest(),
+            'size':image.size,'skips':prepared['skips'],'handwriting':prepared['handwriting'],
+            'printed_model':self.model.model_path,'handwriting_model':self.handwriting_model.model_path}}
+        with trace.open('a') as out:out.write(json.dumps(record,ensure_ascii=False)+'\\n')
+        result=original(self,prepared,cancelled)
+        with (trace.parent/'actual-printed-texts.jsonl').open('a') as out:
+>           out.write(json.dumps({'mode':prepared['mode'],'printed_text':' '.join(row['text'] for row in result['regions'] if row['kind']=='printed')},ensure_ascii=False)+'\\n')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        return result
+    DocumentOCR.finish_page=finish
+    from app.document_worker import main
+    main()
+    ''')
+E       ValueError: Invalid format specifier 'prepared['mode'],'printed_text':' '.join(row['text'] for row in result['regions'] if row['kind']=='printed')' for object of type 'str'
+
+backend/tests/integration/test_multilingual_documents.py:46: ValueError
+=========================== short test summary info ============================
+ERROR backend/tests/integration/test_multilingual_documents.py::test_genuine_four_language_handwriting_publication_and_permission_masks
+1 error in 4.77s

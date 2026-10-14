@@ -1,0 +1,27 @@
+{
+  "status": "current_candidate_NOT_accepted",
+  "source_hashes": {
+    "backend/app/ocr.py": "bb2fe888cc980ea45f59065fbe24ad0993a131409000f39acf618d5db78b0f47",
+    "backend/config/ocr.toml": "a6a740200ae718f6f22a0d56508daea53e44d94d3d5b142d4899a9c74ddf268c",
+    "backend/tests/test_document_ocr.py": "c2f79309d36f44533308c904f096c3fb776da5c1d0db201abe3f2d87580602a7",
+    "backend/tests/integration/test_multilingual_documents.py": "c6114785f43674d3610d70486124d9a8f9e930d91e43e5c083298bc6fe3a38bd",
+    "backend/tests/integration/test_actual_page_failure.py": "3ca5fd779be32274f9383bca65cd5f190a44d328cadb20c32dd87375638dc5f0",
+    "backend/tests/integration/test_actual_lifecycle_gaps.py": "076f57b3146cf53d331377200321274be56c2f7c895aa7d25f63479251707f1c",
+    "backend/tests/integration/test_actual_printed_documents.py": "5062dc42f706cc9ef0064ff702507dbd1343555089163ece7082e48dbc6b78c0",
+    "backend/tests/integration/test_answer_lifecycle.py": "dda4e9519f438f052293e4c7638903cbeb13954e3a006567e52f098335e43513",
+    "frontend/src/app.js": "78a1bd7f5bf3006ed314eef610a92dfc2498b1e29c5da082f9e626ae267daced"
+  },
+  "v33_result": "1failed330.15s. EN/RU/DE exact full transcription,8 native uploads, forbidden modes passed; strict BE printed footer failed actual \u045e/\u0456 glyphs. All raw preserved under v33 names.",
+  "pending": [
+    "printed PDF/DOCX actual4languages",
+    "all20-page modes",
+    "terminal2API",
+    "settings restart",
+    "AE9 queued/streaming",
+    "AE28 actual admission6then5",
+    "tokenizer draft refusal",
+    "completed output isolation",
+    "joint actual bothOCR",
+    "parent finalALL/manual/reviews"
+  ]
+}

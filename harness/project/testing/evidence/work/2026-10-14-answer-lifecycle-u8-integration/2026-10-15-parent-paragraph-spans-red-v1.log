@@ -1,0 +1,35 @@
+F
+=================================== FAILURES ===================================
+________ test_short_unrelated_paragraphs_have_separate_searchable_spans ________
+
+environment = {'admin': {'id': UUID('f8eda717-a2f3-4ad1-ab2a-118645b7fa7d'), 'session_id': UUID('11a4d9bb-3dff-4644-84ef-073bb3ad328...ersation': UUID('d5d1bda4-a2e6-48c6-a9ea-3a68c4ec9c27'), 'document': UUID('2d8d2bac-63a3-42f1-8553-40f3115085f2'), ...}
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x70c91bc3ae10>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70c91bc393d0>
+tmp_path = PosixPath('/tmp/rag-u8-paragraph-spans-red-v1/test_short_unrelated_paragraph0')
+
+    async def test_short_unrelated_paragraphs_have_separate_searchable_spans(environment,rag_pool,monkeypatch,tmp_path):
+        import os
+        from app.document_worker import DocumentWorker
+        from app.rag import E5Embedder
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn']);monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        paragraphs=['The library budget is 100 euros.',
+                    'The exception applies only to non-political crimes.',
+                    'Everyone has the right to a nationality.']
+        text='\n\n'.join(paragraphs);content=text.encode()
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        with TestClient(create_app()) as client:
+            document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'separate-paragraphs.txt','size':len(content)}]}).json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
+            try:
+                assert await worker.process_one()
+                async with rag_pool.connection() as connection:
+                    chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
+>               assert len(chunks)==len(paragraphs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError
+
+backend/tests/test_documents.py:339: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_documents.py::test_short_unrelated_paragraphs_have_separate_searchable_spans
+1 failed in 2.88s

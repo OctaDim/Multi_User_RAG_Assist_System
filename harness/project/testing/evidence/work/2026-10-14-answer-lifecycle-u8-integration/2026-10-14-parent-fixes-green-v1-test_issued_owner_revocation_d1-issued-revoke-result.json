@@ -1,0 +1,33 @@
+{
+  "proof": "actual_issued_account_revocation",
+  "phase": "streaming",
+  "request_id": "8dc041c7-1cbb-41e3-8bc4-4976618fe8a1",
+  "prefix": "The annual budget",
+  "refusals": [
+    {
+      "api": "http://127.0.0.1:58992",
+      "path": "/api/conversations/9d94788f-0b3b-4cd1-9781-ca8283a2d3b6",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:58992",
+      "path": "/api/tabs/e91efac0-a062-4e53-a457-22582043afef/events",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:58166",
+      "path": "/api/conversations/9d94788f-0b3b-4cd1-9781-ca8283a2d3b6",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    },
+    {
+      "api": "http://127.0.0.1:58166",
+      "path": "/api/tabs/e91efac0-a062-4e53-a457-22582043afef/events",
+      "status": 401,
+      "body": "{\"error\":\"unauthenticated\"}"
+    }
+  ],
+  "native_allocations": 1
+}

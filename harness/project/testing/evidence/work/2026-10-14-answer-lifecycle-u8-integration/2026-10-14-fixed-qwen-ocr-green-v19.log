@@ -1,0 +1,220 @@
+......{'proof': 'actual_small_handwriting_detection', 'size': (370, 120), 'regions': [{'kind': 'handwritten', 'bbox': [2, 0, 191, 70], 'detection_confidence': 0.9370757937431335, 'coordinate_source': 'dfine_layout'}, {'kind': 'handwritten', 'bbox': [75, 63, 358, 120], 'detection_confidence': 0.8835065960884094, 'coordinate_source': 'dfine_layout'}]}
+.mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 13
+image_tokens->ny = 2
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+decode: removing memory module entries for seq_id = 0, pos = [0, +inf)
+Actual native abort callback entered C; context close waited for C return before physical free.
+.{'proof': 'actual_fixed_qwen2b_f16_ocr_profile', 'model': '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf', 'projector': '/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/mmproj-F16.gguf'}
+.{"proof": "actual_issuer_partial_upload_failed_file_selected_scope", "request_id": "965c1ec3-6e9c-48f3-8de6-348bb7c011e3", "ready": 1, "selected": 3, "unready": 2, "worker_log": "/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_real_partial_upload_and_f0/document-worker.log", "generation_log": "/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_real_partial_upload_and_f0/generation.log"}
+.FF{"language": "en", "expected_legible_source": ["dreams", "hughes"], "recognized": "Сегодняшняя дата: 2017-09-25\nDreams\n—Langston Hughes\n", "missing": [], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "f170a81bafc44634b247dd4ed3f5b99fb54f8927fc7f48fd9c7b7e97c32990c8"}
+{"language": "ru", "expected_legible_source": ["август"], "recognized": "ВЫБЕРИТЕ\nавгуст\n", "missing": [], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "f8f9915c61dd82cc0657c4488c90e3523221493b9865b5bbf5e256bc22e1e667"}
+{"language": "de", "expected_legible_source": ["die seerose blüht auf dem teich"], "recognized": "Die Seerose blüht auf dem Teich.\n", "missing": [], "accuracy_errors_permitted": false, "contract": null, "original_sha256": "a02dd6c1c1c303430d9306d1124a13fd6b1df5b2a6a0d0f7789bfe94310839d8"}
+{"language": "be", "expected_legible_source": ["беларусы", "крыўду", "людзьмі"], "recognized": "ВЫСШЕЕ ОБЩЕЕ ОБРАЗОВАНИЕ\nСвет\nА. Хто там ідзе, а хто там іде\nСвет\nВЫБЕРИТЕ\nСМИ\nУ агрономіста такій громаді? -\nПРИЛОЖЕНИЕ\nСвет\nбеларусы.\n.\nПРИЛОЖЕНИЕ\nА что яны ищущь на жудых плечах,\nНа руках у краві, на ногах у ланцях?\nСвоей крышей\n.\nВЫ\nА каму-це можучы гэта крыіду\nбо\nцель\nА куда-де имеется на показ?\nНа сём час ие.\nСвет\nА маю-це, паго захацелаць ім\nВЫ\nПалардужным век, ім глухім, слотый\nСвет\nсходзьмі звацца!\n.\nСвет\nС\nВЫСШЕЕ ОБЩЕЕ ОБРАЗОВАНИЕ\nВЫСШЕЕ ОБЩЕЕ АКАДЕМИЧЕСКОЕ УЧРЕЖДЕНИЕ\nНАУК И ТЕХНИКИ\nФаксиміле верша, які знаходзіцца ў музеі Я. Купалы. Верш напісаны ў 1905–1907 гг.\n", "missing": ["крыўду", "людзьмі"], "accuracy_errors_permitted": true, "contract": "harness/project/decisions/2026-10-14-ocr-model-and-belarusian-handwriting-contract.md", "original_sha256": "0ed19d8d9a0ac1e7adee35504d0bdc1e61aa20347928659809d476bd919e31c5"}
+{"proof": "actual_ui_issuer_four_language_handwriting_and_pre_recognition_masks", "results": "/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_genuine_four_language_han0/genuine-handwriting-results.json", "worker_log": "/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_genuine_four_language_han0/document-worker.log"}
+.
+=================================== FAILURES ===================================
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_actual_twenty_page_failur0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_5c46259edbd64e5bac64bf9c1cc2da1e host=/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_actual_twenty_page_failur0')
+skip = False
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click();owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=30)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+            assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+            if skip:
+                assert all(page['mode']=='skip_handwriting' and page['skips'] and 'Рукописный текст пропущен.' in page['text'] for page in pages),pages
+                assert all('dreams' not in page['text'].casefold() and 'hughes' not in page['text'].casefold() for page in pages)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                bad_row=connection.execute("SELECT d.*,f.state,f.failure_page,f.mode,f.original_sha256 FROM documents d JOIN document_files f ON f.document_id=d.id WHERE f.name='twenty-mixed.pdf'").fetchone()
+                assert not bad_row['ready'] and not bad_row['published_revision'] and bad_row['failure_page']==16 and bad_row['state']=='failed'
+                assert bad_row['original_sha256']==hashlib.sha256(content).hexdigest()
+                assert not connection.execute('SELECT 1 FROM available_source_revisions WHERE document_id=%s',(bad_row['id'],)).fetchone()
+                assert connection.execute('SELECT count(*) AS n FROM document_page_texts p JOIN source_revisions r ON r.id=p.revision_id WHERE r.document_id=%s',(bad_row['id'],)).fetchone()['n']==15
+            for checkbox in owner.locator('#question-sources input').all():checkbox.uncheck()
+>           owner.get_by_role('checkbox',name='twenty-mixed.pdf',exact=True).check()
+
+backend/tests/integration/test_actual_page_failure.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15358: in check
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:141: in check
+    return await self._frame.check(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:741: in check
+    await self._channel.send("check", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7aa608e36db0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7aa6092cbd80>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.
+E           Call log:
+E             - waiting for get_by_role("checkbox", name="twenty-mixed.pdf", exact=True)
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li... 'generation': PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_actual_twenty_page_failur1/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_3abd26ec2913459396bdb4afdf8fb65f host=/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/postgres0'}
+tmp_path = PosixPath('/tmp/rag-u8-worker-fixed-qwen-ocr-green-19/test_actual_twenty_page_failur1')
+skip = True
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            deadline=time.monotonic()+420
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click();owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=30)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+            assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+            if skip:
+                assert all(page['mode']=='skip_handwriting' and page['skips'] and 'Рукописный текст пропущен.' in page['text'] for page in pages),pages
+                assert all('dreams' not in page['text'].casefold() and 'hughes' not in page['text'].casefold() for page in pages)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                bad_row=connection.execute("SELECT d.*,f.state,f.failure_page,f.mode,f.original_sha256 FROM documents d JOIN document_files f ON f.document_id=d.id WHERE f.name='twenty-mixed.pdf'").fetchone()
+                assert not bad_row['ready'] and not bad_row['published_revision'] and bad_row['failure_page']==16 and bad_row['state']=='failed'
+                assert bad_row['original_sha256']==hashlib.sha256(content).hexdigest()
+                assert not connection.execute('SELECT 1 FROM available_source_revisions WHERE document_id=%s',(bad_row['id'],)).fetchone()
+                assert connection.execute('SELECT count(*) AS n FROM document_page_texts p JOIN source_revisions r ON r.id=p.revision_id WHERE r.document_id=%s',(bad_row['id'],)).fetchone()['n']==15
+            for checkbox in owner.locator('#question-sources input').all():checkbox.uncheck()
+>           owner.get_by_role('checkbox',name='twenty-mixed.pdf',exact=True).check()
+
+backend/tests/integration/test_actual_page_failure.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15358: in check
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:141: in check
+    return await self._frame.check(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:741: in check
+    await self._channel.send("check", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7aa6092e3a40>
+cb = <function Channel.send.<locals>.<lambda> at 0x7aa608f32ca0>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.
+E           Call log:
+E             - waiting for get_by_role("checkbox", name="twenty-mixed.pdf", exact=True)
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: TimeoutError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]
+2 failed, 11 passed in 489.70s (0:08:09)

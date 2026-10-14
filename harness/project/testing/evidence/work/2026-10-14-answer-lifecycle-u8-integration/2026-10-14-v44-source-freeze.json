@@ -1,0 +1,13 @@
+{
+  "source_sha256": {
+    "backend/app/generation.py": "b97f28fff1fdb74c97c57687841681919e418dbbfb69f658b52088e3bdc9c439",
+    "backend/app/ocr.py": "e407905c517b7f2677d06ef5c4d601384a8de67071c578c3cf41b3a25f5c2acd",
+    "backend/config/ocr.toml": "a6a740200ae718f6f22a0d56508daea53e44d94d3d5b142d4899a9c74ddf268c",
+    "backend/tests/integration/test_multilingual_documents.py": "ca7c07167f28b69bc450a905abec11bc0b203a0af3e3340777f71a6fdd62d972",
+    "backend/tests/integration/test_answer_lifecycle.py": "4b51d85cc9e42b49ac5060ffc6b34d2a2855508262b4e096ad4e9b24a02069f0",
+    "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md": "f6acb914ef7f6f05c67f72904129dcd77ec2220c5bd9cecfaed9a18b27ff4218"
+  },
+  "contract": "RAG67",
+  "production_OCR_unchanged_since40": true,
+  "joint_new_finite_ready_seconds": 300
+}

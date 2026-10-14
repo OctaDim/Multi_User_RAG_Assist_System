@@ -1,0 +1,82 @@
+{
+  "targeted_case_completed": true,
+  "ALL_final_pass": false,
+  "earlier_failure_cause_established": false,
+  "raw_proof_rows": [
+    {
+      "proof": "actual_fixed_two_OCR_models_joint_native_memory",
+      "memory": {
+        "fixed_two_OCR_models": {
+          "pid": 199434,
+          "Rss_kib": 2618028,
+          "Pss_kib": 2244591,
+          "Swap_kib": 4012112,
+          "SwapPss_kib": 4012112
+        },
+        "twelve_generation_contexts": {
+          "pid": 199474,
+          "Rss_kib": 1662792,
+          "Pss_kib": 1289623,
+          "Swap_kib": 1236188,
+          "SwapPss_kib": 1236188
+        },
+        "scope": "PSS and swap of the two actual native processes; excludes API/browser/PostgreSQL processes",
+        "combined_native_pss_kib": 3534214,
+        "combined_native_swap_kib": 5248300,
+        "actual_physical_contexts_at_sample": {
+          "ca4607be-2a07-4a98-ab9e-2c38385d13cb": 133419938170880,
+          "2a64995d-f139-4924-a629-7abda2f57dcb": 133419965772736,
+          "37c2f5a8-9dd2-45b3-9603-2c08e439a779": 133419994679312,
+          "80c334c2-c033-46f7-b7b9-77f143e2e59e": 133418009879520,
+          "d55a8a53-0ef7-4a68-a0fd-c470cce3db4b": 133418025893008,
+          "e7932918-11b3-4f05-9a9e-ea048a44dd95": 133418043755568,
+          "0858f63b-74df-4ce1-8065-71fd1ce860d5": 133417144602256,
+          "ef14a29d-f5fa-480d-ba87-d7acba8f5ce0": 133417171347216,
+          "83ac4a90-1935-486f-a500-e02cd74f1cd9": 133416385410768,
+          "f2e2f88f-932d-4170-8bd5-d0eabada9919": 133416412121152,
+          "542f3456-26e1-4d2c-88f8-3b540ca8bec2": 133416428126384,
+          "7a1301e4-c62d-420d-8394-a5807f174db7": 133415392639888
+        }
+      }
+    },
+    {
+      "proof": "thirty_issued_accounts_ten_real_concurrent_owners",
+      "accounts": 30,
+      "owners": 10,
+      "http_admissions": 13,
+      "native_active": 12,
+      "queued": 1,
+      "step_width": 3,
+      "api_origins": [
+        "http://127.0.0.1:60114",
+        "http://127.0.0.1:57774"
+      ],
+      "hot_revision": 1,
+      "hot_max_active": 6,
+      "hot_step_width": 2,
+      "joint_actual_ocr_published": true,
+      "fixed_Paddle_and_Qwen_actual_OCR": true,
+      "new_question_queued_at_six_admitted_after_five": "5ec5abd2-7a02-4d20-b6a8-41f166b9e2c1",
+      "ocr_overlap_step": 1221,
+      "fair_twelve_context_round": true,
+      "request_ids": [
+        "0858f63b-74df-4ce1-8065-71fd1ce860d5",
+        "2a64995d-f139-4924-a629-7abda2f57dcb",
+        "37b8d58b-7d63-447f-8e7e-06cec5ff1e67",
+        "37c2f5a8-9dd2-45b3-9603-2c08e439a779",
+        "542f3456-26e1-4d2c-88f8-3b540ca8bec2",
+        "7a1301e4-c62d-420d-8394-a5807f174db7",
+        "80c334c2-c033-46f7-b7b9-77f143e2e59e",
+        "83ac4a90-1935-486f-a500-e02cd74f1cd9",
+        "ca4607be-2a07-4a98-ab9e-2c38385d13cb",
+        "d55a8a53-0ef7-4a68-a0fd-c470cce3db4b",
+        "e7932918-11b3-4f05-9a9e-ea048a44dd95",
+        "ef14a29d-f5fa-480d-ba87-d7acba8f5ce0",
+        "f2e2f88f-932d-4170-8bd5-d0eabada9919"
+      ],
+      "actual_ui_smtp_publication": true,
+      "native_log": "/tmp/rag-u8-parent-diagnostic-native-v1/test_thirty_real_accounts_ten_0/generation.log"
+    }
+  ],
+  "generation_log_sha256": "89420479705d9bf506fd117b7a0c70b51ae6a37b0e865e3e969f7b04a10ac5be"
+}

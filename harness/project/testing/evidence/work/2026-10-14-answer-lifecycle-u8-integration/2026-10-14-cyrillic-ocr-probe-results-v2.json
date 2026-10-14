@@ -1,0 +1,52 @@
+[
+  {
+    "language": "ru",
+    "profile": "official-1605632-spotting",
+    "prompt": "Spotting:",
+    "original_size": [
+      472,
+      159
+    ],
+    "processed_size": [
+      944,
+      318
+    ],
+    "text": "abrycm",
+    "raw_special": "abrycm<|LOC_0|><|LOC_0|><|LOC_1000|><|LOC_0|><|LOC_1000|><|LOC_1000|><|LOC_0|><|LOC_1000|>",
+    "finish": "stop",
+    "valid_spotting": true,
+    "expected_independent_gt": [
+      "август"
+    ],
+    "missing": [
+      "август"
+    ]
+  },
+  {
+    "language": "be",
+    "profile": "official-1605632-spotting",
+    "prompt": "Spotting:",
+    "original_size": [
+      1200,
+      1610
+    ],
+    "processed_size": [
+      1200,
+      1610
+    ],
+    "text": "A. timo mou igze, A xmo mau igze.\ny arpouniemai maxoi ypauage?-\nTearpye.\nA wmo ami w.ayub na xgux nexo,\nHa pyx y kabi, no uarao y uansx?\nChap Kauy.\nA nowy-ye uayub zmy kpuey.\nyco?\nA kya-ye uayub no naxs elaco?\nHa elem us ac.\nA rano-ye, rano zaxauasaiu\nNarappyauu kex, iu yxiu, eomui,\nCrogoui Zauua!\nФаксімів верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905—1907 гг.",
+    "raw_special": "A. timo mou igze, A xmo mau igze.<|LOC_37|><|LOC_46|><|LOC_931|><|LOC_46|><|LOC_931|><|LOC_100|><|LOC_37|><|LOC_100|>\ny arpouniemai maxoi ypauage?-<|LOC_37|><|LOC_94|><|LOC_951|><|LOC_94|><|LOC_951|><|LOC_146|><|LOC_37|><|LOC_146|>\nTearpye.<|LOC_394|><|LOC_139|><|LOC_675|><|LOC_139|><|LOC_675|><|LOC_179|><|LOC_394|><|LOC_179|>\nA wmo ami w.ayub na xgux nexo,<|LOC_24|><|LOC_186|><|LOC_985|><|LOC_186|><|LOC_985|><|LOC_229|><|LOC_24|><|LOC_229|>\nHa pyx y kabi, no uarao y uansx?<|LOC_31|><|LOC_223|><|LOC_988|><|LOC_223|><|LOC_988|><|LOC_274|><|LOC_31|><|LOC_274|>\nChap Kauy.<|LOC_355|><|LOC_256|><|LOC_761|><|LOC_256|><|LOC_761|><|LOC_301|><|LOC_355|><|LOC_301|>\nA nowy-ye uayub zmy kpuey.<|LOC_37|><|LOC_306|><|LOC_938|><|LOC_306|><|LOC_938|><|LOC_360|><|LOC_37|><|LOC_360|>\nyco?<|LOC_812|><|LOC_336|><|LOC_938|><|LOC_336|><|LOC_938|><|LOC_369|><|LOC_812|><|LOC_369|>\nA kya-ye uayub no naxs elaco?<|LOC_24|><|LOC_359|><|LOC_963|><|LOC_359|><|LOC_963|><|LOC_407|><|LOC_24|><|LOC_407|>\nHa elem us ac.<|LOC_328|><|LOC_395|><|LOC_755|><|LOC_395|><|LOC_755|><|LOC_441|><|LOC_328|><|LOC_441|>\nA rano-ye, rano zaxauasaiu<|LOC_24|><|LOC_449|><|LOC_851|><|LOC_449|><|LOC_851|><|LOC_494|><|LOC_24|><|LOC_494|>\nNarappyauu kex, iu yxiu, eomui,<|LOC_31|><|LOC_490|><|LOC_991|><|LOC_490|><|LOC_991|><|LOC_540|><|LOC_31|><|LOC_540|>\nCrogoui Zauua!<|LOC_341|><|LOC_523|><|LOC_851|><|LOC_523|><|LOC_851|><|LOC_577|><|LOC_341|><|LOC_577|>\nФаксімів верша, які знаходзіцца<|LOC_66|><|LOC_689|><|LOC_298|><|LOC_689|><|LOC_298|><|LOC_701|><|LOC_66|><|LOC_701|>\ny музеї Я. Купалы.<|LOC_66|><|LOC_703|><|LOC_197|><|LOC_703|><|LOC_197|><|LOC_715|><|LOC_66|><|LOC_715|>\nВерш напісаны ў 1905—1907 гг.<|LOC_66|><|LOC_717|><|LOC_283|><|LOC_717|><|LOC_283|><|LOC_729|><|LOC_66|><|LOC_729|>",
+    "finish": "stop",
+    "valid_spotting": true,
+    "expected_independent_gt": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ],
+    "missing": [
+      "Беларусы",
+      "крыўду",
+      "людзьмі"
+    ]
+  }
+]

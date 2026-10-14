@@ -1,0 +1,58 @@
+INFO:     Started server process [232942]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58822 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59617 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "OPTIONS /api/accounts/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57229 - "OPTIONS /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "OPTIONS /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "OPTIONS /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "OPTIONS /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "OPTIONS /api/conversations/86c84b7c-871b-47a7-9566-df2285f3fb12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "GET /api/conversations/86c84b7c-871b-47a7-9566-df2285f3fb12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "OPTIONS /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "OPTIONS /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "GET /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "OPTIONS /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "OPTIONS /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "POST /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "OPTIONS /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57229 - "GET /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "GET /api/conversations/86c84b7c-871b-47a7-9566-df2285f3fb12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "GET /api/accounts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "POST /api/tabs/c97ed9c2-af46-444e-b129-f30f229e0d01/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "PATCH /api/settings HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:57237 - "OPTIONS /api/accounts/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "POST /api/accounts/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "POST /api/accounts/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:57233 - "POST /api/accounts/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "POST /api/accounts/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "GET /api/accounts/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "OPTIONS /api/conversations/c5fe9ada-f8da-4209-866b-bfa7cb08e4bd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57233 - "OPTIONS /api/tabs/a610bda6-4ed7-4537-abfe-6eb40f2a7244/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "GET /api/conversations/c5fe9ada-f8da-4209-866b-bfa7cb08e4bd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57239 - "GET /api/tabs/a610bda6-4ed7-4537-abfe-6eb40f2a7244/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57237 - "GET /api/documents HTTP/1.1" 200 OK
+error ignored in rollback of <psycopg.AsyncTransaction (rolled_back_with_error) [ACTIVE] (user=postgres database=u8_23665ee3ce814fdf9c5aa3423c6c3470) at 0x74a3560dee40>: sending query failed: another command is already in progress
+error ignored in rollback on <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_23665ee3ce814fdf9c5aa3423c6c3470) at 0x74a356122f30>: sending query failed: another command is already in progress
+another command is already in progress
+closing returned connection: <psycopg.AsyncConnection [ACTIVE] (user=postgres database=u8_23665ee3ce814fdf9c5aa3423c6c3470) at 0x74a356122f30>
+discarding closed connection: <psycopg.AsyncConnection [BAD] at 0x74a356122f30>
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [232942]

@@ -1,0 +1,119 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+backend/tests/integration/test_answer_lifecycle.py {"load_states": {"fd217767-4fb9-41d1-8036-4d02f445e9b4": "generating", "c4763b56-040e-419b-b587-1a85806aa543": "generating", "289cb292-9c7c-40fb-a6a8-c9cac3d7eee2": "generating", "33f3330d-0232-48ce-810c-d0a64d83c1d6": "generating", "b616ab24-d633-4fb3-a0ed-74b22c76601c": "generating", "60a9d688-a621-4707-a0c2-4bbcb081a3df": "generating", "799d2be4-8090-4da4-82f0-32febb258c17": "generating", "422b8717-d018-412e-b0bb-a7705c16ccaf": "generating", "7d9ab071-2f47-4f58-84e5-c11ed9fe47cd": "generating", "038504f6-00d3-4300-8bc9-ceb8d85b968e": "generating", "b818d11d-9d79-4e50-92f8-b8d131fe19f6": "generating", "52b724d9-69a7-4f65-91d9-246c853e1b6a": "generating", "5ea90019-2b9b-4e2e-8607-a7e1c397c7b0": "queued"}}
+F
+
+=================================== FAILURES ===================================
+_ test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits __
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...pi-2.log'), 'generation': PosixPath('/tmp/rag-u8-worker-joint-load-2/test_thirty_real_accounts_ten_0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_8366c9e06c794a66ad47b083e2b9ebfe host=/tmp/rag-u8-worker-joint-load-2/postgres0'}
+
+    def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(integrated_browser, environment):
+        ((browser, mailbox, frontend, first), publisher, publisher_log), second, logs = integrated_browser
+        contexts=[]; pages=[]; credentials=[]; operations=[]
+        try:
+            admin_context=browser.new_context();contexts.append(admin_context)
+            admin=admin_context.new_page();operator(admin,mailbox,frontend)
+            for index in range(29):
+                context=browser.new_context();contexts.append(context)
+                page=context.new_page();email=f'u8-load-{index}@owned.test'
+                register(page,mailbox,frontend,email);login(page,email)
+                if index>=10:
+                    context.close();continue
+                # Every ready document comes through the UI and the actual E5 worker.
+                name=f'private-budget-{index}.txt'
+                content=(f'The annual budget for library {index} is {100+index} euros. '
+                         'The budget pays for maintenance of the library and its reading rooms. ')*45
+                page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':content.encode()})
+                page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,name,timeout=45)
+                page.get_by_role('checkbox',name=name,exact=True).check()
+                pages.append(page)
+                credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
+                    tab:JSON.parse(sessionStorage.getItem('rag:tab')),
+                    conversation:sessionStorage.getItem('rag:conversation'),
+                    document:document.querySelector('#question-sources input:checked').value})'''))
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                assert connection.execute('SELECT count(*) AS n FROM accounts').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM accounts WHERE verified AND NOT paid').fetchone()['n']==30
+                assert connection.execute('SELECT count(*) AS n FROM documents WHERE ready').fetchone()['n']==10
+            # Three owners have a second genuine conversation; all admissions then
+            # run simultaneously through the two real APIs with issued credentials.
+            for index in range(13):
+                actor=credentials[index%10]
+                if index>=10:
+                    conversation=pages[index%10].evaluate('''async ({url,token}) => (await (await fetch(url+'/api/conversations',
+                        {method:'POST',headers:{Authorization:'Bearer '+token}})).json()).id''',{'url':second,'token':actor['token']})
+                else:conversation=actor['conversation']
+                operations.append({'base':first if index%2 else second,'token':actor['token'],'proof':actor['tab']['proof'],
+                    'conversation':conversation,'body':{'operation_key':str(uuid4()),'question':f'What is the annual budget for library {index%10} and its reading rooms? Quote every supplied excerpt in full with citations.',
+                        'document_ids':[actor['document']],'tab_id':actor['tab']['id']}})
+            responses=admin.evaluate('''async operations => await Promise.all(operations.map(async operation => {
+                const response=await fetch(operation.base+'/api/conversations/'+operation.conversation+'/answers',{
+                    method:'POST',headers:{Authorization:'Bearer '+operation.token,'X-Tab-Proof':operation.proof,'Content-Type':'application/json'},body:JSON.stringify(operation.body)});
+                return {status:response.status,body:await response.json()};
+            }))''',operations)
+            assert all(row['status']==200 for row in responses),responses
+            identifiers={row['body']['id'] for row in responses}
+            deadline=time.monotonic()+90
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                allocations=[row for row in trace if row['event']=='native_allocate']
+                with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                    states=connection.execute('SELECT state FROM requests').fetchall()
+                if len(allocations)>=12 and sum(row['state']=='queued' for row in states)==1:break
+                assert time.monotonic()<deadline,{name:path.read_text()[-3000:] for name,path in logs.items()}
+                admin.wait_for_timeout(50)
+            assert len(allocations)==12 and len({row['context'] for row in allocations})==12,allocations
+            assert all(row['max_active']==12 for row in allocations)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                requests=connection.execute('SELECT r.*,a.email FROM requests r JOIN accounts a ON a.id=r.owner_id').fetchall()
+                print(json.dumps({'load_states':{str(row['id']):row['state'] for row in requests}}),flush=True)
+                assert len(requests)==13,requests
+                assert sum(row['state']=='queued' for row in requests)==1,[(str(row['id']),row['state']) for row in requests]
+                for row in requests:
+                    expected=int(row['email'].split('@')[0].rsplit('-',1)[1])
+                    assert row['passport']['passed'] and row['passport']['found'],row['passport']
+                    assert all(f'library {expected} ' in item['text'] for item in row['passport']['passed']),row['passport']
+                    assert {item['document_id'] for item in row['passport']['passed']}==set(map(str,row['scope']))
+            steps=[row for row in trace if row['event']=='native_step']
+            assert steps and all(row['step_width']==3 and len(row['promoted'])<=3 for row in steps)
+            expected={row['request'] for row in allocations}
+            deadline=time.monotonic()+30
+            while True:
+                trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+                steps=[row for row in trace if row['event']=='native_step']
+                fair=any(len(promoted:= [item['request'] for row in steps[start:start+4] for item in row['promoted']])==12
+                    and set(promoted)==expected for start in range(len(steps)))
+                if fair:break
+                assert time.monotonic()<deadline,'No fair round across the twelve genuine admitted contexts'
+                admin.wait_for_timeout(50)
+            form=admin.locator('#global-settings')
+            form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
+            form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
+            form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
+            expect(admin.locator('#status')).to_contain_text('Ревизия 1 сохранена')
+            deadline=time.monotonic()+30
+            while True:
+                with psycopg.connect(environment['dsn'],autocommit=True) as connection:
+                    if connection.execute('SELECT applied_revision FROM settings').fetchone()[0]==1:break
+                assert time.monotonic()<deadline
+                admin.wait_for_timeout(50)
+            form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
+            expect(form.locator('.settings-revision')).to_contain_text('Применена: 1')
+            trace=[json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{"event": "native_')]
+            new_steps=[row for row in trace if row['event']=='native_step' and row['revision']==1]
+>           assert new_steps and all(row['step_width']==2 and len(row['promoted'])<=2 for row in new_steps)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+backend/tests/integration/test_answer_lifecycle.py:245: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits
+======================== 1 failed in 120.42s (0:02:00) =========================

@@ -1,0 +1,65 @@
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=924, ny=1064)
+clip_encode: output embedding shape [1024, 1254, 1]
+image slice encoded in 31558 ms
+decoding image batch 1/10, n_tokens_batch = 128
+image decoded (batch 1/10) in 2315 ms
+decoding image batch 2/10, n_tokens_batch = 128
+image decoded (batch 2/10) in 137 ms
+decoding image batch 3/10, n_tokens_batch = 128
+image decoded (batch 3/10) in 124 ms
+decoding image batch 4/10, n_tokens_batch = 128
+image decoded (batch 4/10) in 126 ms
+decoding image batch 5/10, n_tokens_batch = 128
+image decoded (batch 5/10) in 210 ms
+decoding image batch 6/10, n_tokens_batch = 128
+image decoded (batch 6/10) in 156 ms
+decoding image batch 7/10, n_tokens_batch = 128
+image decoded (batch 7/10) in 159 ms
+decoding image batch 8/10, n_tokens_batch = 128
+image decoded (batch 8/10) in 247 ms
+decoding image batch 9/10, n_tokens_batch = 128
+image decoded (batch 9/10) in 191 ms
+decoding image batch 10/10, n_tokens_batch = 102
+image decoded (batch 10/10) in 157 ms
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|im_start|>user
+
+add_text: <|vision_start|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 27
+image_tokens->ny = 9
+batch_f32 size = 1
+add_text: <|vision_end|>
+add_text: Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. Do not translate, modernize, correct or explain the text.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+encoding image slice...
+clip_encode: copying image 1/1 to input buffer (nx=864, ny=288)
+clip_encode: output embedding shape [2048, 243, 1]
+image slice encoded in 2189 ms
+decoding image batch 1/2, n_tokens_batch = 128
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+find_slot: non-consecutive token position 4 after 3 for sequence 0 with 128 new tokens
+image decoded (batch 1/2) in 3558 ms
+decoding image batch 2/2, n_tokens_batch = 115
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 115 new tokens
+find_slot: non-consecutive token position 4 after 4 for sequence 0 with 115 new tokens
+image decoded (batch 2/2) in 1972 ms
+find_slot: non-consecutive token position 93 after 4 for sequence 0 with 63 new tokens
+find_slot: non-consecutive token position 93 after 4 for sequence 0 with 63 new tokens

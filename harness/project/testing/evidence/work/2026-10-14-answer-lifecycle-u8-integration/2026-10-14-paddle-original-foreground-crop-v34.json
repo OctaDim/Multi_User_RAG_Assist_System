@@ -1,0 +1,100 @@
+{
+  "status": "actual_candidate_not_production",
+  "bbox": [
+    67,
+    1100,
+    367,
+    1186
+  ],
+  "ignored_components_count": 31,
+  "selection": "Only original-image foreground threshold, then mask known hand regions; bounding box of components >5 pixels plus12px padding; no GT/input text",
+  "lines": [
+    {
+      "kind": "printed",
+      "text": "Факсіміле верша, які знаходзіцца",
+      "bbox": [
+        10.500000000000002,
+        11.18,
+        288.0,
+        28.638
+      ],
+      "polygon": [
+        [
+          10.500000000000002,
+          11.18
+        ],
+        [
+          288.0,
+          11.18
+        ],
+        [
+          288.0,
+          28.638
+        ],
+        [
+          10.500000000000002,
+          28.638
+        ]
+      ]
+    },
+    {
+      "kind": "printed",
+      "text": "y музеї Я. Купалы.",
+      "bbox": [
+        10.500000000000002,
+        32.164,
+        166.8,
+        51.256
+      ],
+      "polygon": [
+        [
+          10.500000000000002,
+          32.164
+        ],
+        [
+          166.8,
+          32.164
+        ],
+        [
+          166.8,
+          51.256
+        ],
+        [
+          10.500000000000002,
+          51.256
+        ]
+      ]
+    },
+    {
+      "kind": "printed",
+      "text": "Верш напісаны ў 1905–1907 гг.",
+      "bbox": [
+        10.500000000000002,
+        53.234,
+        270.90000000000003,
+        69.91799999999999
+      ],
+      "polygon": [
+        [
+          10.500000000000002,
+          53.234
+        ],
+        [
+          270.90000000000003,
+          53.234
+        ],
+        [
+          270.90000000000003,
+          69.91799999999999
+        ],
+        [
+          10.500000000000002,
+          69.91799999999999
+        ]
+      ]
+    }
+  ],
+  "text": "Факсіміле верша, які знаходзіцца\ny музеї Я. Купалы.\nВерш напісаны ў 1905–1907 гг.",
+  "printed_model": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf",
+  "projector": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf"
+}

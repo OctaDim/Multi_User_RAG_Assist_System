@@ -1,0 +1,8 @@
+{
+  "reviewer": "performance",
+  "findings": [],
+  "residual_risks": [
+    "Hardware capacity remains unproven, rather than a demonstrated U8 defect. backend/tests/integration/test_answer_lifecycle.py:283-302 measures the two native processes after actual OCR publication with twelve live generation contexts; the immutable 2026-10-14-joint67-v44.log:2 reports combined native PSS 3,406,717 KiB and swap 5,377,748 KiB. The sample expressly excludes API, browser and PostgreSQL processes, and is neither peak whole-system memory nor an agreed latency/SLA measurement. The test proves actual 30-account/10-owner joint execution, physical 12-context admission, OCR/generation overlap and cleanup; its PASS must not be presented as proof of fitting RAM or production responsiveness. The sanitized plan's Wider MVP Acceptance Boundary explicitly says there is no numerical latency SLA or confirmed hardware capacity."
+  ],
+  "testing_gaps": []
+}

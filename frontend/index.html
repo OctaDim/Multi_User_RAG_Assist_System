@@ -52,9 +52,14 @@
       </form>
       <button id="refresh-documents" type="button">Обновить статусы документов</button>
       <ul id="documents"></ul>
+      <dialog id="document-report" aria-label="Отчёт об обработке документа"></dialog>
       <section id="document-view" aria-label="Просмотр и исправление документа"></section>
     </section>
     <section id="administration" hidden>
+      <section id="generation-settings" aria-label="Глобальные настройки генерации" hidden>
+        <h2>Глобальные настройки генерации</h2>
+        <form id="global-settings"></form>
+      </section>
       <h2>Аккаунты</h2>
       <p>Блокировка или мягкое удаление завершают текущие запросы и сессии выбранного аккаунта. Документы и история сохраняются.</p>
       <div id="accounts"></div>

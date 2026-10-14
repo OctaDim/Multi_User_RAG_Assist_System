@@ -1,0 +1,31 @@
+{
+  "reviewer": "adversarial",
+  "findings": [
+    {
+      "title": "OCR acceptance reports forbidden transcription differences as exact",
+      "severity": "P2",
+      "file": "backend/tests/integration/test_multilingual_documents.py",
+      "line": 228,
+      "why_it_matters": "The new OCR acceptance mechanism can pass and label a German, English or Russian transcription as exact after the model changes capitalization or punctuation, although RAG-67 grants no such exception. For the committed German ground truth 'Die Seerose blüht auf dem Teich.', the different output 'die seerose blüht auf dem teich?' becomes the same case-folded word array, reaches exact=True and requires no user permission. The printed PDF/DOCX gate uses the same lossy comparison, so a wrong punctuation mark can also pass that gate. Comparing independently transcribed tokens while retaining case and punctuation prevents these differences from silently receiving an undeclared allowance.",
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "suggested_fix": "Replace the casefold()/\\w+ equality used for strict OCR acceptance with case- and punctuation-preserving source tokens or complete independently recorded source strings, allowing only layout whitespace differences explicitly handled by the existing page composition. Use the committed German ground_truth.text and faithful independent EN/RU/printed ground truths; preserve the existing per-word Paddle Belarusian glyph exception and current Qwen Belarusian handwriting exception. Add a small matcher regression proving that a case change and a period-to-question-mark change fail strict acceptance, then rerun the actual OCR integration gates without changing the originals or old raw records.",
+      "confidence": 100,
+      "evidence": [
+        "backend/tests/integration/test_multilingual_documents.py:228 -- row['actual_words']=re.findall(r'\\w+',row['evaluated_raw_handwriting'].casefold())",
+        "backend/tests/integration/test_multilingual_documents.py:230-233 -- exact=row['actual_words']==row['expected_legible_source']; assert exact or exception=='current_Qwen_BE_handwriting',records; row.update({'identity':identity,'acceptance':'exact' if exact else 'user_permitted_current_model_difference', 'exception':exception,'contract':CONTRACT if exception else None})",
+        "backend/tests/integration/test_multilingual_documents.py:153 -- ('de',raster_pdf(FIXTURES/'handwritten-de-row5.jpg'),['die','seerose','blüht','auf','dem','teich']),",
+        "backend/tests/fixtures/answer_lifecycle/handwriting-primary-provenance-v1.json:15 -- \"text\": \"Die Seerose blüht auf dem Teich.\"",
+        "Constructed sequence: the actual model returns 'die seerose blüht auf dem teich?'; casefold plus \\w+ returns ['die','seerose','blüht','auf','dem','teich']; the German be_exception returns None, but exact is True, so the acceptance assertion passes and the evidence record says exact. This is a mechanical guard-fidelity failure, not a claim that the current native run produced this text.",
+        "backend/tests/integration/test_actual_printed_documents.py:66 -- assert re.findall(r'\\w+',text.casefold())==expected_words,{'name':name,'recognized':page['text'],'expected':gt}",
+        "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md:7 -- **По умолчанию ошибки запрещены. Допуск определяется фактическим типом каждого слова и конкретной моделью OCR.**"
+      ],
+      "pre_existing": false
+    }
+  ],
+  "residual_risks": [
+    "This fallback review inspected the production boundary changes, UI/API guards, native ownership/cancellation and teardown paths, actual issuer/load/transport/fault/OCR mechanisms, and representative frozen controls/provenance. No native, browser or test jobs were launched while the parent's unfiltered application suite was running; its final result and fresh independent thirty-answer factual/citation audit remain required before U8 acceptance."
+  ],
+  "testing_gaps": []
+}

@@ -1,0 +1,325 @@
+{
+  "contract": "harness/project/decisions/2026-10-14-ocr-word-types-and-model-specific-exceptions.md",
+  "scope": "NEW pure per-source-word policy reevaluation of immutable actualv43 native outputs; NOT native rerun; parent fresh ALL mandatory",
+  "input_sha256": {
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-actual-pre-recognition-masks.jsonl": "15e99cbb6bc10d6edc4984529b3ef5f3934bf734a48b61fdd9c183139bf57556",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-v43-test_genuine_four_language_han0-actual-printed-texts.jsonl": "cc783569c3deed6afd00ec680c2d36f057853fb6694d90f5cd31d37ca85a4c24",
+    "harness/project/testing/evidence/work/2026-10-14-answer-lifecycle-u8-integration/2026-10-14-parent-be-printed-footer-independent-gt-v1.json": "f992ca37e4cd23a3be6e2c730a5898ded9b4f9e3cb3919159520670126dd40b9"
+  },
+  "raw_transcripts_modified": false,
+  "strict_policy_negative_assertions_passed": true,
+  "printed_source_words": [
+    {
+      "upload_index": 3,
+      "actual_model_and_projector_sha256": [
+        "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+        "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+      ],
+      "words": [
+        {
+          "source_word": "Факсіміле",
+          "raw_word": "Факсіміле",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "верша,",
+          "raw_word": "верша,",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "які",
+          "raw_word": "які",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "знаходзіцца",
+          "raw_word": "знаходзіцца",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "ў",
+          "raw_word": "у",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": false,
+          "permitted_difference": true,
+          "permission": "current_Paddle_BE_printed_only_u_i_glyph_variants"
+        },
+        {
+          "source_word": "музеі",
+          "raw_word": "музеї",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": false,
+          "permitted_difference": true,
+          "permission": "current_Paddle_BE_printed_only_u_i_glyph_variants"
+        },
+        {
+          "source_word": "Я.",
+          "raw_word": "Я.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "Купалы.",
+          "raw_word": "Купалы.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "Верш",
+          "raw_word": "Верш",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "напісаны",
+          "raw_word": "напісаны",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "ў",
+          "raw_word": "ў",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "1905–1907",
+          "raw_word": "1905–1907",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "гг.",
+          "raw_word": "гг.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        }
+      ]
+    },
+    {
+      "upload_index": 7,
+      "actual_model_and_projector_sha256": [
+        "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+        "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+      ],
+      "words": [
+        {
+          "source_word": "Факсіміле",
+          "raw_word": "Факсіміле",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "верша,",
+          "raw_word": "верша,",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "які",
+          "raw_word": "які",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "знаходзіцца",
+          "raw_word": "знаходзіцца",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "ў",
+          "raw_word": "у",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": false,
+          "permitted_difference": true,
+          "permission": "current_Paddle_BE_printed_only_u_i_glyph_variants"
+        },
+        {
+          "source_word": "музеі",
+          "raw_word": "музеї",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": false,
+          "permitted_difference": true,
+          "permission": "current_Paddle_BE_printed_only_u_i_glyph_variants"
+        },
+        {
+          "source_word": "Я.",
+          "raw_word": "Я.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "Купалы.",
+          "raw_word": "Купалы.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "Верш",
+          "raw_word": "Верш",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "напісаны",
+          "raw_word": "напісаны",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "ў",
+          "raw_word": "ў",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "1905–1907",
+          "raw_word": "1905–1907",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        },
+        {
+          "source_word": "гг.",
+          "raw_word": "гг.",
+          "actual_source_word_kind": "printed",
+          "source_kind_basis": "independent original printed footer GT, not region/model prediction",
+          "exact_match": true,
+          "permitted_difference": false,
+          "permission": null
+        }
+      ]
+    }
+  ],
+  "handwritten_sources": [
+    {
+      "language": "en",
+      "raw_handwriting": "Dreams —Langston Hughes",
+      "source_kind": "handwritten",
+      "source_kind_basis": "independently viewed genuine handwritten source; BE body ends before independently typed printed footer y1112",
+      "exact_word_GT": true,
+      "permission": null,
+      "actual_model_and_projector_sha256": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ]
+    },
+    {
+      "language": "ru",
+      "raw_handwriting": "август",
+      "source_kind": "handwritten",
+      "source_kind_basis": "independently viewed genuine handwritten source; BE body ends before independently typed printed footer y1112",
+      "exact_word_GT": true,
+      "permission": null,
+      "actual_model_and_projector_sha256": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ]
+    },
+    {
+      "language": "de",
+      "raw_handwriting": "Die Seerose blüht auf dem Teich.",
+      "source_kind": "handwritten",
+      "source_kind_basis": "independently viewed genuine handwritten source; BE body ends before independently typed printed footer y1112",
+      "exact_word_GT": true,
+      "permission": null,
+      "actual_model_and_projector_sha256": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ]
+    },
+    {
+      "language": "be",
+      "raw_handwriting": "А. Кіто там ідзе, а хто там ідзе\nУ аграрніста такій грамадзе? -\nБеларусь. Беларусь.\n\nА што яны імяць на хурых плагах,\nНа руках у крыві, на магах у папках?\nСвога крыўду\nА каму-це няжучы гэта крыўду,\nКуды-це імяць на паказ сваё? -\nНа сём чалі.\n\nА чаю-це, гаго захачелась ім\nПалардзаным век, ім глухім, слоткім,\nСлоўным звацца!",
+      "source_kind": "handwritten",
+      "source_kind_basis": "independently viewed genuine handwritten source; BE body ends before independently typed printed footer y1112",
+      "exact_word_GT": false,
+      "permission": "current_Qwen_BE_handwriting",
+      "actual_model_and_projector_sha256": [
+        "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+        "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+      ]
+    }
+  ],
+  "actual_Qwen_calls_per_upload": [
+    2,
+    1,
+    1,
+    2,
+    0,
+    0,
+    0,
+    0
+  ]
+}
