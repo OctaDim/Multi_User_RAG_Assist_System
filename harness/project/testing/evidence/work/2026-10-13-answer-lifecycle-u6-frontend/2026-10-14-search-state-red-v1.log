@@ -1,0 +1,40 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_search_state_is_published_before_graph_work _______________
+
+environment = {'admin': {'id': UUID('c7354f92-1243-47bd-becd-c53a7a1307df'), 'session_id': UUID('7b28a4cd-9893-4d2c-bb83-20b0303e3ce...ersation': UUID('2d8223ff-fb97-4cb8-a368-649cbeb19f1e'), 'document': UUID('21f81186-38aa-4002-b67a-280fdeafd278'), ...}
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_e9bea46332004bd68892b235996aef9a) at 0x7fd62c9bc7a0>
+rag_pool = <psycopg_pool.pool_async.AsyncConnectionPool 'pool-1' at 0x7fd62c9bcfb0>
+
+    async def test_search_state_is_published_before_graph_work(environment, connection, rag_pool):
+        import psycopg
+        from psycopg.rows import dict_row
+    
+        request = await submit(connection, environment)
+        observed = []
+    
+        class InspectSearch(ContractEmbedder):
+            def encode(self, texts, *, query=False):
+                with psycopg.connect(environment['dsn'], row_factory=dict_row) as independent:
+                    row = independent.execute('SELECT state,version FROM requests WHERE id=%s', (request['id'],)).fetchone()
+                    events = independent.execute('SELECT kind,payload FROM events WHERE request_id=%s ORDER BY id', (request['id'],)).fetchall()
+                    observed.append((row, events))
+                return super().encode(texts, query=query)
+    
+        coordinator = Coordinator(rag_pool, 1, TokenRuntime(), InspectSearch())
+        try:
+            await coordinator.prepare_next()
+            assert len(observed) == 1
+            row, events = observed[0]
+>           assert row == {'state': 'searching', 'version': request['version'] + 1}
+E           AssertionError: assert {'state': 'se... 'version': 1} == {'state': 'se... 'version': 2}
+E             
+E             Omitting 1 identical items, use -vv to show
+E             Differing items:
+E             {'version': 1} != {'version': 2}
+E             Use -v to get more diff
+
+backend/tests/test_scheduler.py:254: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_scheduler.py::test_search_state_is_published_before_graph_work
+1 failed in 1.94s

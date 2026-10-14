@@ -1,0 +1,79 @@
+Delayed ACK actual status: Файлы приняты. Обработка выполняется в фоне.
+Delayed ACK actual history: What is the annual budget?
+
+Прерван
+
+Ответ модели
+Actual admitted request states: [(UUID('6a7c2ab1-fff8-4001-9967-e2dc444ccadb'), 'interrupted', 'user_stop', False), (UUID('5310e22b-f68f-45e6-8fda-72d5b3346249'), 'accepted', None, False)]
+F
+=================================== FAILURES ===================================
+_ test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation _
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../Multi_User_RAG_Ass...>, PosixPath('/tmp/pytest-of-octadim/pytest-132/test_delayed_real_ack_preserve0/generation.log'))
+
+    def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation(real_answer_browser):
+        ((browser,mailbox,frontend,_),_,_),generation,generation_log = real_answer_browser
+        context=browser.new_context()
+        held=[]
+        native_pid=None
+        try:
+            page=context.new_page()
+            register(page,mailbox,frontend,'lifecycle-ack@owned.test')
+            login(page,'lifecycle-ack@owned.test')
+            page.locator('#document-upload input').set_input_files({'name':'ack-budget.txt','mimeType':'text/plain',
+                                                                  'buffer':b'The annual budget is 100 euros.\n'})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            ready(page,'ack-budget.txt')
+            page.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
+            native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
+                            if line.startswith('{"event": "native_spawn"'))
+            os.kill(native_pid,signal.SIGSTOP)
+            first_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            first_question='What is the annual budget?'
+            def delay_first_ack(route):
+                if not held:
+                    response=route.fetch()
+                    assert response.status==200
+                    held.append((route,response))
+                else:route.continue_()
+            page.route('**/api/conversations/*/answers',delay_first_ack)
+            page.locator('#question').fill(first_question)
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history h3')).to_have_text(first_question)
+            page.locator('#question').fill('A new unsent draft after acceptance')
+            page.get_by_role('button',name='Новая беседа',exact=True).click()
+            expect(page.locator('#conversations li')).to_have_count(2)
+            second_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            assert second_id!=first_id
+            page.locator('#question').fill('The annual budget is 100 euros. Explain that budget.')
+            expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_enabled()
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history h3')).to_contain_text('Explain that budget')
+            neighbor=context.new_page()
+            neighbor.goto(frontend)
+            login(neighbor,'lifecycle-ack@owned.test')
+            neighbor.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+            neighbor.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
+            neighbor.locator('#question').fill('Neighbor draft while A is busy')
+            expect(neighbor.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
+            # Exercise the same handler reached by a competing form event before a tab sees busy.
+            neighbor.locator('#question-form').evaluate('form => form.requestSubmit()')
+            expect(neighbor.locator('#status')).to_contain_text('В этой беседе уже выполняется запрос')
+            expect(neighbor.locator('#question')).to_have_value('Neighbor draft while A is busy')
+            page.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+            expect(page.locator('#question')).to_have_value('A new unsent draft after acceptance')
+            page.get_by_role('button',name='Остановить ответ',exact=True).click()
+            expect(page.locator('#history')).to_contain_text('Прерван')
+>           expect(page.locator('#history').get_by_text('Ответ модели',exact=True)).to_be_hidden()
+E           AssertionError: Locator expected to be hidden
+E           Actual value: False 
+E           Call log:
+E             - LocatorAssertions.to_be_hidden with timeout 5000ms
+E             -   - waiting for locator("#history").get_by_text("Ответ модели", exact=True)
+E             -     9 × locator resolved to <p>Ответ модели</p>
+E             -       - unexpected value "visible"
+
+backend/tests/browser/test_answer_lifecycle.py:183: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation
+1 failed, 2 deselected in 19.85s

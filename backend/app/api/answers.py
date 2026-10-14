@@ -17,6 +17,12 @@ class Question(BaseModel):
     tab_id: UUID
 
 
+@router.post('/conversations', status_code=201)
+async def create(request: Request, authorization: str | None = Header(None)):
+    async with request.app.state.pool.connection() as connection:
+        return await answers.create_conversation(connection, bearer(authorization))
+
+
 @router.post("/conversations/{conversation_id}/answers")
 async def admit(conversation_id: UUID, body: Question, request: Request, authorization: str | None = Header(None), tab_proof: str = Header(alias="X-Tab-Proof")):
     async with request.app.state.pool.connection() as connection:

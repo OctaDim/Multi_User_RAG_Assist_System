@@ -1,0 +1,52 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation _
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../Multi_User_RAG_Ass...>, PosixPath('/tmp/pytest-of-octadim/pytest-122/test_delayed_real_ack_preserve0/generation.log'))
+
+    def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation(real_answer_browser):
+        ((browser,mailbox,frontend,_),_,_),generation,generation_log = real_answer_browser
+        context=browser.new_context()
+        held=[]
+        native_pid=None
+        try:
+            page=context.new_page()
+            register(page,mailbox,frontend,'lifecycle-ack@owned.test')
+            login(page,'lifecycle-ack@owned.test')
+            page.locator('#document-upload input').set_input_files({'name':'ack-budget.txt','mimeType':'text/plain',
+                                                                  'buffer':b'The annual budget is 100 euros.\n'})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            ready(page,'ack-budget.txt')
+            page.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
+            native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
+                            if line.startswith('{"event": "native_spawn"'))
+            os.kill(native_pid,signal.SIGSTOP)
+            first_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            first_question='What is the annual budget?'
+            def delay_first_ack(route):
+                if not held:
+                    response=route.fetch()
+                    assert response.status==200
+                    held.append((route,response))
+                else:route.continue_()
+            page.route('**/api/conversations/*/answers',delay_first_ack)
+            page.locator('#question').fill(first_question)
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#history h3')).to_have_text(first_question)
+            page.locator('#question').fill('A new unsent draft after acceptance')
+            page.get_by_role('button',name='Новая беседа',exact=True).click()
+            second_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            page.locator('#question').fill('The annual budget is 100 euros. Explain that budget.')
+>           expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_enabled()
+E           AssertionError: Locator expected to be enabled
+E           Actual value: False 
+E           Call log:
+E             - LocatorAssertions.to_be_enabled with timeout 5000ms
+E             -   - waiting for get_by_role("button", name="Отправить вопрос", exact=True)
+E             -     9 × locator resolved to <button disabled id="send-question">Отправить вопрос</button>
+E             -       - unexpected value "disabled"
+
+backend/tests/browser/test_answer_lifecycle.py:157: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation
+1 failed, 2 deselected in 15.22s

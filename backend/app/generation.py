@@ -139,7 +139,10 @@ class Coordinator:
         request_id = row['id']
         try:
             async with self.guard(request_id) as (connection, _):
-                await connection.execute("UPDATE requests SET state='searching' WHERE id=%s AND state='accepted'", (request_id,))
+                updated = await (await connection.execute(
+                    "UPDATE requests SET state='searching',version=version+1 WHERE id=%s AND state='accepted' RETURNING *", (request_id,),
+                )).fetchone()
+                await answers.event(connection, updated, 'state', {'state': 'searching', 'version': updated['version']})
             state = await run_graph(self.pool, request_id, self.epoch, self.embedder, self.runtime.tokenize)
             self.prepared[request_id] = state
             self.ready.append(request_id)
@@ -223,7 +226,8 @@ class Coordinator:
                                DO UPDATE SET text=EXCLUDED.text,excluded=EXCLUDED.excluded,source_flags=EXCLUDED.source_flags''',
                             (request_id, request['conversation_id'], request['answer_text'], bool(flags), Jsonb(flags)),
                         )
-                        await answers.event(connection, request, 'output', {'text': result['text'], 'version': request['version']})
+                        await answers.event(connection, request, 'output', {'text': result['text'], 'version': request['version'],
+                                                                           'citations': sources.cited_spans(request['answer_text'], request['passport'])})
                     if result['done']:
                         completed = result['reason'] == 'eos'
                         await answers.transition(connection, request, 'completed' if completed else 'interrupted',

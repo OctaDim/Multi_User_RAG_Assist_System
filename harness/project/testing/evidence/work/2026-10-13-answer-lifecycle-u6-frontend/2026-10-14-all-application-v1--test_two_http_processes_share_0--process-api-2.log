@@ -1,0 +1,47 @@
+INFO:     Started server process [16031]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:57110 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60347 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60357 - "GET /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60367 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60383 - "POST /api/conversations/3ace5444-f259-4189-b1e4-f0418631e8e6/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60389 - "POST /api/conversations/680d676b-f563-4dbe-9fba-d6bab63ddeee/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60401 - "POST /api/conversations/d49bd427-c3c5-4fa2-964a-5449998af66a/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60407 - "POST /api/conversations/7f9eecc7-f2c0-4143-ba75-7cfaf07f8de4/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60411 - "POST /api/conversations/ab8d7221-83cb-4083-8128-531b4b7f4223/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60421 - "POST /api/conversations/3b560b3e-6af4-4295-bb61-23b01369527a/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60437 - "POST /api/conversations/905b9517-5066-4fef-bbe4-43048e06c2f4/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59337 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59351 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59853 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59869 - "PATCH /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59871 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "GET /api/conversations/93043ccd-49c3-4e25-a140-ab9b0fe22802 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59889 - "POST /api/answers/13b79884-66eb-451b-926f-70ec92f188a9/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59895 - "POST /api/answers/573b17e2-ee2c-4928-b5ce-5b7be1af20e8/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59903 - "POST /api/answers/0d551f9c-bfdf-494b-ad3d-1c9a26793925/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59915 - "POST /api/answers/68ab8bc8-525a-421d-a7ed-b6ff2b160c18/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59927 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59939 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59945 - "POST /api/conversations/a5ea4b2d-0353-4fbc-88fd-6d9f9c860246/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59951 - "POST /api/conversations/359d5bb3-6740-4488-a192-7d203d6e5878/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59957 - "POST /api/conversations/71ea01b7-6e81-4219-b4a0-8252660674d9/answers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57587 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57597 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58175 - "GET /api/conversations/93043ccd-49c3-4e25-a140-ab9b0fe22802 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58179 - "POST /api/tabs/806445da-63f5-461c-bad9-14ec56fb0d93/heartbeat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58185 - "POST /api/answers/13b79884-66eb-451b-926f-70ec92f188a9/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58197 - "POST /api/answers/573b17e2-ee2c-4928-b5ce-5b7be1af20e8/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58201 - "POST /api/answers/0d551f9c-bfdf-494b-ad3d-1c9a26793925/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58209 - "POST /api/answers/68ab8bc8-525a-421d-a7ed-b6ff2b160c18/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58215 - "POST /api/answers/cdf84dab-6f6c-4560-a4d9-ac1dfee90005/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58223 - "POST /api/answers/efa6781e-8e45-4d3b-8421-5e1061277f7b/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58235 - "POST /api/answers/d94ce05c-bd9d-47d4-94ee-54d4d3e4b1f6/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58237 - "POST /api/answers/b58a61d5-5fe6-4ca2-82b6-ac55447232b8/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58239 - "POST /api/answers/43537149-de41-42b6-8278-c99e11a22da8/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58245 - "POST /api/answers/dec68ed4-b469-4209-89cf-8fca6dcf1ca2/stop HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16031]

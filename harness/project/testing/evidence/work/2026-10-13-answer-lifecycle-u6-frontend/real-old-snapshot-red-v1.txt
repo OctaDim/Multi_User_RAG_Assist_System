@@ -1,0 +1,63 @@
+E
+==================================== ERRORS ====================================
+_ ERROR at setup of test_old_real_snapshot_cannot_erase_new_request_or_current_fragments _
+
+fixturedef = <FixtureDef argname='real_account_browser' scope='function' baseid='tests/browser/test_answer_lifecycle.py'>
+request = <SubRequest 'real_account_browser' for <Function test_old_real_snapshot_cannot_erase_new_request_or_current_fragments>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+>               return (yield)
+                        ^^^^^
+
+backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:926: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/browser/test_accounts.py:72: in real_account_browser
+    browser = playwright.chromium.launch(executable_path=playwright.chromium.executable_path, headless=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:14447: in launch
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_browser_type.py:95: in launch
+    Browser, from_channel(await self._channel.send("launch", params))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7619f116e270>
+cb = <function Channel.send.<locals>.<lambda> at 0x7619f1174d60>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           Exception: BrowserType.launch: Connection closed while reading from the driver
+
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: Exception
+=========================== short test summary info ============================
+ERROR backend/tests/browser/test_answer_lifecycle.py::test_old_real_snapshot_cannot_erase_new_request_or_current_fragments
+7 deselected, 1 error in 294.94s (0:04:54)

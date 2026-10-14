@@ -1,0 +1,6 @@
+INFO:     Started server process [18301]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58288 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59059 - "POST /api/tabs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59065 - "GET /api/tabs/7e8f6afa-016f-4eb8-ac37-39c8e0fb6ee3/events HTTP/1.1" 200 OK

@@ -1,0 +1,44 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_real_fragments_precede_answer_without_waiting_for_history_read ______
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li.../Multi_User_RAG_Ass...>, PosixPath('/tmp/pytest-of-octadim/pytest-117/test_real_fragments_precede_an0/generation.log'))
+
+    def test_real_fragments_precede_answer_without_waiting_for_history_read(real_answer_browser):
+        ((browser,mailbox,frontend,_),worker,_),generation,_ = real_answer_browser
+        context=browser.new_context()
+        held=[]
+        try:
+            page=context.new_page()
+            register(page,mailbox,frontend,'lifecycle-answer@owned.test')
+            login(page,'lifecycle-answer@owned.test')
+            content=b'The annual budget is 100 euros.\n'
+            page.locator('#document-upload input').set_input_files({'name':'answer-budget.txt','mimeType':'text/plain','buffer':content})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            ready(page,'answer-budget.txt')
+            page.evaluate("""() => {
+              window.fragmentPrefix = undefined;
+              window.fragmentObserver = new MutationObserver(() => {
+                const fragment=document.querySelector('#early-fragments blockquote');
+                if (fragment?.getClientRects().length && window.fragmentPrefix === undefined)
+                  window.fragmentPrefix=document.querySelector('#history .answer-text')?.textContent || '';
+              });
+              window.fragmentObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+            }""")
+            def hold_history(route):
+                if route.request.method=='GET':held.append(route)
+                else:route.continue_()
+            page.route('**/api/conversations/*',hold_history)
+            page.locator('#question').fill('What is the annual budget?')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
+E           AssertionError: Locator expected to contain text '100 euros'
+E           Actual value: <element(s) not found> 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 5000ms
+E             -   - waiting for locator("#early-fragments blockquote")
+
+backend/tests/browser/test_answer_lifecycle.py:102: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_real_fragments_precede_answer_without_waiting_for_history_read
+1 failed, 1 deselected in 13.82s

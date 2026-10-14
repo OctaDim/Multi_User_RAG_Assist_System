@@ -4,10 +4,20 @@ from uuid import uuid4
 from psycopg.types.json import Jsonb
 
 from app.auth import AccessError, lock_service, principal, secret_hash
-from app.sources import available, source_flags
+from app.sources import available, source_flags, cited_spans
 
 
 UNFINISHED = ("accepted", "searching", "queued", "generating")
+
+
+async def create_conversation(connection, token):
+    async with connection.transaction():
+        await lock_service(connection)
+        actor = await principal(connection, token)
+        return await (await connection.execute(
+            'INSERT INTO conversations(id,owner_id) VALUES (%s,%s) RETURNING id',
+            (uuid4(), actor['id']),
+        )).fetchone()
 
 
 async def conversation(connection, actor, conversation_id, *, read_only=False):
@@ -64,7 +74,11 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
              service['epoch'], history['context_epoch'], actor['context_epoch']),
         )
         await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'user',%s)", (request["id"], conversation_id, question))
-        await event(connection, request, "accepted", {"state": "accepted", "version": request["version"]})
+        await event(connection, request, "accepted", {
+            "state": "accepted", "version": request["version"], "question": question,
+            "operation_key": str(operation_key), "scope": list(map(str, scope)),
+            "created_at": request['created_at'].isoformat(),
+        })
         return request
 
 
@@ -105,6 +119,7 @@ async def histories(connection, conversation_ids):
     for message in messages:
         result[message["conversation_id"]]["messages"].append(message)
     for request in requests:
+        request['citations'] = cited_spans(request['answer_text'], request['passport'])
         result[request["conversation_id"]]["requests"].append(request)
     for watermark in watermarks:
         result[watermark["conversation_id"]]["watermark"] = watermark["watermark"]

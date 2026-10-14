@@ -1,0 +1,22 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt ______
+
+    def test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt():
+        from app.sources import cited_spans
+        old_answer='The old budget is 100 euros [source:1].'
+        text='The new budget is 10 euros.'
+        fragment={'id':'new-chunk','document_id':'new-document','revision_id':'new-revision','page':1,
+                  'text':text,'span_start':0,'span_end':len(text)}
+        packed=pack_context('Compare the budgets.',[{'question':'Old budget?','answer':old_answer}],
+                            [fragment],lambda value:value.encode())
+        conversation=packed['prompt'].split('<conversation>\n',1)[1].split('</conversation>',1)[0]
+        assert 'The old budget is 100 euros' in conversation
+>       assert cited_spans(conversation,{'passed':[fragment]}) == []
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+backend/tests/test_rag_context.py:247: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/test_rag_context.py::test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt
+1 failed, 15 deselected in 0.25s

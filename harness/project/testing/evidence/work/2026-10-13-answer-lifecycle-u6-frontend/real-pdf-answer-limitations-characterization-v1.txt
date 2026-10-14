@@ -1,0 +1,3 @@
+Actual UI/SMTP/operator policy/explicit PDF choice/native OCR/E5/Qwen answer; print-only source limitation carried in passport.
+.
+1 passed, 6 deselected in 132.34s (0:02:12)

@@ -1,0 +1,5 @@
+# Corrected U6 early-fragment test precondition
+
+real-early-fragments-red-v1/v2 and green-v1 failed on missing early-fragment UI, but the later debug run showed the actual question was rejected as no_ready_sources. The test omitted explicit source selection; backend empty scope is not a wildcard. Those runs are failed setup/characterization evidence, not a valid admitted-native fragment ordering RED. Their bytes remain intact. The independently valid first draft RED and GREEN remain unchanged.
+
+Actual E5 measurement gives strong similarity for the intended question/source and does not justify changing the accepted .75 threshold. The UI's unasked “empty means whole library” description was removed; the positive test now checks the ordinary source checkbox. Its genuine coordinator readiness requires a newer epoch than the component fixture lease. No fake model output or ready SQL seed was added. The next real run determines ordering and model behavior; do not fabricate an admitted-native RED from the earlier refusal runs.

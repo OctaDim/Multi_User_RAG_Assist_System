@@ -6,6 +6,8 @@ form { background: white; border: 1px solid #d5e0e5; border-radius: .6rem; paddi
 #authentication { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 20rem),1fr)); gap: 1rem; }
 [hidden] { display: none !important; }
 label { display: block; margin: .9rem 0; }
+label, strong { overflow-wrap: anywhere; }
+fieldset { min-width: 0; }
 input:not([type="checkbox"]), select { display: block; box-sizing: border-box; width: 100%; padding: .65rem; margin-top: .3rem; font: inherit; border: 1px solid #879da8; border-radius: .3rem; }
 input[type="checkbox"] { margin-left: .6rem; width: 1.2rem; height: 1.2rem; vertical-align: middle; }
 button { font: inherit; padding: .65rem 1rem; background: #155f79; color: white; border: 0; border-radius: .3rem; cursor: pointer; }
@@ -22,3 +24,6 @@ textarea { box-sizing: border-box; display: block; width: 100%; padding: .6rem; 
 .original-page { margin: 0; position: relative; align-self: start; }
 .original-page img { display: block; width: 100%; }
 .skip-region { position: absolute; box-sizing: border-box; border: 2px solid #b45d00; background: #ffe6bf60; font-size: .7rem; overflow: hidden; }
+.answer-text, blockquote { white-space: pre-wrap; overflow-wrap: anywhere; }
+#history article, #early-fragments { margin: 1.4rem 0; }
+.answer-passport { padding: .8rem; background: white; border: 1px solid #d5e0e5; border-radius: .4rem; }

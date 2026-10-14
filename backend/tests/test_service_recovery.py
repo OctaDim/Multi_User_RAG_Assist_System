@@ -140,7 +140,10 @@ generation.main()
         assert row['answer_text'].startswith(partial['answer_text'])
         message = await (await connection.execute("SELECT * FROM messages WHERE request_id=%s AND role='assistant'", (request['id'],))).fetchone()
         assert message['text'] == row['answer_text'] and message['excluded']
-        assert (await (await connection.execute('SELECT count(*) AS n FROM events WHERE request_id=%s AND kind=\'state\'', (request['id'],))).fetchone())['n'] == 1
+        state_events = await (await connection.execute(
+            "SELECT payload->>'state' AS state FROM events WHERE request_id=%s AND kind='state' ORDER BY id", (request['id'],),
+        )).fetchall()
+        assert [event['state'] for event in state_events] == ['searching', 'generating']
         print({'proof': 'supervisor_physical_reap', 'predecessor': predecessor, 'replacement': replacement,
                'saved_prefix_chars': len(row['answer_text']), 'inside_real_native_decode': True,
                'native_logs': str(tmp_path)}, flush=True)

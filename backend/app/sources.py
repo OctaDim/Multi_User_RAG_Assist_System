@@ -1,10 +1,14 @@
-from app.auth import AccessError, lock_service, principal
+import re
+
 from psycopg.types.json import Jsonb
+
+from app.auth import AccessError, lock_service, principal
 
 
 async def available(connection, owner_id, scope):
     return await (await connection.execute(
-        "SELECT * FROM available_source_revisions WHERE owner_id=%s AND document_id=ANY(%s::uuid[]) ORDER BY document_id",
+        """SELECT s.*,f.name FROM available_source_revisions s LEFT JOIN document_files f ON f.document_id=s.document_id
+           WHERE s.owner_id=%s AND s.document_id=ANY(%s::uuid[]) ORDER BY s.document_id""",
         (owner_id, scope),
     )).fetchall()
 
@@ -12,14 +16,48 @@ async def available(connection, owner_id, scope):
 async def retrieve(connection, owner_id, scope, embedding, *, limit=12, min_similarity=0.75):
     vector = '[' + ','.join(map(str, embedding)) + ']'
     return await (await connection.execute(
-        """SELECT c.*,s.document_id,s.mode,s.limitations,1-(c.embedding <=> %s::vector) AS similarity
+        """SELECT c.*,s.document_id,s.mode,s.limitations,f.name,1-(c.embedding <=> %s::vector) AS similarity
         FROM source_chunks c JOIN available_source_revisions s ON s.revision_id=c.revision_id
+        LEFT JOIN document_files f ON f.document_id=s.document_id
         WHERE s.owner_id=%s AND s.document_id=ANY(%s::uuid[]) AND c.kind<>'skip'
           AND (s.mode<>'skip_handwriting' OR c.kind='printed')
           AND 1-(c.embedding <=> %s::vector)>=%s
         ORDER BY c.embedding <=> %s::vector,c.id LIMIT %s""",
         (vector, owner_id, scope, vector, min_similarity, vector, limit),
     )).fetchall()
+
+
+def validate_citations(citations, passport):
+    allowed = {value['id']: value for value in passport['passed']}
+    for citation in citations:
+        if not isinstance(citation, dict):
+            raise AccessError('invalid_citation', 422)
+        span = allowed.get(citation.get('id'))
+        if span is None:
+            raise AccessError('invalid_citation', 422)
+        start, end = citation.get('start'), citation.get('end')
+        if (not isinstance(start, int) or isinstance(start, bool) or not isinstance(end, int) or isinstance(end, bool)
+            or not span['span_start'] <= start < end <= span['span_end']
+            or citation.get('quote') != span['text'][start-span['span_start']:end-span['span_start']]):
+            raise AccessError('invalid_citation', 422)
+    return citations
+
+
+def cited_spans(text, passport):
+    fragments = passport.get('passed', [])
+    citations, seen = [], set()
+    for match in re.finditer(r'\[source:([1-9][0-9]?)\]', text):
+        number = int(match.group(1))
+        if number > len(fragments) or number in seen:
+            continue
+        fragment = fragments[number-1]
+        citation = {'number':number, 'id':fragment['id'], 'document_id':fragment['document_id'],
+                    'revision_id':fragment['revision_id'], 'page':fragment['page'], 'name':fragment.get('name'),
+                    'start':fragment['span_start'], 'end':fragment['span_end'], 'quote':fragment['text']}
+        validate_citations([citation], passport)
+        citations.append(citation)
+        seen.add(number)
+    return citations
 
 
 async def history(connection, request):

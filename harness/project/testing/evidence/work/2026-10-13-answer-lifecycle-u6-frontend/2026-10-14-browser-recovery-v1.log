@@ -1,0 +1,79 @@
+E
+==================================== ERRORS ====================================
+_ ERROR at setup of test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources _
+
+fixturedef = <FixtureDef argname='postgres' scope='session' baseid='tests'>
+request = <SubRequest 'postgres' for <Function test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+>               return (yield)
+                        ^^^^^
+
+backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:926: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/tests/conftest.py:41: in postgres
+    server = pgserver.get_server(tmp_path_factory.mktemp("postgres"), cleanup_mode="stop")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py:291: in get_server
+    return PostgresServer(pgdata, cleanup_mode=cleanup_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py:61: in __init__
+    with self._lock:
+         ^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:166: in __enter__
+    gotten = self.acquire()
+             ^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:144: in acquire
+    self._do_open()
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:106: in _do_open
+    made_basedir = _ensure_tree(basedir)
+                   ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = b'/run/user/1000/python_PostgresServer'
+
+    def _ensure_tree(path):
+        """Create a directory (and any ancestor directories required).
+    
+        :param path: Directory to create
+        """
+        try:
+>           os.makedirs(path)
+E           OSError: [Errno 30] Read-only file system: b'/run/user/1000/python_PostgresServer'
+
+backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py:43: OSError
+=========================== short test summary info ============================
+ERROR backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources
+1 error in 0.19s
+Exception ignored in atexit callback: <bound method PostgresServer._cleanup of <pgserver.postgres_server.PostgresServer object at 0x711e87391910>>
+Traceback (most recent call last):
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pgserver/postgres_server.py", line 204, in _cleanup
+    with self._lock:
+         ^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 166, in __enter__
+    gotten = self.acquire()
+             ^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 144, in acquire
+    self._do_open()
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 106, in _do_open
+    made_basedir = _ensure_tree(basedir)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/fasteners/process_lock.py", line 43, in _ensure_tree
+    os.makedirs(path)
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 30] Read-only file system: b'/run/user/1000/python_PostgresServer'

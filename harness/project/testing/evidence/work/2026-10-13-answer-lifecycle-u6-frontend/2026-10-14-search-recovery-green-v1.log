@@ -1,0 +1,3 @@
+{'proof': 'supervisor_physical_reap', 'predecessor': {'event': 'native_spawn', 'pid': 269380, 'keeper_pid': 269379, 'epoch': 2}, 'replacement': {'event': 'native_spawn', 'pid': 269443, 'keeper_pid': 269442, 'epoch': 3}, 'saved_prefix_chars': 1, 'inside_real_native_decode': True, 'native_logs': '/tmp/rag-u6-search-recovery-green-v1/test_real_supervisor_reaps_nat0'}
+..
+2 passed in 13.56s

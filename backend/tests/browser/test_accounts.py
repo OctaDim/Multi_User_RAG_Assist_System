@@ -39,7 +39,7 @@ def real_account_browser(environment, monkeypatch, tmp_path):
             pass
 
         def do_GET(self):
-            if self.path in ('/', '/index.html'):
+            if self.path.split('?',1)[0] in ('/', '/index.html'):
                 body = (FRONTEND / 'index.html').read_text().replace('http://127.0.0.1:8000', api_url).encode()
                 self.send_response(200)
                 self.send_header('Content-Type', 'text/html; charset=utf-8')

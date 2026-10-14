@@ -1,0 +1,203 @@
+Fresh migrated DB, zero fixture accounts/documents; actual API/SMTP/document worker/native coordinator/browser ready.
+Frontend: http://127.0.0.1:58124 Mailbox: http://127.0.0.1:58872
+Личная библиотека
+
+Вход
+Email
+Пароль
+Войти
+Регистрация
+
+После регистрации откройте ссылку в письме, затем войдите.
+
+Email
+Пароль (от 15 символов)
+Приглашение оператора (если выдано)
+Зарегистрироваться
+>>> form=page.locator('#register'); form.get_by_label('Email',exact=True).fill('manual-u6-answer@owned.test'); form.get_by_label('Пароль (от 15 символов)',exact=True).fill('Manual answer password 2026'); form.get_by_role('button',name='Зарегистрироваться',exact=True).click(); page.wait_for_function("document.getElementById('status').textContent.includes('Откройте письмо')"); print(page.locator('#status').inner_text())
+<JSHandle preview=true>
+Откройте письмо и подтвердите email, затем войдите.
+>>> page.goto(f'http://127.0.0.1:{mailbox.http.server_port}/?email=manual-u6-answer%40owned.test'); print(page.locator('body').inner_text())
+<Response url='http://127.0.0.1:58872/?email=manual-u6-answer%40owned.test' request=<Request url='http://127.0.0.1:58872/?email=manual-u6-answer%40owned.test' method='GET'>>
+Mailbox
+
+Verify email
+>>> page.get_by_role('link',name='Verify email',exact=True).click(); page.wait_for_function("document.getElementById('status').textContent.includes('Email подтверждён')"); print(page.locator('#status').inner_text(), page.url)
+<JSHandle preview=true>
+Email подтверждён. Теперь войдите. http://127.0.0.1:58124/
+>>> form=page.locator('#login'); form.get_by_label('Email',exact=True).fill('manual-u6-answer@owned.test'); form.get_by_label('Пароль',exact=True).fill('Manual answer password 2026'); form.get_by_role('button',name='Войти',exact=True).click(); page.locator('#workspace').wait_for(state='visible'); print(page.locator('body').inner_text())
+Личная библиотека
+
+Вы вошли.
+
+manual-u6-answer@owned.test · user
+
+Выйти
+Мои беседы
+Открыть беседу
+Новая беседа
+
+В этой беседе пока нет сообщений.
+
+Область поиска
+
+Выберите личные документы для этого вопроса.
+
+Вопрос
+
+Соединение установлено.
+
+Отправить вопрос
+Мои документы
+Выберите документы
+Загрузить документы
+Обновить статусы документов
+>>> page.get_by_label('Вопрос',exact=True).fill('What is the annual budget?'); page.get_by_role('button',name='Отправить вопрос',exact=True).click(); page.wait_for_function("document.getElementById('status').textContent.includes('Нет готовых источников')"); print(page.locator('#status').inner_text()); print('Draft:',page.get_by_label('Вопрос',exact=True).input_value()); print('History:',page.locator('#history').inner_text())
+<JSHandle preview=true>
+Нет готовых источников в выбранной области. Вопрос сохранён как черновик.
+Draft: What is the annual budget?
+History: В этой беседе пока нет сообщений.
+>>> manual_source=Path(tempfile.mkdtemp(prefix='rag-u6-manual-source-'))/'manual-budget.txt'; manual_source.write_bytes(b'The annual budget is 100 euros.\n'); page.get_by_label('Выберите документы',exact=True).set_input_files(str(manual_source)); page.get_by_role('button',name='Загрузить документы',exact=True).click(); page.wait_for_function("document.getElementById('status').textContent.includes('Файлы приняты')"); print(page.locator('#status').inner_text()); page.get_by_role('button',name='Обновить статусы документов',exact=True).click(); print(page.locator('#documents').inner_text())
+32
+<JSHandle preview=true>
+Файлы приняты. Обработка выполняется в фоне.
+manual-budget.txt
+
+Ожидает обработки
+
+Удалить документ
+>>> page.get_by_role('button',name='Обновить статусы документов',exact=True).click(); page.wait_for_function("document.getElementById('documents').textContent.includes('Готов для поиска')"); print(page.locator('#documents').inner_text()); print('History before explicit submit:',page.locator('#history').inner_text()); print('Draft before explicit submit:',page.get_by_label('Вопрос',exact=True).input_value()); page.get_by_role('checkbox',name='manual-budget.txt',exact=True).check(); page.get_by_role('button',name='Отправить вопрос',exact=True).click(); page.wait_for_function("document.querySelector('#history .answer-text')?.textContent.includes('100')"); print(page.locator('#early-fragments').inner_text()); print(page.locator('#history').inner_text())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py", line 11541, in wait_for_function
+    self._sync(
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py", line 1082, in wait_for_function
+    return await self._main_frame.wait_for_function(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 771, in wait_for_function
+    return from_channel(await self._channel.send("waitForFunction", params))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 61, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 528, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 30000ms exceeded.
+>>> print(page.locator('#documents').inner_text()); print(page.locator('#question-sources').inner_text()); print('History before explicit submit:',page.locator('#history').inner_text()); print('Draft before explicit submit:',page.get_by_label('Вопрос',exact=True).input_value())
+manual-budget.txt
+
+Готов
+
+Открыть документУдалить документ
+Область поиска
+
+Выберите личные документы для этого вопроса.
+
+manual-budget.txt
+History before explicit submit: В этой беседе пока нет сообщений.
+Draft before explicit submit: What is the annual budget?
+>>> page.get_by_role('checkbox',name='manual-budget.txt',exact=True).check(); page.get_by_role('button',name='Отправить вопрос',exact=True).click(); page.wait_for_function("document.querySelector('#history .answer-text')?.textContent.includes('100')"); print(page.locator('#early-fragments').inner_text()); print(page.locator('#history').inner_text())
+<JSHandle preview=true>
+Найденные основания
+
+manual-budget.txt · Страница 1 · Передан модели
+
+The annual budget is 100 euros.
+
+What is the annual budget?
+
+Ответ формируется
+
+Ответ модели
+
+Based on the provided source excerpt, the annual budget is 100
+
+Паспорт источников
+Остановить ответ
+>>> page.wait_for_function("document.getElementById('history').textContent.includes('Завершён')"); page.locator('#history').get_by_text('Паспорт источников',exact=True).click(); print(page.locator('#history').inner_text()); page.locator('#history .answer-text a').first.click(); print('Exact original quote:',page.locator('#history .cited-quote').inner_text()); print('Console errors:',console_errors); _=page.screenshot(path=str(evidence/'2026-10-14-manual-answer-desktop-v1.png'),full_page=True)
+<JSHandle preview=true>
+What is the annual budget?
+
+Завершён
+
+Ответ модели
+
+Based on the provided source excerpt, the annual budget is 100 euros.
+
+Supported claim [1].
+
+Паспорт источников
+
+Выбрано: manual-budget.txt
+
+Доступно для поиска: manual-budget.txt
+
+Найдено фрагментов: 1. Передано модели: 1.
+
+Фрагмент [1]: manual-budget.txt · Страница 1 · символы 0–32
+The annual budget is 100 euros.
+
+Цитата [1]: manual-budget.txt · Страница 1
+The annual budget is 100 euros.
+
+Exact original quote: The annual budget is 100 euros.
+
+Console errors: []
+>>> first_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation'); page.get_by_label('Вопрос',exact=True).fill('Manual unsent draft A'); page.get_by_role('button',name='Новая беседа',exact=True).click(); page.wait_for_function("document.querySelectorAll('#conversations li').length === 2"); second_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation'); page.get_by_label('Вопрос',exact=True).fill('Manual unsent draft B'); page.locator(f'#conversations button[data-conversation="{first_id}"]').click(); print('Returned A draft:',page.get_by_label('Вопрос',exact=True).input_value()); print('A history:',page.locator('#history').inner_text()); page.locator(f'#conversations button[data-conversation="{second_id}"]').click(); print('Returned B draft:',page.get_by_label('Вопрос',exact=True).input_value()); print('B history:',page.locator('#history').inner_text())
+<JSHandle preview=true>
+Returned A draft: Manual unsent draft A
+A history: What is the annual budget?
+
+Завершён
+
+Ответ модели
+
+Based on the provided source excerpt, the annual budget is 100 euros.
+
+Supported claim [1].
+
+Паспорт источников
+Returned B draft: Manual unsent draft B
+B history: В этой беседе пока нет сообщений.
+>>> page.reload(); page.locator('#workspace').wait_for(state='visible'); print('Reload draft:',page.get_by_label('Вопрос',exact=True).input_value()); print('Reload history:',page.locator('#history').inner_text()); print('Connection:',page.locator('#answer-connection').inner_text())
+<Response url='http://127.0.0.1:58124/' request=<Request url='http://127.0.0.1:58124/' method='GET'>>
+Reload draft: Manual unsent draft B
+Reload history: В этой беседе пока нет сообщений.
+Connection: Соединение установлено.
+>>> page.set_viewport_size({'width':375,'height':812}); page.locator(f'#conversations button[data-conversation="{first_id}"]').click(); page.locator('#history').get_by_text('Паспорт источников',exact=True).click(); page.get_by_label('Вопрос',exact=True).click(); page.keyboard.press('Tab'); print('Keyboard focus:',page.evaluate('document.activeElement.textContent')); print('Mobile widths:',page.evaluate('({viewport:innerWidth,client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth})')); print('Mobile A draft:',page.get_by_label('Вопрос',exact=True).input_value()); _=page.screenshot(path=str(evidence/'2026-10-14-manual-answer-mobile-v1.png'),full_page=True)
+Keyboard focus: Отправить вопрос
+Mobile widths: {'viewport': 375, 'client': 360, 'scroll': 360}
+Mobile A draft: Manual unsent draft A
+>>> with psycopg.connect(server.get_uri()) as connection: print('Actual persisted counts:', connection.execute('SELECT (SELECT count(*) FROM accounts),(SELECT count(*) FROM documents WHERE ready),(SELECT count(*) FROM conversations),(SELECT count(*) FROM requests),(SELECT count(*) FROM messages)').fetchone())
+... print('Console errors:',console_errors)
+  File "<stdin>", line 2
+    print('Console errors:',console_errors)
+    ^^^^^
+SyntaxError: invalid syntax
+>>> connection=psycopg.connect(server.get_uri()); print('Actual persisted counts:',connection.execute('SELECT (SELECT count(*) FROM accounts),(SELECT count(*) FROM documents WHERE ready),(SELECT count(*) FROM conversations),(SELECT count(*) FROM requests),(SELECT count(*) FROM messages)').fetchone()); connection.close(); print('Console errors:',console_errors)
+Actual persisted counts: (1, 1, 2, 1, 2)
+Console errors: []
+>>> page.get_by_role('button',name='Выйти',exact=True).click(); page.locator('#login').wait_for(state='visible'); print('Storage keys after logout:',page.evaluate('Object.keys(sessionStorage)')); print(page.locator('#status').inner_text())
+Storage keys after logout: []
+Вы вышли.
+>>> form=page.locator('#login'); form.get_by_label('Email',exact=True).fill('manual-u6-answer@owned.test'); form.get_by_label('Пароль',exact=True).fill('Manual answer password 2026'); form.get_by_role('button',name='Войти',exact=True).click(); page.locator('#workspace').wait_for(state='visible'); print('Draft after new login:',page.get_by_label('Вопрос',exact=True).input_value()); print('History after new login:',page.locator('#history').inner_text()); print('Console errors:',console_errors)
+Draft after new login: 
+History after new login: What is the annual budget?
+
+Завершён
+
+Ответ модели
+
+Based on the provided source excerpt, the annual budget is 100 euros.
+
+Supported claim [1].
+
+Паспорт источников
+Console errors: []
+>>> import json; manual_native_pid=next(json.loads(line)['pid'] for line in (evidence/'2026-10-14-manual-answer-generation-v1.log').read_text().splitlines() if line.startswith('{"event": "native_spawn"')); print('Manual owned PIDs:',[process.pid for process in processes],manual_native_pid); stack.close(); print('Native process reaped:',not Path(f'/proc/{manual_native_pid}').exists()); exit()
+Manual owned PIDs: [7712, 7713, 7714] 7738
+All owned manual browser/API/document/generation/static/SMTP/PostgreSQL resources reaped.
+Native process reaped: True

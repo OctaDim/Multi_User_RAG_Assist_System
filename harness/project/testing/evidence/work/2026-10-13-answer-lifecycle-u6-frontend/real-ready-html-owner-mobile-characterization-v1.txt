@@ -1,0 +1,42 @@
+F
+=================================== FAILURES ===================================
+_ test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts _
+
+real_document_browser = ((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-lin...i_User_RAG_Ass...>, PosixPath('/tmp/pytest-of-octadim/pytest-136/test_ready_source_never_auto_s0/document-worker.log'))
+
+    def test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts(real_document_browser):
+        (browser,mailbox,frontend,_),worker,_=real_document_browser
+        context=browser.new_context(viewport={'width':375,'height':812})
+        paused=False
+        try:
+            page=context.new_page()
+            register(page,mailbox,frontend,'lifecycle-ready@owned.test')
+            login(page,'lifecycle-ready@owned.test')
+            os.kill(worker.pid,signal.SIGSTOP);paused=True
+            name='<img src=x onerror=window.nameInjected=true>.txt'
+            text='<script>window.textInjected=true</script>\nThe annual budget is 100 euros.'
+            page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':text.encode()})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            expect(page.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
+            page.locator('#question-sources input').check()
+            page.locator('#question').fill('Wait for my selected document')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#status')).to_contain_text('Нет готовых источников')
+            os.kill(worker.pid,signal.SIGCONT);paused=False
+            item=ready(page,name)
+            expect(page.locator('#question')).to_have_value('Wait for my selected document')
+            expect(page.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+            item.get_by_role('button',name='Открыть документ',exact=True).click()
+            expect(page.locator('#document-correction textarea')).to_have_value(text)
+            assert page.evaluate('window.nameInjected') is None and page.evaluate('window.textInjected') is None
+            page.locator('#question').focus()
+            page.keyboard.press('Tab')
+            assert page.get_by_role('button',name='Отправить вопрос',exact=True).evaluate('node => node === document.activeElement')
+>           assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+backend/tests/browser/test_answer_lifecycle.py:336: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears_drafts
+1 failed, 5 deselected in 8.32s

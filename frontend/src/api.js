@@ -1,9 +1,9 @@
 import { token } from './auth.js';
-const origin = document.querySelector('meta[name="api-origin"]').content.replace(/\/$/, '');
+export const origin = document.querySelector('meta[name="api-origin"]').content.replace(/\/$/, '');
 
-export async function api(path, method = 'GET', body) {
+export async function api(path, method = 'GET', body, extraHeaders = {}) {
   const credential = token();
-  const headers = {};
+  const headers = {...extraHeaders};
   const binary = body instanceof Blob;
   if (credential) headers.Authorization = `Bearer ${credential}`;
   if (body !== undefined) headers['Content-Type'] = binary ? 'application/octet-stream' : 'application/json';

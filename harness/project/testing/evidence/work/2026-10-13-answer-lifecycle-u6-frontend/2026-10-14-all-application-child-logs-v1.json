@@ -1,0 +1,134 @@
+[
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_actual_print_only_pdf_lim0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_actual_print_only_pdf_lim0--document-worker.log",
+    "bytes": 1346,
+    "sha256": "92c0e66c525d788f62d3ff0aeafa554c518e45e7ea025e316132e15c615ccdc4"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_actual_print_only_pdf_lim0/generation.log",
+    "saved": "2026-10-14-all-application-v1--test_actual_print_only_pdf_lim0--generation.log",
+    "bytes": 99486,
+    "sha256": "73fa02b4bb35e95a2133cc33edaeb306533d39657d9469bebfcd4d53e3ee6bdb"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_actual_tab_sse_confirmed_0/first.log",
+    "saved": "2026-10-14-all-application-v1--test_actual_tab_sse_confirmed_0--first.log",
+    "bytes": 364,
+    "sha256": "11ba461fca0c67db21a1c85a6f28d6b541f8beccfa149597ae4fd06f56abc87e"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_actual_tab_sse_confirmed_0/second.log",
+    "saved": "2026-10-14-all-application-v1--test_actual_tab_sse_confirmed_0--second.log",
+    "bytes": 891,
+    "sha256": "528abe2c85d6e38689d5f59cf782bfc3b7cd043d526ae0534c8c68885b5b4336"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_application_service_lock_0/healthy-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_application_service_lock_0--healthy-supervisor.log",
+    "bytes": 56490,
+    "sha256": "40e5d1e85e50926763dd5bbf714c297b68c161eb11b7308f18d58f600aa4e2b3"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_application_service_lock_1/healthy-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_application_service_lock_1--healthy-supervisor.log",
+    "bytes": 56490,
+    "sha256": "a83f2153d9c7741d5a8409e4bf788a81edb2abb6237fa7d944a9469370b2b88d"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_delayed_real_ack_preserve0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_delayed_real_ack_preserve0--document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_delayed_real_ack_preserve0/generation.log",
+    "saved": "2026-10-14-all-application-v1--test_delayed_real_ack_preserve0--generation.log",
+    "bytes": 99485,
+    "sha256": "3949c365c53386cc0c328c4b9ecda93f4a74462623b92b4b9524f65dc150081e"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_old_real_snapshot_cannot_0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_old_real_snapshot_cannot_0--document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_old_real_snapshot_cannot_0/generation.log",
+    "saved": "2026-10-14-all-application-v1--test_old_real_snapshot_cannot_0--generation.log",
+    "bytes": 99585,
+    "sha256": "1d6faaa1f60e5cd7b484293d284213b3953c72d8a11512cbf969d6fe164a94d4"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_ready_source_never_auto_s0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_ready_source_never_auto_s0--document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_real_fragments_precede_an0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_real_fragments_precede_an0--document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_real_fragments_precede_an0/generation.log",
+    "saved": "2026-10-14-all-application-v1--test_real_fragments_precede_an0--generation.log",
+    "bytes": 99585,
+    "sha256": "8fd17c3925975aa3067ca84f726039c745811daf90135f2da8bfdbbe0f46009a"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_real_supervisor_reaps_nat0/competing-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_real_supervisor_reaps_nat0--competing-supervisor.log",
+    "bytes": 1301,
+    "sha256": "467bcc5765d0d91360c284a43b85609649333be1b68542815f3477fcdafb4ac8"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_real_supervisor_reaps_nat0/first-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_real_supervisor_reaps_nat0--first-supervisor.log",
+    "bytes": 100970,
+    "sha256": "27d7e1e9282438c4c100dd0d6de5e95ccfe0379213a08bccdfba42281839d906"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_real_supervisor_reaps_nat0/second-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_real_supervisor_reaps_nat0--second-supervisor.log",
+    "bytes": 56490,
+    "sha256": "f29efc9a373f08508a991eddefafa13bd8009e49a3bf7f983641f98ac322cc86"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_two_http_processes_share_0/process-api-1-restarted.log",
+    "saved": "2026-10-14-all-application-v1--test_two_http_processes_share_0--process-api-1-restarted.log",
+    "bytes": 1368,
+    "sha256": "901da92bfc5cc82fb3602bc5ccef7cf0982e1ac44c16752671cd33cd12806ac4"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_two_http_processes_share_0/process-api-1.log",
+    "saved": "2026-10-14-all-application-v1--test_two_http_processes_share_0--process-api-1.log",
+    "bytes": 2182,
+    "sha256": "271e77cf469e911a80e660fa51a334c317b0221b0c8695582f8e3eb71940ace9"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_two_http_processes_share_0/process-api-2.log",
+    "saved": "2026-10-14-all-application-v1--test_two_http_processes_share_0--process-api-2.log",
+    "bytes": 4419,
+    "sha256": "4f9d01138531f3f7da918e58c4f07115229ebe1920b5f4f361b226375846d263"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_two_http_processes_share_0/process-supervisor.log",
+    "saved": "2026-10-14-all-application-v1--test_two_http_processes_share_0--process-supervisor.log",
+    "bytes": 900991,
+    "sha256": "4795fed5d60b2e8c63b2dfde54a7d7e7bde6a70cda4f8a2e05f552b469a86e47"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_ui_permission_choice_actu0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_ui_permission_choice_actu0--document-worker.log",
+    "bytes": 1346,
+    "sha256": "14aed9865fbb5b196e6226e1cf7b67b0e2964365bd4ec74198e847aaf24a5ecc"
+  },
+  {
+    "source": "/tmp/rag-u6-all-application-v1/test_ui_smtp_original_text_cor0/document-worker.log",
+    "saved": "2026-10-14-all-application-v1--test_ui_smtp_original_text_cor0--document-worker.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

@@ -34,7 +34,16 @@
     <button id="logout" type="button">Выйти</button>
     <h2>Мои беседы</h2>
     <ul id="conversations"></ul>
+    <button id="new-conversation" type="button">Новая беседа</button>
+    <section id="early-fragments" aria-label="Ранние фрагменты источников"></section>
     <section id="history" aria-label="История беседы"></section>
+    <form id="question-form" aria-label="Вопрос по личной библиотеке">
+      <fieldset id="question-sources"><legend>Область поиска</legend><p>Выберите личные документы для этого вопроса.</p></fieldset>
+      <label>Вопрос<textarea id="question" rows="4" required></textarea></label>
+      <p id="answer-connection" role="status" aria-live="polite"></p>
+      <button id="send-question" disabled>Отправить вопрос</button>
+      <button id="check-question" type="button" hidden>Проверить отправку</button>
+    </form>
     <section id="library" aria-label="Личные документы">
       <h2>Мои документы</h2>
       <form id="document-upload">

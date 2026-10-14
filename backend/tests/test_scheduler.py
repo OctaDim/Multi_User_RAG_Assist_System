@@ -229,3 +229,32 @@ async def test_failed_native_allocation_releases_reservation_without_empty_answe
                             'A new explicit question', [environment['document']], environment['tab'], environment['proof'])
     finally:
         await coordinator.close()
+
+
+async def test_search_state_is_published_before_graph_work(environment, connection, rag_pool):
+    import psycopg
+    from psycopg.rows import dict_row
+
+    request = await submit(connection, environment)
+    observed = []
+
+    class InspectSearch(ContractEmbedder):
+        def encode(self, texts, *, query=False):
+            with psycopg.connect(environment['dsn'], row_factory=dict_row) as independent:
+                row = independent.execute('SELECT state,version FROM requests WHERE id=%s', (request['id'],)).fetchone()
+                events = independent.execute('SELECT kind,payload FROM events WHERE request_id=%s ORDER BY id', (request['id'],)).fetchall()
+                observed.append((row, events))
+            return super().encode(texts, query=query)
+
+    coordinator = Coordinator(rag_pool, 1, TokenRuntime(), InspectSearch())
+    try:
+        await coordinator.prepare_next()
+        assert len(observed) == 1
+        row, events = observed[0]
+        assert row == {'state': 'searching', 'version': request['version'] + 1}
+        assert [event['kind'] for event in events] == ['accepted', 'state']
+        assert events[-1]['payload'] == {'state': 'searching', 'version': row['version']}
+        final = await (await connection.execute('SELECT state,version FROM requests WHERE id=%s', (request['id'],))).fetchone()
+        assert final == {'state': 'queued', 'version': row['version'] + 1}
+    finally:
+        await coordinator.close()

@@ -1,8 +1,10 @@
 import { api } from './api.js';
 import { token, signIn, signOut } from './auth.js';
+import {Conversations, textElement} from './conversations.js';
 
 const $ = id => document.getElementById(id);
 const documentURLs = new Set();
+let conversations;
 const messages = {
   invalid_credentials: 'Неверный email или пароль.',
   access_denied: 'Доступ закрыт. Подтвердите email или обратитесь к администратору.',
@@ -14,6 +16,9 @@ const messages = {
   frontend_not_configured: 'Адрес веб-интерфейса не настроен.',
   forbidden: 'Недостаточно прав.',
   unauthenticated: 'Сессия завершилась. Войдите снова.',
+  no_ready_sources: 'Нет готовых источников в выбранной области. Вопрос сохранён как черновик.',
+  conversation_busy: 'В этой беседе уже выполняется запрос. Черновик сохранён.',
+  coordinator_unavailable: 'Сервис ответов сейчас недоступен. Черновик сохранён.',
   document_not_ready: 'Документ ещё не готов. Обновите его статус после обработки.',
   document_worker_lost: 'Обработка прервана из-за остановки сервиса. Оригинал сохранён; автоматического повтора нет.',
   document_format_forbidden: 'Загрузка этого формата не разрешена для вашей учётной записи.',
@@ -45,6 +50,7 @@ async function perform(operation, control) {
 }
 
 function showAuthentication() {
+  conversations?.close(); conversations = undefined;
   $('authentication').hidden = false;
   $('workspace').hidden = true;
   $('identity').textContent = '';
@@ -56,31 +62,13 @@ function showAuthentication() {
   $('document-upload').reset();
 }
 
-function textElement(tag, text) {
-  const element = document.createElement(tag);
-  element.textContent = text;
-  return element;
-}
-
 async function showWorkspace() {
   const current = await api('/accounts/me');
   $('authentication').hidden = true;
   $('workspace').hidden = false;
   $('identity').textContent = `${current.account.email} · ${current.account.role}`;
-  $('conversations').replaceChildren();
-  for (const conversation of current.conversations) {
-    const button = textElement('button', 'Открыть беседу');
-    button.type = 'button';
-    button.addEventListener('click', () => perform(async () => {
-      const history = await api(`/conversations/${conversation.id}`);
-      $('history').replaceChildren(...(history.messages.length
-        ? history.messages.map(message => textElement('p', message.text))
-        : [textElement('p', 'В этой беседе пока нет сообщений.')]));
-    }, button));
-    const item = document.createElement('li');
-    item.append(button);
-    $('conversations').append(item);
-  }
+  if (!conversations) conversations = new Conversations(current.account.id, error => perform(() => {throw error;}));
+  await conversations.initialize(current.conversations);
   $('administration').hidden = current.account.role === 'user';
   if (current.account.role !== 'user') await showAccounts(current.account.role);
   await showLibrary();
@@ -94,6 +82,7 @@ function clearDocumentView() {
 
 async function showLibrary(ownerId) {
   const result = await api(ownerId ? `/documents/admin/${ownerId}/library` : '/documents');
+  if (!result.readonly) conversations?.sources(result.documents);
   clearDocumentView();
   $('document-upload').hidden = result.readonly;
   $('documents').replaceChildren();

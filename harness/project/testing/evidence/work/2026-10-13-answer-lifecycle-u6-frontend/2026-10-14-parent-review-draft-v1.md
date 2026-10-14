@@ -1,0 +1,11 @@
+# U6 inline three-persona review findings — before final fixes
+
+All three exact ce-simplify-code prompt assets reread. No reviewer dispatch available after unrecoverable agent-thread limit/no release primitive; passes completed inline. Scope only owned U6 files; plan session-settled structure pins preserved.
+
+Reuse: actual server events/tab/epochs, source validation and terminal transitions reused. One existing textElement moved to conversations and used by app; validate_citations moved to lightweight sources and all in-repo callers updated so API projections do not load ONNX/graph unnecessarily. No new behavior-equivalent simplification needed.
+
+Quality: select clears early-fragment DOM but retains its same-conversation signature cache, so reopening the current conversation can leave fragments empty. install merges versions only for rows returned by a snapshot, so a delayed older empty snapshot can erase a newer accepted request and message. Because history is retained, preserve newer known rows and message pairs; prove with actual delayed GET response. Stream retry must cancel its prior reader before reconnecting. Error/interruption reasons need meaningful user labels. Search state mutation currently lacks a versioned event; inspect this actual boundary if building its visible state.
+
+Efficiency/accessibility: early passport DOM and citation anchors stay stable, and no per-token history GET remains. However identical connection live-status text is assigned on every token/heartbeat; guard the native text assignment to avoid recurring no-op mutations/announcements. No new framework, serializer/coercion substitution, caches outside this scope or speculative parallel upload work.
+
+Behavior fixes are separate from simplification and require focused proof before writes. All final results and the complete app/harness gate are still pending. Actual PDF/OCR/E5/Qwen print-only limitation proof passed132.34s on host5783MiB RAM/10000MiB swap; general crop/handwriting G4 quality remains open. Default sandbox launcher bwrap is stuck in rtnl_lock; approved escalated reads/tests work, no automatic approval rejection. Only own wrapper parents were terminated; never kill unrelated daemon/node processes.

@@ -1,0 +1,86 @@
+{
+  "created": "2026-10-14",
+  "persistent_ignored_location": "backend/.venv/rag-native-models",
+  "assets": [
+    {
+      "event": "asset_verified",
+      "repo": "Xenova/multilingual-e5-small",
+      "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+      "name": "tokenizer.json",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/e5/tokenizer.json",
+      "bytes": 17082730,
+      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+      "seconds": 4.83
+    },
+    {
+      "event": "asset_verified",
+      "repo": "Xenova/multilingual-e5-small",
+      "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+      "name": "onnx/model_quantized.onnx",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/e5/model_quantized.onnx",
+      "bytes": 118308185,
+      "sha256": "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193",
+      "seconds": 44.42
+    },
+    {
+      "event": "asset_verified",
+      "repo": "PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+      "revision": "cc977c16989848c264d813ec1705cb181b7a21ee",
+      "name": "PaddleOCR-VL-1.5.gguf",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5.gguf",
+      "bytes": 935768992,
+      "sha256": "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+      "seconds": 275.5
+    },
+    {
+      "event": "asset_verified",
+      "repo": "onnx-community/dfine-egret-x-rukopys-ONNX",
+      "revision": "192cb34880784d916477139a8c403a0e451d179e",
+      "name": "config.json",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/dfine/config.json",
+      "bytes": 4546,
+      "sha256": "18b610b3f6a251e55f84e49933a33759660a8a154929560302db8b8639686047",
+      "seconds": 1.03
+    },
+    {
+      "event": "asset_verified",
+      "repo": "onnx-community/dfine-egret-x-rukopys-ONNX",
+      "revision": "192cb34880784d916477139a8c403a0e451d179e",
+      "name": "preprocessor_config.json",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/dfine/preprocessor_config.json",
+      "bytes": 444,
+      "sha256": "cd38cd59999e7a95d68e487fbe5132df3d4e5c32a0836add57e6126ba0c4eaf1",
+      "seconds": 1.29
+    },
+    {
+      "event": "asset_verified",
+      "repo": "unsloth/Qwen3.5-2B-GGUF",
+      "revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+      "name": "Qwen3.5-2B-Q4_K_M.gguf",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf",
+      "bytes": 1280835840,
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "seconds": 307.86
+    },
+    {
+      "event": "asset_verified",
+      "repo": "PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+      "revision": "cc977c16989848c264d813ec1705cb181b7a21ee",
+      "name": "PaddleOCR-VL-1.5-mmproj.gguf",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/PaddleOCR-VL-1.5-mmproj.gguf",
+      "bytes": 881770496,
+      "sha256": "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87",
+      "seconds": 267.73
+    },
+    {
+      "event": "asset_verified",
+      "repo": "onnx-community/dfine-egret-x-rukopys-ONNX",
+      "revision": "192cb34880784d916477139a8c403a0e451d179e",
+      "name": "onnx/model.onnx",
+      "path": "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/rag-native-models/ocr/dfine/model.onnx",
+      "bytes": 250924657,
+      "sha256": "86a8ba2d3df749b88fb2df707ca26429c2ebbc278c3b9378d7be1518da85d423",
+      "seconds": 47.19
+    }
+  ]
+}

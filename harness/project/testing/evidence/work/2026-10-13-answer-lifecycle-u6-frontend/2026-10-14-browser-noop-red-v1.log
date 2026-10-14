@@ -1,0 +1,102 @@
+Actual UI status: Файлы приняты. Обработка выполняется в фоне.
+Actual UI connection: Соединение установлено.
+Actual UI history: What is the annual budget?
+
+Завершён
+
+Ответ модели
+
+Based on the provided source excerpt, the annual budget is 100 euros.
+
+Supported claim [1].
+
+Паспорт источников
+
+Выбрано: answer-budget.txt
+
+Доступно для поиска: answer-budget.txt
+
+Найдено фрагментов: 1. Передано модели: 1.
+
+Фрагмент [1]: answer-budget.txt · Страница 1 · символы 0–32
+The annual budget is 100 euros.
+
+Цитата [1]: answer-budget.txt · Страница 1
+The annual budget is 100 euros.
+
+Actual UI early fragments: Найденные основания
+
+answer-budget.txt · Страница 1 · Передан модели
+
+The annual budget is 100 euros.
+
+F
+=================================== FAILURES ===================================
+_____ test_real_fragments_precede_answer_without_waiting_for_history_read ______
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...MyProjects/Multi_User_RAG_Ass...>, PosixPath('/tmp/rag-u6-noop-red-v1/test_real_fragments_precede_an0/generation.log'))
+
+    def test_real_fragments_precede_answer_without_waiting_for_history_read(real_answer_browser):
+        ((browser,mailbox,frontend,_),worker,_),generation,_ = real_answer_browser
+        context=browser.new_context()
+        held=[]
+        try:
+            page=context.new_page()
+            register(page,mailbox,frontend,'lifecycle-answer@owned.test')
+            login(page,'lifecycle-answer@owned.test')
+            content=b'The annual budget is 100 euros.\n'
+            page.locator('#document-upload input').set_input_files({'name':'answer-budget.txt','mimeType':'text/plain','buffer':content})
+            page.get_by_role('button',name='Загрузить документы',exact=True).click()
+            ready(page,'answer-budget.txt')
+            page.get_by_role('checkbox',name='answer-budget.txt',exact=True).check()
+            page.evaluate("""() => {
+              window.fragmentPrefix = undefined;
+              window.fragmentObserver = new MutationObserver(() => {
+                const fragment=document.querySelector('#early-fragments blockquote');
+                if (fragment?.getClientRects().length && window.fragmentPrefix === undefined)
+                  window.fragmentPrefix=document.querySelector('#history .answer-text')?.textContent || '';
+              });
+              window.fragmentObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+            }""")
+            def hold_history(route):
+                if route.request.method=='GET':held.append(route)
+                else:route.continue_()
+            page.route('**/api/conversations/*',hold_history)
+            page.locator('#question').fill('What is the annual budget?')
+            page.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
+            assert page.evaluate('window.fragmentPrefix') == ''
+            expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
+            page.locator('#history .answer-passport summary').click()
+            expect(page.locator('#history .answer-passport')).to_contain_text('answer-budget.txt')
+            expect(page.locator('#history .answer-passport')).to_contain_text('Страница 1')
+            expect(page.locator('#history .answer-text a').first).to_be_visible()
+            page.locator('#history .answer-text a').first.click()
+            expect(page.locator('#history .cited-quote')).to_have_text(content.decode().strip())
+            expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
+            page.evaluate("""() => {
+              window.answerNoopMutations = 0;
+              window.answerObserver = new MutationObserver(records => window.answerNoopMutations += records.length);
+              window.answerObserver.observe(document.querySelector('#history .answer-text'),
+                {childList:true,subtree:true,characterData:true,attributes:true});
+            }""")
+            with page.expect_response(lambda response: response.request.method=='POST' and response.url.endswith('/heartbeat'),timeout=10000) as heartbeat:
+                pass
+            heartbeat.value.finished()
+            page.evaluate('() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+>           assert page.evaluate('window.answerNoopMutations') == 0
+E           AssertionError: assert 4 == 0
+E            +  where 4 = evaluate('window.answerNoopMutations')
+E            +    where evaluate = <Page url='http://127.0.0.1:57068/#citation-4c1a6a94-e5de-4a2e-bdbe-2704da70691a-1'>.evaluate
+
+backend/tests/browser/test_answer_lifecycle.py:128: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    asyncio:base_events.py:1833 Task exception was never retrieved
+future: <Task finished name='Task-48' coro=<Response.finished.<locals>.on_finished() done, defined at /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_network.py:842> exception=Error('Target closed')>
+Traceback (most recent call last):
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/playwright/_impl/_network.py", line 844, in on_finished
+    raise Error("Target closed")
+playwright._impl._errors.Error: Target closed
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_real_fragments_precede_answer_without_waiting_for_history_read
+1 failed in 20.92s

@@ -48,7 +48,8 @@ def create_app():
     origin = os.environ.get('RAG_FRONTEND_ORIGIN', '').rstrip('/')
     application.add_middleware(CORSMiddleware, allow_origins=[origin] if origin else [],
                                allow_methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
-                               allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof'])
+                               allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof',
+                                              'X-Connection-Epoch', 'X-Heartbeat-Challenge', 'Last-Event-ID'])
     for router in (accounts.router, answers.router, documents.router, settings.router, tabs.router):
         application.include_router(router)
     application.add_exception_handler(AccessError, access_error)
