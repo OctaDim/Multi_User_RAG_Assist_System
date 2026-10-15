@@ -1,0 +1,21 @@
+{
+  "time_utc": "2026-10-15T20:16:29Z",
+  "supervisor_pid": 358006,
+  "native": {
+    "event": "native_spawn",
+    "pid": 358034,
+    "keeper_pid": 358033,
+    "epoch": 2
+  },
+  "status": {
+    "Name": "rag-generation",
+    "State": "S (sleeping)",
+    "Pid": "358006",
+    "PPid": "357899",
+    "VmSize": "190168 kB",
+    "VmRSS": "11616 kB",
+    "VmSwap": "44084 kB",
+    "Threads": "2"
+  },
+  "native_library_mappings": []
+}

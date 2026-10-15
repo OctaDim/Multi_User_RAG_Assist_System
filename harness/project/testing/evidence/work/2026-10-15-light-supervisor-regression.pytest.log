@@ -1,0 +1,58 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 46 items
+
+backend/tests/test_supervisor_imports.py::test_supervisor_import_keeps_inference_dependencies_in_native_worker PASSED [  2%]
+backend/tests/test_service_recovery.py::test_supervisor_bounds_startup_when_postgres_accepts_without_responding PASSED [  4%]
+backend/tests/test_service_recovery.py::test_application_service_lock_does_not_cancel_healthy_supervisor[SHARE] PASSED [  6%]
+backend/tests/test_service_recovery.py::test_application_service_lock_does_not_cancel_healthy_supervisor[UPDATE] PASSED [  8%]
+backend/tests/test_service_recovery.py::test_real_supervisor_reaps_native_process_before_replacement PASSED [ 10%]
+backend/tests/test_service_recovery.py::test_live_predecessor_record_blocks_unconfirmed_replacement PASSED [ 13%]
+backend/tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed PASSED [ 15%]
+backend/tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[within-confirmed-lease] PASSED [ 17%]
+backend/tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[past-confirmed-lease] PASSED [ 19%]
+backend/tests/test_scheduler.py::test_global_round_robin_and_hot_settings_keep_native_reservations PASSED [ 21%]
+backend/tests/test_scheduler.py::test_saved_shrink_during_allocation_applies_before_next_admission PASSED [ 23%]
+backend/tests/test_scheduler.py::test_stop_wins_dequeue_and_late_computed_token_is_not_committed PASSED [ 26%]
+backend/tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry[False] PASSED [ 28%]
+backend/tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry[True] PASSED [ 30%]
+backend/tests/test_scheduler.py::test_logical_stop_does_not_release_physical_slot_until_ack PASSED [ 32%]
+backend/tests/test_scheduler.py::test_failed_native_allocation_releases_reservation_without_empty_answer PASSED [ 34%]
+backend/tests/test_scheduler.py::test_search_state_is_published_before_graph_work PASSED [ 36%]
+backend/tests/test_rag_context.py::test_source_tag_separates_citation_number_from_internal_fragment_identity PASSED [ 39%]
+backend/tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[error] PASSED [ 41%]
+backend/tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[cancel] PASSED [ 43%]
+backend/tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[disconnect] PASSED [ 45%]
+backend/tests/test_rag_context.py::test_actual_async_graph_commits_fragments_before_model_callback PASSED [ 47%]
+backend/tests/test_rag_context.py::test_not_ready_selected_and_unmatched_ready_sources_are_distinct PASSED [ 50%]
+backend/tests/test_rag_context.py::test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint PASSED [ 52%]
+backend/tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[delete] PASSED [ 54%]
+backend/tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[correct] PASSED [ 56%]
+backend/tests/test_rag_context.py::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction PASSED [ 58%]
+backend/tests/test_rag_context.py::test_correction_before_late_complete_marks_original_without_cancelling PASSED [ 60%]
+backend/tests/test_rag_context.py::test_deselected_source_cannot_reenter_current_model_scope_through_history PASSED [ 63%]
+backend/tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[account] PASSED [ 65%]
+backend/tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[service] PASSED [ 67%]
+backend/tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[owner] PASSED [ 69%]
+backend/tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[thread] PASSED [ 71%]
+backend/tests/test_rag_context.py::test_malicious_doc_cannot_expand_scope_and_invented_quotes_are_rejected PASSED [ 73%]
+backend/tests/test_rag_context.py::test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt PASSED [ 76%]
+backend/tests/test_rag_context.py::test_real_e5_mean_pooling_and_real_pgvector_retrieval PASSED [ 78%]
+backend/tests/test_rag_context.py::test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments PASSED [ 80%]
+backend/tests/runtime/test_generation_contract.py::test_native_twelve_contexts_hot_limits_and_fair_steps PASSED [ 82%]
+backend/tests/runtime/test_generation_contract.py::test_native_eos_releases_one_context_without_stalling_another PASSED [ 84%]
+backend/tests/runtime/test_production_runtime.py::test_independent_production_contexts_match_u1_prefix PASSED [ 86%]
+backend/tests/runtime/test_production_runtime.py::test_real_eos_and_incremental_russian_utf8 PASSED [ 89%]
+backend/tests/runtime/test_production_runtime.py::test_real_source_answer_uses_facts_instead_of_citation_example PASSED [ 91%]
+backend/tests/runtime/test_production_runtime.py::test_actual_token_budget_has_no_prompt_clamp PASSED [ 93%]
+backend/tests/runtime/test_production_runtime.py::test_abort_and_close_wait_for_real_native_decode PASSED [ 95%]
+backend/tests/runtime/test_production_runtime.py::test_partial_allocation_is_freed_on_sampler_failure PASSED [ 97%]
+backend/tests/runtime/test_production_runtime.py::test_admission_vocabulary_matches_loaded_model_and_preserves_live_context PASSED [100%]
+
+---- generated xml file: /tmp/rag-light-supervisor-regression-20261015.xml -----
+======================== 46 passed in 156.19s (0:02:36) ========================

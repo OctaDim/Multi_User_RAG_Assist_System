@@ -1,0 +1,315 @@
+FFFFFFFFFFFFFFFF                                                         [100%]
+=================================== FAILURES ===================================
+___ test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size0] ____
+
+size = (200, 4700)
+
+    @pytest.mark.parametrize('size',[(200,4700),(4700,200),(4700,4700),(2400,2400),(1,2401)])
+    def test_fragments_cover_every_pixel_with_bounded_overlapping_inputs(size):
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:19: ModuleNotFoundError
+___ test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size1] ____
+
+size = (4700, 200)
+
+    @pytest.mark.parametrize('size',[(200,4700),(4700,200),(4700,4700),(2400,2400),(1,2401)])
+    def test_fragments_cover_every_pixel_with_bounded_overlapping_inputs(size):
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:19: ModuleNotFoundError
+___ test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size2] ____
+
+size = (4700, 4700)
+
+    @pytest.mark.parametrize('size',[(200,4700),(4700,200),(4700,4700),(2400,2400),(1,2401)])
+    def test_fragments_cover_every_pixel_with_bounded_overlapping_inputs(size):
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:19: ModuleNotFoundError
+___ test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size3] ____
+
+size = (2400, 2400)
+
+    @pytest.mark.parametrize('size',[(200,4700),(4700,200),(4700,4700),(2400,2400),(1,2401)])
+    def test_fragments_cover_every_pixel_with_bounded_overlapping_inputs(size):
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:19: ModuleNotFoundError
+___ test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size4] ____
+
+size = (1, 2401)
+
+    @pytest.mark.parametrize('size',[(200,4700),(4700,200),(4700,4700),(2400,2400),(1,2401)])
+    def test_fragments_cover_every_pixel_with_bounded_overlapping_inputs(size):
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:19: ModuleNotFoundError
+___________ test_cut_uses_nearby_white_gap_instead_of_bisecting_text ___________
+
+    def test_cut_uses_nearby_white_gap_instead_of_bisecting_text():
+>       from app.ocr_fragments import fragment_boxes
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:37: ModuleNotFoundError
+___ test_overlap_keeps_intact_geometry_and_repeated_words_at_other_locations ___
+
+    def test_overlap_keeps_intact_geometry_and_repeated_words_at_other_locations():
+>       from app.ocr_fragments import merge_fragments
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:46: ModuleNotFoundError
+___ test_fragment_order_keeps_columns_between_full_width_heading_and_footer ____
+
+    def test_fragment_order_keeps_columns_between_full_width_heading_and_footer():
+>       from app.ocr_fragments import merge_fragments
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:58: ModuleNotFoundError
+_ test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[False] _
+
+first_detection = False
+
+    @pytest.mark.parametrize('first_detection',[False,True])
+    def test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr(first_detection):
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        detections=iter([[{'kind':'handwritten','bbox':[10,2350,101,2371],
+                           'detections':[{'bbox':[10,2350,101,2371]}]}] if first_detection else [],
+                         [{'kind':'handwritten','bbox':[10,78,101,99],
+                           'detections':[{'bbox':[10,78,101,99]}]}]])
+        def detect(image):
+            assert max(image.size)<=2400
+            return next(detections)
+        def recognize(image,cancelled):
+            assert max(image.size)<=2400
+            # Both overlapping views of the prohibited ink are blank before OCR.
+            y=2350 if image.height==2400 else 78
+            assert image.getpixel((20,y+5))==(255,255,255)
+            return [line('Top',[10,100,100,120])] if image.height==2400 else [line('Bottom',[10,528,100,548])]
+        def forbidden(*args):
+            pytest.fail('Handwriting OCR must not run without permission')
+        ocr.detect_handwriting=detect
+        ocr.recognize=recognize
+        ocr.transcribe=forbidden
+>       page=ocr.finish_page(ocr.prepare_image(long_image(),'skip_handwriting'),Event())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_ocr_fragments.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/app/ocr.py:274: in prepare_image
+    handwriting=self.detect_handwriting(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+image = <PIL.Image.Image image mode=RGB size=200x3000 at 0x7582F592EC00>
+
+    def detect(image):
+>       assert max(image.size)<=2400
+E       assert 3000 <= 2400
+E        +  where 3000 = max((200, 3000))
+E        +    where (200, 3000) = <PIL.Image.Image image mode=RGB size=200x3000 at 0x7582F592EC00>.size
+
+backend/tests/test_ocr_fragments.py:83: AssertionError
+_ test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[True] _
+
+first_detection = True
+
+    @pytest.mark.parametrize('first_detection',[False,True])
+    def test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr(first_detection):
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        detections=iter([[{'kind':'handwritten','bbox':[10,2350,101,2371],
+                           'detections':[{'bbox':[10,2350,101,2371]}]}] if first_detection else [],
+                         [{'kind':'handwritten','bbox':[10,78,101,99],
+                           'detections':[{'bbox':[10,78,101,99]}]}]])
+        def detect(image):
+            assert max(image.size)<=2400
+            return next(detections)
+        def recognize(image,cancelled):
+            assert max(image.size)<=2400
+            # Both overlapping views of the prohibited ink are blank before OCR.
+            y=2350 if image.height==2400 else 78
+            assert image.getpixel((20,y+5))==(255,255,255)
+            return [line('Top',[10,100,100,120])] if image.height==2400 else [line('Bottom',[10,528,100,548])]
+        def forbidden(*args):
+            pytest.fail('Handwriting OCR must not run without permission')
+        ocr.detect_handwriting=detect
+        ocr.recognize=recognize
+        ocr.transcribe=forbidden
+>       page=ocr.finish_page(ocr.prepare_image(long_image(),'skip_handwriting'),Event())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_ocr_fragments.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/app/ocr.py:274: in prepare_image
+    handwriting=self.detect_handwriting(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+image = <PIL.Image.Image image mode=RGB size=200x3000 at 0x7582F59F4DD0>
+
+    def detect(image):
+>       assert max(image.size)<=2400
+E       assert 3000 <= 2400
+E        +  where 3000 = max((200, 3000))
+E        +    where (200, 3000) = <PIL.Image.Image image mode=RGB size=200x3000 at 0x7582F59F4DD0>.size
+
+backend/tests/test_ocr_fragments.py:83: AssertionError
+___ test_clipped_overlap_line_is_replaced_by_intact_line_from_next_fragment ____
+
+    def test_clipped_overlap_line_is_replaced_by_intact_line_from_next_fragment():
+>       from app.ocr_fragments import merge_fragments
+E       ModuleNotFoundError: No module named 'app.ocr_fragments'
+
+backend/tests/test_ocr_fragments.py:106: ModuleNotFoundError
+_ test_complete_mode_transcribes_overlap_handwriting_once_in_original_coordinates _
+
+    def test_complete_mode_transcribes_overlap_handwriting_once_in_original_coordinates():
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[{'kind':'handwritten',
+            'bbox':[10,2350,101,2371] if image.height==2400 else [10,78,101,99]}]
+        ocr.recognize=lambda image,cancelled:[]
+        calls=[]
+        def transcribe(image,cancelled):
+            calls.append(image.size)
+            return 'Handwritten note'
+        ocr.transcribe=transcribe
+        page=ocr.finish_page(ocr.prepare_image(long_image(),'complete'),Event())
+        assert page['text']=='Handwritten note\n'
+>       assert page['regions'][0]['polygon']==[[10,2350],[101,2350],[101,2371],[10,2371]]
+E       assert [[10, 78], [1...99], [10, 99]] == [[10, 2350], ...], [10, 2371]]
+E         
+E         At index 0 diff: [10, 78] != [10, 2350]
+E         Use -v to get more diff
+
+backend/tests/test_ocr_fragments.py:124: AssertionError
+________ test_empty_middle_fragment_does_not_invoke_native_recognition _________
+
+    def test_empty_middle_fragment_does_not_invoke_native_recognition():
+        image=Image.new('RGB',(200,6900),'white')
+        draw=ImageDraw.Draw(image)
+        draw.rectangle((10,100,100,120),fill='black')
+        draw.rectangle((10,6800,100,6820),fill='black')
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        results=iter([[line('First',[10,100,100,120])],[line('Last',[10,2256,100,2276])]])
+        def recognize(image,cancelled):
+            return next(results)
+        ocr.recognize=recognize
+        page=ocr.finish_page(ocr.prepare_image(image,'skip_handwriting'),Event())
+>       assert page['text']=='First\nLast\n'
+E       AssertionError: assert 'First\n' == 'First\nLast\n'
+E         
+E           First
+E         - Last
+
+backend/tests/test_ocr_fragments.py:140: AssertionError
+___________ test_fragment_failure_never_returns_partial_page[cancel] ___________
+
+failure = 'cancel'
+
+    @pytest.mark.parametrize('failure',['cancel','error'])
+    def test_fragment_failure_never_returns_partial_page(failure):
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        cancelled=Event()
+        calls=[]
+        def recognize(image,event):
+            calls.append(image.size)
+            if len(calls)==1:
+                if failure=='cancel':event.set()
+                return [line('Partial page',[10,100,100,120])]
+            raise AccessError('ocr_truncated',422)
+        ocr.recognize=recognize
+>       with pytest.raises(AccessError,match='document_processing_cancelled' if failure=='cancel' else 'ocr_truncated'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_ocr_fragments.py:157: Failed
+___________ test_fragment_failure_never_returns_partial_page[error] ____________
+
+failure = 'error'
+
+    @pytest.mark.parametrize('failure',['cancel','error'])
+    def test_fragment_failure_never_returns_partial_page(failure):
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        cancelled=Event()
+        calls=[]
+        def recognize(image,event):
+            calls.append(image.size)
+            if len(calls)==1:
+                if failure=='cancel':event.set()
+                return [line('Partial page',[10,100,100,120])]
+            raise AccessError('ocr_truncated',422)
+        ocr.recognize=recognize
+>       with pytest.raises(AccessError,match='document_processing_cancelled' if failure=='cancel' else 'ocr_truncated'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'app.auth.AccessError'>
+
+backend/tests/test_ocr_fragments.py:157: Failed
+______ test_fragment_error_prevents_database_page_and_source_publication _______
+
+environment = {'admin': {'id': UUID('b8e43abe-7c3c-49fd-be9a-eaaea7e6677f'), 'session_id': UUID('5528b0ac-3f95-4c8f-9e2e-868c8223861...ersation': UUID('084b92e9-2115-47f3-8832-ad691641fab6'), 'document': UUID('89fd9030-1427-42d4-bc50-9e41f8efbd2f'), ...}
+rag_pool = <app.db.Database object at 0x7582f584bb00>
+connection = <psycopg.AsyncConnection [IDLE] (user=postgres database=test_8e1ac3c2f3f040c2a5f3cbf8e640f736) at 0x7582f54d16d0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7582f59f7f50>
+tmp_path = PosixPath('/tmp/pytest-of-octadim/pytest-29/test_fragment_error_prevents_d0')
+
+    async def test_fragment_error_prevents_database_page_and_source_publication(
+            environment,rag_pool,connection,monkeypatch,tmp_path):
+        monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
+        monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
+        image=Image.new('RGB',(1000,3000),'white')
+        draw=ImageDraw.Draw(image)
+        draw.rectangle((50,100,200,130),fill='black')
+        draw.rectangle((50,2800,200,2830),fill='black')
+        output=BytesIO();image.save(output,format='PDF',resolution=72)
+        content=output.getvalue()
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[]
+        calls=[]
+        def recognize(image,cancelled):
+            calls.append(image.size)
+            if len(calls)>1:
+                raise AccessError('ocr_truncated',422)
+            return [{'kind':'printed','text':'Unpublished first fragment','bbox':[50,100,200,130]}]
+        ocr.recognize=recognize
+        headers={'Authorization':'Bearer '+environment['user']['token']}
+        with LiveClient(create_app()) as client:
+            response=client.post('/api/documents/uploads',headers=headers,json={
+                'files':[{'name':'long.pdf','size':len(content)}]})
+            assert response.status_code==201,response.text
+            document=response.json()['documents'][0]['id']
+            assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
+            worker=DocumentWorker(rag_pool,None)
+            worker.ocr=ocr
+            assert await worker.process_one()
+>           assert len(calls)==2
+E           assert 1 == 2
+E            +  where 1 = len([(1200, 3600)])
+
+backend/tests/test_ocr_fragment_publication.py:42: AssertionError
+--------- generated xml file: /tmp/rag-ocr-fragments-red-20261015.xml ----------
+=========================== short test summary info ============================
+FAILED backend/tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size0]
+FAILED backend/tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size1]
+FAILED backend/tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size2]
+FAILED backend/tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size3]
+FAILED backend/tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size4]
+FAILED backend/tests/test_ocr_fragments.py::test_cut_uses_nearby_white_gap_instead_of_bisecting_text
+FAILED backend/tests/test_ocr_fragments.py::test_overlap_keeps_intact_geometry_and_repeated_words_at_other_locations
+FAILED backend/tests/test_ocr_fragments.py::test_fragment_order_keeps_columns_between_full_width_heading_and_footer
+FAILED backend/tests/test_ocr_fragments.py::test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[False]
+FAILED backend/tests/test_ocr_fragments.py::test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[True]
+FAILED backend/tests/test_ocr_fragments.py::test_clipped_overlap_line_is_replaced_by_intact_line_from_next_fragment
+FAILED backend/tests/test_ocr_fragments.py::test_complete_mode_transcribes_overlap_handwriting_once_in_original_coordinates
+FAILED backend/tests/test_ocr_fragments.py::test_empty_middle_fragment_does_not_invoke_native_recognition
+FAILED backend/tests/test_ocr_fragments.py::test_fragment_failure_never_returns_partial_page[cancel]
+FAILED backend/tests/test_ocr_fragments.py::test_fragment_failure_never_returns_partial_page[error]
+FAILED backend/tests/test_ocr_fragment_publication.py::test_fragment_error_prevents_database_page_and_source_publication
+16 failed, 1 deselected in 3.44s

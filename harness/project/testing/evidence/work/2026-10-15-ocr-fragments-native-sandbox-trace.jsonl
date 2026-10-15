@@ -1,0 +1,34 @@
+{"time": 1792094378.4167066, "line": 117, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094378.416805, "line": 118, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094378.416839, "line": 119, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094378.4341812, "line": 120, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094378.7897177, "line": 121, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094378.789816, "line": 130, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094392.8218672, "line": 131, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744}
+{"time": 1792094392.8243294, "line": 132, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.908546, "line": 133, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.9138346, "line": 134, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.9139552, "line": 135, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.913989, "line": 136, "function": "test_actual_native_abort_and_close_wait_for_c_return", "thread": 140094736807744, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.9291635, "line": 125, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 0}
+{"time": 1792094392.929303, "line": 126, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 1}
+{"time": 1792094392.9293406, "line": 129, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 1}
+{"time": 1792094397.6803246, "line": 125, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 1}
+{"time": 1792094397.6807547, "line": 126, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 2}
+{"time": 1792094397.68079, "line": 127, "function": "is_set", "thread": 140094091548352, "entered": false, "release": false, "cancelled": false, "calls": 2}
+{"time": 1792094397.6829422, "line": 128, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 2}
+{"time": 1792094417.6843307, "line": 129, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 2}
+{"time": 1792094417.7041957, "line": 125, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 2}
+{"time": 1792094417.7043192, "line": 126, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 3}
+{"time": 1792094417.7043521, "line": 127, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 3}
+{"time": 1792094417.7044032, "line": 128, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 3}
+{"time": 1792094437.7053354, "line": 129, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 3}
+{"time": 1792094437.7734585, "line": 125, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 3}
+{"time": 1792094437.7736034, "line": 126, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 4}
+{"time": 1792094437.773633, "line": 127, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 4}
+{"time": 1792094437.7736807, "line": 128, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 4}
+{"time": 1792094457.7744248, "line": 129, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 4}
+{"time": 1792094457.7750146, "line": 125, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 4}
+{"time": 1792094457.7750723, "line": 126, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 5}
+{"time": 1792094457.7751184, "line": 127, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 5}
+{"time": 1792094457.7751787, "line": 128, "function": "is_set", "thread": 140094091548352, "entered": true, "release": false, "cancelled": false, "calls": 5}

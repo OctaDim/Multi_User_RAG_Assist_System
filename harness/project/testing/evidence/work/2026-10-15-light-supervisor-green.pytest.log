@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+backend/tests/test_supervisor_imports.py::test_supervisor_import_keeps_inference_dependencies_in_native_worker {"heavy_modules": [], "gc_objects": 90328, "rss_kib": 67988, "max_rss_kib": 101636}
+PASSED
+
+------- generated xml file: /tmp/rag-light-supervisor-green-20261015.xml -------
+============================== 1 passed in 0.62s ===============================

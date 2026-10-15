@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 2 items
+
+backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport PASSED [ 50%]
+backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] PASSED [100%]
+
+-------- generated xml file: /tmp/rag-light-supervisor-pdf-20261015.xml --------
+======================== 2 passed in 963.69s (0:16:03) =========================

@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 19 items
+
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[0] PASSED [  5%]
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[128] PASSED [ 10%]
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[240] PASSED [ 15%]
+backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[False] PASSED [ 21%]
+backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[True] PASSED [ 26%]
+backend/tests/test_document_ocr.py::test_handwriting_only_columns_keep_original_geometry_order PASSED [ 31%]
+backend/tests/test_document_ocr.py::test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting PASSED [ 36%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[Unlocated OCR text] PASSED [ 42%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|>] PASSED [ 47%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|>] PASSED [ 52%]
+backend/tests/test_document_ocr.py::test_documented_wrapped_locations_are_not_part_of_recognized_text PASSED [ 57%]
+backend/tests/test_document_ocr.py::test_diagonal_zero_area_polygon_is_rejected PASSED [ 63%]
+backend/tests/test_document_ocr.py::test_real_small_handwriting_crop_is_detected_before_permission_masking PASSED [ 68%]
+backend/tests/test_document_ocr.py::test_actual_native_abort_and_close_wait_for_c_return PASSED [ 73%]
+backend/tests/test_document_ocr.py::test_ocr_loads_fixed_paddle_and_qwen_handwriting_profiles PASSED [ 78%]
+backend/tests/test_document_ocr.py::test_original_english_and_missed_russian_ink_are_both_masked PASSED [ 84%]
+backend/tests/test_document_ocr.py::test_actual_handwriting_abort_and_both_contexts_close_after_c_return PASSED [ 89%]
+backend/tests/test_document_ocr.py::test_genuine_be_expanded_regions_do_not_duplicate_the_same_ink_crop PASSED [ 94%]
+backend/tests/test_ocr_fragments.py::test_actual_native_long_image_keeps_seam_once_and_original_coordinates PASSED [100%]
+
+- generated xml file: /tmp/rag-ocr-fragments-native-unrestricted-20261015.xml --
+======================== 19 passed in 113.26s (0:01:53) ========================

@@ -1,0 +1,58 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport FAILED [100%]
+
+=================================== FAILURES ===================================
+_________ test_actual_print_only_pdf_limitations_reach_answer_passport _________
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...AG_Ass...>, PosixPath('/tmp/rag-ocr-fragments-passport-final-20261015/test_actual_print_only_pdf_lim0/generation.log'))
+
+    def test_actual_print_only_pdf_limitations_reach_answer_passport(real_answer_browser):
+        ((browser,mailbox,frontend,_),worker,_),generation,_=real_answer_browser
+        contexts=[browser.new_context() for _ in range(2)]
+        try:
+            operator,user=[context.new_page() for context in contexts]
+            invitation=subprocess.run([sys.executable,'-m','app.accounts','--email','lifecycle-pdf-operator@owned.test'],
+                cwd=BACKEND,env=os.environ.copy(),check=True,capture_output=True,text=True).stdout.strip()
+            register(operator,mailbox,frontend,'lifecycle-pdf-operator@owned.test',invitation)
+            login(operator,'lifecycle-pdf-operator@owned.test')
+            register(user,mailbox,frontend,'lifecycle-pdf@owned.test')
+            login(user,'lifecycle-pdf@owned.test')
+            operator.reload()
+            card=operator.locator('article').filter(has=operator.locator('form[data-account="lifecycle-pdf@owned.test"]'))
+            card.locator('summary').click()
+            policy=card.locator('form[data-policy]')
+            expect(policy.locator('[name=handwriting]')).to_be_checked()
+            policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов').click()
+            expect(operator.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            path=BACKEND.parent/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf'
+            user.locator('#document-upload input').set_input_files(str(path))
+            user.get_by_role('button',name='Загрузить документы',exact=True).click()
+            expect(user.locator('#documents')).to_contain_text('Для вашей учётной записи OCR рукописей не разрешён')
+            user.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            ready(user,path.name,timeout=300)
+            user.get_by_role('checkbox',name=path.name,exact=True).check()
+            user.locator('#question').fill('What is the annual budget?')
+            user.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(user.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
+E           AssertionError: Locator expected to contain text '100'
+E           Actual value:  
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 120000ms
+E             -   - waiting for locator("#history .answer-text")
+E             -     116 × locator resolved to <p hidden="" class="answer-text"></p>
+E             -         - unexpected value ""
+
+backend/tests/browser/test_answer_lifecycle.py:393: AssertionError
+---- generated xml file: /tmp/rag-ocr-fragments-passport-final-20261015.xml ----
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport
+======================== 1 failed in 196.82s (0:03:16) =========================

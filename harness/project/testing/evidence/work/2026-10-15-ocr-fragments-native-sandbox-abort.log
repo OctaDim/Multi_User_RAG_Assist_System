@@ -1,0 +1,88 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 19 items
+
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[0] PASSED [  5%]
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[128] PASSED [ 10%]
+backend/tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[240] PASSED [ 15%]
+backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[False] PASSED [ 21%]
+backend/tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[True] PASSED [ 26%]
+backend/tests/test_document_ocr.py::test_handwriting_only_columns_keep_original_geometry_order PASSED [ 31%]
+backend/tests/test_document_ocr.py::test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting PASSED [ 36%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[Unlocated OCR text] PASSED [ 42%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|>] PASSED [ 47%]
+backend/tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|>] PASSED [ 52%]
+backend/tests/test_document_ocr.py::test_documented_wrapped_locations_are_not_part_of_recognized_text PASSED [ 57%]
+backend/tests/test_document_ocr.py::test_diagonal_zero_area_polygon_is_rejected PASSED [ 63%]
+backend/tests/test_document_ocr.py::test_real_small_handwriting_crop_is_detected_before_permission_masking PASSED [ 68%]
+backend/tests/test_document_ocr.py::test_actual_native_abort_and_close_wait_for_c_return Fatal Python error: Aborted
+
+Thread 0x000074fbaaa446c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 359 in wait
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 655 in wait
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_document_ocr.py", line 128 in is_set
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 229 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/_internals.py", line 329 in decode
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 680 in eval
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama_chat_format.py", line 3537 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 2075 in create_chat_completion
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 243 in _recognize
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 232 in _run_native
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 222 in recognize
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 93 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Thread 0x000074fbab2456c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 90 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Current thread 0x000074fbcc920740 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/selectors.py", line 468 in select
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 1961 in _run_once
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 645 in run_forever
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 678 in run_until_complete
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118 in run
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 905 in inner
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 157 in pytest_pyfunc_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 1671 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 569 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 178 in pytest_runtest_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 246 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 344 in from_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 245 in call_and_report
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 136 in runtestprotocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 117 in pytest_runtest_protocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 367 in pytest_runtestloop
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 343 in _main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 289 in wrap_session
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 336 in pytest_cmdline_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 175 in main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 201 in console_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/pytest", line 10 in <module>
+
+Extension modules: charset_normalizer.md, charset_normalizer.cd, requests.packages.charset_normalizer.md, requests.packages.chardet.md, requests.packages.charset_normalizer.cd, requests.packages.chardet.cd, psutil._psutil_linux, zstandard.backend_c, xxhash._xxhash, psycopg_binary.pq, psycopg_binary._psycopg, sqlalchemy.util._collections_cy, sqlalchemy.util._immutabledict_cy, sqlalchemy.sql._util_cy, sqlalchemy.sql._cache_key_cy, sqlalchemy.engine._processors_cy, sqlalchemy.engine._util_cy, sqlalchemy.engine._row_cy, sqlalchemy.engine._result_cy, markupsafe._speedups, greenlet._greenlet, PIL._imaging, PIL._imagingft, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, PIL._imagingmath (total: 26)

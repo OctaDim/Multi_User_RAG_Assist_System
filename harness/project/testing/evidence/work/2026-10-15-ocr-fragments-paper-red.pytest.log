@@ -1,0 +1,34 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_masked_handwriting_does_not_turn_gray_paper_into_printed_ink _______
+
+    def test_masked_handwriting_does_not_turn_gray_paper_into_printed_ink():
+        image=Image.new('RGB',(200,3000),(240,240,240))
+        ImageDraw.Draw(image).rectangle((10,2350,100,2370),fill='black')
+        ocr=DocumentOCR.__new__(DocumentOCR)
+        ocr.detect_handwriting=lambda image:[{'kind':'handwritten',
+            'bbox':[10,2350,101,2371] if image.height==2400 else [10,78,101,99]}]
+        def forbidden(*args):
+            pytest.fail('Paper cannot become foreground after prohibited handwriting is masked')
+        ocr.recognize=forbidden
+        ocr.transcribe=forbidden
+>       page=ocr.finish_page(ocr.prepare_image(image,'skip_handwriting'),Event())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend/tests/test_ocr_fragments.py:154: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/app/ocr.py:310: in finish_page
+    recognized.append((box,self.recognize(image,cancelled)))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<PIL.Image.Image image mode=RGB size=200x2400 at 0x7A45877AD640>, <threading.Event at 0x7a45a1bf5b50: unset>)
+
+    def forbidden(*args):
+>       pytest.fail('Paper cannot become foreground after prohibited handwriting is masked')
+E       Failed: Paper cannot become foreground after prohibited handwriting is masked
+
+backend/tests/test_ocr_fragments.py:151: Failed
+=========================== short test summary info ============================
+FAILED backend/tests/test_ocr_fragments.py::test_masked_handwriting_does_not_turn_gray_paper_into_printed_ink
+1 failed in 1.22s

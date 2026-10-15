@@ -1,0 +1,164 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 4 items
+
+backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[before-delete] PASSED [ 25%]
+backend/tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-delete] PASSED [ 50%]
+backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport FAILED [ 75%]
+backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] FAILED [100%]
+
+=================================== FAILURES ===================================
+_________ test_actual_print_only_pdf_limitations_reach_answer_passport _________
+
+real_answer_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...s/Multi_User_RAG_Ass...>, PosixPath('/tmp/rag-timeout-repeat-20261015/test_actual_print_only_pdf_lim0/generation.log'))
+
+    def test_actual_print_only_pdf_limitations_reach_answer_passport(real_answer_browser):
+        ((browser,mailbox,frontend,_),worker,_),generation,_=real_answer_browser
+        contexts=[browser.new_context() for _ in range(2)]
+        try:
+            operator,user=[context.new_page() for context in contexts]
+            invitation=subprocess.run([sys.executable,'-m','app.accounts','--email','lifecycle-pdf-operator@owned.test'],
+                cwd=BACKEND,env=os.environ.copy(),check=True,capture_output=True,text=True).stdout.strip()
+            register(operator,mailbox,frontend,'lifecycle-pdf-operator@owned.test',invitation)
+            login(operator,'lifecycle-pdf-operator@owned.test')
+            register(user,mailbox,frontend,'lifecycle-pdf@owned.test')
+            login(user,'lifecycle-pdf@owned.test')
+            operator.reload()
+            card=operator.locator('article').filter(has=operator.locator('form[data-account="lifecycle-pdf@owned.test"]'))
+            card.locator('summary').click()
+            policy=card.locator('form[data-policy]')
+            expect(policy.locator('[name=handwriting]')).to_be_checked()
+            policy.locator('[name=handwriting]').uncheck()
+            policy.get_by_role('button',name='Сохранить ограничения документов').click()
+            expect(operator.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            path=BACKEND.parent/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf'
+            user.locator('#document-upload input').set_input_files(str(path))
+            user.get_by_role('button',name='Загрузить документы',exact=True).click()
+            expect(user.locator('#documents')).to_contain_text('Для вашей учётной записи OCR рукописей не разрешён')
+            user.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            ready(user,path.name,timeout=300)
+            user.get_by_role('checkbox',name=path.name,exact=True).check()
+            user.locator('#question').fill('What is the annual budget?')
+            user.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(user.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
+E           AssertionError: Locator expected to contain text '100'
+E           Actual value: <element(s) not found> 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 120000ms
+E             -   - waiting for locator("#history .answer-text")
+
+backend/tests/browser/test_answer_lifecycle.py:393: AssertionError
+_ test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] _
+
+integrated_browser = (((<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-li...i-2.log'), 'generation': PosixPath('/tmp/rag-timeout-repeat-20261015/test_actual_twenty_page_failur0/generation.log')})
+environment = {'dsn': 'user=postgres dbname=u8_3b02d82d8eb84110a4197f2c929b745a host=/tmp/rag-timeout-repeat-20261015/postgres0'}
+tmp_path = PosixPath('/tmp/rag-timeout-repeat-20261015/test_actual_twenty_page_failur0')
+skip = False
+
+    @pytest.mark.parametrize('skip',[False,True],ids=['whole-pdf','explicit-print-only'])
+    def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor(integrated_browser,environment,tmp_path,skip):
+        ((browser,mailbox,frontend,_),worker,_),_,_=integrated_browser
+        contexts=[browser.new_context(),browser.new_context()]
+        try:
+            admin,owner=[context.new_page() for context in contexts]
+            operator(admin,mailbox,frontend)
+            email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+            if skip:
+                admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
+                policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
+                policy.get_by_role('button',name='Сохранить ограничения документов').click()
+                expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
+            content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+            owner.locator('#document-upload input').set_input_files([
+                {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
+                {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
+            owner.get_by_role('button',name='Загрузить документы',exact=True).click()
+            bad=owner.locator('#documents li').filter(has=owner.get_by_text('twenty-mixed.pdf',exact=True))
+            if skip:
+                expect(bad).to_contain_text('OCR рукописей не разрешён')
+                bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
+            # Measured fixed CPU models take about 70–80 seconds per complete
+            # page here. Keep a finite bound sufficient for fifteen real pages.
+            deadline=time.monotonic()+2000
+            while 'Обработка неуспешна' not in bad.inner_text():
+                assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
+                try:
+                    owner.get_by_role('button',name='Обновить статусы документов',exact=True).click()
+                except Exception:
+                    with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                        activity=connection.execute("SELECT pid,state,wait_event_type,wait_event,query,pg_blocking_pids(pid) AS blockers FROM pg_stat_activity WHERE datname=current_database() ORDER BY pid").fetchall()
+                        files=connection.execute('SELECT name,state,error,failure_page FROM document_files').fetchall()
+                    (tmp_path/'actual-refresh-stall-diagnostic.json').write_text(json.dumps({'activity':activity,'files':files,
+                        'worker_alive':worker.poll() is None,'source_inputs_unchanged':True},default=str,ensure_ascii=False,indent=2)+'\n')
+                    raise
+                owner.wait_for_timeout(250)
+            expect(bad).to_contain_text('страница 16')
+            bad.get_by_role('button',name='Открыть отчёт об обработке',exact=True).click()
+            report=owner.get_by_role('dialog',name='Отчёт об обработке документа')
+            expect(report).to_contain_text('twenty-mixed.pdf')
+            expect(report).to_contain_text('Этап: обработка документа')
+            expect(report).to_contain_text('Страница: 16')
+            expect(report).to_contain_text('Причина: u8_controlled_page_fault')
+            expect(report).to_contain_text('Документ целиком недоступен для поиска.')
+            if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
+            owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
+            report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
+            ready(owner,'healthy-neighbor.txt',timeout=300)
+            pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
+            assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
+            if skip:
+                assert all(page['mode']=='skip_handwriting' and page['skips'] and 'Рукописный текст пропущен.' in page['text'] for page in pages),pages
+                assert all('dreams' not in page['text'].casefold() and 'hughes' not in page['text'].casefold() for page in pages)
+            with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
+                bad_row=connection.execute("SELECT d.*,f.state,f.failure_page,f.mode,f.original_sha256 FROM documents d JOIN document_files f ON f.document_id=d.id WHERE f.name='twenty-mixed.pdf'").fetchone()
+                assert not bad_row['ready'] and not bad_row['published_revision'] and bad_row['failure_page']==16 and bad_row['state']=='failed'
+                assert bad_row['original_sha256']==hashlib.sha256(content).hexdigest()
+                assert not connection.execute('SELECT 1 FROM available_source_revisions WHERE document_id=%s',(bad_row['id'],)).fetchone()
+                assert connection.execute('SELECT count(*) AS n FROM document_page_texts p JOIN source_revisions r ON r.id=p.revision_id WHERE r.document_id=%s',(bad_row['id'],)).fetchone()['n']==15
+            for checkbox in owner.locator('#question-sources input').all():checkbox.uncheck()
+            # Failed files are deliberately absent from selectable ready sources.
+            assert owner.get_by_role('checkbox',name='twenty-mixed.pdf',exact=True).count()==0
+            api=integrated_browser[0][0][3]
+            refused=owner.evaluate('''async ({api,document})=>{
+                const tab=JSON.parse(sessionStorage.getItem('rag:tab'));
+                const response=await fetch(api+'/api/conversations/'+sessionStorage.getItem('rag:conversation')+'/answers',{
+                    method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential'),
+                        'X-Tab-Proof':tab.proof,'Content-Type':'application/json'},
+                    body:JSON.stringify({operation_key:crypto.randomUUID(),question:'What is the annual budget?',
+                        document_ids:[document],tab_id:tab.id})});
+                return {status:response.status,body:await response.json()};
+            }''',{'api':api,'document':str(bad_row['id'])})
+            assert refused=={'status':409,'body':{'error':'no_ready_sources'}},refused
+            owner.locator('#question').fill('What is the annual budget?')
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+            expect(owner.locator('#status')).to_contain_text('Нет готовых источников')
+            expect(owner.locator('#question')).to_have_value('What is the annual budget?')
+            expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+            owner.get_by_role('checkbox',name='healthy-neighbor.txt',exact=True).check()
+            owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+>           expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=180000)
+E           AssertionError: Locator expected to contain text 'Завершён'
+E           Actual value: <element(s) not found> 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 180000ms
+E             -   - waiting for locator("#history article")
+
+backend/tests/integration/test_actual_page_failure.py:148: AssertionError
+----------- generated xml file: /tmp/rag-timeout-repeat-20261015.xml -----------
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_actual_print_only_pdf_limitations_reach_answer_passport - AssertionError: Locator expected to contain text '100'
+Actual value: <element(s) not found> 
+Call log:
+  - LocatorAssertions.to_contain_text with timeout 120000ms
+  -   - waiting for locator("#history .answer-text")
+FAILED backend/tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf] - AssertionError: Locator expected to contain text 'Завершён'
+Actual value: <element(s) not found> 
+Call log:
+  - LocatorAssertions.to_contain_text with timeout 180000ms
+  -   - waiting for locator("#history article")
+=================== 2 failed, 2 passed in 1888.42s (0:31:28) ===================

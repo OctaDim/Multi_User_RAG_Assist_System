@@ -1,0 +1,150 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+backend/tests/test_document_ocr.py::test_actual_native_abort_and_close_wait_for_c_return [0;93m2026-10-15 22:59:38.570679457 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+mtmd_group_mergeable_bitmaps: no merging for part index 1
+add_text: <|begin_of_sentence|>User: 
+add_text: <|IMAGE_START|>
+add_media: preproc_out has 1 entries, grid_x = 0, grid_y = 0, has_overview = 0
+image_tokens->nx = 33
+image_tokens->ny = 38
+batch_f32 size = 1
+add_text: <|IMAGE_END|>
+add_text: Spotting:
+Assistant:
+
+Timeout (0:01:00)!
+Thread 0x00007f6a328fd6c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 359 in wait
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 655 in wait
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_document_ocr.py", line 128 in is_set
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 229 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/_internals.py", line 329 in decode
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 680 in eval
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama_chat_format.py", line 3537 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 2075 in create_chat_completion
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 243 in _recognize
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 232 in _run_native
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 222 in recognize
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 93 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Thread 0x00007f6a330fe6c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 90 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Thread 0x00007f6a5905b740 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/selectors.py", line 468 in select
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 1961 in _run_once
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 645 in run_forever
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 678 in run_until_complete
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118 in run
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 905 in inner
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 157 in pytest_pyfunc_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 1671 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 569 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 178 in pytest_runtest_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 246 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 344 in from_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 245 in call_and_report
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 136 in runtestprotocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 117 in pytest_runtest_protocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 367 in pytest_runtestloop
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 343 in _main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 289 in wrap_session
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 336 in pytest_cmdline_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 175 in main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 201 in console_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/pytest", line 10 in <module>
+Fatal Python error: Aborted
+
+Thread 0x00007f6a328fd6c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 359 in wait
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 655 in wait
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/tests/test_document_ocr.py", line 128 in is_set
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 229 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/_internals.py", line 329 in decode
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 680 in eval
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama_chat_format.py", line 3537 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/llama_cpp/llama.py", line 2075 in create_chat_completion
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 243 in _recognize
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 232 in _run_native
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/ocr.py", line 222 in recognize
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 93 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Thread 0x00007f6a330fe6c0 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 90 in _worker
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012 in run
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Current thread 0x00007f6a5905b740 (most recent call first):
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/selectors.py", line 468 in select
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 1961 in _run_once
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 645 in run_forever
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 678 in run_until_complete
+  File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118 in run
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 905 in inner
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 157 in pytest_pyfunc_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/python.py", line 1671 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py", line 569 in runtest
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 178 in pytest_runtest_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 246 in <lambda>
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 344 in from_call
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 245 in call_and_report
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 136 in runtestprotocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 117 in pytest_runtest_protocol
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 367 in pytest_runtestloop
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 343 in _main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 289 in wrap_session
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/main.py", line 336 in pytest_cmdline_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 175 in main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 201 in console_main
+  File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/pytest", line 10 in <module>
+
+Extension modules: charset_normalizer.md, charset_normalizer.cd, requests.packages.charset_normalizer.md, requests.packages.chardet.md, requests.packages.charset_normalizer.cd, requests.packages.chardet.cd, psutil._psutil_linux, zstandard.backend_c, xxhash._xxhash, psycopg_binary.pq, psycopg_binary._psycopg, sqlalchemy.util._collections_cy, sqlalchemy.util._immutabledict_cy, sqlalchemy.sql._util_cy, sqlalchemy.sql._cache_key_cy, sqlalchemy.engine._processors_cy, sqlalchemy.engine._util_cy, sqlalchemy.engine._row_cy, sqlalchemy.engine._result_cy, markupsafe._speedups, greenlet._greenlet, PIL._imaging, PIL._imagingft, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, PIL._imagingmath (total: 26)

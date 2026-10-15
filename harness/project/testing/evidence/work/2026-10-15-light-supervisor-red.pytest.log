@@ -1,0 +1,50 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.8, platformdirs-4.13.0, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+backend/tests/test_supervisor_imports.py::test_supervisor_import_keeps_inference_dependencies_in_native_worker {"heavy_modules": ["app.rag", "langgraph", "langgraph._internal", "langgraph._internal._cache", "langgraph._internal._config", "langgraph._internal._constants", "langgraph._internal._fields", "langgraph._internal._future", "langgraph._internal._pydantic", "langgraph._internal._queue", "langgraph._internal._replay", "langgraph._internal._retry", "langgraph._internal._runnable", "langgraph._internal._scratchpad", "langgraph._internal._serde", "langgraph._internal._timeout", "langgraph._internal._typing", "langgraph.cache", "langgraph.cache.base", "langgraph.callbacks", "langgraph.channels", "langgraph.channels.any_value", "langgraph.channels.base", "langgraph.channels.binop", "langgraph.channels.delta", "langgraph.channels.ephemeral_value", "langgraph.channels.last_value", "langgraph.channels.named_barrier_value", "langgraph.channels.topic", "langgraph.channels.untracked_value", "langgraph.checkpoint", "langgraph.checkpoint.base", "langgraph.checkpoint.base.id", "langgraph.checkpoint.postgres", "langgraph.checkpoint.postgres._ainternal", "langgraph.checkpoint.postgres._internal", "langgraph.checkpoint.postgres.aio", "langgraph.checkpoint.postgres.base", "langgraph.checkpoint.postgres.shallow", "langgraph.checkpoint.serde", "langgraph.checkpoint.serde._msgpack", "langgraph.checkpoint.serde.base", "langgraph.checkpoint.serde.encrypted", "langgraph.checkpoint.serde.event_hooks", "langgraph.checkpoint.serde.jsonplus", "langgraph.checkpoint.serde.types", "langgraph.config", "langgraph.constants", "langgraph.errors", "langgraph.graph", "langgraph.graph._branch", "langgraph.graph._node", "langgraph.graph.message", "langgraph.graph.state", "langgraph.managed", "langgraph.managed.base", "langgraph.managed.is_last_step", "langgraph.pregel", "langgraph.pregel._algo", "langgraph.pregel._call", "langgraph.pregel._checkpoint", "langgraph.pregel._draw", "langgraph.pregel._executor", "langgraph.pregel._io", "langgraph.pregel._log", "langgraph.pregel._loop", "langgraph.pregel._messages", "langgraph.pregel._read", "langgraph.pregel._retry", "langgraph.pregel._runner", "langgraph.pregel._task_status", "langgraph.pregel._tools", "langgraph.pregel._utils", "langgraph.pregel._validate", "langgraph.pregel._write", "langgraph.pregel.debug", "langgraph.pregel.main", "langgraph.pregel.protocol", "langgraph.runtime", "langgraph.store", "langgraph.store.base", "langgraph.store.base.embed", "langgraph.stream", "langgraph.stream._convert", "langgraph.stream._mux", "langgraph.stream._types", "langgraph.stream.run_stream", "langgraph.stream.stream_channel", "langgraph.stream.transformers", "langgraph.types", "langgraph.typing", "langgraph.warnings", "numpy", "numpy.__config__", "numpy._array_api_info", "numpy._core", "numpy._core._add_newdocs", "numpy._core._add_newdocs_scalars", "numpy._core._asarray", "numpy._core._dtype", "numpy._core._dtype_ctypes", "numpy._core._exceptions", "numpy._core._internal", "numpy._core._methods", "numpy._core._multiarray_umath", "numpy._core._string_helpers", "numpy._core._type_aliases", "numpy._core._ufunc_config", "numpy._core.arrayprint", "numpy._core.einsumfunc", "numpy._core.fromnumeric", "numpy._core.function_base", "numpy._core.getlimits", "numpy._core.memmap", "numpy._core.multiarray", "numpy._core.numeric", "numpy._core.numerictypes", "numpy._core.overrides", "numpy._core.printoptions", "numpy._core.records", "numpy._core.shape_base", "numpy._core.umath", "numpy._distributor_init", "numpy._expired_attrs_2_0", "numpy._globals", "numpy._pytesttester", "numpy._typing", "numpy._typing._array_like", "numpy._typing._char_codes", "numpy._typing._dtype_like", "numpy._typing._nbit", "numpy._typing._nbit_base", "numpy._typing._nested_sequence", "numpy._typing._scalars", "numpy._typing._shape", "numpy._typing._ufunc", "numpy._utils", "numpy._utils._conversions", "numpy._utils._inspect", "numpy.dtypes", "numpy.exceptions", "numpy.lib", "numpy.lib._array_utils_impl", "numpy.lib._arraypad_impl", "numpy.lib._arraysetops_impl", "numpy.lib._arrayterator_impl", "numpy.lib._datasource", "numpy.lib._format_impl", "numpy.lib._function_base_impl", "numpy.lib._histograms_impl", "numpy.lib._index_tricks_impl", "numpy.lib._iotools", "numpy.lib._nanfunctions_impl", "numpy.lib._npyio_impl", "numpy.lib._polynomial_impl", "numpy.lib._scimath_impl", "numpy.lib._shape_base_impl", "numpy.lib._stride_tricks_impl", "numpy.lib._twodim_base_impl", "numpy.lib._type_check_impl", "numpy.lib._ufunclike_impl", "numpy.lib._utils_impl", "numpy.lib._version", "numpy.lib.array_utils", "numpy.lib.format", "numpy.lib.introspect", "numpy.lib.mixins", "numpy.lib.npyio", "numpy.lib.scimath", "numpy.lib.stride_tricks", "numpy.linalg", "numpy.linalg._linalg", "numpy.linalg._umath_linalg", "numpy.matrixlib", "numpy.matrixlib.defmatrix", "numpy.version", "onnxruntime", "onnxruntime.capi", "onnxruntime.capi._ld_preload", "onnxruntime.capi._pybind_state", "onnxruntime.capi.build_and_package_info", "onnxruntime.capi.onnxruntime_inference_collection", "onnxruntime.capi.onnxruntime_pybind11_state", "onnxruntime.capi.onnxruntime_pybind11_state.opkernel", "onnxruntime.capi.onnxruntime_pybind11_state.schemadef", "onnxruntime.capi.onnxruntime_validation"], "gc_objects": 164378, "rss_kib": 142228, "max_rss_kib": 144076}
+FAILED
+
+=================================== FAILURES ===================================
+_____ test_supervisor_import_keeps_inference_dependencies_in_native_worker _____
+
+tmp_path = PosixPath('/tmp/rag-light-supervisor-red-20261015/test_supervisor_import_keeps_i0')
+
+    def test_supervisor_import_keeps_inference_dependencies_in_native_worker(tmp_path):
+        result=subprocess.run([sys.executable,'-c','''
+    import gc,json,resource,sys
+    from pathlib import Path
+    from app.generation import Supervisor
+    status=Path('/proc/self/status').read_text().splitlines()
+    heavy=sorted(name for name in sys.modules if name.split('.')[0] in
+                 {'numpy','onnxruntime','langgraph','llama_cpp'} or name=='app.rag')
+    print(json.dumps({'heavy_modules':heavy,'gc_objects':len(gc.get_objects()),
+                      'rss_kib':int(next(row for row in status if row.startswith('VmRSS:')).split()[1]),
+                      'max_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}))
+    '''],cwd=tmp_path,capture_output=True,text=True,check=True,timeout=30)
+        proof=json.loads(result.stdout)
+        (tmp_path/'supervisor-import.json').write_text(json.dumps(proof,indent=2)+'\n')
+        print(json.dumps(proof),flush=True)
+>       assert proof['heavy_modules']==[],proof
+E       AssertionError: {'gc_objects': 164378, 'heavy_modules': ['app.rag', 'langgraph', 'langgraph._internal', 'langgraph._internal._cache', 'langgraph._internal._config', 'langgraph._internal._constants', ...], 'max_rss_kib': 144076, 'rss_kib': 142228}
+E       assert ['app.rag', '...nstants', ...] == []
+E         
+E         Left contains 186 more items, first extra item: 'app.rag'
+E         
+E         Full diff:
+E         - []
+E         + [
+E         +     'app.rag',...
+E         
+E         ...Full output truncated (186 lines hidden), use '-vv' to show
+
+backend/tests/test_supervisor_imports.py:23: AssertionError
+-------- generated xml file: /tmp/rag-light-supervisor-red-20261015.xml --------
+=========================== short test summary info ============================
+FAILED backend/tests/test_supervisor_imports.py::test_supervisor_import_keeps_inference_dependencies_in_native_worker
+============================== 1 failed in 1.47s ===============================

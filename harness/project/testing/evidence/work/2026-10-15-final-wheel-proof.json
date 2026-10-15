@@ -1,0 +1,31 @@
+{
+  "wheel_sha256": "1b842ce8bfc82c38b29f161cf4ec0fa8cc146b0dd4a48cf34cfa5f353807a1ec",
+  "installed_module": "/tmp/rag-final-installed-20261015/app/generation.py",
+  "ocr_config": "/tmp/rag-final-installed-20261015/app/_resources/config/ocr.toml",
+  "printed_n_ctx": 16384,
+  "handwriting_n_ctx": 4096,
+  "fragment_boxes": [
+    [
+      0,
+      0,
+      100,
+      2400
+    ],
+    [
+      0,
+      2272,
+      100,
+      3000
+    ]
+  ],
+  "alembic_revisions": [
+    "0001_answer_lifecycle.py",
+    "0002_sources_and_context.py",
+    "0003_generation_ownership.py",
+    "0004_tab_presence.py",
+    "0005_accounts.py",
+    "0006_documents.py",
+    "0007_checkpoints.py"
+  ],
+  "scope": "installed wheel with existing pinned dependencies; no clean dependency installation or production migration"
+}
