@@ -33,6 +33,7 @@ packages = ["app"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "migrations" = "app/_resources/migrations"
+"alembic.ini" = "app/_resources/alembic.ini"
 "config" = "app/_resources/config"
 
 [dependency-groups]

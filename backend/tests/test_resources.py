@@ -23,4 +23,13 @@ def test_installed_package_ignores_an_unrelated_neighbor_config(tmp_path):
 
 def test_working_tree_resources_still_load_runtime_and_migrations():
     assert (resources.resource_path("config") / "runtime.toml").is_file()
-    assert (resources.resource_path("migrations") / "001_answer_lifecycle.sql").is_file()
+    assert (resources.resource_path("migrations") / "versions" / "0001_answer_lifecycle.py").is_file()
+
+
+def test_migration_resources_include_environment_contracts_and_no_legacy_sql():
+    root = resources.resource_path('migrations')
+    assert (root / 'env.py').is_file()
+    assert (root / 'script.py.mako').is_file()
+    assert (root / 'schema_contract.py').is_file()
+    assert (root / 'contracts' / '0007_checkpoints.json').is_file()
+    assert not list(root.glob('*.sql'))
