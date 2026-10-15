@@ -1,0 +1,259 @@
+{
+  "raw_results_sha256": "70ff844ab97ccf000a2dad342b9428464ba009b5f8abaa7618ff3373947d2ba9",
+  "auditor": "Codex: содержательная проверка агентом, не аттестация человеком",
+  "method": "Прочитаны все 30 пар вопрос/ожидаемый факт/ответ; проверены смысл, полнота для конкретного вопроса, отсутствие неподтверждённых фактов. Цитаты независимо сопоставлены с байтово неизменёнными UTF-8 исходниками по start/end и с passed/selected. Три недословных ответа проверены с полными цитатами отдельно.",
+  "total": 30,
+  "mechanical_correct": 30,
+  "semantic_correct": 30,
+  "citation_integrity_correct": 30,
+  "errors": [],
+  "languages": {
+    "eng": 8,
+    "rus": 8,
+    "bel": 7,
+    "deu_1996": 7
+  },
+  "checks": [
+    {
+      "id": "eng-1",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-3",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-4",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-5",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-9",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-14",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-15",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "eng-24",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-1",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-3",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-4",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-5",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-9",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-14",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-15",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "rus-24",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-1",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-3",
+      "issues": [],
+      "answer_is_verbatim_in_citation": false,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Грамматически исправлена опечатка исходника «Кожны чалавека» → «Кожны чалавек»; три права сохранены. Цитата сохраняет оригинал."
+    },
+    {
+      "id": "bel-4",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-5",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-9",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-14",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "bel-15",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "deu_1996-1",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "deu_1996-3",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "deu_1996-4",
+      "issues": [],
+      "answer_is_verbatim_in_citation": false,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Сжатый пересказ о запрете рабства и работорговли во всех формах отвечает конкретному вопросу; цитата статьи 4 подтверждает оба запрета."
+    },
+    {
+      "id": "deu_1996-5",
+      "issues": [],
+      "answer_is_verbatim_in_citation": false,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Грамматический пересказ запрета пыток и жестокого/бесчеловечного/унижающего обращения или наказания; смысл всех перечислений сохранён."
+    },
+    {
+      "id": "deu_1996-9",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "deu_1996-14",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    },
+    {
+      "id": "deu_1996-15",
+      "issues": [],
+      "answer_is_verbatim_in_citation": true,
+      "citation_count": 1,
+      "semantic": "pass",
+      "note": "Ожидаемые факты переданы верно; ответ содержится в процитированном фрагменте."
+    }
+  ],
+  "scope": "30 замороженных вопросов на 4 TXT UDHR; не оценка PDF/рукописей или всего распределения пользовательских вопросов"
+}

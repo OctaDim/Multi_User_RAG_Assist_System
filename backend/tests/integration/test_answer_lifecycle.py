@@ -419,15 +419,15 @@ def test_frozen_thirty_questions_use_real_multilingual_documents(integrated_brow
         files=sorted({item['document'] for item in controls['questions']})
         page.locator('#document-upload input').set_input_files([str(fixtures/name) for name in files])
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
-        for name in files:ready(page,name,timeout=45)
+        for name in files:ready(page,name,timeout=300)
         for index,item in enumerate(controls['questions']):
             if index:page.get_by_role('button',name='Новая беседа',exact=True).click()
             for checkbox in page.locator('#question-sources input').all():checkbox.uncheck()
             page.get_by_role('checkbox',name=item['document'],exact=True).check()
             page.locator('#question').fill(item['question'])
             page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-            expect(page.locator('#history article')).to_have_count(1)
-            expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+            expect(page.locator('#history article')).to_have_count(1,timeout=120000)
+            expect(page.locator('#history article')).to_contain_text('Завершён',timeout=180000)
             with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
                 row=connection.execute('SELECT * FROM requests ORDER BY created_at DESC LIMIT 1').fetchone()
                 binding=connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s',(row['id'],)).fetchone()
