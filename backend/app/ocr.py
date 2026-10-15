@@ -19,6 +19,7 @@ from llama_cpp.llama_chat_format import MTMDChatHandler
 
 from app.auth import AccessError
 from app.resources import resource_path
+from app.ocr_fragments import fragment_boxes, merge_fragments, translate_region
 
 
 SKIP_TEXT = 'Рукописный текст пропущен. Для распознавания требуется разрешение OCR рукописей'
@@ -271,26 +272,53 @@ class DocumentOCR:
 
     def prepare_image(self,image,mode):
         foreground=ink_mask(image)
-        handwriting=self.detect_handwriting(image)
+        boxes=fragment_boxes(image)
+        if len(boxes)==1:
+            handwriting=self.detect_handwriting(image)
+            masks=handwriting
+        else:
+            detected=[(box,self.detect_handwriting(image.crop(box))) for box in boxes]
+            handwriting=merge_fragments(detected)
+            # A hit in either overlapping view masks both printed inputs,
+            # including small differences between duplicate detection boxes.
+            masks=[translate_region(region,box) for box,regions in detected for region in regions]
         printed=image.copy();draw=ImageDraw.Draw(printed);skips=[]
         printed_foreground=foreground.copy()
-        for region in handwriting:
+        for region in masks:
             draw.rectangle(region['bbox'],fill='white')
             x0,y0,x1,y1=region['bbox'];printed_foreground[y0:y1+1,x0:x1+1]=False
+        for region in handwriting:
             if mode=='skip_handwriting':
                 skips.append(region | {'kind':'skip','text':SKIP_TEXT,'reason':'handwriting_permission'})
-        return {'image':printed,'original':image if mode=='complete' else None,
+        prepared={'image':printed,'original':image if mode=='complete' else None,
                 'handwriting':handwriting,'skips':skips,'mode':mode,'printed_ink':bool(printed_foreground.any())}
+        if len(boxes)>1:
+            prepared['fragments']=[(box,bool(printed_foreground[box[1]:box[3],box[0]:box[2]].any())) for box in boxes]
+        return prepared
 
     def finish_page(self,prepared,cancelled):
-        lines=self.recognize(prepared['image'],cancelled) if prepared['printed_ink'] else []
+        def check_cancelled():
+            if cancelled is not None and cancelled.is_set():
+                raise AccessError('document_processing_cancelled',409)
+        check_cancelled()
+        if prepared.get('fragments'):
+            recognized=[]
+            for box,printed_ink in prepared['fragments']:
+                check_cancelled()
+                if printed_ink:
+                    recognized.append((box,self.recognize(prepared['image'].crop(box),cancelled)))
+            lines=merge_fragments(recognized)
+        else:
+            lines=self.recognize(prepared['image'],cancelled) if prepared['printed_ink'] else []
         insertions=list(prepared['skips'])
         if prepared['mode']=='complete':
             for region in prepared['handwriting']:
+                check_cancelled()
                 x0,y0,x1,y1=region['bbox']
                 text=self.transcribe(prepared['original'].crop((x0,y0,x1,y1)),cancelled)
                 if text.strip():
                     insertions.append(region | {'text':text.strip(),'polygon':[[x0,y0],[x1,y0],[x1,y1],[x0,y1]]})
+        check_cancelled()
         if not lines:
             return compose_page(sorted(insertions,key=lambda block:(block['bbox'][1],block['bbox'][0])),[])
         return compose_page(lines,insertions)

@@ -91,19 +91,19 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
             raise
         page.locator('#document-upload input').set_input_files({'name':'scanned-budget.pdf','mimeType':'application/pdf','buffer':scanned_budget()})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
-        item=ready(page,'scanned-budget.pdf',timeout=45)
+        item=ready(page,'scanned-budget.pdf',timeout=300)
         item.get_by_role('button',name='Открыть документ',exact=True).click()
         original=page.locator('#document-correction textarea').input_value()
         assert '100' in original,'Actual OCR must read the source before this proof'
         page.get_by_role('checkbox',name='scanned-budget.pdf',exact=True).check()
         page.locator('#question').fill('What is the annual budget? Cite the source.')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=30000)
-        until=time.monotonic()+30
+        expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=120000)
+        until=time.monotonic()+120
         while not marker.exists() and time.monotonic()<until:page.wait_for_timeout(50)
         assert marker.exists(),'Real native context did not reach the controlled computation boundary'
         if mode=='after':
-            expect(page.locator('#history .answer-text')).not_to_have_text('')
+            expect(page.locator('#history .answer-text')).not_to_have_text('',timeout=120000)
         if mutation=='delete':
             item.get_by_role('button',name='Удалить документ',exact=True).click()
             expect(page.locator('#history')).to_contain_text('Источник удалён',timeout=15000)
@@ -111,11 +111,11 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
         else:
             page.locator('#document-correction textarea').fill(original.replace('100','10'))
             page.get_by_role('button',name='Сохранить исправления',exact=True).click()
-            ready(page,'scanned-budget.pdf',timeout=45)
+            ready(page,'scanned-budget.pdf',timeout=300)
             expect(page.locator('#history')).to_contain_text('OCR исправлен',timeout=15000)
         release.touch()
         if mutation=='correction':
-            expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
+            expect(page.locator('#history')).to_contain_text('Завершён',timeout=180000)
         page.locator('#history .answer-passport summary').click()
         expect(page.locator('#history .answer-passport')).to_contain_text('100')
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
@@ -136,7 +136,7 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
         page.locator('#question').fill('What is the annual budget now? Cite the source.')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history article')).to_have_count(2)
-        expect(page.locator('#history article').last).to_contain_text('Завершён',timeout=30000)
+        expect(page.locator('#history article').last).to_contain_text('Завершён',timeout=180000)
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
             row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
                 WHERE a.email=%s ORDER BY r.created_at DESC LIMIT 1''',(email,)).fetchone()

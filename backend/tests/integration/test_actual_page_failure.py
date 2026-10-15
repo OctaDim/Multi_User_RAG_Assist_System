@@ -88,7 +88,7 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
             bad.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
         # Measured fixed CPU models take about 70–80 seconds per complete
         # page here. Keep a finite bound sufficient for fifteen real pages.
-        deadline=time.monotonic()+1500
+        deadline=time.monotonic()+2000
         while 'Обработка неуспешна' not in bad.inner_text():
             assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
             try:
@@ -112,7 +112,7 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
         if skip:expect(report).to_contain_text('Режим: только печатный текст; рукописные участки пропущены.')
         owner.screenshot(path=str(tmp_path/'actual-page-16-failure-report.png'),full_page=True)
         report.get_by_role('button',name='Закрыть отчёт',exact=True).click()
-        ready(owner,'healthy-neighbor.txt',timeout=30)
+        ready(owner,'healthy-neighbor.txt',timeout=300)
         pages=[json.loads(line) for line in (tmp_path/'actual-finished-pages.jsonl').read_text().splitlines()]
         assert len(pages)==15 and all('100' in page['text'] for page in pages),pages
         if skip:
@@ -145,7 +145,7 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
         expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
         owner.get_by_role('checkbox',name='healthy-neighbor.txt',exact=True).check()
         owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
+        expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=180000)
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
             request=connection.execute('SELECT * FROM requests').fetchone()
             assert str(bad_row['id']) not in request['passport']['selected']

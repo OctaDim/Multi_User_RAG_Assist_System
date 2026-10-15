@@ -6,7 +6,7 @@ projector = "PaddleOCR-VL-1.5-mmproj.gguf"
 projector_sha256 = "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
 repository = "PaddlePaddle/PaddleOCR-VL-1.5-GGUF"
 revision = "cc977c16989848c264d813ec1705cb181b7a21ee"
-n_ctx = 0
+n_ctx = 16384
 
 [handwriting]
 model = "Qwen3.5-2B-Q4_K_M.gguf"
