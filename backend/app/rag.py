@@ -10,7 +10,11 @@ from tokenizers import Tokenizer
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from langgraph.graph import END, START, StateGraph
-from psycopg.types.json import Jsonb
+from sqlalchemy import and_, select, update
+from sqlalchemy.dialects.postgresql import insert
+from psycopg.pq import TransactionStatus
+
+from app.models import Conversation, Document, GraphBinding, Message, Request, RequestSource
 
 from app import sources
 from app.auth import AccessError, lock_service, principal, originating_session
@@ -44,15 +48,15 @@ class E5Embedder:
 class GuardedSaver(BaseCheckpointSaver):
     """The sole runtime saver boundary, bound to one admitted request and epochs."""
 
-    def __init__(self, pool, binding, *, token=None):
+    def __init__(self, database, binding, *, token=None):
         super().__init__()
-        self.pool = pool
+        self.database = database
         self.binding = binding
         self.token = token
 
     @asynccontextmanager
     async def guard(self, config=None, *, preparing=False):
-        async with self.pool.connection() as connection, connection.transaction():
+        async with self.database.session() as connection, connection.begin():
             service = await lock_service(connection)
             if self.token:
                 actor = await principal(connection, self.token)
@@ -62,17 +66,12 @@ class GuardedSaver(BaseCheckpointSaver):
             if self.token and actor['id'] != origin_actor['id']:
                 raise AccessError('not_found', 404)
             actor = origin_actor
-            documents = await (await connection.execute(
-                '''SELECT d.* FROM documents d WHERE d.id IN
-                    (SELECT unnest(scope) FROM requests WHERE id=%s UNION SELECT document_id FROM request_sources WHERE request_id=%s)
-                   ORDER BY d.id FOR SHARE''',
-                (self.binding['request_id'], self.binding['request_id']),
-            )).fetchall()
+            documents = (await connection.execute(select(Document.__table__).where(Document.id.in_(sources.scoped_document_ids(self.binding["request_id"]))).order_by(Document.id).with_for_update(read=True))).mappings().all()
             from app.events import origin
             await origin(connection, self.binding['request_id'])
-            conversation = await (await connection.execute('SELECT * FROM conversations WHERE id=%s FOR SHARE', (self.binding['conversation_id'],))).fetchone()
-            request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR UPDATE', (self.binding['request_id'],))).fetchone()
-            stored = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s FOR SHARE', (self.binding['request_id'],))).fetchone()
+            conversation = (await connection.execute(select(Conversation.__table__).where(Conversation.id == self.binding["conversation_id"]).with_for_update(read=True))).mappings().first()
+            request = (await connection.execute(select(Request.__table__).where(Request.id == self.binding["request_id"]).with_for_update())).mappings().first()
+            stored = (await connection.execute(select(GraphBinding.__table__).where(GraphBinding.request_id == self.binding["request_id"]).with_for_update(read=True))).mappings().first()
             if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in
                 ('thread_id', 'owner_id', 'conversation_id', 'execution_epoch', 'context_epoch', 'account_epoch')):
                 raise AccessError('stale_context', 409)
@@ -90,39 +89,50 @@ class GuardedSaver(BaseCheckpointSaver):
                 or (not preparing and conversation['context_epoch'] != stored['context_epoch'])):
                 raise AccessError('stale_context', 409)
             if not preparing:
-                invalid = await (await connection.execute(
-                    '''SELECT 1 FROM request_sources p LEFT JOIN available_source_revisions s
-                       ON s.document_id=p.document_id AND s.revision_id=p.revision_id AND s.owner_id=%s
-                       WHERE p.request_id=%s AND s.revision_id IS NULL LIMIT 1''', (actor['id'], request['id']),
-                )).fetchone()
+                invalid = (await connection.execute(select(RequestSource.request_id).outerjoin(sources.available_revisions, and_(sources.available_revisions.c.document_id == RequestSource.document_id, sources.available_revisions.c.revision_id == RequestSource.revision_id, sources.available_revisions.c.owner_id == actor["id"])).where(RequestSource.request_id == request["id"], sources.available_revisions.c.revision_id.is_(None)).limit(1))).mappings().first()
                 if invalid:
                     raise AccessError('stale_source', 409)
-            if preparing and await (await connection.execute('''SELECT 1 FROM request_sources p
-                JOIN documents d ON d.id=p.document_id WHERE p.request_id=%s AND d.deleted LIMIT 1''', (request['id'],))).fetchone():
+            if preparing and (await connection.execute(select(RequestSource.request_id).join(Document, Document.id == RequestSource.document_id).where(RequestSource.request_id == request["id"], Document.deleted).limit(1))).mappings().first():
                 raise AccessError('source_deleted',409)
-            yield connection, request
+            yield connection, dict(request)
+
+    @asynccontextmanager
+    async def saver(self, config):
+        async with self.guard(config) as (session, _):
+            connection = await session.connection()
+            driver = (await connection.get_raw_connection()).driver_connection
+            try:
+                yield AsyncPostgresSaver(driver, serde=self.serde)
+            except BaseException:
+                # Driver IO bypasses SQLAlchemy's disconnect classification.
+                if driver.closed or driver.broken or driver.info.transaction_status == TransactionStatus.UNKNOWN:
+                    try:
+                        await connection.invalidate()
+                    except BaseException:
+                        pass  # Preserve the original driver error or cancellation.
+                raise
 
     async def aget_tuple(self, config):
-        async with self.guard(config) as (connection, _):
-            return await AsyncPostgresSaver(connection, serde=self.serde).aget_tuple(config)
+        async with self.saver(config) as saver:
+            return await saver.aget_tuple(config)
 
     async def alist(self, config, *, filter=None, before=None, limit=None):
         if config is None:
             raise AccessError('invalid_graph_identity')
-        async with self.guard(config) as (connection, _):
-            values = [value async for value in AsyncPostgresSaver(connection, serde=self.serde).alist(config, filter=filter, before=before, limit=limit)]
+        async with self.saver(config) as saver:
+            values = [value async for value in saver.alist(config, filter=filter, before=before, limit=limit)]
         for value in values:
             # Each handoff rechecks access, including delayed iteration consumers.
             async with self.guard(config):
                 yield value
 
     async def aput(self, config, checkpoint, metadata, new_versions):
-        async with self.guard(config) as (connection, _):
-            return await AsyncPostgresSaver(connection, serde=self.serde).aput(config, checkpoint, metadata, new_versions)
+        async with self.saver(config) as saver:
+            return await saver.aput(config, checkpoint, metadata, new_versions)
 
     async def aput_writes(self, config, writes, task_id, task_path=''):
-        async with self.guard(config) as (connection, _):
-            await AsyncPostgresSaver(connection, serde=self.serde).aput_writes(config, writes, task_id, task_path)
+        async with self.saver(config) as saver:
+            await saver.aput_writes(config, writes, task_id, task_path)
 
     def get_next_version(self, current, channel):
         return AsyncPostgresSaver.get_next_version(self, current, channel)
@@ -174,7 +184,7 @@ def pack_context(question, history, fragments, tokenize, *, n_ctx=4096, response
 
 async def prepare(saver, embedder, tokenize, *, min_similarity=0.75):
     async with saver.guard(preparing=True) as (connection, request):
-        question = (await (await connection.execute("SELECT text FROM messages WHERE request_id=%s AND role='user'", (request['id'],))).fetchone())['text']
+        question = ((await connection.execute(select(Message.text).where(Message.request_id == request["id"], Message.role == "user"))).mappings().first())['text']
     embedding = (await asyncio.to_thread(embedder.encode, [question], query=True))[0]
     async with saver.guard(preparing=True) as (connection, request):
         available = await sources.available(connection, request['owner_id'], request['scope'])
@@ -202,8 +212,8 @@ async def prepare(saver, embedder, tokenize, *, min_similarity=0.75):
         if not dependencies.issubset(current):
             raise AccessError('stale_source', 409)
         for document_id, revision_id in sorted(dependencies):
-            await connection.execute('INSERT INTO request_sources VALUES (%s,%s,%s) ON CONFLICT DO NOTHING', (request['id'], document_id, revision_id))
-        request = await (await connection.execute("UPDATE requests SET state='queued',passport=%s,version=version+1 WHERE id=%s RETURNING *", (Jsonb(passport), request['id']))).fetchone()
+            await connection.execute(insert(RequestSource.__table__).values(request_id=request["id"], document_id=document_id, revision_id=revision_id).on_conflict_do_nothing())
+        request = (await connection.execute(update(Request.__table__).where(Request.id == request["id"]).values(state="queued", passport=passport, version=Request.version + 1).returning(Request.__table__))).mappings().first()
         await event(connection, request, 'fragments', {'passport': passport, 'version': request['version']})
     return {**packed, 'history': [{**row, 'request_id': str(row['request_id'])} for row in packed['history']],
             'fragments': passport['passed'], 'passport': passport,
@@ -222,14 +232,14 @@ class RAGState(TypedDict, total=False):
     answer: str
 
 
-async def run_graph(pool, request_id, execution_epoch, embedder, tokenize, *, token=None, generate=None, min_similarity=0.75):
-    async with pool.connection() as connection:
-        binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request_id,))).fetchone()
+async def run_graph(database, request_id, execution_epoch, embedder, tokenize, *, token=None, generate=None, min_similarity=0.75):
+    async with database.session() as connection, connection.begin():
+        binding = (await connection.execute(select(GraphBinding.__table__).where(GraphBinding.request_id == request_id))).mappings().first()
     if not binding or binding['execution_epoch'] != execution_epoch:
         raise AccessError('lost_execution', 409)
-    saver = GuardedSaver(pool, binding, token=token)
+    saver = GuardedSaver(database, binding, token=token)
     async with saver.guard(preparing=True) as (connection, _):
-        if not await (await connection.execute('UPDATE graph_bindings SET started=true WHERE request_id=%s AND NOT started RETURNING request_id', (request_id,))).fetchone():
+        if not (await connection.execute(update(GraphBinding.__table__).where(GraphBinding.request_id == request_id, ~GraphBinding.started).values(started=True).returning(GraphBinding.request_id))).mappings().first():
             raise AccessError('graph_already_started', 409)
     prepared = await prepare(saver, embedder, tokenize, min_similarity=min_similarity)
 
@@ -259,7 +269,7 @@ async def run_graph(pool, request_id, execution_epoch, embedder, tokenize, *, to
         # writes but must not cancel this one current native generation. Nothing
         # is retried or resumed, and no stale state is written to persistence.
         from app.generation import Coordinator
-        async with Coordinator(pool, execution_epoch, None, None).guard(request_id) as (connection, _):
+        async with Coordinator(database, execution_epoch, None, None).guard(request_id) as (connection, _):
             flags = await sources.source_flags(connection, request_id)
             if any(flag != 'corrected' for flag in flags.values()):
                 raise

@@ -107,9 +107,9 @@ async def test_verification_expiry_resend_and_block_are_independent(account_clie
     assert client.post('/api/accounts/verify', json={'token': old}).status_code == 400
 
 
-async def test_operator_invitation_roles_admin_boundaries_and_audit(account_client, connection, environment):
+async def test_operator_invitation_roles_admin_boundaries_and_audit(session, account_client, connection, environment):
     client, mailbox = account_client
-    invitation_url = await accounts.bootstrap(connection, 'operator@owned.test')
+    invitation_url = await accounts.bootstrap(session, 'operator@owned.test')
     invitation = parse_qs(urlsplit(invitation_url).fragment)['invite'][0]
     assert client.post('/api/accounts/register', json=credentials('wrong@owned.test') | {'invitation': invitation}).status_code == 400
     super_account, super_headers = signup(client, mailbox, 'operator@owned.test', invitation)
@@ -165,14 +165,15 @@ def test_resend_links_are_one_use_despite_delivery_order(account_client):
 
 
 @pytest.mark.parametrize('changes', [{'disabled': False}, {'role': 'admin'}])
-async def test_unchanged_or_increased_access_preserves_session_and_execution(environment, connection, rag_pool, changes):
+async def test_unchanged_or_increased_access_preserves_session_and_execution(session, environment, connection, rag_pool, changes):
     token = environment['user']['token']
-    request = await answers.admit(connection, token, environment['conversation'], uuid4(), 'owned question',
+    request = await answers.admit(session, token, environment['conversation'], uuid4(), 'owned question',
                                   [environment['document']], environment['tab'], environment['proof'])
-    await accounts.mutate(connection, environment['super_admin']['token'], environment['user']['id'], changes)
+    await accounts.mutate(session, environment['super_admin']['token'], environment['user']['id'], changes)
     current = await (await connection.execute('SELECT * FROM requests WHERE id=%s', (request['id'],))).fetchone()
     assert current['state'] == 'accepted'
-    actor = await principal(connection, token)
+    async with session.begin():
+        actor = await principal(session, token)
     assert actor['context_epoch'] == 0
     binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request['id'],))).fetchone()
     async with GuardedSaver(rag_pool, binding).guard():
@@ -182,10 +183,10 @@ async def test_unchanged_or_increased_access_preserves_session_and_execution(env
 
 
 @pytest.mark.parametrize('mutation', ['logout', 'block', 'soft_delete', 'expiry'])
-async def test_origin_session_and_account_mutations_fence_shared_writes(environment, connection, rag_pool, mutation):
+async def test_origin_session_and_account_mutations_fence_shared_writes(session, environment, connection, rag_pool, mutation):
     # Existing source/tab projections are component-only; issuer browser proof is separate.
     token, owner = environment['user']['token'], environment['user']['id']
-    request = await answers.admit(connection, token, environment['conversation'], uuid4(), 'owned question',
+    request = await answers.admit(session, token, environment['conversation'], uuid4(), 'owned question',
                                   [environment['document']], environment['tab'], environment['proof'])
     assert request['origin_session'] == environment['user']['session_id']
     binding = await (await connection.execute('SELECT * FROM graph_bindings WHERE request_id=%s', (request['id'],))).fetchone()
@@ -198,13 +199,14 @@ async def test_origin_session_and_account_mutations_fence_shared_writes(environm
     second_token = 'independent-owned-session'
     await connection.execute("INSERT INTO sessions(token_hash,owner_id,expires_at) VALUES (%s,%s,now()+interval '1 hour')", (secret_hash(second_token), owner))
     if mutation == 'logout':
-        await accounts.logout(connection, token)
-        assert (await principal(connection, second_token))['id'] == owner
+        await accounts.logout(session, token)
+        async with session.begin():
+            assert (await principal(session, second_token))['id'] == owner
     elif mutation == 'expiry':
         await connection.execute("UPDATE sessions SET expires_at=now()-interval '1 second' WHERE id=%s", (request['origin_session'],))
     else:
         changes = {'disabled': True} if mutation == 'block' else {'active': False}
-        await accounts.mutate(connection, environment['admin']['token'], owner, changes)
+        await accounts.mutate(session, environment['admin']['token'], owner, changes)
     with pytest.raises(AccessError):
         async with saver.guard():
             raise AssertionError('invalid session reached saver')
@@ -221,12 +223,12 @@ async def test_origin_session_and_account_mutations_fence_shared_writes(environm
     assert await (await connection.execute('SELECT id FROM messages WHERE request_id=%s', (request['id'],))).fetchone()
     if mutation != 'expiry':
         with pytest.raises(AccessError):
-            await answers.admit(connection, token, environment['conversation'], uuid4(), 'late question', [environment['document']], environment['tab'], environment['proof'])
+            await answers.admit(session, token, environment['conversation'], uuid4(), 'late question', [environment['document']], environment['tab'], environment['proof'])
 
 
-async def test_expired_bootstrap_and_session_are_refused(account_client, connection):
+async def test_expired_bootstrap_and_session_are_refused(session, account_client, connection):
     client, mailbox = account_client
-    invitation = parse_qs(urlsplit(await accounts.bootstrap(connection, 'expired@owned.test')).fragment)['invite'][0]
+    invitation = parse_qs(urlsplit(await accounts.bootstrap(session, 'expired@owned.test')).fragment)['invite'][0]
     await connection.execute("UPDATE account_invitations SET expires_at=now()-interval '1 second'")
     assert client.post('/api/accounts/register', json=credentials('expired@owned.test') | {'invitation': invitation}).status_code == 400
     account, headers = signup(client, mailbox, 'expiry@owned.test')
@@ -235,7 +237,7 @@ async def test_expired_bootstrap_and_session_are_refused(account_client, connect
     assert client.post('/api/accounts/logout', headers=headers).status_code == 200
 
 
-def test_missing_or_failed_smtp_has_no_verification_bypass(account_client, monkeypatch):
+def test_missing_or_failed_smtp_has_no_verification_bypass(account_client, monkeypatch, environment):
     client, mailbox = account_client
     monkeypatch.delenv('RAG_SMTP_HOST')
     assert client.post('/api/accounts/register', json=credentials()).status_code == 503
@@ -244,3 +246,51 @@ def test_missing_or_failed_smtp_has_no_verification_bypass(account_client, monke
     result = client.post('/api/accounts/register', json=credentials())
     assert result.status_code == 503 and result.json() == {'error': 'mail_delivery_failed'}
     assert 'token' not in result.text
+
+    import psycopg
+    with psycopg.connect(environment['dsn']) as observer:
+        assert observer.execute('SELECT verified FROM accounts WHERE email=%s', (credentials()['email'],)).fetchone() == (False,)
+    mailbox.configure(monkeypatch)
+    account, headers = signup(client, mailbox, credentials()['email'])
+    assert client.get('/api/accounts/me', headers=headers).json()['account']['id'] == account['id']
+
+
+async def test_password_work_and_mail_delivery_happen_after_transaction_release(session, rag_pool, environment, monkeypatch):
+    import psycopg
+    monkeypatch.setenv('RAG_FRONTEND_ORIGIN', 'http://127.0.0.1:3000')
+    monkeypatch.setenv('RAG_SMTP_HOST', '127.0.0.1')
+    monkeypatch.setenv('RAG_SMTP_FROM', 'owned@owned.test')
+    monkeypatch.setenv('RAG_SMTP_SECURITY', 'plain')
+    original_hash, original_verify = accounts.hash_password, accounts.verify_password
+    observed, tokens = [], []
+
+    def released():
+        assert not session.in_transaction()
+        assert rag_pool.engine.pool.checkedout() == 0
+
+    def hash_password(password):
+        released()
+        observed.append('hash')
+        return original_hash(password)
+
+    def verify_password(password, encoded):
+        released()
+        observed.append('verify')
+        return original_verify(password, encoded)
+
+    def deliver(email, token, config, origin):
+        released()
+        with psycopg.connect(environment['dsn']) as observer:
+            assert observer.execute('SELECT verified FROM accounts WHERE email=%s', (email,)).fetchone() == (False,)
+            assert observer.execute('SELECT 1 FROM email_verifications WHERE token_hash=%s', (secret_hash(token),)).fetchone() == (1,)
+        tokens.append(token)
+
+    monkeypatch.setattr(accounts, 'hash_password', hash_password)
+    monkeypatch.setattr(accounts, 'verify_password', verify_password)
+    monkeypatch.setattr(accounts, 'deliver_verification', deliver)
+    body = credentials('transaction-boundary@owned.test')
+    first = await accounts.register(session, **body)
+    assert (await accounts.register(session, **body))['id'] == first['id']
+    await accounts.verify(session, tokens[-1])
+    assert (await accounts.login(session, **body))['account']['id'] == first['id']
+    assert observed == ['hash', 'verify', 'hash', 'verify']

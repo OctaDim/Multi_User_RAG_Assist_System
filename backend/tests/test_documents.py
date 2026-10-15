@@ -1,3 +1,5 @@
+import psycopg
+from psycopg.rows import dict_row
 """Real originals/publisher checks; fixture principals here are component-only."""
 import pytest
 from live_http import LiveClient as TestClient
@@ -21,7 +23,7 @@ def test_actual_original_upload_is_not_a_ready_source(environment, monkeypatch, 
         assert client.get('/api/documents/'+document['id'],headers=headers).status_code==409
 
 
-async def test_real_text_publisher_indexes_whole_original(environment, rag_pool, monkeypatch, tmp_path):
+async def test_real_text_publisher_indexes_whole_original(session, environment, rag_pool, monkeypatch, tmp_path):
     import os
     import hashlib
     from app.document_worker import DocumentWorker
@@ -43,9 +45,10 @@ async def test_real_text_publisher_indexes_whole_original(environment, rag_pool,
         assert read.json()['pages'][0]['text']==content.decode()
         assert client.get('/api/documents/'+document['id']+'/original',headers=headers).content==content
         assert read.json()['document']['original_sha256']==hashlib.sha256(content).hexdigest()
-        async with rag_pool.connection() as connection:
+        async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
             query=worker.embedder.encode(['The annual budget is 100 euros.'],query=True)[0]
-            chunks=await sources.retrieve(connection,environment['user']['id'],[document['id']],query)
+            async with session.begin():
+                chunks=await sources.retrieve(session,environment['user']['id'],[document['id']],query)
             assert len(chunks)==1 and chunks[0]['text']==content.decode()
 
 
@@ -140,13 +143,14 @@ async def test_database_failure_after_atomic_file_link_keeps_original_accounted(
     import hashlib
     monkeypatch.setenv('RAG_DATABASE_URL',environment['dsn'])
     monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path))
-    await connection.execute("""CREATE FUNCTION reject_queue() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN
-        IF NEW.state='queued' THEN RAISE EXCEPTION 'owned queue publication fault'; END IF; RETURN NEW; END $$;
-        CREATE TRIGGER owned_queue_failure BEFORE UPDATE ON document_files FOR EACH ROW EXECUTE FUNCTION reject_queue();""")
+
     content=b'A complete owned original.'
     headers={'Authorization':'Bearer '+environment['user']['token']}
     with TestClient(create_app()) as client:
         document=client.post('/api/documents/uploads',headers=headers,json={'files':[{'name':'fault.txt','size':len(content)}]}).json()['documents'][0]['id']
+        await connection.execute("""CREATE FUNCTION reject_queue() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN
+            IF NEW.state='queued' THEN RAISE EXCEPTION 'owned queue publication fault'; END IF; RETURN NEW; END $$;
+            CREATE TRIGGER owned_queue_failure BEFORE UPDATE ON document_files FOR EACH ROW EXECUTE FUNCTION reject_queue();""")
         assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==500
         row=await (await connection.execute('SELECT state,original_sha256 FROM document_files WHERE document_id=%s',(document,))).fetchone()
         assert row['state']=='failed' and row['original_sha256']==hashlib.sha256(content).hexdigest()
@@ -154,7 +158,7 @@ async def test_database_failure_after_atomic_file_link_keeps_original_accounted(
         assert client.get('/api/documents/'+document,headers=headers).status_code==409
 
 
-async def test_real_correction_switches_whole_index_and_preserves_original(environment, rag_pool, monkeypatch, tmp_path):
+async def test_real_correction_switches_whole_index_and_preserves_original(session, environment, rag_pool, monkeypatch, tmp_path):
     import os
     from app.document_worker import DocumentWorker
     from app.rag import E5Embedder
@@ -176,9 +180,10 @@ async def test_real_correction_switches_whole_index_and_preserves_original(envir
         assert after['pages'][0]['text']=='The annual budget is 10 euros.'
         assert after['document']['published_revision']!=before['document']['published_revision']
         assert client.get('/api/documents/'+document+'/original',headers=headers).content==content
-        async with rag_pool.connection() as connection:
+        async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
             vector=worker.embedder.encode(['The annual budget is 10 euros.'],query=True)[0]
-            chunks=await sources.retrieve(connection,environment['user']['id'],[document],vector)
+            async with session.begin():
+                chunks=await sources.retrieve(session,environment['user']['id'],[document],vector)
             assert len(chunks)==1 and '10 euros' in chunks[0]['text'] and '100 euros' not in chunks[0]['text']
         assert client.post('/api/documents/'+document+'/corrections',headers=headers,json=body).status_code==409
 
@@ -221,7 +226,7 @@ async def test_revocation_after_detection_cannot_start_recognition(environment, 
             worker.close()
 
 
-async def test_real_pdf_skip_publisher_and_manual_correction(environment, rag_pool, monkeypatch, tmp_path):
+async def test_real_pdf_skip_publisher_and_manual_correction(session, environment, rag_pool, monkeypatch, tmp_path):
     import os
     from pathlib import Path
     from app.document_worker import DocumentWorker
@@ -250,18 +255,20 @@ async def test_real_pdf_skip_publisher_and_manual_correction(environment, rag_po
             assert text.count(SKIP_TEXT)==2 and 'Dreams' not in text and 'Hughes' not in text
             assert 'Гадавы бюджэт складае 100 еўра.' in text and 'The annual budget is 100 euros.' in text
             assert client.get('/api/documents/'+document+'/original',headers=headers).content==pdf
-            async with rag_pool.connection() as connection:
+            async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
                 query=worker.embedder.encode(['The annual budget is 100 euros.'],query=True)[0]
-                found=await sources.retrieve(connection,environment['user']['id'],[document],query)
+                async with session.begin():
+                    found=await sources.retrieve(session,environment['user']['id'],[document],query)
                 assert found and all(row['kind']=='printed' and SKIP_TEXT not in row['text'] for row in found)
             body={'base_revision':before['document']['published_revision'],'pages':[{'page':1,'text':text.replace('100','10')}]}
             assert client.post('/api/documents/'+document+'/corrections',headers=headers,json=body).status_code==200
             assert await worker.process_one()
             after=client.get('/api/documents/'+document,headers=headers).json()
             assert after['pages'][0]['text'].count(SKIP_TEXT)==2 and '10 euros' in after['pages'][0]['text']
-            async with rag_pool.connection() as connection:
+            async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
                 query=worker.embedder.encode(['The annual budget is 10 euros.'],query=True)[0]
-                found=await sources.retrieve(connection,environment['user']['id'],[document],query)
+                async with session.begin():
+                    found=await sources.retrieve(session,environment['user']['id'],[document],query)
                 assert found and any('10 euros' in row['text'] for row in found)
                 assert all(SKIP_TEXT not in row['text'] for row in found)
             assert client.get('/api/documents/'+document+'/original',headers=headers).content==pdf
@@ -284,7 +291,7 @@ async def test_long_unicode_original_has_no_silent_embedding_tail_loss(environme
         assert client.put('/api/documents/'+document+'/original',headers=headers,content=content).status_code==200
         worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
         assert await worker.process_one()
-        async with rag_pool.connection() as connection:
+        async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
             chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
         assert ''.join(row['text'] for row in chunks)==text
         assert len(chunks)>1 and chunks[-1]['span_end']==len(text)
@@ -308,7 +315,7 @@ async def test_real_publisher_preserves_complete_short_paragraphs_and_exact_span
         worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
         try:
             assert await worker.process_one()
-            async with rag_pool.connection() as connection:
+            async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
                 chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
             assert ''.join(row['text'] for row in chunks)==text
             for paragraph in paragraphs:
@@ -334,7 +341,7 @@ async def test_short_unrelated_paragraphs_have_separate_searchable_spans(environ
         worker=DocumentWorker(rag_pool,E5Embedder(os.environ['RAG_E5_DIR']))
         try:
             assert await worker.process_one()
-            async with rag_pool.connection() as connection:
+            async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
                 chunks=await (await connection.execute('SELECT text,span_start,span_end FROM source_chunks c JOIN documents d ON d.published_revision=c.revision_id WHERE d.id=%s ORDER BY span_start',(document,))).fetchall()
             assert len(chunks)==len(paragraphs)
             assert ''.join(row['text'] for row in chunks)==text
@@ -428,6 +435,6 @@ async def test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file(
         assert await worker.process_one() and await worker.process_one()
         assert client.get('/api/documents/'+batch[0]['id'],headers=headers).status_code==409
         assert client.get('/api/documents/'+batch[1]['id'],headers=headers).json()['pages'][0]['text']==files[1][1].decode()
-        async with rag_pool.connection() as connection:
+        async with await psycopg.AsyncConnection.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:
             row=await (await connection.execute('SELECT ready,published_revision FROM documents WHERE id=%s',(batch[0]['id'],))).fetchone()
         assert not row['ready'] and row['published_revision'] is None

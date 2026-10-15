@@ -3,6 +3,9 @@ from datetime import datetime, timedelta, timezone
 import secrets
 from uuid import uuid4
 
+from sqlalchemy import and_, func, insert, or_, select, update
+
+from app.models import Account, Conversation, Event, Request, Tab
 from app import answers
 from app.auth import AccessError, lock_service, principal, secret_hash
 
@@ -16,14 +19,10 @@ def now():
 
 
 async def lock_tab(connection, actor, tab_id, proof, *, exclusive=False):
-    mode = 'UPDATE' if exclusive else 'SHARE'
-    tab = await (await connection.execute(
-        f'SELECT * FROM tabs WHERE id=%s AND owner_id=%s AND proof_hash=%s FOR {mode}',
-        (tab_id, actor['id'], secret_hash(proof)),
-    )).fetchone()
+    tab = (await connection.execute(select(Tab.__table__).where(Tab.id == tab_id, Tab.owner_id == actor["id"], Tab.proof_hash == secret_hash(proof)).with_for_update(read=not exclusive))).mappings().first()
     if not tab:
         raise AccessError('invalid_tab')
-    return tab
+    return dict(tab)
 
 
 def live(tab):
@@ -33,10 +32,7 @@ def live(tab):
 
 async def origin(connection, request_id):
     # Same order as admission/deadlines: documents, tab, conversation, request.
-    tab = await (await connection.execute(
-        'SELECT t.* FROM tabs t JOIN requests r ON r.origin_tab=t.id WHERE r.id=%s FOR SHARE OF t',
-        (request_id,),
-    )).fetchone()
+    tab = (await connection.execute(select(Tab.__table__).join(Request, Request.origin_tab == Tab.id).where(Request.id == request_id).with_for_update(read=True, of=Tab))).mappings().first()
     current = now()
     deadline = tab['deadline']
     if deadline is None and tab['ack_until'] is not None and current >= tab['ack_until']:
@@ -47,41 +43,29 @@ async def origin(connection, request_id):
 
 async def create_tab(connection, token):
     proof = secrets.token_urlsafe(32)
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
-        tab = await (await connection.execute(
-            'INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s) RETURNING id',
-            (uuid4(), actor['id'], secret_hash(proof)),
-        )).fetchone()
+        tab = (await connection.execute(insert(Tab.__table__).values(id=uuid4(), owner_id=actor["id"], proof_hash=secret_hash(proof)).returning(Tab.id))).mappings().first()
     return {**tab, 'proof': proof}
 
 
 async def settle(connection, tab, current):
     if tab['connected'] and tab['ack_until'] is not None and current >= tab['ack_until']:
-        tab = await (await connection.execute(
-            'UPDATE tabs SET connected=false,confirmed=false,deadline=coalesce(deadline,ack_until+%s) WHERE id=%s RETURNING *',
-            (timedelta(seconds=GRACE), tab['id']),
-        )).fetchone()
+        tab = (await connection.execute(update(Tab.__table__).where(Tab.id == tab["id"]).values(connected=False, confirmed=False, deadline=func.coalesce(Tab.deadline, Tab.ack_until + timedelta(seconds=GRACE))).returning(Tab.__table__))).mappings().first()
     if tab['deadline'] is not None and current >= tab['deadline']:
-        conversations = await (await connection.execute(
-            'SELECT DISTINCT conversation_id FROM requests WHERE origin_tab=%s AND state=ANY(%s) ORDER BY conversation_id',
-            (tab['id'], list(answers.UNFINISHED)),
-        )).fetchall()
+        conversations = (await connection.execute(select(Request.conversation_id).where(Request.origin_tab == tab["id"], Request.state.in_(answers.UNFINISHED)).distinct().order_by(Request.conversation_id))).mappings().all()
         for row in conversations:
-            await connection.execute('SELECT id FROM conversations WHERE id=%s FOR UPDATE', (row['conversation_id'],))
-        requests = await (await connection.execute(
-            'SELECT * FROM requests WHERE origin_tab=%s AND state=ANY(%s) ORDER BY id FOR UPDATE',
-            (tab['id'], list(answers.UNFINISHED)),
-        )).fetchall()
+            await connection.execute(select(Conversation.id).where(Conversation.id == row["conversation_id"]).with_for_update())
+        requests = (await connection.execute(select(Request.__table__).where(Request.origin_tab == tab["id"], Request.state.in_(answers.UNFINISHED)).order_by(Request.id).with_for_update())).mappings().all()
         for request in requests:
             await answers.transition(connection, request, 'interrupted', 'tab_timeout')
-    return tab
+    return dict(tab)
 
 
 async def connect(connection, token, tab_id, proof):
     challenge = secrets.token_urlsafe(32)
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
         tab = await lock_tab(connection, actor, tab_id, proof, exclusive=True)
@@ -92,16 +76,12 @@ async def connect(connection, token, tab_id, proof):
             deadline = None  # All old unfinished operations have already expired.
         elif deadline is None and tab['confirmed']:
             deadline = current + timedelta(seconds=GRACE)
-        result = await (await connection.execute(
-            '''UPDATE tabs SET connection_epoch=connection_epoch+1,connected=true,confirmed=false,
-               deadline=%s,ack_until=%s,challenge_hash=%s WHERE id=%s RETURNING id,connection_epoch''',
-            (deadline, current + timedelta(seconds=ACK_TIMEOUT), secret_hash(challenge), tab_id),
-        )).fetchone()
+        result = (await connection.execute(update(Tab.__table__).where(Tab.id == tab_id).values(connection_epoch=Tab.connection_epoch + 1, connected=True, confirmed=False, deadline=deadline, ack_until=current + timedelta(seconds=ACK_TIMEOUT), challenge_hash=secret_hash(challenge)).returning(Tab.id, Tab.connection_epoch))).mappings().first()
         return {**result, 'challenge': challenge}
 
 
 async def ack(connection, token, tab_id, proof, epoch, challenge):
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
         tab = await lock_tab(connection, actor, tab_id, proof, exclusive=True)
@@ -113,13 +93,12 @@ async def ack(connection, token, tab_id, proof, epoch, challenge):
             raise AccessError('tab_disconnected', 409)
         if tab['challenge_hash'] != secret_hash(challenge):
             raise AccessError('invalid_heartbeat', 409)
-        await connection.execute('UPDATE tabs SET confirmed=true,deadline=NULL,ack_until=%s,challenge_hash=NULL WHERE id=%s',
-                                 (current + timedelta(seconds=ACK_TIMEOUT), tab_id))
+        await connection.execute(update(Tab.__table__).where(Tab.id == tab_id).values(confirmed=True, deadline=None, ack_until=current + timedelta(seconds=ACK_TIMEOUT), challenge_hash=None))
 
 
 async def heartbeat(connection, token, tab_id, proof, epoch):
     challenge = secrets.token_urlsafe(32)
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
         tab = await lock_tab(connection, actor, tab_id, proof, exclusive=True)
@@ -130,12 +109,12 @@ async def heartbeat(connection, token, tab_id, proof, epoch):
             raise AccessError('tab_disconnected', 409)
         if tab['challenge_hash'] is not None:
             return None
-        await connection.execute('UPDATE tabs SET challenge_hash=%s WHERE id=%s', (secret_hash(challenge), tab_id))
+        await connection.execute(update(Tab.__table__).where(Tab.id == tab_id).values(challenge_hash=secret_hash(challenge)))
         return {'connection_epoch': epoch, 'challenge': challenge}
 
 
 async def disconnect(connection, token, tab_id, proof, epoch):
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
         tab = await lock_tab(connection, actor, tab_id, proof, exclusive=True)
@@ -144,33 +123,26 @@ async def disconnect(connection, token, tab_id, proof, epoch):
         current = now()
         # A delayed close callback cannot extend an already lost heartbeat lease.
         detected = min(current, tab['ack_until'])
-        await connection.execute(
-            'UPDATE tabs SET connected=false,confirmed=false,deadline=coalesce(deadline,%s) WHERE id=%s',
-            (detected + timedelta(seconds=GRACE), tab_id),
-        )
+        await connection.execute(update(Tab.__table__).where(Tab.id == tab_id).values(connected=False, confirmed=False, deadline=func.coalesce(Tab.deadline, detected + timedelta(seconds=GRACE))))
 
 
 async def expire_due(connection):
     current = now()
-    due = await (await connection.execute(
-        '''SELECT id,owner_id FROM tabs WHERE
-           (deadline<=%s AND EXISTS (SELECT 1 FROM requests WHERE origin_tab=tabs.id AND state=ANY(%s)))
-           OR (connected AND ack_until<=%s) ORDER BY owner_id,id''',
-        (current, list(answers.UNFINISHED), current),
-    )).fetchall()
+    async with connection.begin():
+        due = (await connection.execute(select(Tab.id, Tab.owner_id).where(or_(and_(Tab.deadline <= current, select(Request.id).where(Request.origin_tab == Tab.id, Request.state.in_(answers.UNFINISHED)).exists()), and_(Tab.connected, Tab.ack_until <= current))).order_by(Tab.owner_id, Tab.id))).mappings().all()
     # One tab per transaction avoids holding A's conversation while waiting on B's
     # tab lock (an admission on B may already be waiting on that conversation).
     for row in due:
-        async with connection.transaction():
+        async with connection.begin():
             await lock_service(connection)
-            await connection.execute('SELECT id FROM accounts WHERE id=%s FOR SHARE', (row['owner_id'],))
-            tab = await (await connection.execute('SELECT * FROM tabs WHERE id=%s FOR UPDATE', (row['id'],))).fetchone()
+            await connection.execute(select(Account.id).where(Account.id == row["owner_id"]).with_for_update(read=True))
+            tab = (await connection.execute(select(Tab.__table__).where(Tab.id == row["id"]).with_for_update())).mappings().first()
             await settle(connection, tab, current)
 
 
 async def read(connection, token, tab_id, proof, epoch, cursor=None):
     """Authorized committed read boundary; U7 must also fence the actual transport handoff."""
-    async with connection.transaction():
+    async with connection.begin():
         # Event identity is allocated before commit. Wait for every prior writer before
         # capturing the watermark, including concurrent commits in other conversations.
         await lock_service(connection, exclusive=True)
@@ -181,18 +153,13 @@ async def read(connection, token, tab_id, proof, epoch, cursor=None):
         if (not tab['connected'] or now() >= tab['ack_until']
             or (tab['deadline'] is not None and now() >= tab['deadline'])):
             raise AccessError('tab_disconnected', 409)
-        watermark = (await (await connection.execute(
-            '''SELECT coalesce(max(e.id),0) AS id FROM events e JOIN conversations c ON c.id=e.conversation_id
-               WHERE c.owner_id=%s''', (actor['id'],),
-        )).fetchone())['id']
+        watermark = ((await connection.execute(select(func.coalesce(func.max(Event.id), 0).label("id")).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"]))).mappings().first())['id']
         if cursor is None or cursor < 0 or cursor > watermark:
-            conversations = await (await connection.execute('SELECT id FROM conversations WHERE owner_id=%s ORDER BY id', (actor['id'],))).fetchall()
+            conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"]).order_by(Conversation.id))).mappings().all()
             histories = await answers.histories(connection, [value['id'] for value in conversations])
             return {'id': watermark, 'kind': 'snapshot', 'payload': {'conversations': histories}}
-        return await (await connection.execute(
-            '''SELECT e.* FROM events e JOIN conversations c ON c.id=e.conversation_id
-               WHERE c.owner_id=%s AND e.id>%s ORDER BY e.id LIMIT 1''', (actor['id'], cursor),
-        )).fetchone()
+        value = (await connection.execute(select(Event.__table__).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"], Event.id > cursor).order_by(Event.id).limit(1))).mappings().first()
+        return dict(value) if value else None
 
 
 async def delivery_tab(connection, token, tab_id, proof, epoch):
@@ -203,7 +170,7 @@ async def delivery_tab(connection, token, tab_id, proof, epoch):
     if (not tab['connected'] or now() >= tab['ack_until']
         or (tab['deadline'] is not None and now() >= tab['deadline'])):
         raise AccessError('tab_disconnected', 409)
-    return tab
+    return dict(tab)
 
 
 async def delivery_event(connection, actor, prepared):
@@ -211,15 +178,13 @@ async def delivery_event(connection, actor, prepared):
     if prepared['kind'] == 'heartbeat':
         return prepared
     if prepared['kind'] == 'snapshot':
-        conversations = await (await connection.execute('SELECT id FROM conversations WHERE owner_id=%s ORDER BY id', (actor['id'],))).fetchall()
-        watermark = (await (await connection.execute('''SELECT coalesce(max(e.id),0) AS id FROM events e
-            JOIN conversations c ON c.id=e.conversation_id WHERE c.owner_id=%s''',(actor['id'],))).fetchone())['id']
+        conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"]).order_by(Conversation.id))).mappings().all()
+        watermark = ((await connection.execute(select(func.coalesce(func.max(Event.id), 0).label("id")).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"]))).mappings().first())['id']
         return {'id':watermark, 'kind':'snapshot', 'payload':{'conversations':await answers.histories(connection,[row['id'] for row in conversations])}}
-    value = await (await connection.execute('''SELECT e.* FROM events e JOIN conversations c ON c.id=e.conversation_id
-        WHERE e.id=%s AND c.owner_id=%s''',(prepared['id'],actor['id']))).fetchone()
+    value = (await connection.execute(select(Event.__table__).join(Conversation, Conversation.id == Event.conversation_id).where(Event.id == prepared["id"], Conversation.owner_id == actor["id"]))).mappings().first()
     if not value:
         raise AccessError('not_found',404)
-    request = await (await connection.execute('SELECT * FROM requests WHERE id=%s FOR SHARE',(value['request_id'],))).fetchone()
+    request = (await connection.execute(select(Request.__table__).where(Request.id == value["request_id"]).with_for_update(read=True))).mappings().first()
     from app.sources import source_flags
     flags = await source_flags(connection, request['id'])
     # Old output/fragments are no longer grants to publish after a stop/delete.
@@ -231,8 +196,8 @@ async def delivery_event(connection, actor, prepared):
         'excluded':bool(flags) or request['state'] in ('interrupted','failed')}}
 
 
-async def deadlines(pool):
+async def deadlines(database):
     while True:
-        async with pool.connection() as connection:
+        async with database.session() as connection:
             await expire_due(connection)
         await asyncio.sleep(0.25)

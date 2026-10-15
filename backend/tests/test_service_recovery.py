@@ -22,6 +22,33 @@ async def wait_for(predicate, timeout=30):
     raise AssertionError('Expected process state was not reached')
 
 
+async def test_supervisor_bounds_startup_when_postgres_accepts_without_responding():
+    from socketserver import BaseRequestHandler, ThreadingTCPServer
+    from threading import Event, Thread
+    from sqlalchemy.exc import OperationalError
+    from app.generation import Supervisor
+
+    release = Event()
+
+    class SilentPostgres(BaseRequestHandler):
+        def handle(self):
+            release.wait(15)
+
+    with ThreadingTCPServer(('127.0.0.1', 0), SilentPostgres) as server:
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        supervisor = Supervisor(
+            f'host=127.0.0.1 port={server.server_address[1]} user=timeout_test dbname=timeout_test sslmode=disable')
+        try:
+            with pytest.raises(OperationalError, match='timeout'):
+                await asyncio.wait_for(supervisor.run(), 8)
+            assert supervisor.child is None
+        finally:
+            release.set()
+            server.shutdown()
+            thread.join(2)
+
+
 @pytest.mark.parametrize('mode', ['SHARE', 'UPDATE'])
 async def test_application_service_lock_does_not_cancel_healthy_supervisor(environment, connection, tmp_path, mode):
     path = tmp_path / 'healthy-supervisor.log'
@@ -56,7 +83,7 @@ async def test_application_service_lock_does_not_cancel_healthy_supervisor(envir
                 assert not Path(f'/proc/{native_pid}').exists()
 
 
-async def test_real_supervisor_reaps_native_process_before_replacement(environment, connection, tmp_path):
+async def test_real_supervisor_reaps_native_process_before_replacement(session, environment, connection, tmp_path):
     env = dict(os.environ, RAG_DATABASE_URL=environment['dsn'])
     processes = []
     logs = []
@@ -116,7 +143,7 @@ generation.main()
         assert await asyncio.to_thread(competing.wait, 15) != 0
         assert 'Generation supervisor already owns this service' in competing_log.read_text()
         assert 'native_spawn' not in competing_log.read_text()
-        request = await submit(connection, environment)
+        request = await submit(session, environment)
 
         async def prefix():
             row = await (await connection.execute('SELECT * FROM requests WHERE id=%s', (request['id'],))).fetchone()
@@ -195,14 +222,14 @@ async def test_live_predecessor_record_blocks_unconfirmed_replacement(environmen
         predecessor.terminate();await asyncio.to_thread(predecessor.wait,10)
 
 
-async def test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed(environment,connection,tmp_path):
+async def test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed(session, environment,connection,tmp_path):
     from uuid import uuid4
     from app import answers
     requests=[]
     for state in ('accepted','searching','queued','generating','completed'):
         room=uuid4()
         await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)',(room,environment['user']['id']))
-        request=await answers.admit(connection,environment['user']['token'],room,uuid4(),'Budget?',
+        request=await answers.admit(session,environment['user']['token'],room,uuid4(),'Budget?',
             [environment['document']],environment['tab'],environment['proof'])
         await connection.execute('UPDATE requests SET state=%s WHERE id=%s',(state,request['id']))
         if state=='completed':

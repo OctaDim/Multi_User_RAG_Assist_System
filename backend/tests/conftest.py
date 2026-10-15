@@ -8,7 +8,7 @@ from psycopg.conninfo import make_conninfo
 from psycopg.rows import dict_row
 import pytest
 
-from app.db import migrate
+from app.db import Database, migrate
 from app import events
 
 
@@ -67,8 +67,13 @@ async def environment(postgres):
         await connection.execute("INSERT INTO tabs(id,owner_id,proof_hash) VALUES (%s,%s,%s)", (data["tab"], owner, hashlib.sha256(data["proof"].encode()).hexdigest()))
         # Component-only presence projection via the same connect/challenge/ACK
         # operations as SSE. This is not the G3 issuer/browser acceptance proof.
-        tab = await events.connect(connection, data['user']['token'], data['tab'], data['proof'])
-        await events.ack(connection, data['user']['token'], data['tab'], data['proof'], tab['connection_epoch'], tab['challenge'])
+        database = Database(dsn)
+        try:
+            async with database.session() as session:
+                tab = await events.connect(session, data['user']['token'], data['tab'], data['proof'])
+                await events.ack(session, data['user']['token'], data['tab'], data['proof'], tab['connection_epoch'], tab['challenge'])
+        finally:
+            await database.dispose()
         await connection.execute("UPDATE service_state SET epoch=1 WHERE id=1")
         await connection.execute("UPDATE coordinator_lease SET healthy_until=now()+interval '1 hour',epoch=1 WHERE id=1")
     try:
@@ -86,10 +91,14 @@ async def connection(environment):
 
 @pytest.fixture
 async def rag_pool(environment):
-    from psycopg_pool import AsyncConnectionPool
+    database = Database(environment['dsn'])
+    try:
+        yield database
+    finally:
+        await database.dispose()
 
-    async with AsyncConnectionPool(environment['dsn'], open=False, kwargs={
-        'autocommit': True, 'row_factory': dict_row, 'prepare_threshold': 0,
-    }) as pool:
-        await pool.wait()
-        yield pool
+
+@pytest.fixture
+async def session(rag_pool):
+    async with rag_pool.session() as session:
+        yield session

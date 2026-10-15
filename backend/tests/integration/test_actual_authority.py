@@ -52,7 +52,11 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
         for key in ['disabled','active']:
             form=admin.locator(f'form[data-account="{email}"]')
             form.locator(f'[name={key}]').set_checked(key=='disabled')
-            form.get_by_role('button',name='Сохранить права',exact=True).click()
+            previous_form=form.element_handle()
+            with admin.expect_response(lambda response: response.request.method=='PATCH' and '/api/accounts/' in response.url) as saved:
+                form.get_by_role('button',name='Сохранить права',exact=True).click()
+            assert saved.value.status==200 and saved.value.json()[key]==(key=='disabled')
+            admin.wait_for_function('form => !form.isConnected',arg=previous_form)
             expect(admin.locator('#status')).to_contain_text('Права сохранены')
             denied=protected(admin,api,paths,identity['credential'])
             assert all(row['status']==401 for row in denied),denied
@@ -61,7 +65,11 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
             owner.reload();expect(owner.locator('#authentication')).to_be_visible()
             form=admin.locator(f'form[data-account="{email}"]')
             form.locator(f'[name={key}]').set_checked(key=='active')
-            form.get_by_role('button',name='Сохранить права',exact=True).click()
+            previous_form=form.element_handle()
+            with admin.expect_response(lambda response: response.request.method=='PATCH' and '/api/accounts/' in response.url) as saved:
+                form.get_by_role('button',name='Сохранить права',exact=True).click()
+            assert saved.value.status==200 and saved.value.json()[key]==(key=='active')
+            admin.wait_for_function('form => !form.isConnected',arg=previous_form)
             expect(admin.locator('#status')).to_contain_text('Права сохранены')
             login(owner,email);identity['credential']=owner.evaluate("sessionStorage.getItem('rag:credential')")
         print(json.dumps({'proof':'actual_issuer_r17_matrix','anonymous':anonymous,'foreign':denials,

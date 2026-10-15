@@ -9,15 +9,17 @@ from uuid import UUID
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from uvicorn.protocols.http.h11_impl import H11Protocol
+from sqlalchemy import select
 
 from app.auth import AccessError, lock_service, principal
+from app.models import Account, Request
 
 
 def json_bytes(value):
     return json.dumps(jsonable_encoder(value), ensure_ascii=False, separators=(',', ':'), allow_nan=False).encode()
 
 
-async def view(connection, scope, token, actor, value=None):
+async def view(session, scope, token, actor, value=None):
     """Authorize the response's resource and rebuild current read projections."""
     from app import accounts, answers, documents, events, settings
     endpoint = scope.get('endpoint')
@@ -26,65 +28,70 @@ async def view(connection, scope, token, actor, value=None):
               for key, value in scope.get('path_params', {}).items()}
     if module == 'app.api.accounts':
         if name == 'me':
-            return await accounts.me(connection, token)
+            return await accounts.me_view(session, actor)
         if name == 'account_list':
-            return await accounts.account_list(connection, token)
+            return await accounts.account_list_view(session, actor)
         if name == 'login':
             return {'token': token, 'account': accounts.public(actor)}
         if name == 'mutate':
-            target = await (await connection.execute('SELECT * FROM accounts WHERE id=%s FOR SHARE', (params['target_id'],))).fetchone()
+            target = (await session.execute(
+                select(Account.__table__).where(Account.id == params['target_id']).with_for_update(read=True)
+            )).mappings().first()
             if not target or (target['id'] != actor['id'] and actor['role'] != 'super_admin'
                               and not (actor['role'] == 'admin' and target['role'] == 'user')):
                 raise AccessError('forbidden')
             return accounts.public(target)
     elif module == 'app.api.settings':
-        await settings.require_super_admin(connection, token)
-        return await settings.current(connection)
+        await settings.require_super_admin(session, token)
+        return await settings.current(session)
     elif module == 'app.api.documents':
         if name in ('listing', 'admin_listing'):
-            return await documents.listing(connection, token, params.get('owner_id'))
+            return await documents.listing_view(session, actor, params.get('owner_id'))
         if name in ('read_policy', 'update_policy'):
             if name == 'update_policy' and actor['role'] not in ('admin', 'super_admin'):
                 raise AccessError('forbidden')
-            return await documents.read_policy(connection, token, params['owner_id'])
+            return await documents.read_policy_view(session, actor, params['owner_id'])
         if name == 'read':
-            return await documents.read(connection, token, params['document_id'])
+            return await documents.read_view(session, actor, params['document_id'])
         if name in ('original', 'original_page'):
-            await documents.read_original(connection, token, params['document_id'])
+            await documents.read_original_view(session, actor, params['document_id'])
         elif name in ('upload', 'choose', 'correct'):
-            current = await documents.owned(connection, actor, params['document_id'], write=True)
+            current = await documents.owned(session, actor, params['document_id'], write=True)
             if value is not None:
                 # Preserve command-specific ACK fields while refreshing stored fields.
                 return {**value, **{key: current[key] for key in value.keys() & current.keys()}}
         elif name == 'admit' and value is not None:
             for document in value['documents']:
-                current = await documents.owned(connection, actor, document['id'], write=True)
+                current = await documents.owned(session, actor, document['id'], write=True)
                 document.update({key: current[key] for key in document.keys() & current.keys()})
     elif module == 'app.api.answers':
         if name == 'snapshot':
-            return await answers.snapshot(connection, token, params['conversation_id'])
+            return await answers.snapshot_view(session, actor, params['conversation_id'])
         if name in ('admit', 'stop') and value is not None:
-            current = await (await connection.execute('SELECT * FROM requests WHERE id=%s AND owner_id=%s FOR SHARE', (value['id'], actor['id']))).fetchone()
+            current = (await session.execute(
+                select(Request.__table__).where(Request.id == value['id'], Request.owner_id == actor['id'])
+                .with_for_update(read=True)
+            )).mappings().first()
             if not current:
                 raise AccessError('not_found', 404)
-            await answers.conversation(connection, actor, current['conversation_id'], read_only=True)
-            return await answers.project(connection, current)
+            await answers.conversation(session, actor, current['conversation_id'], read_only=True)
+            return await answers.project(session, dict(current))
         if name == 'create' and value is not None:
-            await answers.conversation(connection, actor, value['id'], read_only=True)
+            await answers.conversation(session, actor, value['id'], read_only=True)
     elif module == 'app.api.tabs':
         if name == 'stream':
             headers = dict(scope['headers'])
-            tab = await events.delivery_tab(connection, token, params['tab_id'], headers[b'x-tab-proof'].decode('latin1'), scope['state']['delivery_epoch'])
+            tab = await events.delivery_tab(session, token, params['tab_id'], headers[b'x-tab-proof'].decode('latin1'), scope['state']['delivery_epoch'])
             scope['state']['delivery_until'] = min(tab['ack_until'], tab['deadline'] or tab['ack_until'])
         elif name == 'create' and value is not None:
-            await events.lock_tab(connection, actor, value['id'], value['proof'])
+            await events.lock_tab(session, actor, value['id'], value['proof'])
         elif name == 'ack':
             headers = dict(scope['headers'])
-            await events.delivery_tab(connection, token, params['tab_id'], headers[b'x-tab-proof'].decode('latin1'), int(headers[b'x-connection-epoch']))
+            await events.delivery_tab(session, token, params['tab_id'], headers[b'x-tab-proof'].decode('latin1'), int(headers[b'x-connection-epoch']))
     return value
 
 
-async def serialize(connection, grant, message):
+async def serialize(session, grant, message):
     scope, token, media = grant
     body = message.get('body', b'')
     value = json.loads(body) if body and media == 'application/json' else None
@@ -92,8 +99,8 @@ async def serialize(connection, grant, message):
         if value is None:
             return message  # Headers carry no login credential.
         token = value['token']
-    actor = await principal(connection, token)
-    value = await view(connection, scope, token, actor, value)
+    actor = await principal(session, token)
+    value = await view(session, scope, token, actor, value)
     message = {**message, 'rag.expires_at':actor['session_expires_at']}
     if body and media == 'application/json':
         return {**message, 'body': json_bytes(value)}
@@ -101,7 +108,7 @@ async def serialize(connection, grant, message):
         from app import events
         from app.api.tabs import encode
         prepared = json.loads(body.decode().split('data: ', 1)[1])
-        current = await events.delivery_event(connection, actor, prepared)
+        current = await events.delivery_event(session, actor, prepared)
         return {**message, 'body': encode(current).encode(), 'rag.cursor':current.get('id')}
     return message
 
@@ -122,14 +129,14 @@ class GuardedH11Protocol(H11Protocol):
                 await original(message)
                 return
             scope = grant[0]
-            pool = scope['app'].state.pool
+            database = scope['app'].state.database
             while not cycle.disconnected:
                 if cycle.flow.write_paused:
                     await cycle.flow.drain()
                 try:
-                    async with pool.connection() as connection, connection.transaction():
-                        await lock_service(connection, exclusive=True)
-                        current = await serialize(connection, grant, message)
+                    async with database.session() as session, session.begin():
+                        await lock_service(session, exclusive=True)
+                        current = await serialize(session, grant, message)
                         if cycle.flow.write_paused:
                             continue
                         from app.events import now

@@ -4,16 +4,29 @@ from pathlib import Path
 import tomllib
 from uuid import uuid4
 
-from psycopg.types.json import Jsonb
+from sqlalchemy import case, func, insert, null, or_, select, update
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.auth import AccessError, lock_service, principal
 from app.resources import resource_path
+from app.models import Account, Document, DocumentFile, DocumentPageText, DocumentPolicy, DocumentPolicyAudit
 
 
 LIMIT_KEYS = ('file_bytes', 'pdf_pages', 'batch_files', 'documents', 'original_bytes')
 PERMISSION_KEYS = ('pdf', 'docx', 'txt', 'md', 'handwriting')
-PUBLIC_SQL = '''d.id,d.owner_id,d.ready,d.deleted,f.name,f.format,f.state,f.error,
-                f.failure_page,f.declared_bytes,f.original_sha256,f.mode,d.published_revision'''
+
+
+def public_documents():
+    return select(
+        Document.id, Document.owner_id, Document.ready, Document.deleted, DocumentFile.name,
+        DocumentFile.format, DocumentFile.state, DocumentFile.error, DocumentFile.failure_page,
+        DocumentFile.declared_bytes, DocumentFile.original_sha256, DocumentFile.mode, Document.published_revision,
+    ).join(DocumentFile, DocumentFile.document_id == Document.id)
+
+
+def page_texts(revision_id):
+    return select(DocumentPageText.page, DocumentPageText.text, DocumentPageText.regions).where(
+        DocumentPageText.revision_id == revision_id).order_by(DocumentPageText.page)
 
 
 def defaults():
@@ -31,18 +44,18 @@ def validate_policy(value):
         raise AccessError('invalid_document_policy', 422)
 
 
-async def initialize_policy(connection, owner_id):
+async def initialize_policy(session, owner_id):
     config = defaults()
-    await connection.execute('INSERT INTO document_policies(owner_id,limits,permissions) VALUES (%s,%s,%s) ON CONFLICT DO NOTHING',
-                             (owner_id, Jsonb(config['limits']), Jsonb(config['permissions'])))
+    await session.execute(pg_insert(DocumentPolicy).values(
+        owner_id=owner_id, limits=config['limits'], permissions=config['permissions']).on_conflict_do_nothing())
 
 
-async def policy(connection, owner_id, *, exclusive=False):
-    if not await (await connection.execute('SELECT id FROM accounts WHERE id=%s', (owner_id,))).fetchone():
+async def policy(session, owner_id, *, exclusive=False):
+    if not (await session.execute(select(Account.id).where(Account.id == owner_id))).first():
         raise AccessError('not_found', 404)
-    await initialize_policy(connection, owner_id)
-    lock = 'UPDATE' if exclusive else 'SHARE'
-    return await (await connection.execute(f'SELECT * FROM document_policies WHERE owner_id=%s FOR {lock}', (owner_id,))).fetchone()
+    await initialize_policy(session, owner_id)
+    return dict((await session.execute(select(DocumentPolicy.__table__).where(DocumentPolicy.owner_id == owner_id)
+                .with_for_update(read=not exclusive))).mappings().one())
 
 
 def storage():
@@ -62,25 +75,22 @@ def original_path(document_id):
     return storage()/f'{document_id}.original'
 
 
-async def owned(connection, actor, document_id, *, write=False):
-    lock = 'UPDATE' if write else 'SHARE'
-    row = await (await connection.execute(
-        f'''SELECT {PUBLIC_SQL} FROM documents d JOIN document_files f ON f.document_id=d.id
-            WHERE d.id=%s FOR {lock} OF d,f''', (document_id,),
-    )).fetchone()
+async def owned(session, actor, document_id, *, write=False):
+    row = (await session.execute(public_documents().where(Document.id == document_id)
+           .with_for_update(read=not write, of=[Document, DocumentFile]))).mappings().first()
     if not row or row['deleted'] or (row['owner_id'] != actor['id'] and (write or actor['role'] != 'super_admin')):
         raise AccessError('not_found', 404)
-    return row
+    return dict(row)
 
 
-async def admit_uploads(connection, token, files):
+async def admit_uploads(session, token, files):
     if not files:
         raise AccessError('empty_upload', 422)
     storage()
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        config = await policy(connection, actor['id'], exclusive=True)
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        config = await policy(session, actor['id'], exclusive=True)
         limits, permissions = config['limits'], config['permissions']
         if len(files) > limits['batch_files']:
             raise AccessError('batch_limit', 413)
@@ -97,43 +107,42 @@ async def admit_uploads(connection, token, files):
             if size > limits['file_bytes']:
                 raise AccessError('file_size_limit', 413)
             normalized.append((name, extension, size))
-        usage = await (await connection.execute(
-            '''SELECT count(*) AS documents,coalesce(sum(f.declared_bytes),0) AS bytes
-               FROM document_files f JOIN documents d ON d.id=f.document_id WHERE d.owner_id=%s
-               AND NOT d.deleted AND (f.state IN ('receiving','queued','processing','awaiting_choice','ready')
-                                     OR f.original_sha256 IS NOT NULL)''', (actor['id'],),
-        )).fetchone()
+        usage = (await session.execute(
+            select(func.count().label('documents'), func.coalesce(func.sum(DocumentFile.declared_bytes), 0).label('bytes'))
+            .select_from(DocumentFile).join(Document, Document.id == DocumentFile.document_id)
+            .where(Document.owner_id == actor['id'], ~Document.deleted,
+                   or_(DocumentFile.state.in_(('receiving', 'queued', 'processing', 'awaiting_choice', 'ready')),
+                       DocumentFile.original_sha256.is_not(None)))
+        )).mappings().one()
         if usage['documents'] + len(files) > limits['documents'] or usage['bytes'] + sum(f[2] for f in normalized) > limits['original_bytes']:
             raise AccessError('document_storage_limit', 413)
         batch_id, result = uuid4(), []
         for name, extension, size in normalized:
             document_id = uuid4()
-            await connection.execute('INSERT INTO documents(id,owner_id) VALUES (%s,%s)', (document_id, actor['id']))
-            await connection.execute(
-                '''INSERT INTO document_files(document_id,batch_id,name,format,declared_bytes,state,admitted_limits,admitted_handwriting_epoch)
-                   VALUES (%s,%s,%s,%s,%s,'receiving',%s,%s)''', (document_id, batch_id, name, extension, size, Jsonb(limits),config['handwriting_epoch']),
-            )
+            await session.execute(insert(Document).values(id=document_id, owner_id=actor['id']))
+            await session.execute(insert(DocumentFile).values(
+                document_id=document_id, batch_id=batch_id, name=name, format=extension,
+                declared_bytes=size, state='receiving', admitted_limits=limits,
+                admitted_handwriting_epoch=config['handwriting_epoch']))
             result.append({'id': document_id, 'name': name, 'state': 'receiving', 'ready': False})
         return {'batch_id': batch_id, 'documents': result}
 
 
-async def fail_upload(connection, document_id, reason, original_digest=None):
-    async with connection.transaction():
-        await lock_service(connection)
-        await connection.execute(
-            '''UPDATE document_files SET state=CASE WHEN state='receiving' THEN 'failed' ELSE state END,
-               error=CASE WHEN state='receiving' THEN %s ELSE error END,
-               original_sha256=coalesce(original_sha256,%s) WHERE document_id=%s''',
-            (reason, original_digest, document_id),
-        )
+async def fail_upload(session, document_id, reason, original_digest=None):
+    async with session.begin():
+        await lock_service(session)
+        await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id).values(
+            state=case((DocumentFile.state == 'receiving', 'failed'), else_=DocumentFile.state),
+            error=case((DocumentFile.state == 'receiving', reason), else_=DocumentFile.error),
+            original_sha256=func.coalesce(DocumentFile.original_sha256, original_digest)))
 
 
-async def upload(pool, token, document_id, stream):
+async def upload(database, token, document_id, stream):
     temporary = storage()/f'{document_id}.upload'
-    async with pool.connection() as connection, connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        row = await owned(connection, actor, document_id, write=True)
+    async with database.session() as session, session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        row = await owned(session, actor, document_id, write=True)
         if row['state'] != 'receiving':
             raise AccessError('upload_already_received', 409)
     try:
@@ -147,11 +156,11 @@ async def upload(pool, token, document_id, stream):
                 total += len(chunk)
                 if total > row['declared_bytes']:
                     raise AccessError('upload_size_mismatch', 413)
-                async with pool.connection() as connection, connection.transaction():
-                    await lock_service(connection)
-                    actor = await principal(connection, token)
-                    config = await policy(connection, actor['id'])
-                    current = await owned(connection, actor, document_id, write=True)
+                async with database.session() as session, session.begin():
+                    await lock_service(session)
+                    actor = await principal(session, token)
+                    config = await policy(session, actor['id'])
+                    current = await owned(session, actor, document_id, write=True)
                     if current['state'] != 'receiving' or not config['permissions'][row['format']]:
                         raise AccessError('upload_cancelled', 409)
                     output.write(chunk)
@@ -160,11 +169,11 @@ async def upload(pool, token, document_id, stream):
             os.fsync(output.fileno())
         if total != row['declared_bytes']:
             raise AccessError('upload_size_mismatch', 422)
-        async with pool.connection() as connection, connection.transaction():
-            await lock_service(connection)
-            actor = await principal(connection, token)
-            config = await policy(connection, actor['id'])
-            current = await owned(connection, actor, document_id, write=True)
+        async with database.session() as session, session.begin():
+            await lock_service(session)
+            actor = await principal(session, token)
+            config = await policy(session, actor['id'])
+            current = await owned(session, actor, document_id, write=True)
             if current['state'] != 'receiving' or not config['permissions'][row['format']]:
                 raise AccessError('upload_cancelled', 409)
             state = 'awaiting_choice' if row['format'] == 'pdf' and not config['permissions']['handwriting'] else 'queued'
@@ -172,103 +181,120 @@ async def upload(pool, token, document_id, stream):
             os.link(temporary, original_path(document_id))
             linked = True
             temporary.unlink()
-            await connection.execute('UPDATE document_files SET state=%s,original_sha256=%s WHERE document_id=%s', (state, digest.hexdigest(), document_id))
+            await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id)
+                                  .values(state=state, original_sha256=digest.hexdigest()))
             return dict(current, state=state, original_sha256=digest.hexdigest())
     except BaseException as error:
         temporary.unlink(missing_ok=True)
-        async with pool.connection() as connection:
+        async with database.session() as session:
             # A missing COMMIT ACK must not delete a potentially committed original.
-            await fail_upload(connection, document_id, error.code if isinstance(error, AccessError) else 'upload_failed',
+            await fail_upload(session, document_id, error.code if isinstance(error, AccessError) else 'upload_failed',
                               digest.hexdigest() if linked else None)
         raise
 
 
-async def listing(connection, token, owner_id=None):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        owner_id = owner_id or actor['id']
-        if owner_id != actor['id'] and actor['role'] != 'super_admin':
-            raise AccessError('not_found', 404)
-        rows = await (await connection.execute(
-            f'''SELECT {PUBLIC_SQL} FROM documents d JOIN document_files f ON f.document_id=d.id
-                WHERE d.owner_id=%s AND NOT d.deleted ORDER BY f.created_at,d.id''', (owner_id,),
-        )).fetchall()
-        return {'documents': rows, 'readonly': owner_id != actor['id']}
+async def listing(session, token, owner_id=None):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await listing_view(session, actor, owner_id)
 
 
-async def read(connection, token, document_id):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        row = await owned(connection, actor, document_id)
-        if not row['ready']:
-            raise AccessError('document_not_ready', 409)
-        pages = await (await connection.execute('SELECT page,text,regions FROM document_page_texts WHERE revision_id=%s ORDER BY page', (row['published_revision'],))).fetchall()
-        return {'document': row, 'pages': pages}
+async def listing_view(session, actor, owner_id=None):
+    owner_id = owner_id or actor['id']
+    if owner_id != actor['id'] and actor['role'] != 'super_admin':
+        raise AccessError('not_found', 404)
+    rows = await session.execute(public_documents().where(Document.owner_id == owner_id, ~Document.deleted)
+                                 .order_by(DocumentFile.created_at, Document.id))
+    return {'documents': [dict(row) for row in rows.mappings()], 'readonly': owner_id != actor['id']}
 
 
-async def read_original(connection, token, document_id):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        row = await owned(connection, actor, document_id)
-        if not row['original_sha256']:
-            raise AccessError('original_not_received', 409)
-        return row
+async def read(session, token, document_id):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await read_view(session, actor, document_id)
 
 
-async def read_policy(connection, token, owner_id):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        if owner_id != actor['id'] and actor['role'] not in ('admin', 'super_admin'):
-            raise AccessError('forbidden')
-        return await policy(connection, owner_id)
+async def read_view(session, actor, document_id):
+    row = await owned(session, actor, document_id)
+    if not row['ready']:
+        raise AccessError('document_not_ready', 409)
+    pages = (await session.execute(page_texts(row['published_revision']))).mappings()
+    return {'document': row, 'pages': [dict(page) for page in pages]}
 
 
-async def update_policy(connection, token, owner_id, value):
+async def read_original(session, token, document_id):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await read_original_view(session, actor, document_id)
+
+
+async def read_original_view(session, actor, document_id):
+    row = await owned(session, actor, document_id)
+    if not row['original_sha256']:
+        raise AccessError('original_not_received', 409)
+    return row
+
+
+async def read_policy(session, token, owner_id):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await read_policy_view(session, actor, owner_id)
+
+
+async def read_policy_view(session, actor, owner_id):
+    if owner_id != actor['id'] and actor['role'] not in ('admin', 'super_admin'):
+        raise AccessError('forbidden')
+    return await policy(session, owner_id)
+
+
+async def update_policy(session, token, owner_id, value):
     validate_policy(value)
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        actor = await principal(connection, token)
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        actor = await principal(session, token)
         if actor['role'] not in ('admin', 'super_admin'):
             raise AccessError('forbidden')
-        previous = await policy(connection, owner_id, exclusive=True)
-        await connection.execute('UPDATE document_policies SET limits=%s,permissions=%s WHERE owner_id=%s',
-                                 (Jsonb(value['limits']), Jsonb(value['permissions']), owner_id))
+        previous = await policy(session, owner_id, exclusive=True)
+        await session.execute(update(DocumentPolicy.__table__).where(DocumentPolicy.owner_id == owner_id)
+                              .values(limits=value['limits'], permissions=value['permissions']))
         revoked = [key for key in PERMISSION_KEYS[:4] if previous['permissions'][key] and not value['permissions'][key]]
         if revoked:
-            await connection.execute(
-                '''UPDATE document_files f SET state='failed',error='document_permission_revoked',job_id=NULL
-                   FROM documents d WHERE d.id=f.document_id AND d.owner_id=%s AND f.format=ANY(%s)
-                   AND f.correction_pages IS NULL AND f.state IN ('receiving','queued','processing','awaiting_choice')''', (owner_id, revoked),
-            )
+            await session.execute(update(DocumentFile.__table__).where(
+                Document.id == DocumentFile.document_id, Document.owner_id == owner_id,
+                DocumentFile.format.in_(revoked), DocumentFile.correction_pages.is_(None),
+                DocumentFile.state.in_(('receiving', 'queued', 'processing', 'awaiting_choice')))
+                .values(state='failed', error='document_permission_revoked', job_id=None))
         if previous['permissions']['handwriting'] and not value['permissions']['handwriting']:
-            await connection.execute('UPDATE document_policies SET handwriting_epoch=handwriting_epoch+1 WHERE owner_id=%s', (owner_id,))
-            await connection.execute(
-                '''UPDATE document_files f SET state='awaiting_choice',error='handwriting_permission_revoked',job_id=NULL
-                   FROM documents d WHERE d.id=f.document_id AND d.owner_id=%s AND f.format='pdf'
-                   AND f.mode='complete' AND f.correction_pages IS NULL AND f.state IN ('queued','processing')''', (owner_id,),
-            )
-        await connection.execute('INSERT INTO document_policy_audit(actor_id,target_id,previous,updated) VALUES (%s,%s,%s,%s)',
-                                 (actor['id'], owner_id, Jsonb({'limits': previous['limits'], 'permissions': previous['permissions']}), Jsonb(value)))
+            await session.execute(update(DocumentPolicy.__table__).where(DocumentPolicy.owner_id == owner_id)
+                                  .values(handwriting_epoch=DocumentPolicy.handwriting_epoch+1))
+            await session.execute(update(DocumentFile.__table__).where(
+                Document.id == DocumentFile.document_id, Document.owner_id == owner_id,
+                DocumentFile.format == 'pdf', DocumentFile.mode == 'complete',
+                DocumentFile.correction_pages.is_(None), DocumentFile.state.in_(('queued', 'processing')))
+                .values(state='awaiting_choice', error='handwriting_permission_revoked', job_id=None))
+        await session.execute(insert(DocumentPolicyAudit).values(actor_id=actor['id'], target_id=owner_id,
+                              previous={'limits': previous['limits'], 'permissions': previous['permissions']}, updated=value))
         # Workers recheck permissions at every safe page/publication boundary.
         return value
 
 
-async def choose_mode(connection, token, document_id, choice):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        config = await policy(connection, actor['id'])
-        row = await owned(connection, actor, document_id, write=True)
+async def choose_mode(session, token, document_id, choice):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        config = await policy(session, actor['id'])
+        row = await owned(session, actor, document_id, write=True)
         if row['format'] != 'pdf' or row['state'] not in ('awaiting_choice', 'ready'):
             raise AccessError('document_choice_unavailable', 409)
         if choice == 'cancel':
             if row['ready']:
                 raise AccessError('document_choice_unavailable', 409)
-            await connection.execute("UPDATE document_files SET state='cancelled',job_id=NULL WHERE document_id=%s", (document_id,))
+            await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id)
+                                  .values(state='cancelled', job_id=None))
             return dict(row, state='cancelled')
         if choice not in ('complete', 'skip_handwriting'):
             raise AccessError('invalid_document_mode', 422)
@@ -277,23 +303,22 @@ async def choose_mode(connection, token, document_id, choice):
         limits = config['limits'] if row['ready'] or row['error']=='handwriting_permission_revoked' else None
         if limits and row['declared_bytes'] > limits['file_bytes']:
             raise AccessError('file_size_limit', 413)
-        await connection.execute(
-            '''UPDATE document_files SET mode=%s,state='queued',job_id=NULL,error=NULL,failure_page=NULL,
-               admitted_limits=coalesce(%s,admitted_limits),admitted_handwriting_epoch=%s,
-               correction_pages=NULL,correction_base=NULL WHERE document_id=%s''',
-            (choice, Jsonb(limits) if limits else None, config['handwriting_epoch'],document_id),
-        )
+        values = dict(mode=choice, state='queued', job_id=None, error=None, failure_page=None,
+                      admitted_handwriting_epoch=config['handwriting_epoch'], correction_pages=null(), correction_base=None)
+        if limits:
+            values['admitted_limits'] = limits
+        await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id).values(**values))
         return dict(row, state='queued', mode=choice)
 
 
-async def correct(connection, token, document_id, base_revision, pages):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        row = await owned(connection, actor, document_id, write=True)
+async def correct(session, token, document_id, base_revision, pages):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        row = await owned(session, actor, document_id, write=True)
         if not row['ready'] or row['published_revision'] != base_revision or row['state'] in ('queued','processing'):
             raise AccessError('document_revision_changed', 409)
-        previous = await (await connection.execute('SELECT page,text,regions FROM document_page_texts WHERE revision_id=%s ORDER BY page', (base_revision,))).fetchall()
+        previous = (await session.execute(page_texts(base_revision))).mappings().all()
         if [page['page'] for page in pages] != [page['page'] for page in previous]:
             raise AccessError('incomplete_document_correction', 422)
         updated = []
@@ -318,21 +343,21 @@ async def correct(connection, token, document_id, base_revision, pages):
                 regions.append({'kind':'printed','start':cursor,'end':len(text),'manual_correction':True})
             # Manual edits have exact text spans; old OCR polygons are not reused as exact new locations.
             updated.append({'page': before['page'], 'text': text, 'regions': regions})
-        await connection.execute(
-            "UPDATE document_files SET state='queued',job_id=NULL,error=NULL,failure_page=NULL,correction_pages=%s,correction_base=%s WHERE document_id=%s",
-            (Jsonb(updated), base_revision, document_id),
-        )
+        await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id)
+                              .values(state='queued', job_id=None, error=None, failure_page=None,
+                                      correction_pages=updated, correction_base=base_revision))
         return {'state': 'queued', 'base_revision': base_revision}
 
 
-async def delete(connection, token, document_id):
+async def delete(session, token, document_id):
     from app.sources import switch_source
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        await owned(connection, actor, document_id, write=True)
-        await switch_source(connection, actor, document_id, deleted=True)
-        await connection.execute("UPDATE document_files SET state='cancelled',job_id=NULL,correction_pages=NULL WHERE document_id=%s", (document_id,))
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        await owned(session, actor, document_id, write=True)
+        await switch_source(session, actor, document_id, deleted=True)
+        await session.execute(update(DocumentFile.__table__).where(DocumentFile.document_id == document_id)
+                              .values(state='cancelled', job_id=None, correction_pages=null()))
     # Only the explicitly deleted owner's UUID path; never remove source/history rows.
     original_path(document_id).unlink(missing_ok=True)
     return {'deleted': True}

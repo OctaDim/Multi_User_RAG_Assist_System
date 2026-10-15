@@ -9,11 +9,11 @@ router = APIRouter(prefix="/api/settings")
 
 @router.get("")
 async def read(request: Request, authorization: str | None = Header(None)):
-    async with request.app.state.pool.connection() as connection:
-        return await settings.read(connection, bearer(authorization))
+    async with request.app.state.database.session() as session:
+        return await settings.read(session, bearer(authorization))
 
 
 @router.patch("")
 async def write(changes: dict, request: Request, authorization: str | None = Header(None)):
-    async with request.app.state.pool.connection() as connection:
-        return await settings.write(connection, bearer(authorization), changes)
+    async with request.app.state.database.session() as session:
+        return await settings.write(session, bearer(authorization), changes)

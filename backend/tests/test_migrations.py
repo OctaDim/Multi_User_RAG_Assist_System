@@ -66,6 +66,56 @@ async def test_head_missing_table_is_rejected_without_repair(migration_database)
         assert connection.execute("SELECT to_regclass('accounts_audit')").fetchone() == (None,)
 
 
+async def test_api_lifespan_initializes_empty_database_before_ready(migration_database, monkeypatch):
+    from app.main import create_app, lifespan
+
+    monkeypatch.setenv('RAG_DATABASE_URL', migration_database)
+    application = create_app()
+    async with lifespan(application):
+        with psycopg.connect(migration_database) as observer:
+            assert observer.execute('SELECT version_num FROM alembic_version').fetchone() == ('0007_checkpoints',)
+            assert observer.execute('SELECT count(*) FROM settings').fetchone() == (1,)
+        database = application.state.database
+    assert database.engine.pool.checkedout() == 0
+
+
+@pytest.mark.parametrize('entrypoint', ['api', 'documents', 'generation', 'accounts'])
+async def test_entrypoints_refuse_damaged_schema_before_serving_or_work(
+        migration_database, monkeypatch, entrypoint):
+    await migrate(migration_database)
+    with psycopg.connect(migration_database) as observer:
+        observer.execute('DROP TABLE accounts_audit')
+    monkeypatch.setenv('RAG_DATABASE_URL', migration_database)
+    if entrypoint == 'api':
+        from app.main import create_app, lifespan
+        application = create_app()
+        with pytest.raises(RuntimeError, match='schema.*accounts_audit'):
+            async with lifespan(application):
+                pytest.fail('Damaged schema reached API readiness')
+        assert not hasattr(application.state, 'database')
+    elif entrypoint == 'documents':
+        from app.document_worker import run
+        with pytest.raises(RuntimeError, match='schema.*accounts_audit'):
+            await run()
+    elif entrypoint == 'generation':
+        from app.generation import Supervisor
+        supervisor = Supervisor(migration_database)
+        with pytest.raises(RuntimeError, match='schema.*accounts_audit'):
+            await supervisor.run()
+        assert supervisor.child is None
+    else:
+        process = await asyncio.create_subprocess_exec(
+            sys.executable, '-m', 'app.accounts', '--email', 'operator@example.test',
+            cwd=Path(__file__).parents[1], stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await asyncio.wait_for(process.communicate(), 15)
+        assert process.returncode != 0 and not stdout
+        assert b'accounts_audit' in stderr
+    with psycopg.connect(migration_database) as observer:
+        assert observer.execute("SELECT to_regclass('accounts_audit')").fetchone() == (None,)
+
+
 async def test_concurrent_async_calls_do_not_corrupt_alembic_context(migration_database):
     await asyncio.wait_for(asyncio.gather(migrate(migration_database), migrate(migration_database)), 15)
     with psycopg.connect(migration_database) as connection:

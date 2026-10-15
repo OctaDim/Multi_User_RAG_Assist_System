@@ -55,11 +55,13 @@ class TokenRuntime:
         return context
 
 
-async def submit(connection, environment):
+async def submit(session, environment):
     conversation = uuid4()
-    await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)',
-                             (conversation, environment['user']['id']))
-    return await answers.admit(connection, environment['user']['token'], conversation,
+    from sqlalchemy import insert
+    from app.models import Conversation
+    async with session.begin():
+        await session.execute(insert(Conversation).values(id=conversation, owner_id=environment['user']['id']))
+    return await answers.admit(session, environment['user']['token'], conversation,
                                uuid4(), 'What is the budget?', [environment['document']],
                                environment['tab'], environment['proof'])
 
@@ -70,8 +72,8 @@ async def settle(coordinator, turns=10):
         await asyncio.sleep(0.01)
 
 
-async def test_global_round_robin_and_hot_settings_keep_native_reservations(environment, connection, rag_pool):
-    requests = [await submit(connection, environment) for _ in range(13)]
+async def test_global_round_robin_and_hot_settings_keep_native_reservations(session, environment, connection, rag_pool):
+    requests = [await submit(session, environment) for _ in range(13)]
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
     try:
@@ -85,29 +87,29 @@ async def test_global_round_robin_and_hot_settings_keep_native_reservations(envi
             await coordinator.step()
         assert len(runtime.trace) == 12 and len(set(runtime.trace)) == 12
         runtime.trace.clear()
-        await settings.write(connection, environment['super_admin']['token'], {'max_active': 6, 'step_width': 2})
+        await settings.write(session, environment['super_admin']['token'], {'max_active': 6, 'step_width': 2})
         await coordinator.step()
         assert len(runtime.trace) == 2 and len(runtime.live) == 12
         for request in requests[:7]:
-            await answers.stop(connection, environment['user']['token'], request['id'])
+            await answers.stop(session, environment['user']['token'], request['id'])
         await settle(coordinator, 2)
         assert requests[-1]['id'] in runtime.live
         assert len(runtime.live) <= 6
-        await settings.write(connection, environment['super_admin']['token'], {'max_active': 12, 'step_width': 4})
+        await settings.write(session, environment['super_admin']['token'], {'max_active': 12, 'step_width': 4})
         runtime.trace.clear()
         await coordinator.step()
         assert len(runtime.trace) == 4 and len(set(runtime.trace)) == 4
-        current = await settings.read(connection, environment['super_admin']['token'])
+        current = await settings.read(session, environment['super_admin']['token'])
         assert current['revision'] == current['applied_revision'] == 2
     finally:
         await coordinator.close()
 
 
-async def test_saved_shrink_during_allocation_applies_before_next_admission(environment, connection, rag_pool):
-    await settings.write(connection, environment['super_admin']['token'], {'max_active': 2})
+async def test_saved_shrink_during_allocation_applies_before_next_admission(session, environment, connection, rag_pool):
+    await settings.write(session, environment['super_admin']['token'], {'max_active': 2})
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
-    first, second = await submit(connection, environment), await submit(connection, environment)
+    first, second = await submit(session, environment), await submit(session, environment)
     entered, release = threading.Event(), threading.Event()
 
     def allocation(context):
@@ -120,7 +122,7 @@ async def test_saved_shrink_during_allocation_applies_before_next_admission(envi
         await coordinator.prepare_next()
         admission = asyncio.create_task(coordinator.admit_ready())
         assert await asyncio.to_thread(entered.wait, 10)
-        await settings.write(connection, environment['super_admin']['token'], {'max_active': 1})
+        await settings.write(session, environment['super_admin']['token'], {'max_active': 1})
         release.set()
         await admission
         assert runtime.live == {first['id']} and second['id'] not in runtime.contexts
@@ -129,16 +131,16 @@ async def test_saved_shrink_during_allocation_applies_before_next_admission(envi
         await coordinator.close()
 
 
-async def test_stop_wins_dequeue_and_late_computed_token_is_not_committed(environment, connection, rag_pool):
+async def test_stop_wins_dequeue_and_late_computed_token_is_not_committed(session, environment, connection, rag_pool):
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
-    queued = await submit(connection, environment)
+    queued = await submit(session, environment)
     try:
         await coordinator.prepare_next()
-        await answers.stop(connection, environment['user']['token'], queued['id'])
+        await answers.stop(session, environment['user']['token'], queued['id'])
         await coordinator.admit_ready()
         assert not runtime.live
-        request = await submit(connection, environment)
+        request = await submit(session, environment)
         await coordinator.prepare_next()
         await coordinator.admit_ready()
         entered, release = threading.Event(), threading.Event()
@@ -150,7 +152,7 @@ async def test_stop_wins_dequeue_and_late_computed_token_is_not_committed(enviro
         runtime.advance_hook = computed
         step = asyncio.create_task(coordinator.step())
         assert await asyncio.to_thread(entered.wait, 10)
-        await answers.stop(connection, environment['user']['token'], request['id'])
+        await answers.stop(session, environment['user']['token'], request['id'])
         release.set()
         await step
         assert not await (await connection.execute("SELECT 1 FROM messages WHERE request_id=%s AND role='assistant'", (request['id'],))).fetchone()
@@ -160,10 +162,10 @@ async def test_stop_wins_dequeue_and_late_computed_token_is_not_committed(enviro
 
 
 @pytest.mark.parametrize('partial', [False, True])
-async def test_native_error_preserves_only_committed_prefix_without_retry(environment, connection, rag_pool, partial):
+async def test_native_error_preserves_only_committed_prefix_without_retry(session, environment, connection, rag_pool, partial):
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
-    request = await submit(connection, environment)
+    request = await submit(session, environment)
     try:
         await coordinator.prepare_next()
         await coordinator.admit_ready()
@@ -181,23 +183,23 @@ async def test_native_error_preserves_only_committed_prefix_without_retry(enviro
         await settle(coordinator, 3)
         assert not runtime.live
         assert len(runtime.trace) == (2 if partial else 1)
-        await submit(connection, environment)
+        await submit(session, environment)
     finally:
         await coordinator.close()
 
 
-async def test_logical_stop_does_not_release_physical_slot_until_ack(environment, connection, rag_pool):
-    await settings.write(connection, environment['super_admin']['token'], {'max_active': 1})
+async def test_logical_stop_does_not_release_physical_slot_until_ack(session, environment, connection, rag_pool):
+    await settings.write(session, environment['super_admin']['token'], {'max_active': 1})
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
-    first, second = await submit(connection, environment), await submit(connection, environment)
+    first, second = await submit(session, environment), await submit(session, environment)
     try:
         await coordinator.prepare_next()
         await coordinator.prepare_next()
         await coordinator.admit_ready()
         context = runtime.contexts[first['id']]
         context.close_gate.clear()
-        await answers.stop(connection, environment['user']['token'], first['id'])
+        await answers.stop(session, environment['user']['token'], first['id'])
         await coordinator.tick()
         assert runtime.live == {first['id']} and second['id'] not in runtime.contexts
         context.close_gate.set()
@@ -209,10 +211,10 @@ async def test_logical_stop_does_not_release_physical_slot_until_ack(environment
         await coordinator.close()
 
 
-async def test_failed_native_allocation_releases_reservation_without_empty_answer(environment, connection, rag_pool):
+async def test_failed_native_allocation_releases_reservation_without_empty_answer(session, environment, connection, rag_pool):
     runtime = TokenRuntime()
     coordinator = Coordinator(rag_pool, 1, runtime, ContractEmbedder())
-    request = await submit(connection, environment)
+    request = await submit(session, environment)
 
     def failed_allocation(*args):
         raise RuntimeError('Native context allocation failed')
@@ -225,17 +227,17 @@ async def test_failed_native_allocation_releases_reservation_without_empty_answe
         assert row['state'] == 'failed' and row['reason'] == 'generation_error'
         assert not coordinator.active and not runtime.live
         assert not await (await connection.execute("SELECT 1 FROM messages WHERE request_id=%s AND role='assistant'", (request['id'],))).fetchone()
-        await answers.admit(connection, environment['user']['token'], request['conversation_id'], uuid4(),
+        await answers.admit(session, environment['user']['token'], request['conversation_id'], uuid4(),
                             'A new explicit question', [environment['document']], environment['tab'], environment['proof'])
     finally:
         await coordinator.close()
 
 
-async def test_search_state_is_published_before_graph_work(environment, connection, rag_pool):
+async def test_search_state_is_published_before_graph_work(session, environment, connection, rag_pool):
     import psycopg
     from psycopg.rows import dict_row
 
-    request = await submit(connection, environment)
+    request = await submit(session, environment)
     observed = []
 
     class InspectSearch(ContractEmbedder):

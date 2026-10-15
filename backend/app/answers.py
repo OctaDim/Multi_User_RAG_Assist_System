@@ -3,7 +3,9 @@ import json
 import os
 from uuid import uuid4
 
-from psycopg.types.json import Jsonb
+from sqlalchemy import func, insert, select, update
+
+from app.models import Conversation, Document, Event, GraphBinding, Message, Request
 
 from app.auth import AccessError, lock_service, principal, secret_hash
 from app.sources import available, source_flags, source_flags_for, cited_spans
@@ -33,28 +35,21 @@ def question_budget(question):
 
 
 async def create_conversation(connection, token):
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
-        return await (await connection.execute(
-            'INSERT INTO conversations(id,owner_id) VALUES (%s,%s) RETURNING id',
-            (uuid4(), actor['id']),
-        )).fetchone()
+        return dict((await connection.execute(insert(Conversation.__table__).values(id=uuid4(), owner_id=actor["id"]).returning(Conversation.id))).mappings().first())
 
 
 async def conversation(connection, actor, conversation_id, *, read_only=False):
-    mode = "SHARE" if read_only else "UPDATE"
-    row = await (await connection.execute(f"SELECT * FROM conversations WHERE id=%s FOR {mode}", (conversation_id,))).fetchone()
+    row = (await connection.execute(select(Conversation.__table__).where(Conversation.id == conversation_id).with_for_update(read=read_only))).mappings().first()
     if not row or (row["owner_id"] != actor["id"] and not (read_only and actor["role"] == "super_admin")):
         raise AccessError("not_found", 404)
-    return row
+    return dict(row)
 
 
 async def event(connection, request, kind, payload):
-    return await (await connection.execute(
-        "INSERT INTO events(request_id,conversation_id,kind,payload) VALUES (%s,%s,%s,%s) RETURNING id",
-        (request["id"], request["conversation_id"], kind, Jsonb(payload)),
-    )).fetchone()
+    return dict((await connection.execute(insert(Event.__table__).values(request_id=request["id"], conversation_id=request["conversation_id"], kind=kind, payload=payload).returning(Event.id))).mappings().first())
 
 
 async def admit(connection, token, conversation_id, operation_key, question, document_ids, tab_id, tab_proof):
@@ -63,34 +58,31 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
     fingerprint = secret_hash(json.dumps(payload, sort_keys=True, ensure_ascii=False))
     # Authenticate before expensive tokenization, then release all mutation locks.
     # The full admission transaction below rechecks everything before INSERT.
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
         await conversation(connection, actor, conversation_id)
-        previous = await (await connection.execute('SELECT * FROM requests WHERE owner_id=%s AND operation_key=%s', (actor['id'],operation_key))).fetchone()
+        previous = (await connection.execute(select(Request.__table__).where(Request.owner_id == actor["id"], Request.operation_key == operation_key))).mappings().first()
         if previous:
             if previous['fingerprint'] != fingerprint:
                 raise AccessError('operation_conflict', 409)
             return await project(connection, previous)
     await asyncio.to_thread(question_budget, question)
-    async with connection.transaction():
+    async with connection.begin():
         service = await lock_service(connection)
         actor = await principal(connection, token)
-        documents = await (await connection.execute(
-            "SELECT * FROM documents WHERE id=ANY(%s::uuid[]) AND owner_id=%s ORDER BY id FOR SHARE",
-            (scope, actor["id"]),
-        )).fetchall()
+        documents = (await connection.execute(select(Document.__table__).where(Document.id.in_(scope), Document.owner_id == actor["id"]).order_by(Document.id).with_for_update(read=True))).mappings().all()
         from app.events import live, lock_tab
         tab = await lock_tab(connection, actor, tab_id, tab_proof)
         history = await conversation(connection, actor, conversation_id)
-        previous = await (await connection.execute("SELECT * FROM requests WHERE owner_id=%s AND operation_key=%s", (actor["id"], operation_key))).fetchone()
+        previous = (await connection.execute(select(Request.__table__).where(Request.owner_id == actor["id"], Request.operation_key == operation_key))).mappings().first()
         if previous:
             if previous["fingerprint"] != fingerprint:
                 raise AccessError("operation_conflict", 409)
             return await project(connection, previous)
         if not live(tab):
             raise AccessError("tab_disconnected", 409)
-        if await (await connection.execute("SELECT id FROM requests WHERE conversation_id=%s AND state=ANY(%s)", (conversation_id, list(UNFINISHED)))).fetchone():
+        if (await connection.execute(select(Request.id).where(Request.conversation_id == conversation_id, Request.state.in_(UNFINISHED)))).mappings().first():
             raise AccessError("conversation_busy", 409)
         if len(documents) != len(scope):
             raise AccessError("invalid_scope", 404)
@@ -98,16 +90,9 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             raise AccessError("no_ready_sources", 409)
         if not service["healthy"]:
             raise AccessError("coordinator_unavailable", 503)
-        request = await (await connection.execute(
-            "INSERT INTO requests(id,conversation_id,owner_id,operation_key,fingerprint,scope,origin_tab,origin_session,state,execution_epoch,context_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,'accepted',%s,%s) RETURNING *",
-            (uuid4(), conversation_id, actor["id"], operation_key, fingerprint, scope, tab_id, actor['session_id'], service["epoch"], history["context_epoch"]),
-        )).fetchone()
-        await connection.execute(
-            "INSERT INTO graph_bindings(request_id,thread_id,owner_id,conversation_id,execution_epoch,context_epoch,account_epoch) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-            (request['id'], f"{conversation_id}:{request['id']}:{history['context_epoch']}", actor['id'], conversation_id,
-             service['epoch'], history['context_epoch'], actor['context_epoch']),
-        )
-        await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'user',%s)", (request["id"], conversation_id, question))
+        request = (await connection.execute(insert(Request.__table__).values(id=uuid4(), conversation_id=conversation_id, owner_id=actor["id"], operation_key=operation_key, fingerprint=fingerprint, scope=scope, origin_tab=tab_id, origin_session=actor["session_id"], state="accepted", execution_epoch=service["epoch"], context_epoch=history["context_epoch"]).returning(Request.__table__))).mappings().first()
+        await connection.execute(insert(GraphBinding.__table__).values(request_id=request["id"], thread_id=f"{conversation_id}:{request['id']}:{history['context_epoch']}", owner_id=actor["id"], conversation_id=conversation_id, execution_epoch=service["epoch"], context_epoch=history["context_epoch"], account_epoch=actor["context_epoch"]))
+        await connection.execute(insert(Message.__table__).values(request_id=request["id"], conversation_id=conversation_id, role="user", text=question))
         await event(connection, request, "accepted", {
             "state": "accepted", "version": request["version"], "question": question,
             "operation_key": str(operation_key), "scope": list(map(str, scope)),
@@ -117,43 +102,40 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
 
 
 async def transition(connection, request, state, reason):
-    updated = await (await connection.execute(
-        "UPDATE requests SET state=%s,reason=%s,version=version+1 WHERE id=%s AND state=ANY(%s) RETURNING *",
-        (state, reason, request["id"], list(UNFINISHED)),
-    )).fetchone()
+    updated = (await connection.execute(update(Request.__table__).where(Request.id == request["id"], Request.state.in_(UNFINISHED)).values(state=state, reason=reason, version=Request.version + 1).returning(Request.__table__))).mappings().first()
     if not updated:
-        return request
+        return dict(request)
     if state != "completed":
-        await connection.execute("UPDATE messages SET excluded=true WHERE request_id=%s AND role='assistant'", (request["id"],))
+        await connection.execute(update(Message.__table__).where(Message.request_id == request["id"], Message.role == "assistant").values(excluded=True))
     flags = await source_flags(connection, request['id'])
     if flags:
-        await connection.execute("UPDATE messages SET excluded=true,source_flags=%s WHERE request_id=%s AND role='assistant'", (Jsonb(flags), request['id']))
+        await connection.execute(update(Message.__table__).where(Message.request_id == request["id"], Message.role == "assistant").values(excluded=True, source_flags=flags))
     await event(connection, updated, "terminal", {"state": state, "reason": reason, "version": updated["version"],
                                                 'source_flags': flags, 'excluded': bool(flags) or state != 'completed'})
-    return updated
+    return dict(updated)
 
 
 async def stop(connection, token, request_id):
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
-        request = await (await connection.execute("SELECT * FROM requests WHERE id=%s AND owner_id=%s", (request_id, actor["id"]))).fetchone()
+        request = (await connection.execute(select(Request.__table__).where(Request.id == request_id, Request.owner_id == actor["id"]))).mappings().first()
         if not request:
             raise AccessError("not_found", 404)
         await conversation(connection, actor, request["conversation_id"])
-        request = await (await connection.execute("SELECT * FROM requests WHERE id=%s FOR UPDATE", (request_id,))).fetchone()
+        request = (await connection.execute(select(Request.__table__).where(Request.id == request_id).with_for_update())).mappings().first()
         return await transition(connection, request, "interrupted", "user_stop")
 
 
 async def histories(connection, conversation_ids):
     result = {identifier: {"conversation_id": identifier, "messages": [], "requests": [], "watermark": 0}
               for identifier in conversation_ids}
-    messages = await (await connection.execute("SELECT * FROM messages WHERE conversation_id=ANY(%s::uuid[]) ORDER BY id", (conversation_ids,))).fetchall()
-    requests = await (await connection.execute("SELECT * FROM requests WHERE conversation_id=ANY(%s::uuid[]) ORDER BY created_at,id", (conversation_ids,))).fetchall()
-    watermarks = await (await connection.execute("SELECT conversation_id,max(id) AS watermark FROM events WHERE conversation_id=ANY(%s::uuid[]) GROUP BY conversation_id", (conversation_ids,))).fetchall()
+    messages = (await connection.execute(select(Message.__table__).where(Message.conversation_id.in_(conversation_ids)).order_by(Message.id))).mappings().all()
+    requests = (await connection.execute(select(Request.__table__).where(Request.conversation_id.in_(conversation_ids)).order_by(Request.created_at, Request.id))).mappings().all()
+    watermarks = (await connection.execute(select(Event.conversation_id, func.max(Event.id).label("watermark")).where(Event.conversation_id.in_(conversation_ids)).group_by(Event.conversation_id))).mappings().all()
     flags = await source_flags_for(connection, [request['id'] for request in requests])
     for message in messages:
-        result[message["conversation_id"]]["messages"].append(message)
+        result[message["conversation_id"]]["messages"].append(dict(message))
     for request in requests:
         result[request["conversation_id"]]["requests"].append(await project(connection, request, flags=flags.get(request['id'], {})))
     for watermark in watermarks:
@@ -162,8 +144,12 @@ async def histories(connection, conversation_ids):
 
 
 async def snapshot(connection, token, conversation_id):
-    async with connection.transaction():
+    async with connection.begin():
         await lock_service(connection, exclusive=True)
         actor = await principal(connection, token)
-        await conversation(connection, actor, conversation_id, read_only=True)
-        return (await histories(connection, [conversation_id]))[0]
+        return await snapshot_view(connection, actor, conversation_id)
+
+
+async def snapshot_view(connection, actor, conversation_id):
+    await conversation(connection, actor, conversation_id, read_only=True)
+    return (await histories(connection, [conversation_id]))[0]

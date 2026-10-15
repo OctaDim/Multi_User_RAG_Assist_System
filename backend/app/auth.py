@@ -1,5 +1,9 @@
 import hashlib
 
+from sqlalchemy import and_, func, select
+
+from app.models import Account, CoordinatorLease, Request, ServiceState, Session
+
 
 class AccessError(Exception):
     def __init__(self, code, status=403):
@@ -18,36 +22,46 @@ def bearer(authorization):
     return authorization[7:]
 
 
-async def lock_service(connection, *, exclusive=False):
-    mode = "UPDATE" if exclusive else "SHARE"
-    return await (await connection.execute(
-        f'''SELECT s.id,s.epoch,coalesce(l.healthy_until>clock_timestamp(),false) AS healthy
-            FROM service_state s LEFT JOIN coordinator_lease l ON l.id=s.id AND l.epoch=s.epoch
-            WHERE s.id=1 FOR {mode} OF s''',
-    )).fetchone()
+async def lock_service(session, *, exclusive=False):
+    row = (await session.execute(
+        select(ServiceState.id, ServiceState.epoch,
+               func.coalesce(CoordinatorLease.healthy_until > func.clock_timestamp(), False).label('healthy'))
+        .outerjoin(CoordinatorLease, and_(CoordinatorLease.id == ServiceState.id,
+                                         CoordinatorLease.epoch == ServiceState.epoch))
+        .where(ServiceState.id == 1)
+        .with_for_update(read=not exclusive, of=ServiceState)
+    )).mappings().first()
+    return dict(row) if row else None
 
 
-async def principal(connection, token):
-    actor = await (await connection.execute(
-        "SELECT a.*,s.id AS session_id,s.expires_at AS session_expires_at FROM accounts a JOIN sessions s ON s.owner_id=a.id WHERE s.token_hash=%s AND NOT s.revoked AND s.expires_at>clock_timestamp() FOR SHARE OF a,s",
-        (secret_hash(token),),
-    )).fetchone()
+async def principal(session, token):
+    actor = (await session.execute(
+        select(Account.__table__, Session.id.label('session_id'),
+               Session.expires_at.label('session_expires_at'))
+        .join(Session, Session.owner_id == Account.id)
+        .where(Session.token_hash == secret_hash(token), ~Session.revoked,
+               Session.expires_at > func.clock_timestamp())
+        .with_for_update(read=True, of=[Account, Session])
+    )).mappings().first()
     if not actor:
         raise AccessError("unauthenticated", 401)
     if not actor["verified"] or not actor["active"] or actor["disabled"]:
         raise AccessError("access_denied")
-    return actor
+    return dict(actor)
 
 
-async def originating_session(connection, request_id):
-    row = await (await connection.execute(
-        '''SELECT a.*,s.id AS session_id,s.revoked,s.expires_at>clock_timestamp() AS session_live
-           FROM requests r JOIN accounts a ON a.id=r.owner_id
-           JOIN sessions s ON s.id=r.origin_session AND s.owner_id=a.id
-           WHERE r.id=%s FOR SHARE OF a,s''', (request_id,),
-    )).fetchone()
+async def originating_session(session, request_id):
+    row = (await session.execute(
+        select(Account.__table__, Session.id.label('session_id'), Session.revoked,
+               (Session.expires_at > func.clock_timestamp()).label('session_live'))
+        .select_from(Request)
+        .join(Account, Account.id == Request.owner_id)
+        .join(Session, and_(Session.id == Request.origin_session, Session.owner_id == Account.id))
+        .where(Request.id == request_id)
+        .with_for_update(read=True, of=[Account, Session])
+    )).mappings().first()
     if not row or row['revoked'] or not row['session_live']:
         raise AccessError('session_ended', 401)
     if not row['verified'] or not row['active'] or row['disabled']:
         raise AccessError('access_denied')
-    return row
+    return dict(row)

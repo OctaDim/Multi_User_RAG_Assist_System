@@ -21,7 +21,7 @@ def encode(value):
 
 @router.post('')
 async def create(request: Request, authorization: str | None = Header(None)):
-    async with request.app.state.pool.connection() as connection:
+    async with request.app.state.database.session() as connection:
         return await events.create_tab(connection, bearer(authorization))
 
 
@@ -30,7 +30,7 @@ async def ack(tab_id: UUID, request: Request, authorization: str | None = Header
               tab_proof: str = Header(alias='X-Tab-Proof'),
               epoch: int = Header(alias='X-Connection-Epoch'),
               challenge: str = Header(alias='X-Heartbeat-Challenge')):
-    async with request.app.state.pool.connection() as connection:
+    async with request.app.state.database.session() as connection:
         await events.ack(connection, bearer(authorization), tab_id, tab_proof, epoch, challenge)
     return {'confirmed': True}
 
@@ -39,8 +39,8 @@ async def ack(tab_id: UUID, request: Request, authorization: str | None = Header
 async def stream(tab_id: UUID, request: Request, authorization: str | None = Header(None),
                  tab_proof: str = Header(alias='X-Tab-Proof'), last_event_id: int | None = Header(None)):
     token = bearer(authorization)
-    pool = request.app.state.pool
-    async with pool.connection() as connection:
+    database = request.app.state.database
+    async with database.session() as connection:
         tab = await events.connect(connection, token, tab_id, tab_proof)
     request.scope.setdefault('state', {})['delivery_epoch'] = tab['connection_epoch']
 
@@ -52,13 +52,13 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
             while True:
                 # This DB authorization ends before yielding. U7/U8 must prove the
                 # separate transport fence; StreamingResponse alone cannot do so.
-                async with pool.connection() as connection:
+                async with database.session() as connection:
                     value = await events.read(connection, token, tab_id, tab_proof, tab['connection_epoch'], cursor)
                 if value:
                     yield encode(value)
                     cursor = request.scope['state'].pop('delivery_cursor', value['id'])
                 if asyncio.get_running_loop().time() >= next_heartbeat:
-                    async with pool.connection() as connection:
+                    async with database.session() as connection:
                         heartbeat = await events.heartbeat(connection, token, tab_id, tab_proof, tab['connection_epoch'])
                     if heartbeat:
                         yield encode({'kind': 'heartbeat', 'payload': heartbeat})
@@ -72,7 +72,7 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
             # If the process dies, the shared heartbeat lease supplies detection.
             async def close():
                 try:
-                    async with pool.connection() as connection:
+                    async with database.session() as connection:
                         await events.disconnect(connection, token, tab_id, tab_proof, tab['connection_epoch'])
                 except AccessError:
                     pass

@@ -163,67 +163,67 @@ def test_generic_asgi_without_private_handoff_fails_closed(environment,monkeypat
         assert client.post('/api/accounts/login',json={'email':'a@b.test','password':'Owned long password'}).status_code==503
 
 
-async def test_deduplicated_completed_ack_contains_citations(environment,connection,rag_pool):
+async def test_deduplicated_completed_ack_contains_citations(session, environment,connection,rag_pool):
     from uuid import uuid4
     from app import answers
     from test_rag_context import run,complete
     key=uuid4()
     async def send():
-        return await answers.admit(connection,environment['user']['token'],environment['conversation'],key,
+        return await answers.admit(session,environment['user']['token'],environment['conversation'],key,
             'What is the annual budget?',[environment['document']],environment['tab'],environment['proof'])
     request=await send();await run(rag_pool,request)
     await connection.execute('UPDATE requests SET answer_text=%s WHERE id=%s',('100 euros [source:1]',request['id']))
-    await complete(connection,request,'100 euros [source:1]')
-    snapshot=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+    await complete(session,request,'100 euros [source:1]')
+    snapshot=await answers.snapshot(session,environment['user']['token'],environment['conversation'])
     assert (await send())['citations']==snapshot['requests'][0]['citations']
     assert (await send())['citations'][0]['quote']=='The annual budget is 100 euros.'
 
 
-async def test_correction_marks_request_snapshot_and_notifies_all_tabs(environment,connection,rag_pool):
+async def test_correction_marks_request_snapshot_and_notifies_all_tabs(session, environment,connection,rag_pool):
     from app import answers,sources,events
     from conftest import seed_revision
     from test_source_contract import send
     from test_rag_context import run,complete
-    request=await send(connection,environment);await run(rag_pool,request)
+    request=await send(session,environment);await run(rag_pool,request)
     await connection.execute('UPDATE requests SET answer_text=%s WHERE id=%s',('100 euros [source:1]',request['id']))
-    await complete(connection,request,'100 euros [source:1]')
-    before=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+    await complete(session,request,'100 euros [source:1]')
+    before=await answers.snapshot(session,environment['user']['token'],environment['conversation'])
     revision,_=await seed_revision(connection,environment['document'],text='The budget is 10 euros.',attach=False)
-    await sources.change_source(connection,environment['user']['token'],environment['document'],revision_id=revision)
-    after=await answers.snapshot(connection,environment['user']['token'],environment['conversation'])
+    await sources.change_source(session,environment['user']['token'],environment['document'],revision_id=revision)
+    after=await answers.snapshot(session,environment['user']['token'],environment['conversation'])
     projected=after['requests'][0]
     assert projected['source_flags']=={str(environment['document']):'corrected'} and projected['excluded']
     assert projected['version']>before['requests'][0]['version']
     assert projected['citations'][0]['quote']=='The annual budget is 100 euros.'
-    event=await events.read(connection,environment['user']['token'],environment['tab'],environment['proof'],1,before['watermark'])
+    event=await events.read(session,environment['user']['token'],environment['tab'],environment['proof'],1,before['watermark'])
     assert event['kind']=='source_status' and event['payload']['source_flags']==projected['source_flags']
 
 
 @pytest.mark.parametrize('invalidation',['delete','connection','proof'])
 @pytest.mark.parametrize('kind',['fragments','output'])
-async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,connection,rag_pool,tmp_path,invalidation,kind):
+async def test_prepared_sse_and_replay_rechecks_source_and_tab(session, environment,connection,rag_pool,tmp_path,invalidation,kind):
     import asyncio
     from app import answers,sources,auth
     from test_source_contract import send
     from test_rag_context import run
-    request=await send(connection,environment);await run(rag_pool,request)
+    request=await send(session,environment);await run(rag_pool,request)
     if kind=='output':
-        async with connection.transaction():
-            await connection.execute("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
-            await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
-            updated=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
-            await answers.event(connection,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
+        async with session.begin():
+            await (await session.connection()).exec_driver_sql("UPDATE requests SET state='generating',answer_text='UNDISPATCHED PRIVATE TOKEN',version=version+1 WHERE id=%s",(request['id'],))
+            await (await session.connection()).exec_driver_sql("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','UNDISPATCHED PRIVATE TOKEN')",(request['id'],environment['conversation']))
+            updated=(await (await session.connection()).exec_driver_sql('SELECT * FROM requests WHERE id=%s',(request['id'],))).mappings().first()
+            await answers.event(session,updated,'output',{'text':'UNDISPATCHED PRIVATE TOKEN','version':updated['version']})
     with held_apis(environment,tmp_path) as (ports,clients,held,release):
         peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
             f"X-Tab-Proof: {environment['proof']}\r\nLast-Event-ID: 0\r\nX-Owned-Kind: {kind}\r\n")
         await asyncio.to_thread(wait_marker,held)
         if invalidation=='delete':
-            await sources.change_source(connection,environment['user']['token'],environment['document'],deleted=True)
+            await sources.change_source(session,environment['user']['token'],environment['document'],deleted=True)
         else:
-            async with connection.transaction():
-                await auth.lock_service(connection)
+            async with session.begin():
+                await auth.lock_service(session)
                 column='connection_epoch=connection_epoch+1' if invalidation=='connection' else "proof_hash='no-longer-the-proof'"
-                await connection.execute('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
+                await (await session.connection()).exec_driver_sql('UPDATE tabs SET '+column+' WHERE id=%s',(environment['tab'],))
         release.touch()
         def bounded_receive():
             data=b'';peer.settimeout(.6)
@@ -237,36 +237,36 @@ async def test_prepared_sse_and_replay_rechecks_source_and_tab(environment,conne
         assert forbidden not in data,'Previously read private event escaped its source/tab fence'
 
 
-async def test_prepared_snapshot_retains_old_quote_with_current_correction_flags(environment,connection,rag_pool,tmp_path):
+async def test_prepared_snapshot_retains_old_quote_with_current_correction_flags(session, environment,connection,rag_pool,tmp_path):
     import asyncio
     from app import sources
     from test_source_contract import send
     from test_rag_context import run,complete
     from conftest import seed_revision
-    request=await send(connection,environment);await run(rag_pool,request)
+    request=await send(session,environment);await run(rag_pool,request)
     await connection.execute('UPDATE requests SET answer_text=%s WHERE id=%s',('100 euros [source:1]',request['id']))
-    await complete(connection,request,'100 euros [source:1]')
+    await complete(session,request,'100 euros [source:1]')
     with held_apis(environment,tmp_path) as (ports,clients,held,release):
         peer=paused_get(ports[0],f"/api/conversations/{environment['conversation']}",environment['user']['token'])
         await asyncio.to_thread(wait_marker,held)
         revision,_=await seed_revision(connection,environment['document'],text='Budget 10 euros.',attach=False)
-        await sources.change_source(connection,environment['user']['token'],environment['document'],revision_id=revision)
+        await sources.change_source(session,environment['user']['token'],environment['document'],revision_id=revision)
         release.touch();data=await asyncio.to_thread(receive_all,peer)
         assert b'The annual budget is 100 euros.' in data and b'"corrected"' in data and b'"excluded":true' in data
 
 
-async def test_irreducible_native_question_budget_refuses_before_admission(environment,connection):
+async def test_irreducible_native_question_budget_refuses_before_admission(session, environment,connection):
     from uuid import uuid4
     from app import answers
     from app.auth import AccessError
     with pytest.raises(AccessError,match='context_too_large'):
-        await answers.admit(connection,environment['user']['token'],environment['conversation'],uuid4(),
+        await answers.admit(session,environment['user']['token'],environment['conversation'],uuid4(),
             'Ж budget 100 ' * 4096,[environment['document']],environment['tab'],environment['proof'])
     assert (await (await connection.execute('SELECT count(*) AS n FROM messages')).fetchone())['n']==0
     assert (await (await connection.execute('SELECT count(*) AS n FROM requests')).fetchone())['n']==0
 
 
-async def test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation(environment,connection,rag_pool,monkeypatch):
+async def test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation(session, environment,connection,rag_pool,monkeypatch):
     import asyncio
     from app import sources
     from app.rag import GuardedSaver
@@ -275,7 +275,7 @@ async def test_correction_between_preparation_and_pending_checkpoint_keeps_curre
     from test_source_contract import send
     from test_scheduler import TokenRuntime
     from test_rag_context import ContractEmbedder
-    request=await send(connection,environment)
+    request=await send(session,environment)
     prepared,release=asyncio.Event(),asyncio.Event()
     original=GuardedSaver.aput_writes
     async def held_write(self,config,writes,task_id,task_path=''):
@@ -288,7 +288,7 @@ async def test_correction_between_preparation_and_pending_checkpoint_keeps_curre
     try:
         await asyncio.wait_for(prepared.wait(),10)
         revision,_=await seed_revision(connection,environment['document'],text='Corrected budget 10',attach=False)
-        await sources.change_source(connection,environment['user']['token'],environment['document'],revision_id=revision)
+        await sources.change_source(session,environment['user']['token'],environment['document'],revision_id=revision)
         release.set();await task
         row=await (await connection.execute('SELECT * FROM requests WHERE id=%s',(request['id'],))).fetchone()
         assert row['state']=='queued','OCR correction introduced cancellation before native allocation'
@@ -301,17 +301,17 @@ async def test_correction_between_preparation_and_pending_checkpoint_keeps_curre
         release.set();await asyncio.gather(task,return_exceptions=True);await coordinator.close()
 
 
-async def test_correction_of_prior_history_after_admission_keeps_current_question(environment,connection,rag_pool):
+async def test_correction_of_prior_history_after_admission_keeps_current_question(session, environment,connection,rag_pool):
     from app import sources
     from app.generation import Coordinator
     from conftest import seed_revision
     from test_source_contract import send
     from test_rag_context import run,complete,ContractEmbedder
     from test_scheduler import TokenRuntime
-    previous=await send(connection,environment);await run(rag_pool,previous);await complete(connection,previous,'OLD HISTORY 100')
-    current=await send(connection,environment)
+    previous=await send(session,environment);await run(rag_pool,previous);await complete(session,previous,'OLD HISTORY 100')
+    current=await send(session,environment)
     revision,_=await seed_revision(connection,environment['document'],text='Corrected budget 10',attach=False)
-    await sources.change_source(connection,environment['user']['token'],environment['document'],revision_id=revision)
+    await sources.change_source(session,environment['user']['token'],environment['document'],revision_id=revision)
     coordinator=Coordinator(rag_pool,1,TokenRuntime(),ContractEmbedder())
     try:
         await coordinator.prepare_next()
@@ -321,22 +321,22 @@ async def test_correction_of_prior_history_after_admission_keeps_current_questio
     finally:await coordinator.close()
 
 
-async def test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor(environment,connection,tmp_path):
+async def test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor(session, environment,connection,tmp_path):
     import asyncio,re
     from uuid import uuid4
     from app import answers,events
     from test_source_contract import send
-    await send(connection,environment)
+    await send(session,environment)
     with held_apis(environment,tmp_path) as (ports,clients,held,release):
         peer=paused_get(ports[0],f"/api/tabs/{environment['tab']}/events",environment['user']['token'],
             f"X-Tab-Proof: {environment['proof']}\r\nX-Owned-Kind: snapshot\r\n")
         await asyncio.to_thread(wait_marker,held)
         prefix=await asyncio.to_thread(peer.recv,65536)
         heartbeat=json.loads(re.search(rb'data: (.+)\n\n',prefix).group(1))['payload']
-        await events.ack(connection,environment['user']['token'],environment['tab'],environment['proof'],
+        await events.ack(session,environment['user']['token'],environment['tab'],environment['proof'],
             heartbeat['connection_epoch'],heartbeat['challenge'])
-        room=await answers.create_conversation(connection,environment['user']['token'])
-        await answers.admit(connection,environment['user']['token'],room['id'],uuid4(),'NEW COMMITTED QUESTION',
+        room=await answers.create_conversation(session,environment['user']['token'])
+        await answers.admit(session,environment['user']['token'],room['id'],uuid4(),'NEW COMMITTED QUESTION',
             [environment['document']],environment['tab'],environment['proof'])
         release.touch()
         def receive():
@@ -402,13 +402,13 @@ async def test_natural_session_expiry_during_serialization_closes_unhanded_body(
 
 
 @pytest.mark.parametrize('mutation',['timeout','delete'])
-async def test_real_database_complete_races_invalidation_with_one_terminal_outcome(environment,connection,rag_pool,mutation):
+async def test_real_database_complete_races_invalidation_with_one_terminal_outcome(session, environment,connection,rag_pool,mutation):
     import asyncio
     from app import sources,events
     from app.generation import Coordinator
     from test_source_contract import send
     from test_rag_context import run
-    request=await send(connection,environment);await run(rag_pool,request)
+    request=await send(session,environment);await run(rag_pool,request)
     await connection.execute("UPDATE requests SET state='generating',answer_text='COMMITTED PREFIX' WHERE id=%s",(request['id'],))
     await connection.execute("INSERT INTO messages(request_id,conversation_id,role,text) VALUES (%s,%s,'assistant','COMMITTED PREFIX')",(request['id'],environment['conversation']))
     if mutation=='timeout':
@@ -418,7 +418,7 @@ async def test_real_database_complete_races_invalidation_with_one_terminal_outco
         await start.wait()
         await Coordinator(rag_pool,1,None,None).finish(request['id'],'completed',None)
     async def invalidate():
-        async with rag_pool.connection() as other:
+        async with rag_pool.session() as other:
             await start.wait()
             if mutation=='timeout':await events.expire_due(other)
             else:await sources.change_source(other,environment['user']['token'],environment['document'],deleted=True)
@@ -434,14 +434,14 @@ async def test_real_database_complete_races_invalidation_with_one_terminal_outco
     if mutation=='delete':assert message['excluded'] and list(message['source_flags'].values())==['deleted']
 
 
-async def test_real_database_output_races_account_revoke_without_late_publication(environment,connection,rag_pool):
+async def test_real_database_output_races_account_revoke_without_late_publication(session, environment,connection,rag_pool):
     import asyncio,threading
     from app import accounts
     from app.generation import Coordinator
     from test_source_contract import send
     from test_scheduler import TokenRuntime
     from test_rag_context import ContractEmbedder
-    request=await send(connection,environment)
+    request=await send(session,environment)
     runtime=TokenRuntime();coordinator=Coordinator(rag_pool,1,runtime,ContractEmbedder())
     computed,release=threading.Event(),threading.Event()
     try:
@@ -451,7 +451,7 @@ async def test_real_database_output_races_account_revoke_without_late_publicatio
         runtime.advance_hook=lambda context:(computed.set(),release.wait(10))
         task=asyncio.create_task(coordinator.step())
         assert await asyncio.to_thread(computed.wait,5)
-        async with rag_pool.connection() as independent:
+        async with rag_pool.session() as independent:
             await accounts.mutate(independent,environment['super_admin']['token'],environment['user']['id'],{'disabled':True})
         watermark=(await (await connection.execute('SELECT max(id) AS id FROM events WHERE request_id=%s',(request['id'],))).fetchone())['id']
         release.set();await task
@@ -462,24 +462,24 @@ async def test_real_database_output_races_account_revoke_without_late_publicatio
     finally:release.set();await coordinator.close()
 
 
-async def test_stop_old_request_races_new_admission_and_old_pending_writes_cannot_change_new_context(environment,connection,rag_pool):
+async def test_stop_old_request_races_new_admission_and_old_pending_writes_cannot_change_new_context(session, environment,connection,rag_pool):
     import asyncio
     from uuid import uuid4
     from app import answers
     from app.auth import AccessError
     from test_source_contract import send
     from test_rag_context import run,saver_for
-    old=await send(connection,environment);await run(rag_pool,old)
+    old=await send(session,environment);await run(rag_pool,old)
     saver=await saver_for(rag_pool,connection,old)
     config={'configurable':{'thread_id':saver.binding['thread_id']}}
     checkpoint=await saver.aget_tuple(config)
-    await answers.stop(connection,environment['user']['token'],old['id'])
+    await answers.stop(session,environment['user']['token'],old['id'])
     start=asyncio.Event()
     async def stop_again():
-        async with rag_pool.connection() as independent:
+        async with rag_pool.session() as independent:
             await start.wait();return await answers.stop(independent,environment['user']['token'],old['id'])
     async def new_question():
-        async with rag_pool.connection() as independent:
+        async with rag_pool.session() as independent:
             await start.wait();return await answers.admit(independent,environment['user']['token'],environment['conversation'],
                 uuid4(),'NEW CURRENT QUESTION',[environment['document']],environment['tab'],environment['proof'])
     tasks=[asyncio.create_task(stop_again()),asyncio.create_task(new_question())]

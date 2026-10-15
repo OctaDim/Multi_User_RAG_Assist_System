@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+from datetime import timedelta
 from email.message import EmailMessage
 import hashlib
 import hmac
@@ -12,13 +13,13 @@ from threading import Semaphore
 from urllib.parse import urlsplit
 from uuid import uuid4
 
-from psycopg import AsyncConnection
-from psycopg.rows import dict_row
-from psycopg.types.json import Jsonb
+from sqlalchemy import func, insert, or_, select, update
 
 from app import answers
 from app.auth import AccessError, lock_service, principal, secret_hash
-from app.db import database_url
+from app.db import Database, database_url, migrate
+from app.models import (Account, AccountInvitation, AccountsAudit, Conversation, Document,
+                        DocumentFile, EmailVerification, Request, Session, Tab)
 
 
 PUBLIC = ('id', 'email', 'role', 'verified', 'active', 'disabled', 'paid')
@@ -102,49 +103,55 @@ def deliver_verification(email, token, config, origin):
         smtp.send_message(message)
 
 
-async def audit(connection, actor_id, target, action, previous):
-    await connection.execute(
-        'INSERT INTO accounts_audit(actor_id,target_id,action,previous,updated) VALUES (%s,%s,%s,%s,%s)',
-        (actor_id, target['id'], action, Jsonb(previous), Jsonb({key: str(value) if key == 'id' else value for key, value in public(target).items()})),
-    )
+async def audit(session, actor_id, target, action, previous):
+    await session.execute(insert(AccountsAudit.__table__).values(
+        actor_id=actor_id, target_id=target['id'], action=action, previous=previous,
+        updated={key: str(value) if key == 'id' else value for key, value in public(target).items()},
+    ))
 
 
-async def register(connection, email, password, invitation=None):
+async def register(session, email, password, invitation=None):
     email = email_address(email)
     config, origin = mail_configuration(), frontend_origin()
-    candidate = await (await connection.execute('SELECT * FROM accounts WHERE email=%s', (email,))).fetchone()
+    async with session.begin():
+        candidate = (await session.execute(select(Account.__table__).where(Account.email == email))).mappings().first()
+        candidate = dict(candidate) if candidate else None
     matches = await asyncio.to_thread(verify_password, password, candidate['password_hash']) if candidate else False
     encoded = await asyncio.to_thread(hash_password, password)
     token = secrets.token_urlsafe(32)
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        previous = await (await connection.execute('SELECT * FROM accounts WHERE email=%s FOR UPDATE', (email,))).fetchone()
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        previous = (await session.execute(
+            select(Account.__table__).where(Account.email == email).with_for_update()
+        )).mappings().first()
         if previous:
             if previous['verified'] or invitation or not matches or previous['password_hash'] != candidate['password_hash']:
                 raise AccessError('registration_conflict', 409)
-            account = previous
+            account = dict(previous)
         else:
             role = 'user'
             if invitation:
-                row = await (await connection.execute(
-                    '''UPDATE account_invitations SET consumed=true WHERE token_hash=%s AND email=%s
-                       AND NOT consumed AND expires_at>clock_timestamp() RETURNING role''', (secret_hash(invitation), email),
-                )).fetchone()
+                row = (await session.execute(
+                    update(AccountInvitation.__table__)
+                    .where(AccountInvitation.token_hash == secret_hash(invitation), AccountInvitation.email == email,
+                           ~AccountInvitation.consumed, AccountInvitation.expires_at > func.clock_timestamp())
+                    .values(consumed=True).returning(AccountInvitation.role)
+                )).mappings().first()
                 if not row:
                     raise AccessError('invalid_invitation', 400)
                 role = row['role']
-            account = await (await connection.execute(
-                'INSERT INTO accounts(id,email,password_hash,role) VALUES (%s,%s,%s,%s) RETURNING *',
-                (uuid4(), email, encoded, role),
-            )).fetchone()
-            await connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s)', (uuid4(), account['id']))
+            account = dict((await session.execute(
+                insert(Account.__table__).values(id=uuid4(), email=email, password_hash=encoded, role=role)
+                .returning(Account.__table__)
+            )).mappings().one())
+            await session.execute(insert(Conversation.__table__).values(id=uuid4(), owner_id=account['id']))
             from app.documents import initialize_policy
-            await initialize_policy(connection, account['id'])
-            await audit(connection, None, account, 'bootstrap' if invitation else 'register', {})
-        await connection.execute(
-            "INSERT INTO email_verifications(token_hash,owner_id,expires_at) VALUES (%s,%s,clock_timestamp()+interval '1 hour')",
-            (secret_hash(token), account['id']),
-        )
+            await initialize_policy(session, account['id'])
+            await audit(session, None, account, 'bootstrap' if invitation else 'register', {})
+        await session.execute(insert(EmailVerification.__table__).values(
+            token_hash=secret_hash(token), owner_id=account['id'],
+            expires_at=func.clock_timestamp() + timedelta(hours=1),
+        ))
     try:
         await asyncio.to_thread(deliver_verification, email, token, config, origin)
     except (OSError, smtplib.SMTPException):
@@ -153,108 +160,143 @@ async def register(connection, email, password, invitation=None):
     return public(account)
 
 
-async def verify(connection, token):
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        candidate = await (await connection.execute('SELECT owner_id FROM email_verifications WHERE token_hash=%s', (secret_hash(token),))).fetchone()
+async def verify(session, token):
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        candidate = (await session.execute(
+            select(EmailVerification.owner_id).where(EmailVerification.token_hash == secret_hash(token))
+        )).mappings().first()
         if not candidate:
             raise AccessError('invalid_verification', 400)
-        previous = await (await connection.execute('SELECT * FROM accounts WHERE id=%s FOR UPDATE', (candidate['owner_id'],))).fetchone()
-        consumed = await (await connection.execute(
-            '''UPDATE email_verifications SET consumed=true WHERE token_hash=%s
-               AND NOT consumed AND expires_at>clock_timestamp() RETURNING owner_id''', (secret_hash(token),),
-        )).fetchone()
+        previous = (await session.execute(
+            select(Account.__table__).where(Account.id == candidate['owner_id']).with_for_update()
+        )).mappings().one()
+        consumed = (await session.execute(
+            update(EmailVerification.__table__)
+            .where(EmailVerification.token_hash == secret_hash(token), ~EmailVerification.consumed,
+                   EmailVerification.expires_at > func.clock_timestamp())
+            .values(consumed=True).returning(EmailVerification.owner_id)
+        )).mappings().first()
         if not consumed:
             raise AccessError('invalid_verification', 400)
-        await connection.execute('UPDATE email_verifications SET consumed=true WHERE owner_id=%s', (previous['id'],))
-        account = await (await connection.execute('UPDATE accounts SET verified=true WHERE id=%s RETURNING *', (previous['id'],))).fetchone()
-        await audit(connection, account['id'], account, 'verify_email', {key: str(value) if key == 'id' else value for key, value in public(previous).items()})
+        await session.execute(update(EmailVerification.__table__).where(
+            EmailVerification.owner_id == previous['id']).values(consumed=True))
+        account = dict((await session.execute(
+            update(Account.__table__).where(Account.id == previous['id']).values(verified=True)
+            .returning(Account.__table__)
+        )).mappings().one())
+        await audit(session, account['id'], account, 'verify_email', {key: str(value) if key == 'id' else value for key, value in public(previous).items()})
         return public(account)
 
 
-async def login(connection, email, password):
+async def login(session, email, password):
     email = email_address(email)
-    row = await (await connection.execute('SELECT * FROM accounts WHERE email=%s', (email,))).fetchone()
+    async with session.begin():
+        row = (await session.execute(select(Account.__table__).where(Account.email == email))).mappings().first()
+        row = dict(row) if row else None
     if not await asyncio.to_thread(verify_password, password, row['password_hash'] if row else None):
         raise AccessError('invalid_credentials', 401)
     token = secrets.token_urlsafe(32)
-    async with connection.transaction():
-        await lock_service(connection)
-        account = await (await connection.execute('SELECT * FROM accounts WHERE id=%s FOR SHARE', (row['id'],))).fetchone()
+    async with session.begin():
+        await lock_service(session)
+        account = (await session.execute(
+            select(Account.__table__).where(Account.id == row['id']).with_for_update(read=True)
+        )).mappings().one()
         if account['password_hash'] != row['password_hash'] or not account['active'] or account['disabled'] or not account['verified']:
             raise AccessError('access_denied')
-        await connection.execute(
-            "INSERT INTO sessions(token_hash,owner_id,expires_at) VALUES (%s,%s,clock_timestamp()+interval '12 hours')", (secret_hash(token), account['id']),
-        )
+        await session.execute(insert(Session.__table__).values(
+            token_hash=secret_hash(token), owner_id=account['id'],
+            expires_at=func.clock_timestamp() + timedelta(hours=12),
+        ))
     return {'token': token, 'account': public(account)}
 
 
-async def me(connection, token):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        conversations = await (await connection.execute('SELECT id FROM conversations WHERE owner_id=%s ORDER BY id', (actor['id'],))).fetchall()
-        return {'account': public(actor), 'conversations': conversations}
+async def me_view(session, actor):
+    conversations = (await session.execute(
+        select(Conversation.id).where(Conversation.owner_id == actor['id']).order_by(Conversation.id)
+    )).mappings().all()
+    return {'account': public(actor), 'conversations': [dict(row) for row in conversations]}
 
 
-async def terminal_accounts(connection, owner_id, reason, session_id=None):
-    affected = await (await connection.execute(
-        '''SELECT origin_tab,conversation_id FROM requests WHERE owner_id=%s AND state=ANY(%s)
-           AND (%s::uuid IS NULL OR origin_session=%s)''',
-        (owner_id, list(answers.UNFINISHED), session_id, session_id),
-    )).fetchall()
+async def me(session, token):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await me_view(session, actor)
+
+
+async def terminal_accounts(session, owner_id, reason, session_id=None):
+    filters = [Request.owner_id == owner_id, Request.state.in_(answers.UNFINISHED)]
+    if session_id is not None:
+        filters.append(Request.origin_session == session_id)
+    affected = (await session.execute(
+        select(Request.origin_tab, Request.conversation_id).where(*filters)
+    )).mappings().all()
     tab_ids = sorted({row['origin_tab'] for row in affected})
     conversation_ids = sorted({row['conversation_id'] for row in affected})
-    await connection.execute('SELECT id FROM tabs WHERE id=ANY(%s::uuid[]) ORDER BY id FOR UPDATE', (tab_ids,))
-    await connection.execute('SELECT id FROM conversations WHERE id=ANY(%s::uuid[]) ORDER BY id FOR UPDATE', (conversation_ids,))
-    requests = await (await connection.execute(
-        '''SELECT * FROM requests WHERE owner_id=%s AND state=ANY(%s)
-           AND (%s::uuid IS NULL OR origin_session=%s) ORDER BY id FOR UPDATE''',
-        (owner_id, list(answers.UNFINISHED), session_id, session_id),
-    )).fetchall()
+    await session.execute(select(Tab.id).where(Tab.id.in_(tab_ids)).order_by(Tab.id).with_for_update())
+    await session.execute(select(Conversation.id).where(Conversation.id.in_(conversation_ids))
+                          .order_by(Conversation.id).with_for_update())
+    requests = (await session.execute(
+        select(Request.__table__).where(*filters).order_by(Request.id).with_for_update()
+    )).mappings().all()
     for request in requests:
-        await answers.transition(connection, request, 'interrupted', reason)
+        await answers.transition(session, dict(request), 'interrupted', reason)
     if session_id is None:
-        await connection.execute('UPDATE tabs SET connected=false,confirmed=false,challenge_hash=NULL WHERE id=ANY(%s::uuid[])', (tab_ids,))
+        await session.execute(update(Tab.__table__).where(Tab.id.in_(tab_ids))
+                              .values(connected=False, confirmed=False, challenge_hash=None))
 
 
-async def logout(connection, token):
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        row = await (await connection.execute('SELECT owner_id,id FROM sessions WHERE token_hash=%s', (secret_hash(token),))).fetchone()
+async def logout(session, token):
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        row = (await session.execute(
+            select(Session.owner_id, Session.id).where(Session.token_hash == secret_hash(token))
+        )).mappings().first()
         if not row:
             raise AccessError('unauthenticated', 401)
-        await connection.execute('SELECT id FROM accounts WHERE id=%s FOR UPDATE', (row['owner_id'],))
+        await session.execute(select(Account.id).where(Account.id == row['owner_id']).with_for_update())
         # Logout remains available to blocked, expired or already revoked sessions.
-        await connection.execute('UPDATE sessions SET revoked=true WHERE id=%s', (row['id'],))
-        await terminal_accounts(connection, row['owner_id'], 'logout', row['id'])
+        await session.execute(update(Session.__table__).where(Session.id == row['id']).values(revoked=True))
+        await terminal_accounts(session, row['owner_id'], 'logout', row['id'])
     return {'logged_out': True}
 
 
-async def account_list(connection, token):
-    async with connection.transaction():
-        await lock_service(connection)
-        actor = await principal(connection, token)
-        if actor['role'] not in ('admin', 'super_admin'):
-            raise AccessError('forbidden')
-        return [public(row) for row in await (await connection.execute('SELECT * FROM accounts ORDER BY email,id')).fetchall()]
+async def account_list_view(session, actor):
+    if actor['role'] not in ('admin', 'super_admin'):
+        raise AccessError('forbidden')
+    rows = (await session.execute(select(Account.__table__).order_by(Account.email, Account.id))).mappings().all()
+    return [public(row) for row in rows]
 
 
-async def mutate(connection, token, target_id, changes):
+async def account_list(session, token):
+    async with session.begin():
+        await lock_service(session)
+        actor = await principal(session, token)
+        return await account_list_view(session, actor)
+
+
+async def mutate(session, token, target_id, changes):
     if any(key not in ('role', 'active', 'disabled') for key in changes):
         raise AccessError('invalid_account_changes', 422)
     if ('role' in changes and changes['role'] not in ('user', 'admin', 'super_admin')) or any(type(value) is not bool for key, value in changes.items() if key != 'role'):
         raise AccessError('invalid_account_changes', 422)
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        identity = await (await connection.execute('SELECT owner_id FROM sessions WHERE token_hash=%s', (secret_hash(token),))).fetchone()
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        identity = (await session.execute(
+            select(Session.owner_id).where(Session.token_hash == secret_hash(token))
+        )).mappings().first()
         if not identity:
             raise AccessError('unauthenticated', 401)
         # Take write locks up front, in stable order, before principal's session lock.
-        rows = await (await connection.execute('SELECT * FROM accounts WHERE id=ANY(%s::uuid[]) ORDER BY id FOR UPDATE', ([identity['owner_id'], target_id],))).fetchall()
-        await connection.execute('SELECT id FROM sessions WHERE owner_id=%s OR token_hash=%s ORDER BY id FOR UPDATE', (target_id, secret_hash(token)))
-        actor = await principal(connection, token)
-        target = next((row for row in rows if row['id'] == target_id), None)
+        rows = (await session.execute(
+            select(Account.__table__).where(Account.id.in_([identity['owner_id'], target_id]))
+            .order_by(Account.id).with_for_update()
+        )).mappings().all()
+        await session.execute(select(Session.id).where(or_(Session.owner_id == target_id,
+            Session.token_hash == secret_hash(token))).order_by(Session.id).with_for_update())
+        actor = await principal(session, token)
+        target = next((dict(row) for row in rows if row['id'] == target_id), None)
         if not target:
             raise AccessError('not_found', 404)
         if actor['role'] != 'super_admin' and (actor['role'] != 'admin' or target['role'] != 'user' or 'role' in changes):
@@ -267,31 +309,32 @@ async def mutate(connection, token, target_id, changes):
                        and (not changes.get('active', target['active']) or changes.get('disabled', target['disabled'])))
         updated = target
         if changes:
-            assignments = ','.join(f'{key}=%s' for key in changes)
-            updated = await (await connection.execute(
-                f'UPDATE accounts SET {assignments},context_epoch=context_epoch+%s WHERE id=%s RETURNING *', (*changes.values(), int(access_lost), target_id),
-            )).fetchone()
+            updated = dict((await session.execute(
+                update(Account.__table__).where(Account.id == target_id)
+                .values(**changes, context_epoch=Account.context_epoch + int(access_lost))
+                .returning(Account.__table__)
+            )).mappings().one())
         if access_lost:
-            await connection.execute('UPDATE sessions SET revoked=true WHERE owner_id=%s', (target_id,))
-            await terminal_accounts(connection, target_id, 'account_changed')
-            await connection.execute(
-                '''UPDATE document_files f SET state='failed',error='document_access_lost',job_id=NULL
-                   FROM documents d WHERE d.id=f.document_id AND d.owner_id=%s
-                   AND f.state IN ('receiving','queued','processing','awaiting_choice')''', (target_id,),
-            )
-        await audit(connection, actor['id'], updated, 'update_account', previous)
+            await session.execute(update(Session.__table__).where(Session.owner_id == target_id).values(revoked=True))
+            await terminal_accounts(session, target_id, 'account_changed')
+            await session.execute(update(DocumentFile.__table__)
+                .where(Document.id == DocumentFile.document_id, Document.owner_id == target_id,
+                       DocumentFile.state.in_(('receiving', 'queued', 'processing', 'awaiting_choice')))
+                .values(state='failed', error='document_access_lost', job_id=None))
+        await audit(session, actor['id'], updated, 'update_account', previous)
         return public(updated)
 
 
-async def bootstrap(connection, email):
+async def bootstrap(session, email):
     email = email_address(email)
     origin = frontend_origin()
     token = secrets.token_urlsafe(32)
-    async with connection.transaction():
-        await lock_service(connection, exclusive=True)
-        await connection.execute(
-            "INSERT INTO account_invitations VALUES (%s,%s,'super_admin',clock_timestamp()+interval '1 hour',false)", (secret_hash(token), email),
-        )
+    async with session.begin():
+        await lock_service(session, exclusive=True)
+        await session.execute(insert(AccountInvitation.__table__).values(
+            token_hash=secret_hash(token), email=email, role='super_admin',
+            expires_at=func.clock_timestamp() + timedelta(hours=1), consumed=False,
+        ))
     return f'{origin}/#invite={token}'
 
 
@@ -301,8 +344,14 @@ def main():
     args = parser.parse_args()
 
     async def run():
-        async with await AsyncConnection.connect(database_url(), autocommit=True, row_factory=dict_row) as connection:
-            print(await bootstrap(connection, args.email))
+        dsn = database_url()
+        database = Database(dsn)
+        try:
+            await migrate(dsn)
+            async with database.session() as session:
+                print(await bootstrap(session, args.email))
+        finally:
+            await database.dispose()
     asyncio.run(run())
 
 

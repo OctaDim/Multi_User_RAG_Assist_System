@@ -8,31 +8,33 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from psycopg.rows import dict_row
-from psycopg_pool import AsyncConnectionPool
 import uvicorn
 
 from app.api import accounts, answers, documents, settings, tabs
 from app.events import deadlines
 from app.auth import AccessError
-from app.db import database_url
+from app.db import Database, database_url, migrate
 from app.handoff import GuardedH11Protocol, HandoffMiddleware
 
 
 @asynccontextmanager
 async def lifespan(app):
-    async with AsyncConnectionPool(database_url(), open=False, kwargs={"autocommit": True, "row_factory": dict_row, "prepare_threshold": 0}) as pool:
-        await pool.wait()
-        async with pool.connection() as connection:
-            await connection.execute("SELECT id FROM service_state WHERE id=1")
-        app.state.pool = pool
-        deadline_task = asyncio.create_task(deadlines(pool))
+    dsn = database_url()
+    database = Database(dsn)
+    deadline_task = None
+    try:
+        await migrate(dsn)
+        app.state.database = database
+        deadline_task = asyncio.create_task(deadlines(database))
+        yield
+    finally:
         try:
-            yield
+            if deadline_task is not None:
+                deadline_task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await deadline_task
         finally:
-            deadline_task.cancel()
-            with suppress(asyncio.CancelledError):
-                await deadline_task
+            await database.dispose()
 
 
 async def access_error(request: Request, error: AccessError):
