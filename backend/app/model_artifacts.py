@@ -93,10 +93,8 @@ def verify_directory(root, manifest=None):
         try:
             if path.stat().st_size != item['size']:
                 _fail(f'Corrupt model artifact {path}: size differs from pinned manifest')
-            digest = hashlib.sha256()
             with path.open('rb') as stream:
-                for block in iter(lambda: stream.read(1024 * 1024), b''):
-                    digest.update(block)
+                digest = hashlib.file_digest(stream, 'sha256')
             if digest.hexdigest() != item['sha256']:
                 _fail(f'Corrupt model artifact {path}: SHA-256 differs from pinned manifest')
         except OSError as error:
@@ -137,7 +135,6 @@ def verify_installation(config):
         candidate = _no_symlinks(candidate)
         if candidate != storage / relative:
             _fail(f'Invalid models.{role}: expected project rag/local_models/{relative}')
-    # The configuration module is itself stdlib-only; load lazily for lightweight import.
     from app.configuration import ConfigurationError, load_settings
     for name, profile in manifest['profiles'].items():
         try:
@@ -154,7 +151,6 @@ def _download_url(item):
 
 
 def _remove_source_files(source, manifest):
-    # Unknown files belong to the operator. Delete only the verified companions.
     try:
         for item in manifest['artifacts']:
             (source / item['path']).unlink()
@@ -195,6 +191,13 @@ def prepare_models(*, source=None, download=False, move=False, destination=None,
                 verified = verify_directory(destination, manifest)
             except ModelArtifactError as error:
                 _fail(f'Existing destination is incomplete or corrupt; preserve/restore it before preparation: {error}')
+            scaffold = _no_symlinks(destination / '.gitignore')
+            if not scaffold.exists():
+                try:
+                    with scaffold.open('x') as stream:
+                        stream.write('*\n!.gitignore\n')
+                except OSError as error:
+                    _fail(f'Cannot restore model Git exclusions: {error}')
             if move:
                 verify_directory(source, manifest)
                 _remove_source_files(source, manifest)
@@ -214,19 +217,17 @@ def prepare_models(*, source=None, download=False, move=False, destination=None,
                 with urllib.request.urlopen(_download_url(item), timeout=60) as response, target.open('xb') as stream:
                     shutil.copyfileobj(response, stream)
         verify_directory(stage, manifest)
+        if destination.exists() and (destination / '.gitignore').is_file():
+            shutil.copyfile(destination / '.gitignore', stage / '.gitignore')
+        if not (stage / '.gitignore').exists():
+            (stage / '.gitignore').write_text('*\n!.gitignore\n')
         if destination.exists():
-            # Preserve the tracked scaffold and retain its prior directory.
-            if (destination / '.gitignore').is_file():
-                shutil.copyfile(destination / '.gitignore', stage / '.gitignore')
             backup = destination.parent / ('.local_models-backup-' + uuid.uuid4().hex)
             destination.rename(backup)
-        else:
-            (stage / '.gitignore').write_text('*\n!.gitignore\n')
         try:
             stage.rename(destination)
             verified = verify_directory(destination, manifest)
         except BaseException:
-            # Restore the old directory, retaining a failed candidate for diagnosis.
             if destination.exists():
                 destination.rename(stage)
             if backup is not None:

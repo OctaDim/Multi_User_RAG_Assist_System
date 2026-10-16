@@ -273,3 +273,27 @@ def test_move_cleanup_failure_reports_verified_destination_and_partial_source(mo
     assert (destination / 'tokenizer.json').read_bytes() == b'{}'
     assert not (source / 'model.onnx').exists()
     assert (source / 'tokenizer.json').read_bytes() == b'{}'
+
+
+@pytest.mark.parametrize('existing_set', [False, True], ids=['empty-directory', 'verified-reuse'])
+def test_preparation_restores_missing_git_exclusions(model_set, tmp_path, existing_set):
+    import subprocess
+    api = artifacts_module()
+    source, manifest = model_set
+    repo = tmp_path / 'repo'
+    repo.mkdir()
+    subprocess.run(['git', 'init', '--quiet', str(repo)], check=True)
+    destination = repo / 'rag/local_models'
+    destination.mkdir(parents=True)
+    if existing_set:
+        for item in manifest['artifacts']:
+            (destination / item['path']).write_bytes((source / item['path']).read_bytes())
+    api.prepare_models(source=source, destination=destination, manifest=manifest)
+    model_paths = ['rag/local_models/' + item['path'] for item in manifest['artifacts']]
+    result = subprocess.run(['git', '-C', str(repo), 'check-ignore', *model_paths],
+                            capture_output=True, text=True)
+    assert result.returncode == 0
+    assert result.stdout.splitlines() == model_paths
+    scaffold = subprocess.run(['git', '-C', str(repo), 'check-ignore', 'rag/local_models/.gitignore'],
+                              capture_output=True, text=True)
+    assert scaffold.returncode == 1, 'The exclusion scaffold must remain trackable'
