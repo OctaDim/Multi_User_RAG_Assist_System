@@ -1,0 +1,44 @@
+# Shared launch defaults. Override installation settings in service.local.toml.
+# All relative paths are relative to backend/, regardless of the working directory.
+[launcher]
+python = ".venv/bin/python"
+
+[api]
+host = "127.0.0.1"
+port = 8000
+frontend_origin = "http://127.0.0.1:8080"
+
+[database]
+dsn = ""
+ready_timeout_seconds = 30.0
+connect_timeout_seconds = 3
+retry_seconds = 0.25
+
+[models]
+generation = ""
+embedding = ""
+ocr = ""
+handwriting = ""
+
+[storage]
+originals = "var/originals"
+
+[smtp]
+host = ""
+port = 587
+sender = ""
+security = "starttls"
+username = ""
+password = ""
+timeout_seconds = 10.0
+
+# Defaults for the separately supported component CLI/env interface.
+[smtp.ports]
+starttls = 587
+ssl = 465
+plain = 1025
+
+[supervisor]
+poll_seconds = 0.1
+shutdown_timeout_seconds = 10.0
+kill_timeout_seconds = 3.0

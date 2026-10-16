@@ -1,0 +1,22 @@
+# Copy to service.local.toml (ignored by Git) and replace the placeholders.
+# Paths below are examples relative to backend/; absolute paths also work.
+[database]
+dsn = "postgresql://rag:CHANGE_ME@127.0.0.1:5432/rag"
+
+[models]
+generation = ".venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf"
+embedding = ".venv/rag-native-models/e5"
+ocr = ".venv/rag-native-models/ocr"
+# Optional separate handwriting GGUF; empty uses the generation model.
+handwriting = ""
+
+[smtp]
+host = "smtp.example.invalid"
+port = 587
+sender = "rag@example.invalid"
+security = "starttls"
+username = "CHANGE_ME"
+password = "CHANGE_ME"
+
+# Override [api], [launcher], [storage], [database] timeouts or [supervisor]
+# here when the shared defaults do not match this installation.

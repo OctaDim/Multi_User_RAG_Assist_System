@@ -1,4 +1,4 @@
-import {api, origin} from './api.js';
+import {api, origin, reconnectMs} from './api.js';
 import {token} from './auth.js';
 import {Drafts, tabKey} from './drafts.js';
 
@@ -331,7 +331,7 @@ export class Conversations {
           if (reader) await reader.cancel().catch(() => {});
         }
         this.connected = false; this.render();
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, reconnectMs));
       }
     } catch (error) {if (this.current()) this.reportError(error);}
   }

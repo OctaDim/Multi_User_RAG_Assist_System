@@ -18,6 +18,7 @@ from sqlalchemy import func, insert, or_, select, update
 from app import answers
 from app.auth import AccessError, lock_service, principal, secret_hash
 from app.db import Database, database_url, migrate
+from app.configuration import load_service_config
 from app.models import (Account, AccountInvitation, AccountsAudit, Conversation, Document,
                         DocumentFile, EmailVerification, Request, Session, Tab)
 
@@ -69,8 +70,9 @@ def frontend_origin():
 
 
 def mail_configuration():
+    defaults = load_service_config()['smtp']
     host, sender = os.environ.get('RAG_SMTP_HOST'), os.environ.get('RAG_SMTP_FROM')
-    security = os.environ.get('RAG_SMTP_SECURITY', 'starttls')
+    security = os.environ.get('RAG_SMTP_SECURITY', defaults['security'])
     if not host or not sender or '\n' in sender or '\r' in sender or security not in ('starttls', 'ssl', 'plain'):
         raise AccessError('mail_not_configured', 503)
     if security == 'plain' and host not in ('127.0.0.1', '::1', 'localhost'):
@@ -78,7 +80,7 @@ def mail_configuration():
     if bool(os.environ.get('RAG_SMTP_USERNAME')) != bool(os.environ.get('RAG_SMTP_PASSWORD')):
         raise AccessError('mail_not_configured', 503)
     try:
-        port = int(os.environ.get('RAG_SMTP_PORT', '465' if security == 'ssl' else '587'))
+        port = int(os.environ.get('RAG_SMTP_PORT', str(defaults['ports'][security])))
         if not 1 <= port <= 65535:
             raise ValueError
     except ValueError:
@@ -94,7 +96,8 @@ def deliver_verification(email, token, config, origin):
     message.set_content(f'Confirm your email address:\n{origin}/#verify={token}\nThis link expires in one hour and can be used once.\n')
     transport = smtplib.SMTP_SSL if security == 'ssl' else smtplib.SMTP
     options = {'context': ssl.create_default_context()} if security == 'ssl' else {}
-    with transport(host, port, timeout=10, **options) as smtp:
+    timeout = float(os.environ.get('RAG_SMTP_TIMEOUT', load_service_config()['smtp']['timeout_seconds']))
+    with transport(host, port, timeout=timeout, **options) as smtp:
         if security == 'starttls':
             smtp.starttls(context=ssl.create_default_context())
         username = os.environ.get('RAG_SMTP_USERNAME')

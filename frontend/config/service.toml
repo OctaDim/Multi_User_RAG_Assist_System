@@ -1,0 +1,11 @@
+# Public frontend defaults. Local overrides: service.local.toml (ignored by Git).
+[server]
+host = "127.0.0.1"
+port = 8080
+poll_seconds = 0.1
+
+[api]
+origin = "http://127.0.0.1:8000"
+
+[client]
+reconnect_ms = 1000

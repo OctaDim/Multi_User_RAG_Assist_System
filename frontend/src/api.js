@@ -1,5 +1,6 @@
 import { token } from './auth.js';
 export const origin = document.querySelector('meta[name="api-origin"]').content.replace(/\/$/, '');
+export const reconnectMs = Number(document.querySelector('meta[name="reconnect-ms"]').content);
 
 export async function api(path, method = 'GET', body, extraHeaders = {}) {
   const credential = token();

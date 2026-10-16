@@ -1,6 +1,6 @@
 """D1 real issuer/browser path; documents/OCR and manual G3 proof remain separate."""
 
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+import importlib.util
 import os
 from pathlib import Path
 import re
@@ -20,6 +20,9 @@ from mailbox import Mailbox
 
 BACKEND = Path(__file__).parents[2]
 FRONTEND = BACKEND.parent / 'frontend'
+_frontend_spec = importlib.util.spec_from_file_location('rag_frontend_main', FRONTEND / 'main.py')
+frontend_server = importlib.util.module_from_spec(_frontend_spec)
+_frontend_spec.loader.exec_module(frontend_server)
 PASSWORD = 'A long owned browser password'
 
 
@@ -28,24 +31,9 @@ def real_account_browser(environment, monkeypatch, tmp_path):
     api_url = None
     monkeypatch.setenv('RAG_ORIGINALS_DIR',str(tmp_path/'originals'))
 
-    class Static(SimpleHTTPRequestHandler):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, directory=str(FRONTEND), **kwargs)
-
-        def log_message(self, *args):
-            pass
-
-        def do_GET(self):
-            if self.path.split('?',1)[0] in ('/', '/index.html'):
-                body = (FRONTEND / 'index.html').read_text().replace('http://127.0.0.1:8000', api_url).encode()
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/html; charset=utf-8')
-                self.end_headers()
-                self.wfile.write(body)
-            else:
-                super().do_GET()
-
-    static = ThreadingHTTPServer(('127.0.0.1', 0), Static)
+    static_config = frontend_server.load_config()
+    static_config['server']['port'] = 0
+    static = frontend_server.create_server(static_config)
     frontend_url = f'http://127.0.0.1:{static.server_port}'
     static_thread = Thread(target=static.serve_forever, daemon=True)
     static_thread.start()
@@ -63,6 +51,7 @@ def real_account_browser(environment, monkeypatch, tmp_path):
                 match = re.search(r'Uvicorn running on (http://127\.0\.0\.1:\d+)',(tmp_path/'api-first.log').read_text())
                 if match:
                     api_url = match.group(1)
+                    static_config['api']['origin'] = api_url
                     break
                 if api_process.poll() is not None or time.monotonic() >= deadline:
                     raise RuntimeError('Owned D1 API did not bind')

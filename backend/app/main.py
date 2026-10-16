@@ -15,6 +15,7 @@ from app.events import deadlines
 from app.auth import AccessError
 from app.db import Database, database_url, migrate
 from app.handoff import GuardedH11Protocol, HandoffMiddleware
+from app.configuration import load_service_config
 
 
 @asynccontextmanager
@@ -65,8 +66,13 @@ app = create_app()
 
 
 def main():
+    config = load_service_config()['api']
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--host", default=config['host'])
+    parser.add_argument("--port", type=int, default=config['port'])
     args = parser.parse_args()
     uvicorn.run("app.main:app", host=args.host, port=args.port, http=GuardedH11Protocol, loop='asyncio')
+
+
+if __name__ == '__main__':
+    main()

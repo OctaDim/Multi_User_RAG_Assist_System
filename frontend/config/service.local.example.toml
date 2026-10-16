@@ -1,0 +1,8 @@
+# Copy to service.local.toml to override this installation's public settings.
+# Never place backend credentials in a frontend configuration.
+[server]
+host = "127.0.0.1"
+port = 8080
+
+[api]
+origin = "http://127.0.0.1:8000"
