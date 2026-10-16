@@ -1,0 +1,3 @@
+# Keep the directory scaffold; model weights and downloaded companion files stay local.
+*
+!.gitignore
