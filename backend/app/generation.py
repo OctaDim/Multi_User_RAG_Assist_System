@@ -18,6 +18,7 @@ from sqlalchemy import DateTime, cast, func, literal, select, update
 from sqlalchemy.dialects.postgresql import insert
 from psycopg.conninfo import make_conninfo
 
+from app.configuration import load_settings
 from app.models import Account, Conversation, CoordinatorLease, Document, GraphBinding, Message, Request, RequestSource, ServiceState, Setting
 
 from app import answers, settings, sources
@@ -239,7 +240,7 @@ class Coordinator:
         async def watch():
             while True:
                 await self.cancel_invalid()
-                await asyncio.sleep(0.05)
+                await asyncio.sleep(load_settings('policy')['generation']['cancellation_poll_seconds'])
 
         watcher = asyncio.create_task(watch())
         try:
@@ -247,7 +248,7 @@ class Coordinator:
                 if watcher.done():
                     watcher.result()
                 await self.tick()
-                await asyncio.sleep(0.01 if self.active or self.ready else 0.05)
+                await asyncio.sleep(load_settings('policy')['generation']['active_poll_seconds' if self.active or self.ready else 'idle_poll_seconds'])
         finally:
             watcher.cancel()
             await asyncio.gather(watcher, return_exceptions=True)
@@ -306,15 +307,15 @@ class Supervisor:
             if self.child.poll() is None:
                 self.child.terminate()
             try:
-                await asyncio.to_thread(self.child.wait, 3)
+                await asyncio.to_thread(self.child.wait, load_settings('policy')['generation']['reap_timeout_seconds'])
             except subprocess.TimeoutExpired:
                 self.child.kill()
-                await asyncio.to_thread(self.child.wait, 3)
+                await asyncio.to_thread(self.child.wait, load_settings('policy')['generation']['reap_timeout_seconds'])
             self.child = None
             self.record_child()
 
     async def run(self):
-        dsn = make_conninfo(self.dsn, connect_timeout=5)
+        dsn = make_conninfo(self.dsn, connect_timeout=load_settings('policy')['generation']['connect_timeout_seconds'])
         await migrate(dsn)
         database = Database(dsn)
         try:
@@ -368,7 +369,7 @@ class Supervisor:
             os.set_blocking(ready_read, False)
             ready = False
             loop = asyncio.get_running_loop()
-            lease_seconds = 5
+            lease_seconds = load_settings('policy')['generation']['lease_seconds']
             ownership_deadline = loop.time() + lease_seconds
 
             async def renew(ready):
@@ -400,7 +401,7 @@ class Supervisor:
                     raise RuntimeError('Coordinator ownership connection stalled')
                 heartbeat.result()
                 ownership_deadline = renewal_started + lease_seconds
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(load_settings('policy')['generation']['renewal_poll_seconds'])
         finally:
             # Reap first, even when DB cleanup or a cancelled query cannot complete.
             await self.reap_child()
@@ -458,7 +459,7 @@ async def worker(args):
                     raise RuntimeError('Native worker lost its execution epoch')
                 if service['healthy']:
                     break
-                await asyncio.sleep(0.05)
+                await asyncio.sleep(load_settings('policy')['generation']['ready_poll_seconds'])
             await Coordinator(database, args.epoch, runtime, embedder).run()
         finally:
             runtime.close()

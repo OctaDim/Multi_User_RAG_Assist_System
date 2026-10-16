@@ -17,3 +17,36 @@ repository = "unsloth/Qwen3.5-2B-GGUF"
 revision = "f6d5376be1edb4d416d56da11e5397a961aca8ae"
 n_ctx = 4096
 thinking = false
+
+[execution]
+n_threads = 4
+n_threads_batch = 8
+n_batch = 128
+n_ubatch = 128
+
+[detector]
+intra_op_num_threads = 2
+inter_op_num_threads = 1
+confidence = 0.5
+
+[geometry]
+render_width = 1200
+foreground_threshold = 245
+padding = 12
+component_min_height = 12
+component_min_aspect = 2.5
+component_min_pixels = 30
+component_max_density = 0.65
+region_union_overlap = 0.8
+
+[fragments]
+limit = 2400
+overlap = 128
+edge_tolerance = 1
+duplicate_min_overlap = 0.8
+duplicate_max_overlap = 0.5
+spanning_width = 0.8
+
+[decoding]
+# Zero retains native unlimited output within each recognizer's context.
+max_tokens = 0

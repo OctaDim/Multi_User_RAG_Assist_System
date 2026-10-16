@@ -7,6 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import StreamingResponse
 
 from app import events
+from app.configuration import load_settings
 from app.auth import AccessError, bearer
 
 
@@ -48,7 +49,7 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
         cursor = last_event_id
         try:
             yield encode({'kind': 'heartbeat', 'payload': tab})
-            next_heartbeat = asyncio.get_running_loop().time() + 5
+            next_heartbeat = asyncio.get_running_loop().time() + load_settings('policy')['tabs']['heartbeat_seconds']
             while True:
                 # This DB authorization ends before yielding. U7/U8 must prove the
                 # separate transport fence; StreamingResponse alone cannot do so.
@@ -62,9 +63,9 @@ async def stream(tab_id: UUID, request: Request, authorization: str | None = Hea
                         heartbeat = await events.heartbeat(connection, token, tab_id, tab_proof, tab['connection_epoch'])
                     if heartbeat:
                         yield encode({'kind': 'heartbeat', 'payload': heartbeat})
-                    next_heartbeat = asyncio.get_running_loop().time() + 5
+                    next_heartbeat = asyncio.get_running_loop().time() + load_settings('policy')['tabs']['heartbeat_seconds']
                 if not value:
-                    await asyncio.sleep(0.1)
+                    await asyncio.sleep(load_settings('policy')['tabs']['poll_seconds'])
         except AccessError:
             return
         finally:

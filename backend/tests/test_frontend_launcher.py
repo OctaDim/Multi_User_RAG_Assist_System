@@ -35,16 +35,38 @@ def test_public_config_injection_and_head(tmp_path, monkeypatch):
     config['server']['port'] = 0
     config['api']['origin'] = 'https://api.example.test:9443'
     config['client']['reconnect_ms'] = 2345
+    config['ui'] = {'composer_rows': 7, 'correction_rows': 18, 'short_id_chars': 10}
     with served(config) as origin:
         with urlopen(origin) as response:
             body = response.read()
             assert b'content="https://api.example.test:9443"' in body
             assert b'content="2345"' in body
+            assert b'content="18"' in body
+            assert b'content="10"' in body
+            assert b'id="question" rows="7"' in body
+            assert b'id="authentication" inert' in body
         with urlopen(Request(origin, method='HEAD')) as response:
             assert response.read() == b''
             assert int(response.headers['Content-Length']) == len(body)
         with urlopen(origin + '/src/api.js') as response:
             assert 'javascript' in response.headers['Content-Type']
+
+
+@pytest.mark.parametrize('key,value', [('composer_rows', 0), ('correction_rows', True), ('short_id_chars', -2)])
+def test_ui_config_rejects_invalid_values(key, value):
+    config = frontend.load_config()
+    config.setdefault('ui', {})[key] = value
+    with pytest.raises(ValueError, match=f'ui.{key}'):
+        frontend.validate_config(config)
+
+
+def test_ui_local_settings_are_independent_of_working_directory(tmp_path, monkeypatch):
+    local = tmp_path / 'service.local.toml'
+    local.write_text('[ui]\ncomposer_rows = 7\ncorrection_rows = 18\nshort_id_chars = 10\n')
+    monkeypatch.chdir(tmp_path)
+    config = frontend.load_config(local)
+    frontend.validate_config(config)
+    assert config['ui'] == {'composer_rows': 7, 'correction_rows': 18, 'short_id_chars': 10}
 
 
 @pytest.mark.parametrize('path', [
@@ -73,3 +95,15 @@ def test_frontend_main_reports_busy_port_from_foreign_directory(tmp_path):
                                 cwd=tmp_path, capture_output=True, text=True, timeout=10)
     assert result.returncode != 0
     assert 'Frontend startup failed' in result.stderr
+
+
+@pytest.mark.parametrize('section,key,value', [
+    ('client', 'reconnect_ms', 2147483648),
+    ('ui', 'composer_rows', 4294967296),
+    ('ui', 'correction_rows', 4294967296),
+])
+def test_frontend_config_rejects_browser_integer_overflow(section, key, value):
+    config = frontend.load_config()
+    config[section][key] = value
+    with pytest.raises(ValueError, match=f'{section}.{key}'):
+        frontend.validate_config(config)

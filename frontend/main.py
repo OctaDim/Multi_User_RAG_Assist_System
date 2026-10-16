@@ -52,8 +52,13 @@ def validate_config(config):
             or parsed.password is not None or parsed.path not in ('', '/') or parsed.query or parsed.fragment
             or any(char.isspace() for char in origin) or port == 0):
         raise ValueError('Invalid configuration key: api.origin')
-    if type(config['client']['reconnect_ms']) is not int or config['client']['reconnect_ms'] <= 0:
+    if type(config['client']['reconnect_ms']) is not int or not 0 < config['client']['reconnect_ms'] <= 2**31-1:
         raise ValueError('Invalid configuration key: client.reconnect_ms')
+    for key in ('composer_rows', 'correction_rows', 'short_id_chars'):
+        if type(config['ui'][key]) is not int or config['ui'][key] <= 0:
+            raise ValueError(f'Invalid configuration key: ui.{key}')
+        if key.endswith('_rows') and config['ui'][key] > 2**32-1:
+            raise ValueError(f'Invalid configuration key: ui.{key}')
 
 
 class PublicFiles(BaseHTTPRequestHandler):
@@ -73,7 +78,10 @@ class PublicFiles(BaseHTTPRequestHandler):
             if path in ('/', '/index.html'):
                 text = (ROOT / 'index.html').read_text(encoding='utf-8')
                 body = text.replace('__RAG_API_ORIGIN__', escape(self.config['api']['origin'].rstrip('/'), quote=True))
-                body = body.replace('__RAG_RECONNECT_MS__', str(self.config['client']['reconnect_ms'])).encode('utf-8')
+                body = body.replace('__RAG_RECONNECT_MS__', str(self.config['client']['reconnect_ms']))
+                for key in ('composer_rows', 'correction_rows', 'short_id_chars'):
+                    body = body.replace(f'__RAG_{key.upper()}__', str(self.config['ui'][key]))
+                body = body.encode('utf-8')
                 content_type = 'text/html; charset=utf-8'
             elif path.startswith('/src/') and '..' not in path.split('/') and '\\' not in path:
                 target = (ROOT / path.lstrip('/')).resolve()

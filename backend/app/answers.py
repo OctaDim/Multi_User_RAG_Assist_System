@@ -21,7 +21,7 @@ async def project(connection, request, *, flags=None):
             'source_flags': flags, 'excluded': bool(flags) or request['state'] in ('interrupted', 'failed')}
 
 
-def question_budget(question):
+def question_budget(question, generation=None):
     from app.llama_runtime import Vocabulary
     from app.rag import pack_context
     path = os.environ.get('RAG_MODEL_PATH')
@@ -29,7 +29,8 @@ def question_budget(question):
         raise AccessError('tokenizer_unavailable', 503)
     vocabulary = Vocabulary(path)
     try:
-        pack_context(question, [], [], vocabulary.tokenize)
+        pack_context(question, [], [], vocabulary.tokenize,
+                     n_ctx=generation['n_ctx'] if generation is not None else None)
     finally:
         vocabulary.close()
 
@@ -67,7 +68,9 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             if previous['fingerprint'] != fingerprint:
                 raise AccessError('operation_conflict', 409)
             return await project(connection, previous)
-    await asyncio.to_thread(question_budget, question)
+        from app import settings
+        generation = (await settings.current(connection))['values']
+    await asyncio.to_thread(question_budget, question, generation)
     async with connection.begin():
         service = await lock_service(connection)
         actor = await principal(connection, token)

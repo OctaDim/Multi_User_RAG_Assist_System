@@ -1,15 +1,12 @@
-import tomllib
-
 from sqlalchemy import insert, select, update
 
 from app.auth import AccessError, lock_service, principal
 from app.models import Setting, SettingsAudit
-from app.resources import resource_path
+from app.configuration import load_settings
 
 
 def defaults():
-    with (resource_path("config") / "runtime.toml").open("rb") as source:
-        return tomllib.load(source)
+    return load_settings('runtime')
 
 
 async def current(session):

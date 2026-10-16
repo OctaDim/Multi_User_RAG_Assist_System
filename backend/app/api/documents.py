@@ -8,6 +8,7 @@ from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from app import documents
+from app.configuration import load_settings
 from app.auth import bearer, AccessError
 
 
@@ -16,7 +17,7 @@ router = APIRouter(prefix='/api/documents')
 
 class UploadFile(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
-    name: str = Field(min_length=1, max_length=255)
+    name: str = Field(min_length=1, max_length=load_settings('policy')['inputs']['filename_max'])
     size: int = Field(gt=0, le=2**63-1)
 
 

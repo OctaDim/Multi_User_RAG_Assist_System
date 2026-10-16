@@ -7,3 +7,8 @@ __pycache__/
 /backend/config/service.local.toml
 /frontend/config/service.local.toml
 /backend/var/
+/backend/config/policy.local.toml
+/backend/config/runtime.local.toml
+/backend/config/ocr.local.toml
+/backend/config/documents.local.toml
+/backend/config/prompts.local.toml

@@ -15,7 +15,7 @@ from app.events import deadlines
 from app.auth import AccessError
 from app.db import Database, database_url, migrate
 from app.handoff import GuardedH11Protocol, HandoffMiddleware
-from app.configuration import load_service_config
+from app.configuration import load_service_config, load_settings
 
 
 @asynccontextmanager
@@ -49,6 +49,14 @@ async def invalid_input(request: Request, error: RequestValidationError):
 
 def create_app():
     application = FastAPI(lifespan=lifespan)
+
+    @application.get('/api/public-settings')
+    async def public_settings():
+        inputs = load_settings('policy')['inputs']
+        return {'inputs': {key: inputs[key] for key in (
+            'email_min', 'email_max', 'password_min', 'password_max', 'token_max', 'filename_max',
+        )}, 'document_formats': ['pdf', 'docx', 'txt', 'md']}
+
     origin = os.environ.get('RAG_FRONTEND_ORIGIN', '').rstrip('/')
     application.add_middleware(CORSMiddleware, allow_origins=[origin] if origin else [],
                                allow_methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],

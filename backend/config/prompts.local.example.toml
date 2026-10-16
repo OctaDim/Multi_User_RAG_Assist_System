@@ -1,0 +1,2 @@
+# Optional local prompts. Copy a complete string from prompts.toml.
+# Preserve every required placeholder in rag.template.

@@ -1,0 +1,52 @@
+# Application policy. Restart all backend processes after local changes.
+[inputs]
+email_min = 3
+email_max = 254
+password_min = 15
+password_max = 1024
+token_max = 128
+filename_max = 255
+
+[security]
+kdf_concurrency = 1
+scrypt_n = 131072
+scrypt_r = 8
+scrypt_p = 1
+scrypt_dklen = 32
+salt_bytes = 16
+scrypt_maxmem = 268435456
+token_bytes = 32
+# Retain profiles needed by existing persisted password hashes.
+legacy_scrypt = [{n = 131072, r = 8, p = 1, dklen = 32, salt_bytes = 16}]
+
+[accounts]
+verification_seconds = 3600.0
+invitation_seconds = 3600.0
+session_seconds = 43200.0
+
+[mail]
+subject = "Confirm your RAG account"
+verification_template = "Confirm your email address:\n{origin}/#verify={token}\nThis link expires in {expiry} and can be used once.\n"
+
+[tabs]
+grace_seconds = 10.0
+ack_timeout_seconds = 15.0
+heartbeat_seconds = 5.0
+sweep_seconds = 0.25
+poll_seconds = 0.1
+
+[generation]
+cancellation_poll_seconds = 0.05
+active_poll_seconds = 0.01
+idle_poll_seconds = 0.05
+reap_timeout_seconds = 3.0
+connect_timeout_seconds = 5
+lease_seconds = 5.0
+renewal_poll_seconds = 0.1
+ready_poll_seconds = 0.05
+
+[ingestion]
+digest_block_bytes = 1048576
+chunk_characters = 800
+cancellation_poll_seconds = 0.1
+queue_poll_seconds = 0.25

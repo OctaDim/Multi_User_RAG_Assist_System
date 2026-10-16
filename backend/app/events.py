@@ -5,13 +5,14 @@ from uuid import uuid4
 
 from sqlalchemy import and_, func, insert, or_, select, update
 
+from app.configuration import load_settings
 from app.models import Account, Conversation, Event, Request, Tab
 from app import answers
 from app.auth import AccessError, lock_service, principal, secret_hash
 
 
-GRACE = 10
-ACK_TIMEOUT = 15
+GRACE = load_settings('policy')['tabs']['grace_seconds']
+ACK_TIMEOUT = load_settings('policy')['tabs']['ack_timeout_seconds']
 
 
 def now():
@@ -42,7 +43,7 @@ async def origin(connection, request_id):
 
 
 async def create_tab(connection, token):
-    proof = secrets.token_urlsafe(32)
+    proof = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
@@ -64,7 +65,7 @@ async def settle(connection, tab, current):
 
 
 async def connect(connection, token, tab_id, proof):
-    challenge = secrets.token_urlsafe(32)
+    challenge = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
@@ -97,7 +98,7 @@ async def ack(connection, token, tab_id, proof, epoch, challenge):
 
 
 async def heartbeat(connection, token, tab_id, proof, epoch):
-    challenge = secrets.token_urlsafe(32)
+    challenge = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
@@ -200,4 +201,4 @@ async def deadlines(database):
     while True:
         async with database.session() as connection:
             await expire_due(connection)
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(load_settings('policy')['tabs']['sweep_seconds'])

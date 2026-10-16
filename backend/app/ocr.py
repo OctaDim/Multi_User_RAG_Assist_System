@@ -6,7 +6,6 @@ import math
 import os
 from pathlib import Path
 import re
-import tomllib
 from threading import Event, Lock
 
 from PIL import Image, ImageDraw
@@ -18,7 +17,7 @@ import llama_cpp as native
 from llama_cpp.llama_chat_format import MTMDChatHandler
 
 from app.auth import AccessError
-from app.resources import resource_path
+from app.configuration import load_settings
 from app.ocr_fragments import fragment_boxes, merge_fragments, translate_region
 
 
@@ -32,7 +31,7 @@ def render_pdf_page(path,number):
             raise AccessError('not_found',404)
         page=document[number-1]
         try:
-            bitmap=page.render(scale=1200/page.get_width())
+            bitmap=page.render(scale=load_settings('ocr')['geometry']['render_width']/page.get_width())
             try:
                 return bitmap.to_pil().convert('RGB')
             finally:
@@ -86,14 +85,15 @@ def compose_page(lines, skips):
 def ink_mask(image):
     """Image-derived foreground threshold; no text, language or known answer."""
     gray=np.asarray(image.convert('L'))
-    histogram=np.bincount(gray[gray<245].ravel(),minlength=256).astype(float)
+    threshold=load_settings('ocr')['geometry']['foreground_threshold']
+    histogram=np.bincount(gray[gray<threshold].ravel(),minlength=256).astype(float)
     if not histogram.sum():
         return np.zeros(gray.shape,dtype=bool)
     if np.count_nonzero(histogram)==1:
-        return gray<245
+        return gray<threshold
     weight=np.cumsum(histogram);moment=np.cumsum(histogram*np.arange(256))
     variance=(moment[-1]*weight-moment*weight[-1])**2/np.maximum(weight*(weight[-1]-weight),1)
-    return (gray<245) & (gray<=int(variance.argmax()))
+    return (gray<threshold) & (gray<=int(variance.argmax()))
 
 
 def ink_components(foreground):
@@ -117,16 +117,15 @@ def ink_components(foreground):
 class DocumentOCR:
     def __init__(self):
         root = Path(os.environ['RAG_OCR_DIR'])
+        profiles=load_settings('ocr')
         self.config = json.loads((root/'dfine/config.json').read_text())
         processing = json.loads((root/'dfine/preprocessor_config.json').read_text())
         if processing['do_normalize'] or processing['size']!={'height':640,'width':640} or not self.config['use_focal_loss']:
             raise AccessError('ocr_profile_mismatch',503)
         options = ort.SessionOptions()
-        options.intra_op_num_threads=2
-        options.inter_op_num_threads=1
+        options.intra_op_num_threads=profiles['detector']['intra_op_num_threads']
+        options.inter_op_num_threads=profiles['detector']['inter_op_num_threads']
         self.detector = ort.InferenceSession(str(root/'dfine/model.onnx'),sess_options=options,providers=['CPUExecutionProvider'])
-        with (resource_path('config')/'ocr.toml').open('rb') as source:
-            profiles=tomllib.load(source)
         self.lock = Lock()
         self.model = None
         self.handwriting_model = None
@@ -141,7 +140,7 @@ class DocumentOCR:
                             raise AccessError('ocr_profile_mismatch',503)
                 handler=MTMDChatHandler(str(projector),use_gpu=False,verbose=False)
                 instance=Llama(model_path=str(model),chat_handler=handler,n_ctx=profile['n_ctx'],
-                    n_threads=4,n_threads_batch=8,n_gpu_layers=0,n_batch=128,n_ubatch=128,flash_attn=True,verbose=False)
+                    **profiles['execution'],n_gpu_layers=0,flash_attn=True,verbose=False)
                 if role=='printed':self.model=instance
                 else:self.handwriting_model=instance
         except BaseException:
@@ -159,6 +158,8 @@ class DocumentOCR:
         # Detect on original pixels once. A D-FINE hit must not suppress missed
         # cursive elsewhere, and a partial box must cover its full ink component.
         components=ink_components(ink_mask(image))
+        geometry=load_settings('ocr')['geometry']
+        padding=geometry['padding']
         regions=self.detect_text_regions(image)
         def intersects(a,b):
             return min(a[2],b[2])>max(a[0],b[0]) and min(a[3],b[3])>max(a[1],b[1])
@@ -168,11 +169,13 @@ class DocumentOCR:
             if touching:
                 for region in touching:
                     box=region['bbox']
-                    region['bbox']=[max(0,min(box[0],x0-12)),max(0,min(box[1],y0-12)),
-                        min(image.width,max(box[2],x1+12)),min(image.height,max(box[3],y1+12))]
+                    region['bbox']=[max(0,min(box[0],x0-padding)),max(0,min(box[1],y0-padding)),
+                        min(image.width,max(box[2],x1+padding)),min(image.height,max(box[3],y1+padding))]
                     region['coordinate_source']='dfine_layout_and_original_ink'
-            elif h>=12 and w/h>2.5 and component['pixels']>=30 and component['pixels']/(w*h)<.65:
-                regions.append({'kind':'handwritten','bbox':[max(0,x0-12),max(0,y0-12),min(image.width,x1+12),min(image.height,y1+12)],
+            elif (h>=geometry['component_min_height'] and w/h>geometry['component_min_aspect']
+                    and component['pixels']>=geometry['component_min_pixels']
+                    and component['pixels']/(w*h)<geometry['component_max_density']):
+                regions.append({'kind':'handwritten','bbox':[max(0,x0-padding),max(0,y0-padding),min(image.width,x1+padding),min(image.height,y1+padding)],
                     'detection_source':'connected_ink','coordinate_source':'original_ink_component'})
         # Expansion can make multiple layout detections describe the same
         # source ink. Union those crops rather than transcribing duplicates.
@@ -183,7 +186,7 @@ class DocumentOCR:
             while index<len(merged):
                 prior=merged[index];a=candidate['bbox'];b=prior['bbox']
                 overlap=max(0,min(a[2],b[2])-max(a[0],b[0]))*max(0,min(a[3],b[3])-max(a[1],b[1]))
-                if overlap>=.8*min((a[2]-a[0])*(a[3]-a[1]),(b[2]-b[0])*(b[3]-b[1])):
+                if overlap>=geometry['region_union_overlap']*min((a[2]-a[0])*(a[3]-a[1]),(b[2]-b[0])*(b[3]-b[1])):
                     detections=candidate.get('detections',[dict(candidate)])+prior.get('detections',[dict(prior)])
                     candidate={'kind':'handwritten','bbox':[min(a[0],b[0]),min(a[1],b[1]),max(a[2],b[2]),max(a[3],b[3])],
                         'coordinate_source':'original_ink_region_union','detections':detections}
@@ -197,6 +200,8 @@ class DocumentOCR:
         # input. Keep their original aspect and pixels with white page context
         # instead of stretching a two-line crop to fill the entire page.
         offset_x = offset_y = 0
+        settings=load_settings('ocr')
+        padding=settings['geometry']['padding']
         detection_image = image
         if image.width < 640 and image.height < 640:
             detection_image = Image.new('RGB',(640,640),'white')
@@ -209,11 +214,11 @@ class DocumentOCR:
         regions = []
         for index in np.argsort(scores[:,handwritten])[::-1]:
             confidence = float(scores[index,handwritten])
-            if confidence < .5:
+            if confidence < settings['detector']['confidence']:
                 continue
             cx,cy,w,h = boxes[0,index]
-            bbox = [max(0,math.floor((cx-w/2)*detection_image.width)-offset_x-12),max(0,math.floor((cy-h/2)*detection_image.height)-offset_y-12),
-                    min(image.width,math.ceil((cx+w/2)*detection_image.width)-offset_x+12),min(image.height,math.ceil((cy+h/2)*detection_image.height)-offset_y+12)]
+            bbox = [max(0,math.floor((cx-w/2)*detection_image.width)-offset_x-padding),max(0,math.floor((cy-h/2)*detection_image.height)-offset_y-padding),
+                    min(image.width,math.ceil((cx+w/2)*detection_image.width)-offset_x+padding),min(image.height,math.ceil((cy+h/2)*detection_image.height)-offset_y+padding)]
             if bbox[0]<bbox[2] and bbox[1]<bbox[3]:
                 regions.append({'kind':'handwritten','bbox':bbox,'detection_confidence':confidence,'coordinate_source':'dfine_layout'})
         return sorted(regions,key=lambda region:(region['bbox'][1],region['bbox'][0]))
@@ -241,8 +246,8 @@ class DocumentOCR:
         data=BytesIO();image.save(data,format='PNG')
         uri='data:image/png;base64,'+base64.b64encode(data.getvalue()).decode()
         result=self.model.create_chat_completion(messages=[{'role':'user','content':[
-            {'type':'image_url','image_url':{'url':uri}}, {'type':'text','text':'Spotting:'},
-        ]}],temperature=0,max_tokens=0)
+            {'type':'image_url','image_url':{'url':uri}}, {'type':'text','text':load_settings('prompts')['ocr']['printed']},
+        ]}],temperature=0,max_tokens=load_settings('ocr')['decoding']['max_tokens'])
         if result['choices'][0]['finish_reason']!='stop':
             raise AccessError('ocr_truncated',422)
         count=result['usage']['completion_tokens']
@@ -257,11 +262,8 @@ class DocumentOCR:
         data=BytesIO();image.save(data,format='PNG')
         uri='data:image/png;base64,'+base64.b64encode(data.getvalue()).decode()
         result=self.handwriting_model.chat_handler(llama=self.handwriting_model,messages=[{'role':'user','content':[
-            {'type':'image_url','image_url':{'url':uri}}, {'type':'text','text':
-                'Transcribe exactly the text visible in this image. The supported languages are Russian, Belarusian, English and German. '
-                'Preserve the original language, alphabet, spelling and line breaks. Return only the transcription. '
-                'Do not translate, modernize, correct or explain the text.'},
-        ]}],enable_thinking=False,temperature=0,max_tokens=0)
+            {'type':'image_url','image_url':{'url':uri}}, {'type':'text','text':load_settings('prompts')['ocr']['handwriting']},
+        ]}],enable_thinking=False,temperature=0,max_tokens=load_settings('ocr')['decoding']['max_tokens'])
         if result['choices'][0]['finish_reason']!='stop':
             raise AccessError('ocr_truncated',422)
         return result['choices'][0]['message']['content']

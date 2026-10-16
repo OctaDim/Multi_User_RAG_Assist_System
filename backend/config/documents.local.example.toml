@@ -1,0 +1,3 @@
+# Defaults for NEW per-account policies. Existing overrides remain in PostgreSQL.
+[limits]
+file_bytes = 50000000

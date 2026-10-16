@@ -1,0 +1,4 @@
+# Local CPU runtime and retrieval tuning.
+[rag]
+retrieval_limit = 12
+response_reserve = 256

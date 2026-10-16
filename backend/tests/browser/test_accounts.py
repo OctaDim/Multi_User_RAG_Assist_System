@@ -87,6 +87,7 @@ def real_account_browser(environment, monkeypatch, tmp_path):
 
 def register(page, mailbox, frontend_url, email, invitation_url=None):
     page.goto(invitation_url or frontend_url)
+    page.wait_for_function('document.documentElement.dataset.ready === "true"')
     form = page.locator('#register')
     form.locator('[name=email]').fill(email)
     form.locator('[name=password]').fill(PASSWORD)
@@ -206,6 +207,7 @@ def test_invited_registration_retries_actual_smtp_failure(real_account_browser):
         invitation = subprocess.run([sys.executable, '-m', 'app.accounts', '--email', 'retry-operator@owned.test'],
                                     cwd=BACKEND, env=os.environ.copy(), check=True, capture_output=True, text=True).stdout.strip()
         page.goto(invitation)
+        page.wait_for_function('document.documentElement.dataset.ready === "true"')
         form = page.locator('#register')
         form.locator('[name=email]').fill('retry-operator@owned.test')
         form.locator('[name=password]').fill(PASSWORD)
@@ -220,5 +222,40 @@ def test_invited_registration_retries_actual_smtp_failure(real_account_browser):
         expect(page.locator('#status')).to_have_text('Email подтверждён. Теперь войдите.')
         login(page, 'retry-operator@owned.test')
         expect(page.locator('#identity')).to_contain_text('super_admin')
+    finally:
+        context.close()
+
+
+def test_form_constraints_follow_public_policy_and_unavailable_policy_blocks_forms(real_account_browser):
+    browser, _, frontend, api_url = real_account_browser
+    context = browser.new_context()
+    try:
+        page = context.new_page()
+        inputs = {'email_min': 5, 'email_max': 150, 'password_min': 20,
+                  'password_max': 300, 'token_max': 96, 'filename_max': 180}
+        page.route(f'{api_url}/api/public-settings', lambda route: route.fulfill(json={
+            'inputs': inputs, 'document_formats': ['pdf', 'txt'],
+        }))
+        page.goto(frontend)
+        page.wait_for_function('document.documentElement.dataset.ready === "true"')
+        for name in ('login', 'register'):
+            expect(page.locator(f'#{name} [name=email]')).to_have_attribute('minlength', '5')
+            expect(page.locator(f'#{name} [name=email]')).to_have_attribute('maxlength', '150')
+            expect(page.locator(f'#{name} [name=password]')).to_have_attribute('minlength', '20')
+            expect(page.locator(f'#{name} [name=password]')).to_have_attribute('maxlength', '300')
+        expect(page.locator('#register [name=invitation]')).to_have_attribute('maxlength', '96')
+        expect(page.locator('#registration-password-label')).to_have_text('Пароль (от 20 символов)')
+        expect(page.locator('#document-upload [name=files]')).to_have_attribute('accept', '.pdf,.txt')
+        expect(page.locator('#login button')).to_be_enabled()
+
+        page.unroute(f'{api_url}/api/public-settings')
+        page.route(f'{api_url}/api/public-settings', lambda route: route.fulfill(status=503, json={'error': 'unavailable'}))
+        page.goto(frontend + '/?settings-unavailable#verify=private-proof')
+        expect(page.locator('#status')).to_have_text('Настройки сервиса недоступны. Повторите загрузку страницы позже.')
+        expect(page.locator('#login button')).to_be_disabled()
+        expect(page.locator('#register button')).to_be_disabled()
+        assert page.locator('#authentication').evaluate('(element) => element.inert')
+        assert page.locator('html').get_attribute('data-ready') is None
+        assert '#' not in page.url
     finally:
         context.close()

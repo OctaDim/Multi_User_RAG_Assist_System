@@ -10,6 +10,7 @@ import secrets
 import smtplib
 import ssl
 from threading import Semaphore
+from functools import lru_cache
 from urllib.parse import urlsplit
 from uuid import uuid4
 
@@ -18,14 +19,21 @@ from sqlalchemy import func, insert, or_, select, update
 from app import answers
 from app.auth import AccessError, lock_service, principal, secret_hash
 from app.db import Database, database_url, migrate
-from app.configuration import load_service_config
+from app.configuration import load_service_config, load_settings
 from app.models import (Account, AccountInvitation, AccountsAudit, Conversation, Document,
                         DocumentFile, EmailVerification, Request, Session, Tab)
 
 
 PUBLIC = ('id', 'email', 'role', 'verified', 'active', 'disabled', 'paid')
-# Each OpenSSL scrypt operation uses 128 MiB; serialize KDF work per API process.
-KDF_MEMORY = Semaphore(1)
+@lru_cache(maxsize=1)
+def kdf_memory():
+    return Semaphore(load_settings('policy')['security']['kdf_concurrency'])
+
+
+def password_profile():
+    config = load_settings('policy')['security']
+    return dict(n=config['scrypt_n'], r=config['scrypt_r'], p=config['scrypt_p'],
+                dklen=config['scrypt_dklen'], salt_bytes=config['salt_bytes'])
 
 
 def public(account):
@@ -34,31 +42,53 @@ def public(account):
 
 def email_address(value):
     value = value.strip().lower()
-    if len(value) > 254 or not re.fullmatch(r'[a-z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?\.[a-z]{2,63}', value):
+    limits = load_settings('policy')['inputs']
+    if not limits['email_min'] <= len(value) <= limits['email_max'] or not re.fullmatch(r'[a-z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?\.[a-z]{2,63}', value):
         raise AccessError('invalid_email', 422)
     return value
 
 
-def password_digest(password, salt):
-    # OWASP scrypt floor: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
-    with KDF_MEMORY:
-        return hashlib.scrypt(password.encode(), salt=salt, n=2**17, r=8, p=1, maxmem=256*1024*1024, dklen=32)
+def password_digest(password, salt, profile=None):
+    profile = profile or password_profile()
+    with kdf_memory():
+        return hashlib.scrypt(password.encode(), salt=salt, n=profile['n'], r=profile['r'], p=profile['p'],
+                              maxmem=load_settings('policy')['security']['scrypt_maxmem'], dklen=profile['dklen'])
 
 
 def hash_password(password):
-    salt = secrets.token_bytes(16)
-    return f'scrypt:131072:8:1:{salt.hex()}:{password_digest(password, salt).hex()}'
+    profile = password_profile()
+    salt = secrets.token_bytes(profile['salt_bytes'])
+    return f"scrypt:{profile['n']}:{profile['r']}:{profile['p']}:{salt.hex()}:{password_digest(password, salt, profile).hex()}"
 
 
 def verify_password(password, encoded):
+    profile = password_profile()
     if not encoded:
-        # Missing accounts still pay the same KDF cost; no usable fallback credential.
-        password_digest(password, bytes(16))
+        # Missing accounts pay the active KDF cost, without a fallback credential.
+        password_digest(password, bytes(profile['salt_bytes']), profile)
         return False
-    algorithm, n, r, p, salt, digest = encoded.split(':')
-    if (algorithm, n, r, p) != ('scrypt', '131072', '8', '1'):
+    try:
+        algorithm, n, r, p, salt, digest = encoded.split(':')
+        salt, digest = bytes.fromhex(salt), bytes.fromhex(digest)
+        saved = dict(n=int(n), r=int(r), p=int(p), dklen=len(digest), salt_bytes=len(salt))
+    except (ValueError, TypeError):
         return False
-    return hmac.compare_digest(password_digest(password, bytes.fromhex(salt)), bytes.fromhex(digest))
+    allowed = [profile] + load_settings('policy')['security']['legacy_scrypt']
+    if algorithm != 'scrypt' or saved not in allowed:
+        return False
+    return hmac.compare_digest(password_digest(password, salt, saved), digest)
+
+
+def validate_credentials(password):
+    limits = load_settings('policy')['inputs']
+    if not limits['password_min'] <= len(password) <= limits['password_max']:
+        raise AccessError('invalid_input', 422)
+
+
+def expiry_description(seconds):
+    if seconds == 3600:
+        return 'one hour'
+    return f'{seconds:g} seconds'
 
 
 def frontend_origin():
@@ -91,9 +121,11 @@ def mail_configuration():
 def deliver_verification(email, token, config, origin):
     host, port, sender, security = config
     message = EmailMessage()
-    message['From'], message['To'], message['Subject'] = sender, email, 'Confirm your RAG account'
+    policy = load_settings('policy')
+    message['From'], message['To'], message['Subject'] = sender, email, policy['mail']['subject']
     # Fragment avoids verification credentials in HTTP request paths/access logs.
-    message.set_content(f'Confirm your email address:\n{origin}/#verify={token}\nThis link expires in one hour and can be used once.\n')
+    message.set_content(policy['mail']['verification_template'].format(
+        origin=origin, token=token, expiry=expiry_description(policy['accounts']['verification_seconds'])))
     transport = smtplib.SMTP_SSL if security == 'ssl' else smtplib.SMTP
     options = {'context': ssl.create_default_context()} if security == 'ssl' else {}
     timeout = float(os.environ.get('RAG_SMTP_TIMEOUT', load_service_config()['smtp']['timeout_seconds']))
@@ -115,13 +147,14 @@ async def audit(session, actor_id, target, action, previous):
 
 async def register(session, email, password, invitation=None):
     email = email_address(email)
+    validate_credentials(password)
     config, origin = mail_configuration(), frontend_origin()
     async with session.begin():
         candidate = (await session.execute(select(Account.__table__).where(Account.email == email))).mappings().first()
         candidate = dict(candidate) if candidate else None
     matches = await asyncio.to_thread(verify_password, password, candidate['password_hash']) if candidate else False
     encoded = await asyncio.to_thread(hash_password, password)
-    token = secrets.token_urlsafe(32)
+    token = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with session.begin():
         await lock_service(session, exclusive=True)
         previous = (await session.execute(
@@ -153,7 +186,7 @@ async def register(session, email, password, invitation=None):
             await audit(session, None, account, 'bootstrap' if invitation else 'register', {})
         await session.execute(insert(EmailVerification.__table__).values(
             token_hash=secret_hash(token), owner_id=account['id'],
-            expires_at=func.clock_timestamp() + timedelta(hours=1),
+            expires_at=func.clock_timestamp() + timedelta(seconds=load_settings('policy')['accounts']['verification_seconds']),
         ))
     try:
         await asyncio.to_thread(deliver_verification, email, token, config, origin)
@@ -194,12 +227,13 @@ async def verify(session, token):
 
 async def login(session, email, password):
     email = email_address(email)
+    validate_credentials(password)
     async with session.begin():
         row = (await session.execute(select(Account.__table__).where(Account.email == email))).mappings().first()
         row = dict(row) if row else None
     if not await asyncio.to_thread(verify_password, password, row['password_hash'] if row else None):
         raise AccessError('invalid_credentials', 401)
-    token = secrets.token_urlsafe(32)
+    token = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with session.begin():
         await lock_service(session)
         account = (await session.execute(
@@ -209,7 +243,7 @@ async def login(session, email, password):
             raise AccessError('access_denied')
         await session.execute(insert(Session.__table__).values(
             token_hash=secret_hash(token), owner_id=account['id'],
-            expires_at=func.clock_timestamp() + timedelta(hours=12),
+            expires_at=func.clock_timestamp() + timedelta(seconds=load_settings('policy')['accounts']['session_seconds']),
         ))
     return {'token': token, 'account': public(account)}
 
@@ -331,12 +365,12 @@ async def mutate(session, token, target_id, changes):
 async def bootstrap(session, email):
     email = email_address(email)
     origin = frontend_origin()
-    token = secrets.token_urlsafe(32)
+    token = secrets.token_urlsafe(load_settings('policy')['security']['token_bytes'])
     async with session.begin():
         await lock_service(session, exclusive=True)
         await session.execute(insert(AccountInvitation.__table__).values(
             token_hash=secret_hash(token), email=email, role='super_admin',
-            expires_at=func.clock_timestamp() + timedelta(hours=1), consumed=False,
+            expires_at=func.clock_timestamp() + timedelta(seconds=load_settings('policy')['accounts']['invitation_seconds']), consumed=False,
         ))
     return f'{origin}/#invite={token}'
 

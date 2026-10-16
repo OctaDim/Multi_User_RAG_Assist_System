@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="api-origin" content="__RAG_API_ORIGIN__">
   <meta name="reconnect-ms" content="__RAG_RECONNECT_MS__">
+  <meta name="correction-rows" content="__RAG_CORRECTION_ROWS__">
+  <meta name="short-id-chars" content="__RAG_SHORT_ID_CHARS__">
   <meta name="referrer" content="no-referrer">
   <title>Личная библиотека RAG</title>
   <link rel="stylesheet" href="src/styles.css">
@@ -14,20 +16,20 @@
 <main>
   <h1>Личная библиотека</h1>
   <p id="status" role="status" aria-live="polite"></p>
-  <section id="authentication" aria-label="Вход и регистрация">
+  <section id="authentication" inert aria-label="Вход и регистрация">
     <form id="login">
       <h2>Вход</h2>
-      <label>Email<input name="email" type="email" autocomplete="username" required maxlength="254"></label>
-      <label>Пароль<input name="password" type="password" autocomplete="current-password" required minlength="15" maxlength="1024"></label>
-      <button>Войти</button>
+      <label>Email<input name="email" type="email" autocomplete="username" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required></label>
+      <button disabled>Войти</button>
     </form>
     <form id="register">
       <h2>Регистрация</h2>
       <p>После регистрации откройте ссылку в письме, затем войдите.</p>
-      <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
-      <label>Пароль (от 15 символов)<input name="password" type="password" autocomplete="new-password" required minlength="15" maxlength="1024"></label>
-      <label>Приглашение оператора (если выдано)<input name="invitation" autocomplete="off" maxlength="128"></label>
-      <button>Зарегистрироваться</button>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label><span id="registration-password-label">Пароль</span><input name="password" type="password" autocomplete="new-password" required></label>
+      <label>Приглашение оператора (если выдано)<input name="invitation" autocomplete="off"></label>
+      <button disabled>Зарегистрироваться</button>
     </form>
   </section>
   <section id="workspace" hidden>
@@ -40,7 +42,7 @@
     <section id="history" aria-label="История беседы"></section>
     <form id="question-form" aria-label="Вопрос по личной библиотеке">
       <fieldset id="question-sources"><legend>Область поиска</legend><p>Выберите личные документы для этого вопроса.</p></fieldset>
-      <label>Вопрос<textarea id="question" rows="4" required></textarea></label>
+      <label>Вопрос<textarea id="question" rows="__RAG_COMPOSER_ROWS__" required></textarea></label>
       <p id="answer-connection" role="status" aria-live="polite"></p>
       <button id="send-question" disabled>Отправить вопрос</button>
       <button id="check-question" type="button" hidden>Проверить отправку</button>
@@ -48,7 +50,7 @@
     <section id="library" aria-label="Личные документы">
       <h2>Мои документы</h2>
       <form id="document-upload">
-        <label>Выберите документы<input name="files" type="file" multiple accept=".pdf,.docx,.txt,.md" required></label>
+        <label>Выберите документы<input name="files" type="file" multiple required></label>
         <button>Загрузить документы</button>
       </form>
       <button id="refresh-documents" type="button">Обновить статусы документов</button>

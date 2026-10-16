@@ -1,4 +1,4 @@
-import {api, origin, reconnectMs} from './api.js';
+import {api, origin, reconnectMs, shortIdChars} from './api.js';
 import {token} from './auth.js';
 import {Drafts, tabKey} from './drafts.js';
 
@@ -142,7 +142,7 @@ export class Conversations {
   }
 
   documentName(identifier, name) {
-    return name || this.documents.find(value => value.id === identifier)?.name || `Документ ${identifier.slice(0,8)}`;
+    return name || this.documents.find(value => value.id === identifier)?.name || `Документ ${identifier.slice(0,shortIdChars)}`;
   }
 
   answer(card, request) {

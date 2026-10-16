@@ -4,6 +4,7 @@ from sqlalchemy import Text, and_, cast, column, func, or_, select, table, union
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 
 from app.auth import AccessError, lock_service, principal
+from app.configuration import load_settings
 from app.models import Conversation, Document, DocumentFile, Message, Request, RequestSource, SourceChunk, SourcePage, SourceRevision
 
 
@@ -31,7 +32,10 @@ async def available(session, owner_id, scope):
     return [dict(row) for row in rows.mappings()]
 
 
-async def retrieve(session, owner_id, scope, embedding, *, limit=12, min_similarity=0.75):
+async def retrieve(session, owner_id, scope, embedding, *, limit=None, min_similarity=None):
+    config = load_settings('runtime')['rag']
+    limit = config['retrieval_limit'] if limit is None else limit
+    min_similarity = config['min_similarity'] if min_similarity is None else min_similarity
     distance = SourceChunk.embedding.cosine_distance(embedding)
     rows = await session.execute(
         select(SourceChunk.__table__, available_revisions.c.document_id, available_revisions.c.mode,

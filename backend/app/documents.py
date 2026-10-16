@@ -1,14 +1,13 @@
 import hashlib
 import os
 from pathlib import Path
-import tomllib
 from uuid import uuid4
 
 from sqlalchemy import case, func, insert, null, or_, select, update
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.auth import AccessError, lock_service, principal
-from app.resources import resource_path
+from app.configuration import load_settings
 from app.models import Account, Document, DocumentFile, DocumentPageText, DocumentPolicy, DocumentPolicyAudit
 
 
@@ -30,8 +29,7 @@ def page_texts(revision_id):
 
 
 def defaults():
-    with (resource_path('config')/'documents.toml').open('rb') as source:
-        result = tomllib.load(source)
+    result = load_settings('documents')
     validate_policy(result)
     return result
 
@@ -98,7 +96,7 @@ async def admit_uploads(session, token, files):
         for file in files:
             name, size = file['name'], file['size']
             extension = Path(name).suffix.lower().lstrip('.')
-            if not name or len(name) > 255 or '\x00' in name or extension not in PERMISSION_KEYS[:4]:
+            if not name or len(name) > load_settings('policy')['inputs']['filename_max'] or '\x00' in name or extension not in PERMISSION_KEYS[:4]:
                 raise AccessError('unsupported_document_format', 422)
             if type(size) is not int or size < 1:
                 raise AccessError('invalid_upload_size', 422)

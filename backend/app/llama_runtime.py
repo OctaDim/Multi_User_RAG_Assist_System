@@ -7,10 +7,12 @@ from threading import Event, Lock
 
 import llama_cpp as native
 
+from app.configuration import load_settings
+
 
 def tokenize_vocab(vocab, text):
     data = text.encode('utf-8')
-    capacity = len(data) + 16
+    capacity = len(data) + load_settings('runtime')['native']['token_capacity_padding']
     while True:
         buffer = (native.llama_token * capacity)()
         size = native.llama_tokenize(vocab, data, len(data), buffer, capacity, True, True)
@@ -42,8 +44,10 @@ class Vocabulary:
 
 class LlamaRuntime:
     def __init__(self, model_path, config):
-        self.config = config.get("generation", config)
-        self.n_ctx = self.config.get("n_ctx", 4096)
+        profile = load_settings('runtime')
+        self.config = profile['generation'] | config.get("generation", config)
+        self.native_config = profile['native']
+        self.n_ctx = self.config['n_ctx']
         self._lock = Lock()
         self._contexts = {}
         self._closed = False
@@ -105,9 +109,9 @@ class LlamaContext:
         params = native.llama_context_default_params()
         params.n_ctx = runtime.n_ctx
         params.n_seq_max = 1
-        params.n_batch = params.n_ubatch = 32
-        params.n_threads = runtime.config.get("n_threads", 4)
-        params.n_threads_batch = runtime.config.get("n_threads_batch", 8)
+        params.n_batch = params.n_ubatch = runtime.native_config['prefill_batch']
+        params.n_threads = runtime.config['n_threads']
+        params.n_threads_batch = runtime.config['n_threads_batch']
         params.abort_callback = self._abort_callback
         try:
             self.context = native.llama_init_from_model(runtime.model, params)
@@ -157,7 +161,7 @@ class LlamaContext:
             native.llama_batch_free(batch)
 
     def _piece(self, token):
-        capacity = 32
+        capacity = self.runtime.native_config['piece_capacity']
         while True:
             buffer = ctypes.create_string_buffer(capacity)
             size = native.llama_token_to_piece(self.runtime.vocab, token, buffer, capacity, 0, False)
@@ -166,7 +170,7 @@ class LlamaContext:
             capacity = -size
 
     def advance(self):
-        """Evaluate at most 32 prompt tokens or sample/evaluate one output token."""
+        """Evaluate one configured prompt batch or sample/evaluate one output token."""
         with self._lock:
             if self.context is None:
                 raise RuntimeError("Native context is closed")
@@ -175,7 +179,7 @@ class LlamaContext:
             if self.done:
                 return self._result("done")
             if self.position < len(self.prompt_tokens):
-                self._decode(self.prompt_tokens[self.position:self.position + 32])
+                self._decode(self.prompt_tokens[self.position:self.position + self.runtime.native_config['prefill_batch']])
                 if self._cancelled.is_set():
                     self.done, self.reason = True, "cancelled"
                 elif self.position == self.n_ctx:

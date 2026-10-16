@@ -11,3 +11,17 @@ thinking = false
 model = "multilingual-e5-small"
 backend = "onnxruntime-cpu"
 quantization = "INT8"
+max_length = 512
+intra_op_threads = 1
+query_prefix = "query: "
+passage_prefix = "passage: "
+
+[rag]
+retrieval_limit = 12
+min_similarity = 0.75
+response_reserve = 256
+
+[native]
+prefill_batch = 32
+token_capacity_padding = 16
+piece_capacity = 32

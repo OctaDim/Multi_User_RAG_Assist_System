@@ -9,3 +9,8 @@ origin = "http://127.0.0.1:8000"
 
 [client]
 reconnect_ms = 1000
+
+[ui]
+composer_rows = 4
+correction_rows = 12
+short_id_chars = 8

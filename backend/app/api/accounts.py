@@ -6,6 +6,10 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app import accounts
 from app.auth import bearer
+from app.configuration import load_settings
+
+
+INPUTS = load_settings('policy')['inputs']
 
 
 router = APIRouter(prefix='/api/accounts')
@@ -13,17 +17,17 @@ router = APIRouter(prefix='/api/accounts')
 
 class Credentials(BaseModel):
     model_config = ConfigDict(extra='forbid')
-    email: str = Field(min_length=3, max_length=254)
-    password: str = Field(min_length=15, max_length=1024)
+    email: str = Field(min_length=INPUTS['email_min'], max_length=INPUTS['email_max'])
+    password: str = Field(min_length=INPUTS['password_min'], max_length=INPUTS['password_max'])
 
 
 class Registration(Credentials):
-    invitation: str | None = Field(default=None, min_length=1, max_length=128)
+    invitation: str | None = Field(default=None, min_length=1, max_length=INPUTS['token_max'])
 
 
 class Verification(BaseModel):
     model_config = ConfigDict(extra='forbid')
-    token: str = Field(min_length=1, max_length=128)
+    token: str = Field(min_length=1, max_length=INPUTS['token_max'])
 
 
 class AccountChanges(BaseModel):

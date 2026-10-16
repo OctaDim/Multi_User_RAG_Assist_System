@@ -13,6 +13,7 @@ from sqlalchemy import func, insert, select, update
 from app import documents, sources
 from app.auth import AccessError, lock_service
 from app.db import Database, database_url, migrate
+from app.configuration import load_settings
 from app.models import Account, Document, DocumentFile, DocumentPageText, SourceChunk, SourcePage, SourceRevision
 from app.rag import E5Embedder
 
@@ -49,7 +50,7 @@ def docx_parts(path):
 def file_digest(path):
     digest = hashlib.sha256()
     with path.open('rb') as source:
-        while chunk := source.read(1024*1024):
+        while chunk := source.read(load_settings('policy')['ingestion']['digest_block_bytes']):
             digest.update(chunk)
     return digest.hexdigest()
 
@@ -130,14 +131,16 @@ class DocumentWorker:
         for region in spans:
             start = region['start']
             while start < region['end']:
-                end = min(start+800,region['end'])
+                end = min(start+load_settings('policy')['ingestion']['chunk_characters'],region['end'])
                 paragraph = text.find('\n\n',start+1,end)
                 if paragraph > start:
                     end = paragraph+2
                 part = text[start:end]
-                encoded = self.embedder.tokenizer.encode('passage: '+part)
+                prefix = load_settings('runtime')['embedding']['passage_prefix']
+                encoded = self.embedder.tokenizer.encode(prefix+part)
                 if encoded.overflowing:
-                    part = part[:max(end for _,end in encoded.offsets)-len('passage: ')]
+                    retained = max(end for _,end in encoded.offsets)-len(prefix)
+                    part = part[:max(0, retained)]
                 if not part:
                     raise AccessError('document_tokenization_failed',422)
                 vector = [0.0]*384 if region['kind']=='skip' else (await asyncio.to_thread(self.embedder.encode, [part]))[0]
@@ -162,7 +165,7 @@ class DocumentWorker:
                 except AccessError:
                     cancelled.set()
                     return
-                await asyncio.sleep(.1)
+                await asyncio.sleep(load_settings('policy')['ingestion']['cancellation_poll_seconds'])
         future = asyncio.create_task(asyncio.to_thread(self.ocr.finish_page,prepared,cancelled))
         watcher = asyncio.create_task(watch())
         try:
@@ -275,7 +278,7 @@ async def run():
                     await keeper.execute(select(1))
                     await keeper.commit()
                     if not await worker.process_one():
-                        await asyncio.sleep(.25)
+                        await asyncio.sleep(load_settings('policy')['ingestion']['queue_poll_seconds'])
             finally:
                 try:
                     worker.close()

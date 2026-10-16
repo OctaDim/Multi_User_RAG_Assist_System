@@ -1,0 +1,3 @@
+# Local installation policy. Restart the entire backend after changes.
+[accounts]
+session_seconds = 43200

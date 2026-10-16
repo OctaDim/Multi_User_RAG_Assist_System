@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api, publicSettings, correctionRows } from './api.js';
 import { token, signIn, signOut } from './auth.js';
 import {Conversations, textElement} from './conversations.js';
 
@@ -6,6 +6,7 @@ const $ = id => document.getElementById(id);
 const documentURLs = new Set();
 let conversations;
 let settingsRead = 0;
+let inputPolicy;
 const messages = {
   invalid_credentials: 'Неверный email или пароль.',
   access_denied: 'Доступ закрыт. Подтвердите email или обратитесь к администратору.',
@@ -27,6 +28,7 @@ const messages = {
   document_worker_lost: 'Обработка прервана из-за остановки сервиса. Оригинал сохранён; автоматического повтора нет.',
   document_processing_failed: 'Не удалось обработать документ.',
   upload_failed: 'Загрузка документа не завершена.',
+  filename_too_long: 'Имя файла превышает разрешённую длину.',
   invalid_utf8: 'Текст документа не является корректным UTF-8.',
   invalid_docx: 'Структура файла DOCX повреждена.',
   pdf_page_limit: 'Число страниц PDF превышает разрешённый предел.',
@@ -168,7 +170,7 @@ async function showDocument(file,readonly) {
   for (const page of value.pages) {
     const section=document.createElement('section');section.className='document-page';
     const label=textElement('label',file.format==='pdf' ? `Страница ${page.page}: текст` : 'Текст документа');
-    const text=document.createElement('textarea');text.name=`page-${page.page}`;text.dataset.page=page.page;text.value=page.text;text.rows=12;text.readOnly=readonly;
+    const text=document.createElement('textarea');text.name=`page-${page.page}`;text.dataset.page=page.page;text.value=page.text;text.rows=correctionRows;text.readOnly=readonly;
     label.append(text);section.append(label);
     if (file.format==='pdf') {
       const blob=await api(`/documents/${file.id}/pages/${page.page}/original`);
@@ -213,6 +215,7 @@ $('document-upload').addEventListener('submit',event=>{
   const form=event.currentTarget;
   perform(async()=>{
     const files=Array.from(form.elements.files.files);
+    if (files.some(file => Array.from(file.name).length > inputPolicy.filename_max)) throw new Error('filename_too_long');
     const batch=await api('/documents/uploads','POST',{files:files.map(file=>({name:file.name,size:file.size}))});
     for (let index=0;index<batch.documents.length;index++) await api(`/documents/${batch.documents[index].id}/original`,'PUT',files[index]);
     form.reset();status('Файлы приняты. Обработка выполняется в фоне.');await showLibrary();
@@ -388,12 +391,40 @@ $('logout').addEventListener('click', () => perform(async () => {
   status('Вы вышли.');
 }, $('logout')));
 
-const fragment = new URLSearchParams(location.hash.slice(1));
-history.replaceState(null, '', location.pathname + location.search);
-if (fragment.has('invite')) $('register').elements.invitation.value = fragment.get('invite');
-if (fragment.has('verify')) await perform(async () => {
-  await api('/accounts/verify', 'POST', { token: fragment.get('verify') });
-  status('Email подтверждён. Теперь войдите.');
-});
-if (token()) await perform(showWorkspace);
-document.documentElement.dataset.ready = 'true';
+async function initialize() {
+  const fragment = new URLSearchParams(location.hash.slice(1));
+  history.replaceState(null, '', location.pathname + location.search);
+  const {inputs, document_formats: formats} = await publicSettings();
+  for (const key of ['email_min', 'email_max', 'password_min', 'password_max', 'token_max', 'filename_max']) {
+    if (!Number.isSafeInteger(inputs[key]) || inputs[key] <= 0) throw new Error('invalid_public_settings');
+  }
+  if (inputs.email_min > inputs.email_max || inputs.password_min > inputs.password_max ||
+      !Array.isArray(formats) || !formats.length || formats.some(format => !/^[a-z0-9]+$/.test(format))) {
+    throw new Error('invalid_public_settings');
+  }
+  for (const name of ['login', 'register']) {
+    const form = $(name);
+    form.elements.email.minLength = inputs.email_min;
+    form.elements.email.maxLength = inputs.email_max;
+    form.elements.password.minLength = inputs.password_min;
+    form.elements.password.maxLength = inputs.password_max;
+  }
+  $('register').elements.invitation.maxLength = inputs.token_max;
+  inputPolicy = inputs;
+  $('registration-password-label').textContent = `Пароль (от ${inputs.password_min} символов)`;
+  $('document-upload').elements.files.accept = formats.map(format => `.${format}`).join(',');
+  $('authentication').inert = false;
+  $('authentication').querySelectorAll('button').forEach(button => {button.disabled = false;});
+  if (fragment.has('invite')) $('register').elements.invitation.value = fragment.get('invite');
+  if (fragment.has('verify')) await perform(async () => {
+    await api('/accounts/verify', 'POST', { token: fragment.get('verify') });
+    status('Email подтверждён. Теперь войдите.');
+  });
+  if (token()) await perform(showWorkspace);
+  document.documentElement.dataset.ready = 'true';
+}
+
+try { await initialize(); }
+catch {
+  status('Настройки сервиса недоступны. Повторите загрузку страницы позже.');
+}

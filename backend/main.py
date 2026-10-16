@@ -24,6 +24,7 @@ def main():
         # that location to discover pyvenv.cfg and installed backend dependencies.
         if os.path.abspath(sys.executable) != str(python):
             os.execv(str(python), [str(python), str(Path(__file__).absolute()), *sys.argv[1:]])
+        os.environ['RAG_SERVICE_CONFIG'] = environment['RAG_SERVICE_CONFIG']
         from app.launcher import launch
         return launch(config, environment)
     except ConfigurationError as error:

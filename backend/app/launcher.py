@@ -9,12 +9,11 @@ import subprocess
 import sys
 import threading
 import time
-import tomllib
 
 from psycopg.conninfo import make_conninfo
 from sqlalchemy import literal, select
 
-from app.configuration import ConfigurationError
+from app.configuration import ConfigurationError, load_settings
 from app.db import Database
 from app.resources import resource_path
 
@@ -157,8 +156,7 @@ def _check_resources(environment):
         if not (Path(environment['RAG_E5_DIR']) / relative).is_file():
             raise ConfigurationError(f'Missing embedding resource: {relative}')
     ocr = Path(environment['RAG_OCR_DIR'])
-    with (resource_path('config') / 'ocr.toml').open('rb') as stream:
-        profiles = tomllib.load(stream)
+    profiles = load_settings('ocr')
     files = ['dfine/config.json', 'dfine/preprocessor_config.json', 'dfine/model.onnx',
              profiles['printed']['model'], profiles['printed']['projector'], profiles['handwriting']['projector']]
     for relative in files:
@@ -169,6 +167,8 @@ def _check_resources(environment):
 def launch(config, environment):
     stopping = threading.Event()
     with stop_signals(stopping):
+        for name in ('policy', 'runtime', 'ocr', 'documents', 'prompts'):
+            load_settings(name)
         _check_resources(environment)
         database = config['database']
         print('Backend waiting for PostgreSQL', flush=True)

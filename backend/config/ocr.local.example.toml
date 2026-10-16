@@ -1,0 +1,3 @@
+# Local OCR tuning; fixed model dimensions are not configurable.
+[geometry]
+render_width = 1200
