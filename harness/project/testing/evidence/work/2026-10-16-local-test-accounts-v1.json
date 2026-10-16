@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-10-16T11:32:50.398542+00:00",
+  "database": "rag_assist",
+  "database_user": "rag_assist_user",
+  "operation": "explicit local test accounts; SMTP confirmation bypassed",
+  "password_storage": "application salted scrypt; plaintext credentials omitted",
+  "local_policy": "backend/config/policy.local.toml",
+  "local_password_min": 4,
+  "shared_password_min_unchanged": 15,
+  "ordinary_backend_restarted": true,
+  "frontend_http": 200,
+  "generation_healthy": true,
+  "verification_sessions_logged_out": true,
+  "accounts": [
+    {
+      "email": "superadmin@local.test",
+      "role": "super_admin",
+      "login_status": 200,
+      "verified": true,
+      "active": true,
+      "disabled": false,
+      "conversation_count": 1,
+      "account_list_status": 200,
+      "generation_settings_status": 200,
+      "own_document_policy_status": 200,
+      "wrong_password_status": 401
+    },
+    {
+      "email": "admin@local.test",
+      "role": "admin",
+      "login_status": 200,
+      "verified": true,
+      "active": true,
+      "disabled": false,
+      "conversation_count": 1,
+      "account_list_status": 200,
+      "generation_settings_status": 403,
+      "own_document_policy_status": 200,
+      "wrong_password_status": 401
+    },
+    {
+      "email": "user@local.test",
+      "role": "user",
+      "login_status": 200,
+      "verified": true,
+      "active": true,
+      "disabled": false,
+      "conversation_count": 1,
+      "account_list_status": 403,
+      "generation_settings_status": 403,
+      "own_document_policy_status": 200,
+      "wrong_password_status": 401
+    }
+  ]
+}
