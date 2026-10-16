@@ -1,0 +1,197 @@
+[
+  {
+    "source_url": "https://huggingface.co/api/models/Xenova/multilingual-e5-small/revision/761b726dd34fb83930e26aab4e9ac3899aa1fa78?blobs=true",
+    "repo": "Xenova/multilingual-e5-small",
+    "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+    "gated": false,
+    "disabled": false,
+    "cardData": {
+      "base_model": "intfloat/multilingual-e5-small",
+      "library_name": "transformers.js"
+    },
+    "siblings": [
+      {
+        "rfilename": "onnx/model_quantized.onnx",
+        "blobId": "313b94a513ded056e6b6f13f156cbbe1b1205391",
+        "size": 118308185,
+        "lfs": {
+          "sha256": "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193",
+          "size": 118308185,
+          "pointerSize": 134
+        }
+      },
+      {
+        "rfilename": "tokenizer.json",
+        "blobId": "c9b2fea3119ca8886380e5f47bffc5ea7a6e0ffa",
+        "size": 17082730,
+        "lfs": {
+          "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+          "size": 17082730,
+          "pointerSize": 133
+        }
+      }
+    ]
+  },
+  {
+    "source_url": "https://huggingface.co/api/models/unsloth/Qwen3.5-2B-GGUF/revision/f6d5376be1edb4d416d56da11e5397a961aca8ae?blobs=true",
+    "repo": "unsloth/Qwen3.5-2B-GGUF",
+    "revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+    "gated": false,
+    "disabled": false,
+    "cardData": {
+      "tags": [
+        "unsloth"
+      ],
+      "library_name": "transformers",
+      "license": "apache-2.0",
+      "license_link": "https://huggingface.co/Qwen/Qwen3.5-2B/blob/main/LICENSE",
+      "pipeline_tag": "image-text-to-text",
+      "base_model": [
+        "Qwen/Qwen3.5-2B"
+      ]
+    },
+    "siblings": [
+      {
+        "rfilename": "Qwen3.5-2B-Q4_K_M.gguf",
+        "blobId": "2dd42a93d110e1a333c7464693e3c38b979a940e",
+        "size": 1280835840,
+        "lfs": {
+          "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+          "size": 1280835840,
+          "pointerSize": 135
+        }
+      },
+      {
+        "rfilename": "mmproj-F16.gguf",
+        "blobId": "5c87505c54bca9ebdb1e4db0c45b8a09b019c464",
+        "size": 668227264,
+        "lfs": {
+          "sha256": "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7",
+          "size": 668227264,
+          "pointerSize": 134
+        }
+      }
+    ]
+  },
+  {
+    "source_url": "https://huggingface.co/api/models/PaddlePaddle/PaddleOCR-VL-1.5-GGUF/revision/cc977c16989848c264d813ec1705cb181b7a21ee?blobs=true",
+    "repo": "PaddlePaddle/PaddleOCR-VL-1.5-GGUF",
+    "revision": "cc977c16989848c264d813ec1705cb181b7a21ee",
+    "gated": false,
+    "disabled": false,
+    "cardData": {
+      "license": "apache-2.0"
+    },
+    "siblings": [
+      {
+        "rfilename": "PaddleOCR-VL-1.5-mmproj.gguf",
+        "blobId": "5406d5ec98303591afe72918dd380e9fc7a080d6",
+        "size": 881770496,
+        "lfs": {
+          "sha256": "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87",
+          "size": 881770496,
+          "pointerSize": 134
+        }
+      },
+      {
+        "rfilename": "PaddleOCR-VL-1.5.gguf",
+        "blobId": "57561e788aaed0af74dd24fb4d514756f62d5f2f",
+        "size": 935768992,
+        "lfs": {
+          "sha256": "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c",
+          "size": 935768992,
+          "pointerSize": 134
+        }
+      }
+    ]
+  },
+  {
+    "source_url": "https://huggingface.co/api/models/onnx-community/dfine-egret-x-rukopys-ONNX/revision/192cb34880784d916477139a8c403a0e451d179e?blobs=true",
+    "repo": "onnx-community/dfine-egret-x-rukopys-ONNX",
+    "revision": "192cb34880784d916477139a8c403a0e451d179e",
+    "gated": false,
+    "disabled": false,
+    "cardData": {
+      "language": [
+        "uk"
+      ],
+      "library_name": "transformers.js",
+      "pipeline_tag": "object-detection",
+      "license": "apache-2.0",
+      "base_model": [
+        "Hukyl/dfine-egret-x-rukopys"
+      ],
+      "datasets": [
+        "UkrainianCatholicUniversity/rukopys"
+      ],
+      "metrics": [
+        "precision",
+        "recall"
+      ],
+      "tags": [
+        "d-fine",
+        "dfine",
+        "object-detection",
+        "document-layout-analysis",
+        "handwritten",
+        "ukrainian",
+        "rukopys",
+        "docling"
+      ],
+      "model-index": [
+        {
+          "name": "dfine-egret-x-rukopys",
+          "results": [
+            {
+              "task": {
+                "type": "object-detection",
+                "name": "Document Layout Detection"
+              },
+              "dataset": {
+                "type": "UkrainianCatholicUniversity/rukopys",
+                "name": "Rukopys, gold val",
+                "split": "validation"
+              },
+              "metrics": [
+                {
+                  "type": "mAP@50",
+                  "value": 0.6704,
+                  "name": "mAP@50",
+                  "verified": false
+                },
+                {
+                  "type": "mAP@50-95",
+                  "value": 0.4441,
+                  "name": "mAP@50-95",
+                  "verified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "siblings": [
+      {
+        "rfilename": "config.json",
+        "blobId": "29390a9ae1a72aba4d112fe5e5ee8ccdf6245e28",
+        "size": 4546
+      },
+      {
+        "rfilename": "onnx/model.onnx",
+        "blobId": "c0bd48f57b78d47b1e410696d514c24f35773385",
+        "size": 250924657,
+        "lfs": {
+          "sha256": "86a8ba2d3df749b88fb2df707ca26429c2ebbc278c3b9378d7be1518da85d423",
+          "size": 250924657,
+          "pointerSize": 134
+        }
+      },
+      {
+        "rfilename": "preprocessor_config.json",
+        "blobId": "fcdff16b42e5ebc51d28f59184490c6eff91a88b",
+        "size": 444
+      }
+    ]
+  }
+]

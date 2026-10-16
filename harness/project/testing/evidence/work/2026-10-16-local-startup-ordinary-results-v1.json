@@ -1,0 +1,20 @@
+[
+  {
+    "cycle": 1,
+    "stop": "SIGINT",
+    "backend_owned_children": 4,
+    "owned_processes_gone": 8,
+    "frontend_partial_http_open_on_stop": true,
+    "application_ports_released": true,
+    "postgres_survived": true
+  },
+  {
+    "cycle": 2,
+    "stop": "SIGTERM",
+    "backend_owned_children": 4,
+    "owned_processes_gone": 10,
+    "frontend_partial_http_open_on_stop": true,
+    "application_ports_released": true,
+    "postgres_survived": true
+  }
+]

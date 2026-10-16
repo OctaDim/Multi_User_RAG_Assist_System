@@ -2,6 +2,7 @@ from contextlib import contextmanager
 import importlib.util
 from pathlib import Path
 import subprocess
+import signal
 import sys
 from threading import Thread
 from urllib.error import HTTPError
@@ -107,3 +108,38 @@ def test_frontend_config_rejects_browser_integer_overflow(section, key, value):
     config[section][key] = value
     with pytest.raises(ValueError, match=f'{section}.{key}'):
         frontend.validate_config(config)
+
+
+@pytest.mark.parametrize('stop_signal', [signal.SIGINT, signal.SIGTERM])
+def test_frontend_signal_closes_partial_http_connection_and_allows_restart(tmp_path, stop_signal):
+    import select
+    import socket
+    import time
+    local = tmp_path / 'server.toml'
+    local.write_text('[server]\nhost="127.0.0.1"\nport=0\npoll_seconds=0.02\n')
+    port = None
+    for attempt in range(2):
+        if port is not None:
+            local.write_text(f'[server]\nhost="127.0.0.1"\nport={port}\npoll_seconds=0.02\n')
+        process = subprocess.Popen([sys.executable,str(FRONTEND / 'main.py'),'--config',str(local)],
+                                   cwd=tmp_path,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        connection = None
+        try:
+            assert select.select([process.stdout],[],[],8)[0], 'Frontend failed to become ready'
+            ready = process.stdout.readline().strip()
+            assert ready.startswith('Frontend listening on '), (ready,process.communicate(timeout=2))
+            port = int(ready.rsplit(':',1)[1])
+            with urlopen(f'http://127.0.0.1:{port}/') as response:
+                assert response.status == 200
+            connection = socket.create_connection(('127.0.0.1',port),timeout=2)
+            connection.sendall(b'GET / HTTP/1.1\r\nHost: localhost\r\nX-Partial: ')
+            time.sleep(.05)
+            process.send_signal(stop_signal)
+            assert process.wait(5) == 0, process.communicate()
+            assert connection.recv(1) == b''
+        finally:
+            if connection is not None:
+                connection.close()
+            if process.poll() is None:
+                process.kill()
+            process.wait(5)

@@ -1,12 +1,12 @@
 # Copy to service.local.toml (ignored by Git) and replace the placeholders.
 # Paths below are examples relative to backend/; absolute paths also work.
 [database]
-dsn = "postgresql://rag:CHANGE_ME@127.0.0.1:5432/rag"
+dsn = "postgresql://rag_assist_user:CHANGE_ME@127.0.0.1:5432/rag_assist"
 
 [models]
-generation = ".venv/rag-native-models/Qwen3.5-2B-Q4_K_M.gguf"
-embedding = ".venv/rag-native-models/e5"
-ocr = ".venv/rag-native-models/ocr"
+generation = "../rag/local_models/Qwen3.5-2B-Q4_K_M.gguf"
+embedding = "../rag/local_models/e5"
+ocr = "../rag/local_models/ocr"
 # Optional separate handwriting GGUF; empty uses the generation model.
 handwriting = ""
 

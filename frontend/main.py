@@ -1,4 +1,9 @@
 """Run the standalone public frontend using only Python's standard library."""
+import sys
+
+if sys.version_info < (3, 11):
+    raise SystemExit('Frontend requires Python 3.11 or newer; run with python3.11+ before reading TOML')
+
 import argparse
 from functools import partial
 from html import escape
@@ -6,7 +11,6 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import math
 from pathlib import Path
 import signal
-import sys
 import tomllib
 from urllib.parse import unquote, urlsplit
 

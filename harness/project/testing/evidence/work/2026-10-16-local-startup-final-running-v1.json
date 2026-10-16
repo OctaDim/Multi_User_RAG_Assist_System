@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-10-16T11:01:25.601814+00:00",
+  "backend_command": "python3 backend/main.py",
+  "frontend_command": "python3 frontend/main.py",
+  "api_http": 200,
+  "frontend_http": 200,
+  "generation_healthy": true,
+  "database_user": "rag_assist_user",
+  "database": "rag_assist",
+  "left_running": true
+}

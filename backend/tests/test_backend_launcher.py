@@ -185,7 +185,8 @@ def test_backend_main_config_error_from_foreign_directory_does_not_echo_secret(t
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize('config_source', ['cli', 'environment'])
-async def test_real_backend_main_starts_models_api_and_stops_whole_tree(environment, tmp_path, config_source):
+@pytest.mark.parametrize('stop_signal', [signal.SIGINT, signal.SIGTERM])
+async def test_real_backend_main_starts_models_api_and_stops_whole_tree(environment, tmp_path, config_source, stop_signal):
     from app.auth import lock_service
     from app.db import Database
 
@@ -239,7 +240,7 @@ async def test_real_backend_main_starts_models_api_and_stops_whole_tree(environm
                         owned.append(event['pid'])
             assert len(owned) == 4, log_path.read_text()
             assert all(running(pid) for pid in owned)
-            process.send_signal(signal.SIGTERM)
+            process.send_signal(stop_signal)
             await asyncio.to_thread(process.wait, 15)
             assert process.returncode == 0, log_path.read_text()
             assert all(not running(pid) for pid in owned)
