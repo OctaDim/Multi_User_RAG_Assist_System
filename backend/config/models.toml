@@ -1,0 +1,155 @@
+# Trusted immutable artifact inventory. Weights and every companion live outside virtualenv.
+# Sources verified against pinned publisher metadata on 2026-10-16.
+# E5 conversion: base MIT; converter license unspecified. Qwen/Paddle/D-FINE:
+# Apache-2.0; D-FINE training data attribution: Rukopys, CC BY 4.0.
+# Full redistribution/NOTICE audit remains separate from artifact preparation.
+schema_version = 1
+
+[service_paths]
+generation = "Qwen3.5-2B-Q4_K_M.gguf"
+embedding = "e5"
+ocr = "ocr"
+handwriting = "Qwen3.5-2B-Q4_K_M.gguf"
+
+# These adapter properties define the unchanged embedding space and OCR contracts.
+[adapters.embedding]
+dimensions = 384
+pooling = "attention-mask-mean"
+normalization = "L2"
+provider = "CPUExecutionProvider"
+
+[adapters.ocr]
+handler = "MTMDChatHandler"
+use_gpu = false
+detector_role = "layout-only"
+detector_input = "RGB-640x640-rescale-no-normalize"
+detector_logits = "focal-loss-sigmoid"
+
+[profiles.runtime.generation]
+model = "Qwen3.5-2B-Q4_K_M"
+
+[profiles.runtime.embedding]
+model = "multilingual-e5-small"
+backend = "onnxruntime-cpu"
+quantization = "INT8"
+max_length = 512
+query_prefix = "query: "
+passage_prefix = "passage: "
+
+[profiles.ocr.printed]
+model = "PaddleOCR-VL-1.5.gguf"
+model_sha256 = "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c"
+projector = "PaddleOCR-VL-1.5-mmproj.gguf"
+projector_sha256 = "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+repository = "PaddlePaddle/PaddleOCR-VL-1.5-GGUF"
+revision = "cc977c16989848c264d813ec1705cb181b7a21ee"
+n_ctx = 16384
+
+[profiles.ocr.handwriting]
+model = "Qwen3.5-2B-Q4_K_M.gguf"
+model_sha256 = "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223"
+projector = "mmproj-F16.gguf"
+projector_sha256 = "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+repository = "unsloth/Qwen3.5-2B-GGUF"
+revision = "f6d5376be1edb4d416d56da11e5397a961aca8ae"
+n_ctx = 4096
+thinking = false
+
+[[artifacts]]
+id = "e5/model_quantized.onnx"
+path = "e5/model_quantized.onnx"
+source = "Xenova/multilingual-e5-small"
+revision = "761b726dd34fb83930e26aab4e9ac3899aa1fa78"
+remote_file = "onnx/model_quantized.onnx"
+sha256 = "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193"
+size = 118308185
+format = "ONNX INT8"
+profile = "runtime.embedding"
+
+[[artifacts]]
+id = "e5/tokenizer.json"
+path = "e5/tokenizer.json"
+source = "Xenova/multilingual-e5-small"
+revision = "761b726dd34fb83930e26aab4e9ac3899aa1fa78"
+remote_file = "tokenizer.json"
+sha256 = "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+size = 17082730
+format = "tokenizers JSON"
+profile = "runtime.embedding"
+
+[[artifacts]]
+id = "Qwen3.5-2B-Q4_K_M.gguf"
+path = "Qwen3.5-2B-Q4_K_M.gguf"
+source = "unsloth/Qwen3.5-2B-GGUF"
+revision = "f6d5376be1edb4d416d56da11e5397a961aca8ae"
+remote_file = "Qwen3.5-2B-Q4_K_M.gguf"
+sha256 = "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223"
+size = 1280835840
+format = "GGUF Q4_K_M"
+profile = "runtime.generation + ocr.handwriting"
+
+[[artifacts]]
+id = "ocr/mmproj-F16.gguf"
+path = "ocr/mmproj-F16.gguf"
+source = "unsloth/Qwen3.5-2B-GGUF"
+revision = "f6d5376be1edb4d416d56da11e5397a961aca8ae"
+remote_file = "mmproj-F16.gguf"
+sha256 = "7035e9cb8d7c6a9681d07eef9a364783e86ea4cd73faab2eabb4f43a101830c7"
+size = 668227264
+format = "GGUF F16 projector"
+profile = "ocr.handwriting"
+
+[[artifacts]]
+id = "ocr/PaddleOCR-VL-1.5-mmproj.gguf"
+path = "ocr/PaddleOCR-VL-1.5-mmproj.gguf"
+source = "PaddlePaddle/PaddleOCR-VL-1.5-GGUF"
+revision = "cc977c16989848c264d813ec1705cb181b7a21ee"
+remote_file = "PaddleOCR-VL-1.5-mmproj.gguf"
+sha256 = "e7f1a72400fba517046f90d964e2fa0f4dac7781ee3b1bc5d2022f5f8cecbd87"
+size = 881770496
+format = "GGUF projector"
+profile = "ocr.printed"
+
+[[artifacts]]
+id = "ocr/PaddleOCR-VL-1.5.gguf"
+path = "ocr/PaddleOCR-VL-1.5.gguf"
+source = "PaddlePaddle/PaddleOCR-VL-1.5-GGUF"
+revision = "cc977c16989848c264d813ec1705cb181b7a21ee"
+remote_file = "PaddleOCR-VL-1.5.gguf"
+sha256 = "299051d54faa065abc505cc39b8383ea338fd3020c775ea3e0ba514a7022328c"
+size = 935768992
+format = "GGUF"
+profile = "ocr.printed"
+
+[[artifacts]]
+id = "ocr/dfine/config.json"
+path = "ocr/dfine/config.json"
+source = "onnx-community/dfine-egret-x-rukopys-ONNX"
+revision = "192cb34880784d916477139a8c403a0e451d179e"
+remote_file = "config.json"
+sha256 = "18b610b3f6a251e55f84e49933a33759660a8a154929560302db8b8639686047"
+size = 4546
+format = "JSON companion"
+profile = "ocr.detector"
+
+[[artifacts]]
+id = "ocr/dfine/model.onnx"
+path = "ocr/dfine/model.onnx"
+source = "onnx-community/dfine-egret-x-rukopys-ONNX"
+revision = "192cb34880784d916477139a8c403a0e451d179e"
+remote_file = "onnx/model.onnx"
+sha256 = "86a8ba2d3df749b88fb2df707ca26429c2ebbc278c3b9378d7be1518da85d423"
+size = 250924657
+format = "ONNX FP32"
+profile = "ocr.detector"
+
+[[artifacts]]
+id = "ocr/dfine/preprocessor_config.json"
+path = "ocr/dfine/preprocessor_config.json"
+source = "onnx-community/dfine-egret-x-rukopys-ONNX"
+revision = "192cb34880784d916477139a8c403a0e451d179e"
+remote_file = "preprocessor_config.json"
+sha256 = "cd38cd59999e7a95d68e487fbe5132df3d4e5c32a0836add57e6126ba0c4eaf1"
+size = 444
+format = "JSON companion"
+profile = "ocr.detector"

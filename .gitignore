@@ -12,3 +12,5 @@ __pycache__/
 /backend/config/ocr.local.toml
 /backend/config/documents.local.toml
 /backend/config/prompts.local.toml
+/rag/.local_models-stage-*/
+/rag/.local_models-backup-*/
