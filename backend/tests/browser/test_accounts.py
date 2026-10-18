@@ -125,7 +125,7 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         login(administrator, 'admin-browser@owned.test')
         register(user, mailbox, frontend, 'user-browser@owned.test')
         login(user, 'user-browser@owned.test')
-        user.get_by_role('button', name='Открыть беседу').click()
+        user.locator('#conversations button').first.click()
         expect(user.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
         user_conversation = user.evaluate("async url => { const r = await fetch(url + '/api/accounts/me', {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}}); return (await r.json()).conversations[0].id; }", api_url)
 

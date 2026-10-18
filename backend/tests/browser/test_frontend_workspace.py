@@ -1,19 +1,25 @@
-"""Three-area workspace checks against actual account/API, with controlled policy failure."""
+"""Conversation-first workspace checks against actual account/API, with controlled policy failure."""
 from playwright.sync_api import expect
 from .test_accounts import real_account_browser, register, login
 
 
-def test_three_work_areas_preserve_context_and_role_navigation(real_account_browser):
+def test_chat_first_workspace_preserves_context_and_role_navigation(real_account_browser):
     browser, mailbox, frontend, _ = real_account_browser
     context = browser.new_context(viewport={'width':1440,'height':1000})
     try:
         page = context.new_page()
         errors = []
         page.on('pageerror', lambda error: errors.append(str(error)))
-        register(page, mailbox, frontend, 'three-areas@owned.test')
-        login(page, 'three-areas@owned.test')
-        for area in ('library','chat','evidence'):
-            expect(page.locator('#'+area)).to_be_visible()
+        register(page, mailbox, frontend, 'chat-first@owned.test')
+        login(page, 'chat-first@owned.test')
+        expect(page.locator('#chat')).to_be_visible()
+        expect(page.locator('#library')).to_be_hidden()
+        expect(page.locator('#evidence')).to_be_hidden()
+        page.locator('[data-area=evidence]').click()
+        expect(page.locator('#chat')).to_be_visible()
+        expect(page.locator('#evidence')).to_be_visible()
+        page.locator('#close-evidence').click()
+        expect(page.locator('#evidence')).to_be_hidden()
         expect(page.locator('#nav-administration')).to_be_hidden()
         page.locator('#question').fill('Keep this question while reading documents')
         for width in (768,375):
@@ -22,6 +28,7 @@ def test_three_work_areas_preserve_context_and_role_navigation(real_account_brow
             page.locator('[data-area=library]').click()
             expect(page.locator('#library')).to_be_visible()
             expect(page.locator('#chat')).to_be_hidden()
+            page.locator('[data-area=chat]').click()
             page.locator('[data-area=evidence]').click()
             expect(page.locator('#evidence')).to_be_visible()
             page.locator('[data-area=chat]').focus()

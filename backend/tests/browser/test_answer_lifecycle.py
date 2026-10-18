@@ -44,7 +44,7 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         first = context.new_page()
         register(first, mailbox, frontend, 'lifecycle-drafts@owned.test')
         login(first, 'lifecycle-drafts@owned.test')
-        first.get_by_role('button', name='Открыть беседу', exact=True).click()
+        first.locator('#conversations button[aria-current=true]').click()
         first_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
         first.locator('#question').fill('First tab A')
         first.get_by_role('button', name='Новая беседа', exact=True).click()
@@ -65,8 +65,8 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         first.locator(f'#conversations button[data-conversation="{second_id}"]').click()
         expect(first.locator('#question')).to_have_value('First tab B')
         first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
-        first.get_by_role('button', name='Отправить вопрос', exact=True).click()
-        expect(first.locator('#status')).to_contain_text('Нет готовых источников')
+        expect(first.get_by_role('button', name='Отправить вопрос', exact=True)).to_be_disabled()
+        expect(first.locator('#scope-description')).to_contain_text('Нет готовых источников')
         expect(first.locator('#question')).to_have_value('First tab A')
         expect(first.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
         expect(second.locator('#question')).to_have_value('Second tab A')
@@ -86,10 +86,13 @@ def test_real_fragments_precede_answer_without_waiting_for_history_read(real_ans
         register(page,mailbox,frontend,'lifecycle-answer@owned.test')
         login(page,'lifecycle-answer@owned.test')
         content=b'The annual budget is 100 euros.\n'
+        page.locator('[data-area=library]').click()
         page.locator('#document-upload input').set_input_files({'name':'answer-budget.txt','mimeType':'text/plain','buffer':content})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'answer-budget.txt')
+        page.locator('[data-area=chat]').click()
         page.get_by_role('checkbox',name='answer-budget.txt',exact=True).check()
+        page.locator('[data-area=evidence]').click()
         page.evaluate("""() => {
           window.fragmentPrefix = undefined;
           window.fragmentObserver = new MutationObserver(() => {
@@ -108,12 +111,12 @@ def test_real_fragments_precede_answer_without_waiting_for_history_read(real_ans
         expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
         assert page.evaluate('window.fragmentPrefix') == ''
         expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
-        page.locator('#history .answer-passport summary').click()
-        expect(page.locator('#history .answer-passport')).to_contain_text('answer-budget.txt')
-        expect(page.locator('#history .answer-passport')).to_contain_text('Страница 1')
+        page.get_by_role('button',name='Показать основания',exact=True).click()
+        expect(page.locator('#answer-evidence')).to_contain_text('answer-budget.txt')
+        expect(page.locator('#early-fragments')).to_contain_text('Страница 1')
         expect(page.locator('#history .answer-text a').first).to_be_visible()
         page.locator('#history .answer-text a').first.click()
-        expect(page.locator('#history .cited-quote')).to_have_text(content.decode().strip())
+        expect(page.locator('#answer-evidence .cited-quote')).to_have_text(content.decode().strip())
         expect(page.locator('#history')).to_contain_text('Завершён',timeout=30000)
         page.evaluate("""() => {
           window.answerNoopMutations = 0;
@@ -149,10 +152,12 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         page=context.new_page()
         register(page,mailbox,frontend,'lifecycle-ack@owned.test')
         login(page,'lifecycle-ack@owned.test')
+        page.locator('[data-area=library]').click()
         page.locator('#document-upload input').set_input_files({'name':'ack-budget.txt','mimeType':'text/plain',
                                                               'buffer':b'The annual budget is 100 euros.\n'})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'ack-budget.txt')
+        page.locator('[data-area=chat]').click()
         page.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
@@ -330,20 +335,25 @@ def test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears
         os.kill(worker.pid,signal.SIGSTOP);paused=True
         name='<img src=x onerror=window.nameInjected=true>.txt'
         text='<script>window.textInjected=true</script>\nThe annual budget is 100 euros.'
+        page.locator('[data-area=library]').click()
         page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':text.encode()})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         expect(page.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
+        page.locator('[data-area=chat]').click()
         page.locator('#question-sources input').check()
         page.locator('#question').fill('Wait for my selected document')
-        page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(page.locator('#status')).to_contain_text('Нет готовых источников')
+        expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
+        expect(page.locator('#scope-description')).to_contain_text('Нет готовых источников')
         os.kill(worker.pid,signal.SIGCONT);paused=False
+        page.locator('[data-area=library]').click()
         item=ready(page,name)
         expect(page.locator('#question')).to_have_value('Wait for my selected document')
         expect(page.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
         item.get_by_role('button',name='Открыть документ',exact=True).click()
         expect(page.locator('#document-correction textarea')).to_have_value(text)
         assert page.evaluate('window.nameInjected') is None and page.evaluate('window.textInjected') is None
+        page.locator('#close-editor').click()
+        page.locator('[data-area=chat]').click()
         page.locator('#question').focus()
         page.keyboard.press('Tab')
         assert page.get_by_role('button',name='Отправить вопрос',exact=True).evaluate('node => node === document.activeElement')
@@ -382,20 +392,22 @@ def test_actual_print_only_pdf_limitations_reach_answer_passport(real_answer_bro
         policy.get_by_role('button',name='Сохранить ограничения документов').click()
         expect(operator.locator('#status')).to_have_text('Ограничения документов сохранены.')
         path=BACKEND.parent/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf'
+        user.locator('[data-area=library]').click()
         user.locator('#document-upload input').set_input_files(str(path))
         user.get_by_role('button',name='Загрузить документы',exact=True).click()
         expect(user.locator('#documents')).to_contain_text('Для вашей учётной записи OCR рукописей не разрешён')
         user.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
         ready(user,path.name,timeout=300)
+        user.locator('[data-area=chat]').click()
         user.get_by_role('checkbox',name=path.name,exact=True).check()
         user.locator('#question').fill('What is the annual budget?')
         user.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(user.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
-        user.locator('#history .answer-passport summary').click()
-        expect(user.locator('#history .answer-passport')).to_contain_text(path.name)
-        expect(user.locator('#history .answer-passport')).to_contain_text('рукописные участки пропущены')
-        expect(user.locator('#history .answer-passport')).not_to_contain_text('Dreams')
-        expect(user.locator('#history .answer-passport')).not_to_contain_text('Hughes')
+        user.get_by_role('button',name='Показать основания',exact=True).click()
+        expect(user.locator('#answer-evidence')).to_contain_text(path.name)
+        expect(user.locator('#answer-evidence')).to_contain_text('рукописные участки пропущены')
+        expect(user.locator('#answer-evidence')).not_to_contain_text('Dreams')
+        expect(user.locator('#answer-evidence')).not_to_contain_text('Hughes')
         assert worker.poll() is None and generation.poll() is None
         print('Actual UI/SMTP/operator policy/explicit PDF choice/native OCR/E5/Qwen answer; print-only source limitation carried in passport.')
     finally:
@@ -411,10 +423,12 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
         page=context.new_page()
         register(page,mailbox,frontend,'lifecycle-snapshot@owned.test')
         login(page,'lifecycle-snapshot@owned.test')
+        page.locator('[data-area=library]').click()
         page.locator('#document-upload input').set_input_files({'name':'snapshot-budget.txt','mimeType':'text/plain',
                                                               'buffer':b'The annual budget is 100 euros.\n'})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'snapshot-budget.txt')
+        page.locator('[data-area=chat]').click()
         page.get_by_role('checkbox',name='snapshot-budget.txt',exact=True).check()
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
@@ -424,7 +438,7 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
             assert response.json()['requests']==[]
             held.append((route,response))
         page.route('**/api/conversations/*',hold_old_get)
-        page.get_by_role('button',name='Открыть беседу',exact=True).click()
+        page.locator('#conversations button[aria-current=true]').click()
         page.locator('#question').fill('What is the annual budget?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history h3')).to_have_text('What is the annual budget?')
@@ -437,7 +451,7 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
         page.unroute('**/api/conversations/*',hold_old_get)
         os.kill(native_pid,signal.SIGCONT);native_pid=None
         expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
-        page.get_by_role('button',name='Открыть беседу',exact=True).click()
+        page.locator('#conversations button[aria-current=true]').click()
         expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
         assert generation.poll() is None
     finally:
