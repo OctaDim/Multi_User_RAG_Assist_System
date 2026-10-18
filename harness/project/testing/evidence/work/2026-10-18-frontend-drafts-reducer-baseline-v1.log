@@ -1,0 +1,81 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources _
+
+real_account_browser = (<Browser type=<BrowserType name=chromium executable_path=/home/octadim/.cache/ms-playwright/chromium-1148/chrome-linu...version=131.0.6778.33>, <mailbox.Mailbox object at 0x794df89873e0>, 'http://127.0.0.1:54521', 'http://127.0.0.1:53161')
+
+    def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources(real_account_browser):
+        browser, mailbox, frontend, _ = real_account_browser
+        context = browser.new_context()
+        try:
+            first = context.new_page()
+            register(first, mailbox, frontend, 'lifecycle-drafts@owned.test')
+            login(first, 'lifecycle-drafts@owned.test')
+            first.get_by_role('button', name='Открыть беседу', exact=True).click()
+            first_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            first.locator('#question').fill('First tab A')
+            first.get_by_role('button', name='Новая беседа', exact=True).click()
+            expect(first.locator('#conversations li')).to_have_count(2)
+            second_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            first.locator('#question').fill('First tab B')
+            first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+            expect(first.locator('#question')).to_have_value('First tab A')
+    
+            second = context.new_page()
+            second.goto(frontend)
+            login(second, 'lifecycle-drafts@owned.test')
+            second.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+            second.locator('#question').fill('Second tab A')
+            first.reload()
+            expect(first.locator('#question')).to_have_value('First tab A')
+            expect(second.locator('#question')).to_have_value('Second tab A')
+            first.locator(f'#conversations button[data-conversation="{second_id}"]').click()
+            expect(first.locator('#question')).to_have_value('First tab B')
+            first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+            first.get_by_role('button', name='Отправить вопрос', exact=True).click()
+>           expect(first.locator('#status')).to_contain_text('Нет готовых источников')
+E           AssertionError: Locator expected to contain text 'Нет готовых источников'
+E           Actual value: Не удалось проверить объём вопроса. Сервис модели временно недоступен; черновик сохранён. 
+E           Call log:
+E             - LocatorAssertions.to_contain_text with timeout 5000ms
+E             -   - waiting for locator("#status")
+E             -     4 × locator resolved to <p id="status" role="status" aria-live="polite"></p>
+E             -       - unexpected value ""
+E             -     5 × locator resolved to <p id="status" role="status" aria-live="polite">Не удалось проверить объём вопроса. Сервис модели…</p>
+E             -       - unexpected value "Не удалось проверить объём вопроса. Сервис модели временно недоступен; черновик сохранён."
+
+backend/tests/browser/test_answer_lifecycle.py:69: AssertionError
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/api.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/auth.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/conversations.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /src/drafts.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:57] code 404, message Not Found
+127.0.0.1 - - [18/Oct/2026 23:31:57] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/api.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/auth.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/conversations.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:58] "GET /src/drafts.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/api.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/conversations.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/auth.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:31:59] "GET /src/drafts.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/api.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/auth.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/conversations.js HTTP/1.1" 200 -
+127.0.0.1 - - [18/Oct/2026 23:32:00] "GET /src/drafts.js HTTP/1.1" 200 -
+=========================== short test summary info ============================
+FAILED backend/tests/browser/test_answer_lifecycle.py::test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources
+1 failed, 2 passed in 18.34s
