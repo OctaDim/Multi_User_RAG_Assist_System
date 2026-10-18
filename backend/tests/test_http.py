@@ -56,3 +56,25 @@ def test_login_preflight_is_public_and_keeps_exact_cors_origin(environment,monke
         assert response.status_code==200
         assert response.headers['access-control-allow-origin']=='http://127.0.0.1:54321'
         assert response.text=='OK'
+
+
+def test_forwarded_loopback_origins_require_explicit_opt_in(environment, monkeypatch):
+    from app.main import create_app
+    monkeypatch.setenv('RAG_DATABASE_URL', environment['dsn'])
+    monkeypatch.setenv('RAG_FRONTEND_ORIGIN', 'http://localhost:55848')
+    for enabled in ('0', '1'):
+        monkeypatch.setenv('RAG_ALLOW_LOOPBACK_ORIGINS', enabled)
+        with TestClient(create_app()) as client:
+            for origin in ('http://localhost:56914', 'http://127.0.0.1:54321', 'http://[::1]:54321'):
+                response = client.get('/api/public-settings', headers={'Origin': origin})
+                assert response.status_code == 200
+                assert response.headers.get('access-control-allow-origin') == (origin if enabled == '1' else None)
+                preflight = client.options('/api/accounts/login', headers={
+                    'Origin': origin, 'Access-Control-Request-Method': 'POST',
+                    'Access-Control-Request-Headers': 'content-type,authorization',
+                })
+                assert preflight.status_code == (200 if enabled == '1' else 400)
+            for origin in ('https://external.example', 'http://localhost.evil.test:56914',
+                           'http://127.0.0.1.evil.test:56914', 'http://192.168.1.2:56914', 'null'):
+                response = client.get('/api/public-settings', headers={'Origin': origin})
+                assert 'access-control-allow-origin' not in response.headers

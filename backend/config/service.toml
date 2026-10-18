@@ -7,6 +7,7 @@ python = ".venv/bin/python"
 host = "127.0.0.1"
 port = 8000
 frontend_origin = "http://127.0.0.1:8080"
+allow_loopback_origins = false
 
 [database]
 dsn = ""

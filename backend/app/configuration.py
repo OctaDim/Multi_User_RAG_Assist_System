@@ -213,6 +213,8 @@ def launch_environment(config):
             or parsed.password is not None or parsed.path not in ('', '/') or parsed.query or parsed.fragment
             or any(char.isspace() for char in origin) or origin_port == 0):
         raise ConfigurationError('Invalid configuration key: api.frontend_origin')
+    if type(config['api']['allow_loopback_origins']) is not bool:
+        raise ConfigurationError('Invalid configuration key: api.allow_loopback_origins')
     for section, keys in {
         'database': ('ready_timeout_seconds', 'retry_seconds', 'connect_timeout_seconds'),
         'supervisor': ('poll_seconds', 'shutdown_timeout_seconds', 'kill_timeout_seconds'),
@@ -241,6 +243,7 @@ def launch_environment(config):
     environment = {
         'RAG_DATABASE_URL': config['database']['dsn'],
         'RAG_FRONTEND_ORIGIN': origin.rstrip('/'),
+        'RAG_ALLOW_LOOPBACK_ORIGINS': '1' if config['api']['allow_loopback_origins'] else '0',
         'RAG_MODEL_PATH': str(section_path(config['models']['generation'])),
         'RAG_E5_DIR': str(section_path(config['models']['embedding'])),
         'RAG_OCR_DIR': str(section_path(config['models']['ocr'])),

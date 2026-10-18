@@ -29,6 +29,8 @@ python3 frontend/main.py
 4. Для новой установки скопируйте `backend/config/service.local.example.toml` в `backend/config/service.local.toml`, заполните постоянный DSN и фактические пути. В текущей установке этот приватный файл уже подготовлен с правами `0600`: пути указывают в `../rag/local_models/`, пароль БД не хранится в Git. SMTP настраивается отдельно для регистрации с подтверждением email; при пустой SMTP-конфигурации отправка подтверждений недоступна.
 5. Фронт по умолчанию работает на `http://127.0.0.1:8080` и обращается к API `http://127.0.0.1:8000`. Для других адресов используйте `frontend/config/service.local.toml` и согласуйте его с `api.frontend_origin` бэка.
 
+   При локальном перенаправлении портов Codex адрес браузера может получать новый порт при каждом открытии. Для такой установки задайте `api.allow_loopback_origins = true` в `backend/config/service.local.toml` и перезапустите бэк. Это разрешает CORS для HTTP/HTTPS origins `localhost`, `127.0.0.1` и `[::1]` с любым портом; внешние домены и адреса LAN остаются запрещены. Общий default — `false`: без явного включения разрешён только `api.frontend_origin`. Адрес API в браузере по-прежнему должен быть доступен через `frontend` → `api.origin`; разрешение CORS не создаёт туннель к бэку.
+
 Обычный main проверяет наличие и SHA-256 обязательных моделей, совместимость профилей и runtime до старта компонентов. Он не скачивает веса, не устанавливает системный PostgreSQL и не подменяет постоянную установку временными тестовыми значениями. Ошибка называет недостающий ресурс и явную подготовку.
 
 Крупные модельные файлы, tokenizer/JSON companions, staging и backups исключены из Git. Scaffold `rag/local_models/.gitignore`, manifest и код подготовки отслеживаются. Удаление или пересоздание virtualenv не удаляет модельные ресурсы.
@@ -48,6 +50,7 @@ Launcher бэка формирует существующие `RAG_DATABASE_URL`
 | `launcher.python` | Python подготовленного окружения; по умолчанию `.venv/bin/python`. Main сам переключается на него, без активации venv в терминале. |
 | `api.host`, `api.port` | Адрес прослушивания FastAPI. |
 | `api.frontend_origin` | Публичный origin фронта для CORS и ссылок подтверждения: схема, хост и порт, без пути. |
+| `api.allow_loopback_origins` | Явное разрешение локальных origins с меняющимися портами; по умолчанию false. Не заменяет `api.frontend_origin` для ссылок подтверждения email. |
 | `database.dsn` | Строка PostgreSQL URI или libpq conninfo; обязательна. |
 | `database.ready_timeout_seconds`, `connect_timeout_seconds`, `retry_seconds` | Общий срок ожидания БД, предел попытки и интервал повторения. |
 | `models.generation`, `embedding`, `ocr`, `handwriting` | GGUF генерации, каталог E5, каталог OCR и необязательная отдельная GGUF для рукописей. |

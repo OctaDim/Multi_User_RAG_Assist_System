@@ -1,5 +1,9 @@
 # Copy to service.local.toml (ignored by Git) and replace the placeholders.
 # Paths below are examples relative to backend/; absolute paths also work.
+[api]
+# Enable only for local development with changing forwarded localhost ports.
+allow_loopback_origins = false
+
 [database]
 dsn = "postgresql://rag_assist_user:CHANGE_ME@127.0.0.1:5432/rag_assist"
 

@@ -37,6 +37,7 @@ def test_missing_required_setting_does_not_echo_secrets():
 @pytest.mark.parametrize('section,key,value', [
     ('api', 'port', 65536), ('api', 'port', True),
     ('api', 'frontend_origin', 'https://example.test/path'),
+    ('api', 'allow_loopback_origins', 'true'),
     ('supervisor', 'poll_seconds', 0),
 ])
 def test_invalid_settings_rejected(section, key, value):
@@ -50,3 +51,10 @@ def test_interpreter_path_is_normalized_without_resolving_virtualenv_symlink():
     expected = Path(__file__).parents[1] / '.venv/bin/python'
     assert section_path('../backend/.venv/bin/python') == expected
     assert section_path(str(expected.parent / '../bin/python')) == expected
+
+
+def test_loopback_cors_opt_in_is_exported_to_component_environment():
+    config = load_service_config()
+    for enabled, expected in ((False, '0'), (True, '1')):
+        config['api']['allow_loopback_origins'] = enabled
+        assert launch_environment(config)['RAG_ALLOW_LOOPBACK_ORIGINS'] == expected

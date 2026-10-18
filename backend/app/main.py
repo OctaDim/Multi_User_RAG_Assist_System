@@ -58,7 +58,11 @@ def create_app():
         )}, 'document_formats': ['pdf', 'docx', 'txt', 'md']}
 
     origin = os.environ.get('RAG_FRONTEND_ORIGIN', '').rstrip('/')
+    # Local port forwarding can change the browser's origin on every launch.
+    loopback_origins = (r'https?://(?:localhost|127\.0\.0\.1|\[::1\])(?::[0-9]{1,5})?'
+                        if os.environ.get('RAG_ALLOW_LOOPBACK_ORIGINS') == '1' else None)
     application.add_middleware(CORSMiddleware, allow_origins=[origin] if origin else [],
+                               allow_origin_regex=loopback_origins,
                                allow_methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
                                allow_headers=['Authorization', 'Content-Type', 'X-Tab-Proof',
                                               'X-Connection-Epoch', 'X-Heartbeat-Challenge', 'Last-Event-ID'])
