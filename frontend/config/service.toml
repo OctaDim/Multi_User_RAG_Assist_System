@@ -9,6 +9,7 @@ origin = "http://127.0.0.1:8000"
 
 [client]
 reconnect_ms = 1000
+request_timeout_ms = 30000
 
 [ui]
 composer_rows = 4

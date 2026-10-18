@@ -1,63 +1,29 @@
 import { api, publicSettings, correctionRows } from './api.js';
 import { token, signIn, signOut } from './auth.js';
 import {Conversations, textElement} from './conversations.js';
+import {messages, status, feedback} from './ui.js';
+import {configureNavigation, showSection, showArea, resetNavigation} from './navigation.js';
 
 const $ = id => document.getElementById(id);
 const documentURLs = new Set();
 let conversations;
 let settingsRead = 0;
 let inputPolicy;
-const messages = {
-  invalid_credentials: 'Неверный email или пароль.',
-  access_denied: 'Доступ закрыт. Подтвердите email или обратитесь к администратору.',
-  registration_conflict: 'Регистрация этого email недоступна.',
-  invalid_verification: 'Ссылка подтверждения недействительна или уже использована.',
-  invalid_invitation: 'Приглашение недействительно.',
-  mail_delivery_failed: 'Письмо не доставлено. Повторите регистрацию с тем же паролем.',
-  mail_not_configured: 'Отправка почты не настроена.',
-  frontend_not_configured: 'Адрес веб-интерфейса не настроен.',
-  forbidden: 'Недостаточно прав.',
-  unauthenticated: 'Сессия завершилась. Войдите снова.',
-  no_ready_sources: 'Нет готовых источников в выбранной области. Вопрос сохранён как черновик.',
-  conversation_busy: 'В этой беседе уже выполняется запрос. Черновик сохранён.',
-  coordinator_unavailable: 'Сервис ответов сейчас недоступен. Черновик сохранён.',
-  context_too_large: 'Вопрос превышает доступный контекст модели. Сократите вопрос; текст сохранён как черновик.',
-  tokenizer_unavailable: 'Не удалось проверить объём вопроса. Сервис модели временно недоступен; черновик сохранён.',
-  invalid_settings: 'Укажите положительные целые значения изменяемых настроек. Параметры перезапуска доступны только для просмотра.',
-  document_not_ready: 'Документ ещё не готов. Обновите его статус после обработки.',
-  document_worker_lost: 'Обработка прервана из-за остановки сервиса. Оригинал сохранён; автоматического повтора нет.',
-  document_processing_failed: 'Не удалось обработать документ.',
-  upload_failed: 'Загрузка документа не завершена.',
-  filename_too_long: 'Имя файла превышает разрешённую длину.',
-  invalid_utf8: 'Текст документа не является корректным UTF-8.',
-  invalid_docx: 'Структура файла DOCX повреждена.',
-  pdf_page_limit: 'Число страниц PDF превышает разрешённый предел.',
-  document_format_forbidden: 'Загрузка этого формата не разрешена для вашей учётной записи.',
-  document_permission_revoked: 'Разрешение на эту обработку отозвано.',
-  file_size_limit: 'Файл превышает допустимый размер.',
-  batch_limit: 'Выбрано больше файлов, чем разрешено в одной загрузке.',
-  document_storage_limit: 'Превышен лимит числа документов или объёма оригиналов.',
-  original_storage_not_configured: 'Хранилище документов не настроено.',
-  document_revision_changed: 'Ревизия уже изменилась. Откройте документ заново перед исправлением.',
-  skip_marker_required: 'Блоки пропущенных рукописей нужно сохранить.',
-  invalid_document_policy: 'Укажите положительные целые лимиты и разрешения документов.',
-};
-
-function status(value) { $('status').textContent = value; }
-
 async function perform(operation, control) {
-  if (control) control.disabled = true;
-  try { await operation(); }
+  if (control?.disabled) return;
+  if (control) {control.disabled = true; control.setAttribute('aria-busy','true'); feedback(control, 'Выполняется…');}
+  try { await operation(); if (control?.isConnected) feedback(control, 'Готово.'); }
   catch (error) {
     if (error.message === 'session_changed') return;
-    status(messages[error.message] || 'Не удалось выполнить действие.');
+    const message = messages[error.message] || 'Не удалось выполнить действие. Проверьте соединение и повторите.';
+    status(message, true); feedback(control, message, true);
     // SMTP failure follows committed registration, which already consumed the invite.
     if (error.message === 'mail_delivery_failed') $('register').elements.invitation.value = '';
     if (error.message === 'unauthenticated' || error.message === 'access_denied') {
       signOut();
       showAuthentication();
     }
-  } finally { if (control) control.disabled = false; }
+  } finally { if (control) {control.disabled = false; control.removeAttribute('aria-busy');} }
 }
 
 function showAuthentication() {
@@ -67,6 +33,8 @@ function showAuthentication() {
   $('authentication').hidden = false;
   $('workspace').hidden = true;
   $('identity').textContent = '';
+  $('session-controls').hidden = true; resetNavigation();
+  $('document-editor').close();
   $('history').replaceChildren();
   $('conversations').replaceChildren();
   $('accounts').replaceChildren();
@@ -81,14 +49,15 @@ async function showWorkspace() {
   const current = await api('/accounts/me');
   $('authentication').hidden = true;
   $('workspace').hidden = false;
+  $('session-controls').hidden = false;
+  configureNavigation(current.account.role);
   $('identity').textContent = `${current.account.email} · ${current.account.role}`;
   if (!conversations) conversations = new Conversations(current.account.id, error => perform(() => {throw error;}));
   await conversations.initialize(current.conversations);
-  $('administration').hidden = current.account.role === 'user';
-  if (current.account.role !== 'user') await showAccounts(current.account.role);
+  if (current.account.role !== 'user') await perform(() => showAccounts(current.account.role));
   $('generation-settings').hidden = current.account.role !== 'super_admin';
-  if (current.account.role === 'super_admin') await showSettings();
-  await showLibrary();
+  if (current.account.role === 'super_admin') await perform(showSettings);
+  await perform(showLibrary, $('refresh-documents'));
 }
 
 function clearDocumentView() {
@@ -208,6 +177,7 @@ async function showDocument(file,readonly) {
     }
   }
   view.append(form);
+  if (!$('document-editor').open) $('document-editor').showModal();
 }
 
 $('document-upload').addEventListener('submit',event=>{
@@ -303,7 +273,7 @@ async function showAccounts(actorRole) {
     });
     if (actorRole==='super_admin') {
       const library=textElement('button','Читать библиотеку');library.type='button';
-      library.addEventListener('click',()=>perform(()=>showLibrary(account.id),library));card.append(library);
+      library.addEventListener('click',()=>perform(async()=>{await showLibrary(account.id);showSection('workspace');showArea('library',true);},library));card.append(library);
     }
     $('accounts').append(card);
   }
@@ -391,9 +361,16 @@ $('logout').addEventListener('click', () => perform(async () => {
   status('Вы вышли.');
 }, $('logout')));
 
+const fragment = new URLSearchParams(location.hash.slice(1));
+history.replaceState(null, '', location.pathname + location.search);
+let verificationAttempted = false;
+function showAuthForm(name) {
+  for (const value of ['login','register']) {$(value).hidden = value !== name; $(`show-${value}`).setAttribute('aria-pressed',String(value === name));}
+}
+$('show-login').onclick = () => showAuthForm('login');
+$('show-register').onclick = () => showAuthForm('register');
+$('close-editor').onclick = () => $('document-editor').close();
 async function initialize() {
-  const fragment = new URLSearchParams(location.hash.slice(1));
-  history.replaceState(null, '', location.pathname + location.search);
   const {inputs, document_formats: formats} = await publicSettings();
   for (const key of ['email_min', 'email_max', 'password_min', 'password_max', 'token_max', 'filename_max']) {
     if (!Number.isSafeInteger(inputs[key]) || inputs[key] <= 0) throw new Error('invalid_public_settings');
@@ -415,16 +392,19 @@ async function initialize() {
   $('document-upload').elements.files.accept = formats.map(format => `.${format}`).join(',');
   $('authentication').inert = false;
   $('authentication').querySelectorAll('button').forEach(button => {button.disabled = false;});
-  if (fragment.has('invite')) $('register').elements.invitation.value = fragment.get('invite');
-  if (fragment.has('verify')) await perform(async () => {
+  if (fragment.has('invite')) { $('register').elements.invitation.value = fragment.get('invite'); showAuthForm('register'); }
+  if (fragment.has('verify') && !verificationAttempted) { verificationAttempted = true; await perform(async () => {
     await api('/accounts/verify', 'POST', { token: fragment.get('verify') });
     status('Email подтверждён. Теперь войдите.');
-  });
+  }); }
   if (token()) await perform(showWorkspace);
   document.documentElement.dataset.ready = 'true';
 }
 
-try { await initialize(); }
-catch {
-  status('Настройки сервиса недоступны. Повторите загрузку страницы позже.');
+async function bootstrap() {
+  $('retry-bootstrap').hidden = true;
+  try { await initialize(); }
+  catch { status('Настройки сервиса недоступны. Повторите подключение.', true); $('retry-bootstrap').hidden = false; }
 }
+$('retry-bootstrap').onclick = () => perform(bootstrap, $('retry-bootstrap'));
+await bootstrap();

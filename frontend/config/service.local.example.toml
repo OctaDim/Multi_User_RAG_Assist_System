@@ -7,6 +7,9 @@ port = 8080
 [api]
 origin = "http://127.0.0.1:8000"
 
+[client]
+request_timeout_ms = 30000
+
 [ui]
 composer_rows = 4
 correction_rows = 12

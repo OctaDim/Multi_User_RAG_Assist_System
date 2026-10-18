@@ -88,6 +88,7 @@ def real_account_browser(environment, monkeypatch, tmp_path):
 def register(page, mailbox, frontend_url, email, invitation_url=None):
     page.goto(invitation_url or frontend_url)
     page.wait_for_function('document.documentElement.dataset.ready === "true"')
+    if page.locator('#show-register').count(): page.locator('#show-register').click()
     form = page.locator('#register')
     form.locator('[name=email]').fill(email)
     form.locator('[name=password]').fill(PASSWORD)
@@ -100,6 +101,7 @@ def register(page, mailbox, frontend_url, email, invitation_url=None):
 
 
 def login(page, email):
+    if page.locator('#show-login').count(): page.locator('#show-login').click()
     form = page.locator('#login')
     form.locator('[name=email]').fill(email)
     form.locator('[name=password]').fill(PASSWORD)
@@ -128,6 +130,7 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         user_conversation = user.evaluate("async url => { const r = await fetch(url + '/api/accounts/me', {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}}); return (await r.json()).conversations[0].id; }", api_url)
 
         operator.reload()
+        operator.locator('#nav-administration').click()
         admin_form = operator.locator('form[data-account="admin-browser@owned.test"]')
         admin_form.locator('select[name=role]').select_option('admin')
         admin_form.get_by_role('button', name='Сохранить права').click()
@@ -135,6 +138,7 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         administrator.reload()
         expect(administrator.locator('#workspace')).to_be_visible()
         expect(administrator.locator('#identity')).to_contain_text('admin')
+        administrator.locator('#nav-administration').click()
         expect(administrator.locator('#administration')).to_be_visible()
         expect(administrator.locator('form[data-account="user-browser@owned.test"] select')).to_be_disabled()
         denials = administrator.evaluate("""async ({url, conversation}) => {
@@ -251,7 +255,7 @@ def test_form_constraints_follow_public_policy_and_unavailable_policy_blocks_for
         page.unroute(f'{api_url}/api/public-settings')
         page.route(f'{api_url}/api/public-settings', lambda route: route.fulfill(status=503, json={'error': 'unavailable'}))
         page.goto(frontend + '/?settings-unavailable#verify=private-proof')
-        expect(page.locator('#status')).to_have_text('Настройки сервиса недоступны. Повторите загрузку страницы позже.')
+        expect(page.locator('#status')).to_have_text('Настройки сервиса недоступны. Повторите подключение.')
         expect(page.locator('#login button')).to_be_disabled()
         expect(page.locator('#register button')).to_be_disabled()
         assert page.locator('#authentication').evaluate('(element) => element.inert')

@@ -36,12 +36,14 @@ def test_public_config_injection_and_head(tmp_path, monkeypatch):
     config['server']['port'] = 0
     config['api']['origin'] = 'https://api.example.test:9443'
     config['client']['reconnect_ms'] = 2345
+    config['client']['request_timeout_ms'] = 12345
     config['ui'] = {'composer_rows': 7, 'correction_rows': 18, 'short_id_chars': 10}
     with served(config) as origin:
         with urlopen(origin) as response:
             body = response.read()
             assert b'content="https://api.example.test:9443"' in body
             assert b'content="2345"' in body
+            assert b'name="request-timeout-ms" content="12345"' in body
             assert b'content="18"' in body
             assert b'content="10"' in body
             assert b'id="question" rows="7"' in body

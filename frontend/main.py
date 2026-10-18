@@ -58,6 +58,8 @@ def validate_config(config):
         raise ValueError('Invalid configuration key: api.origin')
     if type(config['client']['reconnect_ms']) is not int or not 0 < config['client']['reconnect_ms'] <= 2**31-1:
         raise ValueError('Invalid configuration key: client.reconnect_ms')
+    if type(config['client']['request_timeout_ms']) is not int or not 0 < config['client']['request_timeout_ms'] <= 2**31-1:
+        raise ValueError('Invalid configuration key: client.request_timeout_ms')
     for key in ('composer_rows', 'correction_rows', 'short_id_chars'):
         if type(config['ui'][key]) is not int or config['ui'][key] <= 0:
             raise ValueError(f'Invalid configuration key: ui.{key}')
@@ -83,6 +85,7 @@ class PublicFiles(BaseHTTPRequestHandler):
                 text = (ROOT / 'index.html').read_text(encoding='utf-8')
                 body = text.replace('__RAG_API_ORIGIN__', escape(self.config['api']['origin'].rstrip('/'), quote=True))
                 body = body.replace('__RAG_RECONNECT_MS__', str(self.config['client']['reconnect_ms']))
+                body = body.replace('__RAG_REQUEST_TIMEOUT_MS__', str(self.config['client']['request_timeout_ms']))
                 for key in ('composer_rows', 'correction_rows', 'short_id_chars'):
                     body = body.replace(f'__RAG_{key.upper()}__', str(self.config['ui'][key]))
                 body = body.encode('utf-8')
