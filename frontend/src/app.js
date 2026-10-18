@@ -1,18 +1,24 @@
-import { api, publicSettings, correctionRows } from './api.js';
+import { api, publicSettings } from './api.js';
+import {Documents} from './documents.js';
 import { token, signIn, signOut } from './auth.js';
 import {Conversations, textElement} from './conversations.js';
 import {messages, status, feedback} from './ui.js';
 import {configureNavigation, showSection, showArea, resetNavigation} from './navigation.js';
 
 const $ = id => document.getElementById(id);
-const documentURLs = new Set();
 let conversations;
+let workspaceRead=0;
 let settingsRead = 0;
 let inputPolicy;
+const documents = new Documents({perform, onSources:files=>conversations?.sources(files), inputPolicy:()=>inputPolicy, reveal:()=>showArea('library')});
 async function perform(operation, control) {
   if (control?.disabled) return;
+  const focused = document.activeElement === control;
   if (control) {control.disabled = true; control.setAttribute('aria-busy','true'); feedback(control, 'Выполняется…');}
-  try { await operation(); if (control?.isConnected) feedback(control, 'Готово.'); }
+  try { await operation();
+    const output = control?.closest('form, li, article, section')?.querySelector(':scope > .operation-status');
+    if (control?.isConnected && output?.textContent === 'Выполняется…') feedback(control, 'Готово.');
+  }
   catch (error) {
     if (error.message === 'session_changed') return;
     const message = messages[error.message] || 'Не удалось выполнить действие. Проверьте соединение и повторите.';
@@ -23,10 +29,13 @@ async function perform(operation, control) {
       signOut();
       showAuthentication();
     }
-  } finally { if (control) {control.disabled = false; control.removeAttribute('aria-busy');} }
+  } finally { if (control) {control.disabled = false; control.removeAttribute('aria-busy');
+    if (focused && control.isConnected && document.activeElement === document.body && !document.querySelector('dialog[open]')) control.focus({preventScroll:true});
+  } }
 }
 
 function showAuthentication() {
+  ++workspaceRead;
   $('document-report').close();
   $('document-report').replaceChildren();
   conversations?.close(); conversations = undefined;
@@ -35,18 +44,21 @@ function showAuthentication() {
   $('identity').textContent = '';
   $('session-controls').hidden = true; resetNavigation();
   $('document-editor').close();
+  $('confirm-action').close('cancel');
   $('history').replaceChildren();
   $('conversations').replaceChildren();
   $('accounts').replaceChildren();
   $('global-settings').replaceChildren();
   $('generation-settings').hidden = true;
-  clearDocumentView();
+  documents.clear();
   $('documents').replaceChildren();
   $('document-upload').reset();
 }
 
 async function showWorkspace() {
+  const reading=++workspaceRead;
   const current = await api('/accounts/me');
+  if(reading!==workspaceRead)return;
   $('authentication').hidden = true;
   $('workspace').hidden = false;
   $('session-controls').hidden = false;
@@ -54,144 +66,13 @@ async function showWorkspace() {
   $('identity').textContent = `${current.account.email} · ${current.account.role}`;
   if (!conversations) conversations = new Conversations(current.account.id, error => perform(() => {throw error;}));
   await conversations.initialize(current.conversations);
+  if(reading!==workspaceRead)return;
   if (current.account.role !== 'user') await perform(() => showAccounts(current.account.role));
   $('generation-settings').hidden = current.account.role !== 'super_admin';
   if (current.account.role === 'super_admin') await perform(showSettings);
-  await perform(showLibrary, $('refresh-documents'));
+  if(reading!==workspaceRead)return;
+  await perform(()=>documents.load(null,'',false), $('refresh-documents'));
 }
-
-function clearDocumentView() {
-  for (const url of documentURLs) URL.revokeObjectURL(url);
-  documentURLs.clear();
-  $('document-view').replaceChildren();
-}
-
-async function showLibrary(ownerId) {
-  const result = await api(ownerId ? `/documents/admin/${ownerId}/library` : '/documents');
-  if (!result.readonly) conversations?.sources(result.documents);
-  clearDocumentView();
-  $('document-report').close();
-  $('document-report').replaceChildren();
-  $('document-upload').hidden = result.readonly;
-  $('documents').replaceChildren();
-  const labels = {receiving:'Загрузка',queued:'Ожидает обработки',processing:'Обрабатывается',awaiting_choice:'Нужен выбор режима',ready:'Готов',failed:'Обработка неуспешна',cancelled:'Отменён'};
-  for (const file of result.documents) {
-    const item = document.createElement('li');
-    item.dataset.document = file.id;
-    item.append(textElement('strong',file.name),textElement('p',labels[file.state]));
-    if (file.error) item.append(textElement('p',`${messages[file.error] || file.error}${file.failure_page ? ` · страница ${file.failure_page}` : ''}`));
-    if (file.state==='failed') {
-      const report=textElement('button','Открыть отчёт об обработке');report.type='button';
-      report.addEventListener('click',()=>showDocumentReport(file));item.append(report);
-    }
-    if (file.ready) {
-      const open = textElement('button','Открыть документ');
-      open.type='button';
-      open.addEventListener('click',()=>perform(()=>showDocument(file,result.readonly),open));
-      item.append(open);
-    }
-    if (!result.readonly && file.state==='awaiting_choice') {
-      item.append(textElement('p','Для вашей учётной записи OCR рукописей не разрешён. Можно отменить загрузку документа или продолжить с пропуском рукописного текста.'));
-      for (const [choice,label] of [['skip_handwriting','Загрузить только печатный текст'],['cancel','Отменить весь документ']]) {
-        const button = textElement('button',label); button.type='button';
-        button.addEventListener('click',()=>perform(async()=>{await api(`/documents/${file.id}/mode`,'POST',{choice});await showLibrary();},button));
-        item.append(button);
-      }
-    }
-    if (!result.readonly) {
-      const remove=textElement('button','Удалить документ'); remove.type='button';
-      remove.addEventListener('click',()=>perform(async()=>{await api(`/documents/${file.id}`,'DELETE');await showLibrary();},remove));
-      item.append(remove);
-    }
-    $('documents').append(item);
-  }
-}
-
-function showDocumentReport(file) {
-  const report=$('document-report');
-  const uploadFailure=['upload_failed','upload_incomplete','file_size_mismatch'].includes(file.error);
-  report.replaceChildren(
-    textElement('h3','Отчёт об обработке документа'),
-    textElement('p',`Файл: ${file.name}`),
-    textElement('p',`Этап: ${uploadFailure ? 'загрузка документа' : 'обработка документа'}`),
-    textElement('p',`Страница: ${file.failure_page || 'не определена'}`),
-    textElement('p',`Причина: ${messages[file.error] || file.error || 'Не удалось обработать документ.'}`),
-    textElement('p',file.ready ? 'Новая ревизия не опубликована; ранее готовая ревизия остаётся доступна.' : 'Документ целиком недоступен для поиска.'),
-  );
-  if (file.mode==='skip_handwriting') report.append(textElement('p','Режим: только печатный текст; рукописные участки пропущены.'));
-  const close=textElement('button','Закрыть отчёт');close.type='button';
-  close.addEventListener('click',()=>report.close());report.append(close);report.showModal();
-}
-
-async function showDocument(file,readonly) {
-  const value=await api(`/documents/${file.id}`);
-  clearDocumentView();
-  const view=$('document-view');
-  view.append(textElement('h3',file.name));
-  const original=textElement('button','Скачать оригинал'); original.type='button';
-  original.addEventListener('click',()=>perform(async()=>{
-    const blob=await api(`/documents/${file.id}/original`);
-    const url=URL.createObjectURL(blob);documentURLs.add(url);
-    const link=document.createElement('a');link.href=url;link.download=file.name;link.click();
-  },original));
-  view.append(original,textElement('p','Распознанный текст можно проверить и исправить. Оригинал сохраняется.'));
-  const form=document.createElement('form');form.id='document-correction';
-  for (const page of value.pages) {
-    const section=document.createElement('section');section.className='document-page';
-    const label=textElement('label',file.format==='pdf' ? `Страница ${page.page}: текст` : 'Текст документа');
-    const text=document.createElement('textarea');text.name=`page-${page.page}`;text.dataset.page=page.page;text.value=page.text;text.rows=correctionRows;text.readOnly=readonly;
-    label.append(text);section.append(label);
-    if (file.format==='pdf') {
-      const blob=await api(`/documents/${file.id}/pages/${page.page}/original`);
-      const url=URL.createObjectURL(blob);documentURLs.add(url);
-      const figure=document.createElement('figure');figure.className='original-page';
-      const image=document.createElement('img');image.src=url;image.alt=`Оригинал страницы ${page.page}`;
-      image.addEventListener('load',()=>{
-        for (const region of page.regions.filter(region=>region.kind==='skip' && region.bbox)) {
-          const marker=textElement('span','Пропуск');marker.className='skip-region';marker.title=region.text;
-          const [x0,y0,x1,y1]=region.bbox;
-          marker.style.left=`${x0/image.naturalWidth*100}%`;marker.style.top=`${y0/image.naturalHeight*100}%`;
-          marker.style.width=`${(x1-x0)/image.naturalWidth*100}%`;marker.style.height=`${(y1-y0)/image.naturalHeight*100}%`;
-          figure.append(marker);
-        }
-      });
-      figure.append(image);section.prepend(figure);
-    }
-    form.append(section);
-  }
-  if (!readonly) {
-    const save=textElement('button','Сохранить исправления');form.append(save);
-    form.addEventListener('submit',event=>{
-      event.preventDefault();
-      perform(async()=>{
-        const pages=Array.from(form.querySelectorAll('textarea')).map(input=>({page:Number(input.dataset.page),text:input.value}));
-        await api(`/documents/${file.id}/corrections`,'POST',{base_revision:value.document.published_revision,pages});
-        status('Исправления приняты. Новая ревизия появится после полной индексации.');
-        await showLibrary();
-      },save);
-    });
-    if (file.format==='pdf') {
-      const full=textElement('button','Обработать PDF полностью');full.type='button';
-      full.addEventListener('click',()=>perform(async()=>{await api(`/documents/${file.id}/mode`,'POST',{choice:'complete'});await showLibrary();},full));
-      view.append(full);
-    }
-  }
-  view.append(form);
-  if (!$('document-editor').open) $('document-editor').showModal();
-}
-
-$('document-upload').addEventListener('submit',event=>{
-  event.preventDefault();
-  const form=event.currentTarget;
-  perform(async()=>{
-    const files=Array.from(form.elements.files.files);
-    if (files.some(file => Array.from(file.name).length > inputPolicy.filename_max)) throw new Error('filename_too_long');
-    const batch=await api('/documents/uploads','POST',{files:files.map(file=>({name:file.name,size:file.size}))});
-    for (let index=0;index<batch.documents.length;index++) await api(`/documents/${batch.documents[index].id}/original`,'PUT',files[index]);
-    form.reset();status('Файлы приняты. Обработка выполняется в фоне.');await showLibrary();
-  },form.querySelector('button'));
-});
-$('refresh-documents').addEventListener('click',()=>perform(()=>showLibrary(),$('refresh-documents')));
 
 async function showAccounts(actorRole) {
   const accounts = await api('/accounts');
@@ -273,7 +154,7 @@ async function showAccounts(actorRole) {
     });
     if (actorRole==='super_admin') {
       const library=textElement('button','Читать библиотеку');library.type='button';
-      library.addEventListener('click',()=>perform(async()=>{await showLibrary(account.id);showSection('workspace');showArea('library',true);},library));card.append(library);
+      library.addEventListener('click',()=>perform(()=>documents.load(account.id,account.email),library));card.append(library);
     }
     $('accounts').append(card);
   }
@@ -369,7 +250,6 @@ function showAuthForm(name) {
 }
 $('show-login').onclick = () => showAuthForm('login');
 $('show-register').onclick = () => showAuthForm('register');
-$('close-editor').onclick = () => $('document-editor').close();
 async function initialize() {
   const {inputs, document_formats: formats} = await publicSettings();
   for (const key of ['email_min', 'email_max', 'password_min', 'password_max', 'token_max', 'filename_max']) {

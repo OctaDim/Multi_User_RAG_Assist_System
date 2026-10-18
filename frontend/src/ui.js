@@ -43,7 +43,7 @@ export function status(value, error = false) {
 }
 export function feedback(control, value, error = false) {
   if (!control?.isConnected) return;
-  const target = control.closest('form, article, section') || control.parentElement;
+  const target = control.closest('form, li, article, section') || control.parentElement;
   let output = Array.from(target.children).find(element => element.classList.contains('operation-status'));
   if (!output) {output = document.createElement('p'); output.className = 'operation-status'; output.setAttribute('role','status'); output.setAttribute('aria-live','polite'); target.append(output);}
   output.textContent = value; output.dataset.error = String(error);
