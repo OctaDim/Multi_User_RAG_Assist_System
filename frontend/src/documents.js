@@ -31,9 +31,14 @@ export class Documents {
     if(owner!==this.owner) {
       if(!await this.allowLeave())return;
       this.releaseView(); this.owner=owner;this.ownerName=name;
+      $('documents').replaceChildren();
+      $('library-title').textContent=owner?'Библиотека аккаунта':'Мои документы';
+      $('library-context').textContent=owner?`${name||owner} · Только чтение`:'Материалы для поиска и ответов';
+      $('document-upload').hidden=Boolean(owner);$('own-library').hidden=!owner;
     }
     if(reveal)this.reveal?.();
-    return this.refresh();
+    await this.refresh();
+    if(reveal&&owner===this.owner){$('library-title').tabIndex=-1;$('library-title').focus({preventScroll:true});}
   }
   async refresh() {
     const reading=++this.read, owner=this.owner, credential=token();
