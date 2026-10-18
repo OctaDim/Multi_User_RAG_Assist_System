@@ -193,6 +193,8 @@ async def prepare(saver, embedder, tokenize, *, min_similarity=None):
                                 for value in packed['history'] for item in value['dependencies']}
         dependencies.update(history_dependencies)
         passport = {
+            'scope_mode': request['passport'].get('scope_mode', 'selected'),
+            'selected_document_ids': request['passport'].get('selected_document_ids', list(map(str, request['scope']))),
             'selected': list(map(str, request['scope'])),
             'available': [{key: str(row[key]) if key in ('document_id', 'revision_id') else row[key]
                            for key in ('document_id', 'revision_id', 'mode', 'limitations', 'name')} for row in available],

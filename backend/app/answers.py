@@ -8,7 +8,7 @@ from sqlalchemy import func, insert, select, update
 from app.models import Conversation, Document, Event, GraphBinding, Message, Request
 
 from app.auth import AccessError, lock_service, principal, secret_hash
-from app.sources import available, source_flags, source_flags_for, cited_spans
+from app.sources import available, ready_document_ids, source_flags, source_flags_for, cited_spans
 
 
 UNFINISHED = ("accepted", "searching", "queued", "generating")
@@ -54,9 +54,11 @@ async def event(connection, request, kind, payload):
 
 
 async def admit(connection, token, conversation_id, operation_key, question, document_ids, tab_id, tab_proof):
-    scope = sorted(set(document_ids))
-    payload = {"conversation": str(conversation_id), "question": question, "documents": list(map(str, scope)), "tab": str(tab_id)}
+    selected = sorted(set(document_ids))
+    payload = {"conversation": str(conversation_id), "question": question, "documents": list(map(str, selected)), "tab": str(tab_id)}
     fingerprint = secret_hash(json.dumps(payload, sort_keys=True, ensure_ascii=False))
+    passport = {'scope_mode': 'selected' if selected else 'all',
+                'selected_document_ids': list(map(str, selected))}
     # Authenticate before expensive tokenization, then release all mutation locks.
     # The full admission transaction below rechecks everything before INSERT.
     async with connection.begin():
@@ -74,6 +76,8 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
     async with connection.begin():
         service = await lock_service(connection)
         actor = await principal(connection, token)
+        # Resolve once for this operation; replay always returns its saved scope.
+        scope = selected if selected else await ready_document_ids(connection, actor['id'])
         documents = (await connection.execute(select(Document.__table__).where(Document.id.in_(scope), Document.owner_id == actor["id"]).order_by(Document.id).with_for_update(read=True))).mappings().all()
         from app.events import live, lock_tab
         tab = await lock_tab(connection, actor, tab_id, tab_proof)
@@ -93,12 +97,13 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             raise AccessError("no_ready_sources", 409)
         if not service["healthy"]:
             raise AccessError("coordinator_unavailable", 503)
-        request = (await connection.execute(insert(Request.__table__).values(id=uuid4(), conversation_id=conversation_id, owner_id=actor["id"], operation_key=operation_key, fingerprint=fingerprint, scope=scope, origin_tab=tab_id, origin_session=actor["session_id"], state="accepted", execution_epoch=service["epoch"], context_epoch=history["context_epoch"]).returning(Request.__table__))).mappings().first()
+        request = (await connection.execute(insert(Request.__table__).values(id=uuid4(), conversation_id=conversation_id, owner_id=actor["id"], operation_key=operation_key, fingerprint=fingerprint, scope=scope, passport=passport, origin_tab=tab_id, origin_session=actor["session_id"], state="accepted", execution_epoch=service["epoch"], context_epoch=history["context_epoch"]).returning(Request.__table__))).mappings().first()
         await connection.execute(insert(GraphBinding.__table__).values(request_id=request["id"], thread_id=f"{conversation_id}:{request['id']}:{history['context_epoch']}", owner_id=actor["id"], conversation_id=conversation_id, execution_epoch=service["epoch"], context_epoch=history["context_epoch"], account_epoch=actor["context_epoch"]))
         await connection.execute(insert(Message.__table__).values(request_id=request["id"], conversation_id=conversation_id, role="user", text=question))
         await event(connection, request, "accepted", {
             "state": "accepted", "version": request["version"], "question": question,
             "operation_key": str(operation_key), "scope": list(map(str, scope)),
+            "passport": passport, **passport,
             "created_at": request['created_at'].isoformat(),
         })
         return await project(connection, request)

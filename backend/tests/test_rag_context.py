@@ -111,6 +111,8 @@ async def test_actual_async_graph_commits_fragments_before_model_callback(sessio
     state = await run(rag_pool, request, generate=generate)
     assert state['answer'] == 'The budget is 100 euros.' and calls == [state['prompt']]
     assert state['passport']['selected'] == [str(environment['document'])]
+    assert state['passport']['scope_mode'] == 'selected'
+    assert state['passport']['selected_document_ids'] == [str(environment['document'])]
     assert state['passport']['passed'][0]['id'] == str(environment['chunk'])
     assert state['response_tokens'] + len(state['tokens']) == 4096
     assert state['prompt'].endswith('<|im_start|>assistant\n<think>\n\n</think>\n\n')
@@ -118,6 +120,24 @@ async def test_actual_async_graph_commits_fragments_before_model_callback(sessio
     checkpoint = await saver.aget_tuple({'configurable': {'thread_id': saver.binding['thread_id']}})
     assert checkpoint.checkpoint['channel_values']['prompt'] == state['prompt']
     assert await (await connection.execute('SELECT 1 FROM checkpoint_writes WHERE thread_id=%s', (saver.binding['thread_id'],))).fetchone()
+
+
+async def test_all_mode_prepare_preserves_admission_metadata_and_frozen_scope(
+        session, environment, connection, rag_pool):
+    request = await send(session, environment, [])
+    later = uuid4()
+    await connection.execute('INSERT INTO documents(id,owner_id,ready) VALUES (%s,%s,true)',
+                             (later, environment['user']['id']))
+    await seed_revision(connection, later, text='LATER DOCUMENT MUST NOT ENTER THIS ANSWER')
+    state = await run(rag_pool, request)
+    assert state['passport']['scope_mode'] == 'all'
+    assert state['passport']['selected_document_ids'] == []
+    assert state['passport']['selected'] == [str(environment['document'])]
+    assert {value['document_id'] for value in state['passport']['found']} == {str(environment['document'])}
+    assert state['dependencies'] == [{'document_id': str(environment['document']), 'revision_id': str(environment['revision'])}]
+    assert 'LATER DOCUMENT' not in state['prompt']
+    snapshot = await answers.snapshot(session, environment['user']['token'], environment['conversation'])
+    assert snapshot['requests'][0]['passport'] == state['passport']
 
 
 async def test_not_ready_selected_and_unmatched_ready_sources_are_distinct(session, environment, connection, rag_pool):
@@ -156,9 +176,10 @@ async def test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpo
 
 
 @pytest.mark.parametrize('mutation', ['delete', 'correct'])
-async def test_transitive_history_provenance_removes_derived_text_and_keeps_ui(session, environment, connection, rag_pool, mutation):
+@pytest.mark.parametrize('all_mode', [False, True])
+async def test_transitive_history_provenance_removes_derived_text_and_keeps_ui(session, environment, connection, rag_pool, mutation, all_mode):
     # Answer two derives from answer one even when its own retrieval found nothing.
-    first = await send(session, environment)
+    first = await send(session, environment, [] if all_mode else None)
     await run(rag_pool, first)
     await complete(session, first, 'OLD OCR answer 100')
     second = await send(session, environment)
@@ -178,7 +199,7 @@ async def test_transitive_history_provenance_removes_derived_text_and_keeps_ui(s
         revision, _ = await seed_revision(connection, environment['document'], text='Corrected OCR budget 10', attach=False)
         await sources.change_source(session, environment['user']['token'], environment['document'], revision_id=revision)
         scope = [environment['document']]
-    fresh = await send(session, environment, scope)
+    fresh = await send(session, environment, [] if all_mode else scope)
     state = await run(rag_pool, fresh)
     assert state['history'] == []
     assert 'OLD OCR' not in state['prompt'] and 'DERIVED SUMMARY' not in state['prompt']

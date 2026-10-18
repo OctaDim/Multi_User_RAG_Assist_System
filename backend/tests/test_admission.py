@@ -12,14 +12,14 @@ from app import answers
 from app.auth import AccessError
 
 
-async def send(session, environment, *, key=None, question="Question", token=None):
+async def send(session, environment, *, key=None, question="Question", token=None, scope=None):
     return await answers.admit(
         session,
         token or environment["user"]["token"],
         environment["conversation"],
         key or uuid4(),
         question,
-        [environment["document"]],
+        [environment["document"]] if scope is None else scope,
         environment["tab"],
         environment["proof"],
     )
@@ -78,15 +78,92 @@ async def test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key(sessio
         await send(session, environment, key=key)
 
 
-async def test_no_ready_sources_refuses_without_history_or_late_auto_admission(session, environment, connection):
+@pytest.mark.parametrize('scope', [None, []])
+async def test_no_ready_sources_refuses_without_history_or_late_auto_admission(session, environment, connection, scope):
     await connection.execute("UPDATE documents SET ready=false")
     with pytest.raises(AccessError, match="no_ready_sources"):
-        await send(session, environment)
+        await send(session, environment, scope=scope)
     assert await count(connection, "requests") == await count(connection, "messages") == 0
     await connection.execute("UPDATE documents SET ready=true")
     assert await count(connection, "requests") == 0
-    accepted = await send(session, environment)
+    accepted = await send(session, environment, scope=scope)
     assert accepted["state"] == "accepted"
+
+
+@pytest.mark.parametrize('scope_mode', ['all', 'selected'])
+async def test_scope_metadata_is_available_before_fragments_and_replay_keeps_original_scope(
+        session, environment, connection, monkeypatch, scope_mode):
+    from conftest import seed_revision
+
+    selection = [] if scope_mode == 'all' else [environment['document']]
+    key = uuid4()
+    first = await send(session, environment, key=key, scope=selection)
+    metadata = {'scope_mode': scope_mode, 'selected_document_ids': list(map(str, selection))}
+    assert first['scope'] == [environment['document']]
+    assert all(first['passport'][name] == value for name, value in metadata.items())
+    accepted = await (await connection.execute(
+        "SELECT payload FROM events WHERE request_id=%s AND kind='accepted'", (first['id'],))).fetchone()
+    assert accepted['payload']['passport'] == first['passport']
+    assert all(accepted['payload'][name] == value for name, value in metadata.items())
+    snapshot = await answers.snapshot(session, environment['user']['token'], environment['conversation'])
+    assert snapshot['requests'][0]['passport'] == first['passport']
+
+    later = uuid4()
+    await connection.execute('INSERT INTO documents(id,owner_id,ready) VALUES (%s,%s,true)',
+                             (later, environment['user']['id']))
+    await seed_revision(connection, later)
+
+    def forbidden_tokenization(*args):
+        raise AssertionError('Replay must return before tokenization')
+
+    monkeypatch.setattr(answers, 'question_budget', forbidden_tokenization)
+    repeated = await send(session, environment, key=key, scope=selection)
+    assert repeated['id'] == first['id'] and repeated['scope'] == first['scope']
+    assert repeated['passport'] == first['passport']
+    changed_selection = [environment['document']] if scope_mode == 'all' else []
+    with pytest.raises(AccessError, match='operation_conflict'):
+        await send(session, environment, key=key, scope=changed_selection)
+    assert await count(connection, 'messages') == 1
+
+
+async def test_second_replay_after_locks_returns_saved_scope_even_when_candidate_differs(
+        session, environment, connection, rag_pool, monkeypatch):
+    from app import events
+    from conftest import seed_revision
+
+    key = uuid4()
+    candidate_read, release = asyncio.Event(), asyncio.Event()
+    original_lock_tab = events.lock_tab
+    calls = 0
+
+    async def delayed_lock_tab(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            candidate_read.set()
+            await release.wait()
+        return await original_lock_tab(*args, **kwargs)
+
+    monkeypatch.setattr(events, 'lock_tab', delayed_lock_tab)
+
+    async def delayed_admission():
+        async with rag_pool.session() as independent:
+            return await send(independent, environment, key=key, scope=[])
+
+    delayed = asyncio.create_task(delayed_admission())
+    try:
+        await asyncio.wait_for(candidate_read.wait(), timeout=30)
+        later = uuid4()
+        await connection.execute('INSERT INTO documents(id,owner_id,ready) VALUES (%s,%s,true)',
+                                 (later, environment['user']['id']))
+        await seed_revision(connection, later)
+        accepted = await send(session, environment, key=key, scope=[])
+    finally:
+        release.set()
+    replayed = await asyncio.wait_for(delayed, timeout=30)
+    assert replayed['id'] == accepted['id']
+    assert set(replayed['scope']) == {environment['document'], later}
+    assert await count(connection, 'requests') == await count(connection, 'messages') == 1
 
 
 @pytest.mark.parametrize("foreign_role", ["user", "admin"])

@@ -9,9 +9,39 @@ from app.auth import AccessError
 async def send(session, environment, scope=None):
     return await answers.admit(
         session, environment["user"]["token"], environment["conversation"],
-        uuid4(), "What is the annual budget?", scope or [environment["document"]],
+        uuid4(), "What is the annual budget?", [environment["document"]] if scope is None else scope,
         environment["tab"], environment["proof"],
     )
+
+
+async def test_empty_selection_resolves_only_whole_ready_owned_sources(session, environment, connection):
+    from conftest import seed_revision
+    from app.sources import retrieve
+
+    neighbor = uuid4()
+    await connection.execute('INSERT INTO documents(id,owner_id,ready) VALUES (%s,%s,true)',
+                             (neighbor, environment['user']['id']))
+    await seed_revision(connection, neighbor, text='Second owned ready source')
+    for owner, ready, deleted, projection in [
+        (environment['admin']['id'], True, False, {}),
+        (environment['user']['id'], False, False, {}),
+        (environment['user']['id'], True, True, {}),
+        (environment['user']['id'], True, False, {'page_statuses': ('ready', 'failed')}),
+        (environment['user']['id'], True, False, {'upload_complete': False}),
+        (environment['user']['id'], True, False, {'mode': 'skip_handwriting'}),
+    ]:
+        identifier = uuid4()
+        await connection.execute('INSERT INTO documents(id,owner_id,ready,deleted) VALUES (%s,%s,%s,%s)',
+                                 (identifier, owner, ready, deleted))
+        await seed_revision(connection, identifier, text='UNAVAILABLE SECRET', **projection)
+    request = await send(session, environment, [])
+    assert request['scope'] == sorted([environment['document'], neighbor])
+    assert request['passport']['scope_mode'] == 'all'
+    assert request['passport']['selected_document_ids'] == []
+    async with session.begin():
+        rows = await retrieve(session, request['owner_id'], request['scope'], [1.0] + [0.0]*383)
+    assert {row['document_id'] for row in rows} == {environment['document'], neighbor}
+    assert 'UNAVAILABLE SECRET' not in repr(rows)
 
 
 async def test_ready_flag_without_whole_published_revision_is_rejected(session, environment, connection):

@@ -32,6 +32,15 @@ async def available(session, owner_id, scope):
     return [dict(row) for row in rows.mappings()]
 
 
+async def ready_document_ids(session, owner_id):
+    rows = await session.execute(
+        select(available_revisions.c.document_id)
+        .where(available_revisions.c.owner_id == owner_id)
+        .order_by(available_revisions.c.document_id)
+    )
+    return list(rows.scalars())
+
+
 async def retrieve(session, owner_id, scope, embedding, *, limit=None, min_similarity=None):
     config = load_settings('runtime')['rag']
     limit = config['retrieval_limit'] if limit is None else limit
