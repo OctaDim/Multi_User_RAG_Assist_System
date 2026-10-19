@@ -1,7 +1,18 @@
+import {token} from './auth.js';
+
 const $ = id => document.getElementById(id);
-let section = 'workspace';
+const narrowWorkspace=matchMedia('(max-width:1179px)');
+let section = sessionStorage.getItem('rag:section') || 'workspace';
 let canManage = false;
 const areaFocus = new Map();
+function compactChat() {
+  document.querySelector('.conversation-picker').open=false;
+  $('source-selection').open=false;
+}
+const chatMenus=[document.querySelector('.conversation-picker'),$('source-selection')];
+for(const menu of chatMenus)menu.querySelector('summary').addEventListener('click',()=>{
+  if(!menu.open)for(const other of chatMenus)if(other!==menu)other.open=false;
+});
 document.addEventListener('focusin',event=>{
   const area = event.target.closest?.('.work-area');
   if(area) areaFocus.set(area.id,event.target);
@@ -27,14 +38,16 @@ export function showArea(area, focus = false) {
 export function showSection(value) {
   section=value==='administration'&&!canManage?'workspace':value;
   if(!['workspace','library','administration'].includes(section))section='workspace';
+  if(token())sessionStorage.setItem('rag:section',section);else sessionStorage.removeItem('rag:section');
   $('knowledge-workspace').hidden=section!=='workspace';$('library').hidden=section!=='library';$('administration').hidden=section!=='administration';
   for(const name of ['workspace','library','administration']) {
     const button=$(`nav-${name}`);
     if(section===name)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
   }
   if(section==='library')markArea('library');
+  document.dispatchEvent(new CustomEvent('rag:section-changed',{detail:section}));
 }
-export function configureNavigation(role) {canManage=role!=='user';$('nav-administration').hidden=!canManage;showSection(section);}
+export function configureNavigation(role) {canManage=role!=='user';$('nav-administration').hidden=!canManage;showSection(section);compactChat();}
 function closeEvidence(focus=false) {
   $('knowledge-workspace').dataset.evidenceOpen='false';$('knowledge-workspace').dataset.activeArea='chat';
   $('evidence').hidden=true;$('open-evidence').setAttribute('aria-expanded','false');markArea('chat');
@@ -46,6 +59,14 @@ $('nav-library').onclick=()=>showArea('library');
 $('nav-administration').onclick=()=>showSection('administration');
 $('open-evidence').onclick=()=>showArea('evidence',true);
 $('close-evidence').onclick=()=>closeEvidence(true);
+$('question').addEventListener('focus',compactChat);
+narrowWorkspace.addEventListener('change',()=>{if(document.activeElement===$('question'))compactChat();});
+document.querySelector('.skip-link').onclick=event=>{
+  event.preventDefault();
+  if(!$('workspace').hidden){showArea('chat');$('question').focus();}
+  else if(!$('authentication').inert)document.querySelector('#authentication form:not([hidden]) input')?.focus();
+  else {$('status').tabIndex=-1;$('status').focus();}
+};
 document.addEventListener('rag:show-area',event=>showArea(event.detail,true));
 document.querySelector('.brand').onclick=event=>{
   if(!$('workspace').hidden){event.preventDefault();showArea('chat');}

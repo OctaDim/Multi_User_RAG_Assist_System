@@ -1,0 +1,343 @@
+{
+  "kind": "application-case-evidence-ledger",
+  "collected_application_cases": 492,
+  "method": "Actual unique-case evidence from completed partitions and targeted retries; historical failures retained. This is not one continuous all-green full-suite run.",
+  "technical": {
+    "cases": 415,
+    "verification": "2026-10-19-frontend-core-verification.json"
+  },
+  "current_browser": {
+    "cases": 40,
+    "verification": "2026-10-19-frontend-browser-current-verification.json"
+  },
+  "native": {
+    "cases": 37,
+    "passed_with_actual_receipt": 34,
+    "unresolved": [
+      "tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]",
+      "tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits",
+      "tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]"
+    ],
+    "receipts_by_case": {
+      "tests/integration/test_actual_authority.py::test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix": [
+        {
+          "receipt": "2026-10-19-frontend-final-flows-partial.jsonl",
+          "outcome": "passed",
+          "duration": 13.58568491099868
+        }
+      ],
+      "tests/integration/test_actual_document_boundaries.py::test_real_partial_upload_and_failed_file_never_expand_selected_source_scope": [
+        {
+          "receipt": "2026-10-19-frontend-integration-01.jsonl",
+          "outcome": "passed",
+          "duration": 117.37775857800443
+        },
+        {
+          "receipt": "2026-10-19-frontend-integration-02.jsonl",
+          "outcome": "failed",
+          "duration": 106.62552192200383
+        }
+      ],
+      "tests/integration/test_actual_lifecycle_gaps.py::test_issued_owner_revocation_during_actual_queue_and_native_stream[after-queued]": [
+        {
+          "receipt": "2026-10-19-frontend-integration-01.jsonl",
+          "outcome": "passed",
+          "duration": 81.06651039700955
+        }
+      ],
+      "tests/integration/test_actual_lifecycle_gaps.py::test_issued_owner_revocation_during_actual_queue_and_native_stream[after-streaming]": [
+        {
+          "receipt": "2026-10-19-frontend-integration-01.jsonl",
+          "outcome": "passed",
+          "duration": 29.842809955007397
+        }
+      ],
+      "tests/integration/test_actual_lifecycle_gaps.py::test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history[after]": [
+        {
+          "receipt": "2026-10-19-frontend-integration-01.jsonl",
+          "outcome": "failed",
+          "duration": 11.996382290002657
+        },
+        {
+          "receipt": "2026-10-19-frontend-tokenizer-retry.jsonl",
+          "outcome": "passed",
+          "duration": 39.58923839300405
+        }
+      ],
+      "tests/integration/test_actual_lifecycle_gaps.py::test_actual_native_completed_outputs_are_isolated_between_issued_owners[after]": [
+        {
+          "receipt": "2026-10-19-frontend-integration-03.jsonl",
+          "outcome": "passed",
+          "duration": 63.24560847799876
+        }
+      ],
+      "tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]": [
+        {
+          "receipt": "2026-10-19-frontend-integration-03.jsonl",
+          "outcome": "failed",
+          "duration": 203.695629793001
+        },
+        {
+          "receipt": "2026-10-19-frontend-integration-04.jsonl",
+          "outcome": "failed",
+          "duration": 1684.4763636979915
+        }
+      ],
+      "tests/runtime/test_generation_contract.py::test_native_twelve_contexts_hot_limits_and_fair_steps": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 19.304198576006456
+        }
+      ],
+      "tests/runtime/test_generation_contract.py::test_native_eos_releases_one_context_without_stalling_another": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.9457598040025914
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_independent_production_contexts_match_u1_prefix": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 3.0118049130105646
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_real_eos_and_incremental_russian_utf8": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.8325053070002468
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_real_source_answer_uses_facts_instead_of_citation_example": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 3.578758793999441
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_actual_token_budget_has_no_prompt_clamp": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 38.47601620698697
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_abort_and_close_wait_for_real_native_decode": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.03389188200526405
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_partial_allocation_is_freed_on_sampler_failure": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.010152965012821369
+        }
+      ],
+      "tests/runtime/test_production_runtime.py::test_admission_vocabulary_matches_loaded_model_and_preserves_live_context": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.6675649259996135
+        }
+      ],
+      "tests/integration/test_actual_printed_documents.py::test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 271.083716129011
+        }
+      ],
+      "tests/integration/test_multi_process.py::test_two_http_processes_share_native_capacity_fairness_and_hot_settings": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 109.33091916500416
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[die Seerose bl\\xfcht auf dem Teich.]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.004345011999248527
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\\xfcht auf dem Teich?]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.00013274600496515632
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\\xfcht auf dem Teich]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 8.246299694292247e-05
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\\xfcht auf dem Teich. extra]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.00014940700202714652
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_current_be_word_permissions_are_strict_outside_exact_model_and_source_type": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 0.005018391995690763
+        }
+      ],
+      "tests/integration/test_multilingual_documents.py::test_genuine_four_language_handwriting_publication_and_permission_masks": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 170.03304695000406
+        },
+        {
+          "receipt": "2026-10-19-frontend-native-retry-02.jsonl",
+          "outcome": "passed",
+          "duration": 393.6284771680075
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 49.45280777500011
+        },
+        {
+          "receipt": "2026-10-19-frontend-native-retry-02.jsonl",
+          "outcome": "passed",
+          "duration": 89.00428575499973
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-stop_during_grace]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 88.4407629579946
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_before-error_before]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 46.48791187199822
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_after-error_during_grace]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 79.03818887200032
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "passed",
+          "duration": 90.0132076489972
+        }
+      ],
+      "tests/integration/test_terminal_lifecycle.py::test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 87.49214395800664
+        },
+        {
+          "receipt": "2026-10-19-frontend-native-retry-02.jsonl",
+          "outcome": "passed",
+          "duration": 90.95472012099344
+        }
+      ],
+      "tests/integration/test_answer_lifecycle.py::test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 171.93020609600353
+        },
+        {
+          "receipt": "2026-10-19-frontend-native-retry-02.jsonl",
+          "outcome": "failed",
+          "duration": 329.1456012999988
+        }
+      ],
+      "tests/integration/test_answer_lifecycle.py::test_frozen_thirty_questions_use_real_multilingual_documents": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 153.6766279440053
+        },
+        {
+          "receipt": "2026-10-19-frontend-native-retry-02.jsonl",
+          "outcome": "passed",
+          "duration": 608.1125309140043
+        }
+      ],
+      "tests/integration/test_actual_page_failure.py::test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]": [
+        {
+          "receipt": "2026-10-19-frontend-native-remainder-01.jsonl",
+          "outcome": "failed",
+          "duration": 838.3750237530039
+        }
+      ],
+      "tests/integration/test_actual_settings_restart.py::test_real_settings_late_refresh_cannot_replace_completed_save": [
+        {
+          "receipt": "2026-10-19-frontend-post-feedback.jsonl",
+          "outcome": "passed",
+          "duration": 4.406565141995088
+        }
+      ],
+      "tests/integration/test_actual_settings_restart.py::test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides[after]": [
+        {
+          "receipt": "2026-10-19-frontend-post-feedback.jsonl",
+          "outcome": "passed",
+          "duration": 82.12410367898701
+        }
+      ],
+      "tests/integration/test_answer_lifecycle.py::test_real_super_admin_settings_preview_apply_and_readonly_models": [
+        {
+          "receipt": "2026-10-19-frontend-post-feedback.jsonl",
+          "outcome": "passed",
+          "duration": 6.904400753002847
+        }
+      ],
+      "tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after]": [
+        {
+          "receipt": "2026-10-19-frontend-post-feedback.jsonl",
+          "outcome": "failed",
+          "duration": 63.014339963003295
+        },
+        {
+          "receipt": "2026-10-19-frontend-transport-final.jsonl",
+          "outcome": "passed",
+          "duration": 61.24166362598771
+        }
+      ]
+    }
+  },
+  "source_snapshot": "2026-10-19-frontend-source-final-v2.json",
+  "raw_native_sha256": {
+    "2026-10-19-frontend-final-flows-partial.jsonl": "2f2498c7dce7030f904b9a1ea7ab3c8a0a568d44d37164cb9ed12e8b75c24d7a",
+    "2026-10-19-frontend-integration-01.jsonl": "2e5efc5a47d2f5f97910f08f06fb9546b13865ed8c846672e7edf59a8577e795",
+    "2026-10-19-frontend-integration-02.jsonl": "e1140e9497ca23f1feb201ddee3c7ba90d77fe7f88838ccc1f62a2b3ee771a14",
+    "2026-10-19-frontend-integration-03.jsonl": "89ec44afd52c78a78bc7aafc380a86539d8bacef04f3803f2ad08024ce318c32",
+    "2026-10-19-frontend-integration-04.jsonl": "0c89ff14138fcbd22a4a06da777aa550e3f9cee68742993c7ce5b20440ae575b",
+    "2026-10-19-frontend-native-remainder-01.jsonl": "ba7704c61bf98adc504939ea32f598d8aad8fa054fad132b2735be65c9ebcf72",
+    "2026-10-19-frontend-native-retry-02.jsonl": "893791066bc9e6cc22bd0d06c14b3b2cdf84594e146636caead15707c34d8b5e",
+    "2026-10-19-frontend-post-feedback.jsonl": "2ed947327b20a6c6f99942e7ca49a8bcdbe8a15ae1cfa3881ba5fff01d8c872c",
+    "2026-10-19-frontend-tokenizer-retry.jsonl": "8eefbdcab5b423b5396a9944253607ab44f8ea2b4b00334a6a66760cabae250c",
+    "2026-10-19-frontend-transport-final.jsonl": "3d5bca096abaf7728db66ca5fcd6dba0669b7111f0b882d6fe926f682847fe8e"
+  },
+  "all_cases_have_passing_evidence": false,
+  "single_full_suite_green_run": false
+}

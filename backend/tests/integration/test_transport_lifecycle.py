@@ -19,7 +19,7 @@ from playwright.sync_api import expect
 import pytest
 
 from integration.test_answer_lifecycle import environment
-from browser.test_accounts import BACKEND, real_account_browser, register, login
+from browser.test_accounts import BACKEND, real_account_browser, register, login, navigate, open_conversations, open_sources
 from browser.test_documents import real_document_browser, ready
 
 
@@ -146,13 +146,17 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
             origins=[through_proxy(page,proxy) for page,proxy in zip(pages,proxies)]
             email='u8-proxy-owner@owned.test'
             register(pages[0],mailbox,frontend,email);login(pages[0],email)
+            navigate(pages[0],'library')
             pages[0].locator('#document-upload input').set_input_files({'name':'proxy-budget.txt','mimeType':'text/plain',
                 'buffer':b'The annual budget is 100 euros.'})
             pages[0].get_by_role('button',name='Загрузить документы',exact=True).click();ready(pages[0],'proxy-budget.txt')
             pages[1].goto(frontend);login(pages[1],email)
             credentials=[]
             for index,page in enumerate(pages):
+                navigate(page,'chat')
                 page.locator('#question').fill(f'Independent unsent tab draft {index}')
+                navigate(page,'chat')
+                open_sources(page)
                 page.get_by_role('checkbox',name='proxy-budget.txt',exact=True).check()
                 credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
                     tab:JSON.parse(sessionStorage.getItem('rag:tab')),conversation:sessionStorage.getItem('rag:conversation'),
@@ -179,15 +183,19 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
                 prefix=connection.execute('SELECT answer_text FROM requests WHERE id=%s',(request_id,)).fetchone()['answer_text']
             expect(owner.locator('#history .answer-text')).to_have_text(prefix)
             proxy.cut();owner.wait_for_timeout(5000);proxy.enabled=True
-            expect(owner.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=8000)
+            expect(owner.locator('#answer-connection')).to_have_text('В этой беседе уже выполняется запрос.',timeout=8000)
             expect(owner.locator('#history .answer-text')).to_have_text(prefix)
+            navigate(owner,'chat')
             owner.locator('#question').fill('Origin A draft')
             owner.get_by_role('button',name='Новая беседа',exact=True).click()
             expect(owner.locator('#conversations li')).to_have_count(2)
             background=owner.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            navigate(owner,'chat')
             owner.locator('#question').fill('Origin B draft')
+            open_conversations(owner)
             owner.locator(f'#conversations button[data-conversation="{conversation}"]').click()
             expect(owner.locator('#question')).to_have_value('Origin A draft')
+            open_conversations(owner)
             owner.locator(f'#conversations button[data-conversation="{background}"]').click()
             expect(owner.locator('#question')).to_have_value('Origin B draft')
             expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')

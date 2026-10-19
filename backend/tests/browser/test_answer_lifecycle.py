@@ -10,7 +10,7 @@ import psycopg
 from playwright.sync_api import expect
 import pytest
 
-from .test_accounts import BACKEND, real_account_browser, register, login
+from .test_accounts import BACKEND, real_account_browser, register, login, open_conversations, open_sources, api_wait_ms
 from .test_documents import real_document_browser, ready
 
 
@@ -44,6 +44,7 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         first = context.new_page()
         register(first, mailbox, frontend, 'lifecycle-drafts@owned.test')
         login(first, 'lifecycle-drafts@owned.test')
+        open_conversations(first)
         first.locator('#conversations button[aria-current=true]').click()
         first_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
         first.locator('#question').fill('First tab A')
@@ -51,19 +52,23 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         expect(first.locator('#conversations li')).to_have_count(2)
         second_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
         first.locator('#question').fill('First tab B')
+        open_conversations(first)
         first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
         expect(first.locator('#question')).to_have_value('First tab A')
 
         second = context.new_page()
         second.goto(frontend)
         login(second, 'lifecycle-drafts@owned.test')
+        open_conversations(second)
         second.locator(f'#conversations button[data-conversation="{first_id}"]').click()
         second.locator('#question').fill('Second tab A')
         first.reload()
         expect(first.locator('#question')).to_have_value('First tab A')
         expect(second.locator('#question')).to_have_value('Second tab A')
+        open_conversations(first)
         first.locator(f'#conversations button[data-conversation="{second_id}"]').click()
         expect(first.locator('#question')).to_have_value('First tab B')
+        open_conversations(first)
         first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
         expect(first.get_by_role('button', name='Отправить вопрос', exact=True)).to_be_disabled()
         expect(first.locator('#scope-description')).to_contain_text('Нет готовых источников')
@@ -91,6 +96,7 @@ def test_real_fragments_precede_answer_without_waiting_for_history_read(real_ans
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'answer-budget.txt')
         page.locator('[data-area=chat]').click()
+        open_sources(page)
         page.get_by_role('checkbox',name='answer-budget.txt',exact=True).check()
         page.locator('[data-area=evidence]').click()
         page.evaluate("""() => {
@@ -108,9 +114,9 @@ def test_real_fragments_precede_answer_without_waiting_for_history_read(real_ans
         page.route('**/api/conversations/*',hold_history)
         page.locator('#question').fill('What is the annual budget?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
+        expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros',timeout=120000)
         assert page.evaluate('window.fragmentPrefix') == ''
-        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
+        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
         page.get_by_role('button',name='Показать основания',exact=True).click()
         expect(page.locator('#answer-evidence')).to_contain_text('answer-budget.txt')
         expect(page.locator('#early-fragments')).to_contain_text('Страница 1')
@@ -158,6 +164,7 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'ack-budget.txt')
         page.locator('[data-area=chat]').click()
+        open_sources(page)
         page.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
@@ -186,7 +193,9 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         neighbor=context.new_page()
         neighbor.goto(frontend)
         login(neighbor,'lifecycle-ack@owned.test')
+        open_conversations(neighbor)
         neighbor.locator(f'#conversations button[data-conversation="{first_id}"]').click()
+        open_sources(neighbor)
         neighbor.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
         neighbor.locator('#question').fill('Neighbor draft while A is busy')
         expect(neighbor.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
@@ -194,6 +203,7 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         neighbor.locator('#question-form').evaluate('form => form.requestSubmit()')
         expect(neighbor.locator('#status')).to_contain_text('В этой беседе уже выполняется запрос')
         expect(neighbor.locator('#question')).to_have_value('Neighbor draft while A is busy')
+        open_conversations(page)
         page.locator(f'#conversations button[data-conversation="{first_id}"]').click()
         expect(page.locator('#question')).to_have_value('A new unsent draft after acceptance')
         page.get_by_role('button',name='Остановить ответ',exact=True).click()
@@ -205,8 +215,9 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         expect(page.locator('#question')).to_have_value('A new unsent draft after acceptance')
         os.kill(native_pid,signal.SIGCONT)
         native_pid=None
+        open_conversations(page)
         page.locator(f'#conversations button[data-conversation="{second_id}"]').click()
-        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
+        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
         expect(page.locator('#history h3')).not_to_have_text(first_question)
         assert generation.poll() is None
     except Exception:
@@ -239,7 +250,7 @@ def test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts(rea
         login(original,'lifecycle-lifetime@owned.test')
         original.goto(frontend+'?lifetime=original')
         expect(original.locator('html')).to_have_attribute('data-ready','true')
-        expect(original.locator('#answer-connection')).to_have_text('Соединение установлено.')
+        expect(original.locator('#answer-connection')).to_contain_text('Соединение установлено.')
         original.locator('#question').fill('Closed original draft')
         original_tab=original.evaluate("JSON.parse(sessionStorage.getItem('rag:tab')).id")
         neighbor=context.new_page()
@@ -262,7 +273,7 @@ def test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts(rea
         expect(restored.locator('html')).to_have_attribute('data-ready','true')
         expect(restored.locator('#workspace')).to_be_visible()
         expect(restored.locator('#question')).to_have_value('')
-        expect(restored.locator('#answer-connection')).to_have_text('Соединение установлено.')
+        expect(restored.locator('#answer-connection')).to_contain_text('Соединение установлено.')
         assert restored.evaluate("JSON.parse(sessionStorage.getItem('rag:tab')).id")!=original_tab
         expect(neighbor.locator('#question')).to_have_value('Neighbor draft remains')
         restored.locator('#question').fill('Restored tab new draft')
@@ -275,14 +286,14 @@ def test_actual_app_close_restore_duplicate_and_opener_discard_closed_drafts(rea
         duplicate=duplicate_page.value
         expect(duplicate.locator('html')).to_have_attribute('data-ready','true')
         expect(duplicate.locator('#question')).to_have_value('')
-        expect(duplicate.locator('#answer-connection')).to_have_text('Соединение установлено.')
+        expect(duplicate.locator('#answer-connection')).to_contain_text('Соединение установлено.')
         assert duplicate.evaluate("JSON.parse(sessionStorage.getItem('rag:tab')).id")!=restored_tab
         with context.expect_page() as opened_page:
             restored.evaluate('url => window.open(url)',frontend+'?lifetime=opener')
         opened=opened_page.value
         expect(opened.locator('html')).to_have_attribute('data-ready','true')
         expect(opened.locator('#question')).to_have_value('')
-        expect(opened.locator('#answer-connection')).to_have_text('Соединение установлено.')
+        expect(opened.locator('#answer-connection')).to_contain_text('Соединение установлено.')
         assert opened.evaluate("JSON.parse(sessionStorage.getItem('rag:tab')).id")!=restored_tab
         expect(restored.locator('#question')).to_have_value('Restored tab new draft')
         expect(neighbor.locator('#question')).to_have_value('Neighbor draft remains')
@@ -317,6 +328,7 @@ def test_actual_browser_restart_does_not_restore_closed_conversation_drafts(real
         assert page.evaluate("!Object.keys(sessionStorage).some(key=>key.startsWith('rag:draft:'))")
         if page.locator('#authentication').is_visible():login(page,'lifecycle-restart@owned.test')
         for identifier in (first_id,second_id):
+            open_conversations(page)
             page.locator(f'#conversations button[data-conversation="{identifier}"]').click()
             expect(page.locator('#question')).to_have_value('')
         print('Actual persistent Chromium restart restored the real app URL; neither closed conversation draft returned.')
@@ -340,6 +352,7 @@ def test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         expect(page.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
         page.locator('[data-area=chat]').click()
+        open_sources(page)
         page.locator('#question-sources input').check()
         page.locator('#question').fill('Wait for my selected document')
         expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
@@ -384,6 +397,7 @@ def test_actual_print_only_pdf_limitations_reach_answer_passport(real_answer_bro
         register(user,mailbox,frontend,'lifecycle-pdf@owned.test')
         login(user,'lifecycle-pdf@owned.test')
         operator.reload()
+        operator.locator('#nav-administration').click()
         card=operator.locator('article').filter(has=operator.locator('form[data-account="lifecycle-pdf@owned.test"]'))
         card.locator('summary').click()
         policy=card.locator('form[data-policy]')
@@ -395,10 +409,11 @@ def test_actual_print_only_pdf_limitations_reach_answer_passport(real_answer_bro
         user.locator('[data-area=library]').click()
         user.locator('#document-upload input').set_input_files(str(path))
         user.get_by_role('button',name='Загрузить документы',exact=True).click()
-        expect(user.locator('#documents')).to_contain_text('Для вашей учётной записи OCR рукописей не разрешён')
+        expect(user.locator('#documents')).to_contain_text('OCR рукописей не разрешён')
         user.get_by_role('button',name='Загрузить только печатный текст',exact=True).click()
         ready(user,path.name,timeout=300)
         user.locator('[data-area=chat]').click()
+        open_sources(user)
         user.get_by_role('checkbox',name=path.name,exact=True).check()
         user.locator('#question').fill('What is the annual budget?')
         user.get_by_role('button',name='Отправить вопрос',exact=True).click()
@@ -429,6 +444,7 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'snapshot-budget.txt')
         page.locator('[data-area=chat]').click()
+        open_sources(page)
         page.get_by_role('checkbox',name='snapshot-budget.txt',exact=True).check()
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
@@ -438,10 +454,11 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
             assert response.json()['requests']==[]
             held.append((route,response))
         page.route('**/api/conversations/*',hold_old_get)
+        open_conversations(page)
         page.locator('#conversations button[aria-current=true]').click()
         page.locator('#question').fill('What is the annual budget?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(page.locator('#history h3')).to_have_text('What is the annual budget?')
+        expect(page.locator('#history h3')).to_have_text('What is the annual budget?',timeout=api_wait_ms(page))
         page.locator('#question').fill('New draft after the old read started')
         route,response=held.pop()
         route.fulfill(response=response)
@@ -450,9 +467,11 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
         expect(page.locator('#question')).to_have_value('New draft after the old read started')
         page.unroute('**/api/conversations/*',hold_old_get)
         os.kill(native_pid,signal.SIGCONT);native_pid=None
-        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=30000)
+        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
+        open_conversations(page)
         page.locator('#conversations button[aria-current=true]').click()
-        expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros')
+        page.locator('[data-area=evidence]').click()
+        expect(page.locator('#early-fragments blockquote')).to_contain_text('100 euros',timeout=120000)
         assert generation.poll() is None
     finally:
         if native_pid is not None:

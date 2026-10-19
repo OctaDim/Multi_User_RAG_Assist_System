@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="73.834" timestamp="2026-10-19T01:09:29.359508+03:00" hostname="16IPK2"><testcase classname="tests.test_backend_launcher" name="test_real_backend_main_starts_models_api_and_stops_whole_tree[15-cli]" time="12.425" /><testcase classname="tests.test_backend_launcher" name="test_real_backend_main_starts_models_api_and_stops_whole_tree[15-environment]" time="58.741"><failure message="AssertionError: Backend waiting for PostgreSQL&#10;  Backend started documents (pid=65505)&#10;  Backend started generation (pid=65506)&#10;  Backend started api (pid=65507)&#10;  {&quot;event&quot;: &quot;native_spawn&quot;, &quot;pid&quot;: 65523, &quot;keeper_pid&quot;: 65522, &quot;epoch&quot;: 2}&#10;  INFO:     Started server process [65507]&#10;  INFO:     Waiting for application startup.&#10;  INFO:     Application startup complete.&#10;  INFO:     Uvicorn running on http://127.0.0.1:53485 (Press CTRL+C to quit)&#10;  INFO:     127.0.0.1:54480 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54496 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54498 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54514 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54518 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54530 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54538 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54552 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/rag/local_models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))&#10;  llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.&#10;  llama_model_loader: - kv   0:                       general.architecture str              = qwen35&#10;  llama_model_loader: - kv   1:                               general.type str              = model&#10;  llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B&#10;  llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B&#10;  llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth&#10;  llama_model_loader: - kv   5:                         general.size_label str              = 2B&#10;  llama_model_loader: - kv   6:                            general.license str              = apache-2.0&#10;  llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...&#10;  llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth&#10;  llama_model_loader: - kv   9:                   general.base_model.count u32              = 1&#10;  llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B&#10;  llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen&#10;  llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B&#10;  llama_model_loader: - kv  13:                               general.tags arr[str,2]       = [&quot;unsloth&quot;, &quot;image-text-to-text&quot;]&#10;  llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24&#10;  llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144&#10;  llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048&#10;  llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144&#10;  llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8&#10;  llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2&#10;  llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]&#10;  llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000&#10;  llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001&#10;  llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256&#10;  llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256&#10;  llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4&#10;  llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128&#10;  llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16&#10;  llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16&#10;  llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048&#10;  llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4&#10;  llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64&#10;  llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2&#10;  llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35&#10;  llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = [&quot;!&quot;, &quot;\&quot;&quot;, &quot;#&quot;, &quot;$&quot;, &quot;%&quot;, &quot;&amp;&quot;, &quot;'&quot;, ...&#10;  llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...&#10;  llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = [&quot;Ġ Ġ&quot;, &quot;ĠĠ ĠĠ&quot;, &quot;i n&quot;, &quot;Ġ t&quot;,...&#10;  llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046&#10;  llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055&#10;  llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...&#10;  llama_model_loader: - kv  40:               general.quantization_version u32              = 2&#10;  llama_model_loader: - kv  41:                          general.file_type u32              = 15&#10;  llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf&#10;  llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt&#10;  llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186&#10;  llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80&#10;  llama_model_loader: - type  f32:  133 tensors&#10;  llama_model_loader: - type q8_0:   36 tensors&#10;  llama_model_loader: - type q4_K:   98 tensors&#10;  llama_model_loader: - type q5_K:   36 tensors&#10;  llama_model_loader: - type q6_K:   17 tensors&#10;  print_info: file format = GGUF V3 (latest)&#10;  print_info: file type   = Q4_K - Medium&#10;  print_info: file size   = 1.18 GiB (5.40 BPW) &#10;  INFO:     127.0.0.1:54560 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:54568 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  init_tokenizer: initializing tokenizer for type 2&#10;  load: 0 unused tokens&#10;  load: control token: 248075 '&lt;tts_text_bos_single&gt;' is not marked as EOG&#10;  load: control token: 248073 '&lt;tts_text_bos&gt;' is not marked as EOG&#10;  load: control token: 248072 '&lt;tts_pad&gt;' is not marked as EOG&#10;  load: control token: 248071 '&lt;|audio_end|&gt;' is not marked as EOG&#10;  load: control token: 248061 '&lt;|fim_middle|&gt;' is not marked as EOG&#10;  load: control token: 248055 '&lt;|vision_pad|&gt;' is not marked as EOG&#10;  load: control token: 248052 '&lt;|quad_end|&gt;' is not marked as EOG&#10;  load: control token: 248049 '&lt;|box_start|&gt;' is not marked as EOG&#10;  load: control token: 248048 '&lt;|object_ref_end|&gt;' is not marked as EOG&#10;  load: control token: 248045 '&lt;|im_start|&gt;' is not marked as EOG&#10;  load: control token: 248057 '&lt;|video_pad|&gt;' is not marked as EOG&#10;  load: control token: 248070 '&lt;|audio_start|&gt;' is not marked as EOG&#10;  load: control token: 248056 '&lt;|image_pad|&gt;' is not marked as EOG&#10;  load: control token: 248054 '&lt;|vision_end|&gt;' is not marked as EOG&#10;  load: control token: 248060 '&lt;|fim_prefix|&gt;' is not marked as EOG&#10;  load: control token: 248050 '&lt;|box_end|&gt;' is not marked as EOG&#10;  load: control token: 248074 '&lt;tts_text_eod&gt;' is not marked as EOG&#10;  load: control token: 248053 '&lt;|vision_start|&gt;' is not marked as EOG&#10;  load: control token: 248062 '&lt;|fim_suffix|&gt;' is not marked as EOG&#10;  load: control token: 248047 '&lt;|object_ref_start|&gt;' is not marked as EOG&#10;  load: control token: 248051 '&lt;|quad_start|&gt;' is not marked as EOG&#10;  load: control token: 248076 '&lt;|audio_pad|&gt;' is not marked as EOG&#10;  INFO:     127.0.0.1:54584 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  load: printing all EOG tokens:&#10;  load:   - 248044 ('&lt;|endoftext|&gt;')&#10;  load:   - 248046 ('&lt;|im_end|&gt;')&#10;  load:   - 248063 ('&lt;|fim_pad|&gt;')&#10;  load:   - 248064 ('&lt;|repo_name|&gt;')&#10;  load:   - 248065 ('&lt;|file_sep|&gt;')&#10;  load: special tokens cache size = 33&#10;  load: token to piece cache size = 1.7581 MB&#10;  print_info: arch                  = qwen35&#10;  print_info: vocab_only            = 0&#10;  print_info: no_alloc              = 0&#10;  print_info: n_ctx_train           = 262144&#10;  print_info: n_embd_inp            = 2048&#10;  print_info: n_embd                = 2048&#10;  print_info: n_embd_out            = 2048&#10;  print_info: n_layer               = 24&#10;  print_info: n_layer_all           = 24&#10;  print_info: n_head                = 8&#10;  print_info: n_head_kv             = 2&#10;  print_info: n_rot                 = 64&#10;  print_info: n_swa                 = 0&#10;  print_info: is_swa_any            = 0&#10;  print_info: non_causal_type       = 0&#10;  print_info: n_embd_head_k         = 256&#10;  print_info: n_embd_head_v         = 256&#10;  print_info: n_gqa                 = 4&#10;  print_info: n_embd_k_gqa          = 512&#10;  print_info: n_embd_v_gqa          = 512&#10;  print_info: f_norm_eps            = 0.0e+00&#10;  print_info: f_norm_rms_eps        = 1.0e-06&#10;  print_info: f_clamp_kqv           = 0.0e+00&#10;  print_info: f_max_alibi_bias      = 0.0e+00&#10;  print_info: f_logit_scale         = 0.0e+00&#10;  print_info: f_attn_scale          = 0.0e+00&#10;  print_info: f_attn_value_scale    = 0.0000&#10;  print_info: n_ff                  = 6144&#10;  print_info: n_expert              = 0&#10;  print_info: n_expert_used         = 0&#10;  print_info: n_expert_groups       = 0&#10;  print_info: n_group_used          = 0&#10;  print_info: causal attn           = 1&#10;  print_info: pooling type          = -1&#10;  print_info: rope type             = 40&#10;  print_info: rope scaling          = linear&#10;  print_info: freq_base_train       = 10000000.0&#10;  print_info: freq_scale_train      = 1&#10;  print_info: n_ctx_orig_yarn       = 262144&#10;  print_info: rope_yarn_log_mul     = 0.0000&#10;  print_info: rope_finetuned        = unknown&#10;  print_info: mrope sections        = [11, 11, 10, 0]&#10;  print_info: ssm_d_conv            = 4&#10;  print_info: ssm_d_inner           = 2048&#10;  print_info: ssm_d_state           = 128&#10;  print_info: ssm_dt_rank           = 16&#10;  print_info: ssm_n_group           = 16&#10;  print_info: ssm_dt_b_c_rms        = 0&#10;  print_info: model type            = 2B&#10;  print_info: model params          = 1.88 B&#10;  print_info: general.name          = Qwen3.5-2B&#10;  print_info: vocab type            = BPE&#10;  print_info: n_vocab               = 248320&#10;  print_info: n_merges              = 247587&#10;  print_info: BOS token             = 11 ','&#10;  print_info: EOS token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: EOT token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: PAD token             = 248055 '&lt;|vision_pad|&gt;'&#10;  print_info: LF token              = 198 'Ċ'&#10;  print_info: FIM PRE token         = 248060 '&lt;|fim_prefix|&gt;'&#10;  print_info: FIM SUF token         = 248062 '&lt;|fim_suffix|&gt;'&#10;  print_info: FIM MID token         = 248061 '&lt;|fim_middle|&gt;'&#10;  print_info: FIM PAD token         = 248063 '&lt;|fim_pad|&gt;'&#10;  print_info: FIM REP token         = 248064 '&lt;|repo_name|&gt;'&#10;  print_info: FIM SEP token         = 248065 '&lt;|file_sep|&gt;'&#10;  print_info: EOG token             = 248044 '&lt;|endoftext|&gt;'&#10;  print_info: EOG token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: EOG token             = 248063 '&lt;|fim_pad|&gt;'&#10;  print_info: EOG token             = 248064 '&lt;|repo_name|&gt;'&#10;  print_info: EOG token             = 248065 '&lt;|file_sep|&gt;'&#10;  print_info: max token length      = 256&#10;  load_tensors: loading model tensors, this can take a while... (load_mode = mmap)&#10;  load_tensors: layer   0 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   1 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   2 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   3 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   4 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   5 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   6 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   7 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   8 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   9 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  10 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  11 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  12 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  13 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  14 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  15 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  16 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  17 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  18 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  19 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  20 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  21 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  22 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  23 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  24 assigned to device CPU, is_swa = 0&#10;  create_tensor: loading tensor token_embd.weight&#10;  create_tensor: loading tensor output_norm.weight&#10;  create_tensor: loading tensor output.weight&#10;  create_tensor: loading tensor token_embd.weight&#10;  create_tensor: loading tensor blk.0.attn_norm.weight&#10;  create_tensor: loading tensor blk.0.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.0.attn_qkv.weight&#10;  create_tensor: loading tensor blk.0.attn_gate.weight&#10;  create_tensor: loading tensor blk.0.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.0.ssm_dt.bias&#10;  create_tensor: loading tensor blk.0.ssm_a&#10;  create_tensor: loading tensor blk.0.ssm_beta.weight&#10;  create_tensor: loading tensor blk.0.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.0.ssm_norm.weight&#10;  create_tensor: loading tensor blk.0.ssm_out.weight&#10;  create_tensor: loading tensor blk.0.ffn_gate.weight&#10;  create_tensor: loading tensor blk.0.ffn_down.weight&#10;  create_tensor: loading tensor blk.0.ffn_up.weight&#10;  create_tensor: loading tensor blk.1.attn_norm.weight&#10;  create_tensor: loading tensor blk.1.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.1.attn_qkv.weight&#10;  create_tensor: loading tensor blk.1.attn_gate.weight&#10;  create_tensor: loading tensor blk.1.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.1.ssm_dt.bias&#10;  create_tensor: loading tensor blk.1.ssm_a&#10;  create_tensor: loading tensor blk.1.ssm_beta.weight&#10;  create_tensor: loading tensor blk.1.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.1.ssm_norm.weight&#10;  create_tensor: loading tensor blk.1.ssm_out.weight&#10;  create_tensor: loading tensor blk.1.ffn_gate.weight&#10;  create_tensor: loading tensor blk.1.ffn_down.weight&#10;  create_tensor: loading tensor blk.1.ffn_up.weight&#10;  create_tensor: loading tensor blk.2.attn_norm.weight&#10;  create_tensor: loading tensor blk.2.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.2.attn_qkv.weight&#10;  create_tensor: loading tensor blk.2.attn_gate.weight&#10;  create_tensor: loading tensor blk.2.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.2.ssm_dt.bias&#10;  create_tensor: loading tensor blk.2.ssm_a&#10;  create_tensor: loading tensor blk.2.ssm_beta.weight&#10;  create_tensor: loading tensor blk.2.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.2.ssm_norm.weight&#10;  create_tensor: loading tensor blk.2.ssm_out.weight&#10;  create_tensor: loading tensor blk.2.ffn_gate.weight&#10;  create_tensor: loading tensor blk.2.ffn_down.weight&#10;  create_tensor: loading tensor blk.2.ffn_up.weight&#10;  create_tensor: loading tensor blk.3.attn_norm.weight&#10;  create_tensor: loading tensor blk.3.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.3.attn_qkv.weight&#10;  create_tensor: loading tensor blk.3.attn_q.weight&#10;  create_tensor: loading tensor blk.3.attn_k.weight&#10;  create_tensor: loading tensor blk.3.attn_v.weight&#10;  create_tensor: loading tensor blk.3.attn_q.bias&#10;  create_tensor: loading tensor blk.3.attn_k.bias&#10;  create_tensor: loading tensor blk.3.attn_v.bias&#10;  create_tensor: loading tensor blk.3.attn_output.weight&#10;  create_tensor: loading tensor blk.3.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.3.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.3.ffn_gate.weight&#10;  create_tensor: loading tensor blk.3.ffn_down.weight&#10;  create_tensor: loading tensor blk.3.ffn_up.weight&#10;  create_tensor: loading tensor blk.4.attn_norm.weight&#10;  create_tensor: loading tensor blk.4.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.4.attn_qkv.weight&#10;  create_tensor: loading tensor blk.4.attn_gate.weight&#10;  create_tensor: loading tensor blk.4.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.4.ssm_dt.bias&#10;  create_tensor: loading tensor blk.4.ssm_a&#10;  create_tensor: loading tensor blk.4.ssm_beta.weight&#10;  create_tensor: loading tensor blk.4.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.4.ssm_norm.weight&#10;  create_tensor: loading tensor blk.4.ssm_out.weight&#10;  create_tensor: loading tensor blk.4.ffn_gate.weight&#10;  create_tensor: loading tensor blk.4.ffn_down.weight&#10;  create_tensor: loading tensor blk.4.ffn_up.weight&#10;  create_tensor: loading tensor blk.5.attn_norm.weight&#10;  create_tensor: loading tensor blk.5.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.5.attn_qkv.weight&#10;  create_tensor: loading tensor blk.5.attn_gate.weight&#10;  create_tensor: loading tensor blk.5.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.5.ssm_dt.bias&#10;  create_tensor: loading tensor blk.5.ssm_a&#10;  create_tensor: loading tensor blk.5.ssm_beta.weight&#10;  create_tensor: loading tensor blk.5.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.5.ssm_norm.weight&#10;  create_tensor: loading tensor blk.5.ssm_out.weight&#10;  create_tensor: loading tensor blk.5.ffn_gate.weight&#10;  create_tensor: loading tensor blk.5.ffn_down.weight&#10;  create_tensor: loading tensor blk.5.ffn_up.weight&#10;  create_tensor: loading tensor blk.6.attn_norm.weight&#10;  create_tensor: loading tensor blk.6.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.6.attn_qkv.weight&#10;  create_tensor: loading tensor blk.6.attn_gate.weight&#10;  create_tensor: loading tensor blk.6.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.6.ssm_dt.bias&#10;  create_tensor: loading tensor blk.6.ssm_a&#10;  create_tensor: loading tensor blk.6.ssm_beta.weight&#10;  create_tensor: loading tensor blk.6.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.6.ssm_norm.weight&#10;  create_tensor: loading tensor blk.6.ssm_out.weight&#10;  create_tensor: loading tensor blk.6.ffn_gate.weight&#10;  create_tensor: loading tensor blk.6.ffn_down.weight&#10;  create_tensor: loading tensor blk.6.ffn_up.weight&#10;  create_tensor: loading tensor blk.7.attn_norm.weight&#10;  create_tensor: loading tensor blk.7.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.7.attn_qkv.weight&#10;  create_tensor: loading tensor blk.7.attn_q.weight&#10;  create_tensor: loading tensor blk.7.attn_k.weight&#10;  create_tensor: loading tensor blk.7.attn_v.weight&#10;  create_tensor: loading tensor blk.7.attn_q.bias&#10;  create_tensor: loading tensor blk.7.attn_k.bias&#10;  create_tensor: loading tensor blk.7.attn_v.bias&#10;  create_tensor: loading tensor blk.7.attn_output.weight&#10;  create_tensor: loading tensor blk.7.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.7.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.7.ffn_gate.weight&#10;  create_tensor: loading tensor blk.7.ffn_down.weight&#10;  create_tensor: loading tensor blk.7.ffn_up.weight&#10;  create_tensor: loading tensor blk.8.attn_norm.weight&#10;  create_tensor: loading tensor blk.8.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.8.attn_qkv.weight&#10;  create_tensor: loading tensor blk.8.attn_gate.weight&#10;  create_tensor: loading tensor blk.8.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.8.ssm_dt.bias&#10;  create_tensor: loading tensor blk.8.ssm_a&#10;  create_tensor: loading tensor blk.8.ssm_beta.weight&#10;  create_tensor: loading tensor blk.8.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.8.ssm_norm.weight&#10;  create_tensor: loading tensor blk.8.ssm_out.weight&#10;  create_tensor: loading tensor blk.8.ffn_gate.weight&#10;  create_tensor: loading tensor blk.8.ffn_down.weight&#10;  create_tensor: loading tensor blk.8.ffn_up.weight&#10;  create_tensor: loading tensor blk.9.attn_norm.weight&#10;  create_tensor: loading tensor blk.9.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.9.attn_qkv.weight&#10;  create_tensor: loading tensor blk.9.attn_gate.weight&#10;  create_tensor: loading tensor blk.9.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.9.ssm_dt.bias&#10;  create_tensor: loading tensor blk.9.ssm_a&#10;  create_tensor: loading tensor blk.9.ssm_beta.weight&#10;  create_tensor: loading tensor blk.9.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.9.ssm_norm.weight&#10;  create_tensor: loading tensor blk.9.ssm_out.weight&#10;  create_tensor: loading tensor blk.9.ffn_gate.weight&#10;  create_tensor: loading tensor blk.9.ffn_down.weight&#10;  create_tensor: loading tensor blk.9.ffn_up.weight&#10;  create_tensor: loading tensor blk.10.attn_norm.weight&#10;  create_tensor: loading tensor blk.10.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.10.attn_qkv.weight&#10;  create_tensor: loading tensor blk.10.attn_gate.weight&#10;  create_tensor: loading tensor blk.10.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.10.ssm_dt.bias&#10;  create_tensor: loading tensor blk.10.ssm_a&#10;  create_tensor: loading tensor blk.10.ssm_beta.weight&#10;  create_tensor: loading tensor blk.10.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.10.ssm_norm.weight&#10;  create_tensor: loading tensor blk.10.ssm_out.weight&#10;  create_tensor: loading tensor blk.10.ffn_gate.weight&#10;  create_tensor: loading tensor blk.10.ffn_down.weight&#10;  create_tensor: loading tensor blk.10.ffn_up.weight&#10;  create_tensor: loading tensor blk.11.attn_norm.weight&#10;  create_tensor: loading tensor blk.11.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.11.attn_qkv.weight&#10;  create_tensor: loading tensor blk.11.attn_q.weight&#10;  create_tensor: loading tensor blk.11.attn_k.weight&#10;  create_tensor: loading tensor blk.11.attn_v.weight&#10;  create_tensor: loading tensor blk.11.attn_q.bias&#10;  create_tensor: loading tensor blk.11.attn_k.bias&#10;  create_tensor: loading tensor blk.11.attn_v.bias&#10;  create_tensor: loading tensor blk.11.attn_output.weight&#10;  create_tensor: loading tensor blk.11.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.11.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.11.ffn_gate.weight&#10;  create_tensor: loading tensor blk.11.ffn_down.weight&#10;  create_tensor: loading tensor blk.11.ffn_up.weight&#10;  create_tensor: loading tensor blk.12.attn_norm.weight&#10;  create_tensor: loading tensor blk.12.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.12.attn_qkv.weight&#10;  create_tensor: loading tensor blk.12.attn_gate.weight&#10;  create_tensor: loading tensor blk.12.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.12.ssm_dt.bias&#10;  create_tensor: loading tensor blk.12.ssm_a&#10;  create_tensor: loading tensor blk.12.ssm_beta.weight&#10;  create_tensor: loading tensor blk.12.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.12.ssm_norm.weight&#10;  create_tensor: loading tensor blk.12.ssm_out.weight&#10;  create_tensor: loading tensor blk.12.ffn_gate.weight&#10;  create_tensor: loading tensor blk.12.ffn_down.weight&#10;  create_tensor: loading tensor blk.12.ffn_up.weight&#10;  create_tensor: loading tensor blk.13.attn_norm.weight&#10;  create_tensor: loading tensor blk.13.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.13.attn_qkv.weight&#10;  create_tensor: loading tensor blk.13.attn_gate.weight&#10;  create_tensor: loading tensor blk.13.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.13.ssm_dt.bias&#10;  create_tensor: loading tensor blk.13.ssm_a&#10;  create_tensor: loading tensor blk.13.ssm_beta.weight&#10;  create_tensor: loading tensor blk.13.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.13.ssm_norm.weight&#10;  create_tensor: loading tensor blk.13.ssm_out.weight&#10;  create_tensor: loading tensor blk.13.ffn_gate.weight&#10;  create_tensor: loading tensor blk.13.ffn_down.weight&#10;  create_tensor: loading tensor blk.13.ffn_up.weight&#10;  create_tensor: loading tensor blk.14.attn_norm.weight&#10;  create_tensor: loading tensor blk.14.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.14.attn_qkv.weight&#10;  create_tensor: loading tensor blk.14.attn_gate.weight&#10;  create_tensor: loading tensor blk.14.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.14.ssm_dt.bias&#10;  create_tensor: loading tensor blk.14.ssm_a&#10;  create_tensor: loading tensor blk.14.ssm_beta.weight&#10;  create_tensor: loading tensor blk.14.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.14.ssm_norm.weight&#10;  create_tensor: loading tensor blk.14.ssm_out.weight&#10;  create_tensor: loading tensor blk.14.ffn_gate.weight&#10;  create_tensor: loading tensor blk.14.ffn_down.weight&#10;  create_tensor: loading tensor blk.14.ffn_up.weight&#10;  create_tensor: loading tensor blk.15.attn_norm.weight&#10;  create_tensor: loading tensor blk.15.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.15.attn_qkv.weight&#10;  create_tensor: loading tensor blk.15.attn_q.weight&#10;  create_tensor: loading tensor blk.15.attn_k.weight&#10;  create_tensor: loading tensor blk.15.attn_v.weight&#10;  create_tensor: loading tensor blk.15.attn_q.bias&#10;  create_tensor: loading tensor blk.15.attn_k.bias&#10;  create_tensor: loading tensor blk.15.attn_v.bias&#10;  create_tensor: loading tensor blk.15.attn_output.weight&#10;  create_tensor: loading tensor blk.15.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.15.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.15.ffn_gate.weight&#10;  create_tensor: loading tensor blk.15.ffn_down.weight&#10;  create_tensor: loading tensor blk.15.ffn_up.weight&#10;  create_tensor: loading tensor blk.16.attn_norm.weight&#10;  create_tensor: loading tensor blk.16.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.16.attn_qkv.weight&#10;  create_tensor: loading tensor blk.16.attn_gate.weight&#10;  create_tensor: loading tensor blk.16.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.16.ssm_dt.bias&#10;  create_tensor: loading tensor blk.16.ssm_a&#10;  create_tensor: loading tensor blk.16.ssm_beta.weight&#10;  create_tensor: loading tensor blk.16.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.16.ssm_norm.weight&#10;  create_tensor: loading tensor blk.16.ssm_out.weight&#10;  create_tensor: loading tensor blk.16.ffn_gate.weight&#10;  create_tensor: loading tensor blk.16.ffn_down.weight&#10;  create_tensor: loading tensor blk.16.ffn_up.weight&#10;  create_tensor: loading tensor blk.17.attn_norm.weight&#10;  create_tensor: loading tensor blk.17.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.17.attn_qkv.weight&#10;  create_tensor: loading tensor blk.17.attn_gate.weight&#10;  create_tensor: loading tensor blk.17.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.17.ssm_dt.bias&#10;  create_tensor: loading tensor blk.17.ssm_a&#10;  create_tensor: loading tensor blk.17.ssm_beta.weight&#10;  create_tensor: loading tensor blk.17.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.17.ssm_norm.weight&#10;  create_tensor: loading tensor blk.17.ssm_out.weight&#10;  create_tensor: loading tensor blk.17.ffn_gate.weight&#10;  create_tensor: loading tensor blk.17.ffn_down.weight&#10;  create_tensor: loading tensor blk.17.ffn_up.weight&#10;  create_tensor: loading tensor blk.18.attn_norm.weight&#10;  create_tensor: loading tensor blk.18.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.18.attn_qkv.weight&#10;  create_tensor: loading tensor blk.18.attn_gate.weight&#10;  create_tensor: loading tensor blk.18.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.18.ssm_dt.bias&#10;  create_tensor: loading tensor blk.18.ssm_a&#10;  create_tensor: loading tensor blk.18.ssm_beta.weight&#10;  create_tensor: loading tensor blk.18.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.18.ssm_norm.weight&#10;  create_tensor: loading tensor blk.18.ssm_out.weight&#10;  create_tensor: loading tensor blk.18.ffn_gate.weight&#10;  create_tensor: loading tensor blk.18.ffn_down.weight&#10;  create_tensor: loading tensor blk.18.ffn_up.weight&#10;  create_tensor: loading tensor blk.19.attn_norm.weight&#10;  create_tensor: loading tensor blk.19.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.19.attn_qkv.weight&#10;  create_tensor: loading tensor blk.19.attn_q.weight&#10;  create_tensor: loading tensor blk.19.attn_k.weight&#10;  create_tensor: loading tensor blk.19.attn_v.weight&#10;  create_tensor: loading tensor blk.19.attn_q.bias&#10;  create_tensor: loading tensor blk.19.attn_k.bias&#10;  create_tensor: loading tensor blk.19.attn_v.bias&#10;  create_tensor: loading tensor blk.19.attn_output.weight&#10;  create_tensor: loading tensor blk.19.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.19.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.19.ffn_gate.weight&#10;  create_tensor: loading tensor blk.19.ffn_down.weight&#10;  create_tensor: loading tensor blk.19.ffn_up.weight&#10;  create_tensor: loading tensor blk.20.attn_norm.weight&#10;  create_tensor: loading tensor blk.20.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.20.attn_qkv.weight&#10;  create_tensor: loading tensor blk.20.attn_gate.weight&#10;  create_tensor: loading tensor blk.20.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.20.ssm_dt.bias&#10;  create_tensor: loading tensor blk.20.ssm_a&#10;  create_tensor: loading tensor blk.20.ssm_beta.weight&#10;  create_tensor: loading tensor blk.20.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.20.ssm_norm.weight&#10;  create_tensor: loading tensor blk.20.ssm_out.weight&#10;  create_tensor: loading tensor blk.20.ffn_gate.weight&#10;  create_tensor: loading tensor blk.20.ffn_down.weight&#10;  create_tensor: loading tensor blk.20.ffn_up.weight&#10;  create_tensor: loading tensor blk.21.attn_norm.weight&#10;  create_tensor: loading tensor blk.21.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.21.attn_qkv.weight&#10;  create_tensor: loading tensor blk.21.attn_gate.weight&#10;  create_tensor: loading tensor blk.21.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.21.ssm_dt.bias&#10;  create_tensor: loading tensor blk.21.ssm_a&#10;  create_tensor: loading tensor blk.21.ssm_beta.weight&#10;  create_tensor: loading tensor blk.21.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.21.ssm_norm.weight&#10;  create_tensor: loading tensor blk.21.ssm_out.weight&#10;  create_tensor: loading tensor blk.21.ffn_gate.weight&#10;  create_tensor: loading tensor blk.21.ffn_down.weight&#10;  create_tensor: loading tensor blk.21.ffn_up.weight&#10;  create_tensor: loading tensor blk.22.attn_norm.weight&#10;  create_tensor: loading tensor blk.22.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.22.attn_qkv.weight&#10;  create_tensor: loading tensor blk.22.attn_gate.weight&#10;  create_tensor: loading tensor blk.22.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.22.ssm_dt.bias&#10;  create_tensor: loading tensor blk.22.ssm_a&#10;  create_tensor: loading tensor blk.22.ssm_beta.weight&#10;  create_tensor: loading tensor blk.22.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.22.ssm_norm.weight&#10;  create_tensor: loading tensor blk.22.ssm_out.weight&#10;  create_tensor: loading tensor blk.22.ffn_gate.weight&#10;  create_tensor: loading tensor blk.22.ffn_down.weight&#10;  create_tensor: loading tensor blk.22.ffn_up.weight&#10;  create_tensor: loading tensor blk.23.attn_norm.weight&#10;  create_tensor: loading tensor blk.23.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.23.attn_qkv.weight&#10;  create_tensor: loading tensor blk.23.attn_q.weight&#10;  create_tensor: loading tensor blk.23.attn_k.weight&#10;  create_tensor: loading tensor blk.23.attn_v.weight&#10;  create_tensor: loading tensor blk.23.attn_q.bias&#10;  create_tensor: loading tensor blk.23.attn_k.bias&#10;  create_tensor: loading tensor blk.23.attn_v.bias&#10;  create_tensor: loading tensor blk.23.attn_output.weight&#10;  create_tensor: loading tensor blk.23.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.23.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.23.ffn_gate.weight&#10;  create_tensor: loading tensor blk.23.ffn_down.weight&#10;  create_tensor: loading tensor blk.23.ffn_up.weight&#10;  create_tensor: loading tensor blk.0.attn_qkv.scale&#10;  create_tensor: loading tensor blk.0.attn_gate.scale&#10;  create_tensor: loading tensor blk.0.ffn_gate.scale&#10;  create_tensor: loading tensor blk.0.ffn_down.scale&#10;  create_tensor: loading tensor blk.0.ffn_up.scale&#10;  create_tensor: loading tensor blk.0.ssm_out.scale&#10;  create_tensor: loading tensor blk.0.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.0.ssm_beta.scale&#10;  create_tensor: loading tensor blk.0.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.0.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.1.attn_qkv.scale&#10;  create_tensor: loading tensor blk.1.attn_gate.scale&#10;  create_tensor: loading tensor blk.1.ffn_gate.scale&#10;  create_tensor: loading tensor blk.1.ffn_down.scale&#10;  create_tensor: loading tensor blk.1.ffn_up.scale&#10;  create_tensor: loading tensor blk.1.ssm_out.scale&#10;  create_tensor: loading tensor blk.1.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.1.ssm_beta.scale&#10;  create_tensor: loading tensor blk.1.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.1.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.2.attn_qkv.scale&#10;  create_tensor: loading tensor blk.2.attn_gate.scale&#10;  create_tensor: loading tensor blk.2.ffn_gate.scale&#10;  create_tensor: loading tensor blk.2.ffn_down.scale&#10;  create_tensor: loading tensor blk.2.ffn_up.scale&#10;  create_tensor: loading tensor blk.2.ssm_out.scale&#10;  create_tensor: loading tensor blk.2.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.2.ssm_beta.scale&#10;  create_tensor: loading tensor blk.2.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.2.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.3.attn_q.scale&#10;  create_tensor: loading tensor blk.3.attn_k.scale&#10;  create_tensor: loading tensor blk.3.attn_v.scale&#10;  create_tensor: loading tensor blk.3.attn_output.scale&#10;  create_tensor: loading tensor blk.3.ffn_gate.scale&#10;  create_tensor: loading tensor blk.3.ffn_down.scale&#10;  create_tensor: loading tensor blk.3.ffn_up.scale&#10;  create_tensor: loading tensor blk.3.attn_q.input_scale&#10;  create_tensor: loading tensor blk.3.attn_k.input_scale&#10;  create_tensor: loading tensor blk.3.attn_v.input_scale&#10;  create_tensor: loading tensor blk.3.attn_output.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.4.attn_qkv.scale&#10;  create_tensor: loading tensor blk.4.attn_gate.scale&#10;  create_tensor: loading tensor blk.4.ffn_gate.scale&#10;  create_tensor: loading tensor blk.4.ffn_down.scale&#10;  create_tensor: loading tensor blk.4.ffn_up.scale&#10;  create_tensor: loading tensor blk.4.ssm_out.scale&#10;  create_tensor: loading tensor blk.4.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.4.ssm_beta.scale&#10;  create_tensor: loading tensor blk.4.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.4.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.5.attn_qkv.scale&#10;  create_tensor: loading tensor blk.5.attn_gate.scale&#10;  create_tensor: loading tensor blk.5.ffn_gate.scale&#10;  create_tensor: loading tensor blk.5.ffn_down.scale&#10;  create_tensor: loading tensor blk.5.ffn_up.scale&#10;  create_tensor: loading tensor blk.5.ssm_out.scale&#10;  create_tensor: loading tensor blk.5.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.5.ssm_beta.scale&#10;  create_tensor: loading tensor blk.5.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.5.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.6.attn_qkv.scale&#10;  create_tensor: loading tensor blk.6.attn_gate.scale&#10;  create_tensor: loading tensor blk.6.ffn_gate.scale&#10;  create_tensor: loading tensor blk.6.ffn_down.scale&#10;  create_tensor: loading tensor blk.6.ffn_up.scale&#10;  create_tensor: loading tensor blk.6.ssm_out.scale&#10;  create_tensor: loading tensor blk.6.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.6.ssm_beta.scale&#10;  create_tensor: loading tensor blk.6.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.6.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.7.attn_q.scale&#10;  create_tensor: loading tensor blk.7.attn_k.scale&#10;  create_tensor: loading tensor blk.7.attn_v.scale&#10;  create_tensor: loading tensor blk.7.attn_output.scale&#10;  create_tensor: loading tensor blk.7.ffn_gate.scale&#10;  create_tensor: loading tensor blk.7.ffn_down.scale&#10;  create_tensor: loading tensor blk.7.ffn_up.scale&#10;  create_tensor: loading tensor blk.7.attn_q.input_scale&#10;  create_tensor: loading tensor blk.7.attn_k.input_scale&#10;  create_tensor: loading tensor blk.7.attn_v.input_scale&#10;  create_tensor: loading tensor blk.7.attn_output.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.8.attn_qkv.scale&#10;  create_tensor: loading tensor blk.8.attn_gate.scale&#10;  create_tensor: loading tensor blk.8.ffn_gate.scale&#10;  create_tensor: loading tensor blk.8.ffn_down.scale&#10;  create_tensor: loading tensor blk.8.ffn_up.scale&#10;  create_tensor: loading tensor blk.8.ssm_out.scale&#10;  create_tensor: loading tensor blk.8.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.8.ssm_beta.scale&#10;  create_tensor: loading tensor blk.8.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.8.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.9.attn_qkv.scale&#10;  create_tensor: loading tensor blk.9.attn_gate.scale&#10;  create_tensor: loading tensor blk.9.ffn_gate.scale&#10;  create_tensor: loading tensor blk.9.ffn_down.scale&#10;  create_tensor: loading tensor blk.9.ffn_up.scale&#10;  create_tensor: loading tensor blk.9.ssm_out.scale&#10;  create_tensor: loading tensor blk.9.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.9.ssm_beta.scale&#10;  create_tensor: loading tensor blk.9.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.9.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.10.attn_qkv.scale&#10;  create_tensor: loading tensor blk.10.attn_gate.scale&#10;  create_tensor: loading tensor blk.10.ffn_gate.scale&#10;  create_tensor: loading tensor blk.10.ffn_down.scale&#10;  create_tensor: loading tensor blk.10.ffn_up.scale&#10;  create_tensor: loading tensor blk.10.ssm_out.scale&#10;  create_tensor: loading tensor blk.10.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.10.ssm_beta.scale&#10;  create_tensor: loading tensor blk.10.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.10.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.11.attn_q.scale&#10;  create_tensor: loading tensor blk.11.attn_k.scale&#10;  create_tensor: loading tensor blk.11.attn_v.scale&#10;  create_tensor: loading tensor blk.11.attn_output.scale&#10;  create_tensor: loading tensor blk.11.ffn_gate.scale&#10;  create_tensor: loading tensor blk.11.ffn_down.scale&#10;  create_tensor: loading tensor blk.11.ffn_up.scale&#10;  create_tensor: loading tensor blk.11.attn_q.input_scale&#10;  create_tensor: loading tensor blk.11.attn_k.input_scale&#10;  create_tensor: loading tensor blk.11.attn_v.input_scale&#10;  create_tensor: loading tensor blk.11.attn_output.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.12.attn_qkv.scale&#10;  create_tensor: loading tensor blk.12.attn_gate.scale&#10;  create_tensor: loading tensor blk.12.ffn_gate.scale&#10;  create_tensor: loading tensor blk.12.ffn_down.scale&#10;  create_tensor: loading tensor blk.12.ffn_up.scale&#10;  create_tensor: loading tensor blk.12.ssm_out.scale&#10;  create_tensor: loading tensor blk.12.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.12.ssm_beta.scale&#10;  create_tensor: loading tensor blk.12.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.12.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.13.attn_qkv.scale&#10;  create_tensor: loading tensor blk.13.attn_gate.scale&#10;  create_tensor: loading tensor blk.13.ffn_gate.scale&#10;  create_tensor: loading tensor blk.13.ffn_down.scale&#10;  create_tensor: loading tensor blk.13.ffn_up.scale&#10;  create_tensor: loading tensor blk.13.ssm_out.scale&#10;  create_tensor: loading tensor blk.13.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.13.ssm_beta.scale&#10;  create_tensor: loading tensor blk.13.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.13.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.14.attn_qkv.scale&#10;  create_tensor: loading tensor blk.14.attn_gate.scale&#10;  create_tensor: loading tensor blk.14.ffn_gate.scale&#10;  create_tensor: loading tensor blk.14.ffn_down.scale&#10;  create_tensor: loading tensor blk.14.ffn_up.scale&#10;  create_tensor: loading tensor blk.14.ssm_out.scale&#10;  create_tensor: loading tensor blk.14.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.14.ssm_beta.scale&#10;  create_tensor: loading tensor blk.14.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.14.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.15.attn_q.scale&#10;  create_tensor: loading tensor blk.15.attn_k.scale&#10;  create_tensor: loading tensor blk.15.attn_v.scale&#10;  create_tensor: loading tensor blk.15.attn_output.scale&#10;  create_tensor: loading tensor blk.15.ffn_gate.scale&#10;  create_tensor: loading tensor blk.15.ffn_down.scale&#10;  create_tensor: loading tensor blk.15.ffn_up.scale&#10;  create_tensor: loading tensor blk.15.attn_q.input_scale&#10;  create_tensor: loading tensor blk.15.attn_k.input_scale&#10;  create_tensor: loading tensor blk.15.attn_v.input_scale&#10;  create_tensor: loading tensor blk.15.attn_output.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.16.attn_qkv.scale&#10;  create_tensor: loading tensor blk.16.attn_gate.scale&#10;  create_tensor: loading tensor blk.16.ffn_gate.scale&#10;  create_tensor: loading tensor blk.16.ffn_down.scale&#10;  create_tensor: loading tensor blk.16.ffn_up.scale&#10;  create_tensor: loading tensor blk.16.ssm_out.scale&#10;  create_tensor: loading tensor blk.16.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.16.ssm_beta.scale&#10;  create_tensor: loading tensor blk.16.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.16.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.17.attn_qkv.scale&#10;  create_tensor: loading tensor blk.17.attn_gate.scale&#10;  create_tensor: loading tensor blk.17.ffn_gate.scale&#10;  create_tensor: loading tensor blk.17.ffn_down.scale&#10;  create_tensor: loading tensor blk.17.ffn_up.scale&#10;  create_tensor: loading tensor blk.17.ssm_out.scale&#10;  create_tensor: loading tensor blk.17.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.17.ssm_beta.scale&#10;  create_tensor: loading tensor blk.17.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.17.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.18.attn_qkv.scale&#10;  create_tensor: loading tensor blk.18.attn_gate.scale&#10;  create_tensor: loading tensor blk.18.ffn_gate.scale&#10;  create_tensor: loading tensor blk.18.ffn_down.scale&#10;  create_tensor: loading tensor blk.18.ffn_up.scale&#10;  create_tensor: loading tensor blk.18.ssm_out.scale&#10;  create_tensor: loading tensor blk.18.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.18.ssm_beta.scale&#10;  create_tensor: loading tensor blk.18.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.18.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.19.attn_q.scale&#10;  create_tensor: loading tensor blk.19.attn_k.scale&#10;  create_tensor: loading tensor blk.19.attn_v.scale&#10;  create_tensor: loading tensor blk.19.attn_output.scale&#10;  create_tensor: loading tensor blk.19.ffn_gate.scale&#10;  create_tensor: loading tensor blk.19.ffn_down.scale&#10;  create_tensor: loading tensor blk.19.ffn_up.scale&#10;  create_tensor: loading tensor blk.19.attn_q.input_scale&#10;  create_tensor: loading tensor blk.19.attn_k.input_scale&#10;  create_tensor: loading tensor blk.19.attn_v.input_scale&#10;  create_tensor: loading tensor blk.19.attn_output.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.20.attn_qkv.scale&#10;  create_tensor: loading tensor blk.20.attn_gate.scale&#10;  create_tensor: loading tensor blk.20.ffn_gate.scale&#10;  create_tensor: loading tensor blk.20.ffn_down.scale&#10;  create_tensor: loading tensor blk.20.ffn_up.scale&#10;  create_tensor: loading tensor blk.20.ssm_out.scale&#10;  create_tensor: loading tensor blk.20.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.20.ssm_beta.scale&#10;  create_tensor: loading tensor blk.20.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.20.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.21.attn_qkv.scale&#10;  create_tensor: loading tensor blk.21.attn_gate.scale&#10;  create_tensor: loading tensor blk.21.ffn_gate.scale&#10;  create_tensor: loading tensor blk.21.ffn_down.scale&#10;  create_tensor: loading tensor blk.21.ffn_up.scale&#10;  create_tensor: loading tensor blk.21.ssm_out.scale&#10;  create_tensor: loading tensor blk.21.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.21.ssm_beta.scale&#10;  create_tensor: loading tensor blk.21.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.21.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.22.attn_qkv.scale&#10;  create_tensor: loading tensor blk.22.attn_gate.scale&#10;  create_tensor: loading tensor blk.22.ffn_gate.scale&#10;  create_tensor: loading tensor blk.22.ffn_down.scale&#10;  create_tensor: loading tensor blk.22.ffn_up.scale&#10;  create_tensor: loading tensor blk.22.ssm_out.scale&#10;  create_tensor: loading tensor blk.22.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.22.ssm_beta.scale&#10;  create_tensor: loading tensor blk.22.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.22.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.23.attn_q.scale&#10;  create_tensor: loading tensor blk.23.attn_k.scale&#10;  create_tensor: loading tensor blk.23.attn_v.scale&#10;  create_tensor: loading tensor blk.23.attn_output.scale&#10;  create_tensor: loading tensor blk.23.ffn_gate.scale&#10;  create_tensor: loading tensor blk.23.ffn_down.scale&#10;  create_tensor: loading tensor blk.23.ffn_up.scale&#10;  create_tensor: loading tensor blk.23.attn_q.input_scale&#10;  create_tensor: loading tensor blk.23.attn_k.input_scale&#10;  create_tensor: loading tensor blk.23.attn_v.input_scale&#10;  create_tensor: loading tensor blk.23.attn_output.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_up.input_scale&#10;  done_getting_tensors: tensor 'token_embd.weight' (q6_K) (and 222 others) cannot be used with preferred buffer type CPU_REPACK, using CPU instead&#10;  INFO:     127.0.0.1:53456 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53468 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53482 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53494 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53496 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53508 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53512 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  load_tensors:   CPU_Mapped model buffer size =  1211.05 MiB&#10;  load_tensors:   CPU_REPACK model buffer size =   490.50 MiB&#10;  ............................repack: repack tensor blk.0.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.0.ffn_gate.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53514 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.0.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.1.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.1.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.1.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.2.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.2.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.2.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.3.attn_q.weight with q4_K_8x8&#10;  repack: repack tensor blk.3.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.3.attn_output.weight with q4_K_8x8&#10;  .repack: repack tensor blk.3.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.3.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.3.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53522 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  repack: repack tensor blk.4.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.4.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.4.ffn_down.weight with q4_K_8x8&#10;  repack: repack tensor blk.4.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.5.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.5.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.5.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.6.attn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.6.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.6.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.6.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.7.attn_q.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53538 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.7.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.7.attn_output.weight with q4_K_8x8&#10;  repack: repack tensor blk.7.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.7.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.7.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53548 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  repack: repack tensor blk.8.attn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.8.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.8.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53556 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.9.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.9.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.9.ffn_down.weight with q4_K_8x8&#10;  repack: repack tensor blk.9.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53560 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.10.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.10.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.10.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.10.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.11.attn_q.weight with q4_K_8x8&#10;  .repack: repack tensor blk.11.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.11.attn_output.weight with q4_K_8x8&#10;  repack: repack tensor blk.11.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.11.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.12.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.12.ffn_gate.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53564 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.12.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.12.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.13.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.13.ffn_gate.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53576 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.13.ffn_down.weight with q4_K_8x8&#10;  repack: repack tensor blk.13.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.14.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.14.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.14.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.15.attn_q.weight with q4_K_8x8&#10;  .repack: repack tensor blk.15.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.15.attn_v.weight with q4_K_8x8&#10;  repack: repack tensor blk.15.attn_output.weight with q4_K_8x8&#10;  repack: repack tensor blk.15.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.15.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.15.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53580 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.16.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.16.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.16.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.16.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.17.attn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.17.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.17.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.18.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.18.ffn_gate.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53594 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  repack: repack tensor blk.18.ffn_down.weight with q4_K_8x8&#10;  .repack: repack tensor blk.18.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53598 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.19.attn_q.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53602 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  repack: repack tensor blk.19.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.19.attn_v.weight with q4_K_8x8&#10;  repack: repack tensor blk.19.attn_output.weight with q4_K_8x8&#10;  repack: repack tensor blk.19.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.19.ffn_down.weight with q4_K_8x8&#10;  repack: repack tensor blk.19.ffn_up.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53618 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.20.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.20.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.20.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.21.attn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.21.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.21.ffn_up.weight with q4_K_8x8&#10;  repack: repack tensor blk.22.attn_gate.weight with q4_K_8x8&#10;  INFO:     127.0.0.1:53622 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  .repack: repack tensor blk.22.ffn_gate.weight with q4_K_8x8&#10;  repack: repack tensor blk.22.ffn_up.weight with q4_K_8x8&#10;  .repack: repack tensor blk.23.attn_q.weight with q4_K_8x8&#10;  repack: repack tensor blk.23.attn_k.weight with q4_K_8x8&#10;  repack: repack tensor blk.23.attn_output.weight with q4_K_8x8&#10;  repack: repack tensor blk.23.ffn_gate.weight with q4_K_8x8&#10;  .repack: repack tensor blk.23.ffn_up.weight with q4_K_8x8&#10;  .&#10;  INFO:     127.0.0.1:53632 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53646 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53652 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53660 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53670 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53676 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53692 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53700 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53708 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53712 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53728 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53730 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53738 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53748 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53758 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53764 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53778 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53784 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53800 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53808 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53824 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53828 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53842 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53854 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53858 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53866 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53870 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56242 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56252 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56266 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56280 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56290 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56302 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56314 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56322 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56332 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56338 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56346 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  Traceback (most recent call last):&#10;    File &quot;&lt;frozen runpy&gt;&quot;, line 198, in _run_module_as_main&#10;    File &quot;&lt;frozen runpy&gt;&quot;, line 88, in _run_code&#10;    File &quot;/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py&quot;, line 493, in &lt;module&gt;&#10;      main()&#10;    File &quot;/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py&quot;, line 489, in main&#10;      asyncio.run(start())&#10;    File &quot;/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py&quot;, line 487, in start&#10;      await supervisor.run()&#10;    File &quot;/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py&quot;, line 323, in run&#10;      await self.own(connection)&#10;    File &quot;/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py&quot;, line 401, in own&#10;      raise RuntimeError('Coordinator ownership connection stalled')&#10;  RuntimeError: Coordinator ownership connection stalled&#10;  INFO:     127.0.0.1:56356 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56366 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56374 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56384 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56394 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56408 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56414 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56424 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56428 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56442 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56452 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56460 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56462 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56464 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56480 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56492 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56502 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56504 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56514 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56522 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56524 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56536 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56552 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56558 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56564 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56566 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56578 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56584 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56594 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56598 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56606 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56610 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56624 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56628 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56634 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56644 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56646 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56656 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56672 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56686 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56698 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56706 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56720 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56736 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56740 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56742 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56754 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:56758 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52832 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52836 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52842 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52858 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52874 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52888 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52900 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52906 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52916 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52918 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52924 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52932 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52948 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52952 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52954 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52956 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52972 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52980 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:52996 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53012 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53022 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53030 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53042 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53044 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53054 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53064 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53066 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53072 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53082 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53098 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53102 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53108 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53114 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53120 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53126 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53128 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53138 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53154 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53170 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53176 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53178 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53190 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53196 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53206 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53220 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53232 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53244 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53246 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53258 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53260 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53268 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53274 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53288 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53294 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53302 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53304 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53310 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53316 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53322 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53326 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53336 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53342 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53346 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53348 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53350 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53356 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53366 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53378 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53382 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53396 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53406 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53416 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53426 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53436 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53438 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53452 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53466 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53472 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53478 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53488 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53490 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53492 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53498 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53514 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53530 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53542 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53558 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53566 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53576 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53556 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  INFO:     127.0.0.1:53566 - &quot;GET /openapi.json HTTP/1.1&quot; 200 OK&#10;  Backend generation exited unexpectedly (status=1)&#10;  INFO:     Shutting down&#10;  INFO:     Waiting for application shutdown.&#10;  INFO:     Application shutdown complete.&#10;  INFO:     Finished server process [65507]&#10;  &#10;assert 1 is None&#10; +  where 1 = poll()&#10; +    where poll = &lt;Popen: returncode: 1 args: ['python3', '/home/octadim/MyProjects/Multi_User...&gt;.poll">backend/tests/test_backend_launcher.py:222: in test_real_backend_main_starts_models_api_and_stops_whole_tree
+    assert process.poll() is None, log_path.read_text()
+E   AssertionError: Backend waiting for PostgreSQL
+E     Backend started documents (pid=65505)
+E     Backend started generation (pid=65506)
+E     Backend started api (pid=65507)
+E     {"event": "native_spawn", "pid": 65523, "keeper_pid": 65522, "epoch": 2}
+E     INFO:     Started server process [65507]
+E     INFO:     Waiting for application startup.
+E     INFO:     Application startup complete.
+E     INFO:     Uvicorn running on http://127.0.0.1:53485 (Press CTRL+C to quit)
+E     INFO:     127.0.0.1:54480 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54496 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54498 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54514 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54518 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54530 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54538 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54552 - "GET /openapi.json HTTP/1.1" 200 OK
+E     llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/rag/local_models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+E     llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+E     llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+E     llama_model_loader: - kv   1:                               general.type str              = model
+E     llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+E     llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+E     llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+E     llama_model_loader: - kv   5:                         general.size_label str              = 2B
+E     llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+E     llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+E     llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+E     llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+E     llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+E     llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+E     llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+E     llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+E     llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+E     llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+E     llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+E     llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+E     llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+E     llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+E     llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+E     llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+E     llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+E     llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+E     llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+E     llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+E     llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+E     llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+E     llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+E     llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+E     llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+E     llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+E     llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+E     llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+E     llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&amp;", "'", ...
+E     llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+E     llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+E     llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+E     llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+E     llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+E     llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+E     llama_model_loader: - kv  41:                          general.file_type u32              = 15
+E     llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+E     llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+E     llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+E     llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+E     llama_model_loader: - type  f32:  133 tensors
+E     llama_model_loader: - type q8_0:   36 tensors
+E     llama_model_loader: - type q4_K:   98 tensors
+E     llama_model_loader: - type q5_K:   36 tensors
+E     llama_model_loader: - type q6_K:   17 tensors
+E     print_info: file format = GGUF V3 (latest)
+E     print_info: file type   = Q4_K - Medium
+E     print_info: file size   = 1.18 GiB (5.40 BPW) 
+E     INFO:     127.0.0.1:54560 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:54568 - "GET /openapi.json HTTP/1.1" 200 OK
+E     init_tokenizer: initializing tokenizer for type 2
+E     load: 0 unused tokens
+E     load: control token: 248075 '&lt;tts_text_bos_single&gt;' is not marked as EOG
+E     load: control token: 248073 '&lt;tts_text_bos&gt;' is not marked as EOG
+E     load: control token: 248072 '&lt;tts_pad&gt;' is not marked as EOG
+E     load: control token: 248071 '&lt;|audio_end|&gt;' is not marked as EOG
+E     load: control token: 248061 '&lt;|fim_middle|&gt;' is not marked as EOG
+E     load: control token: 248055 '&lt;|vision_pad|&gt;' is not marked as EOG
+E     load: control token: 248052 '&lt;|quad_end|&gt;' is not marked as EOG
+E     load: control token: 248049 '&lt;|box_start|&gt;' is not marked as EOG
+E     load: control token: 248048 '&lt;|object_ref_end|&gt;' is not marked as EOG
+E     load: control token: 248045 '&lt;|im_start|&gt;' is not marked as EOG
+E     load: control token: 248057 '&lt;|video_pad|&gt;' is not marked as EOG
+E     load: control token: 248070 '&lt;|audio_start|&gt;' is not marked as EOG
+E     load: control token: 248056 '&lt;|image_pad|&gt;' is not marked as EOG
+E     load: control token: 248054 '&lt;|vision_end|&gt;' is not marked as EOG
+E     load: control token: 248060 '&lt;|fim_prefix|&gt;' is not marked as EOG
+E     load: control token: 248050 '&lt;|box_end|&gt;' is not marked as EOG
+E     load: control token: 248074 '&lt;tts_text_eod&gt;' is not marked as EOG
+E     load: control token: 248053 '&lt;|vision_start|&gt;' is not marked as EOG
+E     load: control token: 248062 '&lt;|fim_suffix|&gt;' is not marked as EOG
+E     load: control token: 248047 '&lt;|object_ref_start|&gt;' is not marked as EOG
+E     load: control token: 248051 '&lt;|quad_start|&gt;' is not marked as EOG
+E     load: control token: 248076 '&lt;|audio_pad|&gt;' is not marked as EOG
+E     INFO:     127.0.0.1:54584 - "GET /openapi.json HTTP/1.1" 200 OK
+E     load: printing all EOG tokens:
+E     load:   - 248044 ('&lt;|endoftext|&gt;')
+E     load:   - 248046 ('&lt;|im_end|&gt;')
+E     load:   - 248063 ('&lt;|fim_pad|&gt;')
+E     load:   - 248064 ('&lt;|repo_name|&gt;')
+E     load:   - 248065 ('&lt;|file_sep|&gt;')
+E     load: special tokens cache size = 33
+E     load: token to piece cache size = 1.7581 MB
+E     print_info: arch                  = qwen35
+E     print_info: vocab_only            = 0
+E     print_info: no_alloc              = 0
+E     print_info: n_ctx_train           = 262144
+E     print_info: n_embd_inp            = 2048
+E     print_info: n_embd                = 2048
+E     print_info: n_embd_out            = 2048
+E     print_info: n_layer               = 24
+E     print_info: n_layer_all           = 24
+E     print_info: n_head                = 8
+E     print_info: n_head_kv             = 2
+E     print_info: n_rot                 = 64
+E     print_info: n_swa                 = 0
+E     print_info: is_swa_any            = 0
+E     print_info: non_causal_type       = 0
+E     print_info: n_embd_head_k         = 256
+E     print_info: n_embd_head_v         = 256
+E     print_info: n_gqa                 = 4
+E     print_info: n_embd_k_gqa          = 512
+E     print_info: n_embd_v_gqa          = 512
+E     print_info: f_norm_eps            = 0.0e+00
+E     print_info: f_norm_rms_eps        = 1.0e-06
+E     print_info: f_clamp_kqv           = 0.0e+00
+E     print_info: f_max_alibi_bias      = 0.0e+00
+E     print_info: f_logit_scale         = 0.0e+00
+E     print_info: f_attn_scale          = 0.0e+00
+E     print_info: f_attn_value_scale    = 0.0000
+E     print_info: n_ff                  = 6144
+E     print_info: n_expert              = 0
+E     print_info: n_expert_used         = 0
+E     print_info: n_expert_groups       = 0
+E     print_info: n_group_used          = 0
+E     print_info: causal attn           = 1
+E     print_info: pooling type          = -1
+E     print_info: rope type             = 40
+E     print_info: rope scaling          = linear
+E     print_info: freq_base_train       = 10000000.0
+E     print_info: freq_scale_train      = 1
+E     print_info: n_ctx_orig_yarn       = 262144
+E     print_info: rope_yarn_log_mul     = 0.0000
+E     print_info: rope_finetuned        = unknown
+E     print_info: mrope sections        = [11, 11, 10, 0]
+E     print_info: ssm_d_conv            = 4
+E     print_info: ssm_d_inner           = 2048
+E     print_info: ssm_d_state           = 128
+E     print_info: ssm_dt_rank           = 16
+E     print_info: ssm_n_group           = 16
+E     print_info: ssm_dt_b_c_rms        = 0
+E     print_info: model type            = 2B
+E     print_info: model params          = 1.88 B
+E     print_info: general.name          = Qwen3.5-2B
+E     print_info: vocab type            = BPE
+E     print_info: n_vocab               = 248320
+E     print_info: n_merges              = 247587
+E     print_info: BOS token             = 11 ','
+E     print_info: EOS token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: EOT token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: PAD token             = 248055 '&lt;|vision_pad|&gt;'
+E     print_info: LF token              = 198 'Ċ'
+E     print_info: FIM PRE token         = 248060 '&lt;|fim_prefix|&gt;'
+E     print_info: FIM SUF token         = 248062 '&lt;|fim_suffix|&gt;'
+E     print_info: FIM MID token         = 248061 '&lt;|fim_middle|&gt;'
+E     print_info: FIM PAD token         = 248063 '&lt;|fim_pad|&gt;'
+E     print_info: FIM REP token         = 248064 '&lt;|repo_name|&gt;'
+E     print_info: FIM SEP token         = 248065 '&lt;|file_sep|&gt;'
+E     print_info: EOG token             = 248044 '&lt;|endoftext|&gt;'
+E     print_info: EOG token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: EOG token             = 248063 '&lt;|fim_pad|&gt;'
+E     print_info: EOG token             = 248064 '&lt;|repo_name|&gt;'
+E     print_info: EOG token             = 248065 '&lt;|file_sep|&gt;'
+E     print_info: max token length      = 256
+E     load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+E     load_tensors: layer   0 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   1 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   2 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   3 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   4 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   5 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   6 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   7 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   8 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   9 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  10 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  11 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  12 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  13 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  14 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  15 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  16 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  17 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  18 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  19 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  20 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  21 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  22 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  23 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  24 assigned to device CPU, is_swa = 0
+E     create_tensor: loading tensor token_embd.weight
+E     create_tensor: loading tensor output_norm.weight
+E     create_tensor: loading tensor output.weight
+E     create_tensor: loading tensor token_embd.weight
+E     create_tensor: loading tensor blk.0.attn_norm.weight
+E     create_tensor: loading tensor blk.0.post_attention_norm.weight
+E     create_tensor: loading tensor blk.0.attn_qkv.weight
+E     create_tensor: loading tensor blk.0.attn_gate.weight
+E     create_tensor: loading tensor blk.0.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.0.ssm_dt.bias
+E     create_tensor: loading tensor blk.0.ssm_a
+E     create_tensor: loading tensor blk.0.ssm_beta.weight
+E     create_tensor: loading tensor blk.0.ssm_alpha.weight
+E     create_tensor: loading tensor blk.0.ssm_norm.weight
+E     create_tensor: loading tensor blk.0.ssm_out.weight
+E     create_tensor: loading tensor blk.0.ffn_gate.weight
+E     create_tensor: loading tensor blk.0.ffn_down.weight
+E     create_tensor: loading tensor blk.0.ffn_up.weight
+E     create_tensor: loading tensor blk.1.attn_norm.weight
+E     create_tensor: loading tensor blk.1.post_attention_norm.weight
+E     create_tensor: loading tensor blk.1.attn_qkv.weight
+E     create_tensor: loading tensor blk.1.attn_gate.weight
+E     create_tensor: loading tensor blk.1.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.1.ssm_dt.bias
+E     create_tensor: loading tensor blk.1.ssm_a
+E     create_tensor: loading tensor blk.1.ssm_beta.weight
+E     create_tensor: loading tensor blk.1.ssm_alpha.weight
+E     create_tensor: loading tensor blk.1.ssm_norm.weight
+E     create_tensor: loading tensor blk.1.ssm_out.weight
+E     create_tensor: loading tensor blk.1.ffn_gate.weight
+E     create_tensor: loading tensor blk.1.ffn_down.weight
+E     create_tensor: loading tensor blk.1.ffn_up.weight
+E     create_tensor: loading tensor blk.2.attn_norm.weight
+E     create_tensor: loading tensor blk.2.post_attention_norm.weight
+E     create_tensor: loading tensor blk.2.attn_qkv.weight
+E     create_tensor: loading tensor blk.2.attn_gate.weight
+E     create_tensor: loading tensor blk.2.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.2.ssm_dt.bias
+E     create_tensor: loading tensor blk.2.ssm_a
+E     create_tensor: loading tensor blk.2.ssm_beta.weight
+E     create_tensor: loading tensor blk.2.ssm_alpha.weight
+E     create_tensor: loading tensor blk.2.ssm_norm.weight
+E     create_tensor: loading tensor blk.2.ssm_out.weight
+E     create_tensor: loading tensor blk.2.ffn_gate.weight
+E     create_tensor: loading tensor blk.2.ffn_down.weight
+E     create_tensor: loading tensor blk.2.ffn_up.weight
+E     create_tensor: loading tensor blk.3.attn_norm.weight
+E     create_tensor: loading tensor blk.3.post_attention_norm.weight
+E     create_tensor: loading tensor blk.3.attn_qkv.weight
+E     create_tensor: loading tensor blk.3.attn_q.weight
+E     create_tensor: loading tensor blk.3.attn_k.weight
+E     create_tensor: loading tensor blk.3.attn_v.weight
+E     create_tensor: loading tensor blk.3.attn_q.bias
+E     create_tensor: loading tensor blk.3.attn_k.bias
+E     create_tensor: loading tensor blk.3.attn_v.bias
+E     create_tensor: loading tensor blk.3.attn_output.weight
+E     create_tensor: loading tensor blk.3.attn_q_norm.weight
+E     create_tensor: loading tensor blk.3.attn_k_norm.weight
+E     create_tensor: loading tensor blk.3.ffn_gate.weight
+E     create_tensor: loading tensor blk.3.ffn_down.weight
+E     create_tensor: loading tensor blk.3.ffn_up.weight
+E     create_tensor: loading tensor blk.4.attn_norm.weight
+E     create_tensor: loading tensor blk.4.post_attention_norm.weight
+E     create_tensor: loading tensor blk.4.attn_qkv.weight
+E     create_tensor: loading tensor blk.4.attn_gate.weight
+E     create_tensor: loading tensor blk.4.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.4.ssm_dt.bias
+E     create_tensor: loading tensor blk.4.ssm_a
+E     create_tensor: loading tensor blk.4.ssm_beta.weight
+E     create_tensor: loading tensor blk.4.ssm_alpha.weight
+E     create_tensor: loading tensor blk.4.ssm_norm.weight
+E     create_tensor: loading tensor blk.4.ssm_out.weight
+E     create_tensor: loading tensor blk.4.ffn_gate.weight
+E     create_tensor: loading tensor blk.4.ffn_down.weight
+E     create_tensor: loading tensor blk.4.ffn_up.weight
+E     create_tensor: loading tensor blk.5.attn_norm.weight
+E     create_tensor: loading tensor blk.5.post_attention_norm.weight
+E     create_tensor: loading tensor blk.5.attn_qkv.weight
+E     create_tensor: loading tensor blk.5.attn_gate.weight
+E     create_tensor: loading tensor blk.5.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.5.ssm_dt.bias
+E     create_tensor: loading tensor blk.5.ssm_a
+E     create_tensor: loading tensor blk.5.ssm_beta.weight
+E     create_tensor: loading tensor blk.5.ssm_alpha.weight
+E     create_tensor: loading tensor blk.5.ssm_norm.weight
+E     create_tensor: loading tensor blk.5.ssm_out.weight
+E     create_tensor: loading tensor blk.5.ffn_gate.weight
+E     create_tensor: loading tensor blk.5.ffn_down.weight
+E     create_tensor: loading tensor blk.5.ffn_up.weight
+E     create_tensor: loading tensor blk.6.attn_norm.weight
+E     create_tensor: loading tensor blk.6.post_attention_norm.weight
+E     create_tensor: loading tensor blk.6.attn_qkv.weight
+E     create_tensor: loading tensor blk.6.attn_gate.weight
+E     create_tensor: loading tensor blk.6.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.6.ssm_dt.bias
+E     create_tensor: loading tensor blk.6.ssm_a
+E     create_tensor: loading tensor blk.6.ssm_beta.weight
+E     create_tensor: loading tensor blk.6.ssm_alpha.weight
+E     create_tensor: loading tensor blk.6.ssm_norm.weight
+E     create_tensor: loading tensor blk.6.ssm_out.weight
+E     create_tensor: loading tensor blk.6.ffn_gate.weight
+E     create_tensor: loading tensor blk.6.ffn_down.weight
+E     create_tensor: loading tensor blk.6.ffn_up.weight
+E     create_tensor: loading tensor blk.7.attn_norm.weight
+E     create_tensor: loading tensor blk.7.post_attention_norm.weight
+E     create_tensor: loading tensor blk.7.attn_qkv.weight
+E     create_tensor: loading tensor blk.7.attn_q.weight
+E     create_tensor: loading tensor blk.7.attn_k.weight
+E     create_tensor: loading tensor blk.7.attn_v.weight
+E     create_tensor: loading tensor blk.7.attn_q.bias
+E     create_tensor: loading tensor blk.7.attn_k.bias
+E     create_tensor: loading tensor blk.7.attn_v.bias
+E     create_tensor: loading tensor blk.7.attn_output.weight
+E     create_tensor: loading tensor blk.7.attn_q_norm.weight
+E     create_tensor: loading tensor blk.7.attn_k_norm.weight
+E     create_tensor: loading tensor blk.7.ffn_gate.weight
+E     create_tensor: loading tensor blk.7.ffn_down.weight
+E     create_tensor: loading tensor blk.7.ffn_up.weight
+E     create_tensor: loading tensor blk.8.attn_norm.weight
+E     create_tensor: loading tensor blk.8.post_attention_norm.weight
+E     create_tensor: loading tensor blk.8.attn_qkv.weight
+E     create_tensor: loading tensor blk.8.attn_gate.weight
+E     create_tensor: loading tensor blk.8.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.8.ssm_dt.bias
+E     create_tensor: loading tensor blk.8.ssm_a
+E     create_tensor: loading tensor blk.8.ssm_beta.weight
+E     create_tensor: loading tensor blk.8.ssm_alpha.weight
+E     create_tensor: loading tensor blk.8.ssm_norm.weight
+E     create_tensor: loading tensor blk.8.ssm_out.weight
+E     create_tensor: loading tensor blk.8.ffn_gate.weight
+E     create_tensor: loading tensor blk.8.ffn_down.weight
+E     create_tensor: loading tensor blk.8.ffn_up.weight
+E     create_tensor: loading tensor blk.9.attn_norm.weight
+E     create_tensor: loading tensor blk.9.post_attention_norm.weight
+E     create_tensor: loading tensor blk.9.attn_qkv.weight
+E     create_tensor: loading tensor blk.9.attn_gate.weight
+E     create_tensor: loading tensor blk.9.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.9.ssm_dt.bias
+E     create_tensor: loading tensor blk.9.ssm_a
+E     create_tensor: loading tensor blk.9.ssm_beta.weight
+E     create_tensor: loading tensor blk.9.ssm_alpha.weight
+E     create_tensor: loading tensor blk.9.ssm_norm.weight
+E     create_tensor: loading tensor blk.9.ssm_out.weight
+E     create_tensor: loading tensor blk.9.ffn_gate.weight
+E     create_tensor: loading tensor blk.9.ffn_down.weight
+E     create_tensor: loading tensor blk.9.ffn_up.weight
+E     create_tensor: loading tensor blk.10.attn_norm.weight
+E     create_tensor: loading tensor blk.10.post_attention_norm.weight
+E     create_tensor: loading tensor blk.10.attn_qkv.weight
+E     create_tensor: loading tensor blk.10.attn_gate.weight
+E     create_tensor: loading tensor blk.10.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.10.ssm_dt.bias
+E     create_tensor: loading tensor blk.10.ssm_a
+E     create_tensor: loading tensor blk.10.ssm_beta.weight
+E     create_tensor: loading tensor blk.10.ssm_alpha.weight
+E     create_tensor: loading tensor blk.10.ssm_norm.weight
+E     create_tensor: loading tensor blk.10.ssm_out.weight
+E     create_tensor: loading tensor blk.10.ffn_gate.weight
+E     create_tensor: loading tensor blk.10.ffn_down.weight
+E     create_tensor: loading tensor blk.10.ffn_up.weight
+E     create_tensor: loading tensor blk.11.attn_norm.weight
+E     create_tensor: loading tensor blk.11.post_attention_norm.weight
+E     create_tensor: loading tensor blk.11.attn_qkv.weight
+E     create_tensor: loading tensor blk.11.attn_q.weight
+E     create_tensor: loading tensor blk.11.attn_k.weight
+E     create_tensor: loading tensor blk.11.attn_v.weight
+E     create_tensor: loading tensor blk.11.attn_q.bias
+E     create_tensor: loading tensor blk.11.attn_k.bias
+E     create_tensor: loading tensor blk.11.attn_v.bias
+E     create_tensor: loading tensor blk.11.attn_output.weight
+E     create_tensor: loading tensor blk.11.attn_q_norm.weight
+E     create_tensor: loading tensor blk.11.attn_k_norm.weight
+E     create_tensor: loading tensor blk.11.ffn_gate.weight
+E     create_tensor: loading tensor blk.11.ffn_down.weight
+E     create_tensor: loading tensor blk.11.ffn_up.weight
+E     create_tensor: loading tensor blk.12.attn_norm.weight
+E     create_tensor: loading tensor blk.12.post_attention_norm.weight
+E     create_tensor: loading tensor blk.12.attn_qkv.weight
+E     create_tensor: loading tensor blk.12.attn_gate.weight
+E     create_tensor: loading tensor blk.12.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.12.ssm_dt.bias
+E     create_tensor: loading tensor blk.12.ssm_a
+E     create_tensor: loading tensor blk.12.ssm_beta.weight
+E     create_tensor: loading tensor blk.12.ssm_alpha.weight
+E     create_tensor: loading tensor blk.12.ssm_norm.weight
+E     create_tensor: loading tensor blk.12.ssm_out.weight
+E     create_tensor: loading tensor blk.12.ffn_gate.weight
+E     create_tensor: loading tensor blk.12.ffn_down.weight
+E     create_tensor: loading tensor blk.12.ffn_up.weight
+E     create_tensor: loading tensor blk.13.attn_norm.weight
+E     create_tensor: loading tensor blk.13.post_attention_norm.weight
+E     create_tensor: loading tensor blk.13.attn_qkv.weight
+E     create_tensor: loading tensor blk.13.attn_gate.weight
+E     create_tensor: loading tensor blk.13.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.13.ssm_dt.bias
+E     create_tensor: loading tensor blk.13.ssm_a
+E     create_tensor: loading tensor blk.13.ssm_beta.weight
+E     create_tensor: loading tensor blk.13.ssm_alpha.weight
+E     create_tensor: loading tensor blk.13.ssm_norm.weight
+E     create_tensor: loading tensor blk.13.ssm_out.weight
+E     create_tensor: loading tensor blk.13.ffn_gate.weight
+E     create_tensor: loading tensor blk.13.ffn_down.weight
+E     create_tensor: loading tensor blk.13.ffn_up.weight
+E     create_tensor: loading tensor blk.14.attn_norm.weight
+E     create_tensor: loading tensor blk.14.post_attention_norm.weight
+E     create_tensor: loading tensor blk.14.attn_qkv.weight
+E     create_tensor: loading tensor blk.14.attn_gate.weight
+E     create_tensor: loading tensor blk.14.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.14.ssm_dt.bias
+E     create_tensor: loading tensor blk.14.ssm_a
+E     create_tensor: loading tensor blk.14.ssm_beta.weight
+E     create_tensor: loading tensor blk.14.ssm_alpha.weight
+E     create_tensor: loading tensor blk.14.ssm_norm.weight
+E     create_tensor: loading tensor blk.14.ssm_out.weight
+E     create_tensor: loading tensor blk.14.ffn_gate.weight
+E     create_tensor: loading tensor blk.14.ffn_down.weight
+E     create_tensor: loading tensor blk.14.ffn_up.weight
+E     create_tensor: loading tensor blk.15.attn_norm.weight
+E     create_tensor: loading tensor blk.15.post_attention_norm.weight
+E     create_tensor: loading tensor blk.15.attn_qkv.weight
+E     create_tensor: loading tensor blk.15.attn_q.weight
+E     create_tensor: loading tensor blk.15.attn_k.weight
+E     create_tensor: loading tensor blk.15.attn_v.weight
+E     create_tensor: loading tensor blk.15.attn_q.bias
+E     create_tensor: loading tensor blk.15.attn_k.bias
+E     create_tensor: loading tensor blk.15.attn_v.bias
+E     create_tensor: loading tensor blk.15.attn_output.weight
+E     create_tensor: loading tensor blk.15.attn_q_norm.weight
+E     create_tensor: loading tensor blk.15.attn_k_norm.weight
+E     create_tensor: loading tensor blk.15.ffn_gate.weight
+E     create_tensor: loading tensor blk.15.ffn_down.weight
+E     create_tensor: loading tensor blk.15.ffn_up.weight
+E     create_tensor: loading tensor blk.16.attn_norm.weight
+E     create_tensor: loading tensor blk.16.post_attention_norm.weight
+E     create_tensor: loading tensor blk.16.attn_qkv.weight
+E     create_tensor: loading tensor blk.16.attn_gate.weight
+E     create_tensor: loading tensor blk.16.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.16.ssm_dt.bias
+E     create_tensor: loading tensor blk.16.ssm_a
+E     create_tensor: loading tensor blk.16.ssm_beta.weight
+E     create_tensor: loading tensor blk.16.ssm_alpha.weight
+E     create_tensor: loading tensor blk.16.ssm_norm.weight
+E     create_tensor: loading tensor blk.16.ssm_out.weight
+E     create_tensor: loading tensor blk.16.ffn_gate.weight
+E     create_tensor: loading tensor blk.16.ffn_down.weight
+E     create_tensor: loading tensor blk.16.ffn_up.weight
+E     create_tensor: loading tensor blk.17.attn_norm.weight
+E     create_tensor: loading tensor blk.17.post_attention_norm.weight
+E     create_tensor: loading tensor blk.17.attn_qkv.weight
+E     create_tensor: loading tensor blk.17.attn_gate.weight
+E     create_tensor: loading tensor blk.17.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.17.ssm_dt.bias
+E     create_tensor: loading tensor blk.17.ssm_a
+E     create_tensor: loading tensor blk.17.ssm_beta.weight
+E     create_tensor: loading tensor blk.17.ssm_alpha.weight
+E     create_tensor: loading tensor blk.17.ssm_norm.weight
+E     create_tensor: loading tensor blk.17.ssm_out.weight
+E     create_tensor: loading tensor blk.17.ffn_gate.weight
+E     create_tensor: loading tensor blk.17.ffn_down.weight
+E     create_tensor: loading tensor blk.17.ffn_up.weight
+E     create_tensor: loading tensor blk.18.attn_norm.weight
+E     create_tensor: loading tensor blk.18.post_attention_norm.weight
+E     create_tensor: loading tensor blk.18.attn_qkv.weight
+E     create_tensor: loading tensor blk.18.attn_gate.weight
+E     create_tensor: loading tensor blk.18.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.18.ssm_dt.bias
+E     create_tensor: loading tensor blk.18.ssm_a
+E     create_tensor: loading tensor blk.18.ssm_beta.weight
+E     create_tensor: loading tensor blk.18.ssm_alpha.weight
+E     create_tensor: loading tensor blk.18.ssm_norm.weight
+E     create_tensor: loading tensor blk.18.ssm_out.weight
+E     create_tensor: loading tensor blk.18.ffn_gate.weight
+E     create_tensor: loading tensor blk.18.ffn_down.weight
+E     create_tensor: loading tensor blk.18.ffn_up.weight
+E     create_tensor: loading tensor blk.19.attn_norm.weight
+E     create_tensor: loading tensor blk.19.post_attention_norm.weight
+E     create_tensor: loading tensor blk.19.attn_qkv.weight
+E     create_tensor: loading tensor blk.19.attn_q.weight
+E     create_tensor: loading tensor blk.19.attn_k.weight
+E     create_tensor: loading tensor blk.19.attn_v.weight
+E     create_tensor: loading tensor blk.19.attn_q.bias
+E     create_tensor: loading tensor blk.19.attn_k.bias
+E     create_tensor: loading tensor blk.19.attn_v.bias
+E     create_tensor: loading tensor blk.19.attn_output.weight
+E     create_tensor: loading tensor blk.19.attn_q_norm.weight
+E     create_tensor: loading tensor blk.19.attn_k_norm.weight
+E     create_tensor: loading tensor blk.19.ffn_gate.weight
+E     create_tensor: loading tensor blk.19.ffn_down.weight
+E     create_tensor: loading tensor blk.19.ffn_up.weight
+E     create_tensor: loading tensor blk.20.attn_norm.weight
+E     create_tensor: loading tensor blk.20.post_attention_norm.weight
+E     create_tensor: loading tensor blk.20.attn_qkv.weight
+E     create_tensor: loading tensor blk.20.attn_gate.weight
+E     create_tensor: loading tensor blk.20.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.20.ssm_dt.bias
+E     create_tensor: loading tensor blk.20.ssm_a
+E     create_tensor: loading tensor blk.20.ssm_beta.weight
+E     create_tensor: loading tensor blk.20.ssm_alpha.weight
+E     create_tensor: loading tensor blk.20.ssm_norm.weight
+E     create_tensor: loading tensor blk.20.ssm_out.weight
+E     create_tensor: loading tensor blk.20.ffn_gate.weight
+E     create_tensor: loading tensor blk.20.ffn_down.weight
+E     create_tensor: loading tensor blk.20.ffn_up.weight
+E     create_tensor: loading tensor blk.21.attn_norm.weight
+E     create_tensor: loading tensor blk.21.post_attention_norm.weight
+E     create_tensor: loading tensor blk.21.attn_qkv.weight
+E     create_tensor: loading tensor blk.21.attn_gate.weight
+E     create_tensor: loading tensor blk.21.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.21.ssm_dt.bias
+E     create_tensor: loading tensor blk.21.ssm_a
+E     create_tensor: loading tensor blk.21.ssm_beta.weight
+E     create_tensor: loading tensor blk.21.ssm_alpha.weight
+E     create_tensor: loading tensor blk.21.ssm_norm.weight
+E     create_tensor: loading tensor blk.21.ssm_out.weight
+E     create_tensor: loading tensor blk.21.ffn_gate.weight
+E     create_tensor: loading tensor blk.21.ffn_down.weight
+E     create_tensor: loading tensor blk.21.ffn_up.weight
+E     create_tensor: loading tensor blk.22.attn_norm.weight
+E     create_tensor: loading tensor blk.22.post_attention_norm.weight
+E     create_tensor: loading tensor blk.22.attn_qkv.weight
+E     create_tensor: loading tensor blk.22.attn_gate.weight
+E     create_tensor: loading tensor blk.22.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.22.ssm_dt.bias
+E     create_tensor: loading tensor blk.22.ssm_a
+E     create_tensor: loading tensor blk.22.ssm_beta.weight
+E     create_tensor: loading tensor blk.22.ssm_alpha.weight
+E     create_tensor: loading tensor blk.22.ssm_norm.weight
+E     create_tensor: loading tensor blk.22.ssm_out.weight
+E     create_tensor: loading tensor blk.22.ffn_gate.weight
+E     create_tensor: loading tensor blk.22.ffn_down.weight
+E     create_tensor: loading tensor blk.22.ffn_up.weight
+E     create_tensor: loading tensor blk.23.attn_norm.weight
+E     create_tensor: loading tensor blk.23.post_attention_norm.weight
+E     create_tensor: loading tensor blk.23.attn_qkv.weight
+E     create_tensor: loading tensor blk.23.attn_q.weight
+E     create_tensor: loading tensor blk.23.attn_k.weight
+E     create_tensor: loading tensor blk.23.attn_v.weight
+E     create_tensor: loading tensor blk.23.attn_q.bias
+E     create_tensor: loading tensor blk.23.attn_k.bias
+E     create_tensor: loading tensor blk.23.attn_v.bias
+E     create_tensor: loading tensor blk.23.attn_output.weight
+E     create_tensor: loading tensor blk.23.attn_q_norm.weight
+E     create_tensor: loading tensor blk.23.attn_k_norm.weight
+E     create_tensor: loading tensor blk.23.ffn_gate.weight
+E     create_tensor: loading tensor blk.23.ffn_down.weight
+E     create_tensor: loading tensor blk.23.ffn_up.weight
+E     create_tensor: loading tensor blk.0.attn_qkv.scale
+E     create_tensor: loading tensor blk.0.attn_gate.scale
+E     create_tensor: loading tensor blk.0.ffn_gate.scale
+E     create_tensor: loading tensor blk.0.ffn_down.scale
+E     create_tensor: loading tensor blk.0.ffn_up.scale
+E     create_tensor: loading tensor blk.0.ssm_out.scale
+E     create_tensor: loading tensor blk.0.ssm_alpha.scale
+E     create_tensor: loading tensor blk.0.ssm_beta.scale
+E     create_tensor: loading tensor blk.0.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.0.attn_gate.input_scale
+E     create_tensor: loading tensor blk.0.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.0.ffn_down.input_scale
+E     create_tensor: loading tensor blk.0.ffn_up.input_scale
+E     create_tensor: loading tensor blk.0.ssm_out.input_scale
+E     create_tensor: loading tensor blk.0.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.0.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.1.attn_qkv.scale
+E     create_tensor: loading tensor blk.1.attn_gate.scale
+E     create_tensor: loading tensor blk.1.ffn_gate.scale
+E     create_tensor: loading tensor blk.1.ffn_down.scale
+E     create_tensor: loading tensor blk.1.ffn_up.scale
+E     create_tensor: loading tensor blk.1.ssm_out.scale
+E     create_tensor: loading tensor blk.1.ssm_alpha.scale
+E     create_tensor: loading tensor blk.1.ssm_beta.scale
+E     create_tensor: loading tensor blk.1.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.1.attn_gate.input_scale
+E     create_tensor: loading tensor blk.1.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.1.ffn_down.input_scale
+E     create_tensor: loading tensor blk.1.ffn_up.input_scale
+E     create_tensor: loading tensor blk.1.ssm_out.input_scale
+E     create_tensor: loading tensor blk.1.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.1.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.2.attn_qkv.scale
+E     create_tensor: loading tensor blk.2.attn_gate.scale
+E     create_tensor: loading tensor blk.2.ffn_gate.scale
+E     create_tensor: loading tensor blk.2.ffn_down.scale
+E     create_tensor: loading tensor blk.2.ffn_up.scale
+E     create_tensor: loading tensor blk.2.ssm_out.scale
+E     create_tensor: loading tensor blk.2.ssm_alpha.scale
+E     create_tensor: loading tensor blk.2.ssm_beta.scale
+E     create_tensor: loading tensor blk.2.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.2.attn_gate.input_scale
+E     create_tensor: loading tensor blk.2.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.2.ffn_down.input_scale
+E     create_tensor: loading tensor blk.2.ffn_up.input_scale
+E     create_tensor: loading tensor blk.2.ssm_out.input_scale
+E     create_tensor: loading tensor blk.2.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.2.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.3.attn_q.scale
+E     create_tensor: loading tensor blk.3.attn_k.scale
+E     create_tensor: loading tensor blk.3.attn_v.scale
+E     create_tensor: loading tensor blk.3.attn_output.scale
+E     create_tensor: loading tensor blk.3.ffn_gate.scale
+E     create_tensor: loading tensor blk.3.ffn_down.scale
+E     create_tensor: loading tensor blk.3.ffn_up.scale
+E     create_tensor: loading tensor blk.3.attn_q.input_scale
+E     create_tensor: loading tensor blk.3.attn_k.input_scale
+E     create_tensor: loading tensor blk.3.attn_v.input_scale
+E     create_tensor: loading tensor blk.3.attn_output.input_scale
+E     create_tensor: loading tensor blk.3.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.3.ffn_down.input_scale
+E     create_tensor: loading tensor blk.3.ffn_up.input_scale
+E     create_tensor: loading tensor blk.4.attn_qkv.scale
+E     create_tensor: loading tensor blk.4.attn_gate.scale
+E     create_tensor: loading tensor blk.4.ffn_gate.scale
+E     create_tensor: loading tensor blk.4.ffn_down.scale
+E     create_tensor: loading tensor blk.4.ffn_up.scale
+E     create_tensor: loading tensor blk.4.ssm_out.scale
+E     create_tensor: loading tensor blk.4.ssm_alpha.scale
+E     create_tensor: loading tensor blk.4.ssm_beta.scale
+E     create_tensor: loading tensor blk.4.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.4.attn_gate.input_scale
+E     create_tensor: loading tensor blk.4.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.4.ffn_down.input_scale
+E     create_tensor: loading tensor blk.4.ffn_up.input_scale
+E     create_tensor: loading tensor blk.4.ssm_out.input_scale
+E     create_tensor: loading tensor blk.4.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.4.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.5.attn_qkv.scale
+E     create_tensor: loading tensor blk.5.attn_gate.scale
+E     create_tensor: loading tensor blk.5.ffn_gate.scale
+E     create_tensor: loading tensor blk.5.ffn_down.scale
+E     create_tensor: loading tensor blk.5.ffn_up.scale
+E     create_tensor: loading tensor blk.5.ssm_out.scale
+E     create_tensor: loading tensor blk.5.ssm_alpha.scale
+E     create_tensor: loading tensor blk.5.ssm_beta.scale
+E     create_tensor: loading tensor blk.5.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.5.attn_gate.input_scale
+E     create_tensor: loading tensor blk.5.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.5.ffn_down.input_scale
+E     create_tensor: loading tensor blk.5.ffn_up.input_scale
+E     create_tensor: loading tensor blk.5.ssm_out.input_scale
+E     create_tensor: loading tensor blk.5.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.5.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.6.attn_qkv.scale
+E     create_tensor: loading tensor blk.6.attn_gate.scale
+E     create_tensor: loading tensor blk.6.ffn_gate.scale
+E     create_tensor: loading tensor blk.6.ffn_down.scale
+E     create_tensor: loading tensor blk.6.ffn_up.scale
+E     create_tensor: loading tensor blk.6.ssm_out.scale
+E     create_tensor: loading tensor blk.6.ssm_alpha.scale
+E     create_tensor: loading tensor blk.6.ssm_beta.scale
+E     create_tensor: loading tensor blk.6.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.6.attn_gate.input_scale
+E     create_tensor: loading tensor blk.6.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.6.ffn_down.input_scale
+E     create_tensor: loading tensor blk.6.ffn_up.input_scale
+E     create_tensor: loading tensor blk.6.ssm_out.input_scale
+E     create_tensor: loading tensor blk.6.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.6.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.7.attn_q.scale
+E     create_tensor: loading tensor blk.7.attn_k.scale
+E     create_tensor: loading tensor blk.7.attn_v.scale
+E     create_tensor: loading tensor blk.7.attn_output.scale
+E     create_tensor: loading tensor blk.7.ffn_gate.scale
+E     create_tensor: loading tensor blk.7.ffn_down.scale
+E     create_tensor: loading tensor blk.7.ffn_up.scale
+E     create_tensor: loading tensor blk.7.attn_q.input_scale
+E     create_tensor: loading tensor blk.7.attn_k.input_scale
+E     create_tensor: loading tensor blk.7.attn_v.input_scale
+E     create_tensor: loading tensor blk.7.attn_output.input_scale
+E     create_tensor: loading tensor blk.7.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.7.ffn_down.input_scale
+E     create_tensor: loading tensor blk.7.ffn_up.input_scale
+E     create_tensor: loading tensor blk.8.attn_qkv.scale
+E     create_tensor: loading tensor blk.8.attn_gate.scale
+E     create_tensor: loading tensor blk.8.ffn_gate.scale
+E     create_tensor: loading tensor blk.8.ffn_down.scale
+E     create_tensor: loading tensor blk.8.ffn_up.scale
+E     create_tensor: loading tensor blk.8.ssm_out.scale
+E     create_tensor: loading tensor blk.8.ssm_alpha.scale
+E     create_tensor: loading tensor blk.8.ssm_beta.scale
+E     create_tensor: loading tensor blk.8.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.8.attn_gate.input_scale
+E     create_tensor: loading tensor blk.8.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.8.ffn_down.input_scale
+E     create_tensor: loading tensor blk.8.ffn_up.input_scale
+E     create_tensor: loading tensor blk.8.ssm_out.input_scale
+E     create_tensor: loading tensor blk.8.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.8.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.9.attn_qkv.scale
+E     create_tensor: loading tensor blk.9.attn_gate.scale
+E     create_tensor: loading tensor blk.9.ffn_gate.scale
+E     create_tensor: loading tensor blk.9.ffn_down.scale
+E     create_tensor: loading tensor blk.9.ffn_up.scale
+E     create_tensor: loading tensor blk.9.ssm_out.scale
+E     create_tensor: loading tensor blk.9.ssm_alpha.scale
+E     create_tensor: loading tensor blk.9.ssm_beta.scale
+E     create_tensor: loading tensor blk.9.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.9.attn_gate.input_scale
+E     create_tensor: loading tensor blk.9.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.9.ffn_down.input_scale
+E     create_tensor: loading tensor blk.9.ffn_up.input_scale
+E     create_tensor: loading tensor blk.9.ssm_out.input_scale
+E     create_tensor: loading tensor blk.9.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.9.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.10.attn_qkv.scale
+E     create_tensor: loading tensor blk.10.attn_gate.scale
+E     create_tensor: loading tensor blk.10.ffn_gate.scale
+E     create_tensor: loading tensor blk.10.ffn_down.scale
+E     create_tensor: loading tensor blk.10.ffn_up.scale
+E     create_tensor: loading tensor blk.10.ssm_out.scale
+E     create_tensor: loading tensor blk.10.ssm_alpha.scale
+E     create_tensor: loading tensor blk.10.ssm_beta.scale
+E     create_tensor: loading tensor blk.10.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.10.attn_gate.input_scale
+E     create_tensor: loading tensor blk.10.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.10.ffn_down.input_scale
+E     create_tensor: loading tensor blk.10.ffn_up.input_scale
+E     create_tensor: loading tensor blk.10.ssm_out.input_scale
+E     create_tensor: loading tensor blk.10.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.10.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.11.attn_q.scale
+E     create_tensor: loading tensor blk.11.attn_k.scale
+E     create_tensor: loading tensor blk.11.attn_v.scale
+E     create_tensor: loading tensor blk.11.attn_output.scale
+E     create_tensor: loading tensor blk.11.ffn_gate.scale
+E     create_tensor: loading tensor blk.11.ffn_down.scale
+E     create_tensor: loading tensor blk.11.ffn_up.scale
+E     create_tensor: loading tensor blk.11.attn_q.input_scale
+E     create_tensor: loading tensor blk.11.attn_k.input_scale
+E     create_tensor: loading tensor blk.11.attn_v.input_scale
+E     create_tensor: loading tensor blk.11.attn_output.input_scale
+E     create_tensor: loading tensor blk.11.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.11.ffn_down.input_scale
+E     create_tensor: loading tensor blk.11.ffn_up.input_scale
+E     create_tensor: loading tensor blk.12.attn_qkv.scale
+E     create_tensor: loading tensor blk.12.attn_gate.scale
+E     create_tensor: loading tensor blk.12.ffn_gate.scale
+E     create_tensor: loading tensor blk.12.ffn_down.scale
+E     create_tensor: loading tensor blk.12.ffn_up.scale
+E     create_tensor: loading tensor blk.12.ssm_out.scale
+E     create_tensor: loading tensor blk.12.ssm_alpha.scale
+E     create_tensor: loading tensor blk.12.ssm_beta.scale
+E     create_tensor: loading tensor blk.12.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.12.attn_gate.input_scale
+E     create_tensor: loading tensor blk.12.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.12.ffn_down.input_scale
+E     create_tensor: loading tensor blk.12.ffn_up.input_scale
+E     create_tensor: loading tensor blk.12.ssm_out.input_scale
+E     create_tensor: loading tensor blk.12.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.12.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.13.attn_qkv.scale
+E     create_tensor: loading tensor blk.13.attn_gate.scale
+E     create_tensor: loading tensor blk.13.ffn_gate.scale
+E     create_tensor: loading tensor blk.13.ffn_down.scale
+E     create_tensor: loading tensor blk.13.ffn_up.scale
+E     create_tensor: loading tensor blk.13.ssm_out.scale
+E     create_tensor: loading tensor blk.13.ssm_alpha.scale
+E     create_tensor: loading tensor blk.13.ssm_beta.scale
+E     create_tensor: loading tensor blk.13.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.13.attn_gate.input_scale
+E     create_tensor: loading tensor blk.13.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.13.ffn_down.input_scale
+E     create_tensor: loading tensor blk.13.ffn_up.input_scale
+E     create_tensor: loading tensor blk.13.ssm_out.input_scale
+E     create_tensor: loading tensor blk.13.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.13.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.14.attn_qkv.scale
+E     create_tensor: loading tensor blk.14.attn_gate.scale
+E     create_tensor: loading tensor blk.14.ffn_gate.scale
+E     create_tensor: loading tensor blk.14.ffn_down.scale
+E     create_tensor: loading tensor blk.14.ffn_up.scale
+E     create_tensor: loading tensor blk.14.ssm_out.scale
+E     create_tensor: loading tensor blk.14.ssm_alpha.scale
+E     create_tensor: loading tensor blk.14.ssm_beta.scale
+E     create_tensor: loading tensor blk.14.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.14.attn_gate.input_scale
+E     create_tensor: loading tensor blk.14.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.14.ffn_down.input_scale
+E     create_tensor: loading tensor blk.14.ffn_up.input_scale
+E     create_tensor: loading tensor blk.14.ssm_out.input_scale
+E     create_tensor: loading tensor blk.14.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.14.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.15.attn_q.scale
+E     create_tensor: loading tensor blk.15.attn_k.scale
+E     create_tensor: loading tensor blk.15.attn_v.scale
+E     create_tensor: loading tensor blk.15.attn_output.scale
+E     create_tensor: loading tensor blk.15.ffn_gate.scale
+E     create_tensor: loading tensor blk.15.ffn_down.scale
+E     create_tensor: loading tensor blk.15.ffn_up.scale
+E     create_tensor: loading tensor blk.15.attn_q.input_scale
+E     create_tensor: loading tensor blk.15.attn_k.input_scale
+E     create_tensor: loading tensor blk.15.attn_v.input_scale
+E     create_tensor: loading tensor blk.15.attn_output.input_scale
+E     create_tensor: loading tensor blk.15.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.15.ffn_down.input_scale
+E     create_tensor: loading tensor blk.15.ffn_up.input_scale
+E     create_tensor: loading tensor blk.16.attn_qkv.scale
+E     create_tensor: loading tensor blk.16.attn_gate.scale
+E     create_tensor: loading tensor blk.16.ffn_gate.scale
+E     create_tensor: loading tensor blk.16.ffn_down.scale
+E     create_tensor: loading tensor blk.16.ffn_up.scale
+E     create_tensor: loading tensor blk.16.ssm_out.scale
+E     create_tensor: loading tensor blk.16.ssm_alpha.scale
+E     create_tensor: loading tensor blk.16.ssm_beta.scale
+E     create_tensor: loading tensor blk.16.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.16.attn_gate.input_scale
+E     create_tensor: loading tensor blk.16.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.16.ffn_down.input_scale
+E     create_tensor: loading tensor blk.16.ffn_up.input_scale
+E     create_tensor: loading tensor blk.16.ssm_out.input_scale
+E     create_tensor: loading tensor blk.16.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.16.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.17.attn_qkv.scale
+E     create_tensor: loading tensor blk.17.attn_gate.scale
+E     create_tensor: loading tensor blk.17.ffn_gate.scale
+E     create_tensor: loading tensor blk.17.ffn_down.scale
+E     create_tensor: loading tensor blk.17.ffn_up.scale
+E     create_tensor: loading tensor blk.17.ssm_out.scale
+E     create_tensor: loading tensor blk.17.ssm_alpha.scale
+E     create_tensor: loading tensor blk.17.ssm_beta.scale
+E     create_tensor: loading tensor blk.17.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.17.attn_gate.input_scale
+E     create_tensor: loading tensor blk.17.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.17.ffn_down.input_scale
+E     create_tensor: loading tensor blk.17.ffn_up.input_scale
+E     create_tensor: loading tensor blk.17.ssm_out.input_scale
+E     create_tensor: loading tensor blk.17.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.17.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.18.attn_qkv.scale
+E     create_tensor: loading tensor blk.18.attn_gate.scale
+E     create_tensor: loading tensor blk.18.ffn_gate.scale
+E     create_tensor: loading tensor blk.18.ffn_down.scale
+E     create_tensor: loading tensor blk.18.ffn_up.scale
+E     create_tensor: loading tensor blk.18.ssm_out.scale
+E     create_tensor: loading tensor blk.18.ssm_alpha.scale
+E     create_tensor: loading tensor blk.18.ssm_beta.scale
+E     create_tensor: loading tensor blk.18.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.18.attn_gate.input_scale
+E     create_tensor: loading tensor blk.18.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.18.ffn_down.input_scale
+E     create_tensor: loading tensor blk.18.ffn_up.input_scale
+E     create_tensor: loading tensor blk.18.ssm_out.input_scale
+E     create_tensor: loading tensor blk.18.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.18.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.19.attn_q.scale
+E     create_tensor: loading tensor blk.19.attn_k.scale
+E     create_tensor: loading tensor blk.19.attn_v.scale
+E     create_tensor: loading tensor blk.19.attn_output.scale
+E     create_tensor: loading tensor blk.19.ffn_gate.scale
+E     create_tensor: loading tensor blk.19.ffn_down.scale
+E     create_tensor: loading tensor blk.19.ffn_up.scale
+E     create_tensor: loading tensor blk.19.attn_q.input_scale
+E     create_tensor: loading tensor blk.19.attn_k.input_scale
+E     create_tensor: loading tensor blk.19.attn_v.input_scale
+E     create_tensor: loading tensor blk.19.attn_output.input_scale
+E     create_tensor: loading tensor blk.19.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.19.ffn_down.input_scale
+E     create_tensor: loading tensor blk.19.ffn_up.input_scale
+E     create_tensor: loading tensor blk.20.attn_qkv.scale
+E     create_tensor: loading tensor blk.20.attn_gate.scale
+E     create_tensor: loading tensor blk.20.ffn_gate.scale
+E     create_tensor: loading tensor blk.20.ffn_down.scale
+E     create_tensor: loading tensor blk.20.ffn_up.scale
+E     create_tensor: loading tensor blk.20.ssm_out.scale
+E     create_tensor: loading tensor blk.20.ssm_alpha.scale
+E     create_tensor: loading tensor blk.20.ssm_beta.scale
+E     create_tensor: loading tensor blk.20.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.20.attn_gate.input_scale
+E     create_tensor: loading tensor blk.20.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.20.ffn_down.input_scale
+E     create_tensor: loading tensor blk.20.ffn_up.input_scale
+E     create_tensor: loading tensor blk.20.ssm_out.input_scale
+E     create_tensor: loading tensor blk.20.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.20.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.21.attn_qkv.scale
+E     create_tensor: loading tensor blk.21.attn_gate.scale
+E     create_tensor: loading tensor blk.21.ffn_gate.scale
+E     create_tensor: loading tensor blk.21.ffn_down.scale
+E     create_tensor: loading tensor blk.21.ffn_up.scale
+E     create_tensor: loading tensor blk.21.ssm_out.scale
+E     create_tensor: loading tensor blk.21.ssm_alpha.scale
+E     create_tensor: loading tensor blk.21.ssm_beta.scale
+E     create_tensor: loading tensor blk.21.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.21.attn_gate.input_scale
+E     create_tensor: loading tensor blk.21.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.21.ffn_down.input_scale
+E     create_tensor: loading tensor blk.21.ffn_up.input_scale
+E     create_tensor: loading tensor blk.21.ssm_out.input_scale
+E     create_tensor: loading tensor blk.21.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.21.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.22.attn_qkv.scale
+E     create_tensor: loading tensor blk.22.attn_gate.scale
+E     create_tensor: loading tensor blk.22.ffn_gate.scale
+E     create_tensor: loading tensor blk.22.ffn_down.scale
+E     create_tensor: loading tensor blk.22.ffn_up.scale
+E     create_tensor: loading tensor blk.22.ssm_out.scale
+E     create_tensor: loading tensor blk.22.ssm_alpha.scale
+E     create_tensor: loading tensor blk.22.ssm_beta.scale
+E     create_tensor: loading tensor blk.22.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.22.attn_gate.input_scale
+E     create_tensor: loading tensor blk.22.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.22.ffn_down.input_scale
+E     create_tensor: loading tensor blk.22.ffn_up.input_scale
+E     create_tensor: loading tensor blk.22.ssm_out.input_scale
+E     create_tensor: loading tensor blk.22.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.22.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.23.attn_q.scale
+E     create_tensor: loading tensor blk.23.attn_k.scale
+E     create_tensor: loading tensor blk.23.attn_v.scale
+E     create_tensor: loading tensor blk.23.attn_output.scale
+E     create_tensor: loading tensor blk.23.ffn_gate.scale
+E     create_tensor: loading tensor blk.23.ffn_down.scale
+E     create_tensor: loading tensor blk.23.ffn_up.scale
+E     create_tensor: loading tensor blk.23.attn_q.input_scale
+E     create_tensor: loading tensor blk.23.attn_k.input_scale
+E     create_tensor: loading tensor blk.23.attn_v.input_scale
+E     create_tensor: loading tensor blk.23.attn_output.input_scale
+E     create_tensor: loading tensor blk.23.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.23.ffn_down.input_scale
+E     create_tensor: loading tensor blk.23.ffn_up.input_scale
+E     done_getting_tensors: tensor 'token_embd.weight' (q6_K) (and 222 others) cannot be used with preferred buffer type CPU_REPACK, using CPU instead
+E     INFO:     127.0.0.1:53456 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53468 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53482 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53494 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53496 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53508 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53512 - "GET /openapi.json HTTP/1.1" 200 OK
+E     load_tensors:   CPU_Mapped model buffer size =  1211.05 MiB
+E     load_tensors:   CPU_REPACK model buffer size =   490.50 MiB
+E     ............................repack: repack tensor blk.0.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.0.ffn_gate.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53514 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.0.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.1.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.1.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.1.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.2.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.2.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.2.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.3.attn_q.weight with q4_K_8x8
+E     repack: repack tensor blk.3.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.3.attn_output.weight with q4_K_8x8
+E     .repack: repack tensor blk.3.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.3.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.3.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53522 - "GET /openapi.json HTTP/1.1" 200 OK
+E     repack: repack tensor blk.4.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.4.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.4.ffn_down.weight with q4_K_8x8
+E     repack: repack tensor blk.4.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.5.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.5.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.5.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.6.attn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.6.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.6.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.6.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.7.attn_q.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53538 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.7.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.7.attn_output.weight with q4_K_8x8
+E     repack: repack tensor blk.7.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.7.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.7.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53548 - "GET /openapi.json HTTP/1.1" 200 OK
+E     repack: repack tensor blk.8.attn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.8.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.8.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53556 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.9.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.9.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.9.ffn_down.weight with q4_K_8x8
+E     repack: repack tensor blk.9.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53560 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.10.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.10.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.10.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.10.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.11.attn_q.weight with q4_K_8x8
+E     .repack: repack tensor blk.11.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.11.attn_output.weight with q4_K_8x8
+E     repack: repack tensor blk.11.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.11.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.12.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.12.ffn_gate.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53564 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.12.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.12.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.13.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.13.ffn_gate.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53576 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.13.ffn_down.weight with q4_K_8x8
+E     repack: repack tensor blk.13.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.14.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.14.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.14.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.15.attn_q.weight with q4_K_8x8
+E     .repack: repack tensor blk.15.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.15.attn_v.weight with q4_K_8x8
+E     repack: repack tensor blk.15.attn_output.weight with q4_K_8x8
+E     repack: repack tensor blk.15.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.15.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.15.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53580 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.16.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.16.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.16.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.16.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.17.attn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.17.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.17.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.18.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.18.ffn_gate.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53594 - "GET /openapi.json HTTP/1.1" 200 OK
+E     repack: repack tensor blk.18.ffn_down.weight with q4_K_8x8
+E     .repack: repack tensor blk.18.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53598 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.19.attn_q.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53602 - "GET /openapi.json HTTP/1.1" 200 OK
+E     repack: repack tensor blk.19.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.19.attn_v.weight with q4_K_8x8
+E     repack: repack tensor blk.19.attn_output.weight with q4_K_8x8
+E     repack: repack tensor blk.19.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.19.ffn_down.weight with q4_K_8x8
+E     repack: repack tensor blk.19.ffn_up.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53618 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.20.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.20.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.20.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.21.attn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.21.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.21.ffn_up.weight with q4_K_8x8
+E     repack: repack tensor blk.22.attn_gate.weight with q4_K_8x8
+E     INFO:     127.0.0.1:53622 - "GET /openapi.json HTTP/1.1" 200 OK
+E     .repack: repack tensor blk.22.ffn_gate.weight with q4_K_8x8
+E     repack: repack tensor blk.22.ffn_up.weight with q4_K_8x8
+E     .repack: repack tensor blk.23.attn_q.weight with q4_K_8x8
+E     repack: repack tensor blk.23.attn_k.weight with q4_K_8x8
+E     repack: repack tensor blk.23.attn_output.weight with q4_K_8x8
+E     repack: repack tensor blk.23.ffn_gate.weight with q4_K_8x8
+E     .repack: repack tensor blk.23.ffn_up.weight with q4_K_8x8
+E     .
+E     INFO:     127.0.0.1:53632 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53646 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53652 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53660 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53670 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53676 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53692 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53700 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53708 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53712 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53728 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53730 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53738 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53748 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53758 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53764 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53778 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53784 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53800 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53808 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53824 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53828 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53842 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53854 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53858 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53866 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53870 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56242 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56252 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56266 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56280 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56290 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56302 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56314 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56322 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56332 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56338 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56346 - "GET /openapi.json HTTP/1.1" 200 OK
+E     Traceback (most recent call last):
+E       File "&lt;frozen runpy&gt;", line 198, in _run_module_as_main
+E       File "&lt;frozen runpy&gt;", line 88, in _run_code
+E       File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 493, in &lt;module&gt;
+E         main()
+E       File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 489, in main
+E         asyncio.run(start())
+E       File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+E         return runner.run(main)
+E                ^^^^^^^^^^^^^^^^
+E       File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+E         return self._loop.run_until_complete(task)
+E                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       File "/home/octadim/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E         return future.result()
+E                ^^^^^^^^^^^^^^^
+E       File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 487, in start
+E         await supervisor.run()
+E       File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 323, in run
+E         await self.own(connection)
+E       File "/home/octadim/MyProjects/Multi_User_RAG_Assist_System/backend/app/generation.py", line 401, in own
+E         raise RuntimeError('Coordinator ownership connection stalled')
+E     RuntimeError: Coordinator ownership connection stalled
+E     INFO:     127.0.0.1:56356 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56366 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56374 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56384 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56394 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56408 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56414 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56424 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56428 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56442 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56452 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56460 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56462 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56464 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56480 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56492 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56502 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56504 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56514 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56522 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56524 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56536 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56552 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56558 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56564 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56566 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56578 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56584 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56594 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56598 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56606 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56610 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56624 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56628 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56634 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56644 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56646 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56656 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56672 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56686 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56698 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56706 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56720 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56736 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56740 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56742 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56754 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:56758 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52832 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52836 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52842 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52858 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52874 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52888 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52900 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52906 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52916 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52918 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52924 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52932 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52948 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52952 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52954 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52956 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52972 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52980 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:52996 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53012 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53022 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53030 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53042 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53044 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53054 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53064 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53066 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53072 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53082 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53098 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53102 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53108 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53114 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53120 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53126 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53128 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53138 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53154 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53170 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53176 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53178 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53190 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53196 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53206 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53220 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53232 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53244 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53246 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53258 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53260 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53268 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53274 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53288 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53294 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53302 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53304 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53310 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53316 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53322 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53326 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53336 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53342 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53346 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53348 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53350 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53356 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53366 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53378 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53382 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53396 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53406 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53416 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53426 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53436 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53438 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53452 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53466 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53472 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53478 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53488 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53490 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53492 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53498 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53514 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53530 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53542 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53558 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53566 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53576 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53556 - "GET /openapi.json HTTP/1.1" 200 OK
+E     INFO:     127.0.0.1:53566 - "GET /openapi.json HTTP/1.1" 200 OK
+E     Backend generation exited unexpectedly (status=1)
+E     INFO:     Shutting down
+E     INFO:     Waiting for application shutdown.
+E     INFO:     Application shutdown complete.
+E     INFO:     Finished server process [65507]
+E     
+E   assert 1 is None
+E    +  where 1 = poll()
+E    +    where poll = &lt;Popen: returncode: 1 args: ['python3', '/home/octadim/MyProjects/Multi_User...&gt;.poll</failure></testcase></testsuite></testsuites>

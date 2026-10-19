@@ -3,7 +3,7 @@ export const tabKey = 'rag:tab';
 
 export function clearDrafts() {
   for (const key of Object.keys(sessionStorage)) {
-    if (key.startsWith(prefix) || key === tabKey || key === 'rag:conversation' || key === 'rag:owner') sessionStorage.removeItem(key);
+    if (key.startsWith(prefix) || key === tabKey || key === 'rag:conversation' || key === 'rag:owner' || key === 'rag:section') sessionStorage.removeItem(key);
   }
 }
 

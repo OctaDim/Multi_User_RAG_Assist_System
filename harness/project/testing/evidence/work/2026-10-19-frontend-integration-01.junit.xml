@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="327.525" timestamp="2026-10-19T02:11:20.662021+03:00" hostname="16IPK2"><testcase classname="tests.integration.test_actual_document_boundaries" name="test_real_partial_upload_and_failed_file_never_expand_selected_source_scope" time="139.088" /><testcase classname="tests.integration.test_actual_lifecycle_gaps" name="test_issued_owner_revocation_during_actual_queue_and_native_stream[after-queued]" time="99.723" /><testcase classname="tests.integration.test_actual_lifecycle_gaps" name="test_issued_owner_revocation_during_actual_queue_and_native_stream[after-streaming]" time="42.972" /><testcase classname="tests.integration.test_actual_lifecycle_gaps" name="test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history[after]" time="40.301"><failure message="AssertionError: Locator expected to have text 'Откройте письмо и подтвердите email, затем войдите.'&#10;Actual value:  &#10;Call log:&#10;  - LocatorAssertions.to_have_text with timeout 5000ms&#10;  -   - waiting for locator(&quot;#status&quot;)&#10;  -     9 × locator resolved to &lt;p id=&quot;status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;&#10;  -       - unexpected value &quot;&quot;">backend/tests/integration/test_actual_lifecycle_gaps.py:118: in test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history
+    page=context.new_page();register(page,mailbox,frontend,'u8-tokenizer@owned.test');login(page,'u8-tokenizer@owned.test')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/browser/test_accounts.py:96: in register
+    expect(page.locator('#status')).to_have_text('Откройте письмо и подтвердите email, затем войдите.')
+E   AssertionError: Locator expected to have text 'Откройте письмо и подтвердите email, затем войдите.'
+E   Actual value:  
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 5000ms
+E     -   - waiting for locator("#status")
+E     -     9 × locator resolved to &lt;p id="status" role="status" aria-live="polite"&gt;&lt;/p&gt;
+E     -       - unexpected value ""</failure></testcase></testsuite></testsuites>

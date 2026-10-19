@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1697.461" timestamp="2026-10-19T02:29:12.824860+03:00" hostname="16IPK2"><testcase classname="tests.integration.test_actual_page_failure" name="test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[whole-pdf]" time="1696.556"><failure message="AssertionError: Locator expected to contain text 'Завершён'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;  - LocatorAssertions.to_contain_text with timeout 180000ms&#10;  -   - waiting for locator(&quot;#history article&quot;)">backend/tests/integration/test_actual_page_failure.py:152: in test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor
+    expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=180000)
+E   AssertionError: Locator expected to contain text 'Завершён'
+E   Actual value: &lt;element(s) not found&gt; 
+E   Call log:
+E     - LocatorAssertions.to_contain_text with timeout 180000ms
+E     -   - waiting for locator("#history article")</failure></testcase></testsuite></testsuites>

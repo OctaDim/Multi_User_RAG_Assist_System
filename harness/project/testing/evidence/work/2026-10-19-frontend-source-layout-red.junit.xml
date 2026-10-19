@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="8.166" timestamp="2026-10-19T03:51:20.427830+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_frontend_workspace" name="test_long_chat_menus_keep_source_choices_clickable_on_a_short_screen" time="7.983"><failure message="playwright._impl._errors.TimeoutError: Locator.check: Timeout 3000ms exceeded.&#10;Call log:&#10;  - waiting for get_by_role(&quot;checkbox&quot;, name=&quot;Source 8&quot;, exact=True)&#10;  -     - locator resolved to &lt;input type=&quot;checkbox&quot;/&gt;&#10;  -   - attempting click action&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;&lt;/section&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 20ms&#10;  -     2 × waiting for element to be visible, enabled and stable&#10;  -       - element is visible, enabled and stable&#10;  -       - scrolling into view if needed&#10;  -       - done scrolling&#10;  -       - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;&lt;/section&gt; intercepts pointer events&#10;  -     - retrying click action&#10;  -       - waiting 100ms&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;&lt;/section&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 500ms&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -   3 × retrying click action&#10;  -       - waiting 500ms&#10;  -       - waiting for element to be visible, enabled and stable&#10;  -       - element is visible, enabled and stable&#10;  -       - scrolling into view if needed&#10;  -       - done scrolling&#10;  -       - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;&lt;/section&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 500ms&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 500ms">backend/tests/browser/test_frontend_workspace.py:98: in test_long_chat_menus_keep_source_choices_clickable_on_a_short_screen
+    page.get_by_role('checkbox',name='Source 8',exact=True).check(timeout=3000)
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15358: in check
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:141: in check
+    return await self._frame.check(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:741: in check
+    await self._channel.send("check", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.check: Timeout 3000ms exceeded.
+E   Call log:
+E     - waiting for get_by_role("checkbox", name="Source 8", exact=True)
+E     -     - locator resolved to &lt;input type="checkbox"/&gt;
+E     -   - attempting click action
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;&lt;/section&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 20ms
+E     -     2 × waiting for element to be visible, enabled and stable
+E     -       - element is visible, enabled and stable
+E     -       - scrolling into view if needed
+E     -       - done scrolling
+E     -       - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;&lt;/section&gt; intercepts pointer events
+E     -     - retrying click action
+E     -       - waiting 100ms
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;&lt;/section&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 500ms
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -   3 × retrying click action
+E     -       - waiting 500ms
+E     -       - waiting for element to be visible, enabled and stable
+E     -       - element is visible, enabled and stable
+E     -       - scrolling into view if needed
+E     -       - done scrolling
+E     -       - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;&lt;/section&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 500ms
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 500ms</failure></testcase></testsuite></testsuites>

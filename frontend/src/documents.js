@@ -15,6 +15,7 @@ export class Documents {
     window.addEventListener('beforeunload',event=>{if(this.dirty()){event.preventDefault();event.returnValue='';}});
     $('document-upload').onsubmit=event=>{event.preventDefault();perform(()=>this.upload(),event.submitter);};
     $('document-upload').elements.files.onchange=()=>{delete $('document-upload').dataset.uncertain;};
+    document.addEventListener('rag:section-changed',event=>{if(event.detail!=='library')++this.opening;});
   }
   dirty() {return Boolean(this.editor?.dirty);}
   async allowLeave() {
@@ -51,17 +52,25 @@ export class Documents {
     $('library-title').textContent=result.readonly?'Библиотека аккаунта':'Мои документы';
     $('library-context').textContent=result.readonly?`${this.ownerName||owner} · Только чтение`:'Материалы для поиска и ответов';
     $('document-upload').hidden=Boolean(result.readonly);$('own-library').hidden=!result.readonly;
-    $('library-status').textContent=result.documents.length?`Документов: ${result.documents.length}`:'Пока нет документов. Загрузите первый файл, чтобы задавать вопросы.';
+    $('library-status').textContent=result.documents.length?`Документов: ${result.documents.length}`:result.readonly?'В этой библиотеке пока нет документов.':'Пока нет документов. Загрузите первый файл, чтобы задавать вопросы.';
     const items=result.documents.map(file=>this.item(file,Boolean(result.readonly)));
     $('documents').replaceChildren(...items);
     const current=this.editor;
     if(current) {
       const file=result.documents.find(file=>file.id===current.file.id);
-      if(!file){this.releaseView();return;}
+      if(!file){
+        if(current.dirty) {
+          current.unavailable=true;current.save.disabled=true;
+          feedback(current.save,'Источник удалён или недоступен. Ваш несохранённый текст остаётся в редакторе: скопируйте его перед закрытием.',true);
+        } else this.releaseView();
+        return;
+      }
       if(current.awaitingPublication) {
         if(file.state==='ready'&&file.published_revision!==current.revision)await this.open(file,current.readonly,true);
         else if(file.state==='failed') {
-          current.awaitingPublication=false;current.dirty=true;current.form.inert=false;current.save.disabled=false;
+          current.awaitingPublication=false;current.dirty=Boolean(current.dirtyPages.size);current.form.inert=false;current.save.disabled=false;
+          current.form.querySelectorAll('textarea').forEach(input=>{input.readOnly=current.readonly;});
+          current.progress?.remove();
           feedback(current.save,'Индексация исправлений не завершена. Ваш текст сохранён в редакторе.',true);
         }
       }
@@ -102,7 +111,7 @@ export class Documents {
     if(!published&&!await this.allowLeave())return;
     const opening=++this.opening,owner=this.owner,credential=token();
     const value=await api(`/documents/${file.id}`);
-    if(opening!==this.opening||owner!==this.owner||credential!==token())return;
+    if(opening!==this.opening||owner!==this.owner||credential!==token()||$('library').hidden)return;
     this.releaseView();
     const generation=this.opening;
     const view=$('document-view');view.append(textElement('h3',file.name));
@@ -142,12 +151,20 @@ export class Documents {
         });
       }
     }
-    const editor={file,readonly,revision:value.document.published_revision,form,initial,dirty:false,awaitingPublication:false};this.editor=editor;
-    form.oninput=()=>{editor.dirty=Array.from(form.querySelectorAll('textarea')).some(input=>input.value!==initial.get(Number(input.dataset.page)));};
+    const processing=!readonly&&['queued','processing'].includes(value.document.state);
+    const editor={file,readonly,revision:value.document.published_revision,form,initial,dirty:false,awaitingPublication:processing};this.editor=editor;
+    const dirtyPages=new Set();
+    editor.dirtyPages=dirtyPages;
+    form.oninput=event=>{
+      const input=event.target;if(!input.matches('textarea[data-page]'))return;
+      const page=Number(input.dataset.page);
+      if(input.value===initial.get(page))dirtyPages.delete(page);else dirtyPages.add(page);
+      editor.dirty=Boolean(dirtyPages.size);
+    };
     if(!readonly) {
       const save=textElement('button','Сохранить исправления');editor.save=save;form.append(save);
-      if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}
-      form.onsubmit=event=>{event.preventDefault();if(editor.awaitingPublication)return;this.perform(async()=>{
+      if(processing){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});editor.progress=textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».');form.append(editor.progress);}
+      form.onsubmit=event=>{event.preventDefault();if(editor.awaitingPublication||editor.unavailable)return;this.perform(async()=>{
         const pages=Array.from(form.querySelectorAll('textarea'),input=>({page:Number(input.dataset.page),text:input.value}));
         form.inert=true;
         try {
@@ -162,7 +179,9 @@ export class Documents {
         const complete=textElement('button','Обработать PDF полностью');complete.type='button';complete.className='secondary';complete.disabled=['queued','processing'].includes(file.state);
         complete.onclick=()=>this.perform(async()=>{
           if(!await this.allowLeave())return;
-          await api(`/documents/${file.id}/mode`,'POST',{choice:'complete'});this.releaseView();await this.refresh();
+          await api(`/documents/${file.id}/mode`,'POST',{choice:'complete'});
+          if(this.editor===editor)this.releaseView();
+          await this.refresh();
         },complete);view.append(complete);
       }
     }

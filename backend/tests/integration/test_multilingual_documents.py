@@ -14,7 +14,7 @@ from playwright.sync_api import expect
 import pytest
 
 from integration.test_answer_lifecycle import environment, operator
-from browser.test_accounts import BACKEND, real_account_browser, register, login
+from browser.test_accounts import BACKEND, real_account_browser, register, login, navigate
 from browser.test_documents import ready
 
 
@@ -173,6 +173,7 @@ def test_genuine_four_language_handwriting_publication_and_permission_masks(real
         register(owner,mailbox,frontend,'u8-genuine-handwriting@owned.test');login(owner,'u8-genuine-handwriting@owned.test')
         for language,content,expected in samples:
             name=f'genuine-{language}.pdf'
+            navigate(owner,'library')
             owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
             owner.get_by_role('button',name='Загрузить документы',exact=True).click()
             item=ready(owner,name,timeout=240)
@@ -188,6 +189,7 @@ def test_genuine_four_language_handwriting_publication_and_permission_masks(real
         result_path=tmp_path/'genuine-handwriting-results.json'
         result_path.write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
         admin.reload()
+        navigate(admin,'administration')
         card=admin.locator('article').filter(has=admin.locator('form[data-account="u8-genuine-handwriting@owned.test"]'))
         card.locator('summary').click()
         policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
@@ -195,6 +197,7 @@ def test_genuine_four_language_handwriting_publication_and_permission_masks(real
         expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
         for language,content,forbidden in samples:
             name=f'forbidden-{language}.pdf'
+            navigate(owner,'library')
             owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/pdf','buffer':content})
             owner.get_by_role('button',name='Загрузить документы',exact=True).click()
             item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))

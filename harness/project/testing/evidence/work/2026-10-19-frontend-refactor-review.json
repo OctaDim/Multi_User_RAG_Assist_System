@@ -1,0 +1,629 @@
+{
+  "status": "complete",
+  "verdict": "Not ready",
+  "scope": {
+    "base": "9f3d77cbd4ea4710f918be41679b5ffc0ed45dad",
+    "branch": "octadim/front-site-refactor",
+    "head_sha": "36c2c4a7029ccd8e450fb974b5f42b76759777af",
+    "pr_url": null,
+    "files_changed": 46,
+    "snapshot": "Original full.diff against base, including dispatch committed and tracked working-tree changes; subsequent caller repairs excluded."
+  },
+  "intent": "Fully refactor the existing corporate RAG frontend into a central conversation with evidence opened alongside, separate document and role-appropriate administration areas, and complete actions with durable draft/edit context and local feedback. Empty source selection must search a frozen admission snapshot of all ready accessible own documents; explicit selection must remain strict, retaining existing replay, owner and lifecycle guarantees.",
+  "intent_confidence": "explicit",
+  "reviewers": [
+    "correctness",
+    "project-standards",
+    "testing",
+    "maintainability",
+    "security",
+    "performance",
+    "api-contract",
+    "reliability",
+    "adversarial",
+    "julik-frontend-races"
+  ],
+  "findings": [
+    {
+      "#": 5,
+      "title": "Complete the planned protection of unsaved document corrections",
+      "severity": "P1",
+      "file": "frontend/src/documents.js",
+      "line": 60,
+      "confidence": 100,
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "pre_existing": false,
+      "suggested_fix": "Complete R16 within U4: keep dirty text when a refreshed document disappears, mark the source unavailable and disable saving until explicit discard; bind delayed PDF-mode completions to their originating editor so replacement edits survive. Cover both paths in the browser, then finish U6 acceptance against the final source.",
+      "first_evidence": "frontend/src/documents.js:60: if(!file){this.releaseView();return;}",
+      "why_it_matters": "The explicit plan promises protection of unsaved corrections during status refresh and editor transitions. The frozen implementation adds confirmation for ordinary closes, but still destroys a dirty editor when its document disappears and lets a delayed PDF-mode completion destroy a replacement editor. Those losses existed at the base, so original regression claims #3/#4 are rejected; their continued presence nevertheless leaves the newly agreed R16/U4 deliverable incomplete. No intentional omission is recorded. This is a plan-completeness obligation, not a claim that the refactor introduced those losses.",
+      "evidence": [
+        "harness/project/docs/plans/2026-10-18-2335-refactor-frontend-usability-plan.md:88 requires status refresh or leaving the editor to preserve unsaved corrections or obtain the user's explicit choice.",
+        "harness/project/docs/plans/2026-10-18-2335-refactor-frontend-usability-plan.md:332-354 makes durable editor state and refresh/leave protection part of U4; :377-396 requires whole-application acceptance with every unfinished item explicit.",
+        "Frozen frontend/src/documents.js:60 calls releaseView() when the current document is absent; :24-26 clears the editor and its textarea DOM without allowLeave().",
+        "Frozen frontend/src/documents.js:169-171 confirms before the mode POST, then unconditionally releases the current editor after its response; it does not verify that the original editor remains current.",
+        "Verified provenance: 9f3d77c frontend/src/app.js:206, :224, :100-103 and :94-97 already permitted these losses. This refutes introduction, not the explicit R16 completion obligation.",
+        "finish-input.json records a failed external-delete dirty-editor browser reproduction against the frozen source; caller repairs and later tests are outside this receipt."
+      ],
+      "reviewers": [
+        "requirements-completeness"
+      ],
+      "independent_reviewers": [],
+      "plan_requirement_ids": [
+        "R16"
+      ],
+      "implementation_unit_ids": [
+        "U4",
+        "U6"
+      ],
+      "finding_type": "plan-completeness"
+    },
+    {
+      "#": 1,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "frontend/src/documents.js:105:     if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+        "frontend/src/documents.js:103-104 captures the opening counter, owner and credential before awaiting the document GET; frontend/src/documents.js:175 unconditionally calls $('document-editor').showModal() after the guard.",
+        "frontend/src/navigation.js:29-38 changes the selected section and hides the library without invalidating Documents.opening. Its navigation buttons remain usable while the document GET is pending.",
+        "Plan R23 requires late results not to replace the selected section, document or owner. The existing browser stale-read case switches to another document and exercises only the opening counter, not section navigation.",
+        "Trigger: click Open document while its GET is delayed, then click the Conversations navigation button and type a question before releasing the GET.",
+        "frontend/src/navigation.js:29-38 changes the visible section but never changes Documents.opening or informs the document controller that the user left the library. Owner and credential remain identical.",
+        "The delayed response therefore passes line 105 and reaches frontend/src/documents.js:175, view.append(form);$('document-editor').showModal();, opening a modal over chat despite the subsequent navigation.",
+        "The newly added test_late_document_open_cannot_interrupt_chat in backend/tests/browser/test_documents.py describes this exact sequence; this review did not execute native/browser tests.",
+        "frontend/src/documents.js:104-105: const value=await api(`/documents/${file.id}`); if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+        "frontend/src/documents.js:175: view.append(form);$('document-editor').showModal();",
+        "frontend/src/navigation.js:33: $('knowledge-workspace').hidden=section!=='workspace';$('library').hidden=section!=='library';$('administration').hidden=section!=='administration';",
+        "Root validation receipt in finish-input.json: test_late_document_open_cannot_interrupt_chat failed against the frozen production source; merge inspected that test and the cited source."
+      ],
+      "file": "frontend/src/documents.js",
+      "first_evidence": "frontend/src/documents.js:105:     if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+      "independent_reviewers": [
+        "julik-frontend-races",
+        "correctness",
+        "adversarial"
+      ],
+      "line": 105,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races",
+        "correctness",
+        "adversarial"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Invalidate pending document-open generations when navigation leaves the library, and check that the library remains active before installing the response and opening the dialog. Retain the existing owner/session/generation guards.",
+      "title": "Cancel pending document opens when leaving the library",
+      "why_it_matters": "Click Open document while its GET is delayed, then switch to Conversations or Administration. Navigation changes the visible section but leaves this.opening, owner and credential unchanged, so the delayed result passes this guard and opens the document modal over the newly chosen section. The result takes focus and blocks the user's current work, violating the explicit requirement that late reads preserve the selected section.",
+      "plan_requirement_ids": [
+        "R23"
+      ],
+      "protected_subject": "concurrency",
+      "validation_status": "confirmed",
+      "validation_reason": "With a document GET pending, navigating to chat leaves owner, token and opening unchanged (navigation.js:29-38), so the new documents.js:105 guard accepts the response and :175 opens its modal over chat; test_late_document_open_cannot_interrupt_chat exercises this reachable ordering, and this confirmation is code-only with incidence not independently measured."
+    },
+    {
+      "#": 2,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "frontend/src/documents.js:155:       if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+        "frontend/src/documents.js:145 initializes every opened editor with awaitingPublication:false; frontend/src/documents.js:61-67 only reopens a newly published revision or restores failed processing when current.awaitingPublication is true.",
+        "backend/app/documents.py:217-222 read_view accepts any ready document and reads its published revision without rejecting queued/processing state. backend/app/documents.py:344-347 queues corrections without clearing Document.ready, allowing this reopen path.",
+        "frontend/src/documents.js:116 wires Check processing to refresh(), which updates the document list but has no transition for this disabled editor.",
+        "Trigger: save corrections, close the accepted editor, and reopen that document while the document worker is still processing. backend/app/documents.py:217-222 reads the currently published pages, so the reopened view contains the old text.",
+        "frontend/src/documents.js:145 initializes every opened editor with awaitingPublication:false. Line 155 disables its save button and textareas for the pending worker state but does not register it as awaiting publication.",
+        "After the worker publishes the new revision, Check processing calls refresh(), whose publication-reload branch at frontend/src/documents.js:61-67 is conditional on current.awaitingPublication. This editor never enters the branch, retaining both the old pages and disabled controls indefinitely.",
+        "The newly added test_open_during_correction_becomes_editable_after_publication in backend/tests/browser/test_documents.py describes this exact sequence; this review did not execute native/browser tests.",
+        "frontend/src/documents.js:145: const editor={file,readonly,revision:value.document.published_revision,form,initial,dirty:false,awaitingPublication:false};this.editor=editor;",
+        "frontend/src/documents.js:155: if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+        "frontend/src/documents.js:61-62: if(current.awaitingPublication) { if(file.state==='ready'&&file.published_revision!==current.revision)await this.open(file,current.readonly,true);",
+        "Root validation receipt in finish-input.json: test_open_during_correction_becomes_editable_after_publication failed against the frozen production source; merge inspected that test and the cited source."
+      ],
+      "file": "frontend/src/documents.js",
+      "first_evidence": "frontend/src/documents.js:155:       if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+      "independent_reviewers": [
+        "julik-frontend-races",
+        "adversarial",
+        "correctness"
+      ],
+      "line": 155,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races",
+        "adversarial",
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Track editors opened during queued/processing independently from accepted correction buffers. When refresh observes ready/failed for that readonly pending view, reopen the current document at its published revision, restoring editing on completion while retaining existing generation and dirty-buffer guards.",
+      "title": "Reload reopened editors after pending publication completes",
+      "why_it_matters": "After submitting a correction, close and reopen the document before indexing finishes, or open the old published revision while full PDF reprocessing runs. The document remains ready and is openable, but this branch disables saving and makes every textarea read-only. That new editor has awaitingPublication=false, so Check processing never enters refresh's publication reconciliation branch. After processing succeeds, the dialog continues to show the old text and permanently disabled editing despite explicitly instructing the user to check processing; closing and reopening is required to recover.",
+      "plan_requirement_ids": [
+        "R14",
+        "R15",
+        "R22"
+      ],
+      "protected_subject": "concurrency",
+      "validation_status": "confirmed",
+      "validation_reason": "Reopening a ready document during queued corrections is permitted by backend/app/documents.py:217-222 and :344-347, but new documents.js:145 and :155 create a disabled editor with awaitingPublication=false that refresh():61-67 never reconciles after publication; test_open_during_correction_becomes_editable_after_publication exercises this ordering, and this confirmation is code-only with incidence not independently measured."
+    }
+  ],
+  "actionable_findings": [
+    {
+      "#": 5,
+      "title": "Complete the planned protection of unsaved document corrections",
+      "severity": "P1",
+      "file": "frontend/src/documents.js",
+      "line": 60,
+      "confidence": 100,
+      "autofix_class": "manual",
+      "owner": "downstream-resolver",
+      "requires_verification": true,
+      "pre_existing": false,
+      "suggested_fix": "Complete R16 within U4: keep dirty text when a refreshed document disappears, mark the source unavailable and disable saving until explicit discard; bind delayed PDF-mode completions to their originating editor so replacement edits survive. Cover both paths in the browser, then finish U6 acceptance against the final source.",
+      "first_evidence": "frontend/src/documents.js:60: if(!file){this.releaseView();return;}",
+      "why_it_matters": "The explicit plan promises protection of unsaved corrections during status refresh and editor transitions. The frozen implementation adds confirmation for ordinary closes, but still destroys a dirty editor when its document disappears and lets a delayed PDF-mode completion destroy a replacement editor. Those losses existed at the base, so original regression claims #3/#4 are rejected; their continued presence nevertheless leaves the newly agreed R16/U4 deliverable incomplete. No intentional omission is recorded. This is a plan-completeness obligation, not a claim that the refactor introduced those losses.",
+      "evidence": [
+        "harness/project/docs/plans/2026-10-18-2335-refactor-frontend-usability-plan.md:88 requires status refresh or leaving the editor to preserve unsaved corrections or obtain the user's explicit choice.",
+        "harness/project/docs/plans/2026-10-18-2335-refactor-frontend-usability-plan.md:332-354 makes durable editor state and refresh/leave protection part of U4; :377-396 requires whole-application acceptance with every unfinished item explicit.",
+        "Frozen frontend/src/documents.js:60 calls releaseView() when the current document is absent; :24-26 clears the editor and its textarea DOM without allowLeave().",
+        "Frozen frontend/src/documents.js:169-171 confirms before the mode POST, then unconditionally releases the current editor after its response; it does not verify that the original editor remains current.",
+        "Verified provenance: 9f3d77c frontend/src/app.js:206, :224, :100-103 and :94-97 already permitted these losses. This refutes introduction, not the explicit R16 completion obligation.",
+        "finish-input.json records a failed external-delete dirty-editor browser reproduction against the frozen source; caller repairs and later tests are outside this receipt."
+      ],
+      "reviewers": [
+        "requirements-completeness"
+      ],
+      "independent_reviewers": [],
+      "plan_requirement_ids": [
+        "R16"
+      ],
+      "implementation_unit_ids": [
+        "U4",
+        "U6"
+      ],
+      "finding_type": "plan-completeness"
+    },
+    {
+      "#": 1,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "frontend/src/documents.js:105:     if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+        "frontend/src/documents.js:103-104 captures the opening counter, owner and credential before awaiting the document GET; frontend/src/documents.js:175 unconditionally calls $('document-editor').showModal() after the guard.",
+        "frontend/src/navigation.js:29-38 changes the selected section and hides the library without invalidating Documents.opening. Its navigation buttons remain usable while the document GET is pending.",
+        "Plan R23 requires late results not to replace the selected section, document or owner. The existing browser stale-read case switches to another document and exercises only the opening counter, not section navigation.",
+        "Trigger: click Open document while its GET is delayed, then click the Conversations navigation button and type a question before releasing the GET.",
+        "frontend/src/navigation.js:29-38 changes the visible section but never changes Documents.opening or informs the document controller that the user left the library. Owner and credential remain identical.",
+        "The delayed response therefore passes line 105 and reaches frontend/src/documents.js:175, view.append(form);$('document-editor').showModal();, opening a modal over chat despite the subsequent navigation.",
+        "The newly added test_late_document_open_cannot_interrupt_chat in backend/tests/browser/test_documents.py describes this exact sequence; this review did not execute native/browser tests.",
+        "frontend/src/documents.js:104-105: const value=await api(`/documents/${file.id}`); if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+        "frontend/src/documents.js:175: view.append(form);$('document-editor').showModal();",
+        "frontend/src/navigation.js:33: $('knowledge-workspace').hidden=section!=='workspace';$('library').hidden=section!=='library';$('administration').hidden=section!=='administration';",
+        "Root validation receipt in finish-input.json: test_late_document_open_cannot_interrupt_chat failed against the frozen production source; merge inspected that test and the cited source."
+      ],
+      "file": "frontend/src/documents.js",
+      "first_evidence": "frontend/src/documents.js:105:     if(opening!==this.opening||owner!==this.owner||credential!==token())return;",
+      "independent_reviewers": [
+        "julik-frontend-races",
+        "correctness",
+        "adversarial"
+      ],
+      "line": 105,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races",
+        "correctness",
+        "adversarial"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Invalidate pending document-open generations when navigation leaves the library, and check that the library remains active before installing the response and opening the dialog. Retain the existing owner/session/generation guards.",
+      "title": "Cancel pending document opens when leaving the library",
+      "why_it_matters": "Click Open document while its GET is delayed, then switch to Conversations or Administration. Navigation changes the visible section but leaves this.opening, owner and credential unchanged, so the delayed result passes this guard and opens the document modal over the newly chosen section. The result takes focus and blocks the user's current work, violating the explicit requirement that late reads preserve the selected section.",
+      "plan_requirement_ids": [
+        "R23"
+      ],
+      "protected_subject": "concurrency",
+      "validation_status": "confirmed",
+      "validation_reason": "With a document GET pending, navigating to chat leaves owner, token and opening unchanged (navigation.js:29-38), so the new documents.js:105 guard accepts the response and :175 opens its modal over chat; test_late_document_open_cannot_interrupt_chat exercises this reachable ordering, and this confirmation is code-only with incidence not independently measured."
+    },
+    {
+      "#": 2,
+      "autofix_class": "manual",
+      "confidence": 100,
+      "evidence": [
+        "frontend/src/documents.js:155:       if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+        "frontend/src/documents.js:145 initializes every opened editor with awaitingPublication:false; frontend/src/documents.js:61-67 only reopens a newly published revision or restores failed processing when current.awaitingPublication is true.",
+        "backend/app/documents.py:217-222 read_view accepts any ready document and reads its published revision without rejecting queued/processing state. backend/app/documents.py:344-347 queues corrections without clearing Document.ready, allowing this reopen path.",
+        "frontend/src/documents.js:116 wires Check processing to refresh(), which updates the document list but has no transition for this disabled editor.",
+        "Trigger: save corrections, close the accepted editor, and reopen that document while the document worker is still processing. backend/app/documents.py:217-222 reads the currently published pages, so the reopened view contains the old text.",
+        "frontend/src/documents.js:145 initializes every opened editor with awaitingPublication:false. Line 155 disables its save button and textareas for the pending worker state but does not register it as awaiting publication.",
+        "After the worker publishes the new revision, Check processing calls refresh(), whose publication-reload branch at frontend/src/documents.js:61-67 is conditional on current.awaitingPublication. This editor never enters the branch, retaining both the old pages and disabled controls indefinitely.",
+        "The newly added test_open_during_correction_becomes_editable_after_publication in backend/tests/browser/test_documents.py describes this exact sequence; this review did not execute native/browser tests.",
+        "frontend/src/documents.js:145: const editor={file,readonly,revision:value.document.published_revision,form,initial,dirty:false,awaitingPublication:false};this.editor=editor;",
+        "frontend/src/documents.js:155: if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+        "frontend/src/documents.js:61-62: if(current.awaitingPublication) { if(file.state==='ready'&&file.published_revision!==current.revision)await this.open(file,current.readonly,true);",
+        "Root validation receipt in finish-input.json: test_open_during_correction_becomes_editable_after_publication failed against the frozen production source; merge inspected that test and the cited source."
+      ],
+      "file": "frontend/src/documents.js",
+      "first_evidence": "frontend/src/documents.js:155:       if(['queued','processing'].includes(value.document.state)){save.disabled=true;form.querySelectorAll('textarea').forEach(input=>{input.readOnly=true;});form.append(textElement('p','Новая ревизия обрабатывается. Для проверки нажмите «Проверить обработку».'));}",
+      "independent_reviewers": [
+        "julik-frontend-races",
+        "adversarial",
+        "correctness"
+      ],
+      "line": 155,
+      "owner": "downstream-resolver",
+      "pre_existing": false,
+      "requires_verification": true,
+      "reviewers": [
+        "julik-frontend-races",
+        "adversarial",
+        "correctness"
+      ],
+      "severity": "P2",
+      "suggested_fix": "Track editors opened during queued/processing independently from accepted correction buffers. When refresh observes ready/failed for that readonly pending view, reopen the current document at its published revision, restoring editing on completion while retaining existing generation and dirty-buffer guards.",
+      "title": "Reload reopened editors after pending publication completes",
+      "why_it_matters": "After submitting a correction, close and reopen the document before indexing finishes, or open the old published revision while full PDF reprocessing runs. The document remains ready and is openable, but this branch disables saving and makes every textarea read-only. That new editor has awaitingPublication=false, so Check processing never enters refresh's publication reconciliation branch. After processing succeeds, the dialog continues to show the old text and permanently disabled editing despite explicitly instructing the user to check processing; closing and reopening is required to recover.",
+      "plan_requirement_ids": [
+        "R14",
+        "R15",
+        "R22"
+      ],
+      "protected_subject": "concurrency",
+      "validation_status": "confirmed",
+      "validation_reason": "Reopening a ready document during queued corrections is permitted by backend/app/documents.py:217-222 and :344-347, but new documents.js:145 and :155 create a disabled editor with awaitingPublication=false that refresh():61-67 never reconciles after publication; test_open_during_correction_becomes_editable_after_publication exercises this ordering, and this confirmation is code-only with incidence not independently measured."
+    }
+  ],
+  "triage_groups": [],
+  "pre_existing_findings": [],
+  "requirements_completeness": {
+    "plan": "harness/project/docs/plans/2026-10-18-2335-refactor-frontend-usability-plan.md",
+    "source": "explicit",
+    "requirements": [
+      {
+        "id": "R1",
+        "status": "met",
+        "evidence": "frontend/index.html and navigation.js implement central chat with a nearby conversation picker and separate library/administration."
+      },
+      {
+        "id": "R2",
+        "status": "met",
+        "evidence": "navigation.js and conversations.js provide on-demand selected-answer evidence, its empty state and narrow-screen return; browser workspace/conversation cases are present."
+      },
+      {
+        "id": "R3",
+        "status": "met",
+        "evidence": "styles.css, ui.js and the extracted controllers establish shared hierarchy, forms, status and action styles."
+      },
+      {
+        "id": "R4",
+        "status": "partially addressed",
+        "evidence": "Loading, empty, failure and retry paths are implemented; the reopened-processing editor lacks its completion transition (#2)."
+      },
+      {
+        "id": "R5",
+        "status": "met",
+        "evidence": "frontend/index.html uses the requested product name in title, brand and heading."
+      },
+      {
+        "id": "R6",
+        "status": "met",
+        "evidence": "app.js preserves registration, invitation, verification, sign-in and sign-out; real account browser evidence is recorded."
+      },
+      {
+        "id": "R7",
+        "status": "met",
+        "evidence": "Conversation navigation, creation and content-derived labels appear in conversations.js and index.html."
+      },
+      {
+        "id": "R8",
+        "status": "met",
+        "evidence": "drafts.js persists source scope with owner/conversation/tab context and preserves it across section changes."
+      },
+      {
+        "id": "R9",
+        "status": "met",
+        "evidence": "Existing draft/ACK/tab/session lifecycle is retained and extended by reducer and real lifecycle scenarios."
+      },
+      {
+        "id": "R10",
+        "status": "met",
+        "evidence": "conversations.js renderComposer explains connection, pending admission, busy request and unavailable-source conditions while retaining text."
+      },
+      {
+        "id": "R11",
+        "status": "met",
+        "evidence": "conversations.js distinguishes request states and restores stop after transient failure; stop503 and terminal-before-late-POST scenarios are recorded."
+      },
+      {
+        "id": "R12",
+        "status": "met",
+        "evidence": "Selected-answer evidence renders early fragments, saved citations and changed/deleted source flags."
+      },
+      {
+        "id": "R13",
+        "status": "met",
+        "evidence": "Pending operation body/key and SSE/ACK reconciliation preserve the operation without automatic fresh generation."
+      },
+      {
+        "id": "R14",
+        "status": "partially addressed",
+        "evidence": "All document operations have corresponding UI; reopening during processing leaves stale disabled editing after completion (#2)."
+      },
+      {
+        "id": "R15",
+        "status": "partially addressed",
+        "evidence": "List states and actions are distinct, but a reopened pending editor never reconciles ready/failed processing (#2)."
+      },
+      {
+        "id": "R16",
+        "status": "partially addressed",
+        "evidence": "Ordinary leave/refresh guards exist; disappeared-file refresh and delayed mode responses still bypass dirty-buffer protection (#5)."
+      },
+      {
+        "id": "R17",
+        "status": "met",
+        "evidence": "documents.js confirms deletion with filename and search/history consequences, with a separate dirty-edit choice."
+      },
+      {
+        "id": "R18",
+        "status": "met",
+        "evidence": "administration.js and navigation.js provide a separate role-filtered management section while server authorization remains in force."
+      },
+      {
+        "id": "R19",
+        "status": "met",
+        "evidence": "documents.js keeps foreign owner/read-only context and a return action independent from own-library question scope."
+      },
+      {
+        "id": "R20",
+        "status": "met",
+        "evidence": "administration.js retains preview, immutable fields and saved/applied revision distinction; real-role/settings scenario is recorded."
+      },
+      {
+        "id": "R21",
+        "status": "met",
+        "evidence": "ui.js feedback and operation-specific controls show local busy, result and error messages."
+      },
+      {
+        "id": "R22",
+        "status": "partially addressed",
+        "evidence": "Finite API deadlines, upload uncertainty recovery and stop retry are implemented; reopened processing leaves unexplained permanent editor disablement (#2)."
+      },
+      {
+        "id": "R23",
+        "status": "partially addressed",
+        "evidence": "Session/read/editor generations protect many paths; late document GET can still interrupt the selected section (#1), and R16 mode completion remains incomplete (#5)."
+      },
+      {
+        "id": "R24",
+        "status": "met",
+        "evidence": "Visible focus, semantic navigation, native dialogs and focus restoration have corresponding implementation and keyboard scenarios; whole acceptance remains open."
+      },
+      {
+        "id": "R25",
+        "status": "met",
+        "evidence": "Responsive CSS and workspace checks cover 375/768/1440 widths; complete final-section visual acceptance remains part of U6."
+      },
+      {
+        "id": "R26",
+        "status": "met",
+        "evidence": "Text uses textContent/text nodes; admission, source queries and existing server guards retain owner and session boundaries."
+      },
+      {
+        "id": "R27",
+        "status": "met",
+        "evidence": "Existing Python launcher and TOML configuration remain, with allowlisted timeout injection and recorded ordinary HTTP/module startup evidence."
+      },
+      {
+        "id": "R28",
+        "status": "met",
+        "evidence": "answers.py resolves empty selection to ready_document_ids inside admission and persists the explicit scope."
+      },
+      {
+        "id": "R29",
+        "status": "met",
+        "evidence": "Explicit selection stays strict; owner/availability checks and retrieval use persisted scope without all-library fallback."
+      },
+      {
+        "id": "R30",
+        "status": "met",
+        "evidence": "UI distinguishes all/selected, admission emits mode/selection metadata, and RAG preserves effective/available/passed sources in the passport."
+      }
+    ],
+    "implementation_units": [
+      {
+        "id": "U1",
+        "status": "met",
+        "evidence": "Admission/sources/RAG and their tests implement frozen optional scope and passport metadata; recorded focused run: 56 passed."
+      },
+      {
+        "id": "U2",
+        "status": "met",
+        "evidence": "Shell/auth/navigation/shared operations and launcher/public policy tests are implemented; recorded account/workspace/launcher run: 33 passed."
+      },
+      {
+        "id": "U3",
+        "status": "met",
+        "evidence": "Central conversation, selected-answer evidence, durable draft scope and stop/recovery scenarios are implemented; recorded real lifecycle and targeted tests pass."
+      },
+      {
+        "id": "U4",
+        "status": "partially addressed",
+        "evidence": "Library/editor/controller and real document scenarios are implemented; #1/#2/#5 leave navigation, publication recovery and R16 incomplete."
+      },
+      {
+        "id": "U5",
+        "status": "met",
+        "evidence": "Accounts, policy and global settings controller and controlled-failure/real-role coverage are present."
+      },
+      {
+        "id": "U6",
+        "status": "partially addressed",
+        "evidence": "Acceptance tests, implementation evidence and ordinary startup work appear; frozen source still has #1/#2/#5, and full-suite/final visual acceptance was in progress at dispatch. No full-green claim is supported."
+      }
+    ],
+    "unrequested_behavior_rules": [],
+    "blocking_omissions": [
+      5
+    ]
+  },
+  "learnings": [],
+  "agent_native_gaps": [],
+  "deployment_notes": [],
+  "residual_risks": [],
+  "testing_gaps": [
+    "frontend/src/documents.js:63-65 restores retained accepted-correction text after indexing failure, but backend/tests/browser/test_documents.py does not drive that post-admission failure transition; add a controlled worker-failure test that preserves text, restores editing, and permits a deliberate subsequent correction.",
+    "frontend/src/documents.js:128 starts PDF page-image requests without awaiting previous pages; backend/app/api/documents.py:103 rasterizes each page. A long admitted PDF preview is not covered by the browser tests, so concurrency and interaction with request deadlines remain unmeasured; no confirmed performance defect or impact threshold is asserted."
+  ],
+  "coverage": {
+    "depth": "full",
+    "reviewer_justifications": [
+      {
+        "reviewer": "correctness",
+        "tier": "session",
+        "reason": "always-on"
+      },
+      {
+        "reviewer": "project-standards",
+        "tier": "mid-tier",
+        "reason": "root instruction-file criteria fallback"
+      },
+      {
+        "reviewer": "testing",
+        "tier": "mid-tier",
+        "reason": "changed test proofs and state transitions"
+      },
+      {
+        "reviewer": "maintainability",
+        "tier": "mid-tier",
+        "reason": "structural frontend refactor"
+      },
+      {
+        "reviewer": "security",
+        "tier": "session",
+        "reason": "auth, user text, owner and session boundaries"
+      },
+      {
+        "reviewer": "performance",
+        "tier": "mid-tier",
+        "reason": "admission query and UI render loops"
+      },
+      {
+        "reviewer": "api-contract",
+        "tier": "mid-tier",
+        "reason": "empty-source semantics and passport/event metadata"
+      },
+      {
+        "reviewer": "reliability",
+        "tier": "mid-tier",
+        "reason": "timeout and stop/retry control"
+      },
+      {
+        "reviewer": "adversarial",
+        "tier": "session",
+        "reason": "persistence and async ordering"
+      },
+      {
+        "reviewer": "julik-frontend-races",
+        "tier": "mid-tier",
+        "reason": "DOM and async frontend state races"
+      }
+    ],
+    "compound_packs": {
+      "roots": [],
+      "warnings": [],
+      "errors": []
+    },
+    "suppressed_by_confidence": {},
+    "first_evidence_backfilled": 0,
+    "quote_missing_demotions": 0,
+    "mode_aware_demotions": 0,
+    "settlement_suppressions": 0,
+    "validator": {
+      "outcome": "verdicts",
+      "batches": 1,
+      "confirmed": 2,
+      "rejected": 2,
+      "unresolved": 0,
+      "malformed": 0,
+      "failed": 0,
+      "shortcut_skipped": 0,
+      "bound_exceeded": false,
+      "verdicts": [
+        {
+          "#": 1,
+          "status": "confirmed",
+          "protected_subject": "concurrency",
+          "reason": "With a document GET pending, navigating to chat leaves owner, token and opening unchanged (navigation.js:29-38), so the new documents.js:105 guard accepts the response and :175 opens its modal over chat; test_late_document_open_cannot_interrupt_chat exercises this reachable ordering, and this confirmation is code-only with incidence not independently measured."
+        },
+        {
+          "#": 2,
+          "status": "confirmed",
+          "protected_subject": "concurrency",
+          "reason": "Reopening a ready document during queued corrections is permitted by backend/app/documents.py:217-222 and :344-347, but new documents.js:145 and :155 create a disabled editor with awaitingPublication=false that refresh():61-67 never reconciles after publication; test_open_during_correction_becomes_editable_after_publication exercises this ordering, and this confirmation is code-only with incidence not independently measured."
+        },
+        {
+          "#": 3,
+          "status": "rejected",
+          "protected_subject": "data-loss",
+          "reason": "The alleged delayed-mode ordering can destroy replacement edits in current documents.js:171, but it already did so at base 9f3d77c frontend/src/app.js:206 via showLibrary():100-103 and clearDocumentView():94-97, while :118-122 allowed opening B during A's pending POST; the supplied claim does not establish a newly introduced or exposed loss."
+        },
+        {
+          "#": 4,
+          "status": "rejected",
+          "protected_subject": "data-loss",
+          "reason": "Deleting the edited file elsewhere and refreshing can erase dirty text at documents.js:60, but the same trigger already erased it at base 9f3d77c frontend/src/app.js:224 through showLibrary():100-103 and clearDocumentView():94-97, so the supplied loss is pre-existing despite remaining contrary to the refactor's R16 requirement."
+        }
+      ],
+      "protected_subjects": {
+        "1": "concurrency",
+        "2": "concurrency",
+        "3": "data-loss",
+        "4": "data-loss"
+      },
+      "protected_rejections_verified": [
+        3,
+        4
+      ],
+      "protected_reclassifications": []
+    },
+    "failed_reviewers": [],
+    "timed_out_reviewers": [],
+    "notes": [
+      "Full base-to-workingtree review includes committed, staged and unstaged tracked files.",
+      "Standards use root CLAUDE.md and AGENTS.md instruction-file fallback; no CODING_STANDARDS.md applies.",
+      "Excluded untracked unrelated user docs: harness/project/docs/2026-10-15-database-options-history.md and harness/project/docs/2026-10-15-project-overview.md.",
+      "No configured lint/typecheck tooling in this frontend; root runs native JS syntax and application/browser suites.",
+      "Root validation receipts during review: real browser delayed-open and reopened-processing editor reproductions both failed (2 failed,48.29s); external-delete dirty-editor reproduction failed; ambiguous admitted-upload timeout coverage passed (1 failed,1 passed,26.61s combined externaldelete/upload batch). Upload response withheld after real admission proves inventory recovery and unchanged-files duplicate retry blocked. Added tests are backend/tests/browser/test_documents.py; source production remains frozen. Full suite still in progress; no full-suite-green claim.",
+      "The first report leaf failed with Selected model is at capacity after reviewer, merge and validator completion. This report-only retry consumes the same frozen diff and validated artifacts; subsequent caller fixes and tests are outside this receipt.",
+      "cross-model pass: not run (required acpx CLI is neither installed nor cached; installation is prohibited without separate approval); adversarial lens covered by the in-process fallback.",
+      "Stage 5 inspected all 10 available per-reviewer artifacts; no malformed returns or findings, no pre-existing findings, and no quote/confidence suppressions.",
+      "Semantic reconciliation merged three reports of delayed document-open navigation and three reports of reopened processing editors into two findings; conservative manual routing was retained for both. Shared-model agreement did not promote confidence.",
+      "The testing request for admitted-upload timeout recovery was discarded because backend/tests/browser/test_documents.py:280 now covers real admission, withheld confirmation, recovered inventory, blocked unchanged-selection retry, and intentional reselection; finish-input.json records its passing execution. This obsolete claim was not moved to a soft bucket.",
+      "first_evidence_backfilled: 0; quote-the-line demotions for missing first_evidence: 0; mode-aware demotions: 0; settled-decision preference suppressions: 0.",
+      "Validation shortcut-skipped: 0. No adversarial-<provider> artifact with independence_verified:true exists, so all four remaining actionable P2 findings are selected for one deterministic validator batch. Validation verdicts have not yet been consumed by the merge stage.",
+      "No scoped-rule, settlement, protected-artifact cleanup, or direct-dependency reclassification was required.",
+      "The prior Stage 5 note that validator verdicts were not yet consumed is historical: this receipt consumes the existing completed batch, with two confirmations and two provenance-backed rejections.",
+      "Report inspected original full.diff reconstructed over base 9f3d77c; it did not inspect caller-repaired source as the reviewed version. No code was changed or fix verified by this report.",
+      "Original #3/#4 are dropped as introduced-defect claims after confirming the cited short-hash provenance. They are not recycled as residual risks or testing gaps. Separate #5 records the explicit plan's still-incomplete R16 deliverable.",
+      "Requirements completeness checks corresponding work in the frozen diff, not independent proof that every acceptance scenario passed. R4/R14/R15/R22/R23 partial status is linked to existing findings, without raising their severity. No additional unrequested user-visible behavior rule was established by the reverse check.",
+      "Stage 6 plan-completeness #5 was checked against the frozen plan/source and verified base provenance; it was not part of the earlier four-finding validator batch. Reviewers, merge and validator were not rerun.",
+      "First report attempt ended with model-capacity failure before any report stage timing was logged. Only the authorized second attempt is timed."
+    ]
+  },
+  "peer": {
+    "outcome": "in-process-fallback",
+    "coverage": "cross-model pass: not run (required acpx CLI is neither installed nor cached; installation is prohibited without separate approval); adversarial lens covered by the in-process fallback."
+  },
+  "verdict_reason": "The frozen snapshot is not ready: explicit R16/U4 work remains incomplete (#5), U6 acceptance remains open, and confirmed document navigation/publication defects #1/#2 remain. Fix dirty-buffer protection first, then stale navigation and publication reconciliation, and complete acceptance. Caller repairs and later results are outside this receipt.",
+  "artifact_path": "/tmp/compound-engineering-1000/ce-code-review/20261019-004909-de28b8cb",
+  "run_id": "20261019-004909-de28b8cb"
+}

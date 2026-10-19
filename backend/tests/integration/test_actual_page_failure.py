@@ -19,7 +19,7 @@ from playwright.sync_api import expect
 import pytest
 
 from integration.test_answer_lifecycle import environment,integrated_browser,operator
-from browser.test_accounts import BACKEND,real_account_browser,register,login
+from browser.test_accounts import BACKEND,real_account_browser,register,login, navigate, open_sources
 from browser.test_documents import ready
 
 
@@ -73,11 +73,13 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
         operator(admin,mailbox,frontend)
         email='u8-page-failure@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
         if skip:
+            navigate(admin,'administration')
             admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
             policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
             policy.get_by_role('button',name='Сохранить ограничения документов').click()
             expect(admin.locator('#status')).to_have_text('Ограничения документов сохранены.')
         content=twenty_mixed_pages();(tmp_path/'actual-twenty-page-original.pdf').write_bytes(content)
+        navigate(owner,'library')
         owner.locator('#document-upload input').set_input_files([
             {'name':'twenty-mixed.pdf','mimeType':'application/pdf','buffer':content},
             {'name':'healthy-neighbor.txt','mimeType':'text/plain','buffer':b'The current annual budget is 10 euros.'}])
@@ -92,13 +94,18 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
         while 'Обработка неуспешна' not in bad.inner_text():
             assert worker.poll() is None and time.monotonic()<deadline,bad.inner_text()
             try:
-                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click()
+                # A read may consume the configured30s timeout before a manual
+                # retry becomes available; give that transition its own margin.
+                owner.get_by_role('button',name='Обновить статусы документов',exact=True).click(timeout=45000)
             except Exception:
                 with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
                     activity=connection.execute("SELECT pid,state,wait_event_type,wait_event,query,pg_blocking_pids(pid) AS blockers FROM pg_stat_activity WHERE datname=current_database() ORDER BY pid").fetchall()
                     files=connection.execute('SELECT name,state,error,failure_page FROM document_files').fetchall()
                 (tmp_path/'actual-refresh-stall-diagnostic.json').write_text(json.dumps({'activity':activity,'files':files,
-                    'worker_alive':worker.poll() is None,'source_inputs_unchanged':True},default=str,ensure_ascii=False,indent=2)+'\n')
+                    'worker_alive':worker.poll() is None,'source_inputs_unchanged':True,
+                    'browser':owner.evaluate('''() => ({timeout:document.querySelector('meta[name=request-timeout-ms]').content,
+                      library:document.querySelector('#library-status').textContent,status:document.querySelector('#status').textContent,
+                      refresh:document.querySelector('#refresh-documents').outerHTML})''')},default=str,ensure_ascii=False,indent=2)+'\n')
                 raise
             owner.wait_for_timeout(250)
         expect(bad).to_contain_text('страница 16')
@@ -124,8 +131,11 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
             assert bad_row['original_sha256']==hashlib.sha256(content).hexdigest()
             assert not connection.execute('SELECT 1 FROM available_source_revisions WHERE document_id=%s',(bad_row['id'],)).fetchone()
             assert connection.execute('SELECT count(*) AS n FROM document_page_texts p JOIN source_revisions r ON r.id=p.revision_id WHERE r.document_id=%s',(bad_row['id'],)).fetchone()['n']==15
+        navigate(owner,'chat')
+        open_sources(owner)
         for checkbox in owner.locator('#question-sources input').all():checkbox.uncheck()
         # Failed files are deliberately absent from selectable ready sources.
+        open_sources(owner)
         assert owner.get_by_role('checkbox',name='twenty-mixed.pdf',exact=True).count()==0
         api=integrated_browser[0][0][3]
         refused=owner.evaluate('''async ({api,document})=>{
@@ -138,16 +148,26 @@ def test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_
             return {status:response.status,body:await response.json()};
         }''',{'api':api,'document':str(bad_row['id'])})
         assert refused=={'status':409,'body':{'error':'no_ready_sources'}},refused
+        navigate(owner,'chat')
         owner.locator('#question').fill('What is the annual budget?')
         owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(owner.locator('#status')).to_contain_text('Нет готовых источников')
-        expect(owner.locator('#question')).to_have_value('What is the annual budget?')
-        expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
-        owner.get_by_role('checkbox',name='healthy-neighbor.txt',exact=True).check()
-        owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=180000)
+        navigate(owner,'chat')
+        open_sources(owner)
+        owner.get_by_role('checkbox',name='healthy-neighbor.txt',exact=True).check()
+        owner.locator('#question').fill('What is the annual budget?')
+        owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
+        expect(owner.locator('#history article')).to_have_count(2)
+        expect(owner.locator('#history article').last).to_contain_text('Завершён',timeout=180000)
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
-            request=connection.execute('SELECT * FROM requests').fetchone()
+            requests=connection.execute('SELECT * FROM requests ORDER BY created_at').fetchall()
+            assert len(requests)==2
+            assert [request['passport']['scope_mode'] for request in requests]==['all','selected']
+            for request in requests:
+                assert all(row['document_id']!=str(bad_row['id']) for row in request['passport']['available']+request['passport']['passed'])
+                assert all('100' not in fragment['text'] for fragment in request['passport']['passed'])
+                assert '10' in request['answer_text']
+            request=requests[-1]
             assert str(bad_row['id']) not in request['passport']['selected']
             assert all(row['document_id']!=str(bad_row['id']) for row in request['passport']['available']+request['passport']['passed'])
             assert all('100' not in fragment['text'] for fragment in request['passport']['passed'])

@@ -10,13 +10,16 @@ import pytest
 
 from integration.test_answer_lifecycle import environment,operator
 from integration.test_terminal_lifecycle import controlled_native_browser,current,records
-from browser.test_accounts import real_account_browser,register,login
+from browser.test_accounts import real_account_browser,register,login, navigate, open_sources
 from browser.test_documents import real_document_browser,ready
 
 
 def upload(page,name,text):
+    navigate(page,'library')
     page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':text.encode()})
     page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,name)
+    navigate(page,'chat')
+    open_sources(page)
     page.get_by_role('checkbox',name=name,exact=True).check()
 
 
@@ -28,6 +31,7 @@ def test_issued_owner_revocation_during_actual_queue_and_native_stream(controlle
         admin,holder,owner=[context.new_page() for context in contexts]
         operator(admin,mailbox,frontend)
         if phase=='queued':
+            navigate(admin,'administration')
             form=admin.locator('#global-settings');form.locator('[name=max_active]').fill('1')
             form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
             form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
@@ -38,6 +42,7 @@ def test_issued_owner_revocation_during_actual_queue_and_native_stream(controlle
         upload(owner,'revoked-owner.txt','The annual budget is 200 euros.')
         if phase=='streaming':armed.touch()
         active=holder if phase=='queued' else owner
+        navigate(active,'chat')
         active.locator('#question').fill('What is the annual budget? Quote every supplied excerpt in full with citations.' if phase=='queued' else 'What is the annual budget?')
         active.get_by_role('button',name='Отправить вопрос',exact=True).click()
         if phase=='queued':
@@ -48,6 +53,7 @@ def test_issued_owner_revocation_during_actual_queue_and_native_stream(controlle
                 assert time.monotonic()<until;holder.wait_for_timeout(50)
             # Let real native prefill advance in finite steps while the second
             # issued owner is searched/queued, then hold only native compute.
+            navigate(owner,'chat')
             owner.locator('#question').fill('What is the annual budget?')
             owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
             until=time.monotonic()+30
@@ -70,6 +76,7 @@ def test_issued_owner_revocation_during_actual_queue_and_native_stream(controlle
         request_id=str(row['id']);prefix=row['answer_text']
         tab=json.loads(owner.evaluate("sessionStorage.getItem('rag:tab')"))
         credential=owner.evaluate("sessionStorage.getItem('rag:credential')")
+        navigate(admin,'administration')
         admin.reload();form=admin.locator(f'form[data-account="{email}"]')
         form.locator('[name=disabled]').check();form.get_by_role('button',name='Сохранить права',exact=True).click()
         expect(admin.locator('#status')).to_contain_text('Права сохранены')
@@ -117,6 +124,7 @@ def test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history(con
         try:actual_tokens=len(vocabulary.tokenize(question))
         finally:vocabulary.close()
         assert actual_tokens>4096
+        navigate(page,'chat')
         page.locator('#question').fill(question);page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#status')).to_contain_text('Вопрос превышает доступный контекст')
         expect(page.locator('#question')).to_have_value(question)
@@ -126,7 +134,10 @@ def test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history(con
             assert connection.execute('SELECT count(*) FROM messages').fetchone()[0]==0
         assert not any(value['event']=='native_allocate' for value in records(native_log))
         page.reload();expect(page.locator('#question')).to_have_value(question)
+        navigate(page,'chat')
         page.locator('#question').fill('What is the annual budget?')
+        navigate(page,'chat')
+        open_sources(page)
         page.get_by_role('checkbox',name='budget.txt',exact=True).check()
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
@@ -145,6 +156,7 @@ def test_actual_native_completed_outputs_are_isolated_between_issued_owners(cont
             register(page,mailbox,frontend,f'u8-isolated-{index}@owned.test');login(page,f'u8-isolated-{index}@owned.test')
             upload(page,f'budget-{index}.txt',f'The annual budget is {(index+1)*100} euros.')
         for page in pages:
+            navigate(page,'chat')
             page.locator('#question').fill('What is the annual budget?');page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         for page in pages:expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
@@ -154,8 +166,8 @@ def test_actual_native_completed_outputs_are_isolated_between_issued_owners(cont
             expected=str((index+1)*100);foreign=str((2-index)*100)
             assert expected in row['answer_text'] and foreign not in row['answer_text'],row['answer_text']
             assert all(expected in span['text'] and foreign not in span['text'] for span in row['passport']['passed'])
-            pages[index].locator('.answer-passport summary').click()
-            expect(pages[index].locator('#early-fragments')).to_contain_text('последнего вопроса')
+            navigate(pages[index],'evidence')
+            expect(pages[index].locator('#early-fragments')).to_contain_text('Сохранённые основания')
         assert len({value['context'] for value in records(native_log) if value['event']=='native_allocate'})==2
         proof=[{'owner':row['email'],'answer':row['answer_text'],'passport':row['passport']} for row in rows]
         (tmp_path/'actual-isolated-outputs.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'proof':'actual_completed_native_output_isolation','results':proof},ensure_ascii=False),flush=True)

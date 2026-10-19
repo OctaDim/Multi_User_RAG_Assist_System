@@ -1,0 +1,280 @@
+{
+  "requests": [
+    {
+      "id": "c08e1aed-30f9-4f9d-aa30-2c05b89bd2a1",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-3@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:12.810743+03:00"
+    },
+    {
+      "id": "baef4cfd-d442-4bad-95c0-a7197658129a",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-1@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.686007+03:00"
+    },
+    {
+      "id": "fac033f5-9e62-433e-9c40-95f7a84e187b",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-5@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.731928+03:00"
+    },
+    {
+      "id": "1f5504df-348d-4b2e-8f1f-4bc54ebdc79e",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-7@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:16.444187+03:00"
+    },
+    {
+      "id": "e8ffe81c-fb3c-4259-aa8c-ca33345ace23",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-9@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:13.000773+03:00"
+    },
+    {
+      "id": "22df650c-463b-44d1-8d17-e1c6b0b0ac05",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-8@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:12.843839+03:00"
+    },
+    {
+      "id": "61fddc00-8064-4a84-9b8f-930edd5b2d41",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-4@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.621953+03:00"
+    },
+    {
+      "id": "6a89d179-0cb7-4adf-b57f-aab1a4ade506",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-6@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:12.914038+03:00"
+    },
+    {
+      "id": "83acc56b-d1f6-4aa7-9d22-644bc2feb642",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-2@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.599409+03:00"
+    },
+    {
+      "id": "36eed6d1-99a5-4c8b-bb49-966309c634fa",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-0@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:12.499942+03:00"
+    },
+    {
+      "id": "d98756a9-6c6c-44e9-9f64-45438e4aef4f",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-1@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.686007+03:00"
+    },
+    {
+      "id": "a557b0e5-8875-4c3f-9cbf-fab035ef9329",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-0@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:12.499942+03:00"
+    },
+    {
+      "id": "809ab35e-2d34-4b4d-9a3a-96da173bb47c",
+      "state": "interrupted",
+      "reason": "tab_timeout",
+      "email": "u8-load-2@owned.test",
+      "connected": true,
+      "confirmed": true,
+      "deadline": null,
+      "ack_until": "2026-10-19 05:10:14.599409+03:00"
+    }
+  ],
+  "activity": [
+    {
+      "pid": 121006,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 121016,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 121027,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 121028,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122686,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122687,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122688,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122742,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122756,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122757,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 122808,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123664,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123665,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123667,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123676,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123681,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123682,
+      "state": "idle",
+      "wait_event_type": "Client",
+      "wait_event": "ClientRead",
+      "query": "COMMIT",
+      "blockers": []
+    },
+    {
+      "pid": 123684,
+      "state": "active",
+      "wait_event_type": null,
+      "wait_event": null,
+      "query": "SELECT pid,state,wait_event_type,wait_event,query,pg_blocking_pids(pid) AS blockers FROM pg_stat_activity WHERE datname=current_database() ORDER BY pid",
+      "blockers": []
+    }
+  ]
+}

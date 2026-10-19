@@ -1,0 +1,1 @@
+{"nodeid": "tests/browser/test_documents.py::test_refresh_timeout_preserves_editor_and_allows_manual_retry", "phase": "call", "outcome": "passed", "duration": 6.063440072000958, "failure": null}

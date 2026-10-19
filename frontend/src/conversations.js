@@ -1,6 +1,7 @@
 import {api, origin, reconnectMs, shortIdChars} from './api.js';
 import {token} from './auth.js';
 import {Drafts, tabKey} from './drafts.js';
+import {textElement, messages} from './ui.js';
 
 const $ = id => document.getElementById(id);
 const unfinished = new Set(['accepted', 'searching', 'queued', 'generating']);
@@ -13,12 +14,6 @@ const reasons = {user_stop:'Остановлен пользователем', ta
   search_error:'Не удалось подготовить источники', generation_error:'Не удалось сформировать ответ',
   context_limit:'Достигнут предел контекста', cancelled:'Обработка остановлена', error:'Ошибка обработки'};
 
-export function textElement(tag, text) {
-  const element = document.createElement(tag);
-  element.textContent = text;
-  return element;
-}
-
 export class Conversations {
   constructor(owner, reportError) {
     this.credential = token();
@@ -27,6 +22,7 @@ export class Conversations {
     this.histories = new Map();
     this.cards = new Map();
     this.sending = new Set();
+    this.questionErrors = new Map();
     this.selectionVersion = 0;
     this.documents = [];
     this.connected = false;
@@ -34,7 +30,11 @@ export class Conversations {
     this.cursor = null;
     this.selected = sessionStorage.getItem('rag:conversation');
     this.abort = new AbortController();
-    $('question').oninput = () => {this.drafts.edit(this.selected, $('question').value); this.render();};
+    $('question').oninput = () => {
+      this.drafts.edit(this.selected, $('question').value);
+      this.questionErrors.delete(this.selected);
+      this.renderComposer(this.histories.get(this.selected), this.drafts.get(this.selected));
+    };
     $('question-form').onsubmit = event => {event.preventDefault(); this.submit();};
     $('check-question').onclick = () => this.submit();
     $('new-conversation').onclick = () => this.create();
@@ -51,19 +51,36 @@ export class Conversations {
     $('grounds-indicator').hidden = true;
     $('question-sources').querySelectorAll('label').forEach(element => element.remove());
     $('answer-connection').textContent = '';
+    this.questionErrors.clear();
+    for(const id of ['question-feedback','conversation-feedback']) {$(id).textContent='';$(id).hidden=true;}
+    $('new-conversation').disabled=false;$('new-conversation').removeAttribute('aria-busy');
   }
 
   async create() {
     const selecting = this.selectionVersion;
+    const feedback=$('conversation-feedback');let created=false;
+    feedback.textContent='Создаём беседу…';feedback.hidden=false;feedback.dataset.error='false';
     $('new-conversation').disabled = true;
+    $('new-conversation').setAttribute('aria-busy','true');
     try {
       const value = await api('/conversations', 'POST');
       if (!this.current()) return;
+      created=true;
       this.histories.set(value.id, {conversation_id:value.id, requests:[], messages:[]});
       this.list();
-      if (selecting === this.selectionVersion) await this.select(value.id);
-    } catch (error) { this.reportError(error); }
-    finally {$('new-conversation').disabled = false;}
+      if (selecting === this.selectionVersion) {feedback.hidden=true;await this.select(value.id);}
+    } catch (error) {if(this.current()) {
+      if(!created&&selecting===this.selectionVersion) {
+        feedback.textContent=['request_timeout','network_error'].includes(error.message)
+          ? 'Результат создания беседы неизвестен. Обновите страницу и проверьте список перед повтором.'
+          : messages[error.message]||'Не удалось создать беседу. Повторите действие.';
+        feedback.dataset.error='true';feedback.hidden=false;
+      }
+      this.reportError(error);
+    }}
+    finally {if(this.current()) {
+      $('new-conversation').disabled=false;$('new-conversation').removeAttribute('aria-busy');
+    }}
   }
 
   async initialize(conversations) {
@@ -93,7 +110,9 @@ export class Conversations {
 
   async select(identifier) {
     if (!identifier) return;
-    ++this.selectionVersion;
+    const selecting=++this.selectionVersion;
+    const feedback=$('conversation-feedback');
+    feedback.textContent='Загружаем беседу…';feedback.dataset.error='false';feedback.hidden=false;
     this.selected = identifier;
     this.cards.clear(); this.evidenceSignature = undefined;
     $('history').replaceChildren(); $('early-fragments').replaceChildren(); $('answer-evidence').replaceChildren();
@@ -103,7 +122,14 @@ export class Conversations {
     $('question').value = this.drafts.get(identifier).text;
     this.sources(this.documents);
     this.render();
-    await this.refresh(identifier);
+    try {await this.refresh(identifier);}
+    catch(error) {
+      if(!this.current()||selecting!==this.selectionVersion)return;
+      feedback.textContent=messages[error.message]||'Не удалось открыть беседу. Повторите выбор в списке.';
+      feedback.dataset.error='true';throw error;
+    } finally {
+      if(this.current()&&selecting===this.selectionVersion&&feedback.dataset.error==='false')feedback.hidden=true;
+    }
   }
 
   async refresh(identifier) {
@@ -126,7 +152,12 @@ export class Conversations {
     for (const message of value.messages) messages.set(`${message.request_id}:${message.role}`,message);
     value.messages = Array.from(messages.values());
     this.histories.set(value.conversation_id, value);
-    for (const request of value.requests) this.drafts.accepted(value.conversation_id, request.operation_key);
+    for (const request of value.requests) this.acknowledge(value.conversation_id, request.operation_key);
+  }
+
+  acknowledge(identifier,operationKey) {
+    this.drafts.accepted(identifier,operationKey);
+    if(this.questionErrors.get(identifier)?.operationKey===operationKey)this.questionErrors.delete(identifier);
   }
 
   accepted(request, question) {
@@ -137,7 +168,7 @@ export class Conversations {
     if (!history.messages.some(value => value.request_id === request.id && value.role === 'user'))
       history.messages.push({request_id:request.id, role:'user', text:question});
     this.histories.set(request.conversation_id, history);
-    this.drafts.accepted(request.conversation_id, request.operation_key);
+    this.acknowledge(request.conversation_id, request.operation_key);
   }
 
   sources(documents) {
@@ -156,6 +187,7 @@ export class Conversations {
         const ids = new Set(this.drafts.get(this.selected).documentIds);
         if (input.checked) ids.add(value.id); else ids.delete(value.id);
         this.drafts.selectSources(this.selected, Array.from(ids));
+        this.questionErrors.delete(this.selected);
         this.render();
       };
       label.prepend(input); $('question-sources').append(label);
@@ -226,16 +258,12 @@ export class Conversations {
       }
     } finally {
       card.stopping = false;
-      // A terminal SSE or a conversation switch may precede this POST result.
       if (this.current()) this.render();
     }
   }
 
-  render() {
-    if (!this.current() || !this.selected) return;
-    const value = this.histories.get(this.selected);
-    if (!value) return;
-    const draft = this.drafts.get(this.selected);
+  renderComposer(value,draft) {
+    if(!this.current()||!value)return;
     if ($('question').value !== draft.text) $('question').value = draft.text;
     const ready = this.effectiveSources(draft).length;
     const busy = value.requests.some(request => unfinished.has(request.state));
@@ -245,8 +273,22 @@ export class Conversations {
     const scope = draft.documentIds.length ? `Выбрано источников: ${draft.documentIds.length}. Готово для поиска: ${ready}.` : `Все готовые документы моей библиотеки: ${ready}.`;
     const scopeLabel = `${scope}${ready ? '' : ' Нет готовых источников в области поиска. Вопрос сохранён как черновик.'}`;
     if ($('scope-description').textContent !== scopeLabel) $('scope-description').textContent = scopeLabel;
-    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этой беседе уже выполняется запрос.' : 'Соединение установлено.';
+    const summary=$('source-selection').querySelector('summary');
+    const summaryLabel=draft.documentIds.length ? `Источники: выбрано ${draft.documentIds.length}` : 'Источники: все готовые';
+    if(summary.textContent!==summaryLabel)summary.textContent=summaryLabel;
+    const noSources=draft.documentIds.length ? ' Нет готовых документов в выборе. Измените выбор в «Источниках» или обновите статусы.' : ' Нет готовых источников. Загрузите документы или обновите их статусы.';
+    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этой беседе уже выполняется запрос.' : `Соединение установлено.${!ready ? noSources : !draft.text.trim() ? ' Введите вопрос.' : ''}`;
     if ($('answer-connection').textContent !== connectionStatus) $('answer-connection').textContent = connectionStatus;
+    const feedback=$('question-feedback'),failure=this.questionErrors.get(this.selected);
+    feedback.textContent=failure?.message||'';feedback.hidden=!failure;feedback.dataset.error='true';
+  }
+
+  render() {
+    if (!this.current() || !this.selected) return;
+    const value = this.histories.get(this.selected);
+    if (!value) return;
+    const draft = this.drafts.get(this.selected);
+    this.renderComposer(value,draft);
     if (!value.requests.length) {
       $('history').replaceChildren(textElement('p', 'В этой беседе пока нет сообщений.'));
       this.renderEvidence(null);
@@ -302,6 +344,8 @@ export class Conversations {
     const fresh = Array.from(this.evidenceFragmentIds).some(id => !oldFragments.has(id));
     const evidenceHidden = !document.querySelector('[data-area="evidence"]')?.matches('[aria-pressed="true"]') && matchMedia('(max-width:1179px)').matches;
     if (fresh && evidenceHidden && unfinished.has(request?.state)) $('grounds-indicator').hidden = false;
+    const focusedQuote=document.activeElement?.closest('#answer-evidence .cited-quote')?.id;
+    const body=$('answer-evidence').closest('.area-body'),scroll=body.scrollTop;
     $('early-fragments').replaceChildren(); $('answer-evidence').replaceChildren();
     $('evidence-empty').hidden = Boolean(request);
     if (!request) return;
@@ -338,16 +382,22 @@ export class Conversations {
       const quote = textElement('blockquote', citation.quote); quote.className = 'cited-quote'; quote.id = `citation-${request.id}-${citation.number}`;
       $('answer-evidence').append(quote);
     }
+    const quote=focusedQuote&&$(focusedQuote);
+    if(quote){quote.tabIndex=-1;quote.focus({preventScroll:true});body.scrollTop=scroll;}
   }
 
   async submit() {
     if (!this.current() || !this.connected || this.sending.has(this.selected)) return;
     const identifier = this.selected;
     const draft = this.drafts.get(identifier);
-    if (!draft.pending && !this.effectiveSources(draft).length) {this.reportError(new Error('no_ready_sources')); return;}
+    if (!draft.pending && !this.effectiveSources(draft).length) {
+      this.questionErrors.set(identifier,{message:messages.no_ready_sources});this.render();
+      this.reportError(new Error('no_ready_sources'));return;
+    }
     if (!draft.pending && !draft.text.trim()) return;
     const pending = this.drafts.begin(identifier, {operation_key:crypto.randomUUID(), question:draft.text,
       document_ids:draft.documentIds, tab_id:this.tab.id});
+    this.questionErrors.delete(identifier);
     this.sending.add(identifier); this.render();
     try {
       const request = await api(`/conversations/${identifier}/answers`, 'POST', pending.body, {'X-Tab-Proof':this.tab.proof});
@@ -357,7 +407,10 @@ export class Conversations {
       if (this.selected === identifier) $('question').value = this.drafts.get(identifier).text;
     } catch (error) {
       if (!this.current()) return;
+      if(this.drafts.get(identifier).pending?.body.operation_key!==pending.body.operation_key)return;
       if (['conversation_busy','no_ready_sources','invalid_scope','coordinator_unavailable','tab_disconnected','invalid_input','context_too_large','tokenizer_unavailable'].includes(error.message)) this.drafts.rejected(identifier, pending.body.operation_key);
+      this.questionErrors.set(identifier,{operationKey:pending.body.operation_key,
+        message:messages[error.message]||'Не удалось отправить вопрос. Проверьте отправку перед повтором.'});
       this.reportError(error);
     } finally {this.sending.delete(identifier); this.render();}
   }
@@ -408,7 +461,7 @@ export class Conversations {
     if (value.kind === 'heartbeat') {
       await api(`/tabs/${this.tab.id}/heartbeat`, 'POST', undefined, {'X-Tab-Proof':this.tab.proof,
         'X-Connection-Epoch':String(value.payload.connection_epoch), 'X-Heartbeat-Challenge':value.payload.challenge});
-      this.connected = true; this.render(); return;
+      if(!this.connected){this.connected=true;this.render();} return;
     }
     if (this.cursor !== null && value.id <= this.cursor) return;
     if (value.kind === 'snapshot') {

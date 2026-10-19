@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="26" time="2436.429" timestamp="2026-10-19T03:13:45.737648+03:00" hostname="16IPK2"><testcase classname="tests.runtime.test_generation_contract" name="test_native_twelve_contexts_hot_limits_and_fair_steps" time="21.545" /><testcase classname="tests.runtime.test_generation_contract" name="test_native_eos_releases_one_context_without_stalling_another" time="1.074" /><testcase classname="tests.runtime.test_production_runtime" name="test_independent_production_contexts_match_u1_prefix" time="4.791" /><testcase classname="tests.runtime.test_production_runtime" name="test_real_eos_and_incremental_russian_utf8" time="0.833" /><testcase classname="tests.runtime.test_production_runtime" name="test_real_source_answer_uses_facts_instead_of_citation_example" time="3.579" /><testcase classname="tests.runtime.test_production_runtime" name="test_actual_token_budget_has_no_prompt_clamp" time="38.477" /><testcase classname="tests.runtime.test_production_runtime" name="test_abort_and_close_wait_for_real_native_decode" time="0.034" /><testcase classname="tests.runtime.test_production_runtime" name="test_partial_allocation_is_freed_on_sampler_failure" time="0.013" /><testcase classname="tests.runtime.test_production_runtime" name="test_admission_vocabulary_matches_loaded_model_and_preserves_live_context" time="0.813" /><testcase classname="tests.integration.test_actual_printed_documents" name="test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels" time="276.934" /><testcase classname="tests.integration.test_multi_process" name="test_two_http_processes_share_native_capacity_fairness_and_hot_settings" time="111.164" /><testcase classname="tests.integration.test_multilingual_documents" name="test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[die Seerose bl\xfcht auf dem Teich.]" time="0.022" /><testcase classname="tests.integration.test_multilingual_documents" name="test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich?]" time="0.001" /><testcase classname="tests.integration.test_multilingual_documents" name="test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich]" time="0.001" /><testcase classname="tests.integration.test_multilingual_documents" name="test_strict_ocr_acceptance_rejects_case_punctuation_and_added_text[Die Seerose bl\xfcht auf dem Teich. extra]" time="0.000" /><testcase classname="tests.integration.test_multilingual_documents" name="test_current_be_word_permissions_are_strict_outside_exact_model_and_source_type" time="0.005" /><testcase classname="tests.integration.test_multilingual_documents" name="test_genuine_four_language_handwriting_publication_and_permission_masks" time="176.262"><failure message="playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.&#10;Call log:&#10;  - waiting for get_by_role(&quot;button&quot;, name=&quot;Обновить статусы документов&quot;)&#10;  -     - locator resolved to &lt;button disabled type=&quot;button&quot; class=&quot;quiet&quot; aria-busy=&quot;true&quot; id=&quot;refresh-documents&quot; title=&quot;Обновить статусы документов&quot; aria-label=&quot;Обновить статусы документов&quot;&gt;↻&lt;/button&gt;&#10;  -   - attempting click action&#10;  -     2 × waiting for element to be visible, enabled and stable&#10;  -       - element is not enabled&#10;  -     - retrying click action&#10;  -     - waiting 20ms&#10;  -     2 × waiting for element to be visible, enabled and stable&#10;  -       - element is not enabled&#10;  -     - retrying click action&#10;  -       - waiting 100ms&#10;  -     45 × waiting for element to be visible, enabled and stable&#10;  -        - element is not enabled&#10;  -      - retrying click action&#10;  -        - waiting 500ms">backend/tests/integration/test_multilingual_documents.py:179: in test_genuine_four_language_handwriting_publication_and_permission_masks
+    item=ready(owner,name,timeout=240)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/browser/test_documents.py:34: in ready
+    page.get_by_role('button',name='Обновить статусы документов').click()
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15450: in click
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:156: in click
+    return await self._frame.click(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:488: in click
+    await self._channel.send("click", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+E   Call log:
+E     - waiting for get_by_role("button", name="Обновить статусы документов")
+E     -     - locator resolved to &lt;button disabled type="button" class="quiet" aria-busy="true" id="refresh-documents" title="Обновить статусы документов" aria-label="Обновить статусы документов"&gt;↻&lt;/button&gt;
+E     -   - attempting click action
+E     -     2 × waiting for element to be visible, enabled and stable
+E     -       - element is not enabled
+E     -     - retrying click action
+E     -     - waiting 20ms
+E     -     2 × waiting for element to be visible, enabled and stable
+E     -       - element is not enabled
+E     -     - retrying click action
+E     -       - waiting 100ms
+E     -     45 × waiting for element to be visible, enabled and stable
+E     -        - element is not enabled
+E     -      - retrying click action
+E     -        - waiting 500ms</failure></testcase><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[after-complete_during_grace]" time="70.765"><failure message="AssertionError: Locator expected to be visible&#10;Actual value: False &#10;Call log:&#10;  - LocatorAssertions.to_be_visible with timeout 5000ms&#10;  -   - waiting for locator(&quot;#workspace&quot;)&#10;  -     9 × locator resolved to &lt;section hidden=&quot;&quot; id=&quot;workspace&quot;&gt;…&lt;/section&gt;&#10;  -       - unexpected value &quot;hidden&quot;">backend/tests/integration/test_terminal_lifecycle.py:132: in test_actual_native_terminal_paths_no_retry_and_preserved_history
+    observer.goto(frontend);login(observer,email)
+                            ^^^^^^^^^^^^^^^^^^^^^
+backend/tests/browser/test_accounts.py:109: in login
+    expect(page.locator('#workspace')).to_be_visible()
+E   AssertionError: Locator expected to be visible
+E   Actual value: False 
+E   Call log:
+E     - LocatorAssertions.to_be_visible with timeout 5000ms
+E     -   - waiting for locator("#workspace")
+E     -     9 × locator resolved to &lt;section hidden="" id="workspace"&gt;…&lt;/section&gt;
+E     -       - unexpected value "hidden"</failure></testcase><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[after-stop_during_grace]" time="103.845" /><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_before-error_before]" time="57.257" /><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[fault_after-error_during_grace]" time="90.677" /><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[before-crash_before]" time="106.888" /><testcase classname="tests.integration.test_terminal_lifecycle" name="test_actual_native_terminal_paths_no_retry_and_preserved_history[after-crash_after]" time="118.425"><failure message="AssertionError: Вы вошли.&#10;assert 73363.940200611 &lt; 73363.901532775&#10; +  where 73363.940200611 = &lt;built-in function monotonic&gt;()&#10; +    where &lt;built-in function monotonic&gt; = time.monotonic">backend/tests/integration/test_terminal_lifecycle.py:224: in test_actual_native_terminal_paths_no_retry_and_preserved_history
+    assert time.monotonic()&lt;until,observer.locator('#status').inner_text();observer.wait_for_timeout(50)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Вы вошли.
+E   assert 73363.940200611 &lt; 73363.901532775
+E    +  where 73363.940200611 = &lt;built-in function monotonic&gt;()
+E    +    where &lt;built-in function monotonic&gt; = time.monotonic</failure></testcase><testcase classname="tests.integration.test_answer_lifecycle" name="test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits" time="206.047"><failure message="AssertionError: Ten genuine owners did not receive native contexts&#10;assert 73572.083395233 &lt; 73572.037623012&#10; +  where 73572.083395233 = &lt;built-in function monotonic&gt;()&#10; +    where &lt;built-in function monotonic&gt; = time.monotonic">backend/tests/integration/test_answer_lifecycle.py:209: in test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits
+    assert time.monotonic()&lt;deadline,'Ten genuine owners did not receive native contexts'
+E   AssertionError: Ten genuine owners did not receive native contexts
+E   assert 73572.083395233 &lt; 73572.037623012
+E    +  where 73572.083395233 = &lt;built-in function monotonic&gt;()
+E    +    where &lt;built-in function monotonic&gt; = time.monotonic</failure></testcase><testcase classname="tests.integration.test_answer_lifecycle" name="test_frozen_thirty_questions_use_real_multilingual_documents" time="179.777"><failure message="playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.&#10;Call log:&#10;  - waiting for get_by_role(&quot;checkbox&quot;, name=&quot;udhr-eng.txt&quot;, exact=True)&#10;  -     - locator resolved to &lt;input type=&quot;checkbox&quot; value=&quot;32a762d6-90d6-47a1-a826-b08835ecfdb1&quot;/&gt;&#10;  -   - attempting click action&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 20ms&#10;  -     2 × waiting for element to be visible, enabled and stable&#10;  -       - element is visible, enabled and stable&#10;  -       - scrolling into view if needed&#10;  -       - done scrolling&#10;  -       - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -     - retrying click action&#10;  -       - waiting 100ms&#10;  -     14 × waiting for element to be visible, enabled and stable&#10;  -        - element is visible, enabled and stable&#10;  -        - scrolling into view if needed&#10;  -        - done scrolling&#10;  -        - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -      - retrying click action&#10;  -        - waiting 500ms&#10;  -        - waiting for element to be visible, enabled and stable&#10;  -        - element is visible, enabled and stable&#10;  -        - scrolling into view if needed&#10;  -        - done scrolling&#10;  -        - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -      - retrying click action&#10;  -        - waiting 500ms&#10;  -        - waiting for element to be visible, enabled and stable&#10;  -        - element is visible, enabled and stable&#10;  -        - scrolling into view if needed&#10;  -        - done scrolling&#10;  -        - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -      - retrying click action&#10;  -        - waiting 500ms&#10;  -        - waiting for element to be visible, enabled and stable&#10;  -        - element is visible, enabled and stable&#10;  -        - scrolling into view if needed&#10;  -        - done scrolling&#10;  -        - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -      - retrying click action&#10;  -        - waiting 500ms&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;section id=&quot;history&quot; tabindex=&quot;-1&quot; aria-label=&quot;История беседы&quot;&gt;…&lt;/section&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 500ms&#10;  -     - waiting for element to be visible, enabled and stable&#10;  -     - element is visible, enabled and stable&#10;  -     - scrolling into view if needed&#10;  -     - done scrolling&#10;  -     - &lt;details open=&quot;&quot; class=&quot;conversation-picker&quot;&gt;…&lt;/details&gt; intercepts pointer events&#10;  -   - retrying click action&#10;  -     - waiting 500ms">backend/tests/integration/test_answer_lifecycle.py:434: in test_frozen_thirty_questions_use_real_multilingual_documents
+    page.get_by_role('checkbox',name=item['document'],exact=True).check()
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15358: in check
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:141: in check
+    return await self._frame.check(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:741: in check
+    await self._channel.send("check", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.check: Timeout 30000ms exceeded.
+E   Call log:
+E     - waiting for get_by_role("checkbox", name="udhr-eng.txt", exact=True)
+E     -     - locator resolved to &lt;input type="checkbox" value="32a762d6-90d6-47a1-a826-b08835ecfdb1"/&gt;
+E     -   - attempting click action
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 20ms
+E     -     2 × waiting for element to be visible, enabled and stable
+E     -       - element is visible, enabled and stable
+E     -       - scrolling into view if needed
+E     -       - done scrolling
+E     -       - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -     - retrying click action
+E     -       - waiting 100ms
+E     -     14 × waiting for element to be visible, enabled and stable
+E     -        - element is visible, enabled and stable
+E     -        - scrolling into view if needed
+E     -        - done scrolling
+E     -        - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -      - retrying click action
+E     -        - waiting 500ms
+E     -        - waiting for element to be visible, enabled and stable
+E     -        - element is visible, enabled and stable
+E     -        - scrolling into view if needed
+E     -        - done scrolling
+E     -        - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -      - retrying click action
+E     -        - waiting 500ms
+E     -        - waiting for element to be visible, enabled and stable
+E     -        - element is visible, enabled and stable
+E     -        - scrolling into view if needed
+E     -        - done scrolling
+E     -        - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -      - retrying click action
+E     -        - waiting 500ms
+E     -        - waiting for element to be visible, enabled and stable
+E     -        - element is visible, enabled and stable
+E     -        - scrolling into view if needed
+E     -        - done scrolling
+E     -        - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -      - retrying click action
+E     -        - waiting 500ms
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;section id="history" tabindex="-1" aria-label="История беседы"&gt;…&lt;/section&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 500ms
+E     -     - waiting for element to be visible, enabled and stable
+E     -     - element is visible, enabled and stable
+E     -     - scrolling into view if needed
+E     -     - done scrolling
+E     -     - &lt;details open="" class="conversation-picker"&gt;…&lt;/details&gt; intercepts pointer events
+E     -   - retrying click action
+E     -     - waiting 500ms</failure></testcase><testcase classname="tests.integration.test_actual_page_failure" name="test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor[explicit-print-only]" time="848.764"><failure message="AssertionError: Locator expected to contain text 'Завершён'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;  - LocatorAssertions.to_contain_text with timeout 180000ms&#10;  -   - waiting for locator(&quot;#history article&quot;)">backend/tests/integration/test_actual_page_failure.py:152: in test_actual_twenty_page_failure_excludes_fifteen_native_successes_and_keeps_neighbor
+    owner.locator('#question').fill('What is the annual budget?')
+E   AssertionError: Locator expected to contain text 'Завершён'
+E   Actual value: &lt;element(s) not found&gt; 
+E   Call log:
+E     - LocatorAssertions.to_contain_text with timeout 180000ms
+E     -   - waiting for locator("#history article")</failure></testcase></testsuite></testsuites>

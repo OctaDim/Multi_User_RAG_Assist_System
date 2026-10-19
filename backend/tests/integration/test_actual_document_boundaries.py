@@ -10,7 +10,7 @@ from psycopg.rows import dict_row
 from playwright.sync_api import expect
 
 from integration.test_answer_lifecycle import environment,integrated_browser,operator
-from browser.test_accounts import real_account_browser,register,login
+from browser.test_accounts import real_account_browser,register,login, navigate
 from browser.test_documents import real_document_browser,ready
 
 
@@ -19,6 +19,7 @@ def test_real_partial_upload_and_failed_file_never_expand_selected_source_scope(
     context=browser.new_context()
     try:
         page=context.new_page();register(page,mailbox,frontend,'u8-whole-source@owned.test');login(page,'u8-whole-source@owned.test')
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files([
             {'name':'whole-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'},
             {'name':'broken.pdf','mimeType':'application/pdf','buffer':b'%PDF-1.7\nIncomplete invalid original with no pages'}])
@@ -69,6 +70,7 @@ def test_real_partial_upload_and_failed_file_never_expand_selected_source_scope(
             headers:{Authorization:'Bearer '+token,'X-Tab-Proof':actor.tab.proof,'Content-Type':'application/json'},body:JSON.stringify(operation)});
             return {status:response.status,body:await response.json()};}''',{'api':api,'token':token,'actor':actor,'operation':operation})
         assert response['status']==200,response
+        navigate(page,'chat')
         expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
             row=connection.execute('SELECT * FROM requests WHERE id=%s',(response['body']['id'],)).fetchone()

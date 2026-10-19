@@ -1,0 +1,1 @@
+{"nodeid": "tests/integration/test_actual_lifecycle_gaps.py::test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history[after]", "phase": "call", "outcome": "passed", "duration": 39.58923839300405, "failure": null}

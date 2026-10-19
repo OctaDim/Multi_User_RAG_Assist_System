@@ -88,6 +88,7 @@ for (const name of ['register', 'login']) {
         status('Откройте письмо и подтвердите email, затем войдите.');
       } else {
         signIn(result.token);
+        resetNavigation();
         status('Вы вошли.');
         await showWorkspace();
       }

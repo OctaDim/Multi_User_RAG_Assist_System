@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-19T02:16:56.188673+00:00",
+  "kind": "ordinary-local-readiness",
+  "source": "existing local configuration, no test DSN or credentials",
+  "generation": {
+    "epoch": 9,
+    "lease_healthy": true,
+    "unfinished_requests": 0
+  },
+  "public_settings_http": 200,
+  "frontend_http": 200,
+  "frontend": "http://127.0.0.1:55848",
+  "browser": [
+    {
+      "width": 1440,
+      "bootstrap": "ready",
+      "login_enabled": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    },
+    {
+      "width": 768,
+      "bootstrap": "ready",
+      "login_enabled": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    },
+    {
+      "width": 375,
+      "bootstrap": "ready",
+      "login_enabled": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    }
+  ]
+}

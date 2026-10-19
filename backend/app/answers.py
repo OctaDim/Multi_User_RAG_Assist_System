@@ -76,7 +76,6 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
     async with connection.begin():
         service = await lock_service(connection)
         actor = await principal(connection, token)
-        # Resolve once for this operation; replay always returns its saved scope.
         scope = selected if selected else await ready_document_ids(connection, actor['id'])
         documents = (await connection.execute(select(Document.__table__).where(Document.id.in_(scope), Document.owner_id == actor["id"]).order_by(Document.id).with_for_update(read=True))).mappings().all()
         from app.events import live, lock_tab

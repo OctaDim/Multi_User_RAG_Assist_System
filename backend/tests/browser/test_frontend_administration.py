@@ -4,7 +4,7 @@ from playwright.sync_api import expect
 from .test_accounts import BACKEND,real_account_browser,register,login
 
 
-def test_management_retry_foreign_library_and_settings_write_failure(real_account_browser):
+def test_management_retry_foreign_library_and_settings_write_failure(real_account_browser,tmp_path):
     browser,mailbox,frontend,api_url=real_account_browser
     contexts=[browser.new_context() for _ in range(2)]
     try:
@@ -65,5 +65,9 @@ def test_management_retry_foreign_library_and_settings_write_failure(real_accoun
         expect(form.locator('.settings-revision')).to_contain_text(f'Сохранена ревизия {previous_revision+1}')
         expect(form.locator('.settings-revision')).to_contain_text('Ожидает применения')
         assert len(attempts)==2
+        for width in (1440,768,375):
+            operator.set_viewport_size({'width':width,'height':1000})
+            assert operator.evaluate('document.documentElement.scrollWidth <= innerWidth')
+            operator.screenshot(path=str(tmp_path/f'administration-{width}.png'),full_page=True)
     finally:
         for context in contexts:context.close()

@@ -1,0 +1,160 @@
+{
+  "kind": "caller-semantic-comparison",
+  "method": "Caller inspected all30 actual question/reference/answer pairs after the native test; original raw semantic_audit field is preserved unchanged. Actual test independently checks evidence, citations and selected scope.",
+  "raw_result": "2026-10-19-frontend-thirty-question-results.json",
+  "raw_sha256": "47dbbfc8c52eb695ff32bca4727feafb89485209e391bd3588b059b1eca5ed06",
+  "mechanical_correct": 30,
+  "semantic_correct": 30,
+  "cases": [
+    {
+      "id": "eng-1",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-3",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-4",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-5",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-9",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-14",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-15",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "eng-24",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-1",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-3",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-4",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-5",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-9",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-14",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-15",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "rus-24",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-1",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-3",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Grammar correction of source typo preserves life, liberty and personal inviolability."
+    },
+    {
+      "id": "bel-4",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-5",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-9",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-14",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "bel-15",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "deu_1996-1",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "deu_1996-3",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "deu_1996-4",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Concise paraphrase correctly prohibits slavery and slave trade in all forms."
+    },
+    {
+      "id": "deu_1996-5",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "German paraphrase preserves prohibition of torture and cruel, inhuman or degrading treatment/punishment."
+    },
+    {
+      "id": "deu_1996-9",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "deu_1996-14",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    },
+    {
+      "id": "deu_1996-15",
+      "verdict": "consistent-with-fixed-reference",
+      "note": "Quoted or closely reproduced the relevant reference; no added material contradicts the answer."
+    }
+  ]
+}

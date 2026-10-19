@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="10.173" timestamp="2026-10-19T02:28:35.216184+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_documents" name="test_refresh_timeout_preserves_editor_and_allows_manual_retry" time="10.083" /></testsuite></testsuites>

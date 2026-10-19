@@ -104,7 +104,7 @@ async function showSettings() {
   if (reading !== settingsRead) return;
   const form = $('global-settings');
   form.replaceChildren();
-  const revision = textElement('p', `Сохранена ревизия ${value.revision}. ${value.applied_revision === value.revision ? 'Применена' : 'Ожидает применения'}: ${value.applied_revision}.`);
+  const revision = textElement('p', `Сохранена ревизия ${value.revision}. Применена: ${value.applied_revision}.${value.applied_revision === value.revision ? '' : ' Ожидает применения.'}`);
   revision.className = 'settings-revision';
   form.append(revision);
   const labels = {max_active:'Активные запросы', step_width:'Запросы за шаг', model:'Модель генерации',

@@ -93,11 +93,15 @@ def register(page, mailbox, frontend_url, email, invitation_url=None):
     form.locator('[name=email]').fill(email)
     form.locator('[name=password]').fill(PASSWORD)
     form.get_by_role('button', name='Зарегистрироваться').click()
-    expect(page.locator('#status')).to_have_text('Откройте письмо и подтвердите email, затем войдите.')
+    expect(page.locator('#status')).to_have_text('Откройте письмо и подтвердите email, затем войдите.',timeout=api_wait_ms(page))
     page.goto(f'http://127.0.0.1:{mailbox.http.server_port}/?{urlencode({"email": email})}')
     page.get_by_role('link', name='Verify email').click()
-    expect(page.locator('#status')).to_have_text('Email подтверждён. Теперь войдите.')
+    expect(page.locator('#status')).to_have_text('Email подтверждён. Теперь войдите.',timeout=api_wait_ms(page))
     assert '#' not in page.url
+
+
+def api_wait_ms(page):
+    return int(page.locator('meta[name=request-timeout-ms]').get_attribute('content'))+15000
 
 
 def login(page, email):
@@ -106,8 +110,33 @@ def login(page, email):
     form.locator('[name=email]').fill(email)
     form.locator('[name=password]').fill(PASSWORD)
     form.get_by_role('button', name='Войти', exact=True).click()
-    expect(page.locator('#workspace')).to_be_visible()
+    expect(page.locator('#workspace')).to_be_visible(timeout=api_wait_ms(page))
     expect(page.locator('#identity')).to_contain_text(email)
+
+
+def navigate(page, area):
+    """Follow the actual section controls, closing only an unmodified editor."""
+    if page.locator('#document-editor[open]').count():
+        page.locator('#close-editor').click()
+        expect(page.locator('#document-editor')).to_be_hidden()
+    if area == 'administration':
+        page.locator('#nav-administration').click()
+    else:
+        if area == 'evidence': page.locator('[data-area=chat]').click()
+        page.locator(f'[data-area={area}]').click()
+
+
+
+def open_sources(page):
+    navigate(page,'chat')
+    menu=page.locator('#source-selection')
+    if menu.count() and not menu.evaluate('(details)=>details.open'):menu.locator('summary').click()
+
+
+def open_conversations(page):
+    navigate(page,'chat')
+    menu=page.locator('.conversation-picker')
+    if menu.count() and not menu.evaluate('(details)=>details.open'):menu.locator('summary').click()
 
 
 def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser):
@@ -125,6 +154,7 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         login(administrator, 'admin-browser@owned.test')
         register(user, mailbox, frontend, 'user-browser@owned.test')
         login(user, 'user-browser@owned.test')
+        open_conversations(user)
         user.locator('#conversations button').first.click()
         expect(user.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
         user_conversation = user.evaluate("async url => { const r = await fetch(url + '/api/accounts/me', {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}}); return (await r.json()).conversations[0].id; }", api_url)

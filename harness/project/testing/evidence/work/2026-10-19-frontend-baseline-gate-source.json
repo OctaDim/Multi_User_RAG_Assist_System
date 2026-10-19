@@ -1,0 +1,50 @@
+{
+  "kind": "baseline-frontend-first-gate-comparison-provenance",
+  "base": "9f3d77cbd4ea4710f918be41679b5ffc0ed45dad",
+  "scope": "Only original frontend assets, with current backend/current static server and isolated fixtures. Exact first10-owner allocation gate, not full stress or later joint OCR phase.",
+  "public_configuration_exception": "Current public frontend service.toml is used for the current static server loader; no local override or working DB/SMTP is copied. All other listed assets match base byte-for-byte.",
+  "actual_asset_sha256": {
+    "frontend/config/service.local.example.toml": {
+      "sha256": "5bf06b9b8262f1de972a06cee539bfad5abaefcf8d44c0be9b2c0f93c9b04dd8",
+      "matches_base": true
+    },
+    "frontend/config/service.toml": {
+      "sha256": "9186ea37c5c5917250bb867c63967acff9bba87b185937855e98f4670766eca3",
+      "matches_base": false
+    },
+    "frontend/index.html": {
+      "sha256": "3dd04301984acf7f52de28983c5de423f3aa521b2d9556c9d2f4a38071825a40",
+      "matches_base": true
+    },
+    "frontend/main.py": {
+      "sha256": "9ad144e79f320d39ae05193e5a435b80acf2ebb055d32f62fc58a325cb22010c",
+      "matches_base": true
+    },
+    "frontend/src/api.js": {
+      "sha256": "515ed1cf956130382954442fb7527f25201a447f058163f27920d9296eaa5e3f",
+      "matches_base": true
+    },
+    "frontend/src/app.js": {
+      "sha256": "4bf507f8bfd214c8c53f4c87304443eff915d7aa8befa11a3a6f1a5096615630",
+      "matches_base": true
+    },
+    "frontend/src/auth.js": {
+      "sha256": "920863aa8d713ca8021c167aeff2506ae51b514078cd250bb101c79273421267",
+      "matches_base": true
+    },
+    "frontend/src/conversations.js": {
+      "sha256": "1055e76c00e8b2d84a90a295ecff683357ffda6c47bfa5a08b5586233b112273",
+      "matches_base": true
+    },
+    "frontend/src/drafts.js": {
+      "sha256": "33eb8abf443b04385fd1acfd656b30b5ac9f5a6799bdda11afd0b9738da5f941",
+      "matches_base": true
+    },
+    "frontend/src/styles.css": {
+      "sha256": "b8ad48b1bfdebd2963e56724252d08578117e5856a01b589113811fa9dc215fc",
+      "matches_base": true
+    }
+  },
+  "probe_source": "from conftest import postgres\nfrom integration.test_answer_lifecycle import *\ndef test_baseline_ten_owner_allocation_gate(integrated_browser, environment):\n    ((browser, mailbox, frontend, first), publisher, publisher_log), second, logs = integrated_browser\n    contexts = []\n    pages = []\n    credentials = []\n    operations = []\n    try:\n        admin_context = browser.new_context()\n        contexts.append(admin_context)\n        admin = admin_context.new_page()\n        operator(admin, mailbox, frontend)\n        for index in range(29):\n            context = browser.new_context()\n            contexts.append(context)\n            page = context.new_page()\n            email = f'u8-load-{index}@owned.test'\n            register(page, mailbox, frontend, email)\n            login(page, email)\n            if index >= 10:\n                context.close()\n                continue\n            name = f'private-budget-{index}.txt'\n            content = f'The annual budget for library {index} is {100 + index} euros. The budget pays for maintenance of the library and its reading rooms. ' * 45\n            navigate(page, 'library')\n            page.locator('#document-upload input').set_input_files({'name': name, 'mimeType': 'text/plain', 'buffer': content.encode()})\n            page.get_by_role('button', name='Загрузить документы', exact=True).click()\n            ready(page, name, timeout=45)\n            navigate(page, 'chat')\n            open_sources(page)\n            page.get_by_role('checkbox', name=name, exact=True).check()\n            pages.append(page)\n            credentials.append(page.evaluate(\"() => ({token:sessionStorage.getItem('rag:credential'),\\n                tab:JSON.parse(sessionStorage.getItem('rag:tab')),\\n                conversation:sessionStorage.getItem('rag:conversation'),\\n                document:document.querySelector('#question-sources input:checked').value})\"))\n        with psycopg.connect(environment['dsn'], autocommit=True, row_factory=dict_row) as connection:\n            assert connection.execute('SELECT count(*) AS n FROM accounts').fetchone()['n'] == 30\n            assert connection.execute('SELECT count(*) AS n FROM accounts WHERE verified AND NOT paid').fetchone()['n'] == 30\n            assert connection.execute('SELECT count(*) AS n FROM documents WHERE ready').fetchone()['n'] == 10\n        for index in range(13):\n            actor = credentials[index % 10]\n            if index >= 10:\n                conversation = pages[index % 10].evaluate(\"async ({url,token}) => (await (await fetch(url+'/api/conversations',\\n                    {method:'POST',headers:{Authorization:'Bearer '+token}})).json()).id\", {'url': second, 'token': actor['token']})\n            else:\n                conversation = actor['conversation']\n            operations.append({'base': first if index % 2 else second, 'token': actor['token'], 'proof': actor['tab']['proof'], 'conversation': conversation, 'body': {'operation_key': str(uuid4()), 'question': f'What is the annual budget for library {index % 10} and its reading rooms? Quote every supplied excerpt in full with citations.', 'document_ids': [actor['document']], 'tab_id': actor['tab']['id']}})\n        submit = \"async operations => await Promise.all(operations.map(async operation => {\\n            const response=await fetch(operation.base+'/api/conversations/'+operation.conversation+'/answers',{\\n                method:'POST',headers:{Authorization:'Bearer '+operation.token,'X-Tab-Proof':operation.proof,'Content-Type':'application/json'},body:JSON.stringify(operation.body)});\\n            return {status:response.status,body:await response.json()};\\n        }))\"\n        responses = admin.evaluate(submit, operations[:10])\n        deadline = time.monotonic() + 90\n        while True:\n            trace = [json.loads(line) for line in logs['generation'].read_text().splitlines() if line.startswith('{\"event\": \"native_')]\n            if len([row for row in trace if row['event'] == 'native_allocate']) == 10:\n                break\n            assert time.monotonic() < deadline, 'Ten genuine owners did not receive native contexts'\n            admin.wait_for_timeout(50)\n        print('Baseline UI: exact original first gate reached ten native contexts; later stress phases not executed.', flush=True)\n        return\n    finally:\n        for context in contexts:\n            context.close()\n",
+  "adapter_source": "from pathlib import Path\nimport time\nimport pytest\n\n\n@pytest.fixture(autouse=True)\ndef baseline_frontend_only(monkeypatch,request):\n    import browser.test_accounts as accounts\n    monkeypatch.setattr(accounts.frontend_server,'ROOT',Path('/tmp/rag-baseline-front-9f3d77c'))\n    monkeypatch.setattr(accounts,'api_wait_ms',lambda page:45000)\n    monkeypatch.setattr(accounts,'navigate',lambda page,area:None)\n    monkeypatch.setattr(request.module,'navigate',lambda page,area:None)\n    def baseline_ready(page,name,timeout=20):\n        deadline=time.monotonic()+timeout\n        while time.monotonic()<deadline:\n            page.get_by_role('button',name='Обновить статусы документов').click(timeout=min(45000,max(1,int((deadline-time.monotonic())*1000))))\n            item=page.locator('#documents li').filter(has=page.get_by_text(name,exact=True))\n            if item.count() and item.locator(':scope > p').first.inner_text()=='Готов' and item.get_by_role('button',name='Открыть документ',exact=True).count():return item\n            page.wait_for_timeout(300)\n        raise AssertionError('Baseline owned source did not become ready: '+name)\n    monkeypatch.setattr(request.module,'ready',baseline_ready)\n"
+}

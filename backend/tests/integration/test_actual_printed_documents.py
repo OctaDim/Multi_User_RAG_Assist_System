@@ -12,7 +12,7 @@ from PIL import Image
 
 from integration.test_answer_lifecycle import environment,operator
 from integration.test_multilingual_documents import real_document_browser,strict_ocr_tokens,be_exception,CURRENT_PRINTED
-from browser.test_accounts import BACKEND,real_account_browser,register,login
+from browser.test_accounts import BACKEND,real_account_browser,register,login, navigate
 from browser.test_documents import ready
 from app.ocr import SKIP_TEXT
 
@@ -27,6 +27,7 @@ def test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels(real_do
         admin,owner=[context.new_page() for context in contexts]
         operator(admin,mailbox,frontend)
         email='u8-printed-four-languages@owned.test';register(owner,mailbox,frontend,email);login(owner,email)
+        navigate(admin,'administration')
         admin.reload();card=admin.locator('article').filter(has=admin.locator(f'form[data-account="{email}"]'));card.locator('summary').click()
         policy=card.locator('form[data-policy]');policy.locator('[name=handwriting]').uncheck()
         policy.get_by_role('button',name='Сохранить ограничения документов',exact=True).click()
@@ -52,6 +53,7 @@ def test_actual_four_language_printed_pdf_docx_and_forbidden_hand_pixels(real_do
         expected_tokens=[(word,language) for language,line in zip(['en','en','de','ru','be'],gt) for word in strict_ocr_tokens(line)]
         records=[]
         for name,content,has_hand in samples:
+            navigate(owner,'library')
             owner.locator('#document-upload input').set_input_files({'name':name,'mimeType':'application/octet-stream','buffer':content})
             owner.get_by_role('button',name='Загрузить документы',exact=True).click()
             item=owner.locator('#documents li').filter(has=owner.get_by_text(name,exact=True))

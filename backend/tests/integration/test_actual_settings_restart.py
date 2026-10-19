@@ -12,7 +12,7 @@ import pytest
 
 from integration.test_answer_lifecycle import environment,operator
 from integration.test_terminal_lifecycle import controlled_native_browser,records
-from browser.test_accounts import real_account_browser
+from browser.test_accounts import real_account_browser, navigate, open_sources
 from browser.test_documents import real_document_browser,ready
 
 
@@ -21,6 +21,7 @@ def test_real_settings_late_refresh_cannot_replace_completed_save(real_account_b
     context=browser.new_context()
     try:
         page=context.new_page();operator(page,mailbox,frontend)
+        navigate(page,'administration')
         form=page.locator('#global-settings')
         expect(form.locator('[name=max_active]')).to_have_value('12')
         form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
@@ -44,6 +45,7 @@ def test_real_settings_late_refresh_cannot_replace_completed_save(real_account_b
                 return response;
             };
         }''')
+        navigate(page,'administration')
         form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
         page.wait_for_function('window.heldSettings?.value.revision===0')
         form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
@@ -63,6 +65,7 @@ def test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides(co
     context=browser.new_context()
     try:
         page=context.new_page();operator(page,mailbox,frontend)
+        navigate(page,'administration')
         form=page.locator('#global-settings')
         expect(form.locator('[name=max_active]')).to_have_value('12')
         expect(form.locator('[name=step_width]')).to_have_value('3')
@@ -70,9 +73,13 @@ def test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides(co
         form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
         form.get_by_role('button',name='Сохранить глобальные настройки',exact=True).click()
         expect(page.locator('#status')).to_contain_text('Ревизия 1 сохранена')
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':'restart-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
         page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'restart-budget.txt')
+        navigate(page,'chat')
+        open_sources(page)
         page.get_by_role('checkbox',name='restart-budget.txt',exact=True).check()
+        navigate(page,'chat')
         page.locator('#question').fill('What is the annual budget?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history article')).to_contain_text('Завершён',timeout=60000)
@@ -100,9 +107,13 @@ def test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides(co
             assert saved[0]['max_active']==6 and saved[0]['step_width']==2 and saved[1]==1
             assert connection.execute('SELECT state,answer_text FROM requests WHERE id=%s',(completed[0],)).fetchone()==completed[1:]
         page.reload()
+        navigate(page,'administration')
         expect(form.locator('[name=max_active]')).to_have_value('6')
         expect(form.locator('[name=step_width]')).to_have_value('2')
+        navigate(page,'chat')
+        open_sources(page)
         page.get_by_role('checkbox',name='restart-budget.txt',exact=True).check()
+        navigate(page,'chat')
         page.locator('#question').fill('What is the annual budget now?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history article')).to_have_count(2)
@@ -110,6 +121,7 @@ def test_real_ui_hot_settings_and_supervisor_restart_preserve_saved_overrides(co
         trace=records(native_log);new_allocations=[row for row in trace if row['event']=='native_allocate' and row['epoch']>first_epoch]
         assert len(new_allocations)==1 and new_allocations[0]['max_active']==6
         assert any(row['event']=='native_step' and row['epoch']>first_epoch and row['revision']==1 and row['step_width']==2 for row in trace)
+        navigate(page,'administration')
         form.get_by_role('button',name='Обновить применение настроек',exact=True).click()
         expect(form.locator('.settings-revision')).to_contain_text('Применена: 1')
         page.bring_to_front();page.screenshot(path=str(tmp_path/'settings-after-real-restart.png'),full_page=True)

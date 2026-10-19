@@ -1,0 +1,5 @@
+{"nodeid": "tests/browser/test_frontend_administration.py::test_management_retry_foreign_library_and_settings_write_failure", "phase": "call", "outcome": "passed", "duration": 6.351920389002771, "failure": null}
+{"nodeid": "tests/browser/test_frontend_conversations.py::test_selected_old_answer_evidence_and_citation_survive_navigation", "phase": "call", "outcome": "passed", "duration": 49.57374991000688, "failure": null}
+{"nodeid": "tests/browser/test_documents.py::test_ui_permission_choice_actual_native_pdf_and_unchanged_original", "phase": "call", "outcome": "passed", "duration": 98.4581940670032, "failure": null}
+{"nodeid": "tests/browser/test_invalidation.py::test_real_ocr_mutation_preserves_original_and_excludes_future_context[after-correction]", "phase": "call", "outcome": "passed", "duration": 203.83389980600623, "failure": null}
+{"nodeid": "tests/integration/test_actual_authority.py::test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix", "phase": "call", "outcome": "passed", "duration": 13.58568491099868, "failure": null}

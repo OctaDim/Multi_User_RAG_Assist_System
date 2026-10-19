@@ -1,0 +1,1698 @@
+{
+  "status": "passed",
+  "unique_technical_cases": 415,
+  "method": "Disjoint completed partitions plus successful isolated retry; failed historical runs preserved, not counted as green. No remaining case skipped.",
+  "configuration": "Canonical profiles, existing local model paths only; isolated fixture DB/SMTP and nonconnecting config-validation DSN. Production local overrides untouched.",
+  "raw_receipts": {
+    "core-01": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-core-01.junit.xml",
+      "sha256": "ea243494b72d9c3e4ea8c734c14893d03d943d341a816bf2845ba4502de761fb"
+    },
+    "core-02": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-core-02.junit.xml",
+      "sha256": "349bf2b258205e67f14cc815c99311189d6381b26fe78b7aea6f7da8c8c309d7"
+    },
+    "core-03": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-core-03.junit.xml",
+      "sha256": "ff9b3451e9b7886c2d2fedc814859d8434fe0bd2175f5d47702e5bfbe51eb753"
+    },
+    "core-04": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-core-04.junit.xml",
+      "sha256": "dd123c62091f5ffc5c2250ee2f902f63b685f18087f4dcf369f3e29c6f82b3f8"
+    },
+    "core-05": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-core-05.junit.xml",
+      "sha256": "75df38b461979e3924e209a25e31dfbcb96287d2289cc34f2db1482624af460e"
+    },
+    "native-startup-serial": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-native-startup-serial.junit.xml",
+      "sha256": "5410fe4cb78d9fd031000d77364862c34cffc8420d092ef7070c1f1afc186594"
+    },
+    "harness": {
+      "path": "harness/project/testing/evidence/work/2026-10-19-frontend-harness.junit.xml",
+      "sha256": "01dfb0381564c968aa4a58cdc7ad9b17839d76826c45ec15b6da550a2bd3379f"
+    }
+  },
+  "cases": {
+    "tests/test_accounts.py::test_real_registration_mail_verification_and_login": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_passwords_validation_roles_and_credentials_do_not_leak": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_verification_expiry_resend_and_block_are_independent": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_operator_invitation_roles_admin_boundaries_and_audit": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_concurrent_registration_has_one_account": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_resend_links_are_one_use_despite_delivery_order": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_unchanged_or_increased_access_preserves_session_and_execution[changes0]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_unchanged_or_increased_access_preserves_session_and_execution[changes1]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_origin_session_and_account_mutations_fence_shared_writes[logout]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_origin_session_and_account_mutations_fence_shared_writes[block]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_origin_session_and_account_mutations_fence_shared_writes[soft_delete]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_origin_session_and_account_mutations_fence_shared_writes[expiry]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_expired_bootstrap_and_session_are_refused": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_missing_or_failed_smtp_has_no_verification_bypass": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_accounts.py::test_password_work_and_mail_delivery_happen_after_transaction_release": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_concurrent_different_questions_accept_exactly_one": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_no_ready_sources_refuses_without_history_or_late_auto_admission[None]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_no_ready_sources_refuses_without_history_or_late_auto_admission[scope1]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_scope_metadata_is_available_before_fragments_and_replay_keeps_original_scope[all]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_scope_metadata_is_available_before_fragments_and_replay_keeps_original_scope[selected]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_second_replay_after_locks_returns_saved_scope_even_when_candidate_differs": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read[user]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read[admin]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_current_account_state_is_checked_on_every_operation[verified-False]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_current_account_state_is_checked_on_every_operation[active-False]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_current_account_state_is_checked_on_every_operation[disabled-True]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_anonymous_or_expired_session_is_denied": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_failed_transaction_leaves_no_partial_admission": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_unavailable_coordinator_refuses_before_admission[False]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_unavailable_coordinator_refuses_before_admission[True]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_admission.py::test_database_enforces_occupancy_and_owner_operation_uniqueness": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_profiles_follow_selected_service_directory_from_other_cwd": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_policy_rejected_without_value_disclosure[[inputs]\\npassword_min = \"PRIVATE_VALUE\"-inputs.password_min]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_policy_rejected_without_value_disclosure[[inputs]\\npassword_min = 2048-inputs.password]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_policy_rejected_without_value_disclosure[[tabs]\\nheartbeat_seconds = 30-tabs.heartbeat_seconds]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_policy_rejected_without_value_disclosure[[security]\\nscrypt_n = 123-security.scrypt_n]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_policy_rejected_without_value_disclosure[[inputs]\\nunknown = \"PRIVATE_VALUE\"-inputs.unknown]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_context_budget_must_fit_configured_context": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_original_model_prompt_bytes_are_preserved": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[policy-[security]\\nscrypt_maxmem=2147483648-security.scrypt_maxmem]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[policy-[tabs]\\npoll_seconds=20.0-tabs.poll_seconds]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[policy-[inputs]\\npassword_max=2147483648-inputs.password_max]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[runtime-[rag]\\nretrieval_limit=100-rag.retrieval_limit]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[runtime-[generation]\\nn_ctx=4294967297-generation.n_ctx]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[runtime-[generation]\\nn_threads=2147483648-generation.n_threads]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[ocr-[execution]\\nn_threads=2147483648-execution.n_threads]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[ocr-[execution]\\nn_batch=64\\nn_ubatch=128-execution.n_ubatch]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[ocr-[fragments]\\nlimit=200\\noverlap=128-fragments.overlap]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_application_settings.py::test_invalid_cross_field_and_native_bounds[prompts-[rag]\\ntemplate=\"{system} {question.secret}\"-rag.template]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_signals_stop_descendants_even_when_their_leader_has_exited[2]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_signals_stop_descendants_even_when_their_leader_has_exited[15]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_unexpected_child_exit_fails_launch_and_stops_sibling[0]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_unexpected_child_exit_fails_launch_and_stops_sibling[7]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_database_readiness_uses_existing_database_owner": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_database_wait_is_bounded_for_silent_peer": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_database_deadline_bounds_a_peer_that_stalls_after_authentication": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_backend_main_config_error_from_foreign_directory_does_not_echo_secret": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_real_backend_main_starts_models_api_and_stops_whole_tree[2-cli]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_real_backend_main_starts_models_api_and_stops_whole_tree[2-environment]": {
+      "outcome": "passed",
+      "receipt": "02"
+    },
+    "tests/test_backend_launcher.py::test_real_backend_main_starts_models_api_and_stops_whole_tree[15-cli]": {
+      "outcome": "passed",
+      "receipt": "03"
+    },
+    "tests/test_backend_launcher.py::test_real_backend_main_starts_models_api_and_stops_whole_tree[15-environment]": {
+      "outcome": "passed",
+      "receipt": "native-startup-serial"
+    },
+    "tests/test_configured_ocr.py::test_foreground_cutoff_is_shared_with_fragment_boundary_search": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_fragment_duplicate_threshold_retains_distinct_overlapping_regions": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_connected_ink_uses_configured_component_rules_and_padding": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_detector_uses_configured_confidence_and_padding": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_model_calls_use_configured_tasks_and_output_limit": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_native_and_detector_creation_use_configured_execution": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_ocr.py::test_pdf_render_uses_configured_width": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_policy.py::test_password_profile_change_keeps_original_credentials": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_policy.py::test_email_domain_uses_selected_limit": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_policy.py::test_session_and_verification_deadlines_use_policy": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_policy.py::test_ingestion_uses_configured_chunks_and_embedding_prefix": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_policy.py::test_generation_reaps_stubborn_child_using_configured_timeout": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_packing_uses_configured_context_and_response_reserve": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_default_prompt_bytes_are_unchanged": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_retrieval_obeys_configured_limit_and_similarity": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_real_embedder_uses_configured_truncation_threads_and_prefixes": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_real_native_prefill_respects_configured_batch": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_configured_rag.py::test_admission_budget_uses_the_selected_generation_context": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_database.py::test_database_is_an_explicit_resource_owner": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_database.py::test_parallel_sessions_use_distinct_connections_and_dispose_closes_pool": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_database.py::test_session_cleanup_does_not_commit_and_operation_owns_transaction": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_database.py::test_socket_options_and_credential_characters_are_preserved[conninfo]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_database.py::test_socket_options_and_credential_characters_are_preserved[uri]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[0]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[128]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_single_color_ink_reaches_printed_page_text[240]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[False]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_complete_page_preserves_printed_columns_when_inserting_handwriting[True]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_handwriting_only_columns_keep_original_geometry_order": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_native_coordinate_tokens_place_skip_blocks_without_recognizing_handwriting": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[Unlocated OCR text]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|><|LOC_1001|>]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_invalid_or_degenerate_native_coordinates_fail_whole_page[x<|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|><|LOC_0|>]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_documented_wrapped_locations_are_not_part_of_recognized_text": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_diagonal_zero_area_polygon_is_rejected": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_real_small_handwriting_crop_is_detected_before_permission_masking": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_actual_native_abort_and_close_wait_for_c_return": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_ocr_loads_fixed_paddle_and_qwen_handwriting_profiles": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_original_english_and_missed_russian_ink_are_both_masked": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_actual_handwriting_abort_and_both_contexts_close_after_c_return": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_document_ocr.py::test_genuine_be_expanded_regions_do_not_duplicate_the_same_ink_crop": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_actual_original_upload_is_not_a_ready_source": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_text_publisher_indexes_whole_original": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_worker_restart_ends_lost_job_without_requeue": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_revoked_permission_and_account_access_stop_queued_documents[permission]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_revoked_permission_and_account_access_stop_queued_documents[account]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_lower_quota_keeps_admitted_upload_and_denies_new_one": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_forbidden_handwriting_requires_explicit_choice_and_no_auto_resume": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_database_failure_after_atomic_file_link_keeps_original_accounted": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_correction_switches_whole_index_and_preserves_original": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_revocation_after_detection_cannot_start_recognition": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_pdf_skip_publisher_and_manual_correction": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_long_unicode_original_has_no_silent_embedding_tail_loss": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_publisher_preserves_complete_short_paragraphs_and_exact_spans": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_short_unrelated_paragraphs_have_separate_searchable_spans": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_docx_headers_footnotes_and_body_are_all_published": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_docx_embedded_handwriting_is_processed_before_publication[False]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_real_docx_embedded_handwriting_is_processed_before_publication[True]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_documents.py::test_bad_file_does_not_publish_partial_text_or_cancel_good_batch_file": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_public_config_injection_and_head": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_ui_config_rejects_invalid_values[composer_rows-0]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_ui_config_rejects_invalid_values[correction_rows-True]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_ui_config_rejects_invalid_values[short_id_chars--2]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_ui_local_settings_are_independent_of_working_directory": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/config/service.local.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/main.py]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/backend/config/service.local.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/src/../config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/src/%2e%2e/config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/src/]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[GET-/src/not-allowed.txt]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/config/service.local.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/main.py]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/backend/config/service.local.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/src/../config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/src/%2e%2e/config/service.toml]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/src/]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_only_public_files_are_served[HEAD-/src/not-allowed.txt]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_main_reports_busy_port_from_foreign_directory": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_config_rejects_browser_integer_overflow[client-reconnect_ms-2147483648]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_config_rejects_browser_integer_overflow[ui-composer_rows-4294967296]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_config_rejects_browser_integer_overflow[ui-correction_rows-4294967296]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_signal_closes_partial_http_connection_and_allows_restart[2]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_launcher.py::test_frontend_signal_closes_partial_http_connection_and_allows_restart[15]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_reducer.py::test_delayed_empty_snapshot_keeps_accepted_request_and_new_draft": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_reducer.py::test_source_status_event_marks_original_without_replacing_quote": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_frontend_reducer.py::test_scope_is_per_conversation_and_pending_submission_is_immutable": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_http.py::test_http_rejects_missing_credentials_and_restart_only_settings": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_http.py::test_http_accepts_one_question_replays_ack_and_stops": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_http.py::test_api_lifespan_restart_preserves_overrides_and_applied_revision": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_http.py::test_login_preflight_is_public_and_keeps_exact_cors_origin": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_http.py::test_forwarded_loopback_origins_require_explicit_opt_in": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_role_downgrade_closes_prepared_admin_response[/api/accounts]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_role_downgrade_closes_prepared_admin_response[/api/settings]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[original]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[png]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_deleted_document_closes_prepared_original_png_and_json[json]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_account_view_is_freshly_serialized_at_handoff": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_generic_asgi_without_private_handoff_fails_closed": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_deduplicated_completed_ack_contains_citations": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_correction_marks_request_snapshot_and_notifies_all_tabs": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-delete]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-connection]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[fragments-proof]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-delete]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-connection]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_sse_and_replay_rechecks_source_and_tab[output-proof]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_prepared_snapshot_retains_old_quote_with_current_correction_flags": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_irreducible_native_question_budget_refuses_before_admission": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_correction_between_preparation_and_pending_checkpoint_keeps_current_generation": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_correction_of_prior_history_after_admission_keeps_current_question": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_fresh_handoff_snapshot_watermark_is_the_actual_replay_cursor": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_minted_login_token_is_fenced_before_private_body": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_current_session_fences_prepared_json_but_logout_ack_stays_minimal[logout]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_current_session_fences_prepared_json_but_logout_ack_stays_minimal[expiry]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_current_session_fences_prepared_json_but_logout_ack_stays_minimal[soft_delete]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_natural_session_expiry_during_serialization_closes_unhanded_body": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_database_complete_races_invalidation_with_one_terminal_outcome[timeout]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_database_complete_races_invalidation_with_one_terminal_outcome[delete]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_database_output_races_account_revoke_without_late_publication": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_stop_old_request_races_new_admission_and_old_pending_writes_cannot_change_new_context": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[json]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[file]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[png]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[snapshot]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_real_socket_backpressure_revocation_holds_no_database_locks[replay]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_invalidation.py::test_account_revoke_closes_prepared_body_before_real_handoff": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_local_settings_override_defaults_and_paths_are_section_relative": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_missing_required_setting_does_not_echo_secrets": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_invalid_settings_rejected[api-port-65536]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_invalid_settings_rejected[api-port-True]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_invalid_settings_rejected[api-frontend_origin-https://example.test/path]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_invalid_settings_rejected[api-allow_loopback_origins-true]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_invalid_settings_rejected[supervisor-poll_seconds-0]": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_interpreter_path_is_normalized_without_resolving_virtualenv_symlink": {
+      "outcome": "passed",
+      "receipt": "04"
+    },
+    "tests/test_launch_configuration.py::test_loopback_cors_opt_in_is_exported_to_component_environment": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[5]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head[6]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_head_missing_table_is_rejected_without_repair": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_api_lifespan_initializes_empty_database_before_ready": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_entrypoints_refuse_damaged_schema_before_serving_or_work[api]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_entrypoints_refuse_damaged_schema_before_serving_or_work[documents]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_entrypoints_refuse_damaged_schema_before_serving_or_work[generation]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_entrypoints_refuse_damaged_schema_before_serving_or_work[accounts]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_concurrent_async_calls_do_not_corrupt_alembic_context": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[ALTER TABLE requests DROP CONSTRAINT request_session_owner-constraints]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[ALTER TABLE source_chunks DISABLE TRIGGER immutable_chunks-triggers]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[DELETE FROM settings-singleton.*settings]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[UPDATE lifecycle_migrations SET sha256='wrong'-checksum]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[INSERT INTO lifecycle_migrations VALUES ('007_unknown.sql','unknown')-history]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[DELETE FROM lifecycle_migrations WHERE name LIKE '003%'-history]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[UPDATE alembic_version SET version_num='unknown'-Unknown Alembic]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[INSERT INTO checkpoint_migrations VALUES (10)-checkpoint_migrations]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_current_head_rejects_schema_and_history_damage[DELETE FROM checkpoint_migrations WHERE v=4-checkpoint_migrations]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_adoption_preserves_lease_history_and_once_only_terminal_effects[2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_adoption_preserves_lease_history_and_once_only_terminal_effects[4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_adoption_preserves_lease_history_and_once_only_terminal_effects[6]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-5]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-6]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-7]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-8]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-9]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[False-10]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-5]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-6]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-7]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-8]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-9]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_prefix_and_ddl_before_marker_preserve_payload[True-10]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_checkpoint_unknown_unjournaled_shape_stops_before_application_ddl": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_prepared_future_revision_uses_its_own_contract_without_changing_legacy_profiles": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_revision_failure_rolls_back_ddl_data_and_releases_lock": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_independent_cli_processes_wait_for_migration_lock_and_recheck": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_cli_autogenerate_excludes_infrastructure_and_refuses_offline_and_downgrade": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_cli_current_on_legacy_database_does_not_adopt_or_create_history": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_migrations.py::test_cli_upgrade_can_stop_at_historical_revision_then_reach_head": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_verification_requires_every_companion_and_reports_preparation": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_verification_rejects_truncated_or_wrong_hash[x]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_verification_rejects_truncated_or_wrong_hash[WEIGHTS]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_verification_is_offline_and_rejects_symlink_escape": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_manifest_paths_cannot_escape[../outside]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_manifest_paths_cannot_escape[/tmp/outside]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_preparation_verified_reuse_and_move_preserve_unrelated_files": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_failed_source_or_stage_keeps_current_and_source": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_partial_destination_is_preserved": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_download_rejects_mutable_revision_before_network": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_download_uses_pinned_url_and_verifies_full_set": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_installation_rejects_outside_paths_and_incompatible_profile": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_full_manifest_companions_are_required_and_import_is_lightweight": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_installation_accepts_complete_set_independently_of_cwd": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_publication_failure_restores_previous_scaffold": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_source_rejects_symlink_hidden_by_dotdot": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_invalid_profile_has_actionable_model_error": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_operational_runtime_tuning_does_not_change_artifact_compatibility": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_move_cleanup_failure_reports_verified_destination_and_partial_source": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_preparation_restores_missing_git_exclusions[empty-directory]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_model_artifacts.py::test_preparation_restores_missing_git_exclusions[verified-reuse]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_models.py::test_model_registry_contains_all_application_tables": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_models.py::test_importing_models_needs_no_engine_or_connection": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_models.py::test_models_match_existing_migration_catalog": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_models.py::test_vector_comparator_uses_existing_embedding": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragment_publication.py::test_fragment_error_prevents_database_page_and_source_publication": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragments_cover_every_pixel_with_bounded_overlapping_inputs[size4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_cut_uses_nearby_white_gap_instead_of_bisecting_text": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_overlap_keeps_intact_geometry_and_repeated_words_at_other_locations": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragment_order_keeps_columns_between_full_width_heading_and_footer": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[False]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_split_before_detector_masks_overlap_handwriting_before_any_printed_ocr[True]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_clipped_overlap_line_is_replaced_by_intact_line_from_next_fragment": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_complete_mode_transcribes_overlap_handwriting_once_in_original_coordinates": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_empty_middle_fragment_does_not_invoke_native_recognition": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_masked_handwriting_does_not_turn_gray_paper_into_printed_ink": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragment_failure_never_returns_partial_page[cancel]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_fragment_failure_never_returns_partial_page[error]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_ocr_fragments.py::test_actual_native_long_image_keeps_seam_once_and_original_coordinates": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_public_settings.py::test_public_settings_uses_configured_limits_without_publishing_secrets": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_public_settings.py::test_public_settings_reads_selected_local_policy_from_another_directory": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_source_tag_separates_citation_number_from_internal_fragment_identity": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[error]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[cancel]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_runtime_saver_failure_rolls_back_and_releases_guard[disconnect]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_actual_async_graph_commits_fragments_before_model_callback": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_all_mode_prepare_preserves_admission_metadata_and_frozen_scope": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_not_ready_selected_and_unmatched_ready_sources_are_distinct": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[False-delete]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[False-correct]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[True-delete]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[True-correct]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_correction_before_late_complete_marks_original_without_cancelling": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_deselected_source_cannot_reenter_current_model_scope_through_history": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[account]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[service]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[owner]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_every_saver_operation_rechecks_access_identity_and_epochs[thread]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_malicious_doc_cannot_expand_scope_and_invented_quotes_are_rejected": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_real_e5_mean_pooling_and_real_pgvector_retrieval": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_rag_context.py::test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_resources.py::test_installed_package_ignores_an_unrelated_neighbor_config": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_resources.py::test_working_tree_resources_still_load_runtime_and_migrations": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_resources.py::test_migration_resources_include_environment_contracts_and_no_legacy_sql": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_saver_transaction.py::test_saver_and_application_rollback_together[pipeline]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_saver_transaction.py::test_saver_and_application_rollback_together[fallback]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_saver_transaction.py::test_saver_committed_blob_writes_get_list_and_delete[pipeline]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_saver_transaction.py::test_saver_committed_blob_writes_get_list_and_delete[fallback]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_saver_transaction.py::test_cancelling_blocked_saver_rolls_back_and_releases_guard": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_global_round_robin_and_hot_settings_keep_native_reservations": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_saved_shrink_during_allocation_applies_before_next_admission": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_stop_wins_dequeue_and_late_computed_token_is_not_committed": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry[False]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_native_error_preserves_only_committed_prefix_without_retry[True]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_logical_stop_does_not_release_physical_slot_until_ack": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_failed_native_allocation_releases_reservation_without_empty_answer": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_scheduler.py::test_search_state_is_published_before_graph_work": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[within-confirmed-lease]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_ownership_lease.py::test_real_query_delay_keeps_owner_until_confirmed_lease_bound[past-confirmed-lease]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_supervisor_bounds_startup_when_postgres_accepts_without_responding": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_application_service_lock_does_not_cancel_healthy_supervisor[SHARE]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_application_service_lock_does_not_cancel_healthy_supervisor[UPDATE]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_real_supervisor_reaps_native_process_before_replacement": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_live_predecessor_record_blocks_unconfirmed_replacement": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_service_recovery.py::test_real_coordinator_recovery_reconciles_all_pre_token_states_and_keeps_completed": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_saved_overrides_survive_repeated_controlled_migration": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_global_changes_require_super_admin[user]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_global_changes_require_super_admin[admin]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_restart_only_and_invalid_changes_do_not_change_revision[changes0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_restart_only_and_invalid_changes_do_not_change_revision[changes1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_restart_only_and_invalid_changes_do_not_change_revision[changes2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_restart_only_and_invalid_changes_do_not_change_revision[changes3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_settings.py::test_restart_only_and_invalid_changes_do_not_change_revision[changes4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_empty_selection_resolves_only_whole_ready_owned_sources": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_ready_flag_without_whole_published_revision_is_rejected": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection0]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection1]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection3]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection4]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection5]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_explicit_ready_skip_mode_retrieves_only_printed_text_with_limitations": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_owner_and_scope_are_enforced_by_pgvector_not_document_instructions": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_chunks SET text='x',span_end=1 WHERE revision_id=%s]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[DELETE FROM source_chunks WHERE revision_id=%s]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_pages SET status='failed' WHERE revision_id=%s]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_source_contract.py::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_revisions SET status='failed' WHERE id=%s]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_main_checks_models_before_importing_launcher": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_dependency_checks_include_exact_direct_versions_and_binary_extras": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_environment_repair_is_frozen_isolated_and_bounded[success]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_environment_repair_is_frozen_isolated_and_bounded[still-missing]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_environment_repair_is_frozen_isolated_and_bounded[sync-failed]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_environment_repair_is_frozen_isolated_and_bounded[no-uv]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_environment_repair_is_frozen_isolated_and_bounded[native-changed]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_early_child_signal_reaps_owned_group_and_preserves_unrelated[2]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_early_child_signal_reaps_owned_group_and_preserves_unrelated[15]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_unsupported_python_fails_before_tomllib_import[backend-version0-3.12]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_unsupported_python_fails_before_tomllib_import[frontend-version1-3.11]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_failed_reexec_environment_does_not_trigger_second_sync": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_unverified_native_rebuild_is_not_blessed_by_successful_symbol_probe": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_failed_sync_still_detects_changed_existing_native_libraries": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_main_import_keeps_native_and_database_dependencies_unloaded": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_real_environment_probe_and_fake_uv_recheck_missing_dependency": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_owned_probe_reaps_descendants_after_timeout_or_leader_exit[timeout]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_startup_bootstrap.py::test_owned_probe_reaps_descendants_after_timeout_or_leader_exit[leader-exit]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_admission_requires_confirmed_connection": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_idle_expired_tab_lock_does_not_delay_another_origin_deadline": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_owner_snapshot_preserves_multiple_and_empty_conversations": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[accepted]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[searching]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[queued]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[generating]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[accepted]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[searching]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[generating]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout[completed-finished]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout[failed-generation_error]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_terminal_during_grace_is_immediate_and_survives_timeout[interrupted-user_stop]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_background_conversations_and_missing_heartbeat_ack": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_proof_owner_and_epoch_checks": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_snapshot_replay_monotonic_and_access_rechecked": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_snapshot_watermark_waits_for_lower_uncommitted_event[False]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_snapshot_watermark_waits_for_lower_uncommitted_event[True]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_heartbeat_challenge_is_one_use_and_unconfirmed_reconnect_refuses_new_admission": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_same_native_context_continues_through_reconnect_and_dedupe": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_delayed_search_callback_cannot_publish_after_deadline": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_unacknowledged_reconnect_does_not_extend_original_grace": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_reconnect_and_expiry_race_share_tab_lock[9.5-accepted]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_reconnect_and_expiry_race_share_tab_lock[10-interrupted]": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_stream_recovery.py::test_actual_tab_sse_confirmed_on_second_api_and_deadline_survives_first_api_death": {
+      "outcome": "passed",
+      "receipt": "05"
+    },
+    "tests/test_supervisor_imports.py::test_supervisor_import_keeps_inference_dependencies_in_native_worker": {
+      "outcome": "passed",
+      "receipt": "05"
+    }
+  }
+}

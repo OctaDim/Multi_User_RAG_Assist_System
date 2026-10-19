@@ -13,7 +13,7 @@ from psycopg.rows import dict_row
 from playwright.sync_api import expect
 import pytest
 
-from .test_accounts import BACKEND, real_account_browser, register, login
+from .test_accounts import BACKEND, real_account_browser, register, login, navigate, open_sources
 from .test_documents import real_document_browser, ready
 
 
@@ -89,13 +89,17 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
         except Exception:
             print('U7 login status:',page.locator('#status').inner_text(),flush=True)
             raise
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':'scanned-budget.pdf','mimeType':'application/pdf','buffer':scanned_budget()})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         item=ready(page,'scanned-budget.pdf',timeout=300)
         item.get_by_role('button',name='Открыть документ',exact=True).click()
         original=page.locator('#document-correction textarea').input_value()
         assert '100' in original,'Actual OCR must read the source before this proof'
+        navigate(page,'chat')
+        open_sources(page)
         page.get_by_role('checkbox',name='scanned-budget.pdf',exact=True).check()
+        navigate(page,'evidence')
         page.locator('#question').fill('What is the annual budget? Cite the source.')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#early-fragments blockquote')).to_contain_text('100',timeout=120000)
@@ -105,19 +109,27 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
         if mode=='after':
             expect(page.locator('#history .answer-text')).not_to_have_text('',timeout=120000)
         if mutation=='delete':
+            navigate(page,'library')
             item.get_by_role('button',name='Удалить документ',exact=True).click()
+            page.locator('#confirm-accept').click()
+            navigate(page,'chat')
             expect(page.locator('#history')).to_contain_text('Источник удалён',timeout=15000)
             expect(page.locator('#history')).to_contain_text('Прерван',timeout=15000)
         else:
+            navigate(page,'library')
+            item.get_by_role('button',name='Открыть документ',exact=True).click()
             page.locator('#document-correction textarea').fill(original.replace('100','10'))
             page.get_by_role('button',name='Сохранить исправления',exact=True).click()
+            expect(page.locator('#document-correction .operation-status')).to_contain_text('Исправления приняты')
+            navigate(page,'library')
             ready(page,'scanned-budget.pdf',timeout=300)
+            navigate(page,'chat')
             expect(page.locator('#history')).to_contain_text('OCR исправлен',timeout=15000)
         release.touch()
         if mutation=='correction':
             expect(page.locator('#history')).to_contain_text('Завершён',timeout=180000)
-        page.locator('#history .answer-passport summary').click()
-        expect(page.locator('#history .answer-passport')).to_contain_text('100')
+        navigate(page,'evidence')
+        expect(page.locator('#early-fragments')).to_contain_text('100')
         with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
             row=connection.execute('''SELECT r.* FROM requests r JOIN accounts a ON a.id=r.owner_id
                 WHERE a.email=%s ORDER BY r.created_at LIMIT 1''',(email,)).fetchone()
@@ -130,9 +142,13 @@ def test_real_ocr_mutation_preserves_original_and_excludes_future_context(paused
             else:assert messages and row['answer_text']
             old_request,old_state=row['id'],row['state']
         if mutation=='delete':
+            navigate(page,'library')
             page.locator('#document-upload input').set_input_files({'name':'current-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 10 euros.'})
             page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,'current-budget.txt')
+            navigate(page,'chat')
+            open_sources(page)
             page.get_by_role('checkbox',name='current-budget.txt',exact=True).check()
+        navigate(page,'chat')
         page.locator('#question').fill('What is the annual budget now? Cite the source.')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#history article')).to_have_count(2)

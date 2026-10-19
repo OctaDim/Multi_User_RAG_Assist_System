@@ -17,6 +17,8 @@ const drafts=new Drafts('owner');
 drafts.edit('room','New unsent draft');
 const controller=Object.create(Conversations.prototype);
 controller.drafts=drafts;
+controller.questionErrors=new Map([['room',{operationKey:'operation',message:'Uncertain send'}],
+  ['other',{operationKey:'other-operation',message:'Other room failure'}]]);
 controller.histories=new Map([['room', {
   conversation_id:'room',watermark:5,
   requests:[{id:'accepted',version:1,operation_key:'operation',state:'accepted'}],
@@ -26,6 +28,8 @@ controller.install({conversation_id:'room',watermark:0,requests:[],messages:[]})
 assert.deepEqual(controller.histories.get('room').requests.map(row=>row.id),['accepted']);
 assert.deepEqual(controller.histories.get('room').messages.map(row=>row.text),['Already accepted question']);
 assert.equal(drafts.get('room').text,'New unsent draft');
+assert.equal(controller.questionErrors.has('room'),false);
+assert.equal(controller.questionErrors.get('other').message,'Other room failure');
 console.log('Real reducer and draft store preserved newer accepted state against an older empty snapshot.');
 '''
     result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
@@ -89,12 +93,14 @@ drafts.selectSources('first',[]);
 assert.deepEqual(controller.effectiveSources(drafts.get('first')).map(value=>value.id),['other-document']);
 controller.current=()=>true;controller.render=()=>{};controller.list=()=>{};
 controller.drafts=drafts;controller.histories=new Map();controller.selected='second';controller.cursor=null;
+controller.questionErrors=new Map([['first',{operationKey:'newer-refused',message:'Newer failure'}]]);
 const passport={scope_mode:'all',selected_document_ids:[]};
 await controller.receive({id:1,kind:'accepted',conversation_id:'first',request_id:'request',payload:{
  state:'accepted',version:1,operation_key:'admitted',scope:['other-document'],question:'Accepted question',passport}});
 assert.deepEqual(controller.histories.get('first').requests[0].passport,passport);
 assert.equal(controller.selected,'second');
 assert.equal(drafts.get('second').text,'Question two');
+assert.equal(controller.questionErrors.get('first').message,'Newer failure');
 '''
     result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
         input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)

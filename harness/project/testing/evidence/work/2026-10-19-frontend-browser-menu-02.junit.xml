@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="220.517" timestamp="2026-10-19T04:18:12.719439+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_answer_lifecycle" name="test_actual_print_only_pdf_limitations_reach_answer_passport" time="173.122" /><testcase classname="tests.browser.test_answer_lifecycle" name="test_old_real_snapshot_cannot_erase_new_request_or_current_fragments" time="44.911"><failure message="AssertionError: Locator expected to have text 'What is the annual budget?'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;  - LocatorAssertions.to_have_text with timeout 5000ms&#10;  -   - waiting for locator(&quot;#history h3&quot;)">backend/tests/browser/test_answer_lifecycle.py:461: in test_old_real_snapshot_cannot_erase_new_request_or_current_fragments
+    expect(page.locator('#history h3')).to_have_text('What is the annual budget?')
+E   AssertionError: Locator expected to have text 'What is the annual budget?'
+E   Actual value: &lt;element(s) not found&gt; 
+E   Call log:
+E     - LocatorAssertions.to_have_text with timeout 5000ms
+E     -   - waiting for locator("#history h3")</failure></testcase></testsuite></testsuites>

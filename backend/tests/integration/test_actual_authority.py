@@ -4,7 +4,7 @@ import json
 from playwright.sync_api import expect
 
 from integration.test_answer_lifecycle import environment, operator
-from browser.test_accounts import PASSWORD, real_account_browser, register, login
+from browser.test_accounts import PASSWORD, real_account_browser, register, login, navigate
 from browser.test_documents import real_document_browser, ready
 
 
@@ -23,6 +23,7 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
         operator(admin,mailbox,frontend)
         email='u8-authority-owner@owned.test'
         register(owner,mailbox,frontend,email);login(owner,email)
+        navigate(owner,'library')
         owner.locator('#document-upload input').set_input_files({'name':'owner-secret.txt','mimeType':'text/plain','buffer':b'Private owner receipt: 74192.'})
         owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'owner-secret.txt')
         identity=owner.evaluate('''async api => ({credential:sessionStorage.getItem('rag:credential'),
@@ -41,6 +42,7 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
         assert all(row['status']==404 for row in denials),denials
         assert all('74192' not in row['body'] and 'owner-secret' not in row['body'] for row in denials+anonymous)
         unverified.goto(frontend)
+        unverified.locator('#show-register').click()
         form=unverified.locator('#register');form.locator('[name=email]').fill('u8-unverified@owned.test')
         form.locator('[name=password]').fill(PASSWORD);form.get_by_role('button',name='Зарегистрироваться',exact=True).click()
         expect(unverified.locator('#status')).to_contain_text('Откройте письмо')
@@ -50,6 +52,7 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
         admin.reload()
         states={}
         for key in ['disabled','active']:
+            navigate(admin,'administration')
             form=admin.locator(f'form[data-account="{email}"]')
             form.locator(f'[name={key}]').set_checked(key=='disabled')
             previous_form=form.element_handle()
@@ -63,6 +66,7 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
             assert all('74192' not in row['body'] and 'owner-secret' not in row['body'] for row in denied)
             states[key]=denied
             owner.reload();expect(owner.locator('#authentication')).to_be_visible()
+            navigate(admin,'administration')
             form=admin.locator(f'form[data-account="{email}"]')
             form.locator(f'[name={key}]').set_checked(key=='active')
             previous_form=form.element_handle()

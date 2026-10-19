@@ -22,7 +22,7 @@ import pytest
 
 from integration.test_answer_lifecycle import environment
 from integration.test_transport_lifecycle import CutProxy, through_proxy
-from browser.test_accounts import BACKEND, real_account_browser, register, login
+from browser.test_accounts import BACKEND, real_account_browser, register, login, navigate, api_wait_ms, open_sources
 from browser.test_documents import real_document_browser, ready
 
 
@@ -116,19 +116,25 @@ def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_
         owner,observer=context.new_page(),context.new_page();through_proxy(owner,proxy);through_proxy(observer,observer_proxy)
         email=f'u8-terminal-{outcome}@owned.test'
         register(owner,mailbox,frontend,email);login(owner,email)
+        navigate(owner,'library')
         owner.locator('#document-upload input').set_input_files({'name':'terminal-budget.txt','mimeType':'text/plain','buffer':b'The annual budget is 100 euros.'})
         owner.get_by_role('button',name='Загрузить документы',exact=True).click();ready(owner,'terminal-budget.txt')
+        navigate(owner,'chat')
+        open_sources(owner)
         owner.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
         # A completed real answer must survive the same recovery event.
         completed_id=None
         if outcome.startswith('crash'):
+            navigate(owner,'chat')
             owner.locator('#question').fill('What is the annual budget?')
             owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
             expect(owner.locator('#history article')).to_contain_text('Завершён',timeout=60000)
             completed=current(environment);completed_id=completed['id'];completed_text=completed['answer_text']
         observer.goto(frontend);login(observer,email)
+        navigate(observer,'chat')
         observer.locator('#question').fill('Independent observer draft')
         armed.touch()
+        navigate(owner,'chat')
         owner.locator('#question').fill('What is the annual budget?')
         owner.get_by_role('button',name='Отправить вопрос',exact=True).click()
         until=time.monotonic()+40
@@ -208,9 +214,14 @@ def test_actual_native_terminal_paths_no_retry_and_preserved_history(controlled_
                     assert time.monotonic()<until;observer.wait_for_timeout(50)
         # A new request is only sent by this explicit UI operation. It must
         # build a fresh checkpoint from admissible history across API2.
+        navigate(observer,'chat')
+        open_sources(observer)
         observer.get_by_role('checkbox',name='terminal-budget.txt',exact=True).check()
+        navigate(observer,'chat')
         observer.locator('#question').fill('What is the annual budget now?')
-        observer.get_by_role('button',name='Отправить вопрос',exact=True).click()
+        with observer.expect_response(lambda response:response.request.method=='POST' and response.url.endswith('/answers'),timeout=api_wait_ms(observer)) as admitted:
+            observer.get_by_role('button',name='Отправить вопрос',exact=True).click()
+        assert admitted.value.status==200
         # A previously completed last card cannot acknowledge a new question.
         until=time.monotonic()+15
         while current(environment)['id']==identifier:

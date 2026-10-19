@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="29.022" timestamp="2026-10-19T01:03:10.906523+03:00" hostname="16IPK2"><testcase classname="tests.test_accounts" name="test_real_registration_mail_verification_and_login" time="17.510" /><testcase classname="tests.test_accounts" name="test_passwords_validation_roles_and_credentials_do_not_leak" time="2.319"><failure message="assert 201 == 422&#10; +  where 201 = &lt;Response [201 Created]&gt;.status_code">backend/tests/test_accounts.py:74: in test_passwords_validation_roles_and_credentials_do_not_leak
+    assert result.status_code == 422
+E   assert 201 == 422
+E    +  where 201 = &lt;Response [201 Created]&gt;.status_code</failure></testcase></testsuite></testsuites>

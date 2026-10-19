@@ -19,7 +19,7 @@ from playwright.sync_api import expect
 import pytest
 
 from app.db import migrate
-from browser.test_accounts import BACKEND, real_account_browser, register, login
+from browser.test_accounts import BACKEND, real_account_browser, register, login, navigate, open_sources, api_wait_ms
 from browser.test_documents import real_document_browser, ready
 
 
@@ -105,6 +105,7 @@ def test_real_super_admin_settings_preview_apply_and_readonly_models(real_accoun
     try:
         page = context.new_page()
         operator(page, mailbox, frontend)
+        navigate(page,'administration')
         form = page.locator('#global-settings')
         expect(form).to_be_visible()
         expect(form.locator('[name=max_active]')).to_have_value('12')
@@ -170,8 +171,11 @@ def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(
             name=f'private-budget-{index}.txt'
             content=(f'The annual budget for library {index} is {100+index} euros. '
                      'The budget pays for maintenance of the library and its reading rooms. ')*45
+            navigate(page,'library')
             page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':content.encode()})
             page.get_by_role('button',name='Загрузить документы',exact=True).click();ready(page,name,timeout=45)
+            navigate(page,'chat')
+            open_sources(page)
             page.get_by_role('checkbox',name=name,exact=True).check()
             pages.append(page)
             credentials.append(page.evaluate('''() => ({token:sessionStorage.getItem('rag:credential'),
@@ -241,6 +245,7 @@ def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(
             if fair:break
             assert time.monotonic()<deadline,'No fair round across the twelve genuine admitted contexts'
             admin.wait_for_timeout(50)
+        navigate(admin,'administration')
         form=admin.locator('#global-settings')
         form.locator('[name=max_active]').fill('6');form.locator('[name=step_width]').fill('2')
         form.get_by_role('button',name='Предпросмотр изменения',exact=True).click()
@@ -268,6 +273,7 @@ def test_thirty_real_accounts_ten_concurrent_owners_share_two_api_native_limits(
         # Exercise actual OCR publication while the generation/API/DB workload
         # is running. Unchanged source fixture combines four printed languages
         # and real English handwriting, exercising both fixed OCR contexts.
+        navigate(pages[0],'library')
         pages[0].locator('#document-upload input').set_input_files({'name':'joint-scanned-budget.pdf',
             'mimeType':'application/pdf','buffer':(BACKEND.parent/'harness/project/testing/evidence/work/2026-10-13-answer-lifecycle-d2-ocr-proof/mixed-real-title-fixture-v1.pdf').read_bytes()})
         pages[0].get_by_role('button',name='Загрузить документы',exact=True).click()
@@ -417,13 +423,22 @@ def test_frozen_thirty_questions_use_real_multilingual_documents(integrated_brow
     try:
         page=context.new_page();register(page,mailbox,frontend,'u8-quality@owned.test');login(page,'u8-quality@owned.test')
         files=sorted({item['document'] for item in controls['questions']})
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files([str(fixtures/name) for name in files])
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         for name in files:ready(page,name,timeout=300)
+        navigate(page,'chat')
         for index,item in enumerate(controls['questions']):
-            if index:page.get_by_role('button',name='Новая беседа',exact=True).click()
+            if index:
+                previous=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+                page.get_by_role('button',name='Новая беседа',exact=True).click()
+                expect(page.locator('#conversations button[aria-current=true]')).not_to_have_attribute('data-conversation',previous,timeout=api_wait_ms(page))
+            open_sources(page)
             for checkbox in page.locator('#question-sources input').all():checkbox.uncheck()
+            navigate(page,'chat')
+            open_sources(page)
             page.get_by_role('checkbox',name=item['document'],exact=True).check()
+            navigate(page,'chat')
             page.locator('#question').fill(item['question'])
             page.get_by_role('button',name='Отправить вопрос',exact=True).click()
             expect(page.locator('#history article')).to_have_count(1,timeout=120000)

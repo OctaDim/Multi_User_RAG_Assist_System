@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="11.508" timestamp="2026-10-19T03:01:38.181854+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_frontend_conversations" name="test_submission_and_creation_errors_stay_with_their_conversation" time="11.463"><failure message="AssertionError: Locator expected to contain text 'Не удалось открыть беседу'&#10;Actual value: Создаём беседу… &#10;Call log:&#10;  - LocatorAssertions.to_contain_text with timeout 5000ms&#10;  -   - waiting for locator(&quot;#conversation-feedback&quot;)&#10;  -     9 × locator resolved to &lt;p hidden=&quot;&quot; role=&quot;status&quot; aria-live=&quot;polite&quot; data-error=&quot;false&quot; id=&quot;conversation-feedback&quot; class=&quot;operation-status conversation-feedback&quot;&gt;Создаём беседу…&lt;/p&gt;&#10;  -       - unexpected value &quot;Создаём беседу…&quot;">backend/tests/browser/test_frontend_conversations.py:52: in test_submission_and_creation_errors_stay_with_their_conversation
+    expect(page.locator('#conversation-feedback')).to_contain_text('Не удалось открыть беседу')
+E   AssertionError: Locator expected to contain text 'Не удалось открыть беседу'
+E   Actual value: Создаём беседу… 
+E   Call log:
+E     - LocatorAssertions.to_contain_text with timeout 5000ms
+E     -   - waiting for locator("#conversation-feedback")
+E     -     9 × locator resolved to &lt;p hidden="" role="status" aria-live="polite" data-error="false" id="conversation-feedback" class="operation-status conversation-feedback"&gt;Создаём беседу…&lt;/p&gt;
+E     -       - unexpected value "Создаём беседу…"</failure></testcase></testsuite></testsuites>

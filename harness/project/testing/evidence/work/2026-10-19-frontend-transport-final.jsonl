@@ -1,0 +1,1 @@
+{"nodeid": "tests/integration/test_transport_lifecycle.py::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after]", "phase": "call", "outcome": "passed", "duration": 61.24166362598771, "failure": null}
