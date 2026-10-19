@@ -78,8 +78,8 @@ async def test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key(sessio
         await send(session, environment, key=key)
 
 
-@pytest.mark.parametrize('scope', [None, []])
-async def test_no_ready_sources_refuses_without_history_or_late_auto_admission(session, environment, connection, scope):
+async def test_selected_unready_sources_refuse_without_history_or_late_auto_admission(session, environment, connection):
+    scope = [environment['document']]
     await connection.execute("UPDATE documents SET ready=false")
     with pytest.raises(AccessError, match="no_ready_sources"):
         await send(session, environment, scope=scope)

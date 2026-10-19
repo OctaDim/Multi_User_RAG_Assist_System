@@ -119,10 +119,13 @@ def navigate(page, area):
     if page.locator('#document-editor[open]').count():
         page.locator('#close-editor').click()
         expect(page.locator('#document-editor')).to_be_hidden()
+    if area != 'evidence' and page.locator('#sidebar-toggle').is_visible() and not page.locator('#workspace-sidebar').is_visible():
+        page.locator('#sidebar-toggle').click()
     if area == 'administration':
         page.locator('#nav-administration').click()
     else:
-        if area == 'evidence': page.locator('[data-area=chat]').click()
+        if area == 'evidence' and not page.locator('#chat').is_visible():
+            page.locator('#close-evidence').click()
         page.locator(f'[data-area={area}]').click()
 
 
@@ -135,6 +138,7 @@ def open_sources(page):
 
 def open_conversations(page):
     navigate(page,'chat')
+    if page.locator('#sidebar-toggle').is_visible():page.locator('#sidebar-toggle').click()
     menu=page.locator('.conversation-picker')
     if menu.count() and not menu.evaluate('(details)=>details.open'):menu.locator('summary').click()
 
@@ -155,9 +159,9 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         register(user, mailbox, frontend, 'user-browser@owned.test')
         login(user, 'user-browser@owned.test')
         open_conversations(user)
-        user.locator('#conversations button').first.click()
+        expect(user.locator('#conversations li')).to_have_count(0)
         expect(user.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
-        user_conversation = user.evaluate("async url => { const r = await fetch(url + '/api/accounts/me', {headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}}); return (await r.json()).conversations[0].id; }", api_url)
+        user_conversation = user.evaluate("async url => (await (await fetch(url+'/api/conversations',{method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json()).id",api_url)
 
         operator.reload()
         operator.locator('#nav-administration').click()

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="11.343" timestamp="2026-10-19T18:21:10.441288+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_variant_a_corrections" name="test_variant_a_positions_all_controls_and_keeps_new_chats_local" time="11.261"><failure message="AssertionError: Locator expected to be focused&#10;Actual value: False &#10;Call log:&#10;  - LocatorAssertions.to_be_focused with timeout 5000ms&#10;  -   - waiting for locator(&quot;#new-conversation&quot;)&#10;  -     9 × locator resolved to &lt;button type=&quot;button&quot; class=&quot;secondary&quot; id=&quot;new-conversation&quot;&gt;…&lt;/button&gt;&#10;  -       - unexpected value &quot;not focused&quot;">backend/tests/browser/test_variant_a_corrections.py:39: in test_variant_a_positions_all_controls_and_keeps_new_chats_local
+    page.keyboard.press('Shift+Tab');expect(page.locator('#new-conversation')).to_be_focused()
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Locator expected to be focused
+E   Actual value: False 
+E   Call log:
+E     - LocatorAssertions.to_be_focused with timeout 5000ms
+E     -   - waiting for locator("#new-conversation")
+E     -     9 × locator resolved to &lt;button type="button" class="secondary" id="new-conversation"&gt;…&lt;/button&gt;
+E     -       - unexpected value "not focused"</failure></testcase></testsuite></testsuites>

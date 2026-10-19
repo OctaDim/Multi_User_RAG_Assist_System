@@ -150,7 +150,11 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
             pages[0].locator('#document-upload input').set_input_files({'name':'proxy-budget.txt','mimeType':'text/plain',
                 'buffer':b'The annual budget is 100 euros.'})
             pages[0].get_by_role('button',name='Загрузить документы',exact=True).click();ready(pages[0],'proxy-budget.txt')
+            shared=pages[0].evaluate("async api=>{const id=sessionStorage.getItem('rag:conversation');await fetch(api+'/api/conversations',{method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential'),'Content-Type':'application/json'},body:JSON.stringify({id})});return id;}",origins[0])
+            pages[0].reload();expect(pages[0].locator('html')).to_have_attribute('data-ready','true')
             pages[1].goto(frontend);login(pages[1],email)
+            pages[1].evaluate("id=>sessionStorage.setItem('rag:conversation',id)",shared)
+            pages[1].reload();expect(pages[1].locator('html')).to_have_attribute('data-ready','true')
             credentials=[]
             for index,page in enumerate(pages):
                 navigate(page,'chat')
@@ -188,15 +192,16 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
             navigate(owner,'chat')
             owner.locator('#question').fill('Origin A draft')
             owner.get_by_role('button',name='Новая беседа',exact=True).click()
-            expect(owner.locator('#conversations li')).to_have_count(2)
-            background=owner.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+            expect(owner.locator('#conversations li')).to_have_count(1)
+            background=owner.locator('#chat').get_attribute('data-conversation')
             navigate(owner,'chat')
             owner.locator('#question').fill('Origin B draft')
             open_conversations(owner)
             owner.locator(f'#conversations button[data-conversation="{conversation}"]').click()
             expect(owner.locator('#question')).to_have_value('Origin A draft')
             open_conversations(owner)
-            owner.locator(f'#conversations button[data-conversation="{background}"]').click()
+            owner.get_by_role('button',name='Новая беседа',exact=True).click()
+            expect(owner.locator('#chat')).to_have_attribute('data-conversation',background)
             expect(owner.locator('#question')).to_have_value('Origin B draft')
             expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
             with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:

@@ -3,7 +3,7 @@ export const tabKey = 'rag:tab';
 
 export function clearDrafts() {
   for (const key of Object.keys(sessionStorage)) {
-    if (key.startsWith(prefix) || key === tabKey || key === 'rag:conversation' || key === 'rag:owner' || key === 'rag:section') sessionStorage.removeItem(key);
+    if (key.startsWith(prefix) || key === tabKey || key === 'rag:conversation' || key === 'rag:new-conversation' || key === 'rag:owner' || key === 'rag:section') sessionStorage.removeItem(key);
   }
 }
 
@@ -18,6 +18,11 @@ export class Drafts {
   }
 
   key(conversation) { return `${prefix}${this.owner}:${conversation}`; }
+  pendingConversations() {
+    const ownedPrefix=this.key('');
+    return Object.keys(sessionStorage).filter(key=>key.startsWith(ownedPrefix)&&JSON.parse(sessionStorage.getItem(key))?.pending)
+      .map(key=>key.slice(ownedPrefix.length));
+  }
   get(conversation) {
     return {text:'', revision:0, pending:null, documentIds:[], answerId:null,
       ...JSON.parse(sessionStorage.getItem(this.key(conversation)) || 'null')};

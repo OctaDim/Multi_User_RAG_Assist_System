@@ -4,6 +4,7 @@ import os
 from uuid import uuid4
 
 from sqlalchemy import func, insert, select, update
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.models import Conversation, Document, Event, GraphBinding, Message, Request
 
@@ -35,11 +36,17 @@ def question_budget(question, generation=None):
         vocabulary.close()
 
 
-async def create_conversation(connection, token):
+async def create_conversation(connection, token, identifier=None):
     async with connection.begin():
         await lock_service(connection)
         actor = await principal(connection, token)
-        return dict((await connection.execute(insert(Conversation.__table__).values(id=uuid4(), owner_id=actor["id"]).returning(Conversation.id))).mappings().first())
+        identifier = identifier or uuid4()
+        await connection.execute(pg_insert(Conversation.__table__).values(id=identifier, owner_id=actor['id'])
+                                 .on_conflict_do_nothing(index_elements=[Conversation.id]))
+        row = await conversation(connection, actor, identifier, read_only=True)
+        if row['owner_id'] != actor['id']:
+            raise AccessError('not_found', 404)
+        return {'id': identifier}
 
 
 async def conversation(connection, actor, conversation_id, *, read_only=False):
@@ -92,8 +99,10 @@ async def admit(connection, token, conversation_id, operation_key, question, doc
             raise AccessError("conversation_busy", 409)
         if len(documents) != len(scope):
             raise AccessError("invalid_scope", 404)
-        if not await available(connection, actor["id"], scope):
+        if scope and not await available(connection, actor["id"], scope):
             raise AccessError("no_ready_sources", 409)
+        if not scope:
+            passport['scope_mode'] = 'chat'
         if not service["healthy"]:
             raise AccessError("coordinator_unavailable", 503)
         request = (await connection.execute(insert(Request.__table__).values(id=uuid4(), conversation_id=conversation_id, owner_id=actor["id"], operation_key=operation_key, fingerprint=fingerprint, scope=scope, passport=passport, origin_tab=tab_id, origin_session=actor["session_id"], state="accepted", execution_epoch=service["epoch"], context_epoch=history["context_epoch"]).returning(Request.__table__))).mappings().first()

@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="1" skipped="0" tests="8" time="305.302" timestamp="2026-10-19T18:12:36.943838+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_variant_a_corrections" name="test_variant_a_positions_all_controls_and_keeps_new_chats_local" time="6.944" /><testcase classname="tests.browser.test_variant_a_corrections" name="test_actual_llm_answers_without_documents_and_preserves_chat_history" time="45.617" /><testcase classname="tests.browser.test_variant_a_corrections" name="test_lost_first_creation_response_retries_same_conversation_and_question" time="16.769" /><testcase classname="tests.browser.test_answer_lifecycle" name="test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation" time="52.569" /><testcase classname="tests.browser.test_answer_lifecycle" name="test_old_real_snapshot_cannot_erase_new_request_or_current_fragments" time="59.459"><failure message="playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.&#10;Call log:&#10;  - waiting for locator(&quot;#conversations button[aria-current=true]&quot;)">backend/tests/browser/test_answer_lifecycle.py:470: in test_old_real_snapshot_cannot_erase_new_request_or_current_fragments
+    page.locator('#conversations button[aria-current=true]').click()
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15450: in click
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:156: in click
+    return await self._frame.click(self._selector, strict=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:488: in click
+    await self._channel.send("click", locals_to_params(locals()))
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.
+E   Call log:
+E     - waiting for locator("#conversations button[aria-current=true]")</failure></testcase><testcase classname="tests.browser.test_answer_lifecycle" name="test_actual_browser_restart_does_not_restore_closed_conversation_drafts" time="46.011" /><testcase classname="tests.integration.test_actual_authority" name="test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix" time="33.892" /><testcase classname="tests.integration.test_transport_lifecycle" name="test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after]" time="35.387"><error message="failed on setup with &quot;AssertionError: {&quot;event&quot;: &quot;native_spawn&quot;, &quot;pid&quot;: 219597, &quot;keeper_pid&quot;: 219596, &quot;epoch&quot;: 1}&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.schemas&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.tables&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.types&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.constraints&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.defaults&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.comments&#10;  INFO:alembic.runtime.plugins:setup plugin alembic.ext.checkconstraint_byname&#10;  DEBUG:asyncio:Using selector: EpollSelector&#10;  DEBUG:asyncio:Using selector: EpollSelector&#10;  INFO:alembic.runtime.migration:Context impl PostgresqlImpl.&#10;  INFO:alembic.runtime.migration:Will assume transactional DDL.&#10;  llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/rag/local_models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))&#10;  llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.&#10;  llama_model_loader: - kv   0:                       general.architecture str              = qwen35&#10;  llama_model_loader: - kv   1:                               general.type str              = model&#10;  llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B&#10;  llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B&#10;  llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth&#10;  llama_model_loader: - kv   5:                         general.size_label str              = 2B&#10;  llama_model_loader: - kv   6:                            general.license str              = apache-2.0&#10;  llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...&#10;  llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth&#10;  llama_model_loader: - kv   9:                   general.base_model.count u32              = 1&#10;  llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B&#10;  llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen&#10;  llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B&#10;  llama_model_loader: - kv  13:                               general.tags arr[str,2]       = [&quot;unsloth&quot;, &quot;image-text-to-text&quot;]&#10;  llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24&#10;  llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144&#10;  llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048&#10;  llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144&#10;  llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8&#10;  llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2&#10;  llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]&#10;  llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000&#10;  llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001&#10;  llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256&#10;  llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256&#10;  llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4&#10;  llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128&#10;  llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16&#10;  llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16&#10;  llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048&#10;  llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4&#10;  llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64&#10;  llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2&#10;  llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35&#10;  llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = [&quot;!&quot;, &quot;\&quot;&quot;, &quot;#&quot;, &quot;$&quot;, &quot;%&quot;, &quot;&amp;&quot;, &quot;'&quot;, ...&#10;  llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...&#10;  llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = [&quot;Ġ Ġ&quot;, &quot;ĠĠ ĠĠ&quot;, &quot;i n&quot;, &quot;Ġ t&quot;,...&#10;  llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046&#10;  llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055&#10;  llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...&#10;  llama_model_loader: - kv  40:               general.quantization_version u32              = 2&#10;  llama_model_loader: - kv  41:                          general.file_type u32              = 15&#10;  llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf&#10;  llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt&#10;  llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186&#10;  llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80&#10;  llama_model_loader: - type  f32:  133 tensors&#10;  llama_model_loader: - type q8_0:   36 tensors&#10;  llama_model_loader: - type q4_K:   98 tensors&#10;  llama_model_loader: - type q5_K:   36 tensors&#10;  llama_model_loader: - type q6_K:   17 tensors&#10;  print_info: file format = GGUF V3 (latest)&#10;  print_info: file type   = Q4_K - Medium&#10;  print_info: file size   = 1.18 GiB (5.40 BPW) &#10;  init_tokenizer: initializing tokenizer for type 2&#10;  load: 0 unused tokens&#10;  load: control token: 248075 '&lt;tts_text_bos_single&gt;' is not marked as EOG&#10;  load: control token: 248073 '&lt;tts_text_bos&gt;' is not marked as EOG&#10;  load: control token: 248072 '&lt;tts_pad&gt;' is not marked as EOG&#10;  load: control token: 248071 '&lt;|audio_end|&gt;' is not marked as EOG&#10;  load: control token: 248061 '&lt;|fim_middle|&gt;' is not marked as EOG&#10;  load: control token: 248055 '&lt;|vision_pad|&gt;' is not marked as EOG&#10;  load: control token: 248052 '&lt;|quad_end|&gt;' is not marked as EOG&#10;  load: control token: 248049 '&lt;|box_start|&gt;' is not marked as EOG&#10;  load: control token: 248048 '&lt;|object_ref_end|&gt;' is not marked as EOG&#10;  load: control token: 248045 '&lt;|im_start|&gt;' is not marked as EOG&#10;  load: control token: 248057 '&lt;|video_pad|&gt;' is not marked as EOG&#10;  load: control token: 248070 '&lt;|audio_start|&gt;' is not marked as EOG&#10;  load: control token: 248056 '&lt;|image_pad|&gt;' is not marked as EOG&#10;  load: control token: 248054 '&lt;|vision_end|&gt;' is not marked as EOG&#10;  load: control token: 248060 '&lt;|fim_prefix|&gt;' is not marked as EOG&#10;  load: control token: 248050 '&lt;|box_end|&gt;' is not marked as EOG&#10;  load: control token: 248074 '&lt;tts_text_eod&gt;' is not marked as EOG&#10;  load: control token: 248053 '&lt;|vision_start|&gt;' is not marked as EOG&#10;  load: control token: 248062 '&lt;|fim_suffix|&gt;' is not marked as EOG&#10;  load: control token: 248047 '&lt;|object_ref_start|&gt;' is not marked as EOG&#10;  load: control token: 248051 '&lt;|quad_start|&gt;' is not marked as EOG&#10;  load: control token: 248076 '&lt;|audio_pad|&gt;' is not marked as EOG&#10;  load: printing all EOG tokens:&#10;  load:   - 248044 ('&lt;|endoftext|&gt;')&#10;  load:   - 248046 ('&lt;|im_end|&gt;')&#10;  load:   - 248063 ('&lt;|fim_pad|&gt;')&#10;  load:   - 248064 ('&lt;|repo_name|&gt;')&#10;  load:   - 248065 ('&lt;|file_sep|&gt;')&#10;  load: special tokens cache size = 33&#10;  load: token to piece cache size = 1.7581 MB&#10;  print_info: arch                  = qwen35&#10;  print_info: vocab_only            = 0&#10;  print_info: no_alloc              = 0&#10;  print_info: n_ctx_train           = 262144&#10;  print_info: n_embd_inp            = 2048&#10;  print_info: n_embd                = 2048&#10;  print_info: n_embd_out            = 2048&#10;  print_info: n_layer               = 24&#10;  print_info: n_layer_all           = 24&#10;  print_info: n_head                = 8&#10;  print_info: n_head_kv             = 2&#10;  print_info: n_rot                 = 64&#10;  print_info: n_swa                 = 0&#10;  print_info: is_swa_any            = 0&#10;  print_info: non_causal_type       = 0&#10;  print_info: n_embd_head_k         = 256&#10;  print_info: n_embd_head_v         = 256&#10;  print_info: n_gqa                 = 4&#10;  print_info: n_embd_k_gqa          = 512&#10;  print_info: n_embd_v_gqa          = 512&#10;  print_info: f_norm_eps            = 0.0e+00&#10;  print_info: f_norm_rms_eps        = 1.0e-06&#10;  print_info: f_clamp_kqv           = 0.0e+00&#10;  print_info: f_max_alibi_bias      = 0.0e+00&#10;  print_info: f_logit_scale         = 0.0e+00&#10;  print_info: f_attn_scale          = 0.0e+00&#10;  print_info: f_attn_value_scale    = 0.0000&#10;  print_info: n_ff                  = 6144&#10;  print_info: n_expert              = 0&#10;  print_info: n_expert_used         = 0&#10;  print_info: n_expert_groups       = 0&#10;  print_info: n_group_used          = 0&#10;  print_info: causal attn           = 1&#10;  print_info: pooling type          = -1&#10;  print_info: rope type             = 40&#10;  print_info: rope scaling          = linear&#10;  print_info: freq_base_train       = 10000000.0&#10;  print_info: freq_scale_train      = 1&#10;  print_info: n_ctx_orig_yarn       = 262144&#10;  print_info: rope_yarn_log_mul     = 0.0000&#10;  print_info: rope_finetuned        = unknown&#10;  print_info: mrope sections        = [11, 11, 10, 0]&#10;  print_info: ssm_d_conv            = 4&#10;  print_info: ssm_d_inner           = 2048&#10;  print_info: ssm_d_state           = 128&#10;  print_info: ssm_dt_rank           = 16&#10;  print_info: ssm_n_group           = 16&#10;  print_info: ssm_dt_b_c_rms        = 0&#10;  print_info: model type            = 2B&#10;  print_info: model params          = 1.88 B&#10;  print_info: general.name          = Qwen3.5-2B&#10;  print_info: vocab type            = BPE&#10;  print_info: n_vocab               = 248320&#10;  print_info: n_merges              = 247587&#10;  print_info: BOS token             = 11 ','&#10;  print_info: EOS token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: EOT token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: PAD token             = 248055 '&lt;|vision_pad|&gt;'&#10;  print_info: LF token              = 198 'Ċ'&#10;  print_info: FIM PRE token         = 248060 '&lt;|fim_prefix|&gt;'&#10;  print_info: FIM SUF token         = 248062 '&lt;|fim_suffix|&gt;'&#10;  print_info: FIM MID token         = 248061 '&lt;|fim_middle|&gt;'&#10;  print_info: FIM PAD token         = 248063 '&lt;|fim_pad|&gt;'&#10;  print_info: FIM REP token         = 248064 '&lt;|repo_name|&gt;'&#10;  print_info: FIM SEP token         = 248065 '&lt;|file_sep|&gt;'&#10;  print_info: EOG token             = 248044 '&lt;|endoftext|&gt;'&#10;  print_info: EOG token             = 248046 '&lt;|im_end|&gt;'&#10;  print_info: EOG token             = 248063 '&lt;|fim_pad|&gt;'&#10;  print_info: EOG token             = 248064 '&lt;|repo_name|&gt;'&#10;  print_info: EOG token             = 248065 '&lt;|file_sep|&gt;'&#10;  print_info: max token length      = 256&#10;  load_tensors: loading model tensors, this can take a while... (load_mode = mmap)&#10;  load_tensors: layer   0 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   1 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   2 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   3 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   4 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   5 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   6 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   7 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   8 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer   9 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  10 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  11 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  12 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  13 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  14 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  15 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  16 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  17 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  18 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  19 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  20 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  21 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  22 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  23 assigned to device CPU, is_swa = 0&#10;  load_tensors: layer  24 assigned to device CPU, is_swa = 0&#10;  create_tensor: loading tensor token_embd.weight&#10;  create_tensor: loading tensor output_norm.weight&#10;  create_tensor: loading tensor output.weight&#10;  create_tensor: loading tensor token_embd.weight&#10;  create_tensor: loading tensor blk.0.attn_norm.weight&#10;  create_tensor: loading tensor blk.0.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.0.attn_qkv.weight&#10;  create_tensor: loading tensor blk.0.attn_gate.weight&#10;  create_tensor: loading tensor blk.0.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.0.ssm_dt.bias&#10;  create_tensor: loading tensor blk.0.ssm_a&#10;  create_tensor: loading tensor blk.0.ssm_beta.weight&#10;  create_tensor: loading tensor blk.0.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.0.ssm_norm.weight&#10;  create_tensor: loading tensor blk.0.ssm_out.weight&#10;  create_tensor: loading tensor blk.0.ffn_gate.weight&#10;  create_tensor: loading tensor blk.0.ffn_down.weight&#10;  create_tensor: loading tensor blk.0.ffn_up.weight&#10;  create_tensor: loading tensor blk.1.attn_norm.weight&#10;  create_tensor: loading tensor blk.1.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.1.attn_qkv.weight&#10;  create_tensor: loading tensor blk.1.attn_gate.weight&#10;  create_tensor: loading tensor blk.1.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.1.ssm_dt.bias&#10;  create_tensor: loading tensor blk.1.ssm_a&#10;  create_tensor: loading tensor blk.1.ssm_beta.weight&#10;  create_tensor: loading tensor blk.1.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.1.ssm_norm.weight&#10;  create_tensor: loading tensor blk.1.ssm_out.weight&#10;  create_tensor: loading tensor blk.1.ffn_gate.weight&#10;  create_tensor: loading tensor blk.1.ffn_down.weight&#10;  create_tensor: loading tensor blk.1.ffn_up.weight&#10;  create_tensor: loading tensor blk.2.attn_norm.weight&#10;  create_tensor: loading tensor blk.2.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.2.attn_qkv.weight&#10;  create_tensor: loading tensor blk.2.attn_gate.weight&#10;  create_tensor: loading tensor blk.2.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.2.ssm_dt.bias&#10;  create_tensor: loading tensor blk.2.ssm_a&#10;  create_tensor: loading tensor blk.2.ssm_beta.weight&#10;  create_tensor: loading tensor blk.2.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.2.ssm_norm.weight&#10;  create_tensor: loading tensor blk.2.ssm_out.weight&#10;  create_tensor: loading tensor blk.2.ffn_gate.weight&#10;  create_tensor: loading tensor blk.2.ffn_down.weight&#10;  create_tensor: loading tensor blk.2.ffn_up.weight&#10;  create_tensor: loading tensor blk.3.attn_norm.weight&#10;  create_tensor: loading tensor blk.3.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.3.attn_qkv.weight&#10;  create_tensor: loading tensor blk.3.attn_q.weight&#10;  create_tensor: loading tensor blk.3.attn_k.weight&#10;  create_tensor: loading tensor blk.3.attn_v.weight&#10;  create_tensor: loading tensor blk.3.attn_q.bias&#10;  create_tensor: loading tensor blk.3.attn_k.bias&#10;  create_tensor: loading tensor blk.3.attn_v.bias&#10;  create_tensor: loading tensor blk.3.attn_output.weight&#10;  create_tensor: loading tensor blk.3.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.3.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.3.ffn_gate.weight&#10;  create_tensor: loading tensor blk.3.ffn_down.weight&#10;  create_tensor: loading tensor blk.3.ffn_up.weight&#10;  create_tensor: loading tensor blk.4.attn_norm.weight&#10;  create_tensor: loading tensor blk.4.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.4.attn_qkv.weight&#10;  create_tensor: loading tensor blk.4.attn_gate.weight&#10;  create_tensor: loading tensor blk.4.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.4.ssm_dt.bias&#10;  create_tensor: loading tensor blk.4.ssm_a&#10;  create_tensor: loading tensor blk.4.ssm_beta.weight&#10;  create_tensor: loading tensor blk.4.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.4.ssm_norm.weight&#10;  create_tensor: loading tensor blk.4.ssm_out.weight&#10;  create_tensor: loading tensor blk.4.ffn_gate.weight&#10;  create_tensor: loading tensor blk.4.ffn_down.weight&#10;  create_tensor: loading tensor blk.4.ffn_up.weight&#10;  create_tensor: loading tensor blk.5.attn_norm.weight&#10;  create_tensor: loading tensor blk.5.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.5.attn_qkv.weight&#10;  create_tensor: loading tensor blk.5.attn_gate.weight&#10;  create_tensor: loading tensor blk.5.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.5.ssm_dt.bias&#10;  create_tensor: loading tensor blk.5.ssm_a&#10;  create_tensor: loading tensor blk.5.ssm_beta.weight&#10;  create_tensor: loading tensor blk.5.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.5.ssm_norm.weight&#10;  create_tensor: loading tensor blk.5.ssm_out.weight&#10;  create_tensor: loading tensor blk.5.ffn_gate.weight&#10;  create_tensor: loading tensor blk.5.ffn_down.weight&#10;  create_tensor: loading tensor blk.5.ffn_up.weight&#10;  create_tensor: loading tensor blk.6.attn_norm.weight&#10;  create_tensor: loading tensor blk.6.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.6.attn_qkv.weight&#10;  create_tensor: loading tensor blk.6.attn_gate.weight&#10;  create_tensor: loading tensor blk.6.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.6.ssm_dt.bias&#10;  create_tensor: loading tensor blk.6.ssm_a&#10;  create_tensor: loading tensor blk.6.ssm_beta.weight&#10;  create_tensor: loading tensor blk.6.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.6.ssm_norm.weight&#10;  create_tensor: loading tensor blk.6.ssm_out.weight&#10;  create_tensor: loading tensor blk.6.ffn_gate.weight&#10;  create_tensor: loading tensor blk.6.ffn_down.weight&#10;  create_tensor: loading tensor blk.6.ffn_up.weight&#10;  create_tensor: loading tensor blk.7.attn_norm.weight&#10;  create_tensor: loading tensor blk.7.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.7.attn_qkv.weight&#10;  create_tensor: loading tensor blk.7.attn_q.weight&#10;  create_tensor: loading tensor blk.7.attn_k.weight&#10;  create_tensor: loading tensor blk.7.attn_v.weight&#10;  create_tensor: loading tensor blk.7.attn_q.bias&#10;  create_tensor: loading tensor blk.7.attn_k.bias&#10;  create_tensor: loading tensor blk.7.attn_v.bias&#10;  create_tensor: loading tensor blk.7.attn_output.weight&#10;  create_tensor: loading tensor blk.7.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.7.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.7.ffn_gate.weight&#10;  create_tensor: loading tensor blk.7.ffn_down.weight&#10;  create_tensor: loading tensor blk.7.ffn_up.weight&#10;  create_tensor: loading tensor blk.8.attn_norm.weight&#10;  create_tensor: loading tensor blk.8.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.8.attn_qkv.weight&#10;  create_tensor: loading tensor blk.8.attn_gate.weight&#10;  create_tensor: loading tensor blk.8.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.8.ssm_dt.bias&#10;  create_tensor: loading tensor blk.8.ssm_a&#10;  create_tensor: loading tensor blk.8.ssm_beta.weight&#10;  create_tensor: loading tensor blk.8.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.8.ssm_norm.weight&#10;  create_tensor: loading tensor blk.8.ssm_out.weight&#10;  create_tensor: loading tensor blk.8.ffn_gate.weight&#10;  create_tensor: loading tensor blk.8.ffn_down.weight&#10;  create_tensor: loading tensor blk.8.ffn_up.weight&#10;  create_tensor: loading tensor blk.9.attn_norm.weight&#10;  create_tensor: loading tensor blk.9.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.9.attn_qkv.weight&#10;  create_tensor: loading tensor blk.9.attn_gate.weight&#10;  create_tensor: loading tensor blk.9.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.9.ssm_dt.bias&#10;  create_tensor: loading tensor blk.9.ssm_a&#10;  create_tensor: loading tensor blk.9.ssm_beta.weight&#10;  create_tensor: loading tensor blk.9.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.9.ssm_norm.weight&#10;  create_tensor: loading tensor blk.9.ssm_out.weight&#10;  create_tensor: loading tensor blk.9.ffn_gate.weight&#10;  create_tensor: loading tensor blk.9.ffn_down.weight&#10;  create_tensor: loading tensor blk.9.ffn_up.weight&#10;  create_tensor: loading tensor blk.10.attn_norm.weight&#10;  create_tensor: loading tensor blk.10.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.10.attn_qkv.weight&#10;  create_tensor: loading tensor blk.10.attn_gate.weight&#10;  create_tensor: loading tensor blk.10.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.10.ssm_dt.bias&#10;  create_tensor: loading tensor blk.10.ssm_a&#10;  create_tensor: loading tensor blk.10.ssm_beta.weight&#10;  create_tensor: loading tensor blk.10.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.10.ssm_norm.weight&#10;  create_tensor: loading tensor blk.10.ssm_out.weight&#10;  create_tensor: loading tensor blk.10.ffn_gate.weight&#10;  create_tensor: loading tensor blk.10.ffn_down.weight&#10;  create_tensor: loading tensor blk.10.ffn_up.weight&#10;  create_tensor: loading tensor blk.11.attn_norm.weight&#10;  create_tensor: loading tensor blk.11.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.11.attn_qkv.weight&#10;  create_tensor: loading tensor blk.11.attn_q.weight&#10;  create_tensor: loading tensor blk.11.attn_k.weight&#10;  create_tensor: loading tensor blk.11.attn_v.weight&#10;  create_tensor: loading tensor blk.11.attn_q.bias&#10;  create_tensor: loading tensor blk.11.attn_k.bias&#10;  create_tensor: loading tensor blk.11.attn_v.bias&#10;  create_tensor: loading tensor blk.11.attn_output.weight&#10;  create_tensor: loading tensor blk.11.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.11.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.11.ffn_gate.weight&#10;  create_tensor: loading tensor blk.11.ffn_down.weight&#10;  create_tensor: loading tensor blk.11.ffn_up.weight&#10;  create_tensor: loading tensor blk.12.attn_norm.weight&#10;  create_tensor: loading tensor blk.12.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.12.attn_qkv.weight&#10;  create_tensor: loading tensor blk.12.attn_gate.weight&#10;  create_tensor: loading tensor blk.12.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.12.ssm_dt.bias&#10;  create_tensor: loading tensor blk.12.ssm_a&#10;  create_tensor: loading tensor blk.12.ssm_beta.weight&#10;  create_tensor: loading tensor blk.12.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.12.ssm_norm.weight&#10;  create_tensor: loading tensor blk.12.ssm_out.weight&#10;  create_tensor: loading tensor blk.12.ffn_gate.weight&#10;  create_tensor: loading tensor blk.12.ffn_down.weight&#10;  create_tensor: loading tensor blk.12.ffn_up.weight&#10;  create_tensor: loading tensor blk.13.attn_norm.weight&#10;  create_tensor: loading tensor blk.13.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.13.attn_qkv.weight&#10;  create_tensor: loading tensor blk.13.attn_gate.weight&#10;  create_tensor: loading tensor blk.13.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.13.ssm_dt.bias&#10;  create_tensor: loading tensor blk.13.ssm_a&#10;  create_tensor: loading tensor blk.13.ssm_beta.weight&#10;  create_tensor: loading tensor blk.13.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.13.ssm_norm.weight&#10;  create_tensor: loading tensor blk.13.ssm_out.weight&#10;  create_tensor: loading tensor blk.13.ffn_gate.weight&#10;  create_tensor: loading tensor blk.13.ffn_down.weight&#10;  create_tensor: loading tensor blk.13.ffn_up.weight&#10;  create_tensor: loading tensor blk.14.attn_norm.weight&#10;  create_tensor: loading tensor blk.14.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.14.attn_qkv.weight&#10;  create_tensor: loading tensor blk.14.attn_gate.weight&#10;  create_tensor: loading tensor blk.14.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.14.ssm_dt.bias&#10;  create_tensor: loading tensor blk.14.ssm_a&#10;  create_tensor: loading tensor blk.14.ssm_beta.weight&#10;  create_tensor: loading tensor blk.14.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.14.ssm_norm.weight&#10;  create_tensor: loading tensor blk.14.ssm_out.weight&#10;  create_tensor: loading tensor blk.14.ffn_gate.weight&#10;  create_tensor: loading tensor blk.14.ffn_down.weight&#10;  create_tensor: loading tensor blk.14.ffn_up.weight&#10;  create_tensor: loading tensor blk.15.attn_norm.weight&#10;  create_tensor: loading tensor blk.15.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.15.attn_qkv.weight&#10;  create_tensor: loading tensor blk.15.attn_q.weight&#10;  create_tensor: loading tensor blk.15.attn_k.weight&#10;  create_tensor: loading tensor blk.15.attn_v.weight&#10;  create_tensor: loading tensor blk.15.attn_q.bias&#10;  create_tensor: loading tensor blk.15.attn_k.bias&#10;  create_tensor: loading tensor blk.15.attn_v.bias&#10;  create_tensor: loading tensor blk.15.attn_output.weight&#10;  create_tensor: loading tensor blk.15.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.15.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.15.ffn_gate.weight&#10;  create_tensor: loading tensor blk.15.ffn_down.weight&#10;  create_tensor: loading tensor blk.15.ffn_up.weight&#10;  create_tensor: loading tensor blk.16.attn_norm.weight&#10;  create_tensor: loading tensor blk.16.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.16.attn_qkv.weight&#10;  create_tensor: loading tensor blk.16.attn_gate.weight&#10;  create_tensor: loading tensor blk.16.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.16.ssm_dt.bias&#10;  create_tensor: loading tensor blk.16.ssm_a&#10;  create_tensor: loading tensor blk.16.ssm_beta.weight&#10;  create_tensor: loading tensor blk.16.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.16.ssm_norm.weight&#10;  create_tensor: loading tensor blk.16.ssm_out.weight&#10;  create_tensor: loading tensor blk.16.ffn_gate.weight&#10;  create_tensor: loading tensor blk.16.ffn_down.weight&#10;  create_tensor: loading tensor blk.16.ffn_up.weight&#10;  create_tensor: loading tensor blk.17.attn_norm.weight&#10;  create_tensor: loading tensor blk.17.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.17.attn_qkv.weight&#10;  create_tensor: loading tensor blk.17.attn_gate.weight&#10;  create_tensor: loading tensor blk.17.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.17.ssm_dt.bias&#10;  create_tensor: loading tensor blk.17.ssm_a&#10;  create_tensor: loading tensor blk.17.ssm_beta.weight&#10;  create_tensor: loading tensor blk.17.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.17.ssm_norm.weight&#10;  create_tensor: loading tensor blk.17.ssm_out.weight&#10;  create_tensor: loading tensor blk.17.ffn_gate.weight&#10;  create_tensor: loading tensor blk.17.ffn_down.weight&#10;  create_tensor: loading tensor blk.17.ffn_up.weight&#10;  create_tensor: loading tensor blk.18.attn_norm.weight&#10;  create_tensor: loading tensor blk.18.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.18.attn_qkv.weight&#10;  create_tensor: loading tensor blk.18.attn_gate.weight&#10;  create_tensor: loading tensor blk.18.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.18.ssm_dt.bias&#10;  create_tensor: loading tensor blk.18.ssm_a&#10;  create_tensor: loading tensor blk.18.ssm_beta.weight&#10;  create_tensor: loading tensor blk.18.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.18.ssm_norm.weight&#10;  create_tensor: loading tensor blk.18.ssm_out.weight&#10;  create_tensor: loading tensor blk.18.ffn_gate.weight&#10;  create_tensor: loading tensor blk.18.ffn_down.weight&#10;  create_tensor: loading tensor blk.18.ffn_up.weight&#10;  create_tensor: loading tensor blk.19.attn_norm.weight&#10;  create_tensor: loading tensor blk.19.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.19.attn_qkv.weight&#10;  create_tensor: loading tensor blk.19.attn_q.weight&#10;  create_tensor: loading tensor blk.19.attn_k.weight&#10;  create_tensor: loading tensor blk.19.attn_v.weight&#10;  create_tensor: loading tensor blk.19.attn_q.bias&#10;  create_tensor: loading tensor blk.19.attn_k.bias&#10;  create_tensor: loading tensor blk.19.attn_v.bias&#10;  create_tensor: loading tensor blk.19.attn_output.weight&#10;  create_tensor: loading tensor blk.19.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.19.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.19.ffn_gate.weight&#10;  create_tensor: loading tensor blk.19.ffn_down.weight&#10;  create_tensor: loading tensor blk.19.ffn_up.weight&#10;  create_tensor: loading tensor blk.20.attn_norm.weight&#10;  create_tensor: loading tensor blk.20.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.20.attn_qkv.weight&#10;  create_tensor: loading tensor blk.20.attn_gate.weight&#10;  create_tensor: loading tensor blk.20.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.20.ssm_dt.bias&#10;  create_tensor: loading tensor blk.20.ssm_a&#10;  create_tensor: loading tensor blk.20.ssm_beta.weight&#10;  create_tensor: loading tensor blk.20.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.20.ssm_norm.weight&#10;  create_tensor: loading tensor blk.20.ssm_out.weight&#10;  create_tensor: loading tensor blk.20.ffn_gate.weight&#10;  create_tensor: loading tensor blk.20.ffn_down.weight&#10;  create_tensor: loading tensor blk.20.ffn_up.weight&#10;  create_tensor: loading tensor blk.21.attn_norm.weight&#10;  create_tensor: loading tensor blk.21.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.21.attn_qkv.weight&#10;  create_tensor: loading tensor blk.21.attn_gate.weight&#10;  create_tensor: loading tensor blk.21.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.21.ssm_dt.bias&#10;  create_tensor: loading tensor blk.21.ssm_a&#10;  create_tensor: loading tensor blk.21.ssm_beta.weight&#10;  create_tensor: loading tensor blk.21.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.21.ssm_norm.weight&#10;  create_tensor: loading tensor blk.21.ssm_out.weight&#10;  create_tensor: loading tensor blk.21.ffn_gate.weight&#10;  create_tensor: loading tensor blk.21.ffn_down.weight&#10;  create_tensor: loading tensor blk.21.ffn_up.weight&#10;  create_tensor: loading tensor blk.22.attn_norm.weight&#10;  create_tensor: loading tensor blk.22.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.22.attn_qkv.weight&#10;  create_tensor: loading tensor blk.22.attn_gate.weight&#10;  create_tensor: loading tensor blk.22.ssm_conv1d.weight&#10;  create_tensor: loading tensor blk.22.ssm_dt.bias&#10;  create_tensor: loading tensor blk.22.ssm_a&#10;  create_tensor: loading tensor blk.22.ssm_beta.weight&#10;  create_tensor: loading tensor blk.22.ssm_alpha.weight&#10;  create_tensor: loading tensor blk.22.ssm_norm.weight&#10;  create_tensor: loading tensor blk.22.ssm_out.weight&#10;  create_tensor: loading tensor blk.22.ffn_gate.weight&#10;  create_tensor: loading tensor blk.22.ffn_down.weight&#10;  create_tensor: loading tensor blk.22.ffn_up.weight&#10;  create_tensor: loading tensor blk.23.attn_norm.weight&#10;  create_tensor: loading tensor blk.23.post_attention_norm.weight&#10;  create_tensor: loading tensor blk.23.attn_qkv.weight&#10;  create_tensor: loading tensor blk.23.attn_q.weight&#10;  create_tensor: loading tensor blk.23.attn_k.weight&#10;  create_tensor: loading tensor blk.23.attn_v.weight&#10;  create_tensor: loading tensor blk.23.attn_q.bias&#10;  create_tensor: loading tensor blk.23.attn_k.bias&#10;  create_tensor: loading tensor blk.23.attn_v.bias&#10;  create_tensor: loading tensor blk.23.attn_output.weight&#10;  create_tensor: loading tensor blk.23.attn_q_norm.weight&#10;  create_tensor: loading tensor blk.23.attn_k_norm.weight&#10;  create_tensor: loading tensor blk.23.ffn_gate.weight&#10;  create_tensor: loading tensor blk.23.ffn_down.weight&#10;  create_tensor: loading tensor blk.23.ffn_up.weight&#10;  create_tensor: loading tensor blk.0.attn_qkv.scale&#10;  create_tensor: loading tensor blk.0.attn_gate.scale&#10;  create_tensor: loading tensor blk.0.ffn_gate.scale&#10;  create_tensor: loading tensor blk.0.ffn_down.scale&#10;  create_tensor: loading tensor blk.0.ffn_up.scale&#10;  create_tensor: loading tensor blk.0.ssm_out.scale&#10;  create_tensor: loading tensor blk.0.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.0.ssm_beta.scale&#10;  create_tensor: loading tensor blk.0.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.0.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.0.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.0.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.1.attn_qkv.scale&#10;  create_tensor: loading tensor blk.1.attn_gate.scale&#10;  create_tensor: loading tensor blk.1.ffn_gate.scale&#10;  create_tensor: loading tensor blk.1.ffn_down.scale&#10;  create_tensor: loading tensor blk.1.ffn_up.scale&#10;  create_tensor: loading tensor blk.1.ssm_out.scale&#10;  create_tensor: loading tensor blk.1.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.1.ssm_beta.scale&#10;  create_tensor: loading tensor blk.1.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.1.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.1.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.1.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.2.attn_qkv.scale&#10;  create_tensor: loading tensor blk.2.attn_gate.scale&#10;  create_tensor: loading tensor blk.2.ffn_gate.scale&#10;  create_tensor: loading tensor blk.2.ffn_down.scale&#10;  create_tensor: loading tensor blk.2.ffn_up.scale&#10;  create_tensor: loading tensor blk.2.ssm_out.scale&#10;  create_tensor: loading tensor blk.2.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.2.ssm_beta.scale&#10;  create_tensor: loading tensor blk.2.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.2.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.2.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.2.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.3.attn_q.scale&#10;  create_tensor: loading tensor blk.3.attn_k.scale&#10;  create_tensor: loading tensor blk.3.attn_v.scale&#10;  create_tensor: loading tensor blk.3.attn_output.scale&#10;  create_tensor: loading tensor blk.3.ffn_gate.scale&#10;  create_tensor: loading tensor blk.3.ffn_down.scale&#10;  create_tensor: loading tensor blk.3.ffn_up.scale&#10;  create_tensor: loading tensor blk.3.attn_q.input_scale&#10;  create_tensor: loading tensor blk.3.attn_k.input_scale&#10;  create_tensor: loading tensor blk.3.attn_v.input_scale&#10;  create_tensor: loading tensor blk.3.attn_output.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.3.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.4.attn_qkv.scale&#10;  create_tensor: loading tensor blk.4.attn_gate.scale&#10;  create_tensor: loading tensor blk.4.ffn_gate.scale&#10;  create_tensor: loading tensor blk.4.ffn_down.scale&#10;  create_tensor: loading tensor blk.4.ffn_up.scale&#10;  create_tensor: loading tensor blk.4.ssm_out.scale&#10;  create_tensor: loading tensor blk.4.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.4.ssm_beta.scale&#10;  create_tensor: loading tensor blk.4.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.4.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.4.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.4.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.5.attn_qkv.scale&#10;  create_tensor: loading tensor blk.5.attn_gate.scale&#10;  create_tensor: loading tensor blk.5.ffn_gate.scale&#10;  create_tensor: loading tensor blk.5.ffn_down.scale&#10;  create_tensor: loading tensor blk.5.ffn_up.scale&#10;  create_tensor: loading tensor blk.5.ssm_out.scale&#10;  create_tensor: loading tensor blk.5.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.5.ssm_beta.scale&#10;  create_tensor: loading tensor blk.5.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.5.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.5.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.5.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.6.attn_qkv.scale&#10;  create_tensor: loading tensor blk.6.attn_gate.scale&#10;  create_tensor: loading tensor blk.6.ffn_gate.scale&#10;  create_tensor: loading tensor blk.6.ffn_down.scale&#10;  create_tensor: loading tensor blk.6.ffn_up.scale&#10;  create_tensor: loading tensor blk.6.ssm_out.scale&#10;  create_tensor: loading tensor blk.6.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.6.ssm_beta.scale&#10;  create_tensor: loading tensor blk.6.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.6.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.6.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.6.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.7.attn_q.scale&#10;  create_tensor: loading tensor blk.7.attn_k.scale&#10;  create_tensor: loading tensor blk.7.attn_v.scale&#10;  create_tensor: loading tensor blk.7.attn_output.scale&#10;  create_tensor: loading tensor blk.7.ffn_gate.scale&#10;  create_tensor: loading tensor blk.7.ffn_down.scale&#10;  create_tensor: loading tensor blk.7.ffn_up.scale&#10;  create_tensor: loading tensor blk.7.attn_q.input_scale&#10;  create_tensor: loading tensor blk.7.attn_k.input_scale&#10;  create_tensor: loading tensor blk.7.attn_v.input_scale&#10;  create_tensor: loading tensor blk.7.attn_output.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.7.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.8.attn_qkv.scale&#10;  create_tensor: loading tensor blk.8.attn_gate.scale&#10;  create_tensor: loading tensor blk.8.ffn_gate.scale&#10;  create_tensor: loading tensor blk.8.ffn_down.scale&#10;  create_tensor: loading tensor blk.8.ffn_up.scale&#10;  create_tensor: loading tensor blk.8.ssm_out.scale&#10;  create_tensor: loading tensor blk.8.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.8.ssm_beta.scale&#10;  create_tensor: loading tensor blk.8.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.8.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.8.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.8.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.9.attn_qkv.scale&#10;  create_tensor: loading tensor blk.9.attn_gate.scale&#10;  create_tensor: loading tensor blk.9.ffn_gate.scale&#10;  create_tensor: loading tensor blk.9.ffn_down.scale&#10;  create_tensor: loading tensor blk.9.ffn_up.scale&#10;  create_tensor: loading tensor blk.9.ssm_out.scale&#10;  create_tensor: loading tensor blk.9.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.9.ssm_beta.scale&#10;  create_tensor: loading tensor blk.9.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.9.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.9.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.9.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.10.attn_qkv.scale&#10;  create_tensor: loading tensor blk.10.attn_gate.scale&#10;  create_tensor: loading tensor blk.10.ffn_gate.scale&#10;  create_tensor: loading tensor blk.10.ffn_down.scale&#10;  create_tensor: loading tensor blk.10.ffn_up.scale&#10;  create_tensor: loading tensor blk.10.ssm_out.scale&#10;  create_tensor: loading tensor blk.10.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.10.ssm_beta.scale&#10;  create_tensor: loading tensor blk.10.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.10.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.10.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.10.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.11.attn_q.scale&#10;  create_tensor: loading tensor blk.11.attn_k.scale&#10;  create_tensor: loading tensor blk.11.attn_v.scale&#10;  create_tensor: loading tensor blk.11.attn_output.scale&#10;  create_tensor: loading tensor blk.11.ffn_gate.scale&#10;  create_tensor: loading tensor blk.11.ffn_down.scale&#10;  create_tensor: loading tensor blk.11.ffn_up.scale&#10;  create_tensor: loading tensor blk.11.attn_q.input_scale&#10;  create_tensor: loading tensor blk.11.attn_k.input_scale&#10;  create_tensor: loading tensor blk.11.attn_v.input_scale&#10;  create_tensor: loading tensor blk.11.attn_output.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.11.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.12.attn_qkv.scale&#10;  create_tensor: loading tensor blk.12.attn_gate.scale&#10;  create_tensor: loading tensor blk.12.ffn_gate.scale&#10;  create_tensor: loading tensor blk.12.ffn_down.scale&#10;  create_tensor: loading tensor blk.12.ffn_up.scale&#10;  create_tensor: loading tensor blk.12.ssm_out.scale&#10;  create_tensor: loading tensor blk.12.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.12.ssm_beta.scale&#10;  create_tensor: loading tensor blk.12.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.12.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.12.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.12.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.13.attn_qkv.scale&#10;  create_tensor: loading tensor blk.13.attn_gate.scale&#10;  create_tensor: loading tensor blk.13.ffn_gate.scale&#10;  create_tensor: loading tensor blk.13.ffn_down.scale&#10;  create_tensor: loading tensor blk.13.ffn_up.scale&#10;  create_tensor: loading tensor blk.13.ssm_out.scale&#10;  create_tensor: loading tensor blk.13.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.13.ssm_beta.scale&#10;  create_tensor: loading tensor blk.13.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.13.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.13.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.13.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.14.attn_qkv.scale&#10;  create_tensor: loading tensor blk.14.attn_gate.scale&#10;  create_tensor: loading tensor blk.14.ffn_gate.scale&#10;  create_tensor: loading tensor blk.14.ffn_down.scale&#10;  create_tensor: loading tensor blk.14.ffn_up.scale&#10;  create_tensor: loading tensor blk.14.ssm_out.scale&#10;  create_tensor: loading tensor blk.14.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.14.ssm_beta.scale&#10;  create_tensor: loading tensor blk.14.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.14.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.14.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.14.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.15.attn_q.scale&#10;  create_tensor: loading tensor blk.15.attn_k.scale&#10;  create_tensor: loading tensor blk.15.attn_v.scale&#10;  create_tensor: loading tensor blk.15.attn_output.scale&#10;  create_tensor: loading tensor blk.15.ffn_gate.scale&#10;  create_tensor: loading tensor blk.15.ffn_down.scale&#10;  create_tensor: loading tensor blk.15.ffn_up.scale&#10;  create_tensor: loading tensor blk.15.attn_q.input_scale&#10;  create_tensor: loading tensor blk.15.attn_k.input_scale&#10;  create_tensor: loading tensor blk.15.attn_v.input_scale&#10;  create_tensor: loading tensor blk.15.attn_output.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.15.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.16.attn_qkv.scale&#10;  create_tensor: loading tensor blk.16.attn_gate.scale&#10;  create_tensor: loading tensor blk.16.ffn_gate.scale&#10;  create_tensor: loading tensor blk.16.ffn_down.scale&#10;  create_tensor: loading tensor blk.16.ffn_up.scale&#10;  create_tensor: loading tensor blk.16.ssm_out.scale&#10;  create_tensor: loading tensor blk.16.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.16.ssm_beta.scale&#10;  create_tensor: loading tensor blk.16.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.16.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.16.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.16.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.17.attn_qkv.scale&#10;  create_tensor: loading tensor blk.17.attn_gate.scale&#10;  create_tensor: loading tensor blk.17.ffn_gate.scale&#10;  create_tensor: loading tensor blk.17.ffn_down.scale&#10;  create_tensor: loading tensor blk.17.ffn_up.scale&#10;  create_tensor: loading tensor blk.17.ssm_out.scale&#10;  create_tensor: loading tensor blk.17.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.17.ssm_beta.scale&#10;  create_tensor: loading tensor blk.17.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.17.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.17.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.17.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.18.attn_qkv.scale&#10;  create_tensor: loading tensor blk.18.attn_gate.scale&#10;  create_tensor: loading tensor blk.18.ffn_gate.scale&#10;  create_tensor: loading tensor blk.18.ffn_down.scale&#10;  create_tensor: loading tensor blk.18.ffn_up.scale&#10;  create_tensor: loading tensor blk.18.ssm_out.scale&#10;  create_tensor: loading tensor blk.18.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.18.ssm_beta.scale&#10;  create_tensor: loading tensor blk.18.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.18.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.18.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.18.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.19.attn_q.scale&#10;  create_tensor: loading tensor blk.19.attn_k.scale&#10;  create_tensor: loading tensor blk.19.attn_v.scale&#10;  create_tensor: loading tensor blk.19.attn_output.scale&#10;  create_tensor: loading tensor blk.19.ffn_gate.scale&#10;  create_tensor: loading tensor blk.19.ffn_down.scale&#10;  create_tensor: loading tensor blk.19.ffn_up.scale&#10;  create_tensor: loading tensor blk.19.attn_q.input_scale&#10;  create_tensor: loading tensor blk.19.attn_k.input_scale&#10;  create_tensor: loading tensor blk.19.attn_v.input_scale&#10;  create_tensor: loading tensor blk.19.attn_output.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.19.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.20.attn_qkv.scale&#10;  create_tensor: loading tensor blk.20.attn_gate.scale&#10;  create_tensor: loading tensor blk.20.ffn_gate.scale&#10;  create_tensor: loading tensor blk.20.ffn_down.scale&#10;  create_tensor: loading tensor blk.20.ffn_up.scale&#10;  create_tensor: loading tensor blk.20.ssm_out.scale&#10;  create_tensor: loading tensor blk.20.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.20.ssm_beta.scale&#10;  create_tensor: loading tensor blk.20.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.20.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.20.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.20.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.21.attn_qkv.scale&#10;  create_tensor: loading tensor blk.21.attn_gate.scale&#10;  create_tensor: loading tensor blk.21.ffn_gate.scale&#10;  create_tensor: loading tensor blk.21.ffn_down.scale&#10;  create_tensor: loading tensor blk.21.ffn_up.scale&#10;  create_tensor: loading tensor blk.21.ssm_out.scale&#10;  create_tensor: loading tensor blk.21.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.21.ssm_beta.scale&#10;  create_tensor: loading tensor blk.21.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.21.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.21.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.21.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.22.attn_qkv.scale&#10;  create_tensor: loading tensor blk.22.attn_gate.scale&#10;  create_tensor: loading tensor blk.22.ffn_gate.scale&#10;  create_tensor: loading tensor blk.22.ffn_down.scale&#10;  create_tensor: loading tensor blk.22.ffn_up.scale&#10;  create_tensor: loading tensor blk.22.ssm_out.scale&#10;  create_tensor: loading tensor blk.22.ssm_alpha.scale&#10;  create_tensor: loading tensor blk.22.ssm_beta.scale&#10;  create_tensor: loading tensor blk.22.attn_qkv.input_scale&#10;  create_tensor: loading tensor blk.22.attn_gate.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.22.ffn_up.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_out.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_alpha.input_scale&#10;  create_tensor: loading tensor blk.22.ssm_beta.input_scale&#10;  create_tensor: loading tensor blk.23.attn_q.scale&#10;  create_tensor: loading tensor blk.23.attn_k.scale&#10;  create_tensor: loading tensor blk.23.attn_v.scale&#10;  create_tensor: loading tensor blk.23.attn_output.scale&#10;  create_tensor: loading tensor blk.23.ffn_gate.scale&#10;  create_tensor: loading tensor blk.23.ffn_down.scale&#10;  create_tensor: loading tensor blk.23.ffn_up.scale&#10;  create_tensor: loading tensor blk.23.attn_q.input_scale&#10;  create_tensor: loading tensor blk.23.attn_k.input_scale&#10;  create_tensor: loading tensor blk.23.attn_v.input_scale&#10;  create_tensor: loading tensor blk.23.attn_output.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_gate.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_down.input_scale&#10;  create_tensor: loading tensor blk.23.ffn_up.input_scale&#10;  done_getting_tensors: tensor 'token_embd.weight' (q6_K) (and 222 others) cannot be used with preferred buffer type CPU_REPACK, using CPU instead&#10;  &#10;assert (None is None and 126426.926590148 &lt; 126426.902757737)&#10; +  where None = poll()&#10; +    where poll = &lt;Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...&gt;.poll&#10; +  and   126426.926590148 = &lt;built-in function monotonic&gt;()&#10; +    where &lt;built-in function monotonic&gt; = time.monotonic&quot;">backend/tests/integration/test_transport_lifecycle.py:67: in paused_native_browser
+    assert process.poll() is None and time.monotonic()&lt;until,log_path.read_text()
+E   AssertionError: {"event": "native_spawn", "pid": 219597, "keeper_pid": 219596, "epoch": 1}
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.schemas
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.tables
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.types
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.constraints
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.defaults
+E     INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.comments
+E     INFO:alembic.runtime.plugins:setup plugin alembic.ext.checkconstraint_byname
+E     DEBUG:asyncio:Using selector: EpollSelector
+E     DEBUG:asyncio:Using selector: EpollSelector
+E     INFO:alembic.runtime.migration:Context impl PostgresqlImpl.
+E     INFO:alembic.runtime.migration:Will assume transactional DDL.
+E     llama_model_loader: loaded meta data with 46 key-value pairs and 320 tensors from /home/octadim/MyProjects/Multi_User_RAG_Assist_System/rag/local_models/Qwen3.5-2B-Q4_K_M.gguf (version GGUF V3 (latest))
+E     llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+E     llama_model_loader: - kv   0:                       general.architecture str              = qwen35
+E     llama_model_loader: - kv   1:                               general.type str              = model
+E     llama_model_loader: - kv   2:                               general.name str              = Qwen3.5-2B
+E     llama_model_loader: - kv   3:                           general.basename str              = Qwen3.5-2B
+E     llama_model_loader: - kv   4:                       general.quantized_by str              = Unsloth
+E     llama_model_loader: - kv   5:                         general.size_label str              = 2B
+E     llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+E     llama_model_loader: - kv   7:                       general.license.link str              = https://huggingface.co/Qwen/Qwen3.5-2...
+E     llama_model_loader: - kv   8:                           general.repo_url str              = https://huggingface.co/unsloth
+E     llama_model_loader: - kv   9:                   general.base_model.count u32              = 1
+E     llama_model_loader: - kv  10:                  general.base_model.0.name str              = Qwen3.5 2B
+E     llama_model_loader: - kv  11:          general.base_model.0.organization str              = Qwen
+E     llama_model_loader: - kv  12:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen3.5-2B
+E     llama_model_loader: - kv  13:                               general.tags arr[str,2]       = ["unsloth", "image-text-to-text"]
+E     llama_model_loader: - kv  14:                         qwen35.block_count u32              = 24
+E     llama_model_loader: - kv  15:                      qwen35.context_length u32              = 262144
+E     llama_model_loader: - kv  16:                    qwen35.embedding_length u32              = 2048
+E     llama_model_loader: - kv  17:                 qwen35.feed_forward_length u32              = 6144
+E     llama_model_loader: - kv  18:                qwen35.attention.head_count u32              = 8
+E     llama_model_loader: - kv  19:             qwen35.attention.head_count_kv u32              = 2
+E     llama_model_loader: - kv  20:             qwen35.rope.dimension_sections arr[i32,4]       = [11, 11, 10, 0]
+E     llama_model_loader: - kv  21:                      qwen35.rope.freq_base f32              = 10000000.000000
+E     llama_model_loader: - kv  22:    qwen35.attention.layer_norm_rms_epsilon f32              = 0.000001
+E     llama_model_loader: - kv  23:                qwen35.attention.key_length u32              = 256
+E     llama_model_loader: - kv  24:              qwen35.attention.value_length u32              = 256
+E     llama_model_loader: - kv  25:                     qwen35.ssm.conv_kernel u32              = 4
+E     llama_model_loader: - kv  26:                      qwen35.ssm.state_size u32              = 128
+E     llama_model_loader: - kv  27:                     qwen35.ssm.group_count u32              = 16
+E     llama_model_loader: - kv  28:                  qwen35.ssm.time_step_rank u32              = 16
+E     llama_model_loader: - kv  29:                      qwen35.ssm.inner_size u32              = 2048
+E     llama_model_loader: - kv  30:             qwen35.full_attention_interval u32              = 4
+E     llama_model_loader: - kv  31:                qwen35.rope.dimension_count u32              = 64
+E     llama_model_loader: - kv  32:                       tokenizer.ggml.model str              = gpt2
+E     llama_model_loader: - kv  33:                         tokenizer.ggml.pre str              = qwen35
+E     llama_model_loader: - kv  34:                      tokenizer.ggml.tokens arr[str,248320]  = ["!", "\"", "#", "$", "%", "&amp;", "'", ...
+E     llama_model_loader: - kv  35:                  tokenizer.ggml.token_type arr[i32,248320]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+E     llama_model_loader: - kv  36:                      tokenizer.ggml.merges arr[str,247587]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+E     llama_model_loader: - kv  37:                tokenizer.ggml.eos_token_id u32              = 248046
+E     llama_model_loader: - kv  38:            tokenizer.ggml.padding_token_id u32              = 248055
+E     llama_model_loader: - kv  39:                    tokenizer.chat_template str              = {%- set image_count = namespace(value...
+E     llama_model_loader: - kv  40:               general.quantization_version u32              = 2
+E     llama_model_loader: - kv  41:                          general.file_type u32              = 15
+E     llama_model_loader: - kv  42:                      quantize.imatrix.file str              = Qwen3.5-2B-GGUF/imatrix_unsloth.gguf
+E     llama_model_loader: - kv  43:                   quantize.imatrix.dataset str              = unsloth_calibration_Qwen3.5-2B.txt
+E     llama_model_loader: - kv  44:             quantize.imatrix.entries_count u32              = 186
+E     llama_model_loader: - kv  45:              quantize.imatrix.chunks_count u32              = 80
+E     llama_model_loader: - type  f32:  133 tensors
+E     llama_model_loader: - type q8_0:   36 tensors
+E     llama_model_loader: - type q4_K:   98 tensors
+E     llama_model_loader: - type q5_K:   36 tensors
+E     llama_model_loader: - type q6_K:   17 tensors
+E     print_info: file format = GGUF V3 (latest)
+E     print_info: file type   = Q4_K - Medium
+E     print_info: file size   = 1.18 GiB (5.40 BPW) 
+E     init_tokenizer: initializing tokenizer for type 2
+E     load: 0 unused tokens
+E     load: control token: 248075 '&lt;tts_text_bos_single&gt;' is not marked as EOG
+E     load: control token: 248073 '&lt;tts_text_bos&gt;' is not marked as EOG
+E     load: control token: 248072 '&lt;tts_pad&gt;' is not marked as EOG
+E     load: control token: 248071 '&lt;|audio_end|&gt;' is not marked as EOG
+E     load: control token: 248061 '&lt;|fim_middle|&gt;' is not marked as EOG
+E     load: control token: 248055 '&lt;|vision_pad|&gt;' is not marked as EOG
+E     load: control token: 248052 '&lt;|quad_end|&gt;' is not marked as EOG
+E     load: control token: 248049 '&lt;|box_start|&gt;' is not marked as EOG
+E     load: control token: 248048 '&lt;|object_ref_end|&gt;' is not marked as EOG
+E     load: control token: 248045 '&lt;|im_start|&gt;' is not marked as EOG
+E     load: control token: 248057 '&lt;|video_pad|&gt;' is not marked as EOG
+E     load: control token: 248070 '&lt;|audio_start|&gt;' is not marked as EOG
+E     load: control token: 248056 '&lt;|image_pad|&gt;' is not marked as EOG
+E     load: control token: 248054 '&lt;|vision_end|&gt;' is not marked as EOG
+E     load: control token: 248060 '&lt;|fim_prefix|&gt;' is not marked as EOG
+E     load: control token: 248050 '&lt;|box_end|&gt;' is not marked as EOG
+E     load: control token: 248074 '&lt;tts_text_eod&gt;' is not marked as EOG
+E     load: control token: 248053 '&lt;|vision_start|&gt;' is not marked as EOG
+E     load: control token: 248062 '&lt;|fim_suffix|&gt;' is not marked as EOG
+E     load: control token: 248047 '&lt;|object_ref_start|&gt;' is not marked as EOG
+E     load: control token: 248051 '&lt;|quad_start|&gt;' is not marked as EOG
+E     load: control token: 248076 '&lt;|audio_pad|&gt;' is not marked as EOG
+E     load: printing all EOG tokens:
+E     load:   - 248044 ('&lt;|endoftext|&gt;')
+E     load:   - 248046 ('&lt;|im_end|&gt;')
+E     load:   - 248063 ('&lt;|fim_pad|&gt;')
+E     load:   - 248064 ('&lt;|repo_name|&gt;')
+E     load:   - 248065 ('&lt;|file_sep|&gt;')
+E     load: special tokens cache size = 33
+E     load: token to piece cache size = 1.7581 MB
+E     print_info: arch                  = qwen35
+E     print_info: vocab_only            = 0
+E     print_info: no_alloc              = 0
+E     print_info: n_ctx_train           = 262144
+E     print_info: n_embd_inp            = 2048
+E     print_info: n_embd                = 2048
+E     print_info: n_embd_out            = 2048
+E     print_info: n_layer               = 24
+E     print_info: n_layer_all           = 24
+E     print_info: n_head                = 8
+E     print_info: n_head_kv             = 2
+E     print_info: n_rot                 = 64
+E     print_info: n_swa                 = 0
+E     print_info: is_swa_any            = 0
+E     print_info: non_causal_type       = 0
+E     print_info: n_embd_head_k         = 256
+E     print_info: n_embd_head_v         = 256
+E     print_info: n_gqa                 = 4
+E     print_info: n_embd_k_gqa          = 512
+E     print_info: n_embd_v_gqa          = 512
+E     print_info: f_norm_eps            = 0.0e+00
+E     print_info: f_norm_rms_eps        = 1.0e-06
+E     print_info: f_clamp_kqv           = 0.0e+00
+E     print_info: f_max_alibi_bias      = 0.0e+00
+E     print_info: f_logit_scale         = 0.0e+00
+E     print_info: f_attn_scale          = 0.0e+00
+E     print_info: f_attn_value_scale    = 0.0000
+E     print_info: n_ff                  = 6144
+E     print_info: n_expert              = 0
+E     print_info: n_expert_used         = 0
+E     print_info: n_expert_groups       = 0
+E     print_info: n_group_used          = 0
+E     print_info: causal attn           = 1
+E     print_info: pooling type          = -1
+E     print_info: rope type             = 40
+E     print_info: rope scaling          = linear
+E     print_info: freq_base_train       = 10000000.0
+E     print_info: freq_scale_train      = 1
+E     print_info: n_ctx_orig_yarn       = 262144
+E     print_info: rope_yarn_log_mul     = 0.0000
+E     print_info: rope_finetuned        = unknown
+E     print_info: mrope sections        = [11, 11, 10, 0]
+E     print_info: ssm_d_conv            = 4
+E     print_info: ssm_d_inner           = 2048
+E     print_info: ssm_d_state           = 128
+E     print_info: ssm_dt_rank           = 16
+E     print_info: ssm_n_group           = 16
+E     print_info: ssm_dt_b_c_rms        = 0
+E     print_info: model type            = 2B
+E     print_info: model params          = 1.88 B
+E     print_info: general.name          = Qwen3.5-2B
+E     print_info: vocab type            = BPE
+E     print_info: n_vocab               = 248320
+E     print_info: n_merges              = 247587
+E     print_info: BOS token             = 11 ','
+E     print_info: EOS token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: EOT token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: PAD token             = 248055 '&lt;|vision_pad|&gt;'
+E     print_info: LF token              = 198 'Ċ'
+E     print_info: FIM PRE token         = 248060 '&lt;|fim_prefix|&gt;'
+E     print_info: FIM SUF token         = 248062 '&lt;|fim_suffix|&gt;'
+E     print_info: FIM MID token         = 248061 '&lt;|fim_middle|&gt;'
+E     print_info: FIM PAD token         = 248063 '&lt;|fim_pad|&gt;'
+E     print_info: FIM REP token         = 248064 '&lt;|repo_name|&gt;'
+E     print_info: FIM SEP token         = 248065 '&lt;|file_sep|&gt;'
+E     print_info: EOG token             = 248044 '&lt;|endoftext|&gt;'
+E     print_info: EOG token             = 248046 '&lt;|im_end|&gt;'
+E     print_info: EOG token             = 248063 '&lt;|fim_pad|&gt;'
+E     print_info: EOG token             = 248064 '&lt;|repo_name|&gt;'
+E     print_info: EOG token             = 248065 '&lt;|file_sep|&gt;'
+E     print_info: max token length      = 256
+E     load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+E     load_tensors: layer   0 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   1 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   2 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   3 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   4 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   5 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   6 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   7 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   8 assigned to device CPU, is_swa = 0
+E     load_tensors: layer   9 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  10 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  11 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  12 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  13 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  14 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  15 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  16 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  17 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  18 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  19 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  20 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  21 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  22 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  23 assigned to device CPU, is_swa = 0
+E     load_tensors: layer  24 assigned to device CPU, is_swa = 0
+E     create_tensor: loading tensor token_embd.weight
+E     create_tensor: loading tensor output_norm.weight
+E     create_tensor: loading tensor output.weight
+E     create_tensor: loading tensor token_embd.weight
+E     create_tensor: loading tensor blk.0.attn_norm.weight
+E     create_tensor: loading tensor blk.0.post_attention_norm.weight
+E     create_tensor: loading tensor blk.0.attn_qkv.weight
+E     create_tensor: loading tensor blk.0.attn_gate.weight
+E     create_tensor: loading tensor blk.0.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.0.ssm_dt.bias
+E     create_tensor: loading tensor blk.0.ssm_a
+E     create_tensor: loading tensor blk.0.ssm_beta.weight
+E     create_tensor: loading tensor blk.0.ssm_alpha.weight
+E     create_tensor: loading tensor blk.0.ssm_norm.weight
+E     create_tensor: loading tensor blk.0.ssm_out.weight
+E     create_tensor: loading tensor blk.0.ffn_gate.weight
+E     create_tensor: loading tensor blk.0.ffn_down.weight
+E     create_tensor: loading tensor blk.0.ffn_up.weight
+E     create_tensor: loading tensor blk.1.attn_norm.weight
+E     create_tensor: loading tensor blk.1.post_attention_norm.weight
+E     create_tensor: loading tensor blk.1.attn_qkv.weight
+E     create_tensor: loading tensor blk.1.attn_gate.weight
+E     create_tensor: loading tensor blk.1.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.1.ssm_dt.bias
+E     create_tensor: loading tensor blk.1.ssm_a
+E     create_tensor: loading tensor blk.1.ssm_beta.weight
+E     create_tensor: loading tensor blk.1.ssm_alpha.weight
+E     create_tensor: loading tensor blk.1.ssm_norm.weight
+E     create_tensor: loading tensor blk.1.ssm_out.weight
+E     create_tensor: loading tensor blk.1.ffn_gate.weight
+E     create_tensor: loading tensor blk.1.ffn_down.weight
+E     create_tensor: loading tensor blk.1.ffn_up.weight
+E     create_tensor: loading tensor blk.2.attn_norm.weight
+E     create_tensor: loading tensor blk.2.post_attention_norm.weight
+E     create_tensor: loading tensor blk.2.attn_qkv.weight
+E     create_tensor: loading tensor blk.2.attn_gate.weight
+E     create_tensor: loading tensor blk.2.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.2.ssm_dt.bias
+E     create_tensor: loading tensor blk.2.ssm_a
+E     create_tensor: loading tensor blk.2.ssm_beta.weight
+E     create_tensor: loading tensor blk.2.ssm_alpha.weight
+E     create_tensor: loading tensor blk.2.ssm_norm.weight
+E     create_tensor: loading tensor blk.2.ssm_out.weight
+E     create_tensor: loading tensor blk.2.ffn_gate.weight
+E     create_tensor: loading tensor blk.2.ffn_down.weight
+E     create_tensor: loading tensor blk.2.ffn_up.weight
+E     create_tensor: loading tensor blk.3.attn_norm.weight
+E     create_tensor: loading tensor blk.3.post_attention_norm.weight
+E     create_tensor: loading tensor blk.3.attn_qkv.weight
+E     create_tensor: loading tensor blk.3.attn_q.weight
+E     create_tensor: loading tensor blk.3.attn_k.weight
+E     create_tensor: loading tensor blk.3.attn_v.weight
+E     create_tensor: loading tensor blk.3.attn_q.bias
+E     create_tensor: loading tensor blk.3.attn_k.bias
+E     create_tensor: loading tensor blk.3.attn_v.bias
+E     create_tensor: loading tensor blk.3.attn_output.weight
+E     create_tensor: loading tensor blk.3.attn_q_norm.weight
+E     create_tensor: loading tensor blk.3.attn_k_norm.weight
+E     create_tensor: loading tensor blk.3.ffn_gate.weight
+E     create_tensor: loading tensor blk.3.ffn_down.weight
+E     create_tensor: loading tensor blk.3.ffn_up.weight
+E     create_tensor: loading tensor blk.4.attn_norm.weight
+E     create_tensor: loading tensor blk.4.post_attention_norm.weight
+E     create_tensor: loading tensor blk.4.attn_qkv.weight
+E     create_tensor: loading tensor blk.4.attn_gate.weight
+E     create_tensor: loading tensor blk.4.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.4.ssm_dt.bias
+E     create_tensor: loading tensor blk.4.ssm_a
+E     create_tensor: loading tensor blk.4.ssm_beta.weight
+E     create_tensor: loading tensor blk.4.ssm_alpha.weight
+E     create_tensor: loading tensor blk.4.ssm_norm.weight
+E     create_tensor: loading tensor blk.4.ssm_out.weight
+E     create_tensor: loading tensor blk.4.ffn_gate.weight
+E     create_tensor: loading tensor blk.4.ffn_down.weight
+E     create_tensor: loading tensor blk.4.ffn_up.weight
+E     create_tensor: loading tensor blk.5.attn_norm.weight
+E     create_tensor: loading tensor blk.5.post_attention_norm.weight
+E     create_tensor: loading tensor blk.5.attn_qkv.weight
+E     create_tensor: loading tensor blk.5.attn_gate.weight
+E     create_tensor: loading tensor blk.5.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.5.ssm_dt.bias
+E     create_tensor: loading tensor blk.5.ssm_a
+E     create_tensor: loading tensor blk.5.ssm_beta.weight
+E     create_tensor: loading tensor blk.5.ssm_alpha.weight
+E     create_tensor: loading tensor blk.5.ssm_norm.weight
+E     create_tensor: loading tensor blk.5.ssm_out.weight
+E     create_tensor: loading tensor blk.5.ffn_gate.weight
+E     create_tensor: loading tensor blk.5.ffn_down.weight
+E     create_tensor: loading tensor blk.5.ffn_up.weight
+E     create_tensor: loading tensor blk.6.attn_norm.weight
+E     create_tensor: loading tensor blk.6.post_attention_norm.weight
+E     create_tensor: loading tensor blk.6.attn_qkv.weight
+E     create_tensor: loading tensor blk.6.attn_gate.weight
+E     create_tensor: loading tensor blk.6.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.6.ssm_dt.bias
+E     create_tensor: loading tensor blk.6.ssm_a
+E     create_tensor: loading tensor blk.6.ssm_beta.weight
+E     create_tensor: loading tensor blk.6.ssm_alpha.weight
+E     create_tensor: loading tensor blk.6.ssm_norm.weight
+E     create_tensor: loading tensor blk.6.ssm_out.weight
+E     create_tensor: loading tensor blk.6.ffn_gate.weight
+E     create_tensor: loading tensor blk.6.ffn_down.weight
+E     create_tensor: loading tensor blk.6.ffn_up.weight
+E     create_tensor: loading tensor blk.7.attn_norm.weight
+E     create_tensor: loading tensor blk.7.post_attention_norm.weight
+E     create_tensor: loading tensor blk.7.attn_qkv.weight
+E     create_tensor: loading tensor blk.7.attn_q.weight
+E     create_tensor: loading tensor blk.7.attn_k.weight
+E     create_tensor: loading tensor blk.7.attn_v.weight
+E     create_tensor: loading tensor blk.7.attn_q.bias
+E     create_tensor: loading tensor blk.7.attn_k.bias
+E     create_tensor: loading tensor blk.7.attn_v.bias
+E     create_tensor: loading tensor blk.7.attn_output.weight
+E     create_tensor: loading tensor blk.7.attn_q_norm.weight
+E     create_tensor: loading tensor blk.7.attn_k_norm.weight
+E     create_tensor: loading tensor blk.7.ffn_gate.weight
+E     create_tensor: loading tensor blk.7.ffn_down.weight
+E     create_tensor: loading tensor blk.7.ffn_up.weight
+E     create_tensor: loading tensor blk.8.attn_norm.weight
+E     create_tensor: loading tensor blk.8.post_attention_norm.weight
+E     create_tensor: loading tensor blk.8.attn_qkv.weight
+E     create_tensor: loading tensor blk.8.attn_gate.weight
+E     create_tensor: loading tensor blk.8.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.8.ssm_dt.bias
+E     create_tensor: loading tensor blk.8.ssm_a
+E     create_tensor: loading tensor blk.8.ssm_beta.weight
+E     create_tensor: loading tensor blk.8.ssm_alpha.weight
+E     create_tensor: loading tensor blk.8.ssm_norm.weight
+E     create_tensor: loading tensor blk.8.ssm_out.weight
+E     create_tensor: loading tensor blk.8.ffn_gate.weight
+E     create_tensor: loading tensor blk.8.ffn_down.weight
+E     create_tensor: loading tensor blk.8.ffn_up.weight
+E     create_tensor: loading tensor blk.9.attn_norm.weight
+E     create_tensor: loading tensor blk.9.post_attention_norm.weight
+E     create_tensor: loading tensor blk.9.attn_qkv.weight
+E     create_tensor: loading tensor blk.9.attn_gate.weight
+E     create_tensor: loading tensor blk.9.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.9.ssm_dt.bias
+E     create_tensor: loading tensor blk.9.ssm_a
+E     create_tensor: loading tensor blk.9.ssm_beta.weight
+E     create_tensor: loading tensor blk.9.ssm_alpha.weight
+E     create_tensor: loading tensor blk.9.ssm_norm.weight
+E     create_tensor: loading tensor blk.9.ssm_out.weight
+E     create_tensor: loading tensor blk.9.ffn_gate.weight
+E     create_tensor: loading tensor blk.9.ffn_down.weight
+E     create_tensor: loading tensor blk.9.ffn_up.weight
+E     create_tensor: loading tensor blk.10.attn_norm.weight
+E     create_tensor: loading tensor blk.10.post_attention_norm.weight
+E     create_tensor: loading tensor blk.10.attn_qkv.weight
+E     create_tensor: loading tensor blk.10.attn_gate.weight
+E     create_tensor: loading tensor blk.10.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.10.ssm_dt.bias
+E     create_tensor: loading tensor blk.10.ssm_a
+E     create_tensor: loading tensor blk.10.ssm_beta.weight
+E     create_tensor: loading tensor blk.10.ssm_alpha.weight
+E     create_tensor: loading tensor blk.10.ssm_norm.weight
+E     create_tensor: loading tensor blk.10.ssm_out.weight
+E     create_tensor: loading tensor blk.10.ffn_gate.weight
+E     create_tensor: loading tensor blk.10.ffn_down.weight
+E     create_tensor: loading tensor blk.10.ffn_up.weight
+E     create_tensor: loading tensor blk.11.attn_norm.weight
+E     create_tensor: loading tensor blk.11.post_attention_norm.weight
+E     create_tensor: loading tensor blk.11.attn_qkv.weight
+E     create_tensor: loading tensor blk.11.attn_q.weight
+E     create_tensor: loading tensor blk.11.attn_k.weight
+E     create_tensor: loading tensor blk.11.attn_v.weight
+E     create_tensor: loading tensor blk.11.attn_q.bias
+E     create_tensor: loading tensor blk.11.attn_k.bias
+E     create_tensor: loading tensor blk.11.attn_v.bias
+E     create_tensor: loading tensor blk.11.attn_output.weight
+E     create_tensor: loading tensor blk.11.attn_q_norm.weight
+E     create_tensor: loading tensor blk.11.attn_k_norm.weight
+E     create_tensor: loading tensor blk.11.ffn_gate.weight
+E     create_tensor: loading tensor blk.11.ffn_down.weight
+E     create_tensor: loading tensor blk.11.ffn_up.weight
+E     create_tensor: loading tensor blk.12.attn_norm.weight
+E     create_tensor: loading tensor blk.12.post_attention_norm.weight
+E     create_tensor: loading tensor blk.12.attn_qkv.weight
+E     create_tensor: loading tensor blk.12.attn_gate.weight
+E     create_tensor: loading tensor blk.12.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.12.ssm_dt.bias
+E     create_tensor: loading tensor blk.12.ssm_a
+E     create_tensor: loading tensor blk.12.ssm_beta.weight
+E     create_tensor: loading tensor blk.12.ssm_alpha.weight
+E     create_tensor: loading tensor blk.12.ssm_norm.weight
+E     create_tensor: loading tensor blk.12.ssm_out.weight
+E     create_tensor: loading tensor blk.12.ffn_gate.weight
+E     create_tensor: loading tensor blk.12.ffn_down.weight
+E     create_tensor: loading tensor blk.12.ffn_up.weight
+E     create_tensor: loading tensor blk.13.attn_norm.weight
+E     create_tensor: loading tensor blk.13.post_attention_norm.weight
+E     create_tensor: loading tensor blk.13.attn_qkv.weight
+E     create_tensor: loading tensor blk.13.attn_gate.weight
+E     create_tensor: loading tensor blk.13.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.13.ssm_dt.bias
+E     create_tensor: loading tensor blk.13.ssm_a
+E     create_tensor: loading tensor blk.13.ssm_beta.weight
+E     create_tensor: loading tensor blk.13.ssm_alpha.weight
+E     create_tensor: loading tensor blk.13.ssm_norm.weight
+E     create_tensor: loading tensor blk.13.ssm_out.weight
+E     create_tensor: loading tensor blk.13.ffn_gate.weight
+E     create_tensor: loading tensor blk.13.ffn_down.weight
+E     create_tensor: loading tensor blk.13.ffn_up.weight
+E     create_tensor: loading tensor blk.14.attn_norm.weight
+E     create_tensor: loading tensor blk.14.post_attention_norm.weight
+E     create_tensor: loading tensor blk.14.attn_qkv.weight
+E     create_tensor: loading tensor blk.14.attn_gate.weight
+E     create_tensor: loading tensor blk.14.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.14.ssm_dt.bias
+E     create_tensor: loading tensor blk.14.ssm_a
+E     create_tensor: loading tensor blk.14.ssm_beta.weight
+E     create_tensor: loading tensor blk.14.ssm_alpha.weight
+E     create_tensor: loading tensor blk.14.ssm_norm.weight
+E     create_tensor: loading tensor blk.14.ssm_out.weight
+E     create_tensor: loading tensor blk.14.ffn_gate.weight
+E     create_tensor: loading tensor blk.14.ffn_down.weight
+E     create_tensor: loading tensor blk.14.ffn_up.weight
+E     create_tensor: loading tensor blk.15.attn_norm.weight
+E     create_tensor: loading tensor blk.15.post_attention_norm.weight
+E     create_tensor: loading tensor blk.15.attn_qkv.weight
+E     create_tensor: loading tensor blk.15.attn_q.weight
+E     create_tensor: loading tensor blk.15.attn_k.weight
+E     create_tensor: loading tensor blk.15.attn_v.weight
+E     create_tensor: loading tensor blk.15.attn_q.bias
+E     create_tensor: loading tensor blk.15.attn_k.bias
+E     create_tensor: loading tensor blk.15.attn_v.bias
+E     create_tensor: loading tensor blk.15.attn_output.weight
+E     create_tensor: loading tensor blk.15.attn_q_norm.weight
+E     create_tensor: loading tensor blk.15.attn_k_norm.weight
+E     create_tensor: loading tensor blk.15.ffn_gate.weight
+E     create_tensor: loading tensor blk.15.ffn_down.weight
+E     create_tensor: loading tensor blk.15.ffn_up.weight
+E     create_tensor: loading tensor blk.16.attn_norm.weight
+E     create_tensor: loading tensor blk.16.post_attention_norm.weight
+E     create_tensor: loading tensor blk.16.attn_qkv.weight
+E     create_tensor: loading tensor blk.16.attn_gate.weight
+E     create_tensor: loading tensor blk.16.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.16.ssm_dt.bias
+E     create_tensor: loading tensor blk.16.ssm_a
+E     create_tensor: loading tensor blk.16.ssm_beta.weight
+E     create_tensor: loading tensor blk.16.ssm_alpha.weight
+E     create_tensor: loading tensor blk.16.ssm_norm.weight
+E     create_tensor: loading tensor blk.16.ssm_out.weight
+E     create_tensor: loading tensor blk.16.ffn_gate.weight
+E     create_tensor: loading tensor blk.16.ffn_down.weight
+E     create_tensor: loading tensor blk.16.ffn_up.weight
+E     create_tensor: loading tensor blk.17.attn_norm.weight
+E     create_tensor: loading tensor blk.17.post_attention_norm.weight
+E     create_tensor: loading tensor blk.17.attn_qkv.weight
+E     create_tensor: loading tensor blk.17.attn_gate.weight
+E     create_tensor: loading tensor blk.17.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.17.ssm_dt.bias
+E     create_tensor: loading tensor blk.17.ssm_a
+E     create_tensor: loading tensor blk.17.ssm_beta.weight
+E     create_tensor: loading tensor blk.17.ssm_alpha.weight
+E     create_tensor: loading tensor blk.17.ssm_norm.weight
+E     create_tensor: loading tensor blk.17.ssm_out.weight
+E     create_tensor: loading tensor blk.17.ffn_gate.weight
+E     create_tensor: loading tensor blk.17.ffn_down.weight
+E     create_tensor: loading tensor blk.17.ffn_up.weight
+E     create_tensor: loading tensor blk.18.attn_norm.weight
+E     create_tensor: loading tensor blk.18.post_attention_norm.weight
+E     create_tensor: loading tensor blk.18.attn_qkv.weight
+E     create_tensor: loading tensor blk.18.attn_gate.weight
+E     create_tensor: loading tensor blk.18.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.18.ssm_dt.bias
+E     create_tensor: loading tensor blk.18.ssm_a
+E     create_tensor: loading tensor blk.18.ssm_beta.weight
+E     create_tensor: loading tensor blk.18.ssm_alpha.weight
+E     create_tensor: loading tensor blk.18.ssm_norm.weight
+E     create_tensor: loading tensor blk.18.ssm_out.weight
+E     create_tensor: loading tensor blk.18.ffn_gate.weight
+E     create_tensor: loading tensor blk.18.ffn_down.weight
+E     create_tensor: loading tensor blk.18.ffn_up.weight
+E     create_tensor: loading tensor blk.19.attn_norm.weight
+E     create_tensor: loading tensor blk.19.post_attention_norm.weight
+E     create_tensor: loading tensor blk.19.attn_qkv.weight
+E     create_tensor: loading tensor blk.19.attn_q.weight
+E     create_tensor: loading tensor blk.19.attn_k.weight
+E     create_tensor: loading tensor blk.19.attn_v.weight
+E     create_tensor: loading tensor blk.19.attn_q.bias
+E     create_tensor: loading tensor blk.19.attn_k.bias
+E     create_tensor: loading tensor blk.19.attn_v.bias
+E     create_tensor: loading tensor blk.19.attn_output.weight
+E     create_tensor: loading tensor blk.19.attn_q_norm.weight
+E     create_tensor: loading tensor blk.19.attn_k_norm.weight
+E     create_tensor: loading tensor blk.19.ffn_gate.weight
+E     create_tensor: loading tensor blk.19.ffn_down.weight
+E     create_tensor: loading tensor blk.19.ffn_up.weight
+E     create_tensor: loading tensor blk.20.attn_norm.weight
+E     create_tensor: loading tensor blk.20.post_attention_norm.weight
+E     create_tensor: loading tensor blk.20.attn_qkv.weight
+E     create_tensor: loading tensor blk.20.attn_gate.weight
+E     create_tensor: loading tensor blk.20.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.20.ssm_dt.bias
+E     create_tensor: loading tensor blk.20.ssm_a
+E     create_tensor: loading tensor blk.20.ssm_beta.weight
+E     create_tensor: loading tensor blk.20.ssm_alpha.weight
+E     create_tensor: loading tensor blk.20.ssm_norm.weight
+E     create_tensor: loading tensor blk.20.ssm_out.weight
+E     create_tensor: loading tensor blk.20.ffn_gate.weight
+E     create_tensor: loading tensor blk.20.ffn_down.weight
+E     create_tensor: loading tensor blk.20.ffn_up.weight
+E     create_tensor: loading tensor blk.21.attn_norm.weight
+E     create_tensor: loading tensor blk.21.post_attention_norm.weight
+E     create_tensor: loading tensor blk.21.attn_qkv.weight
+E     create_tensor: loading tensor blk.21.attn_gate.weight
+E     create_tensor: loading tensor blk.21.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.21.ssm_dt.bias
+E     create_tensor: loading tensor blk.21.ssm_a
+E     create_tensor: loading tensor blk.21.ssm_beta.weight
+E     create_tensor: loading tensor blk.21.ssm_alpha.weight
+E     create_tensor: loading tensor blk.21.ssm_norm.weight
+E     create_tensor: loading tensor blk.21.ssm_out.weight
+E     create_tensor: loading tensor blk.21.ffn_gate.weight
+E     create_tensor: loading tensor blk.21.ffn_down.weight
+E     create_tensor: loading tensor blk.21.ffn_up.weight
+E     create_tensor: loading tensor blk.22.attn_norm.weight
+E     create_tensor: loading tensor blk.22.post_attention_norm.weight
+E     create_tensor: loading tensor blk.22.attn_qkv.weight
+E     create_tensor: loading tensor blk.22.attn_gate.weight
+E     create_tensor: loading tensor blk.22.ssm_conv1d.weight
+E     create_tensor: loading tensor blk.22.ssm_dt.bias
+E     create_tensor: loading tensor blk.22.ssm_a
+E     create_tensor: loading tensor blk.22.ssm_beta.weight
+E     create_tensor: loading tensor blk.22.ssm_alpha.weight
+E     create_tensor: loading tensor blk.22.ssm_norm.weight
+E     create_tensor: loading tensor blk.22.ssm_out.weight
+E     create_tensor: loading tensor blk.22.ffn_gate.weight
+E     create_tensor: loading tensor blk.22.ffn_down.weight
+E     create_tensor: loading tensor blk.22.ffn_up.weight
+E     create_tensor: loading tensor blk.23.attn_norm.weight
+E     create_tensor: loading tensor blk.23.post_attention_norm.weight
+E     create_tensor: loading tensor blk.23.attn_qkv.weight
+E     create_tensor: loading tensor blk.23.attn_q.weight
+E     create_tensor: loading tensor blk.23.attn_k.weight
+E     create_tensor: loading tensor blk.23.attn_v.weight
+E     create_tensor: loading tensor blk.23.attn_q.bias
+E     create_tensor: loading tensor blk.23.attn_k.bias
+E     create_tensor: loading tensor blk.23.attn_v.bias
+E     create_tensor: loading tensor blk.23.attn_output.weight
+E     create_tensor: loading tensor blk.23.attn_q_norm.weight
+E     create_tensor: loading tensor blk.23.attn_k_norm.weight
+E     create_tensor: loading tensor blk.23.ffn_gate.weight
+E     create_tensor: loading tensor blk.23.ffn_down.weight
+E     create_tensor: loading tensor blk.23.ffn_up.weight
+E     create_tensor: loading tensor blk.0.attn_qkv.scale
+E     create_tensor: loading tensor blk.0.attn_gate.scale
+E     create_tensor: loading tensor blk.0.ffn_gate.scale
+E     create_tensor: loading tensor blk.0.ffn_down.scale
+E     create_tensor: loading tensor blk.0.ffn_up.scale
+E     create_tensor: loading tensor blk.0.ssm_out.scale
+E     create_tensor: loading tensor blk.0.ssm_alpha.scale
+E     create_tensor: loading tensor blk.0.ssm_beta.scale
+E     create_tensor: loading tensor blk.0.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.0.attn_gate.input_scale
+E     create_tensor: loading tensor blk.0.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.0.ffn_down.input_scale
+E     create_tensor: loading tensor blk.0.ffn_up.input_scale
+E     create_tensor: loading tensor blk.0.ssm_out.input_scale
+E     create_tensor: loading tensor blk.0.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.0.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.1.attn_qkv.scale
+E     create_tensor: loading tensor blk.1.attn_gate.scale
+E     create_tensor: loading tensor blk.1.ffn_gate.scale
+E     create_tensor: loading tensor blk.1.ffn_down.scale
+E     create_tensor: loading tensor blk.1.ffn_up.scale
+E     create_tensor: loading tensor blk.1.ssm_out.scale
+E     create_tensor: loading tensor blk.1.ssm_alpha.scale
+E     create_tensor: loading tensor blk.1.ssm_beta.scale
+E     create_tensor: loading tensor blk.1.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.1.attn_gate.input_scale
+E     create_tensor: loading tensor blk.1.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.1.ffn_down.input_scale
+E     create_tensor: loading tensor blk.1.ffn_up.input_scale
+E     create_tensor: loading tensor blk.1.ssm_out.input_scale
+E     create_tensor: loading tensor blk.1.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.1.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.2.attn_qkv.scale
+E     create_tensor: loading tensor blk.2.attn_gate.scale
+E     create_tensor: loading tensor blk.2.ffn_gate.scale
+E     create_tensor: loading tensor blk.2.ffn_down.scale
+E     create_tensor: loading tensor blk.2.ffn_up.scale
+E     create_tensor: loading tensor blk.2.ssm_out.scale
+E     create_tensor: loading tensor blk.2.ssm_alpha.scale
+E     create_tensor: loading tensor blk.2.ssm_beta.scale
+E     create_tensor: loading tensor blk.2.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.2.attn_gate.input_scale
+E     create_tensor: loading tensor blk.2.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.2.ffn_down.input_scale
+E     create_tensor: loading tensor blk.2.ffn_up.input_scale
+E     create_tensor: loading tensor blk.2.ssm_out.input_scale
+E     create_tensor: loading tensor blk.2.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.2.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.3.attn_q.scale
+E     create_tensor: loading tensor blk.3.attn_k.scale
+E     create_tensor: loading tensor blk.3.attn_v.scale
+E     create_tensor: loading tensor blk.3.attn_output.scale
+E     create_tensor: loading tensor blk.3.ffn_gate.scale
+E     create_tensor: loading tensor blk.3.ffn_down.scale
+E     create_tensor: loading tensor blk.3.ffn_up.scale
+E     create_tensor: loading tensor blk.3.attn_q.input_scale
+E     create_tensor: loading tensor blk.3.attn_k.input_scale
+E     create_tensor: loading tensor blk.3.attn_v.input_scale
+E     create_tensor: loading tensor blk.3.attn_output.input_scale
+E     create_tensor: loading tensor blk.3.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.3.ffn_down.input_scale
+E     create_tensor: loading tensor blk.3.ffn_up.input_scale
+E     create_tensor: loading tensor blk.4.attn_qkv.scale
+E     create_tensor: loading tensor blk.4.attn_gate.scale
+E     create_tensor: loading tensor blk.4.ffn_gate.scale
+E     create_tensor: loading tensor blk.4.ffn_down.scale
+E     create_tensor: loading tensor blk.4.ffn_up.scale
+E     create_tensor: loading tensor blk.4.ssm_out.scale
+E     create_tensor: loading tensor blk.4.ssm_alpha.scale
+E     create_tensor: loading tensor blk.4.ssm_beta.scale
+E     create_tensor: loading tensor blk.4.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.4.attn_gate.input_scale
+E     create_tensor: loading tensor blk.4.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.4.ffn_down.input_scale
+E     create_tensor: loading tensor blk.4.ffn_up.input_scale
+E     create_tensor: loading tensor blk.4.ssm_out.input_scale
+E     create_tensor: loading tensor blk.4.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.4.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.5.attn_qkv.scale
+E     create_tensor: loading tensor blk.5.attn_gate.scale
+E     create_tensor: loading tensor blk.5.ffn_gate.scale
+E     create_tensor: loading tensor blk.5.ffn_down.scale
+E     create_tensor: loading tensor blk.5.ffn_up.scale
+E     create_tensor: loading tensor blk.5.ssm_out.scale
+E     create_tensor: loading tensor blk.5.ssm_alpha.scale
+E     create_tensor: loading tensor blk.5.ssm_beta.scale
+E     create_tensor: loading tensor blk.5.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.5.attn_gate.input_scale
+E     create_tensor: loading tensor blk.5.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.5.ffn_down.input_scale
+E     create_tensor: loading tensor blk.5.ffn_up.input_scale
+E     create_tensor: loading tensor blk.5.ssm_out.input_scale
+E     create_tensor: loading tensor blk.5.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.5.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.6.attn_qkv.scale
+E     create_tensor: loading tensor blk.6.attn_gate.scale
+E     create_tensor: loading tensor blk.6.ffn_gate.scale
+E     create_tensor: loading tensor blk.6.ffn_down.scale
+E     create_tensor: loading tensor blk.6.ffn_up.scale
+E     create_tensor: loading tensor blk.6.ssm_out.scale
+E     create_tensor: loading tensor blk.6.ssm_alpha.scale
+E     create_tensor: loading tensor blk.6.ssm_beta.scale
+E     create_tensor: loading tensor blk.6.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.6.attn_gate.input_scale
+E     create_tensor: loading tensor blk.6.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.6.ffn_down.input_scale
+E     create_tensor: loading tensor blk.6.ffn_up.input_scale
+E     create_tensor: loading tensor blk.6.ssm_out.input_scale
+E     create_tensor: loading tensor blk.6.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.6.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.7.attn_q.scale
+E     create_tensor: loading tensor blk.7.attn_k.scale
+E     create_tensor: loading tensor blk.7.attn_v.scale
+E     create_tensor: loading tensor blk.7.attn_output.scale
+E     create_tensor: loading tensor blk.7.ffn_gate.scale
+E     create_tensor: loading tensor blk.7.ffn_down.scale
+E     create_tensor: loading tensor blk.7.ffn_up.scale
+E     create_tensor: loading tensor blk.7.attn_q.input_scale
+E     create_tensor: loading tensor blk.7.attn_k.input_scale
+E     create_tensor: loading tensor blk.7.attn_v.input_scale
+E     create_tensor: loading tensor blk.7.attn_output.input_scale
+E     create_tensor: loading tensor blk.7.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.7.ffn_down.input_scale
+E     create_tensor: loading tensor blk.7.ffn_up.input_scale
+E     create_tensor: loading tensor blk.8.attn_qkv.scale
+E     create_tensor: loading tensor blk.8.attn_gate.scale
+E     create_tensor: loading tensor blk.8.ffn_gate.scale
+E     create_tensor: loading tensor blk.8.ffn_down.scale
+E     create_tensor: loading tensor blk.8.ffn_up.scale
+E     create_tensor: loading tensor blk.8.ssm_out.scale
+E     create_tensor: loading tensor blk.8.ssm_alpha.scale
+E     create_tensor: loading tensor blk.8.ssm_beta.scale
+E     create_tensor: loading tensor blk.8.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.8.attn_gate.input_scale
+E     create_tensor: loading tensor blk.8.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.8.ffn_down.input_scale
+E     create_tensor: loading tensor blk.8.ffn_up.input_scale
+E     create_tensor: loading tensor blk.8.ssm_out.input_scale
+E     create_tensor: loading tensor blk.8.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.8.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.9.attn_qkv.scale
+E     create_tensor: loading tensor blk.9.attn_gate.scale
+E     create_tensor: loading tensor blk.9.ffn_gate.scale
+E     create_tensor: loading tensor blk.9.ffn_down.scale
+E     create_tensor: loading tensor blk.9.ffn_up.scale
+E     create_tensor: loading tensor blk.9.ssm_out.scale
+E     create_tensor: loading tensor blk.9.ssm_alpha.scale
+E     create_tensor: loading tensor blk.9.ssm_beta.scale
+E     create_tensor: loading tensor blk.9.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.9.attn_gate.input_scale
+E     create_tensor: loading tensor blk.9.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.9.ffn_down.input_scale
+E     create_tensor: loading tensor blk.9.ffn_up.input_scale
+E     create_tensor: loading tensor blk.9.ssm_out.input_scale
+E     create_tensor: loading tensor blk.9.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.9.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.10.attn_qkv.scale
+E     create_tensor: loading tensor blk.10.attn_gate.scale
+E     create_tensor: loading tensor blk.10.ffn_gate.scale
+E     create_tensor: loading tensor blk.10.ffn_down.scale
+E     create_tensor: loading tensor blk.10.ffn_up.scale
+E     create_tensor: loading tensor blk.10.ssm_out.scale
+E     create_tensor: loading tensor blk.10.ssm_alpha.scale
+E     create_tensor: loading tensor blk.10.ssm_beta.scale
+E     create_tensor: loading tensor blk.10.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.10.attn_gate.input_scale
+E     create_tensor: loading tensor blk.10.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.10.ffn_down.input_scale
+E     create_tensor: loading tensor blk.10.ffn_up.input_scale
+E     create_tensor: loading tensor blk.10.ssm_out.input_scale
+E     create_tensor: loading tensor blk.10.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.10.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.11.attn_q.scale
+E     create_tensor: loading tensor blk.11.attn_k.scale
+E     create_tensor: loading tensor blk.11.attn_v.scale
+E     create_tensor: loading tensor blk.11.attn_output.scale
+E     create_tensor: loading tensor blk.11.ffn_gate.scale
+E     create_tensor: loading tensor blk.11.ffn_down.scale
+E     create_tensor: loading tensor blk.11.ffn_up.scale
+E     create_tensor: loading tensor blk.11.attn_q.input_scale
+E     create_tensor: loading tensor blk.11.attn_k.input_scale
+E     create_tensor: loading tensor blk.11.attn_v.input_scale
+E     create_tensor: loading tensor blk.11.attn_output.input_scale
+E     create_tensor: loading tensor blk.11.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.11.ffn_down.input_scale
+E     create_tensor: loading tensor blk.11.ffn_up.input_scale
+E     create_tensor: loading tensor blk.12.attn_qkv.scale
+E     create_tensor: loading tensor blk.12.attn_gate.scale
+E     create_tensor: loading tensor blk.12.ffn_gate.scale
+E     create_tensor: loading tensor blk.12.ffn_down.scale
+E     create_tensor: loading tensor blk.12.ffn_up.scale
+E     create_tensor: loading tensor blk.12.ssm_out.scale
+E     create_tensor: loading tensor blk.12.ssm_alpha.scale
+E     create_tensor: loading tensor blk.12.ssm_beta.scale
+E     create_tensor: loading tensor blk.12.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.12.attn_gate.input_scale
+E     create_tensor: loading tensor blk.12.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.12.ffn_down.input_scale
+E     create_tensor: loading tensor blk.12.ffn_up.input_scale
+E     create_tensor: loading tensor blk.12.ssm_out.input_scale
+E     create_tensor: loading tensor blk.12.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.12.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.13.attn_qkv.scale
+E     create_tensor: loading tensor blk.13.attn_gate.scale
+E     create_tensor: loading tensor blk.13.ffn_gate.scale
+E     create_tensor: loading tensor blk.13.ffn_down.scale
+E     create_tensor: loading tensor blk.13.ffn_up.scale
+E     create_tensor: loading tensor blk.13.ssm_out.scale
+E     create_tensor: loading tensor blk.13.ssm_alpha.scale
+E     create_tensor: loading tensor blk.13.ssm_beta.scale
+E     create_tensor: loading tensor blk.13.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.13.attn_gate.input_scale
+E     create_tensor: loading tensor blk.13.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.13.ffn_down.input_scale
+E     create_tensor: loading tensor blk.13.ffn_up.input_scale
+E     create_tensor: loading tensor blk.13.ssm_out.input_scale
+E     create_tensor: loading tensor blk.13.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.13.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.14.attn_qkv.scale
+E     create_tensor: loading tensor blk.14.attn_gate.scale
+E     create_tensor: loading tensor blk.14.ffn_gate.scale
+E     create_tensor: loading tensor blk.14.ffn_down.scale
+E     create_tensor: loading tensor blk.14.ffn_up.scale
+E     create_tensor: loading tensor blk.14.ssm_out.scale
+E     create_tensor: loading tensor blk.14.ssm_alpha.scale
+E     create_tensor: loading tensor blk.14.ssm_beta.scale
+E     create_tensor: loading tensor blk.14.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.14.attn_gate.input_scale
+E     create_tensor: loading tensor blk.14.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.14.ffn_down.input_scale
+E     create_tensor: loading tensor blk.14.ffn_up.input_scale
+E     create_tensor: loading tensor blk.14.ssm_out.input_scale
+E     create_tensor: loading tensor blk.14.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.14.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.15.attn_q.scale
+E     create_tensor: loading tensor blk.15.attn_k.scale
+E     create_tensor: loading tensor blk.15.attn_v.scale
+E     create_tensor: loading tensor blk.15.attn_output.scale
+E     create_tensor: loading tensor blk.15.ffn_gate.scale
+E     create_tensor: loading tensor blk.15.ffn_down.scale
+E     create_tensor: loading tensor blk.15.ffn_up.scale
+E     create_tensor: loading tensor blk.15.attn_q.input_scale
+E     create_tensor: loading tensor blk.15.attn_k.input_scale
+E     create_tensor: loading tensor blk.15.attn_v.input_scale
+E     create_tensor: loading tensor blk.15.attn_output.input_scale
+E     create_tensor: loading tensor blk.15.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.15.ffn_down.input_scale
+E     create_tensor: loading tensor blk.15.ffn_up.input_scale
+E     create_tensor: loading tensor blk.16.attn_qkv.scale
+E     create_tensor: loading tensor blk.16.attn_gate.scale
+E     create_tensor: loading tensor blk.16.ffn_gate.scale
+E     create_tensor: loading tensor blk.16.ffn_down.scale
+E     create_tensor: loading tensor blk.16.ffn_up.scale
+E     create_tensor: loading tensor blk.16.ssm_out.scale
+E     create_tensor: loading tensor blk.16.ssm_alpha.scale
+E     create_tensor: loading tensor blk.16.ssm_beta.scale
+E     create_tensor: loading tensor blk.16.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.16.attn_gate.input_scale
+E     create_tensor: loading tensor blk.16.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.16.ffn_down.input_scale
+E     create_tensor: loading tensor blk.16.ffn_up.input_scale
+E     create_tensor: loading tensor blk.16.ssm_out.input_scale
+E     create_tensor: loading tensor blk.16.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.16.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.17.attn_qkv.scale
+E     create_tensor: loading tensor blk.17.attn_gate.scale
+E     create_tensor: loading tensor blk.17.ffn_gate.scale
+E     create_tensor: loading tensor blk.17.ffn_down.scale
+E     create_tensor: loading tensor blk.17.ffn_up.scale
+E     create_tensor: loading tensor blk.17.ssm_out.scale
+E     create_tensor: loading tensor blk.17.ssm_alpha.scale
+E     create_tensor: loading tensor blk.17.ssm_beta.scale
+E     create_tensor: loading tensor blk.17.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.17.attn_gate.input_scale
+E     create_tensor: loading tensor blk.17.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.17.ffn_down.input_scale
+E     create_tensor: loading tensor blk.17.ffn_up.input_scale
+E     create_tensor: loading tensor blk.17.ssm_out.input_scale
+E     create_tensor: loading tensor blk.17.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.17.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.18.attn_qkv.scale
+E     create_tensor: loading tensor blk.18.attn_gate.scale
+E     create_tensor: loading tensor blk.18.ffn_gate.scale
+E     create_tensor: loading tensor blk.18.ffn_down.scale
+E     create_tensor: loading tensor blk.18.ffn_up.scale
+E     create_tensor: loading tensor blk.18.ssm_out.scale
+E     create_tensor: loading tensor blk.18.ssm_alpha.scale
+E     create_tensor: loading tensor blk.18.ssm_beta.scale
+E     create_tensor: loading tensor blk.18.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.18.attn_gate.input_scale
+E     create_tensor: loading tensor blk.18.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.18.ffn_down.input_scale
+E     create_tensor: loading tensor blk.18.ffn_up.input_scale
+E     create_tensor: loading tensor blk.18.ssm_out.input_scale
+E     create_tensor: loading tensor blk.18.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.18.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.19.attn_q.scale
+E     create_tensor: loading tensor blk.19.attn_k.scale
+E     create_tensor: loading tensor blk.19.attn_v.scale
+E     create_tensor: loading tensor blk.19.attn_output.scale
+E     create_tensor: loading tensor blk.19.ffn_gate.scale
+E     create_tensor: loading tensor blk.19.ffn_down.scale
+E     create_tensor: loading tensor blk.19.ffn_up.scale
+E     create_tensor: loading tensor blk.19.attn_q.input_scale
+E     create_tensor: loading tensor blk.19.attn_k.input_scale
+E     create_tensor: loading tensor blk.19.attn_v.input_scale
+E     create_tensor: loading tensor blk.19.attn_output.input_scale
+E     create_tensor: loading tensor blk.19.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.19.ffn_down.input_scale
+E     create_tensor: loading tensor blk.19.ffn_up.input_scale
+E     create_tensor: loading tensor blk.20.attn_qkv.scale
+E     create_tensor: loading tensor blk.20.attn_gate.scale
+E     create_tensor: loading tensor blk.20.ffn_gate.scale
+E     create_tensor: loading tensor blk.20.ffn_down.scale
+E     create_tensor: loading tensor blk.20.ffn_up.scale
+E     create_tensor: loading tensor blk.20.ssm_out.scale
+E     create_tensor: loading tensor blk.20.ssm_alpha.scale
+E     create_tensor: loading tensor blk.20.ssm_beta.scale
+E     create_tensor: loading tensor blk.20.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.20.attn_gate.input_scale
+E     create_tensor: loading tensor blk.20.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.20.ffn_down.input_scale
+E     create_tensor: loading tensor blk.20.ffn_up.input_scale
+E     create_tensor: loading tensor blk.20.ssm_out.input_scale
+E     create_tensor: loading tensor blk.20.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.20.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.21.attn_qkv.scale
+E     create_tensor: loading tensor blk.21.attn_gate.scale
+E     create_tensor: loading tensor blk.21.ffn_gate.scale
+E     create_tensor: loading tensor blk.21.ffn_down.scale
+E     create_tensor: loading tensor blk.21.ffn_up.scale
+E     create_tensor: loading tensor blk.21.ssm_out.scale
+E     create_tensor: loading tensor blk.21.ssm_alpha.scale
+E     create_tensor: loading tensor blk.21.ssm_beta.scale
+E     create_tensor: loading tensor blk.21.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.21.attn_gate.input_scale
+E     create_tensor: loading tensor blk.21.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.21.ffn_down.input_scale
+E     create_tensor: loading tensor blk.21.ffn_up.input_scale
+E     create_tensor: loading tensor blk.21.ssm_out.input_scale
+E     create_tensor: loading tensor blk.21.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.21.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.22.attn_qkv.scale
+E     create_tensor: loading tensor blk.22.attn_gate.scale
+E     create_tensor: loading tensor blk.22.ffn_gate.scale
+E     create_tensor: loading tensor blk.22.ffn_down.scale
+E     create_tensor: loading tensor blk.22.ffn_up.scale
+E     create_tensor: loading tensor blk.22.ssm_out.scale
+E     create_tensor: loading tensor blk.22.ssm_alpha.scale
+E     create_tensor: loading tensor blk.22.ssm_beta.scale
+E     create_tensor: loading tensor blk.22.attn_qkv.input_scale
+E     create_tensor: loading tensor blk.22.attn_gate.input_scale
+E     create_tensor: loading tensor blk.22.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.22.ffn_down.input_scale
+E     create_tensor: loading tensor blk.22.ffn_up.input_scale
+E     create_tensor: loading tensor blk.22.ssm_out.input_scale
+E     create_tensor: loading tensor blk.22.ssm_alpha.input_scale
+E     create_tensor: loading tensor blk.22.ssm_beta.input_scale
+E     create_tensor: loading tensor blk.23.attn_q.scale
+E     create_tensor: loading tensor blk.23.attn_k.scale
+E     create_tensor: loading tensor blk.23.attn_v.scale
+E     create_tensor: loading tensor blk.23.attn_output.scale
+E     create_tensor: loading tensor blk.23.ffn_gate.scale
+E     create_tensor: loading tensor blk.23.ffn_down.scale
+E     create_tensor: loading tensor blk.23.ffn_up.scale
+E     create_tensor: loading tensor blk.23.attn_q.input_scale
+E     create_tensor: loading tensor blk.23.attn_k.input_scale
+E     create_tensor: loading tensor blk.23.attn_v.input_scale
+E     create_tensor: loading tensor blk.23.attn_output.input_scale
+E     create_tensor: loading tensor blk.23.ffn_gate.input_scale
+E     create_tensor: loading tensor blk.23.ffn_down.input_scale
+E     create_tensor: loading tensor blk.23.ffn_up.input_scale
+E     done_getting_tensors: tensor 'token_embd.weight' (q6_K) (and 222 others) cannot be used with preferred buffer type CPU_REPACK, using CPU instead
+E     
+E   assert (None is None and 126426.926590148 &lt; 126426.902757737)
+E    +  where None = poll()
+E    +    where poll = &lt;Popen: returncode: None args: ['/home/octadim/MyProjects/Multi_User_RAG_Ass...&gt;.poll
+E    +  and   126426.926590148 = &lt;built-in function monotonic&gt;()
+E    +    where &lt;built-in function monotonic&gt; = time.monotonic</error></testcase></testsuite></testsuites>

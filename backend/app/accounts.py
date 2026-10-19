@@ -180,7 +180,6 @@ async def register(session, email, password, invitation=None):
                 insert(Account.__table__).values(id=uuid4(), email=email, password_hash=encoded, role=role)
                 .returning(Account.__table__)
             )).mappings().one())
-            await session.execute(insert(Conversation.__table__).values(id=uuid4(), owner_id=account['id']))
             from app.documents import initialize_policy
             await initialize_policy(session, account['id'])
             await audit(session, None, account, 'bootstrap' if invitation else 'register', {})

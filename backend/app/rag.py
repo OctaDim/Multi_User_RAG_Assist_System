@@ -145,11 +145,11 @@ def fragment_payload(fragment):
             for key in ('id', 'document_id', 'revision_id', 'page', 'text', 'span_start', 'span_end', 'coordinates', 'kind', 'mode', 'limitations', 'similarity', 'name')}
 
 
-def pack_context(question, history, fragments, tokenize, *, n_ctx=None, response_reserve=None):
+def pack_context(question, history, fragments, tokenize, *, n_ctx=None, response_reserve=None, chat=False):
     config = load_settings('runtime')
     n_ctx = config['generation']['n_ctx'] if n_ctx is None else n_ctx
     response_reserve = config['rag']['response_reserve'] if response_reserve is None else response_reserve
-    prompts = load_settings('prompts')['rag']
+    prompts = load_settings('prompts')['chat' if chat else 'rag']
     kept_history, kept_fragments = list(history), list(fragments)
 
     def prompt():
@@ -180,14 +180,15 @@ async def prepare(saver, embedder, tokenize, *, min_similarity=None):
     async with saver.guard(preparing=True) as (connection, request):
         question = ((await connection.execute(select(Message.text).where(Message.request_id == request["id"], Message.role == "user"))).mappings().first())['text']
         generation = (await settings.current(connection))['values']
-    embedding = (await asyncio.to_thread(embedder.encode, [question], query=True))[0]
+        chat = request['passport'].get('scope_mode') == 'chat'
+    embedding = None if chat else (await asyncio.to_thread(embedder.encode, [question], query=True))[0]
     async with saver.guard(preparing=True) as (connection, request):
         available = await sources.available(connection, request['owner_id'], request['scope'])
-        if not available:
+        if not available and not chat:
             raise AccessError('no_ready_sources', 409)
-        found = await sources.retrieve(connection, request['owner_id'], request['scope'], embedding, min_similarity=min_similarity)
+        found = [] if chat else await sources.retrieve(connection, request['owner_id'], request['scope'], embedding, min_similarity=min_similarity)
         previous = await sources.history(connection, request)
-        packed = pack_context(question, previous, found, tokenize, n_ctx=generation['n_ctx'])
+        packed = pack_context(question, previous, found, tokenize, n_ctx=generation['n_ctx'], chat=chat)
         dependencies = {(str(value['document_id']), str(value['revision_id'])) for value in found}
         history_dependencies = {(item['document_id'], item['revision_id'])
                                 for value in packed['history'] for item in value['dependencies']}
@@ -201,7 +202,7 @@ async def prepare(saver, embedder, tokenize, *, min_similarity=None):
             'excluded': [str(value) for value in request['scope'] if value not in {row['document_id'] for row in available}],
             'found': [fragment_payload(value) for value in found],
             'passed': [fragment_payload(value) for value in packed['fragments']],
-            'insufficient_evidence': not bool(packed['fragments']),
+            'insufficient_evidence': not chat and not bool(packed['fragments']),
             'history_requests': [str(value['request_id']) for value in packed['history']],
             'history_dependencies': [{'document_id': doc, 'revision_id': rev} for doc, rev in sorted(history_dependencies)],
         }

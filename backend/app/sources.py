@@ -111,13 +111,16 @@ async def history(session, request):
                or_(available_revisions.c.revision_id.is_(None), RequestSource.document_id.not_in(request['scope'])))
         .correlate(Request).exists()
     )
+    prior_chat = func.coalesce(Request.passport['scope_mode'].astext, 'selected') == 'chat'
+    same_mode = prior_chat if request['passport'].get('scope_mode') == 'chat' else ~prior_chat
     rows = await session.execute(
         select(Request.id.label('request_id'), question.c.text.label('question'), answer.c.text.label('answer'),
                func.coalesce(dependencies, cast([], JSONB)).label('dependencies'))
         .join(question, and_(question.c.request_id == Request.id, question.c.role == 'user'))
         .join(answer, and_(answer.c.request_id == Request.id, answer.c.role == 'assistant'))
         .where(Request.conversation_id == request['conversation_id'], Request.owner_id == request['owner_id'],
-               Request.state == 'completed', ~answer.c.excluded, ~unavailable)
+               Request.state == 'completed', ~answer.c.excluded, ~unavailable,
+               same_mode)
         .order_by(Request.created_at, Request.id)
     )
     return [dict(row) for row in rows.mappings()]

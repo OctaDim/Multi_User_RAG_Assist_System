@@ -31,15 +31,24 @@
     </div>
   </section>
   <section id="workspace" hidden>
-    <nav class="workspace-navigation" aria-label="Разделы"><button id="nav-workspace" data-area="chat" type="button" aria-current="page" aria-pressed="true">Беседы</button><button id="nav-library" data-area="library" type="button" aria-pressed="false">Документы</button><button id="nav-administration" type="button" hidden>Управление</button><span class="workspace-caption">Рабочее пространство</span></nav>
+    <div class="mobile-workspace-bar"><button id="sidebar-toggle" class="quiet" type="button" aria-controls="workspace-sidebar" aria-expanded="false">☰ Меню</button><span id="mobile-section-title">Беседы</span></div>
+    <div id="sidebar-backdrop" hidden></div>
+    <aside id="workspace-sidebar" aria-label="Рабочее меню">
+      <div class="sidebar-heading"><p class="eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО</p><button id="close-sidebar" class="quiet" type="button" aria-label="Закрыть меню">✕</button></div>
+      <nav class="workspace-navigation" aria-label="Разделы"><button id="nav-workspace" data-area="chat" type="button" aria-current="page" aria-pressed="true"><span aria-hidden="true">◉</span> Беседы</button><button id="nav-library" data-area="library" type="button" aria-pressed="false"><span aria-hidden="true">▤</span> Документы</button></nav>
+      <button id="new-conversation" type="button" class="secondary"><span aria-hidden="true">+</span> Новая беседа</button>
+      <p id="conversation-feedback" class="operation-status" role="status" aria-live="polite" hidden></p>
+      <details class="conversation-picker" open><summary>Последние беседы</summary><p id="conversations-empty" class="muted">Здесь появятся беседы, в которых вы задали вопрос.</p><ul id="conversations"></ul></details>
+      <div class="sidebar-footer"><button id="nav-administration" class="quiet" type="button" hidden><span aria-hidden="true">⚙</span> Управление</button></div>
+    </aside>
+    <div id="workspace-content">
     <div id="knowledge-workspace" data-active-area="chat" data-evidence-open="false">
       <section id="chat" class="work-area" aria-label="Беседа">
-        <header class="area-heading"><div><p class="eyebrow">БЕСЕДА</p><h2>Беседа с базой знаний</h2></div><div class="chat-actions"><button id="open-evidence" data-area="evidence" aria-pressed="false" aria-expanded="false" type="button" class="quiet">Основания<span id="grounds-indicator" hidden> · новые</span></button><button id="new-conversation" type="button" class="secondary">Новая беседа</button></div></header>
-        <p id="conversation-feedback" class="operation-status conversation-feedback" role="status" aria-live="polite" hidden></p>
-        <details class="conversation-picker"><summary>Мои беседы</summary><ul id="conversations"></ul></details>
+        <header class="area-heading"><div><p class="eyebrow">БЕСЕДА</p><h2 id="conversation-title">Новая беседа</h2></div><div class="chat-actions"><button id="open-evidence" data-area="evidence" aria-pressed="false" aria-expanded="false" type="button" class="quiet">Основания<span id="grounds-indicator" hidden> · новые</span></button></div></header>
         <details id="source-selection"><summary>Источники для вопроса</summary><fieldset id="question-sources"><legend class="sr-only">Область поиска</legend><p id="scope-description" class="muted">Источники не выбраны — поиск по всем готовым документам.</p></fieldset></details>
         <section id="history" aria-label="История беседы" tabindex="-1"></section>
-        <form id="question-form" aria-label="Вопрос по базе знаний"><label for="question">Ваш вопрос</label><textarea id="question" rows="__RAG_COMPOSER_ROWS__" placeholder="Что нужно узнать из документов?" required></textarea><p id="question-feedback" class="operation-status" role="status" aria-live="polite" hidden></p><div class="composer-footer"><p id="answer-connection" role="status" aria-live="polite">Подключение…</p><div><button id="check-question" type="button" class="secondary" hidden>Проверить отправку</button><button id="send-question" disabled>Отправить вопрос <span aria-hidden="true">↗</span></button></div></div></form>
+        <section id="active-answer-status" class="request-status-strip" aria-label="Состояние ответа" hidden><p id="active-answer-state" role="status" aria-live="polite"></p><div id="active-answer-actions"></div></section>
+        <form id="question-form" aria-label="Вопрос"><label for="question">Ваш вопрос</label><textarea id="question" rows="__RAG_COMPOSER_ROWS__" placeholder="Задайте вопрос…" required></textarea><p id="question-feedback" class="operation-status" role="status" aria-live="polite" hidden></p><div class="composer-footer"><p id="answer-connection" role="status" aria-live="polite">Подключение…</p><div><button id="check-question" type="button" class="secondary" hidden>Проверить отправку</button><button id="send-question" disabled>Отправить вопрос <span aria-hidden="true">↗</span></button></div></div></form>
       </section>
       <aside id="evidence" class="work-area" hidden aria-label="Основания ответа" tabindex="-1"><header class="area-heading"><div><p class="eyebrow">ПРОВЕРКА</p><h2>Основания ответа</h2></div><button id="close-evidence" class="quiet" type="button" aria-label="Закрыть основания">Закрыть</button></header><div class="area-body"><p id="evidence-empty" class="empty-state">Здесь появятся фрагменты документов и паспорт источников.<br><br>Выберите ответ в беседе, чтобы проверить его основания.</p><section id="early-fragments" aria-label="Ранние фрагменты источников"></section><section id="answer-evidence" aria-label="Паспорт выбранного ответа"></section></div></aside>
     </div>
@@ -52,6 +61,7 @@
         </div>
       </section>
     <section id="administration" hidden><header class="section-heading"><p class="eyebrow">УПРАВЛЕНИЕ</p><h2>Аккаунты и параметры сервиса</h2><p class="muted">Доступные действия определяются вашей ролью.</p><button id="refresh-administration" class="secondary" type="button">Обновить управление</button></header><section id="generation-settings" aria-label="Глобальные настройки генерации" hidden><h3>Глобальные настройки генерации</h3><form id="global-settings"></form></section><h3>Аккаунты</h3><p class="muted">Блокировка или мягкое удаление завершают текущие запросы и сессии выбранного аккаунта. Документы и история сохраняются.</p><div id="accounts"></div></section>
+    </div>
   </section>
   <dialog id="document-report" aria-label="Отчёт об обработке документа"></dialog>
   <dialog id="document-editor" aria-label="Просмотр и исправление документа"><div class="dialog-heading"><h2>Просмотр документа</h2><button id="close-editor" type="button" class="quiet">Закрыть</button></div><section id="document-view" aria-label="Просмотр и исправление документа"></section></dialog>

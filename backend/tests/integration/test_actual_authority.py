@@ -30,7 +30,9 @@ def test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_mat
             me:await (await fetch(api+'/api/accounts/me',{headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json(),
             document:document.querySelector('#documents li').dataset.document})''',api)
         assert identity['me']['account']['paid'] is False
-        conversation=identity['me']['conversations'][0]['id'];document=identity['document']
+        assert identity['me']['conversations']==[]
+        conversation=owner.evaluate("async api=>(await(await fetch(api+'/api/conversations',{method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json()).id",api)
+        document=identity['document']
         paths=[f'/api/conversations/{conversation}',f'/api/documents/{document}',f'/api/documents/{document}/original']
         allowed=protected(owner,api,paths,identity['credential'])
         assert all(row['status']==200 for row in allowed),allowed

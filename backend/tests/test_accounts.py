@@ -59,8 +59,10 @@ def test_real_registration_mail_verification_and_login(environment, monkeypatch)
             headers = {'Authorization': f"Bearer {logged_in.json()['token']}"}
             me = client.get('/api/accounts/me', headers=headers).json()
             assert me['account']['role'] == 'user' and me['account']['verified']
-            assert len(me['conversations']) == 1
-            history = client.get(f"/api/conversations/{me['conversations'][0]['id']}", headers=headers).json()
+            assert me['conversations'] == []
+            created = client.post('/api/conversations', headers=headers)
+            assert created.status_code == 201
+            history = client.get(f"/api/conversations/{created.json()['id']}", headers=headers).json()
             assert history['messages'] == []
             assert client.post('/api/accounts/logout', headers=headers).status_code == 200
             assert client.get('/api/accounts/me', headers=headers).status_code == 401

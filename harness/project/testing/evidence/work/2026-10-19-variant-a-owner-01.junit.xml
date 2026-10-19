@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="70.666" timestamp="2026-10-19T18:14:14.562580+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_variant_a_corrections" name="test_late_answer_ack_does_not_restore_previous_account_sidebar" time="60.360"><failure message="playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event &quot;requestfinished&quot;&#10;=========================== logs ===========================&#10;waiting for event &quot;requestfinished&quot;&#10;============================================================">backend/tests/browser/test_variant_a_corrections.py:142: in test_late_answer_ack_does_not_restore_previous_account_sidebar
+    route,response=held.pop()
+         ^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_sync_base.py:85: in __exit__
+    self._event.value
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_sync_base.py:59: in value
+    raise exception
+E   playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded while waiting for event "requestfinished"
+E   =========================== logs ===========================
+E   waiting for event "requestfinished"
+E   ============================================================</failure></testcase><testcase classname="tests.test_chat_mode" name="test_empty_library_admits_chat_and_replay_keeps_its_mode" time="4.343" /><testcase classname="tests.test_chat_mode" name="test_explicit_unavailable_selection_does_not_become_chat" time="1.116" /><testcase classname="tests.test_chat_mode" name="test_chat_history_is_kept_and_does_not_become_rag_evidence" time="3.254" /><testcase classname="tests.test_chat_mode" name="test_first_send_conversation_creation_is_idempotent_and_owner_checked" time="0.546" /><testcase classname="tests.test_frontend_reducer" name="test_delayed_empty_snapshot_keeps_accepted_request_and_new_draft" time="0.357" /><testcase classname="tests.test_frontend_reducer" name="test_source_status_event_marks_original_without_replacing_quote" time="0.035" /><testcase classname="tests.test_frontend_reducer" name="test_scope_is_per_conversation_and_pending_submission_is_immutable" time="0.143" /></testsuite></testsuites>

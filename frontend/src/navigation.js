@@ -2,16 +2,44 @@ import {token} from './auth.js';
 
 const $ = id => document.getElementById(id);
 const narrowWorkspace=matchMedia('(max-width:1179px)');
+const mobileMenu=matchMedia('(max-width:959px)');
 let section = sessionStorage.getItem('rag:section') || 'workspace';
 let canManage = false;
 const areaFocus = new Map();
 function compactChat() {
-  document.querySelector('.conversation-picker').open=false;
   $('source-selection').open=false;
 }
-const chatMenus=[document.querySelector('.conversation-picker'),$('source-selection')];
-for(const menu of chatMenus)menu.querySelector('summary').addEventListener('click',()=>{
-  if(!menu.open)for(const other of chatMenus)if(other!==menu)other.open=false;
+function sidebar(open,focus=false) {
+  open=Boolean(open&&mobileMenu.matches);
+  $('workspace').dataset.menuOpen=String(open);
+  $('sidebar-toggle').setAttribute('aria-expanded',String(open));
+  $('sidebar-backdrop').hidden=!open;
+  $('workspace-content').inert=open;
+  document.querySelector('.app-header').inert=open;
+  document.querySelector('.mobile-workspace-bar').inert=open;
+  if(open) {
+    $('workspace-sidebar').setAttribute('role','dialog');
+    $('workspace-sidebar').setAttribute('aria-modal','true');
+    $('close-sidebar').focus();
+  } else {
+    $('workspace-sidebar').removeAttribute('role');
+    $('workspace-sidebar').removeAttribute('aria-modal');
+    if(focus&&mobileMenu.matches)$('sidebar-toggle').focus();
+  }
+}
+$('sidebar-toggle').onclick=()=>sidebar(true);
+$('close-sidebar').onclick=()=>sidebar(false,true);
+$('sidebar-backdrop').onclick=()=>sidebar(false,true);
+mobileMenu.addEventListener('change',()=>sidebar(false));
+$('workspace-sidebar').addEventListener('keydown',event=>{
+  if($('workspace').dataset.menuOpen!=='true')return;
+  if(event.key==='Escape'){event.preventDefault();sidebar(false,true);}
+  if(event.key==='Tab') {
+    const items=Array.from($('workspace-sidebar').querySelectorAll('button,summary')).filter(item=>item.getClientRects().length&&!item.disabled);
+    const first=items[0],last=items.at(-1);
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  }
 });
 document.addEventListener('focusin',event=>{
   const area = event.target.closest?.('.work-area');
@@ -36,6 +64,7 @@ export function showArea(area, focus = false) {
   }
 }
 export function showSection(value) {
+  sidebar(false);
   section=value==='administration'&&!canManage?'workspace':value;
   if(!['workspace','library','administration'].includes(section))section='workspace';
   if(token())sessionStorage.setItem('rag:section',section);else sessionStorage.removeItem('rag:section');
@@ -45,6 +74,7 @@ export function showSection(value) {
     if(section===name)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
   }
   if(section==='library')markArea('library');
+  $('mobile-section-title').textContent={workspace:'Беседы',library:'Документы',administration:'Управление'}[section];
   document.dispatchEvent(new CustomEvent('rag:section-changed',{detail:section}));
 }
 export function configureNavigation(role) {canManage=role!=='user';$('nav-administration').hidden=!canManage;showSection(section);compactChat();}

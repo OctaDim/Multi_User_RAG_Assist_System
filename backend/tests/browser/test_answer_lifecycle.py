@@ -10,7 +10,7 @@ import psycopg
 from playwright.sync_api import expect
 import pytest
 
-from .test_accounts import BACKEND, real_account_browser, register, login, open_conversations, open_sources, api_wait_ms
+from .test_accounts import BACKEND, real_account_browser, register, login, navigate, open_conversations, open_sources, api_wait_ms
 from .test_documents import real_document_browser, ready
 
 
@@ -37,7 +37,18 @@ def real_answer_browser(real_document_browser, environment, tmp_path):
             except subprocess.TimeoutExpired:process.kill();process.wait(10)
 
 
-def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_sources(real_account_browser):
+def start_and_stop(page,question):
+    """Create meaningful history through the real admission and stop controls."""
+    page.locator('#question').fill(question)
+    expect(page.locator('#send-question')).to_be_enabled(timeout=api_wait_ms(page))
+    page.locator('#send-question').click()
+    expect(page.locator('#history h3').last).to_have_text(question,timeout=api_wait_ms(page))
+    page.get_by_role('button',name='Остановить ответ',exact=True).click()
+    expect(page.locator('#active-answer-state')).to_contain_text('Прерван')
+    return page.locator('#chat').get_attribute('data-conversation')
+
+
+def test_real_ui_keeps_independent_conversation_tab_drafts_without_documents(real_account_browser):
     browser, mailbox, frontend, _ = real_account_browser
     context = browser.new_context()
     try:
@@ -45,12 +56,11 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         register(first, mailbox, frontend, 'lifecycle-drafts@owned.test')
         login(first, 'lifecycle-drafts@owned.test')
         open_conversations(first)
-        first.locator('#conversations button[aria-current=true]').click()
-        first_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+        first_id = start_and_stop(first,'First meaningful conversation')
         first.locator('#question').fill('First tab A')
         first.get_by_role('button', name='Новая беседа', exact=True).click()
+        second_id = start_and_stop(first,'Second meaningful conversation')
         expect(first.locator('#conversations li')).to_have_count(2)
-        second_id = first.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
         first.locator('#question').fill('First tab B')
         open_conversations(first)
         first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
@@ -70,10 +80,10 @@ def test_real_ui_keeps_independent_conversation_tab_drafts_and_refuses_no_source
         expect(first.locator('#question')).to_have_value('First tab B')
         open_conversations(first)
         first.locator(f'#conversations button[data-conversation="{first_id}"]').click()
-        expect(first.get_by_role('button', name='Отправить вопрос', exact=True)).to_be_disabled()
-        expect(first.locator('#scope-description')).to_contain_text('Нет готовых источников')
+        expect(first.get_by_role('button', name='Отправить вопрос', exact=True)).to_be_enabled()
+        expect(first.locator('#scope-description')).to_contain_text('Без документов')
         expect(first.locator('#question')).to_have_value('First tab A')
-        expect(first.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+        expect(first.locator('#history')).to_contain_text('First meaningful conversation')
         expect(second.locator('#question')).to_have_value('Second tab A')
         first.get_by_role('button', name='Выйти', exact=True).click()
         login(first, 'lifecycle-drafts@owned.test')
@@ -91,11 +101,11 @@ def test_real_fragments_precede_answer_without_waiting_for_history_read(real_ans
         register(page,mailbox,frontend,'lifecycle-answer@owned.test')
         login(page,'lifecycle-answer@owned.test')
         content=b'The annual budget is 100 euros.\n'
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':'answer-budget.txt','mimeType':'text/plain','buffer':content})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'answer-budget.txt')
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         open_sources(page)
         page.get_by_role('checkbox',name='answer-budget.txt',exact=True).check()
         page.locator('[data-area=evidence]').click()
@@ -158,18 +168,18 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         page=context.new_page()
         register(page,mailbox,frontend,'lifecycle-ack@owned.test')
         login(page,'lifecycle-ack@owned.test')
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':'ack-budget.txt','mimeType':'text/plain',
                                                               'buffer':b'The annual budget is 100 euros.\n'})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'ack-budget.txt')
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         open_sources(page)
         page.get_by_role('checkbox',name='ack-budget.txt',exact=True).check()
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
         os.kill(native_pid,signal.SIGSTOP)
-        first_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+        first_id=page.locator('#chat').get_attribute('data-conversation')
         first_question='What is the annual budget?'
         def delay_first_ack(route):
             if not held:
@@ -183,8 +193,8 @@ def test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversat
         expect(page.locator('#history h3')).to_have_text(first_question)
         page.locator('#question').fill('A new unsent draft after acceptance')
         page.get_by_role('button',name='Новая беседа',exact=True).click()
-        expect(page.locator('#conversations li')).to_have_count(2)
-        second_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+        expect(page.locator('#conversations li')).to_have_count(1)
+        second_id=page.locator('#chat').get_attribute('data-conversation')
         assert second_id!=first_id
         page.locator('#question').fill('The annual budget is 100 euros. Explain that budget.')
         expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_enabled()
@@ -313,11 +323,11 @@ def test_actual_browser_restart_does_not_restore_closed_conversation_drafts(real
         login(page,'lifecycle-restart@owned.test')
         page.goto(frontend+'?lifetime=restart')
         expect(page.locator('html')).to_have_attribute('data-ready','true')
-        first_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
+        first_id=start_and_stop(page,'First restart conversation')
         page.locator('#question').fill('Closed browser first conversation')
         page.get_by_role('button',name='Новая беседа',exact=True).click()
+        second_id=start_and_stop(page,'Second restart conversation')
         expect(page.locator('#conversations li')).to_have_count(2)
-        second_id=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
         page.locator('#question').fill('Closed browser second conversation')
     finally:
         context.close()
@@ -347,18 +357,18 @@ def test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears
         os.kill(worker.pid,signal.SIGSTOP);paused=True
         name='<img src=x onerror=window.nameInjected=true>.txt'
         text='<script>window.textInjected=true</script>\nThe annual budget is 100 euros.'
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':name,'mimeType':'text/plain','buffer':text.encode()})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         expect(page.locator('#status')).to_have_text('Файлы приняты. Обработка выполняется в фоне.')
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         open_sources(page)
         page.locator('#question-sources input').check()
         page.locator('#question').fill('Wait for my selected document')
         expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
         expect(page.locator('#scope-description')).to_contain_text('Нет готовых источников')
         os.kill(worker.pid,signal.SIGCONT);paused=False
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         item=ready(page,name)
         expect(page.locator('#question')).to_have_value('Wait for my selected document')
         expect(page.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
@@ -366,7 +376,7 @@ def test_ready_source_never_auto_submits_html_stays_text_and_owner_change_clears
         expect(page.locator('#document-correction textarea')).to_have_value(text)
         assert page.evaluate('window.nameInjected') is None and page.evaluate('window.textInjected') is None
         page.locator('#close-editor').click()
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         page.locator('#question').focus()
         page.keyboard.press('Tab')
         assert page.get_by_role('button',name='Отправить вопрос',exact=True).evaluate('node => node === document.activeElement')
@@ -438,36 +448,37 @@ def test_old_real_snapshot_cannot_erase_new_request_or_current_fragments(real_an
         page=context.new_page()
         register(page,mailbox,frontend,'lifecycle-snapshot@owned.test')
         login(page,'lifecycle-snapshot@owned.test')
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.locator('#document-upload input').set_input_files({'name':'snapshot-budget.txt','mimeType':'text/plain',
                                                               'buffer':b'The annual budget is 100 euros.\n'})
         page.get_by_role('button',name='Загрузить документы',exact=True).click()
         ready(page,'snapshot-budget.txt')
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         open_sources(page)
         page.get_by_role('checkbox',name='snapshot-budget.txt',exact=True).check()
+        start_and_stop(page,'Earlier stopped question')
         native_pid=next(json.loads(line)['pid'] for line in generation_log.read_text().splitlines()
                         if line.startswith('{"event": "native_spawn"'))
         os.kill(native_pid,signal.SIGSTOP)
         def hold_old_get(route):
             response=route.fetch()
-            assert response.json()['requests']==[]
+            assert len(response.json()['requests'])==1
             held.append((route,response))
         page.route('**/api/conversations/*',hold_old_get)
         open_conversations(page)
         page.locator('#conversations button[aria-current=true]').click()
         page.locator('#question').fill('What is the annual budget?')
         page.get_by_role('button',name='Отправить вопрос',exact=True).click()
-        expect(page.locator('#history h3')).to_have_text('What is the annual budget?',timeout=api_wait_ms(page))
+        expect(page.locator('#history h3').last).to_have_text('What is the annual budget?',timeout=api_wait_ms(page))
         page.locator('#question').fill('New draft after the old read started')
         route,response=held.pop()
         route.fulfill(response=response)
-        expect(page.locator('#history h3')).to_have_text('What is the annual budget?')
+        expect(page.locator('#history h3').last).to_have_text('What is the annual budget?')
         expect(page.get_by_role('button',name='Отправить вопрос',exact=True)).to_be_disabled()
         expect(page.locator('#question')).to_have_value('New draft after the old read started')
         page.unroute('**/api/conversations/*',hold_old_get)
         os.kill(native_pid,signal.SIGCONT);native_pid=None
-        expect(page.locator('#history .answer-text')).to_contain_text('100',timeout=120000)
+        expect(page.locator('#history .answer-text').last).to_contain_text('100',timeout=120000)
         open_conversations(page)
         page.locator('#conversations button[aria-current=true]').click()
         page.locator('[data-area=evidence]').click()

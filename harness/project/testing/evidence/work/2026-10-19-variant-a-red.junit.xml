@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="5" time="17.600" timestamp="2026-10-19T11:38:26.991761+03:00" hostname="16IPK2"><testcase classname="tests.test_chat_mode" name="test_empty_library_admits_chat_and_replay_keeps_its_mode" time="2.215"><failure message="app.auth.AccessError: no_ready_sources">backend/tests/test_chat_mode.py:25: in test_empty_library_admits_chat_and_replay_keeps_its_mode
+    request=await submit(session, environment, key=key)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/test_chat_mode.py:18: in submit
+    return await answers.admit(session, environment['user']['token'], environment['conversation'],
+backend/app/answers.py:96: in admit
+    raise AccessError("no_ready_sources", 409)
+E   app.auth.AccessError: no_ready_sources</failure></testcase><testcase classname="tests.test_chat_mode" name="test_explicit_unavailable_selection_does_not_become_chat" time="1.025" /><testcase classname="tests.test_chat_mode" name="test_chat_history_is_kept_and_does_not_become_rag_evidence" time="1.122"><failure message="app.auth.AccessError: no_ready_sources">backend/tests/test_chat_mode.py:45: in test_chat_history_is_kept_and_does_not_become_rag_evidence
+    first=await submit(session,environment)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/test_chat_mode.py:18: in submit
+    return await answers.admit(session, environment['user']['token'], environment['conversation'],
+backend/app/answers.py:96: in admit
+    raise AccessError("no_ready_sources", 409)
+E   app.auth.AccessError: no_ready_sources</failure></testcase><testcase classname="tests.test_chat_mode" name="test_first_send_conversation_creation_is_idempotent_and_owner_checked" time="0.426"><failure message="TypeError: create_conversation() takes 2 positional arguments but 3 were given">backend/tests/test_chat_mode.py:63: in test_first_send_conversation_creation_is_idempotent_and_owner_checked
+    first=await answers.create_conversation(session,environment['user']['token'],identifier)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: create_conversation() takes 2 positional arguments but 3 were given</failure></testcase><testcase classname="tests.browser.test_variant_a_corrections" name="test_variant_a_positions_all_controls_and_keeps_new_chats_local" time="11.907"><failure message="AssertionError: Locator expected to be visible&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;  - LocatorAssertions.to_be_visible with timeout 5000ms&#10;  -   - waiting for locator(&quot;#workspace-sidebar&quot;)">backend/tests/browser/test_variant_a_corrections.py:13: in test_variant_a_positions_all_controls_and_keeps_new_chats_local
+    expect(page.locator('#workspace-sidebar')).to_be_visible()
+E   AssertionError: Locator expected to be visible
+E   Actual value: &lt;element(s) not found&gt; 
+E   Call log:
+E     - LocatorAssertions.to_be_visible with timeout 5000ms
+E     -   - waiting for locator("#workspace-sidebar")</failure></testcase></testsuite></testsuites>

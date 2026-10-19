@@ -28,7 +28,12 @@ export class Conversations {
     this.connected = false;
     this.closed = false;
     this.cursor = null;
-    this.selected = sessionStorage.getItem('rag:conversation');
+    this.localConversation=sessionStorage.getItem('rag:new-conversation')||crypto.randomUUID();
+    sessionStorage.setItem('rag:new-conversation',this.localConversation);
+    this.histories.set(this.localConversation,{conversation_id:this.localConversation,requests:[],messages:[],persisted:false});
+    for(const id of this.drafts.pendingConversations())if(!this.histories.has(id))
+      this.histories.set(id,{conversation_id:id,requests:[],messages:[],persisted:false});
+    this.selected = sessionStorage.getItem('rag:conversation')||this.localConversation;
     this.abort = new AbortController();
     $('question').oninput = () => {
       this.drafts.edit(this.selected, $('question').value);
@@ -51,44 +56,31 @@ export class Conversations {
     $('grounds-indicator').hidden = true;
     $('question-sources').querySelectorAll('label').forEach(element => element.remove());
     $('answer-connection').textContent = '';
+    $('active-answer-status').hidden=true;$('active-answer-actions').replaceChildren();
     this.questionErrors.clear();
     for(const id of ['question-feedback','conversation-feedback']) {$(id).textContent='';$(id).hidden=true;}
     $('new-conversation').disabled=false;$('new-conversation').removeAttribute('aria-busy');
   }
 
   async create() {
-    const selecting = this.selectionVersion;
-    const feedback=$('conversation-feedback');let created=false;
-    feedback.textContent='Создаём беседу…';feedback.hidden=false;feedback.dataset.error='false';
-    $('new-conversation').disabled = true;
-    $('new-conversation').setAttribute('aria-busy','true');
-    try {
-      const value = await api('/conversations', 'POST');
-      if (!this.current()) return;
-      created=true;
-      this.histories.set(value.id, {conversation_id:value.id, requests:[], messages:[]});
-      this.list();
-      if (selecting === this.selectionVersion) {feedback.hidden=true;await this.select(value.id);}
-    } catch (error) {if(this.current()) {
-      if(!created&&selecting===this.selectionVersion) {
-        feedback.textContent=['request_timeout','network_error'].includes(error.message)
-          ? 'Результат создания беседы неизвестен. Обновите страницу и проверьте список перед повтором.'
-          : messages[error.message]||'Не удалось создать беседу. Повторите действие.';
-        feedback.dataset.error='true';feedback.hidden=false;
-      }
-      this.reportError(error);
-    }}
-    finally {if(this.current()) {
-      $('new-conversation').disabled=false;$('new-conversation').removeAttribute('aria-busy');
-    }}
+    const local=this.histories.get(this.localConversation);
+    if(local?.requests.length||this.sending.has(this.localConversation)||this.drafts.get(this.localConversation).pending) {
+      this.localConversation=crypto.randomUUID();
+      sessionStorage.setItem('rag:new-conversation',this.localConversation);
+      this.histories.set(this.localConversation,{conversation_id:this.localConversation,requests:[],messages:[],persisted:false});
+    }
+    await this.select(this.localConversation);
+    document.dispatchEvent(new CustomEvent('rag:show-area',{detail:'chat'}));
+    $('question').focus();
   }
 
   async initialize(conversations) {
     for (const value of conversations) {
-      if (!this.histories.has(value.id)) this.histories.set(value.id, {conversation_id:value.id, requests:[], messages:[]});
+      const prior=this.histories.get(value.id);
+      this.histories.set(value.id,{conversation_id:value.id,requests:[],messages:[],...prior,persisted:true});
     }
     this.list();
-    await this.select(this.histories.has(this.selected) ? this.selected : conversations[0]?.id);
+    await this.select(this.histories.has(this.selected) ? this.selected : this.localConversation);
   }
 
   list() {
@@ -96,16 +88,20 @@ export class Conversations {
     for (const [identifier, history] of this.histories) {
       const item = document.createElement('li');
       const first = history.messages.find(message => message.role === 'user')?.text;
-      const name = first?.trim().replace(/\s+/g,' ') || `Новая беседа ${Array.from(this.histories.keys()).indexOf(identifier)+1}`;
+      const pending=this.drafts.get(identifier).pending;
+      if(!first&&!history.requests.length&&!pending)continue;
+      const question=first||pending?.body.question;
+      const name = `${!history.requests.length&&pending?'Не подтверждено · ':''}${question?.trim().replace(/\s+/g,' ')||'Беседа'}`;
       const button = textElement('button', name.length > 72 ? `${name.slice(0,72)}…` : name);
       button.title = name;
       button.type = 'button';
       button.dataset.conversation = identifier;
       button.setAttribute('aria-current', String(identifier === this.selected));
-      button.onclick = () => this.select(identifier).catch(this.reportError);
+      button.onclick = () => {document.dispatchEvent(new CustomEvent('rag:show-area',{detail:'chat'}));this.select(identifier).catch(this.reportError);};
       item.append(button);
       $('conversations').append(item);
     }
+    $('conversations-empty').hidden=Boolean($('conversations').children.length);
   }
 
   async select(identifier) {
@@ -114,6 +110,7 @@ export class Conversations {
     const feedback=$('conversation-feedback');
     feedback.textContent='Загружаем беседу…';feedback.dataset.error='false';feedback.hidden=false;
     this.selected = identifier;
+    $('chat').dataset.conversation=identifier;
     this.cards.clear(); this.evidenceSignature = undefined;
     $('history').replaceChildren(); $('early-fragments').replaceChildren(); $('answer-evidence').replaceChildren();
     $('grounds-indicator').hidden = true;
@@ -122,7 +119,7 @@ export class Conversations {
     $('question').value = this.drafts.get(identifier).text;
     this.sources(this.documents);
     this.render();
-    try {await this.refresh(identifier);}
+    try {if(this.histories.get(identifier)?.persisted!==false)await this.refresh(identifier);}
     catch(error) {
       if(!this.current()||selecting!==this.selectionVersion)return;
       feedback.textContent=messages[error.message]||'Не удалось открыть беседу. Повторите выбор в списке.';
@@ -151,7 +148,7 @@ export class Conversations {
     const messages = new Map(prior?.messages.map(message => [`${message.request_id}:${message.role}`,message]) || []);
     for (const message of value.messages) messages.set(`${message.request_id}:${message.role}`,message);
     value.messages = Array.from(messages.values());
-    this.histories.set(value.conversation_id, value);
+    this.histories.set(value.conversation_id, {...value,persisted:true});
     for (const request of value.requests) this.acknowledge(value.conversation_id, request.operation_key);
   }
 
@@ -167,6 +164,7 @@ export class Conversations {
     else if (history.requests[index].version < request.version) history.requests[index] = request;
     if (!history.messages.some(value => value.request_id === request.id && value.role === 'user'))
       history.messages.push({request_id:request.id, role:'user', text:question});
+    history.persisted=true;
     this.histories.set(request.conversation_id, history);
     this.acknowledge(request.conversation_id, request.operation_key);
   }
@@ -267,17 +265,17 @@ export class Conversations {
     if ($('question').value !== draft.text) $('question').value = draft.text;
     const ready = this.effectiveSources(draft).length;
     const busy = value.requests.some(request => unfinished.has(request.state));
-    $('send-question').disabled = !this.connected || this.sending.has(this.selected) || Boolean(draft.pending) || busy || !ready || !draft.text.trim();
+    $('send-question').disabled = !this.connected || this.sending.has(this.selected) || Boolean(draft.pending) || busy || (draft.documentIds.length>0&&!ready) || !draft.text.trim();
     $('check-question').hidden = !draft.pending;
     $('check-question').disabled = !this.connected || this.sending.has(this.selected);
-    const scope = draft.documentIds.length ? `Выбрано источников: ${draft.documentIds.length}. Готово для поиска: ${ready}.` : `Все готовые документы моей библиотеки: ${ready}.`;
-    const scopeLabel = `${scope}${ready ? '' : ' Нет готовых источников в области поиска. Вопрос сохранён как черновик.'}`;
+    const scope = draft.documentIds.length ? `Выбрано источников: ${draft.documentIds.length}. Готово для поиска: ${ready}.` : ready ? `Все готовые документы моей библиотеки: ${ready}.` : 'Без документов — ответ LLM из общих знаний.';
+    const scopeLabel = `${scope}${ready||!draft.documentIds.length ? '' : ' Нет готовых источников в выбранной области. Измените выбор для отправки.'}`;
     if ($('scope-description').textContent !== scopeLabel) $('scope-description').textContent = scopeLabel;
     const summary=$('source-selection').querySelector('summary');
-    const summaryLabel=draft.documentIds.length ? `Источники: выбрано ${draft.documentIds.length}` : 'Источники: все готовые';
+    const summaryLabel=draft.documentIds.length ? `Источники: выбрано ${draft.documentIds.length}` : ready ? 'Источники: все готовые' : 'Без документов · LLM';
     if(summary.textContent!==summaryLabel)summary.textContent=summaryLabel;
     const noSources=draft.documentIds.length ? ' Нет готовых документов в выборе. Измените выбор в «Источниках» или обновите статусы.' : ' Нет готовых источников. Загрузите документы или обновите их статусы.';
-    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этой беседе уже выполняется запрос.' : `Соединение установлено.${!ready ? noSources : !draft.text.trim() ? ' Введите вопрос.' : ''}`;
+    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этой беседе уже выполняется запрос.' : `Соединение установлено.${!ready&&draft.documentIds.length ? noSources : !draft.text.trim() ? ' Введите вопрос.' : ''}`;
     if ($('answer-connection').textContent !== connectionStatus) $('answer-connection').textContent = connectionStatus;
     const feedback=$('question-feedback'),failure=this.questionErrors.get(this.selected);
     feedback.textContent=failure?.message||'';feedback.hidden=!failure;feedback.dataset.error='true';
@@ -289,7 +287,12 @@ export class Conversations {
     if (!value) return;
     const draft = this.drafts.get(this.selected);
     this.renderComposer(value,draft);
+    const title=value.messages.find(message=>message.role==='user')?.text.trim().replace(/\s+/g,' ')||'Новая беседа';
+    $('conversation-title').textContent=title.length>120?title.slice(0,120)+'…':title;
+    $('conversation-title').title=title;
+    $('active-answer-status').hidden=!value.requests.length;
     if (!value.requests.length) {
+      $('active-answer-actions').replaceChildren();
       $('history').replaceChildren(textElement('p', 'В этой беседе пока нет сообщений.'));
       this.renderEvidence(null);
       return;
@@ -312,7 +315,7 @@ export class Conversations {
         const feedback = textElement('p', ''); feedback.className = 'action-feedback'; feedback.setAttribute('role','status');
         card = {article, question, state, answerLabel, answer, evidence, stop, feedback, stopping:false};
         stop.onclick = () => this.stop(request, card);
-        article.append(question, state, answerLabel, answer, evidence, stop, feedback);
+        article.append(question, state, answerLabel, answer, evidence);
         $('history').append(article);
         this.cards.set(request.id, card);
       }
@@ -332,6 +335,10 @@ export class Conversations {
       card.stop.disabled = card.stopping || !unfinished.has(request.state);
       card.evidence.setAttribute('aria-pressed', String(request.id === selectedAnswer.id));
     }
+    const active=value.requests.find(request=>unfinished.has(request.state))||value.requests.at(-1);
+    const activeCard=this.cards.get(active.id);
+    $('active-answer-state').textContent=`Ответ: ${activeCard.state.textContent}`;
+    if($('active-answer-actions').firstChild!==activeCard.stop)$('active-answer-actions').replaceChildren(activeCard.stop,activeCard.feedback);
     this.renderEvidence(selectedAnswer);
   }
 
@@ -342,7 +349,7 @@ export class Conversations {
     this.evidenceSignature = signature;
     this.evidenceFragmentIds = new Set((request?.passport?.found || []).map(fragment => fragment.id));
     const fresh = Array.from(this.evidenceFragmentIds).some(id => !oldFragments.has(id));
-    const evidenceHidden = !document.querySelector('[data-area="evidence"]')?.matches('[aria-pressed="true"]') && matchMedia('(max-width:1179px)').matches;
+    const evidenceHidden = $('evidence').hidden || (matchMedia('(max-width:1179px)').matches && $('knowledge-workspace').dataset.activeArea!=='evidence');
     if (fresh && evidenceHidden && unfinished.has(request?.state)) $('grounds-indicator').hidden = false;
     const focusedQuote=document.activeElement?.closest('#answer-evidence .cited-quote')?.id;
     const body=$('answer-evidence').closest('.area-body'),scroll=body.scrollTop;
@@ -350,6 +357,11 @@ export class Conversations {
     $('evidence-empty').hidden = Boolean(request);
     if (!request) return;
     const passport = request.passport || {};
+    if(passport.scope_mode==='chat') {
+      $('early-fragments').append(textElement('p','Ответ без поиска по документам.'));
+      $('answer-evidence').append(textElement('h3','Без документов · LLM'),textElement('p','Ответ основан на общих знаниях модели и истории этой беседы. Документальные источники и цитаты не использовались.'));
+      return;
+    }
     const selected = passport.selected_document_ids || passport.selected || request.scope || [];
     const available = passport.available || [];
     const selectedMode = passport.scope_mode ? passport.scope_mode === 'selected' : Boolean(selected.length);
@@ -390,7 +402,7 @@ export class Conversations {
     if (!this.current() || !this.connected || this.sending.has(this.selected)) return;
     const identifier = this.selected;
     const draft = this.drafts.get(identifier);
-    if (!draft.pending && !this.effectiveSources(draft).length) {
+    if (!draft.pending && draft.documentIds.length && !this.effectiveSources(draft).length) {
       this.questionErrors.set(identifier,{message:messages.no_ready_sources});this.render();
       this.reportError(new Error('no_ready_sources'));return;
     }
@@ -400,6 +412,11 @@ export class Conversations {
     this.questionErrors.delete(identifier);
     this.sending.add(identifier); this.render();
     try {
+      if(this.histories.get(identifier)?.persisted===false) {
+        await api('/conversations','POST',{id:identifier});
+        if(!this.current())return;
+        this.histories.get(identifier).persisted=true;
+      }
       const request = await api(`/conversations/${identifier}/answers`, 'POST', pending.body, {'X-Tab-Proof':this.tab.proof});
       if (!this.current()) return;
       this.accepted(request, pending.body.question);
@@ -412,7 +429,10 @@ export class Conversations {
       this.questionErrors.set(identifier,{operationKey:pending.body.operation_key,
         message:messages[error.message]||'Не удалось отправить вопрос. Проверьте отправку перед повтором.'});
       this.reportError(error);
-    } finally {this.sending.delete(identifier); this.render();}
+    } finally {
+      this.sending.delete(identifier);
+      if(this.current()){this.list();this.render();}
+    }
   }
 
   async connect() {

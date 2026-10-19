@@ -1,0 +1,762 @@
+{
+  "at": "2026-10-19T15:22:38.545419+00:00",
+  "purpose": "variant A correction application verification",
+  "kind": "split-run case coverage, not a single full-suite pass",
+  "runs": [
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-browser-02.junit.xml",
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "296.311"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-chat-green.junit.xml",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "6.843"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-core-01.junit.xml",
+      "tests": "113",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "253.184"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-final-01.junit.xml",
+      "tests": "8",
+      "failures": "1",
+      "errors": "1",
+      "seconds": "305.302"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-final-02.junit.xml",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "167.328"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-layout-final-02.junit.xml",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "17.076"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-layout-tab-01.junit.xml",
+      "tests": "1",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "11.343"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-owner-01.junit.xml",
+      "tests": "8",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "70.666"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-owner-02.junit.xml",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "21.176"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-recovery-01.junit.xml",
+      "tests": "10",
+      "failures": "1",
+      "errors": "0",
+      "seconds": "68.335"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-red.junit.xml",
+      "tests": "5",
+      "failures": "4",
+      "errors": "0",
+      "seconds": "17.600"
+    },
+    {
+      "path": "harness/project/testing/evidence/work/2026-10-19-variant-a-short-viewport-02.junit.xml",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "seconds": "6.738"
+    }
+  ],
+  "latest_cases": {
+    "tests.browser.test_variant_a_corrections::test_variant_a_positions_all_controls_and_keeps_new_chats_local": {
+      "timestamp": "2026-10-19T18:21:38.712435+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-layout-final-02.junit.xml"
+    },
+    "tests.browser.test_variant_a_corrections::test_actual_llm_answers_without_documents_and_preserves_chat_history": {
+      "timestamp": "2026-10-19T18:12:36.943838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-01.junit.xml"
+    },
+    "tests.browser.test_variant_a_corrections::test_lost_first_creation_response_retries_same_conversation_and_question": {
+      "timestamp": "2026-10-19T18:12:36.943838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-01.junit.xml"
+    },
+    "tests.browser.test_frontend_conversations::test_submission_and_creation_errors_stay_with_their_conversation": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_conversations::test_scopes_survive_conversation_reload_and_missing_selection_never_broadens": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_conversations::test_stop_503_retries_and_terminal_event_wins_over_late_stop_response": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_conversations::test_selected_old_answer_evidence_and_citation_survive_navigation": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_conversations::test_empty_selection_searches_all_ready_owned_sources": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_workspace::test_chat_first_workspace_preserves_context_and_role_navigation": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_workspace::test_public_policy_failure_can_retry_without_reloading": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_workspace::test_long_chat_menus_keep_source_choices_clickable_on_a_short_screen": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.browser.test_frontend_workspace::test_evidence_render_preserves_focused_citation_when_status_changes": {
+      "timestamp": "2026-10-19T18:06:54.002369+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-browser-02.junit.xml"
+    },
+    "tests.test_chat_mode::test_empty_library_admits_chat_and_replay_keeps_its_mode": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_chat_mode::test_explicit_unavailable_selection_does_not_become_chat": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_chat_mode::test_chat_history_is_kept_and_does_not_become_rag_evidence": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_chat_mode::test_first_send_conversation_creation_is_idempotent_and_owner_checked": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_accounts::test_real_registration_mail_verification_and_login": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_passwords_validation_roles_and_credentials_do_not_leak": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_verification_expiry_resend_and_block_are_independent": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_operator_invitation_roles_admin_boundaries_and_audit": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_concurrent_registration_has_one_account": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_resend_links_are_one_use_despite_delivery_order": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_unchanged_or_increased_access_preserves_session_and_execution[changes0]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_unchanged_or_increased_access_preserves_session_and_execution[changes1]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_origin_session_and_account_mutations_fence_shared_writes[logout]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_origin_session_and_account_mutations_fence_shared_writes[block]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_origin_session_and_account_mutations_fence_shared_writes[soft_delete]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_origin_session_and_account_mutations_fence_shared_writes[expiry]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_expired_bootstrap_and_session_are_refused": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_missing_or_failed_smtp_has_no_verification_bypass": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_accounts::test_password_work_and_mail_delivery_happen_after_transaction_release": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_concurrent_different_questions_accept_exactly_one": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_lost_ack_is_idempotent_and_a_new_key_is_a_new_operation": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_changed_payload_and_newly_blocked_owner_cannot_reuse_a_key": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_selected_unready_sources_refuse_without_history_or_late_auto_admission": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_scope_metadata_is_available_before_fragments_and_replay_keeps_original_scope[all]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_scope_metadata_is_available_before_fragments_and_replay_keeps_original_scope[selected]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_second_replay_after_locks_returns_saved_scope_even_when_candidate_differs": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read[user]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_foreign_user_or_admin_cannot_read_or_stop_but_super_admin_can_read[admin]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_current_account_state_is_checked_on_every_operation[verified-False]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_current_account_state_is_checked_on_every_operation[active-False]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_current_account_state_is_checked_on_every_operation[disabled-True]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_anonymous_or_expired_session_is_denied": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_failed_transaction_leaves_no_partial_admission": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_unavailable_coordinator_refuses_before_admission[False]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_unavailable_coordinator_refuses_before_admission[True]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_admission::test_database_enforces_occupancy_and_owner_operation_uniqueness": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_empty_selection_resolves_only_whole_ready_owned_sources": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_ready_flag_without_whole_published_revision_is_rejected": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection0]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection1]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection2]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection3]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection4]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_incomplete_failed_cancelled_or_unconfirmed_whole_revision_is_excluded[projection5]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_bad_selected_file_excludes_its_good_pages_but_keeps_healthy_neighbor": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_explicit_ready_skip_mode_retrieves_only_printed_text_with_limitations": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_owner_and_scope_are_enforced_by_pgvector_not_document_instructions": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_chunks SET text='x',span_end=1 WHERE revision_id=%s]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[DELETE FROM source_chunks WHERE revision_id=%s]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_pages SET status='failed' WHERE revision_id=%s]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_source_contract::test_published_revision_is_immutable_so_ocr_correction_needs_new_identity[UPDATE source_revisions SET status='failed' WHERE id=%s]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_source_tag_separates_citation_number_from_internal_fragment_identity": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_runtime_saver_failure_rolls_back_and_releases_guard[error]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_runtime_saver_failure_rolls_back_and_releases_guard[cancel]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_runtime_saver_failure_rolls_back_and_releases_guard[disconnect]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_actual_async_graph_commits_fragments_before_model_callback": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_all_mode_prepare_preserves_admission_metadata_and_frozen_scope": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_not_ready_selected_and_unmatched_ready_sources_are_distinct": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_interrupted_text_is_visible_but_absent_from_new_graph_and_checkpoint": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[False-delete]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[False-correct]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[True-delete]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_transitive_history_provenance_removes_derived_text_and_keeps_ui[True-correct]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_delayed_checkpoint_and_pending_writes_are_denied_after_correction": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_correction_before_late_complete_marks_original_without_cancelling": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_deselected_source_cannot_reenter_current_model_scope_through_history": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_every_saver_operation_rechecks_access_identity_and_epochs[account]": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    },
+    "tests.test_rag_context::test_every_saver_operation_rechecks_access_identity_and_epochs[service]": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    },
+    "tests.test_rag_context::test_every_saver_operation_rechecks_access_identity_and_epochs[owner]": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    },
+    "tests.test_rag_context::test_every_saver_operation_rechecks_access_identity_and_epochs[thread]": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    },
+    "tests.test_rag_context::test_malicious_doc_cannot_expand_scope_and_invented_quotes_are_rejected": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_previous_citation_number_cannot_refer_to_newly_ranked_excerpt": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_real_e5_mean_pooling_and_real_pgvector_retrieval": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_rag_context::test_real_qwen_overloaded_prompt_fits_and_passport_reports_only_passed_fragments": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_frontend_reducer::test_delayed_empty_snapshot_keeps_accepted_request_and_new_draft": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_frontend_reducer::test_source_status_event_marks_original_without_replacing_quote": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_frontend_reducer::test_scope_is_per_conversation_and_pending_submission_is_immutable": {
+      "timestamp": "2026-10-19T18:14:14.562580+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_local_settings_override_defaults_and_paths_are_section_relative": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_missing_required_setting_does_not_echo_secrets": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_invalid_settings_rejected[api-port-65536]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_invalid_settings_rejected[api-port-True]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_invalid_settings_rejected[api-frontend_origin-https://example.test/path]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_invalid_settings_rejected[api-allow_loopback_origins-true]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_invalid_settings_rejected[supervisor-poll_seconds-0]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_interpreter_path_is_normalized_without_resolving_virtualenv_symlink": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_launch_configuration::test_loopback_cors_opt_in_is_exported_to_component_environment": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_public_settings::test_public_settings_uses_configured_limits_without_publishing_secrets": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_public_settings::test_public_settings_reads_selected_local_policy_from_another_directory": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_admission_requires_confirmed_connection": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_idle_expired_tab_lock_does_not_delay_another_origin_deadline": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_owner_snapshot_preserves_multiple_and_empty_conversations": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[accepted]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[searching]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[queued]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_recovery_preserves_same_operation_and_stale_disconnect_is_harmless[generating]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[accepted]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[searching]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_observer_cannot_extend_deadline_and_late_recovery_cannot_rescue[generating]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_terminal_during_grace_is_immediate_and_survives_timeout[completed-finished]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_terminal_during_grace_is_immediate_and_survives_timeout[failed-generation_error]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_terminal_during_grace_is_immediate_and_survives_timeout[interrupted-user_stop]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_background_conversations_and_missing_heartbeat_ack": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_proof_owner_and_epoch_checks": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_snapshot_replay_monotonic_and_access_rechecked": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_snapshot_watermark_waits_for_lower_uncommitted_event[False]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_snapshot_watermark_waits_for_lower_uncommitted_event[True]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_heartbeat_challenge_is_one_use_and_unconfirmed_reconnect_refuses_new_admission": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_same_native_context_continues_through_reconnect_and_dedupe": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_delayed_search_callback_cannot_publish_after_deadline": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_unacknowledged_reconnect_does_not_extend_original_grace": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_reconnect_and_expiry_race_share_tab_lock[9.5-accepted]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_reconnect_and_expiry_race_share_tab_lock[10-interrupted]": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.test_stream_recovery::test_actual_tab_sse_confirmed_on_second_api_and_deadline_survives_first_api_death": {
+      "timestamp": "2026-10-19T18:04:42.327465+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-core-01.junit.xml"
+    },
+    "tests.browser.test_answer_lifecycle::test_delayed_real_ack_preserves_new_draft_and_does_not_block_other_conversation": {
+      "timestamp": "2026-10-19T18:12:36.943838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-01.junit.xml"
+    },
+    "tests.browser.test_answer_lifecycle::test_old_real_snapshot_cannot_erase_new_request_or_current_fragments": {
+      "timestamp": "2026-10-19T18:18:16.220838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-02.junit.xml"
+    },
+    "tests.browser.test_answer_lifecycle::test_actual_browser_restart_does_not_restore_closed_conversation_drafts": {
+      "timestamp": "2026-10-19T18:12:36.943838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-01.junit.xml"
+    },
+    "tests.integration.test_actual_authority::test_anonymous_unverified_inactive_disabled_and_paid_false_actual_issuer_matrix": {
+      "timestamp": "2026-10-19T18:12:36.943838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-01.junit.xml"
+    },
+    "tests.integration.test_transport_lifecycle::test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout[after]": {
+      "timestamp": "2026-10-19T18:18:16.220838+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-final-02.junit.xml"
+    },
+    "tests.browser.test_variant_a_corrections::test_late_answer_ack_does_not_restore_previous_account_sidebar": {
+      "timestamp": "2026-10-19T18:16:01.224998+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-owner-02.junit.xml"
+    },
+    "tests.browser.test_answer_lifecycle::test_real_ui_keeps_independent_conversation_tab_drafts_without_documents": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    },
+    "tests.browser.test_accounts::test_actual_ui_smtp_roles_block_soft_delete_and_logout": {
+      "timestamp": "2026-10-19T18:10:40.780631+03:00",
+      "result": "passed",
+      "report": "2026-10-19-variant-a-recovery-01.junit.xml"
+    }
+  },
+  "latest_passed": 133,
+  "latest_unresolved": [],
+  "ordinary_readiness": "2026-10-19-variant-a-ordinary.json",
+  "review": "P1 stale account list and P2 lost pending navigation fixed; reviewer confirmed no outstanding important findings"
+}

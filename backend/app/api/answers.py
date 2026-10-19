@@ -17,10 +17,14 @@ class Question(BaseModel):
     tab_id: UUID
 
 
+class NewConversation(BaseModel):
+    id: UUID
+
+
 @router.post('/conversations', status_code=201)
-async def create(request: Request, authorization: str | None = Header(None)):
+async def create(request: Request, body: NewConversation | None = None, authorization: str | None = Header(None)):
     async with request.app.state.database.session() as connection:
-        return await answers.create_conversation(connection, bearer(authorization))
+        return await answers.create_conversation(connection, bearer(authorization), body.id if body else None)
 
 
 @router.post("/conversations/{conversation_id}/answers")

@@ -150,6 +150,7 @@ def _validate_settings(name, config):
             for key, value in section.items():
                 _string(value, key)
         _template(config['rag']['template'], ('system', 'prior', 'excerpts', 'question', 'markers'), 'rag.template')
+        _template(config['chat']['template'], ('system', 'prior', 'question'), 'chat.template')
 
 
 def _merge(defaults, overrides, prefix=''):

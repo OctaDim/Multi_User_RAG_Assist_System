@@ -1,6 +1,6 @@
 """Conversation-first workspace checks against actual account/API, with controlled policy failure."""
 from playwright.sync_api import expect
-from .test_accounts import real_account_browser, register, login
+from .test_accounts import real_account_browser, register, login, navigate
 
 
 def test_chat_first_workspace_preserves_context_and_role_navigation(real_account_browser,tmp_path):
@@ -15,14 +15,14 @@ def test_chat_first_workspace_preserves_context_and_role_navigation(real_account
         expect(page.locator('#chat')).to_be_visible()
         expect(page.locator('#library')).to_be_hidden()
         expect(page.locator('#evidence')).to_be_hidden()
-        page.locator('[data-area=evidence]').click()
+        navigate(page,'evidence')
         expect(page.locator('#chat')).to_be_visible()
         expect(page.locator('#evidence')).to_be_visible()
         page.locator('#close-evidence').click()
         expect(page.locator('#evidence')).to_be_hidden()
         expect(page.locator('#nav-administration')).to_be_hidden()
         page.locator('#question').fill('Keep this question while reading documents')
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.locator('.skip-link').focus();page.keyboard.press('Enter')
         expect(page.locator('#chat')).to_be_visible()
         expect(page.locator('#question')).to_be_focused()
@@ -30,22 +30,21 @@ def test_chat_first_workspace_preserves_context_and_role_navigation(real_account
             page.set_viewport_size({'width':width,'height':900})
             expect(page.locator('#chat')).to_be_visible()
             page.screenshot(path=str(tmp_path/f'workspace-{width}.png'),full_page=True)
-            page.locator('[data-area=library]').click()
+            navigate(page,'library')
             expect(page.locator('#library')).to_be_visible()
             expect(page.locator('#chat')).to_be_hidden()
-            page.locator('[data-area=chat]').click()
-            page.locator('[data-area=evidence]').click()
+            navigate(page,'chat')
+            navigate(page,'evidence')
             expect(page.locator('#evidence')).to_be_visible()
-            page.locator('[data-area=chat]').focus()
-            page.keyboard.press('Enter')
+            navigate(page,'chat')
             expect(page.locator('#question')).to_have_value('Keep this question while reading documents')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
         page.set_viewport_size({'width':375,'height':812})
         assert page.locator('#history').bounding_box()['height'] >= 200, 'The conversation needs a readable viewport on a small screen'
-        page.locator('[data-area=library]').click()
+        navigate(page,'library')
         page.reload()
         expect(page.locator('#library')).to_be_visible()
-        page.locator('[data-area=chat]').click()
+        navigate(page,'chat')
         expect(page.locator('#question')).to_have_value('Keep this question while reading documents')
         assert errors == []
     finally:
@@ -99,7 +98,7 @@ def test_long_chat_menus_keep_source_choices_clickable_on_a_short_screen(real_ac
         expect(page.get_by_role('checkbox',name='Source 8',exact=True)).to_be_checked()
         page.locator('#question').fill('A draft survives opening the source chooser')
         assert not page.locator('#source-selection').evaluate('(details)=>details.open')
-        assert not page.locator('.conversation-picker').evaluate('(details)=>details.open')
+        assert page.locator('.conversation-picker').evaluate('(details)=>details.open')
         page.locator('#source-selection summary').focus();page.keyboard.press('Enter')
         expect(page.get_by_role('checkbox',name='Source 8',exact=True)).to_be_checked()
         expect(page.locator('#question')).to_have_value('A draft survives opening the source chooser')
@@ -113,7 +112,7 @@ def test_evidence_render_preserves_focused_citation_when_status_changes(real_acc
     context=browser.new_context()
     try:
         page=context.new_page();register(page,mailbox,frontend,'evidence-focus@owned.test');login(page,'evidence-focus@owned.test')
-        page.locator('[data-area=evidence]').click()
+        navigate(page,'evidence')
         result=page.evaluate('''async () => {
             const {Conversations}=await import('/src/conversations.js');
             const renderer=Object.create(Conversations.prototype);

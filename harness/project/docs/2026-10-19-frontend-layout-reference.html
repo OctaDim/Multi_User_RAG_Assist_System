@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Личная библиотека — три схемы рабочего пространства</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#f4f4f4;color:#242424;font:15px/1.5 system-ui,sans-serif}main{max-width:1540px;margin:auto;padding:36px 28px 48px}h1,h2,h3,p{margin:0}h1{font-size:30px;line-height:1.2;margin:8px 0 14px}h2{font-size:21px;line-height:1.25}h3{font-size:17px;line-height:1.35}header>p{max-width:950px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#656565}.caption{font-size:13px;color:#616161}.intro{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 26px}.tag{border:1px dashed #aaa;padding:5px 9px;font-size:12px;background:#fafafa}.variants{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}.variant{border:1px solid #aaa;background:white;padding:20px;min-width:0}.letter{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid #777;margin-right:8px;font:600 16px ui-monospace,monospace}.variant>p{margin-top:12px;min-height:68px;font-size:14px}.screen-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:18px 0 7px}.frame{height:362px;border:1px solid #777;font-size:11px;line-height:1.4;overflow:hidden;background:#fff;display:flex;flex-direction:column}.bar{background:#eee;border-bottom:1px solid #999;padding:8px;display:flex;justify-content:space-between;gap:6px;font-weight:600}.layout{display:grid;min-height:0;flex:1}.two{grid-template-columns:96px minmax(0,1fr)}.library-layout{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}.three{grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr) minmax(0,.85fr)}.rail{padding:9px 7px;background:#fafafa;border-right:1px solid #aaa;display:flex;flex-direction:column;gap:9px;min-width:0}.nav-item{padding:6px;border:1px dashed #aaa}.nav-here{background:#e2e2e2;border:1px solid #888;font-weight:600}.spacer{flex:1}.tiny{font-size:10px;color:#666}.work{display:flex;flex-direction:column;gap:9px;padding:10px;min-width:0}.box{border:1px dashed #999;background:#fafafa;padding:8px;overflow-wrap:anywhere}.solid{border-style:solid}.subhead{font-weight:650;margin-bottom:6px}.question{align-self:flex-end;max-width:94%;background:#ededed;padding:9px}.answer{padding:7px 0;flex:1}.lines{height:5px;background:#dedede;margin:6px 0}.lines.short{width:70%}.composer{margin-top:auto;border:1px solid #888;padding:8px;background:#fafafa;min-height:67px}.control{display:inline-block;border:1px solid #999;padding:3px 5px;margin-top:7px;background:white;font-size:10px}.action-row{display:flex;justify-content:space-between;gap:4px;align-items:center}.doc-row{border-bottom:1px solid #ddd;padding:7px 0;overflow-wrap:anywhere}.doc-row:last-child{border:0}.active-row{background:#e6e6e6;padding-left:5px}.right-panel{border-left:1px solid #aaa;background:#fafafa;padding:8px;min-width:0;overflow-wrap:anywhere}.paper{min-height:115px;padding:11px;border:1px solid #aaa;background:white}.footbar{padding:8px;border-top:1px solid #999;background:#eee}.flow{border-left:2px solid #aaa;padding-left:10px;margin-top:15px;font-size:13px;min-height:44px}.tradeoffs{margin:14px 0 0;padding-left:17px;font-size:13px}.tradeoffs li{margin:5px 0}.mobile-row{display:grid;grid-template-columns:106px minmax(0,1fr);gap:14px;margin-top:18px;border-top:1px solid #ddd;padding-top:16px}.phone{height:187px;border:1px solid #888;font-size:10px;display:flex;flex-direction:column;background:#fff}.phone .bar{padding:5px}.phone-content{padding:7px;flex:1;display:flex;flex-direction:column;gap:7px}.phone .composer{min-height:35px;padding:5px}.phone-notes{font-size:12px;color:#555}.phone-notes strong{display:block;color:#333;margin-bottom:7px}.shared{border:1px solid #aaa;padding:22px;margin-top:26px;background:white}.shared h2{font-size:20px}.shared-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:15px}.shared-grid p{font-size:13px;color:#555;margin-top:7px}.recommendation{margin-top:24px;max-width:1000px}.recommendation p{margin-top:8px;font-size:14px}.closing{margin-top:24px;border-top:1px solid #bbb;padding-top:16px;font-size:13px;color:#555}code{font:inherit;font-weight:650}strong{font-weight:650}
+  .frame{height:500px}
+  @media(min-width:1500px){.frame{font-size:12px}.two{grid-template-columns:112px minmax(0,1fr)}}
+  @media(max-width:1120px){.variants{grid-template-columns:1fr}.variant{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:0 24px}.variant h2,.variant>p{grid-column:1/-1}.variant>p{min-height:0}.desktop{grid-column:1;grid-row:3/8}.mobile-row{grid-column:2;grid-row:6/8}.variant .flow{grid-column:2;grid-row:3;margin-top:38px}.variant>.tradeoffs{grid-column:2;grid-row:4}.frame{font-size:12px}.shared-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:620px){main{padding:22px 15px 32px}h1{font-size:25px}.variant{display:block;padding:16px}.frame{height:560px;font-size:11px}.variant .flow{margin-top:16px}.shared-grid{grid-template-columns:1fr}.shared{padding:18px}.variant>p{min-height:0}.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) minmax(0,.8fr)}.bar{flex-wrap:wrap}.tag{font-size:11px}.two{grid-template-columns:94px minmax(0,1fr)}}
+</style>
+</head>
+<body><main>
+<header>
+  <div class="eyebrow">Личная библиотека RAG · предварительные схемы</div>
+  <h1>Как организовать рабочее пространство?</h1>
+  <p>Сравниваем <strong>порядок работы и расположение областей</strong>. Серые блоки обозначают будущие элементы: это схемы, а не готовые экраны. Шрифты, цвета и оформление здесь не выбираем.</p>
+  <div class="intro"><span class="tag">Одна задача: выбрать основу навигации</span><span class="tag">Текущие функции сохраняются во всех вариантах</span><span class="tag">Финальный интерфейс требует полной проработки</span></div>
+</header>
+<div class="variants">
+  <section class="variant" aria-labelledby="a-title">
+    <h2 id="a-title"><span class="letter">A</span>Беседа в центре</h2>
+    <p>Основной экран — вопросы и ответы. Документы и управление открываются отдельными разделами; источники доступны рядом с беседой.</p>
+    <div class="desktop"><div class="screen-label">Большой экран · открыта беседа</div>
+      <div class="frame">
+        <div class="bar"><span>Личная библиотека</span><span>Аккаунт / выход</span></div>
+        <div class="layout two">
+          <aside class="rail"><div class="nav-item nav-here">Беседы</div><div class="nav-item">Документы</div><div class="tiny">Новая беседа</div><div class="doc-row active-row">Бюджет проекта</div><div class="doc-row">Условия договора</div><div class="spacer"></div><div class="nav-item">Управление*</div></aside>
+          <div class="work"><div class="subhead">Бюджет проекта</div><div class="box">Источники: 2 документа<br><span class="tiny">Выбрать / изменить область</span></div><div class="question">Как распределён бюджет?</div><div class="answer"><strong>Ответ с цитатами [1] [2]</strong><div class="lines"></div><div class="lines"></div><div class="lines short"></div><div class="control">Открыть паспорт и основания</div></div><div class="box">Состояние ответа / действие остановки</div><div class="composer">Поле вопроса<div class="action-row"><span class="tiny">Черновик сохранён</span><span class="control">Отправить</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="flow"><strong>Путь:</strong> выбрать беседу → указать источники → задать вопрос → проверить цитаты.</div>
+    <ul class="tradeoffs"><li><strong>Сильная сторона:</strong> внимание на одном рабочем действии; история и вопрос всегда рядом.</li><li><strong>Компромисс:</strong> для загрузки или исправления документа нужно переключить раздел.</li></ul>
+    <div class="mobile-row"><div class="phone"><div class="bar">Меню · Беседа</div><div class="phone-content"><div class="box">2 источника</div><div>Вопрос / ответ / цитаты</div><div class="composer">Вопрос · отправка</div></div></div><div class="phone-notes"><strong>Узкий экран</strong>Список бесед — в меню. Чат занимает экран; выбор источников и паспорт открываются по запросу.</div></div>
+  </section>
+  <section class="variant" aria-labelledby="b-title">
+    <h2 id="b-title"><span class="letter">B</span>Библиотека в центре</h2>
+    <p>Работа начинается с документов: загрузить, проверить, выбрать материалы. По выбранным источникам пользователь переходит к беседе.</p>
+    <div class="desktop"><div class="screen-label">Большой экран · открыты документы</div>
+      <div class="frame">
+        <div class="bar"><span>Личная библиотека</span><span>Аккаунт / выход</span></div>
+        <div class="bar"><span><strong>Документы</strong> · Беседы</span><span>Управление*</span></div>
+        <div class="layout library-layout">
+          <div class="rail"><div class="subhead">Мои документы</div><div class="box">Загрузка файлов</div><div class="doc-row active-row">Выбран: Бюджет.pdf<br><span class="tiny">Готов к поиску</span></div><div class="doc-row">Выбран: Смета.txt<br><span class="tiny">Готов к поиску</span></div><div class="doc-row">Договор.pdf<br><span class="tiny">Обрабатывается</span></div></div>
+          <div class="work"><div class="subhead">Бюджет.pdf</div><div class="paper">Оригинал / текст<div class="lines"></div><div class="lines"></div><div class="lines short"></div></div><div class="box">Просмотр / исправление<br>Статус обработки</div><div class="tiny">Оригинал и ревизии доступны в документе.</div></div>
+        </div>
+        <div class="footbar">Выбрано 2 документа → перейти к вопросу</div>
+      </div>
+    </div>
+    <div class="flow"><strong>Путь:</strong> подготовить документы → выбрать материалы → открыть беседу → получить ответ.</div>
+    <ul class="tradeoffs"><li><strong>Сильная сторона:</strong> понятно, какие материалы готовы и на чём будет основан вопрос.</li><li><strong>Компромисс:</strong> возвращение к переписке менее прямое; библиотека важнее чата.</li></ul>
+    <div class="mobile-row"><div class="phone"><div class="bar">Документы · Беседы</div><div class="phone-content"><div class="box">Загрузить</div><div>Бюджет.pdf · готов</div><div>Смета.txt · готов</div><div class="composer">2 выбрано → вопрос</div></div></div><div class="phone-notes"><strong>Узкий экран</strong>Сначала список документов. Просмотр документа и беседа открываются отдельными экранами с возвратом.</div></div>
+  </section>
+  <section class="variant" aria-labelledby="c-title">
+    <h2 id="c-title"><span class="letter">C</span>Три рабочие области</h2>
+    <p>Документы, беседа и найденные основания остаются на одном рабочем столе. Подходит для постоянной сверки ответов с материалами.</p>
+    <div class="desktop"><div class="screen-label">Большой экран · три области одновременно</div>
+      <div class="frame">
+        <div class="bar"><span>Беседа: бюджет проекта</span><span>Управление* / выход</span></div>
+        <div class="layout three">
+          <aside class="rail"><div class="subhead">Документы</div><div class="box">Выбрать</div><div class="doc-row active-row">Бюджет.pdf<br><span class="tiny">Выбран</span></div><div class="doc-row">Смета.txt<br><span class="tiny">Выбран</span></div><div class="spacer"></div><div class="box">Другие беседы</div><div class="tiny">Новая беседа</div></aside>
+          <div class="work"><div class="subhead">Беседа</div><div class="question">Как распределён бюджет?</div><div class="answer"><strong>Ответ [1]</strong><div class="lines"></div><div class="lines"></div><div class="lines"></div><div class="lines short"></div></div><div class="box">Состояние / стоп</div><div class="composer">Вопрос<div class="control">Отправить</div></div></div>
+          <aside class="right-panel"><div class="subhead">Основания</div><div class="box">Найдено до ответа</div><div class="doc-row">[1] Бюджет.pdf<br>Страница 3</div><div class="paper">Цитата из документа<div class="lines"></div><div class="lines"></div></div><div class="doc-row">Паспорт источников</div></aside>
+        </div>
+      </div>
+    </div>
+    <div class="flow"><strong>Путь:</strong> выбрать материалы слева → задать вопрос в центре → сверить основания справа.</div>
+    <ul class="tradeoffs"><li><strong>Сильная сторона:</strong> можно сверять ответ с источниками без переключения рабочего контекста.</li><li><strong>Компромисс:</strong> экран плотнее; для длинного ответа и небольшого ноутбука меньше места.</li></ul>
+    <div class="mobile-row"><div class="phone"><div class="bar">Беседа</div><div class="bar">Док. · Чат · Цитаты</div><div class="phone-content"><div>Одна область за раз</div><div class="composer">Вопрос · отправка</div></div></div><div class="phone-notes"><strong>Узкий экран</strong>Три области становятся переключаемыми представлениями. Одновременная сверка возможна на широком экране.</div></div>
+  </section>
+</div>
+<section class="shared" aria-labelledby="shared-title">
+  <h2 id="shared-title">Что будет полностью проработано при любом выборе</h2>
+  <div class="shared-grid">
+    <div><h3>Вход и восстановление</h3><p>Понятный переход между входом и регистрацией, подтверждение email, ошибки и повтор подключения к сервису.</p></div>
+    <div><h3>Действия и состояния</h3><p>У каждой операции — загрузка, результат и ошибка рядом с действием. Недоступность кнопки объясняется; временная ошибка допускает повтор.</p></div>
+    <div><h3>Документы и редактор</h3><p>Загрузка, обработка, выбор OCR, готовность, отчёт, просмотр оригинала, исправления и безопасное удаление.</p></div>
+    <div><h3>Права и адаптивность</h3><p>* Управление доступно по роли. Чужая библиотека явно подписана. Все экраны работают с клавиатурой и на узкой ширине.</p></div>
+  </div>
+</section>
+<section class="recommendation">
+  <h2>Предварительная рекомендация — A</h2>
+  <p>Для текущего RAG-приложения A даёт беседе больше места и убирает длинную ленту несвязанных форм. Основания из C можно показывать в дополнительной области, когда пользователь их открывает. Если ваша основная работа — сначала проверять и исправлять документы, B может подойти лучше.</p>
+</section>
+<p class="closing">Это статические схемы: действия внутри не выполняются. Оцените навигацию, порядок работы и расположение областей; ответьте в чате: <strong>A</strong>, <strong>B</strong>, <strong>C</strong> или сочетание с пояснением. Выбор схемы не означает приёмку готового интерфейса.</p>
+</main></body></html>
