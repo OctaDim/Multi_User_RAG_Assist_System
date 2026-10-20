@@ -1,6 +1,6 @@
 """History geometry and streaming scroll against the production renderer."""
 from playwright.sync_api import expect
-from .test_accounts import real_account_browser, register, login, navigate
+from .test_accounts import real_account_browser, register, login, navigate, api_wait_ms
 
 
 def test_history_is_ten_times_taller_at_desktop_and_mobile(real_account_browser):
@@ -35,6 +35,7 @@ def test_new_questions_and_streamed_answer_scroll_to_latest_content(real_account
     context=browser.new_context(viewport={'width':1440,'height':900})
     try:
         page=context.new_page();register(page,mailbox,frontend,'history-scroll@owned.test');login(page,'history-scroll@owned.test')
+        expect(page.locator('#answer-connection')).to_contain_text('Соединение установлено',timeout=api_wait_ms(page))
         page.evaluate('''async () => {
             const {Conversations}=await import('/src/conversations.js');
             const renderer=Object.create(Conversations.prototype);

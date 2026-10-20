@@ -149,7 +149,7 @@ def test_late_answer_ack_does_not_restore_previous_account_sidebar(real_account_
             route.fulfill(response=response)
         page.wait_for_timeout(100)
         expect(page.locator('#conversations li')).to_have_count(0)
-        expect(page.locator('#conversation-title')).to_have_text('Новая беседа')
+        expect(page.locator('#conversation-title')).to_have_text('Новый диалог')
         expect(page.locator('#workspace')).not_to_contain_text('Private question of the previous account')
     finally:
         for route,_ in held:

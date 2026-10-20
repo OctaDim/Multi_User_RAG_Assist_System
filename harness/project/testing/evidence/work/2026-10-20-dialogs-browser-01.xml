@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="1" skipped="0" tests="7" time="214.738" timestamp="2026-10-20T10:56:20.653159+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_dialog_management" name="test_file_queue_is_russian_removable_and_only_kept_files_are_uploaded" time="8.102" /><testcase classname="tests.browser.test_dialog_management" name="test_dialog_dates_delete_confirmation_and_other_tab_sync" time="9.616" /><testcase classname="tests.browser.test_frontend_conversations" name="test_submission_and_creation_errors_stay_with_their_conversation" time="11.653" /><testcase classname="tests.browser.test_frontend_conversations" name="test_scopes_survive_conversation_reload_and_missing_selection_never_broadens" time="13.339" /><testcase classname="tests.browser.test_frontend_conversations" name="test_stop_503_retries_and_terminal_event_wins_over_late_stop_response" time="56.570" /><testcase classname="tests.browser.test_frontend_conversations" name="test_selected_old_answer_evidence_and_citation_survive_navigation" time="76.339"><failure message="AssertionError: Locator expected to be visible&#10;Actual value: False &#10;Call log:&#10;  - LocatorAssertions.to_be_visible with timeout 30000ms&#10;  -   - waiting for locator(&quot;#grounds-indicator&quot;)&#10;  -     34 × locator resolved to &lt;span hidden=&quot;&quot; id=&quot;grounds-indicator&quot;&gt; · новые&lt;/span&gt;&#10;  -        - unexpected value &quot;hidden&quot;">backend/tests/browser/test_frontend_conversations.py:207: in test_selected_old_answer_evidence_and_citation_survive_navigation
+    expect(page.locator('#grounds-indicator')).to_be_visible(timeout=30000)
+E   AssertionError: Locator expected to be visible
+E   Actual value: False 
+E   Call log:
+E     - LocatorAssertions.to_be_visible with timeout 30000ms
+E     -   - waiting for locator("#grounds-indicator")
+E     -     34 × locator resolved to &lt;span hidden="" id="grounds-indicator"&gt; · новые&lt;/span&gt;
+E     -        - unexpected value "hidden"</failure></testcase><testcase classname="tests.browser.test_frontend_conversations" name="test_empty_selection_searches_all_ready_owned_sources" time="34.115"><error message="failed on setup with &quot;RuntimeError: Owned generation did not become ready&quot;">backend/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:926: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+backend/tests/browser/test_answer_lifecycle.py:31: in real_answer_browser
+    if process.poll() is not None or time.monotonic()&gt;deadline:raise RuntimeError('Owned generation did not become ready')
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   RuntimeError: Owned generation did not become ready</error></testcase></testsuite></testsuites>

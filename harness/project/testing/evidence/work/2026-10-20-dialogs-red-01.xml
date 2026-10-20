@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="6" time="29.047" timestamp="2026-10-20T10:50:49.318660+03:00" hostname="16IPK2"><testcase classname="tests.test_dialog_management" name="test_dialog_dates_follow_creation_and_actual_last_update" time="1.751"><failure message="KeyError: 'created_at'">backend/tests/test_dialog_management.py:10: in test_dialog_dates_follow_creation_and_actual_last_update
+    assert created['created_at'] is not None and created['updated_at']&gt;=created['created_at']
+           ^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'created_at'</failure></testcase><testcase classname="tests.test_dialog_management" name="test_delete_dialog_is_owner_only_idempotent_and_keeps_documents" time="3.111"><failure message="AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?">backend/tests/test_dialog_management.py:27: in test_delete_dialog_is_owner_only_idempotent_and_keeps_documents
+    await answers.delete_conversation(session,environment[role]['token'],environment['conversation'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?</failure></testcase><testcase classname="tests.test_dialog_management" name="test_active_dialog_cannot_be_deleted_until_stopped" time="1.490"><failure message="AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?">backend/tests/test_dialog_management.py:44: in test_active_dialog_cannot_be_deleted_until_stopped
+    await answers.delete_conversation(session,environment['user']['token'],environment['conversation'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?</failure></testcase><testcase classname="tests.test_dialog_management" name="test_deletion_is_fenced_at_snapshot_and_late_event_delivery" time="1.127"><failure message="AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?">backend/tests/test_dialog_management.py:56: in test_deletion_is_fenced_at_snapshot_and_late_event_delivery
+    await answers.delete_conversation(session,actor['token'],environment['conversation'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'app.answers' has no attribute 'delete_conversation'. Did you mean: 'create_conversation'?</failure></testcase><testcase classname="tests.browser.test_dialog_management" name="test_file_queue_is_russian_removable_and_only_kept_files_are_uploaded" time="7.590" /><testcase classname="tests.browser.test_dialog_management" name="test_dialog_dates_delete_confirmation_and_other_tab_sync" time="13.840"><failure message="AssertionError: Locator expected to have count '2'&#10;Actual value: 0 &#10;Call log:&#10;  - LocatorAssertions.to_have_count with timeout 5000ms&#10;  -   - waiting for locator(&quot;#conversations li[data-conversation=\&quot;ddecfd91-9a97-46af-acf6-c5751c684ecf\&quot;]&quot;).locator(&quot;time&quot;)&#10;  -     9 × locator resolved to 0 elements&#10;  -       - unexpected value &quot;0&quot;">backend/tests/browser/test_dialog_management.py:35: in test_dialog_dates_delete_confirmation_and_other_tab_sync
+    expect(row.locator('time')).to_have_count(2)
+E   AssertionError: Locator expected to have count '2'
+E   Actual value: 0 
+E   Call log:
+E     - LocatorAssertions.to_have_count with timeout 5000ms
+E     -   - waiting for locator("#conversations li[data-conversation=\"ddecfd91-9a97-46af-acf6-c5751c684ecf\"]").locator("time")
+E     -     9 × locator resolved to 0 elements
+E     -       - unexpected value "0"</failure></testcase></testsuite></testsuites>

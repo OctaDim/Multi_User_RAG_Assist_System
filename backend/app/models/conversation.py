@@ -1,4 +1,5 @@
-from sqlalchemy import BigInteger, ForeignKeyConstraint, PrimaryKeyConstraint, UniqueConstraint, text as sql_text
+from datetime import datetime
+from sqlalchemy import BigInteger, DateTime, ForeignKeyConstraint, PrimaryKeyConstraint, UniqueConstraint, text as sql_text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from uuid import UUID as PyUUID
@@ -17,3 +18,6 @@ class Conversation(Base):
     id: Mapped[PyUUID] = mapped_column(UUID, primary_key=True)
     owner_id: Mapped[PyUUID] = mapped_column(UUID)
     context_epoch: Mapped[int] = mapped_column(BigInteger, server_default=sql_text('0'))
+    created_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), server_default=sql_text('clock_timestamp()'))
+    updated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), server_default=sql_text('clock_timestamp()'))
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

@@ -187,11 +187,11 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
                 prefix=connection.execute('SELECT answer_text FROM requests WHERE id=%s',(request_id,)).fetchone()['answer_text']
             expect(owner.locator('#history .answer-text')).to_have_text(prefix)
             proxy.cut();owner.wait_for_timeout(5000);proxy.enabled=True
-            expect(owner.locator('#answer-connection')).to_have_text('В этой беседе уже выполняется запрос.',timeout=8000)
+            expect(owner.locator('#answer-connection')).to_have_text('В этом диалоге уже выполняется запрос.',timeout=8000)
             expect(owner.locator('#history .answer-text')).to_have_text(prefix)
             navigate(owner,'chat')
             owner.locator('#question').fill('Origin A draft')
-            owner.get_by_role('button',name='Новая беседа',exact=True).click()
+            owner.get_by_role('button',name='Новый диалог',exact=True).click()
             expect(owner.locator('#conversations li')).to_have_count(1)
             background=owner.locator('#chat').get_attribute('data-conversation')
             navigate(owner,'chat')
@@ -200,10 +200,10 @@ def test_actual_two_tab_admission_proxy_recovery_background_and_origin_timeout(p
             owner.locator(f'#conversations button[data-conversation="{conversation}"]').click()
             expect(owner.locator('#question')).to_have_value('Origin A draft')
             open_conversations(owner)
-            owner.get_by_role('button',name='Новая беседа',exact=True).click()
+            owner.get_by_role('button',name='Новый диалог',exact=True).click()
             expect(owner.locator('#chat')).to_have_attribute('data-conversation',background)
             expect(owner.locator('#question')).to_have_value('Origin B draft')
-            expect(owner.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+            expect(owner.locator('#history')).to_have_text('В этом диалоге пока нет сообщений.')
             with psycopg.connect(environment['dsn'],autocommit=True,row_factory=dict_row) as connection:
                 row=connection.execute('SELECT * FROM requests WHERE id=%s',(request_id,)).fetchone()
                 assert row['state']=='generating' and row['answer_text']==prefix

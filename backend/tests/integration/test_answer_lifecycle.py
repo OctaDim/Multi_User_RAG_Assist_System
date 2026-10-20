@@ -431,7 +431,7 @@ def test_frozen_thirty_questions_use_real_multilingual_documents(integrated_brow
         for index,item in enumerate(controls['questions']):
             if index:
                 previous=page.locator('#conversations button[aria-current=true]').get_attribute('data-conversation')
-                page.get_by_role('button',name='Новая беседа',exact=True).click()
+                page.get_by_role('button',name='Новый диалог',exact=True).click()
                 expect(page.locator('#conversations button[aria-current=true]')).not_to_have_attribute('data-conversation',previous,timeout=api_wait_ms(page))
             open_sources(page)
             for checkbox in page.locator('#question-sources input').all():checkbox.uncheck()

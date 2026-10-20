@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="70.598" timestamp="2026-10-20T11:12:31.322147+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_frontend_conversations" name="test_selected_old_answer_evidence_and_citation_survive_navigation" time="69.849"><failure message="AssertionError: Locator expected to contain text 'Завершён'&#10;Actual value: What is the annual budget?Ответ формируетсяОтвет моделиThe annual budget is 100Показать основания &#10;Call log:&#10;  - LocatorAssertions.to_contain_text with timeout 30000ms&#10;  -   - waiting for locator(&quot;#history article&quot;).first&#10;  -     31 × locator resolved to &lt;article data-request=&quot;c8b99647-d3ed-4b00-9e19-9e3bacada61e&quot;&gt;…&lt;/article&gt;&#10;  -        - unexpected value &quot;What is the annual budget?Ответ формируетсяОтвет моделиПоказать основания&quot;&#10;  -     - locator resolved to &lt;article data-request=&quot;c8b99647-d3ed-4b00-9e19-9e3bacada61e&quot;&gt;…&lt;/article&gt;&#10;  -     - unexpected value &quot;What is the annual budget?Ответ формируетсяОтвет моделиThe annual budgetПоказать основания&quot;&#10;  -     - locator resolved to &lt;article data-request=&quot;c8b99647-d3ed-4b00-9e19-9e3bacada61e&quot;&gt;…&lt;/article&gt;&#10;  -     - unexpected value &quot;What is the annual budget?Ответ формируетсяОтвет моделиThe annual budget is 100Показать основания&quot;">backend/tests/browser/test_frontend_conversations.py:210: in test_selected_old_answer_evidence_and_citation_survive_navigation
+    expect(first).to_contain_text('Завершён',timeout=30000)
+E   AssertionError: Locator expected to contain text 'Завершён'
+E   Actual value: What is the annual budget?Ответ формируетсяОтвет моделиThe annual budget is 100Показать основания 
+E   Call log:
+E     - LocatorAssertions.to_contain_text with timeout 30000ms
+E     -   - waiting for locator("#history article").first
+E     -     31 × locator resolved to &lt;article data-request="c8b99647-d3ed-4b00-9e19-9e3bacada61e"&gt;…&lt;/article&gt;
+E     -        - unexpected value "What is the annual budget?Ответ формируетсяОтвет моделиПоказать основания"
+E     -     - locator resolved to &lt;article data-request="c8b99647-d3ed-4b00-9e19-9e3bacada61e"&gt;…&lt;/article&gt;
+E     -     - unexpected value "What is the annual budget?Ответ формируетсяОтвет моделиThe annual budgetПоказать основания"
+E     -     - locator resolved to &lt;article data-request="c8b99647-d3ed-4b00-9e19-9e3bacada61e"&gt;…&lt;/article&gt;
+E     -     - unexpected value "What is the annual budget?Ответ формируетсяОтвет моделиThe annual budget is 100Показать основания"</failure></testcase></testsuite></testsuites>

@@ -9,8 +9,15 @@ const areaFocus = new Map();
 let historySizeFrame;
 function sizeHistory() {
   cancelAnimationFrame(historySizeFrame);
+  if($('workspace').hidden||$('knowledge-workspace').hidden) {
+    document.querySelector('main').style.removeProperty('--history-extra-height');return;
+  }
   historySizeFrame=requestAnimationFrame(()=>{
     const main=document.querySelector('main');
+    if(!$('workspace').hidden) {
+      const top=$('workspace').getBoundingClientRect().top+window.scrollY;
+      $('workspace-sidebar').style.setProperty('--sidebar-height',`${Math.max(200,innerHeight-top-24)}px`);
+    }
     main.style.removeProperty('--history-extra-height');
     const history=$('history');
     if($('workspace').hidden||$('knowledge-workspace').hidden||!history.getClientRects().length)return;
@@ -24,6 +31,9 @@ function sizeHistory() {
   });
 }
 window.addEventListener('resize',sizeHistory);
+const headerSize=new ResizeObserver(sizeHistory);
+headerSize.observe(document.querySelector('.app-header'));
+headerSize.observe(document.querySelector('.service-status'));
 document.addEventListener('rag:section-changed',sizeHistory);
 document.addEventListener('rag:history-changed',sizeHistory);
 function compactChat() {
@@ -94,7 +104,7 @@ export function showSection(value) {
     if(section===name)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
   }
   if(section==='library')markArea('library');
-  $('mobile-section-title').textContent={workspace:'Беседы',library:'Документы',administration:'Управление'}[section];
+  $('mobile-section-title').textContent={workspace:'Диалоги',library:'Документы',administration:'Управление'}[section];
   document.dispatchEvent(new CustomEvent('rag:section-changed',{detail:section}));
 }
 export function configureNavigation(role) {canManage=role!=='user';$('nav-administration').hidden=!canManage;showSection(section);compactChat();}

@@ -32,4 +32,6 @@ def test_migration_resources_include_environment_contracts_and_no_legacy_sql():
     assert (root / 'script.py.mako').is_file()
     assert (root / 'schema_contract.py').is_file()
     assert (root / 'contracts' / '0007_checkpoints.json').is_file()
+    assert (root / 'contracts' / '0008_dialog_metadata.json').is_file()
+    assert (root / 'versions' / '0008_dialog_metadata.py').is_file()
     assert not list(root.glob('*.sql'))

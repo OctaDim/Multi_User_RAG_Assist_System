@@ -46,18 +46,42 @@ async def create_conversation(connection, token, identifier=None):
         row = await conversation(connection, actor, identifier, read_only=True)
         if row['owner_id'] != actor['id']:
             raise AccessError('not_found', 404)
-        return {'id': identifier}
+        return {'id': identifier, 'created_at': row['created_at'], 'updated_at': row['updated_at']}
 
 
 async def conversation(connection, actor, conversation_id, *, read_only=False):
     row = (await connection.execute(select(Conversation.__table__).where(Conversation.id == conversation_id).with_for_update(read=read_only))).mappings().first()
-    if not row or (row["owner_id"] != actor["id"] and not (read_only and actor["role"] == "super_admin")):
+    if not row or row['deleted_at'] is not None or (row["owner_id"] != actor["id"] and not (read_only and actor["role"] == "super_admin")):
         raise AccessError("not_found", 404)
     return dict(row)
 
 
 async def event(connection, request, kind, payload):
+    dates = (await connection.execute(update(Conversation.__table__).where(Conversation.id == request['conversation_id'])
+        .values(updated_at=func.clock_timestamp()).returning(Conversation.created_at, Conversation.updated_at))).mappings().one()
+    payload = {**payload, 'conversation_created_at': dates['created_at'].isoformat() if dates['created_at'] else None,
+               'conversation_updated_at': dates['updated_at'].isoformat()}
     return dict((await connection.execute(insert(Event.__table__).values(request_id=request["id"], conversation_id=request["conversation_id"], kind=kind, payload=payload).returning(Event.id))).mappings().first())
+
+
+async def delete_conversation(connection, token, identifier):
+    async with connection.begin():
+        await lock_service(connection, exclusive=True)
+        actor = await principal(connection, token)
+        row = (await connection.execute(select(Conversation.__table__).where(
+            Conversation.id == identifier, Conversation.owner_id == actor['id']).with_for_update())).mappings().first()
+        if not row:
+            raise AccessError('not_found', 404)
+        if row['deleted_at'] is not None:
+            return
+        requests = (await connection.execute(select(Request.__table__).where(Request.conversation_id == identifier)
+            .order_by(Request.created_at, Request.id).with_for_update())).mappings().all()
+        if any(request['state'] in UNFINISHED for request in requests):
+            raise AccessError('conversation_busy', 409)
+        await connection.execute(update(Conversation.__table__).where(Conversation.id == identifier)
+            .values(deleted_at=func.clock_timestamp(), updated_at=func.clock_timestamp(), context_epoch=Conversation.context_epoch+1))
+        if requests:
+            await event(connection, requests[-1], 'conversation_deleted', {'conversation_id': str(identifier)})
 
 
 async def admit(connection, token, conversation_id, operation_key, question, document_ids, tab_id, tab_proof):
@@ -144,8 +168,11 @@ async def stop(connection, token, request_id):
 
 
 async def histories(connection, conversation_ids):
-    result = {identifier: {"conversation_id": identifier, "messages": [], "requests": [], "watermark": 0}
-              for identifier in conversation_ids}
+    rows = (await connection.execute(select(Conversation.id, Conversation.created_at, Conversation.updated_at).where(
+        Conversation.id.in_(conversation_ids), Conversation.deleted_at.is_(None)).order_by(Conversation.id))).mappings().all()
+    result = {row['id']: {'conversation_id': row['id'], 'created_at': row['created_at'], 'updated_at': row['updated_at'],
+                         'messages': [], 'requests': [], 'watermark': 0} for row in rows}
+    conversation_ids = list(result)
     messages = (await connection.execute(select(Message.__table__).where(Message.conversation_id.in_(conversation_ids)).order_by(Message.id))).mappings().all()
     requests = (await connection.execute(select(Request.__table__).where(Request.conversation_id.in_(conversation_ids)).order_by(Request.created_at, Request.id))).mappings().all()
     watermarks = (await connection.execute(select(Event.conversation_id, func.max(Event.id).label("watermark")).where(Event.conversation_id.in_(conversation_ids)).group_by(Event.conversation_id))).mappings().all()

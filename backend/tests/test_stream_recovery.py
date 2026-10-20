@@ -81,7 +81,8 @@ async def test_owner_snapshot_preserves_multiple_and_empty_conversations(session
     by_id = {history['conversation_id']: history for history in histories}
     assert [(message['role'], message['text']) for message in by_id[first['conversation_id']]['messages']] == [('user', 'Question'), ('assistant', 'Saved prefix')]
     assert [(message['role'], message['text']) for message in by_id[second_id]['messages']] == [('user', 'Second question')]
-    assert by_id[empty_id] == {'conversation_id': empty_id, 'messages': [], 'requests': [], 'watermark': 0}
+    dates=await (await connection.execute('SELECT created_at,updated_at FROM conversations WHERE id=%s',(empty_id,))).fetchone()
+    assert by_id[empty_id] == {'conversation_id': empty_id, 'messages': [], 'requests': [], 'watermark': 0, **dates}
     assert [(row['id'], row['answer_text']) for row in by_id[first['conversation_id']]['requests']] == [(first['id'], 'Saved prefix')]
     assert [(row['id'], row['answer_text']) for row in by_id[second_id]['requests']] == [(second['id'], '')]
     assert by_id[first['conversation_id']]['watermark'] == value['id'] == output['id']

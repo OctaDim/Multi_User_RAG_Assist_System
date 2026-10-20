@@ -48,7 +48,7 @@ async def test_empty_and_every_legacy_prefix_reach_repeatable_alembic_head(migra
     await migrate(migration_database)
     await migrate(migration_database)
     with psycopg.connect(migration_database) as connection:
-        assert connection.execute('SELECT version_num FROM alembic_version').fetchall() == [('0007_checkpoints',)]
+        assert connection.execute('SELECT version_num FROM alembic_version').fetchall() == [('0008_dialog_metadata',)]
         if prefix:
             assert connection.execute('SELECT name,sha256 FROM lifecycle_migrations ORDER BY name').fetchall() == original_history
         else:
@@ -73,7 +73,7 @@ async def test_api_lifespan_initializes_empty_database_before_ready(migration_da
     application = create_app()
     async with lifespan(application):
         with psycopg.connect(migration_database) as observer:
-            assert observer.execute('SELECT version_num FROM alembic_version').fetchone() == ('0007_checkpoints',)
+            assert observer.execute('SELECT version_num FROM alembic_version').fetchone() == ('0008_dialog_metadata',)
             assert observer.execute('SELECT count(*) FROM settings').fetchone() == (1,)
         database = application.state.database
     assert database.engine.pool.checkedout() == 0
@@ -119,7 +119,7 @@ async def test_entrypoints_refuse_damaged_schema_before_serving_or_work(
 async def test_concurrent_async_calls_do_not_corrupt_alembic_context(migration_database):
     await asyncio.wait_for(asyncio.gather(migrate(migration_database), migrate(migration_database)), 15)
     with psycopg.connect(migration_database) as connection:
-        assert connection.execute('SELECT version_num FROM alembic_version').fetchall() == [('0007_checkpoints',)]
+        assert connection.execute('SELECT version_num FROM alembic_version').fetchall() == [('0008_dialog_metadata',)]
         assert connection.execute("SELECT to_regclass('lifecycle_migrations')").fetchone() == (None,)
 
 
@@ -203,16 +203,16 @@ async def test_checkpoint_unknown_unjournaled_shape_stops_before_application_ddl
 def prepared_next_revision(tmp_path):
     root = tmp_path / 'migrations'
     shutil.copytree(resource_path('migrations'), root, ignore=shutil.ignore_patterns('__pycache__'))
-    profile = json.loads((root / 'contracts' / '0007_checkpoints.json').read_text())
+    profile = json.loads((root / 'contracts' / '0008_dialog_metadata.json').read_text())
     columns = profile['application']['columns']
     position = max(i for i, row in enumerate(columns) if row[0] == 'accounts') + 1
     columns.insert(position, ['accounts','prepared_note','text',False,'','',None])
-    (root / 'contracts' / '0008_prepared.json').write_text(json.dumps(profile))
-    revision = root / 'versions' / '0008_prepared.py'
+    (root / 'contracts' / '0009_prepared.json').write_text(json.dumps(profile))
+    revision = root / 'versions' / '0009_prepared.py'
     revision.write_text('''from alembic import op
 import sqlalchemy as sa
-revision = '0008_prepared'
-down_revision = '0007_checkpoints'
+revision = '0009_prepared'
+down_revision = '0008_dialog_metadata'
 
 def upgrade():
     op.add_column('accounts', sa.Column('prepared_note', sa.Text()))
@@ -233,7 +233,7 @@ async def test_prepared_future_revision_uses_its_own_contract_without_changing_l
     await migrate(migration_database)
     assert (root / 'contracts' / 'application.json').read_bytes() == legacy
     with psycopg.connect(migration_database) as connection:
-        assert connection.execute('SELECT version_num FROM alembic_version').fetchone() == ('0008_prepared',)
+        assert connection.execute('SELECT version_num FROM alembic_version').fetchone() == ('0009_prepared',)
         connection.execute('ALTER TABLE accounts DROP COLUMN prepared_note')
     with pytest.raises(RuntimeError, match='schema mismatch.*prepared_note'):
         await migrate(migration_database)
@@ -244,10 +244,10 @@ async def test_revision_failure_rolls_back_ddl_data_and_releases_lock(migration_
     root = tmp_path / 'migrations'
     shutil.copytree(resource_path('migrations'), root, ignore=shutil.ignore_patterns('__pycache__'))
     monkeypatch.setattr('app.db.resource_path', lambda name: root)
-    (root / 'versions' / '0008_failure.py').write_text('''from alembic import op
+    (root / 'versions' / '0009_failure.py').write_text('''from alembic import op
 import sqlalchemy as sa
-revision = '0008_failure'
-down_revision = '0007_checkpoints'
+revision = '0009_failure'
+down_revision = '0008_dialog_metadata'
 
 def upgrade():
     op.add_column('accounts', sa.Column('rolled_back', sa.Text()))
@@ -259,7 +259,7 @@ def upgrade():
         with pytest.raises(RuntimeError, match='injected revision failure'):
             await migrate(migration_database)
         with psycopg.connect(migration_database) as connection:
-            assert connection.execute('SELECT version_num FROM alembic_version').fetchone() == ('0007_checkpoints',)
+            assert connection.execute('SELECT version_num FROM alembic_version').fetchone() == ('0008_dialog_metadata',)
             assert connection.execute('SELECT revision FROM settings').fetchone() == (0,)
             assert connection.execute("SELECT count(*) FROM information_schema.columns WHERE table_name='accounts' AND column_name='rolled_back'").fetchone() == (0,)
             assert connection.execute("SELECT pg_try_advisory_lock(hashtextextended('rag:migrations',0))").fetchone() == (True,)
@@ -324,3 +324,25 @@ async def test_cli_upgrade_can_stop_at_historical_revision_then_reach_head(migra
         assert connection.execute('SELECT version_num FROM alembic_version').fetchone() == ('0003_generation_ownership',)
         assert connection.execute("SELECT to_regclass('email_verifications'),to_regclass('checkpoint_migrations')").fetchone() == (None,None)
     await migrate(migration_database)
+
+
+async def test_dialog_metadata_upgrade_preserves_legacy_rows_without_inventing_dates(migration_database):
+    from alembic import command
+    from alembic.config import Config
+    def prepare_previous_head():
+        config=Config()
+        config.set_main_option('script_location',str(resource_path('migrations')))
+        config.attributes['dsn']=migration_database
+        config.attributes['command']='upgrade'
+        command.upgrade(config,'0007_checkpoints')
+    await asyncio.to_thread(prepare_previous_head)
+    owner,old,new=uuid4(),uuid4(),uuid4()
+    with psycopg.connect(migration_database) as connection:
+        connection.execute("INSERT INTO accounts(id,role) VALUES (%s,'user')",(owner,))
+        connection.execute('INSERT INTO conversations(id,owner_id,context_epoch) VALUES (%s,%s,7)',(old,owner))
+    await migrate(migration_database)
+    await migrate(migration_database)
+    with psycopg.connect(migration_database) as connection:
+        assert connection.execute('SELECT context_epoch,created_at,updated_at,deleted_at FROM conversations WHERE id=%s',(old,)).fetchone()==(7,None,None,None)
+        created,updated=connection.execute('INSERT INTO conversations(id,owner_id) VALUES (%s,%s) RETURNING created_at,updated_at',(new,owner)).fetchone()
+        assert created is not None and updated>=created

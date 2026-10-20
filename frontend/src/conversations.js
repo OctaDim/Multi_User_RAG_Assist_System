@@ -1,7 +1,7 @@
 import {api, origin, reconnectMs, shortIdChars} from './api.js';
 import {token} from './auth.js';
 import {Drafts, tabKey} from './drafts.js';
-import {textElement, messages} from './ui.js';
+import {textElement, messages, confirmAction} from './ui.js';
 
 const $ = id => document.getElementById(id);
 const unfinished = new Set(['accepted', 'searching', 'queued', 'generating']);
@@ -20,6 +20,8 @@ export class Conversations {
     this.reportError = reportError;
     this.drafts = new Drafts(owner);
     this.histories = new Map();
+    this.removed = new Set();
+    this.deleting = new Set();
     this.cards = new Map();
     this.sending = new Set();
     this.questionErrors = new Map();
@@ -76,39 +78,109 @@ export class Conversations {
 
   async initialize(conversations) {
     for (const value of conversations) {
+      if(this.removed.has(value.id))continue;
       const prior=this.histories.get(value.id);
-      this.histories.set(value.id,{conversation_id:value.id,requests:[],messages:[],...prior,persisted:true});
+      this.histories.set(value.id,{conversation_id:value.id,requests:[],messages:[],...prior,created_at:prior?.created_at||value.created_at,
+        updated_at:prior?.updated_at&&(!value.updated_at||prior.updated_at>value.updated_at)?prior.updated_at:value.updated_at,persisted:true});
     }
     this.list();
     await this.select(this.histories.has(this.selected) ? this.selected : this.localConversation);
   }
 
+  dates(history, target) {
+    const requestDates=history.requests.map(request=>request.created_at).filter(Boolean).sort();
+    const formatter=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    for(const [field,label,fallback] of [['created_at','Создан:',requestDates[0]],['updated_at','Обновлён:',requestDates.at(-1)]]) {
+      const stamp=history[field]||fallback;
+      const line=textElement('span',`${label} `),time=document.createElement('time');
+      if(stamp&&Number.isFinite(Date.parse(stamp))) {
+        time.dateTime=stamp;
+        time.textContent=`${history[field]?'':'≈ '}${formatter.format(new Date(stamp))}`;
+        if(!history[field])time.title='Приблизительно по времени запроса. Точная дата старого диалога не сохранена.';
+      } else time.textContent='нет данных';
+      line.append(time);target.append(line);
+    }
+  }
+
+  updateDates(identifier, payload) {
+    if(!payload.conversation_created_at&&!payload.conversation_updated_at)return;
+    const history=this.histories.get(identifier);
+    if(!history)return;
+    if(payload.conversation_created_at)history.created_at=payload.conversation_created_at;
+    const stamp=payload.conversation_updated_at;
+    if(stamp&&(!history.updated_at||stamp>history.updated_at))history.updated_at=stamp;
+    const target=Array.from($('conversations').children).find(row=>row.dataset.conversation===identifier)?.querySelector('.conversation-dates');
+    if(target){target.replaceChildren();this.dates(history,target);}
+  }
+
   list() {
+    const focused=document.activeElement?.closest('#conversations button');
+    const focusedId=focused?.closest('li').dataset.conversation,focusedClass=focused?.className;
+    const scroll=$('conversations').parentElement.scrollTop;
     $('conversations').replaceChildren();
-    for (const [identifier, history] of this.histories) {
-      const item = document.createElement('li');
+    const ordered=[...this.histories].sort((a,b)=>(b[1].updated_at||b[1].requests.at(-1)?.created_at||'').localeCompare(a[1].updated_at||a[1].requests.at(-1)?.created_at||''));
+    for (const [identifier, history] of ordered) {
+      if(this.removed.has(identifier))continue;
       const first = history.messages.find(message => message.role === 'user')?.text;
       const pending=this.drafts.get(identifier).pending;
       if(!first&&!history.requests.length&&!pending)continue;
+      const item = document.createElement('li');item.dataset.conversation=identifier;
       const question=first||pending?.body.question;
-      const name = `${!history.requests.length&&pending?'Не подтверждено · ':''}${question?.trim().replace(/\s+/g,' ')||'Беседа'}`;
-      const button = textElement('button', name.length > 72 ? `${name.slice(0,72)}…` : name);
-      button.title = name;
-      button.type = 'button';
-      button.dataset.conversation = identifier;
+      const name = `${!history.requests.length&&pending?'Не подтверждено · ':''}${question?.trim().replace(/\s+/g,' ')||'Диалог'}`;
+      const button=document.createElement('button');button.className='conversation-open';
+      button.append(textElement('span',name));
+      const dates=document.createElement('small');dates.className='conversation-dates';this.dates(history,dates);button.append(dates);
+      button.title = name;button.type = 'button';button.dataset.conversation = identifier;
       button.setAttribute('aria-current', String(identifier === this.selected));
       button.onclick = () => {document.dispatchEvent(new CustomEvent('rag:show-area',{detail:'chat'}));this.select(identifier).catch(this.reportError);};
-      item.append(button);
-      $('conversations').append(item);
+      const remove=document.createElement('button');remove.type='button';remove.className='delete-conversation';
+      remove.setAttribute('aria-label',`Удалить диалог «${name}»`);
+      remove.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg>';
+      const busy=history.requests.some(request=>unfinished.has(request.state))||pending||this.sending.has(identifier);
+      remove.disabled=Boolean(busy)||this.deleting.has(identifier);
+      remove.title=busy?'Остановите ответ или проверьте неподтверждённую отправку перед удалением':'Удалить диалог';
+      remove.onclick=()=>this.remove(identifier).catch(this.reportError);
+      item.append(button,remove);$('conversations').append(item);
     }
+    $('conversations').parentElement.scrollTop=scroll;
+    if(focusedId)Array.from($('conversations').children).find(row=>row.dataset.conversation===focusedId)?.querySelector(`.${focusedClass}`)?.focus({preventScroll:true});
     $('conversations-empty').hidden=Boolean($('conversations').children.length);
   }
 
+  discard(identifier) {
+    if(this.removed.has(identifier))return;
+    this.removed.add(identifier);this.histories.delete(identifier);this.drafts.remove(identifier);this.questionErrors.delete(identifier);
+    if(this.localConversation===identifier) {
+      this.localConversation=crypto.randomUUID();sessionStorage.setItem('rag:new-conversation',this.localConversation);
+      this.histories.set(this.localConversation,{conversation_id:this.localConversation,requests:[],messages:[],persisted:false});
+    }
+    if(this.selected===identifier)this.select(this.localConversation).catch(this.reportError);
+    else this.list();
+  }
+
+  async remove(identifier) {
+    if(this.deleting.has(identifier)||this.removed.has(identifier))return;
+    const confirmed=await confirmAction('Удалить диалог?','Диалог и его история исчезнут из списка на всех вкладках. Документы останутся в базе знаний.','Удалить диалог');
+    if(!confirmed||!this.current()||this.removed.has(identifier))return;
+    this.deleting.add(identifier);this.list();
+    try {
+      await api(`/conversations/${identifier}`,'DELETE');
+      if(this.current())this.discard(identifier);
+    } catch(error) {
+      if(this.current()) {
+        const feedback=$('conversation-feedback');
+        feedback.textContent=error.message==='conversation_busy'?'В диалоге выполняется запрос. Остановите ответ перед удалением.':'Не удалось подтвердить удаление диалога. Проверьте соединение и повторите попытку.';
+        feedback.dataset.error='true';feedback.hidden=false;
+        this.reportError(error);
+      }
+    } finally {this.deleting.delete(identifier);if(this.current())this.list();}
+  }
+
   async select(identifier) {
-    if (!identifier) return;
+    if (!identifier || this.removed.has(identifier)) return;
     const selecting=++this.selectionVersion;
     const feedback=$('conversation-feedback');
-    feedback.textContent='Загружаем беседу…';feedback.dataset.error='false';feedback.hidden=false;
+    feedback.textContent='Загружаем диалог…';feedback.dataset.error='false';feedback.hidden=false;
     this.selected = identifier;
     $('chat').dataset.conversation=identifier;
     this.cards.clear(); this.evidenceSignature = undefined;
@@ -122,7 +194,7 @@ export class Conversations {
     try {if(this.histories.get(identifier)?.persisted!==false)await this.refresh(identifier);}
     catch(error) {
       if(!this.current()||selecting!==this.selectionVersion)return;
-      feedback.textContent=messages[error.message]||'Не удалось открыть беседу. Повторите выбор в списке.';
+      feedback.textContent=messages[error.message]||'Не удалось открыть диалог. Повторите выбор в списке.';
       feedback.dataset.error='true';throw error;
     } finally {
       if(this.current()&&selecting===this.selectionVersion&&feedback.dataset.error==='false')feedback.hidden=true;
@@ -138,6 +210,7 @@ export class Conversations {
   }
 
   install(value) {
+    if(this.removed?.has(value.conversation_id))return;
     const prior = this.histories.get(value.conversation_id);
     const known = new Map(prior?.requests.map(request => [request.id, request]) || []);
     for (const request of value.requests) {
@@ -148,7 +221,8 @@ export class Conversations {
     const messages = new Map(prior?.messages.map(message => [`${message.request_id}:${message.role}`,message]) || []);
     for (const message of value.messages) messages.set(`${message.request_id}:${message.role}`,message);
     value.messages = Array.from(messages.values());
-    this.histories.set(value.conversation_id, {...value,persisted:true});
+    this.histories.set(value.conversation_id, {...prior,...value,persisted:true,
+      updated_at:prior?.updated_at&&(!value.updated_at||prior.updated_at>value.updated_at)?prior.updated_at:value.updated_at});
     for (const request of value.requests) this.acknowledge(value.conversation_id, request.operation_key);
   }
 
@@ -158,6 +232,7 @@ export class Conversations {
   }
 
   accepted(request, question) {
+    if(this.removed?.has(request.conversation_id))return;
     const history = this.histories.get(request.conversation_id) || {conversation_id:request.conversation_id, requests:[], messages:[]};
     const index = history.requests.findIndex(value => value.id === request.id);
     if (index < 0) history.requests.push(request);
@@ -275,7 +350,7 @@ export class Conversations {
     const summaryLabel=draft.documentIds.length ? `Источники: выбрано ${draft.documentIds.length}` : ready ? 'Источники: все готовые' : 'Без документов · LLM';
     if(summary.textContent!==summaryLabel)summary.textContent=summaryLabel;
     const noSources=draft.documentIds.length ? ' Нет готовых документов в выборе. Измените выбор в «Источниках» или обновите статусы.' : ' Нет готовых источников. Загрузите документы или обновите их статусы.';
-    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этой беседе уже выполняется запрос.' : `Соединение установлено.${!ready&&draft.documentIds.length ? noSources : !draft.text.trim() ? ' Введите вопрос.' : ''}`;
+    const connectionStatus = !this.connected ? 'Соединение восстанавливается. Черновик сохранён.' : draft.pending ? 'Отправка пока не подтверждена. Проверьте её.' : busy ? 'В этом диалоге уже выполняется запрос.' : `Соединение установлено.${!ready&&draft.documentIds.length ? noSources : !draft.text.trim() ? ' Введите вопрос.' : ''}`;
     if ($('answer-connection').textContent !== connectionStatus) $('answer-connection').textContent = connectionStatus;
     const feedback=$('question-feedback'),failure=this.questionErrors.get(this.selected);
     feedback.textContent=failure?.message||'';feedback.hidden=!failure;feedback.dataset.error='true';
@@ -287,13 +362,13 @@ export class Conversations {
     if (!value) return;
     const draft = this.drafts.get(this.selected);
     this.renderComposer(value,draft);
-    const title=value.messages.find(message=>message.role==='user')?.text.trim().replace(/\s+/g,' ')||'Новая беседа';
+    const title=value.messages.find(message=>message.role==='user')?.text.trim().replace(/\s+/g,' ')||'Новый диалог';
     $('conversation-title').textContent=title.length>120?title.slice(0,120)+'…':title;
     $('conversation-title').title=title;
     $('active-answer-status').hidden=!value.requests.length;
     if (!value.requests.length) {
       $('active-answer-actions').replaceChildren();
-      $('history').replaceChildren(textElement('p', 'В этой беседе пока нет сообщений.'));
+      $('history').replaceChildren(textElement('p', 'В этом диалоге пока нет сообщений.'));
       this.renderEvidence(null);
       return;
     }
@@ -365,7 +440,7 @@ export class Conversations {
     const passport = request.passport || {};
     if(passport.scope_mode==='chat') {
       $('early-fragments').append(textElement('p','Ответ без поиска по документам.'));
-      $('answer-evidence').append(textElement('h3','Без документов · LLM'),textElement('p','Ответ основан на общих знаниях модели и истории этой беседы. Документальные источники и цитаты не использовались.'));
+      $('answer-evidence').append(textElement('h3','Без документов · LLM'),textElement('p','Ответ основан на общих знаниях модели и истории этого диалога. Документальные источники и цитаты не использовались.'));
       return;
     }
     const selected = passport.selected_document_ids || passport.selected || request.scope || [];
@@ -419,9 +494,9 @@ export class Conversations {
     this.sending.add(identifier); this.render();
     try {
       if(this.histories.get(identifier)?.persisted===false) {
-        await api('/conversations','POST',{id:identifier});
-        if(!this.current())return;
-        this.histories.get(identifier).persisted=true;
+        const created=await api('/conversations','POST',{id:identifier});
+        if(!this.current()||this.removed.has(identifier))return;
+        Object.assign(this.histories.get(identifier),created,{persisted:true});
       }
       const request = await api(`/conversations/${identifier}/answers`, 'POST', pending.body, {'X-Tab-Proof':this.tab.proof});
       if (!this.current()) return;
@@ -491,9 +566,12 @@ export class Conversations {
     }
     if (this.cursor !== null && value.id <= this.cursor) return;
     if (value.kind === 'snapshot') {
+      for(const identifier of value.payload.deleted_conversation_ids||[])this.discard(identifier);
       for (const history of value.payload.conversations) this.install(history);
       this.list(); this.render();
     } else {
+      if(value.kind==='conversation_deleted'){this.discard(value.conversation_id||value.payload.conversation_id);this.cursor=value.id;return;}
+      if(this.removed?.has(value.conversation_id)){this.cursor=value.id;return;}
       if (value.kind === 'accepted') {
         this.accepted({id:value.request_id, conversation_id:value.conversation_id,
           state:value.payload.state, version:value.payload.version, operation_key:value.payload.operation_key,
@@ -517,7 +595,8 @@ export class Conversations {
           request.version = value.payload.version;
         }
       }
-      if (value.kind === 'accepted') this.list();
+      this.updateDates(value.conversation_id,value.payload);
+      if (value.kind === 'accepted'||value.kind==='terminal') this.list();
       if (this.selected === value.conversation_id) this.render();
     }
     this.cursor = value.id;

@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Header, Request
+from fastapi import APIRouter, Header, Request, Response
 from pydantic import BaseModel, Field
 
 from app import answers
@@ -37,6 +37,13 @@ async def admit(conversation_id: UUID, body: Question, request: Request, authori
 async def snapshot(conversation_id: UUID, request: Request, authorization: str | None = Header(None)):
     async with request.app.state.database.session() as connection:
         return await answers.snapshot(connection, bearer(authorization), conversation_id)
+
+
+@router.delete('/conversations/{conversation_id}', status_code=204)
+async def delete(conversation_id: UUID, request: Request, authorization: str | None = Header(None)):
+    async with request.app.state.database.session() as connection:
+        await answers.delete_conversation(connection, bearer(authorization), conversation_id)
+    return Response(status_code=204)
 
 
 @router.post("/answers/{request_id}/stop")

@@ -105,3 +105,24 @@ assert.equal(controller.questionErrors.get('first').message,'Newer failure');
     result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
         input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
     assert result.returncode==0,result.stdout+result.stderr
+
+
+def test_deleted_dialog_ignores_late_snapshot_and_acknowledgement():
+    script=r'''import assert from 'node:assert/strict';
+globalThis.document={querySelector:()=>({content:'http://127.0.0.1:8000'})};
+globalThis.sessionStorage={getItem(key){return this[key]??null;},setItem(key,value){this[key]=String(value);},removeItem(key){delete this[key];}};
+const {Conversations}=await import('./frontend/src/conversations.js');
+const {Drafts}=await import('./frontend/src/drafts.js');
+const controller=Object.create(Conversations.prototype);
+controller.histories=new Map();controller.removed=new Set(['deleted']);controller.drafts=new Drafts('owner');
+controller.questionErrors=new Map();controller.current=()=>true;controller.cursor=4;
+controller.install({conversation_id:'deleted',messages:[{role:'user',text:'Old question'}],requests:[]});
+controller.accepted({conversation_id:'deleted',id:'old-request',version:1},'Old question');
+await controller.receive({id:5,kind:'output',conversation_id:'deleted',request_id:'old-request',payload:{version:2,text:'Late token'}});
+assert.equal(controller.histories.has('deleted'),false);
+assert.equal(controller.cursor,5);
+assert.deepEqual(controller.drafts.pendingConversations(),[]);
+'''
+    result=subprocess.run(['node','--experimental-default-type=module','--input-type=module','-'],
+        input=script,text=True,capture_output=True,cwd=Path(__file__).resolve().parents[2],timeout=15)
+    assert result.returncode==0,result.stdout+result.stderr

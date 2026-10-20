@@ -65,7 +65,8 @@ def real_account_browser(environment, monkeypatch, tmp_path):
                         raise RuntimeError('Owned D1 API did not start')
                     time.sleep(.05)
             with sync_playwright() as playwright:
-                browser = playwright.chromium.launch(executable_path=playwright.chromium.executable_path, headless=True)
+                browser = playwright.chromium.launch(executable_path=playwright.chromium.executable_path, headless=True,
+                                                     ignore_default_args=['--hide-scrollbars'])
                 try:
                     yield browser, mailbox, frontend_url, api_url
                 finally:
@@ -160,7 +161,7 @@ def test_actual_ui_smtp_roles_block_soft_delete_and_logout(real_account_browser)
         login(user, 'user-browser@owned.test')
         open_conversations(user)
         expect(user.locator('#conversations li')).to_have_count(0)
-        expect(user.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+        expect(user.locator('#history')).to_have_text('В этом диалоге пока нет сообщений.')
         user_conversation = user.evaluate("async url => (await (await fetch(url+'/api/conversations',{method:'POST',headers:{Authorization:'Bearer '+sessionStorage.getItem('rag:credential')}})).json()).id",api_url)
 
         operator.reload()

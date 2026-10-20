@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="6" time="108.458" timestamp="2026-10-20T11:11:42.414652+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_dialog_management" name="test_file_queue_is_russian_removable_and_only_kept_files_are_uploaded" time="7.678" /><testcase classname="tests.browser.test_dialog_management" name="test_dialog_dates_delete_confirmation_and_other_tab_sync" time="12.802" /><testcase classname="tests.browser.test_dialog_management" name="test_dialog_delete_failure_keeps_history_and_draft" time="7.136" /><testcase classname="tests.browser.test_dialog_management" name="test_recent_dialogs_scroll_inside_sidebar_at_desktop_and_mobile" time="16.861" /><testcase classname="tests.browser.test_history_viewport" name="test_history_is_ten_times_taller_at_desktop_and_mobile" time="6.024" /><testcase classname="tests.browser.test_history_viewport" name="test_new_questions_and_streamed_answer_scroll_to_latest_content" time="55.388"><failure message="playwright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 30000ms exceeded.">backend/tests/browser/test_history_viewport.py:89: in test_new_questions_and_streamed_answer_scroll_to_latest_content
+    page.wait_for_function("document.querySelector('#history .answer-text:last-of-type')!==null")
+backend/.venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:11541: in wait_for_function
+    self._sync(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py:1082: in wait_for_function
+    return await self._main_frame.wait_for_function(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:771: in wait_for_function
+    return from_channel(await self._channel.send("waitForFunction", params))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:61: in send
+    return await self._connection.wrap_api_call(
+backend/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:528: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 30000ms exceeded.</failure></testcase></testsuite></testsuites>

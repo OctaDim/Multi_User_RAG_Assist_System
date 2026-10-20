@@ -156,9 +156,10 @@ async def read(connection, token, tab_id, proof, epoch, cursor=None):
             raise AccessError('tab_disconnected', 409)
         watermark = ((await connection.execute(select(func.coalesce(func.max(Event.id), 0).label("id")).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"]))).mappings().first())['id']
         if cursor is None or cursor < 0 or cursor > watermark:
-            conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"]).order_by(Conversation.id))).mappings().all()
+            conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"], Conversation.deleted_at.is_(None)).order_by(Conversation.id))).mappings().all()
             histories = await answers.histories(connection, [value['id'] for value in conversations])
-            return {'id': watermark, 'kind': 'snapshot', 'payload': {'conversations': histories}}
+            deleted = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor['id'], Conversation.deleted_at.is_not(None)).order_by(Conversation.id))).scalars().all()
+            return {'id': watermark, 'kind': 'snapshot', 'payload': {'conversations': histories, 'deleted_conversation_ids': deleted}}
         value = (await connection.execute(select(Event.__table__).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"], Event.id > cursor).order_by(Event.id).limit(1))).mappings().first()
         return dict(value) if value else None
 
@@ -179,12 +180,16 @@ async def delivery_event(connection, actor, prepared):
     if prepared['kind'] == 'heartbeat':
         return prepared
     if prepared['kind'] == 'snapshot':
-        conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"]).order_by(Conversation.id))).mappings().all()
+        conversations = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor["id"], Conversation.deleted_at.is_(None)).order_by(Conversation.id))).mappings().all()
         watermark = ((await connection.execute(select(func.coalesce(func.max(Event.id), 0).label("id")).join(Conversation, Conversation.id == Event.conversation_id).where(Conversation.owner_id == actor["id"]))).mappings().first())['id']
-        return {'id':watermark, 'kind':'snapshot', 'payload':{'conversations':await answers.histories(connection,[row['id'] for row in conversations])}}
+        deleted = (await connection.execute(select(Conversation.id).where(Conversation.owner_id == actor['id'], Conversation.deleted_at.is_not(None)).order_by(Conversation.id))).scalars().all()
+        return {'id':watermark, 'kind':'snapshot', 'payload':{'conversations':await answers.histories(connection,[row['id'] for row in conversations]), 'deleted_conversation_ids': deleted}}
     value = (await connection.execute(select(Event.__table__).join(Conversation, Conversation.id == Event.conversation_id).where(Event.id == prepared["id"], Conversation.owner_id == actor["id"]))).mappings().first()
     if not value:
         raise AccessError('not_found',404)
+    deleted = await connection.scalar(select(Conversation.deleted_at).where(Conversation.id == value['conversation_id']))
+    if deleted is not None:
+        return {**value, 'kind': 'conversation_deleted', 'payload': {'conversation_id': str(value['conversation_id'])}}
     request = (await connection.execute(select(Request.__table__).where(Request.id == value["request_id"]).with_for_update(read=True))).mappings().first()
     from app.sources import source_flags
     flags = await source_flags(connection, request['id'])

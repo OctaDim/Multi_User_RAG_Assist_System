@@ -31,31 +31,31 @@
     </div>
   </section>
   <section id="workspace" hidden>
-    <div class="mobile-workspace-bar"><button id="sidebar-toggle" class="quiet" type="button" aria-controls="workspace-sidebar" aria-expanded="false">☰ Меню</button><span id="mobile-section-title">Беседы</span></div>
+    <div class="mobile-workspace-bar"><button id="sidebar-toggle" class="quiet" type="button" aria-controls="workspace-sidebar" aria-expanded="false">☰ Меню</button><span id="mobile-section-title">Диалоги</span></div>
     <div id="sidebar-backdrop" hidden></div>
     <aside id="workspace-sidebar" aria-label="Рабочее меню">
       <div class="sidebar-heading"><p class="eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО</p><button id="close-sidebar" class="quiet" type="button" aria-label="Закрыть меню">✕</button></div>
-      <nav class="workspace-navigation" aria-label="Разделы"><button id="nav-workspace" data-area="chat" type="button" aria-current="page" aria-pressed="true"><span aria-hidden="true">◉</span> Беседы</button><button id="nav-library" data-area="library" type="button" aria-pressed="false"><span aria-hidden="true">▤</span> Документы</button></nav>
-      <button id="new-conversation" type="button" class="secondary"><span aria-hidden="true">+</span> Новая беседа</button>
+      <nav class="workspace-navigation" aria-label="Разделы"><button id="nav-workspace" data-area="chat" type="button" aria-current="page" aria-pressed="true"><span aria-hidden="true">◉</span> Диалоги</button><button id="nav-library" data-area="library" type="button" aria-pressed="false"><span aria-hidden="true">▤</span> Документы</button></nav>
+      <button id="new-conversation" type="button" class="secondary"><span aria-hidden="true">+</span> Новый диалог</button>
       <p id="conversation-feedback" class="operation-status" role="status" aria-live="polite" hidden></p>
-      <details class="conversation-picker" open><summary>Последние беседы</summary><p id="conversations-empty" class="muted">Здесь появятся беседы, в которых вы задали вопрос.</p><ul id="conversations"></ul></details>
+      <details class="conversation-picker" open><summary>Последние диалоги</summary><p id="conversations-empty" class="muted">Здесь появятся диалоги, в которых вы задали вопрос.</p><ul id="conversations"></ul></details>
       <div class="sidebar-footer"><button id="nav-administration" class="quiet" type="button" hidden><span aria-hidden="true">⚙</span> Управление</button></div>
     </aside>
     <div id="workspace-content">
     <div id="knowledge-workspace" data-active-area="chat" data-evidence-open="false">
-      <section id="chat" class="work-area" aria-label="Беседа">
-        <header class="area-heading"><div><p class="eyebrow">БЕСЕДА</p><h2 id="conversation-title">Новая беседа</h2></div><div class="chat-actions"><button id="open-evidence" data-area="evidence" aria-pressed="false" aria-expanded="false" type="button" class="quiet">Основания<span id="grounds-indicator" hidden> · новые</span></button></div></header>
+      <section id="chat" class="work-area" aria-label="Диалог">
+        <header class="area-heading"><div><p class="eyebrow">ДИАЛОГ</p><h2 id="conversation-title">Новый диалог</h2></div><div class="chat-actions"><button id="open-evidence" data-area="evidence" aria-pressed="false" aria-expanded="false" type="button" class="quiet">Основания<span id="grounds-indicator" hidden> · новые</span></button></div></header>
         <details id="source-selection"><summary>Источники для вопроса</summary><fieldset id="question-sources"><legend class="sr-only">Область поиска</legend><p id="scope-description" class="muted">Источники не выбраны — поиск по всем готовым документам.</p></fieldset></details>
-        <section id="history" aria-label="История беседы" tabindex="-1"></section>
+        <section id="history" aria-label="История диалога" tabindex="-1"></section>
         <section id="active-answer-status" class="request-status-strip" aria-label="Состояние ответа" hidden><p id="active-answer-state" role="status" aria-live="polite"></p><div id="active-answer-actions"></div></section>
         <form id="question-form" aria-label="Вопрос"><label for="question">Ваш вопрос</label><textarea id="question" rows="__RAG_COMPOSER_ROWS__" placeholder="Задайте вопрос…" required></textarea><p id="question-feedback" class="operation-status" role="status" aria-live="polite" hidden></p><div class="composer-footer"><p id="answer-connection" role="status" aria-live="polite">Подключение…</p><div><button id="check-question" type="button" class="secondary" hidden>Проверить отправку</button><button id="send-question" disabled>Отправить вопрос <span aria-hidden="true">↗</span></button></div></div></form>
       </section>
-      <aside id="evidence" class="work-area" hidden aria-label="Основания ответа" tabindex="-1"><header class="area-heading"><div><p class="eyebrow">ПРОВЕРКА</p><h2>Основания ответа</h2></div><button id="close-evidence" class="quiet" type="button" aria-label="Закрыть основания">Закрыть</button></header><div class="area-body"><p id="evidence-empty" class="empty-state">Здесь появятся фрагменты документов и паспорт источников.<br><br>Выберите ответ в беседе, чтобы проверить его основания.</p><section id="early-fragments" aria-label="Ранние фрагменты источников"></section><section id="answer-evidence" aria-label="Паспорт выбранного ответа"></section></div></aside>
+      <aside id="evidence" class="work-area" hidden aria-label="Основания ответа" tabindex="-1"><header class="area-heading"><div><p class="eyebrow">ПРОВЕРКА</p><h2>Основания ответа</h2></div><button id="close-evidence" class="quiet" type="button" aria-label="Закрыть основания">Закрыть</button></header><div class="area-body"><p id="evidence-empty" class="empty-state">Здесь появятся фрагменты документов и паспорт источников.<br><br>Выберите ответ в диалоге, чтобы проверить его основания.</p><section id="early-fragments" aria-label="Ранние фрагменты источников"></section><section id="answer-evidence" aria-label="Паспорт выбранного ответа"></section></div></aside>
     </div>
           <section id="library" class="work-area library-page" hidden aria-label="Документы">
         <header class="area-heading"><div><p class="eyebrow">ДОКУМЕНТЫ</p><h2 id="library-title">Мои документы</h2></div><button id="refresh-documents" type="button" class="quiet" title="Обновить статусы документов" aria-label="Обновить статусы документов">↻</button></header>
         <div class="area-body"><p id="library-context" class="muted">Материалы для поиска и ответов</p><button id="own-library" class="quiet" type="button" hidden>Вернуться к своей библиотеке</button>
-          <form id="document-upload"><label class="upload-field">Добавить документы<input name="files" type="file" multiple required></label><button class="secondary">Загрузить документы</button></form>
+          <form id="document-upload"><label class="upload-field" for="document-files">Добавить документы</label><div class="file-picker"><input id="document-files" class="sr-only" name="files" type="file" multiple required aria-describedby="file-selection-status"><button id="choose-files" class="secondary" type="button">Выбрать файлы</button><span id="file-selection-status" role="status">Файлы не выбраны.</span></div><ul id="selected-files" aria-label="Файлы для загрузки"></ul><button id="upload-documents" class="secondary" disabled>Загрузить документы</button></form>
           <p id="library-status" role="status" aria-live="polite"></p><ul id="documents" class="document-list"></ul>
 
         </div>

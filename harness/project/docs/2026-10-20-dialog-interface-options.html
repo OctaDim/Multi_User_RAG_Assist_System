@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="api-origin" content="__RAG_API_ORIGIN__">
+  <meta name="reconnect-ms" content="__RAG_RECONNECT_MS__">
+  <meta name="request-timeout-ms" content="__RAG_REQUEST_TIMEOUT_MS__">
+  <meta name="correction-rows" content="__RAG_CORRECTION_ROWS__">
+  <meta name="short-id-chars" content="__RAG_SHORT_ID_CHARS__">
+  <meta name="referrer" content="no-referrer">
+  <title>Корпоративная база знаний RAG</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%2323624c%27/%3E%3Ctext x=%279%27 y=%2724%27 fill=%27white%27 font-family=%27sans-serif%27 font-size=%2724%27%3ER%3C/text%3E%3C/svg%3E">
+  <style>:root { font-family: 'Segoe UI', system-ui, sans-serif; color: #253a33; background: #f6f7f4; font-size: 14px; line-height: 1.5; --ink:#253a33; --muted:#65736c; --accent:#23624c; --accent-hover:#194b39; --line:#dde3dc; --surface:#fff; --tint:#edf3ed; --danger:#963b32; --radius:10px; }
+* { box-sizing:border-box; }
+body { margin:0; }
+main { padding:0 24px 24px; max-width:1920px; margin:auto; height:calc(100dvh + var(--history-extra-height, 0px)); display:flex; flex-direction:column; }
+[hidden] { display:none !important; }
+button,input,textarea,select { font:inherit; }
+button { min-height:40px; padding:9px 14px; border:1px solid transparent; border-radius:7px; color:white; background:var(--accent); cursor:pointer; font-weight:600; line-height:1.35; }
+button:hover { background:var(--accent-hover); }
+button:disabled { opacity:.55; cursor:default; }
+button.secondary { color:var(--accent); background:var(--tint); border-color:var(--line); }
+button.secondary:hover { background:#deeadd; }
+button.quiet { color:var(--muted); background:transparent; border-color:var(--line); }
+button.quiet:hover { background:var(--tint); color:var(--ink); }
+button.danger { background:var(--danger); }
+a { color:var(--accent); text-underline-offset:3px; }
+:focus-visible { outline:3px solid #b07d2a; outline-offset:3px; }
+h1,h2,h3,h4,p,ul,figure { margin-top:0; }
+h1 { font-size:18px; letter-spacing:-.4px; margin:0; font-weight:650; }
+h2 { font-size:18px; letter-spacing:-.3px; line-height:1.35; margin-bottom:12px; }
+h3 { font-size:16px; line-height:1.5; }
+h4 { font-size:14px; }
+p { margin-bottom:12px; }
+label,strong,h1,h2,h3,h4,p,li,button,summary { overflow-wrap:anywhere; }
+label { display:block; margin:16px 0; font-weight:500; }
+input:not([type=checkbox]):not([type=file]),textarea,select { display:block; width:100%; min-width:0; padding:11px 12px; margin-top:6px; border:1px solid #bcc8be; border-radius:7px; background:var(--surface); color:var(--ink); }
+input[type=checkbox] { accent-color:var(--accent); width:17px; height:17px; margin:0 8px 0 0; vertical-align:middle; flex:none; }
+input[type=file] { display:block; width:100%; font-size:12px; margin-top:10px; }
+input[type=file]::file-selector-button { font:inherit; border:1px solid var(--line); background:white; padding:7px; border-radius:5px; margin-right:8px; color:var(--ink); cursor:pointer; }
+textarea { resize:vertical; line-height:1.65; }
+fieldset { min-width:0; padding:0; border:0; margin:12px 0; }
+summary { cursor:pointer; font-weight:600; padding:12px 0; }
+summary:hover { color:var(--accent); }
+.muted { color:var(--muted); font-size:13px; }
+.eyebrow { font-size:10px; font-weight:700; color:var(--muted); letter-spacing:1.5px; margin:0 0 6px; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.skip-link { position:fixed; top:-100px; padding:12px; background:white; z-index:10; clip-path:inset(50%); }
+.skip-link:focus { top:8px; clip-path:none; }
+.app-header { flex:none; min-height:88px; display:flex; align-items:center; justify-content:space-between; gap:24px; border-bottom:1px solid var(--line); }
+.brand { display:flex; align-items:center; gap:12px; color:var(--ink); text-decoration:none; }
+.brand-mark { display:grid; place-items:center; width:38px; height:40px; flex:none; background:var(--accent); color:white; border-radius:9px; font-size:25px; font-weight:600; }
+.brand-tag { color:var(--accent); font-size:12px; letter-spacing:1px; white-space:nowrap; }
+.brand-caption { color:var(--muted); font-size:11px; }
+#session-controls { display:flex; align-items:center; gap:16px; }
+#logout { flex:none; white-space:nowrap; }
+#identity { color:var(--muted); font-size:12px; max-width:320px; }
+.service-status { flex:none; display:flex; align-items:center; gap:12px; }
+#status { margin:0; font-size:13px; }
+#status:not(:empty) { padding:12px 0; }
+#status[data-error=true],.operation-status[data-error=true] { color:var(--danger); }
+#authentication { max-width:1040px; min-height:calc(100dvh - 140px); margin:auto; display:grid; grid-template-columns:1fr 420px; align-items:center; gap:100px; padding:48px 0; }
+.auth-intro h2 { font-size:40px; font-weight:550; line-height:1.2; margin:18px 0 24px; letter-spacing:-1.5px; }
+.auth-intro > p:not(.eyebrow) { color:var(--muted); font-size:16px; max-width:350px; }
+.auth-principles { display:flex; flex-direction:column; gap:20px; margin-top:40px; color:var(--accent); font-size:12px; }
+.auth-principles strong { color:var(--ink); padding-left:14px; font-weight:500; font-size:14px; }
+.auth-card { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:28px; }
+.auth-switch { display:flex; gap:4px; padding:4px; background:var(--tint); border-radius:8px; margin-bottom:28px; }
+.auth-switch button { background:transparent; color:var(--muted); flex:1; }
+.auth-switch button[aria-pressed=true] { background:white; color:var(--ink); box-shadow:0 1px 3px #263e3214; }
+.auth-card form > button { width:100%; margin-top:8px; }
+.workspace-navigation { display:flex; flex-direction:column; gap:4px; }
+.workspace-navigation button { background:transparent; color:var(--muted); border-radius:6px; width:100%; text-align:left; }
+.workspace-navigation button[aria-current=page] { background:#e5ede3; color:var(--accent); }
+
+#knowledge-workspace { display:grid; grid-template-columns:minmax(0,1fr); gap:16px; height:100%; min-height:0; }
+.work-area { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); display:flex; flex-direction:column; min-width:0; overflow:hidden; }
+.area-heading { min-height:91px; padding:20px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.area-heading h2 { margin:0; font-size:16px; }
+.area-heading button { font-size:12px; flex:none; }
+.area-body { overflow:auto; padding:20px; flex:1; min-height:0; scrollbar-width:thin; }
+#document-upload { padding:12px; border:1px dashed #c5d0c4; border-radius:7px; background:#fafbf8; margin:16px 0; }
+#document-upload label { margin:0 0 12px; font-size:13px; }
+#document-upload button { width:100%; font-size:12px; }
+.document-list { list-style:none; padding:0; margin:20px 0; }
+.document-list li { padding:14px 0; border-bottom:1px solid var(--line); }
+.document-list strong { display:block; font-size:13px; }
+.document-list p { color:var(--muted); font-size:12px; margin:4px 0 8px; }
+.document-list button { font-size:11px; min-height:32px; padding:6px 9px; margin:2px 4px 2px 0; }
+.document-list button:last-child { color:var(--muted); background:transparent; border-color:var(--line); }
+#source-selection { border-top:1px solid var(--line); }
+#source-selection summary { font-size:13px; }
+#question-sources label { display:flex; align-items:flex-start; font-size:12px; font-weight:400; margin:12px 0; }
+#question-sources input { margin-top:2px; }
+#scope-description { font-size:12px; }
+.conversation-picker { flex:1; min-height:0; overflow:auto; margin-top:20px; scrollbar-width:thin; }
+.conversation-picker summary { color:var(--muted); font-size:12px; }
+#conversations { list-style:none; padding:0; margin:4px 0; }
+#conversations button { color:var(--muted); background:transparent; font-size:12px; line-height:1.5; text-align:left; width:100%; margin-bottom:4px; }
+#conversations button[aria-current=true] { background:var(--tint); color:var(--accent); }
+#history { padding:24px; flex:1; overflow:auto; min-height:0; scrollbar-width:thin; display:flex; flex-direction:column; }
+#history > p { color:var(--muted); text-align:center; padding:60px 16px; }
+#history article { flex:none; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:24px; }
+#history article:first-child { margin-top:auto; }
+#history h3 { border-radius:8px; background:var(--tint); padding:14px 16px; width:fit-content; max-width:90%; margin:0 0 16px auto; font-weight:500; font-size:14px; }
+#history article > p:not(.answer-text) { font-size:11px; color:var(--muted); }
+#history article > button { min-height:32px; padding:6px 10px; font-size:11px; margin-right:8px; }
+#history article > button:not(:last-child) { background:var(--tint); color:var(--accent); }
+.answer-text,blockquote { white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.75; }
+.answer-text { font-size:14px; }
+#question-form { padding:16px 20px 20px; border-top:1px solid var(--line); background:#fcfdfb; }
+#question-form > label { margin:0 0 8px; font-size:12px; }
+#question { max-height:200px; min-height:84px; font-size:13px; margin:0; }
+.composer-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:12px; }
+.composer-footer > div { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+#answer-connection { font-size:10px; color:var(--muted); margin:0; max-width:52%; }
+#send-question,#check-question { font-size:12px; white-space:nowrap; }
+#send-question span { margin-left:8px; }
+.empty-state { color:var(--muted); font-size:13px; text-align:center; padding:48px 12px; }
+#early-fragments h3 { font-size:14px; }
+#early-fragments blockquote,.cited-quote { margin:12px 0; padding:12px 14px; border-left:2px solid #a4bfa3; background:#f5f8f1; font-size:12px; }
+#answer-evidence { font-size:12px; }
+#answer-evidence p { margin:8px 0; }
+#answer-evidence h4 { margin:20px 0 8px; font-size:12px; }
+#administration { height:100%; overflow:auto; padding:0 4px; }
+.section-heading { padding:24px 0; }
+#accounts { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:20px; }
+#accounts article,#global-settings { padding:24px; border:1px solid var(--line); border-radius:var(--radius); background:white; }
+#accounts form label { font-size:12px; }
+#accounts article > button { margin-top:16px; }
+#generation-settings { margin-bottom:32px; }
+#global-settings { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 24px; }
+#global-settings > p,#global-settings > div { grid-column:1/-1; }
+#global-settings > button { margin:8px 8px 8px 0; }
+.operation-status { margin:10px 0 0; font-size:12px; color:var(--accent); }
+
+dialog { border:1px solid var(--line); border-radius:12px; padding:28px; width:min(560px,calc(100vw - 32px)); max-height:calc(100dvh - 40px); color:var(--ink); }
+dialog::backdrop { background:#172c2566; backdrop-filter:blur(2px); }
+#document-editor { width:min(1240px,calc(100vw - 32px)); }
+.dialog-heading { display:flex; justify-content:space-between; gap:16px; align-items:center; border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:20px; }
+.dialog-heading h2 { margin:0; }
+.dialog-heading > button { flex:none; white-space:nowrap; }
+.dialog-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:24px; }
+.document-page { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); gap:24px; margin:20px 0; }
+.document-page textarea { font-size:13px; }
+.original-page { position:relative; align-self:start; }
+.original-page img { display:block; width:100%; }
+.skip-region { position:absolute; border:2px solid #a66c16; background:#ffe6bf60; font-size:10px; overflow:hidden; }
+#document-view > button,#document-correction > button { margin:8px 8px 8px 0; }
+@media(max-width:1179px) { main { padding:0 16px 16px; } #knowledge-workspace { display:block; height:100%; } .work-area { height:100%; } #knowledge-workspace[data-active-area=chat] > :not(#chat),#knowledge-workspace[data-active-area=evidence] > :not(#evidence) { display:none; } }
+@media(max-width:767px) { .app-header { min-height:84px; gap:12px; align-items:center; } h1 { font-size:14px; max-width:260px; } .brand-caption { display:none; } .brand-mark { width:30px; height:34px; font-size:21px; } .brand-tag { font-size:10px; } #session-controls { flex-direction:column; align-items:flex-end; gap:4px; } #identity { font-size:9px; max-width:105px; } #logout { font-size:11px; min-height:28px; padding:4px 8px; } #authentication { display:block; min-height:0; padding:32px 0; max-width:460px; } .auth-intro { margin:0 0 28px; } .auth-intro h2 { font-size:30px; margin:12px 0; } .auth-intro > p:not(.eyebrow) { font-size:14px; } .auth-principles { display:none; } .auth-card { padding:20px; } .workspace-caption { display:none; }   .area-heading { padding:16px; min-height:82px; } .area-heading h2 { font-size:15px; } .area-heading button { padding:8px; font-size:11px; } .area-body { padding:16px; } #history { padding:16px; } #history h3 { max-width:94%; } #question-form { padding:12px; } #question { min-height:80px; } .composer-footer { align-items:flex-start; flex-direction:column; gap:8px; } #answer-connection { max-width:none; } .composer-footer > div { width:100%; } #global-settings { display:block; padding:16px; } dialog { padding:20px; } }
+@media(prefers-reduced-motion:no-preference) { button { transition:background .12s ease,color .12s ease; } }
+#knowledge-workspace[data-evidence-open=true] { grid-template-columns:minmax(0,1fr) 350px; }
+.chat-actions { display:flex; gap:8px; flex:none; }
+#chat > #source-selection { flex:none; border:0; border-bottom:1px solid var(--line); padding:0 20px; }
+#chat > #source-selection summary { font-size:12px; color:var(--muted); }
+#question-sources { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:0 16px; max-height:140px; overflow:auto; margin:0 0 12px; }
+#scope-description { grid-column:1/-1; }
+.library-page { height:100%; margin:0; }
+.library-page > .area-body { overflow:auto; }
+.library-page .document-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:20px; }
+.library-page .document-list li { border:1px solid var(--line); border-radius:8px; padding:20px; }
+.library-page #document-upload { max-width:560px; }
+@media(max-width:1179px) {
+  #knowledge-workspace,#knowledge-workspace[data-evidence-open=true] { display:block; height:100%; }
+  #knowledge-workspace[data-active-area=chat] > #chat { display:flex; }
+  #knowledge-workspace[data-active-area=evidence] > #evidence { display:flex; }
+
+}
+@media(max-width:767px) { .chat-actions { gap:4px; flex-wrap:wrap; justify-content:flex-end; } .chat-actions button { min-height:32px; } .workspace-navigation { gap:2px; } .workspace-navigation button { font-size:12px; padding:8px 10px; } #chat > #source-selection { padding-inline:16px; } }
+
+#workspace { display:grid; grid-template-columns:240px minmax(0,1fr); gap:24px; flex:1; min-height:520px; margin-top:8px; }
+#workspace-content { min-width:0; min-height:0; height:100%; }
+#workspace-sidebar { display:flex; flex-direction:column; min-height:0; padding:20px 14px; background:#eff3ed; border:1px solid var(--line); border-radius:var(--radius); }
+@media(min-width:960px) { #workspace-sidebar { position:sticky; top:16px; align-self:start; height:calc(100dvh - 32px); } }
+@media(min-width:1180px) { #evidence { position:sticky; top:16px; align-self:start; height:calc(100dvh - 32px); } }
+.sidebar-heading { display:flex; align-items:center; justify-content:space-between; padding:0 10px 12px; }
+.sidebar-heading .eyebrow { font-size:9px; margin:0; }
+#new-conversation { flex:none; text-align:left; margin-top:18px; background:white; }
+#new-conversation span { margin-right:6px; }
+.sidebar-footer { flex:none; padding-top:16px; margin-top:auto; border-top:1px solid var(--line); }
+.sidebar-footer button { width:100%; text-align:left; }
+#conversations-empty { font-size:12px; padding:6px 10px; }
+#conversation-title { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+#chat > .area-heading > div:first-child { min-width:0; flex:1; }
+.mobile-workspace-bar,#close-sidebar { display:none; }
+@media(max-width:959px) {
+  #workspace { grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr); gap:8px; }
+  .mobile-workspace-bar { display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:12px; }
+  #workspace-content { grid-column:1; grid-row:2; }
+  #workspace-sidebar { display:none; position:fixed; z-index:40; inset:0 auto 0 0; width:min(310px,86vw); height:100dvh; border-radius:0 12px 12px 0; background:var(--surface); box-shadow:8px 0 32px #172c2533; }
+  #workspace[data-menu-open=true] #workspace-sidebar { display:flex; }
+  #sidebar-backdrop { position:fixed; inset:0; background:#172c2566; z-index:30; }
+  #close-sidebar { display:block; padding:6px 10px; }
+  #workspace-sidebar .conversation-picker { margin-top:16px; }
+}
+
+.request-status-strip { flex:none; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 20px; border-top:1px solid var(--line); background:#f6f8f3; font-size:12px; }
+.request-status-strip p { margin:0; }
+#active-answer-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+#active-answer-actions button { font-size:12px; min-height:34px; padding:6px 12px; }
+#active-answer-actions .action-feedback { color:var(--danger); }
+#active-answer-actions .action-feedback:empty { display:none; }
+@media(max-width:767px) { .request-status-strip { padding:10px 12px; align-items:flex-start; flex-direction:column; gap:6px; } }
+</style>
+
+<style>
+body{--ink:#172b24;--muted:#40564b;--accent:#1c6148;--line:#cfd8d0;--tint:#e8f0e9;background:#f5f7f4;color:var(--ink)}body[data-palette=p2]{--ink:#14263f;--muted:#40546b;--accent:#174f9e;--line:#cbd5e2;--tint:#e8eff8;background:#f4f7fb}body[data-palette=p3]{--ink:#111817;--muted:#343f3b;--accent:#293b34;--line:#c6ceca;--tint:#ecefed;background:#fafaf9}.preview-controls{padding:20px 24px;max-width:1500px;margin:auto}.preview-controls h1{font-size:24px;margin-bottom:7px}.preview-controls>p{font-size:12px;color:#40534a;margin:8px 0}.preview-options{display:grid;grid-template-columns:1fr 1fr;gap:24px}.preview-options fieldset{display:flex;gap:8px}.preview-options legend{font-weight:700;padding:0 0 8px;font-size:13px}.preview-options label{flex:1;background:white;border:1px solid #bdc9c0;border-radius:8px;padding:9px;margin:0;cursor:pointer}.preview-options label:has(:checked){border:2px solid #23624c;padding:8px}.preview-options input[type=radio]{display:inline-block;width:15px;min-width:0;padding:0;margin:0 5px 0 0;vertical-align:middle}.preview-options strong{font-size:12px}.preview-options small{display:block;color:#40534a;font-size:11px;margin-top:4px}.preview-note{max-width:1100px}main{height:790px;max-width:1500px;margin:auto}#workspace-sidebar{position:static;height:auto}#history article:first-child{margin-top:0}#identity{color:var(--muted)}#workspace{grid-template-columns:290px minmax(0,1fr);min-height:590px}.preview-dialog{position:relative;border-bottom:1px solid var(--line);padding:0 27px 0 0}.preview-dialog>button:first-child{margin:0!important;padding:7px!important;min-height:0!important}.preview-dialog strong{font-weight:650;display:block;font-size:12px;line-height:1.35;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.preview-dates{font-size:10px;line-height:1.4;color:var(--muted);display:grid;margin-top:3px}.preview-delete{position:absolute;right:0;top:5px;width:25px!important;height:28px;min-height:0!important;margin:0!important;padding:5px!important;opacity:0}.preview-delete svg{width:15px;height:15px}.preview-dialog:hover .preview-delete,.preview-dialog:focus-within .preview-delete{opacity:1}.preview-delete:hover{color:#a32123!important;background:#fceced!important}body[data-layout=e2] #workspace{grid-template-columns:280px minmax(0,1fr);gap:10px}body[data-layout=e2] .preview-dialog>button:first-child{padding:4px 6px!important}body[data-layout=e2] .preview-dates{font-size:9px;display:flex;flex-wrap:wrap;gap:0 5px}body[data-layout=e2] .area-heading{min-height:70px;padding:12px 16px}body[data-layout=e2] .work-area{border-radius:5px}body[data-layout=e2] #question-form{padding:10px 16px}body[data-layout=e3] #workspace{grid-template-columns:260px minmax(0,1fr)}body[data-layout=e3] #workspace-sidebar{border:0;background:transparent}body[data-layout=e3] .preview-dialog{border:0;margin-bottom:5px}body[data-layout=e3] .answer-text{font-size:15px}body[data-layout=e3] #question-form,body[data-layout=e3] #source-selection{background:var(--tint)}#preview-file-list{list-style:none;padding:0;margin:12px 0}#preview-file-list li{display:flex;align-items:center;gap:10px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0}#preview-file-list span{flex:1;font-size:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}#preview-file-list button{padding:3px 8px;min-height:28px;background:transparent;color:#a32123}#document-upload #preview-pick{width:auto}#preview-file-status{font-size:12px;color:var(--muted);margin-left:10px}#document-upload input{display:none}#document-upload label{margin-bottom:9px}@media(hover:none){.preview-delete{opacity:1}}@media(max-width:959px){.preview-options{grid-template-columns:1fr}.preview-controls{padding:12px}#workspace{grid-template-columns:1fr!important}.preview-options fieldset{gap:5px}main{height:860px}#workspace-sidebar{position:fixed;height:100dvh}#workspace-sidebar.preview-open{display:flex}}
+</style></head>
+<body>
+<a class="skip-link" href="#authentication">К основному содержимому</a>
+<section class="preview-controls"><h1>Варианты оформления диалогов</h1><p>Это интерактивный макет с примерными данными. Он не меняет рабочие диалоги и не загружает документы.</p><div class="preview-options"><fieldset><legend>Контраст шрифтов</legend><label><input name="palette" type="radio" value="p1" checked><strong>P1 · Графит и зелёный</strong><small>Привычная палитра, более тёмные подписи.</small></label><label><input name="palette" type="radio" value="p2"><strong>P2 · Тёмно-синий</strong><small>Холодные акценты и чёткое разделение текста.</small></label><label><input name="palette" type="radio" value="p3"><strong>P3 · Нейтральный графит</strong><small>Самый тёмный текст, минимум цветовых акцентов.</small></label></fieldset><fieldset><legend>Эргономика · диалог в центре</legend><label><input name="layout" type="radio" value="e1" checked><strong>E1 · Чёткая структура</strong><small>Две читаемые строки дат, заметные границы.</small></label><label><input name="layout" type="radio" value="e2"><strong>E2 · Плотный рабочий</strong><small>Меньше отступов и высоты строк, компактные панели.</small></label><label><input name="layout" type="radio" value="e3"><strong>E3 · Фокус на диалоге</strong><small>Спокойное меню, крупнее ответы, выделенный ввод.</small></label></fieldset></div><p id="preview-selection">Выбрано: P1 + E1. Рекомендую это сочетание для читаемости дат.</p><p class="preview-note">Палитру и компоновку можно сочетать независимо. Наведите курсор на диалог; откройте «Документы» для проверки очереди файлов. Здесь показан видимый участок длинной истории, высота 10× сохраняется при реализации.</p></section><main>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="Корпоративная база знаний RAG — главная"><span class="brand-mark" aria-hidden="true">R</span><span><h1>Корпоративная база знаний <span class="brand-tag">RAG</span></h1><span class="brand-caption">Документы. Ответы. Проверяемые основания.</span></span></a>
+    <div id="session-controls"><span id="identity"></span><button id="logout" class="quiet" type="button">Выйти</button></div>
+  </header>
+  <div class="service-status"><p id="status" role="status" aria-live="polite"></p><button id="retry-bootstrap" type="button" hidden>Повторить подключение</button></div>
+
+  <section id="workspace">
+    <div class="mobile-workspace-bar"><button id="sidebar-toggle" class="quiet" type="button" aria-controls="workspace-sidebar" aria-expanded="false">☰ Меню</button><span id="mobile-section-title">Диалоги</span></div>
+    <div id="sidebar-backdrop" hidden></div>
+    <aside id="workspace-sidebar" aria-label="Рабочее меню">
+      <div class="sidebar-heading"><p class="eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО</p><button id="close-sidebar" class="quiet" type="button" aria-label="Закрыть меню">✕</button></div>
+      <nav class="workspace-navigation" aria-label="Разделы"><button id="nav-workspace" data-area="chat" type="button" aria-current="page" aria-pressed="true"><span aria-hidden="true">◉</span> Диалоги</button><button id="nav-library" data-area="library" type="button" aria-pressed="false"><span aria-hidden="true">▤</span> Документы</button></nav>
+      <button id="new-conversation" type="button" class="secondary"><span aria-hidden="true">+</span> Новый диалог</button>
+      <p id="conversation-feedback" class="operation-status" role="status" aria-live="polite" hidden></p>
+      <details class="conversation-picker" open><summary>Последние диалоги</summary><p id="conversations-empty" class="muted">Здесь появятся диалоги, в которых вы задали вопрос.</p><ul id="conversations"></ul></details>
+      <div class="sidebar-footer"><button id="nav-administration" class="quiet" type="button" hidden><span aria-hidden="true">⚙</span> Управление</button></div>
+    </aside>
+    <div id="workspace-content">
+    <div id="knowledge-workspace" data-active-area="chat" data-evidence-open="false">
+      <section id="chat" class="work-area" aria-label="Диалог">
+        <header class="area-heading"><div><p class="eyebrow">ДИАЛОГ</p><h2 id="conversation-title">Новый диалог</h2></div><div class="chat-actions"><button id="open-evidence" data-area="evidence" aria-pressed="false" aria-expanded="false" type="button" class="quiet">Основания<span id="grounds-indicator" hidden> · новые</span></button></div></header>
+        <details id="source-selection"><summary>Источники для вопроса</summary><fieldset id="question-sources"><legend class="sr-only">Область поиска</legend><p id="scope-description" class="muted">Источники не выбраны — поиск по всем готовым документам.</p></fieldset></details>
+        <section id="history" aria-label="История диалога" tabindex="-1"></section>
+        <section id="active-answer-status" class="request-status-strip" aria-label="Состояние ответа" hidden><p id="active-answer-state" role="status" aria-live="polite"></p><div id="active-answer-actions"></div></section>
+        <form id="question-form" aria-label="Вопрос"><label for="question">Ваш вопрос</label><textarea id="question" rows="__RAG_COMPOSER_ROWS__" placeholder="Задайте вопрос…" required></textarea><p id="question-feedback" class="operation-status" role="status" aria-live="polite" hidden></p><div class="composer-footer"><p id="answer-connection" role="status" aria-live="polite">Подключение…</p><div><button id="check-question" type="button" class="secondary" hidden>Проверить отправку</button><button id="send-question" disabled>Отправить вопрос <span aria-hidden="true">↗</span></button></div></div></form>
+      </section>
+      <aside id="evidence" class="work-area" hidden aria-label="Основания ответа" tabindex="-1"><header class="area-heading"><div><p class="eyebrow">ПРОВЕРКА</p><h2>Основания ответа</h2></div><button id="close-evidence" class="quiet" type="button" aria-label="Закрыть основания">Закрыть</button></header><div class="area-body"><p id="evidence-empty" class="empty-state">Здесь появятся фрагменты документов и паспорт источников.<br><br>Выберите ответ в диалоге, чтобы проверить его основания.</p><section id="early-fragments" aria-label="Ранние фрагменты источников"></section><section id="answer-evidence" aria-label="Паспорт выбранного ответа"></section></div></aside>
+    </div>
+          <section id="library" class="work-area library-page" hidden aria-label="Документы">
+        <header class="area-heading"><div><p class="eyebrow">ДОКУМЕНТЫ</p><h2 id="library-title">Мои документы</h2></div><button id="refresh-documents" type="button" class="quiet" title="Обновить статусы документов" aria-label="Обновить статусы документов">↻</button></header>
+        <div class="area-body"><p id="library-context" class="muted">Материалы для поиска и ответов</p><button id="own-library" class="quiet" type="button" hidden>Вернуться к своей библиотеке</button>
+          <form id="document-upload"><label class="upload-field">Добавить документы<input name="files" type="file" multiple required></label><button class="secondary">Загрузить документы</button></form>
+          <p id="library-status" role="status" aria-live="polite"></p><ul id="documents" class="document-list"></ul>
+
+        </div>
+      </section>
+    <section id="administration" hidden><header class="section-heading"><p class="eyebrow">УПРАВЛЕНИЕ</p><h2>Аккаунты и параметры сервиса</h2><p class="muted">Доступные действия определяются вашей ролью.</p><button id="refresh-administration" class="secondary" type="button">Обновить управление</button></header><section id="generation-settings" aria-label="Глобальные настройки генерации" hidden><h3>Глобальные настройки генерации</h3><form id="global-settings"></form></section><h3>Аккаунты</h3><p class="muted">Блокировка или мягкое удаление завершают текущие запросы и сессии выбранного аккаунта. Документы и история сохраняются.</p><div id="accounts"></div></section>
+    </div>
+  </section>
+  <dialog id="document-report" aria-label="Отчёт об обработке документа"></dialog>
+  <dialog id="document-editor" aria-label="Просмотр и исправление документа"><div class="dialog-heading"><h2>Просмотр документа</h2><button id="close-editor" type="button" class="quiet">Закрыть</button></div><section id="document-view" aria-label="Просмотр и исправление документа"></section></dialog>
+  <dialog id="confirm-action" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-description"></p><div class="dialog-actions"><button id="confirm-cancel" type="button" class="secondary">Отмена</button><button id="confirm-accept" type="button">Продолжить</button></div></dialog>
+</main>
+<script>
+const $=id=>document.getElementById(id),body=document.body;body.dataset.palette='p1';body.dataset.layout='e1';
+$('identity').textContent='Анна · Пользователь';$('conversation-title').textContent='Бюджет и сроки проекта';$('source-selection').querySelector('summary').textContent='Источники: все готовые · 4 документа';$('answer-connection').textContent='Соединение установлено';$('question').placeholder='Уточните детали или задайте следующий вопрос…';$('send-question').disabled=false;
+$('history').innerHTML='<article><h3>Какой бюджет и срок запуска согласованы по проекту?</h3><p>Ответ завершён</p><p class="answer-text">На запуск проекта предусмотрено <strong>2,4 млн ₽</strong>. В сумму входят подготовка материалов, внедрение и первый месяц сопровождения. <a href="#">[1]</a><br><br>Пилотный запуск запланирован на <strong>15 ноября</strong>. Перед ним команда проверит качество ответов и доступ сотрудников к документам. <a href="#">[2]</a></p><button id="preview-grounds">Показать основания</button></article>';
+let dialogs=[['Бюджет и сроки проекта','20.10.26, 09:41','20.10.26, 10:26'],['Порядок согласования договора','19.10.26, 14:20','20.10.26, 08:54'],['Какие документы нужны для отпуска?','18.10.26, 11:03','19.10.26, 16:37'],['Регламент закупок и лимиты','17.10.26, 10:14','18.10.26, 15:02'],['Условия работы с подрядчиками','16.10.26, 13:32','17.10.26, 09:18']];
+const trash='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg>';
+function draw(){const ul=$('conversations');ul.replaceChildren();dialogs.forEach((d,i)=>{const li=document.createElement('li');li.className='preview-dialog';const button=document.createElement('button'),title=document.createElement('strong'),dates=document.createElement('span');button.type='button';button.setAttribute('aria-current',String(i===0));title.textContent=d[0];title.title=d[0];dates.className='preview-dates';for(const text of ['Создан: '+d[1],'Обновлён: '+d[2]]){const span=document.createElement('span');span.textContent=text;dates.append(span)}button.append(title,dates);button.onclick=()=>{section('chat');$('conversation-title').textContent=d[0]};const del=document.createElement('button');del.className='preview-delete';del.type='button';del.innerHTML=trash;del.setAttribute('aria-label','Удалить диалог «'+d[0]+'»');del.onclick=()=>{if(confirm('Убрать этот диалог только из макета?')){dialogs.splice(i,1);draw()}};li.append(button,del);ul.append(li)});$('conversations-empty').hidden=Boolean(dialogs.length)}draw();
+for(const input of document.querySelectorAll('.preview-options input'))input.onchange=()=>{body.dataset.palette=document.querySelector('[name=palette]:checked').value;body.dataset.layout=document.querySelector('[name=layout]:checked').value;$('preview-selection').textContent='Выбрано: '+body.dataset.palette.toUpperCase()+' + '+body.dataset.layout.toUpperCase()+'. Любую палитру можно сочетать с любой компоновкой.'};
+function section(name){$('knowledge-workspace').hidden=name!=='chat';$('library').hidden=name!=='docs';$('nav-workspace').setAttribute('aria-current',name==='chat'?'page':'false');$('nav-library').setAttribute('aria-current',name==='docs'?'page':'false')}$('nav-workspace').onclick=()=>section('chat');$('nav-library').onclick=()=>section('docs');$('new-conversation').onclick=()=>{section('chat');$('conversation-title').textContent='Новый диалог';$('question').value='';$('question').focus()};$('sidebar-toggle').onclick=()=>$('workspace-sidebar').classList.add('preview-open');$('close-sidebar').onclick=()=>$('workspace-sidebar').classList.remove('preview-open');
+function grounds(open){$('evidence').hidden=!open;$('knowledge-workspace').dataset.evidenceOpen=String(open);$('knowledge-workspace').dataset.activeArea=open?'evidence':'chat';$('evidence-empty').hidden=true;$('answer-evidence').innerHTML='<h3>Паспорт источников</h3><p>План проекта.pdf · страница 3</p><blockquote class="cited-quote">Бюджет запуска — 2 400 000 рублей. Пилот — 15 ноября.</blockquote>'}$('open-evidence').onclick=()=>grounds(true);$('preview-grounds').onclick=()=>grounds(true);$('close-evidence').onclick=()=>grounds(false);$('question-form').onsubmit=e=>{e.preventDefault();$('answer-connection').textContent='Это макет: вопрос не отправляется в модель.'};
+const form=$('document-upload');form.innerHTML='<label>Добавить документы</label><button id="preview-pick" type="button" class="secondary">Выбрать файлы</button><input id="preview-files" type="file" multiple><span id="preview-file-status">Файлы не выбраны.</span><ul id="preview-file-list"></ul><button type="submit" class="secondary">Загрузить документы</button><p id="preview-upload-status"></p>';
+let files=[];function drawFiles(){const ul=$('preview-file-list');ul.replaceChildren();$('preview-file-status').textContent=files.length?'Выбрано файлов: '+files.length:'Файлы не выбраны.';files.forEach((f,i)=>{const li=document.createElement('li'),name=document.createElement('span'),del=document.createElement('button');name.textContent=f.name;name.title=f.name;del.type='button';del.textContent='×';del.setAttribute('aria-label','Убрать файл '+f.name);del.onclick=()=>{files.splice(i,1);drawFiles()};li.append(name,del);ul.append(li)})}drawFiles();$('preview-pick').onclick=()=>$('preview-files').click();$('preview-files').onchange=e=>{files.push(...e.target.files);e.target.value='';drawFiles()};form.onsubmit=e=>{e.preventDefault();$('preview-upload-status').textContent='Это макет: файлы не отправляются на сервер.'};
+</script></body>
+</html>

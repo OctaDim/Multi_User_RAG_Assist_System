@@ -71,7 +71,8 @@ class GuardedSaver(BaseCheckpointSaver):
             documents = (await connection.execute(select(Document.__table__).where(Document.id.in_(sources.scoped_document_ids(self.binding["request_id"]))).order_by(Document.id).with_for_update(read=True))).mappings().all()
             from app.events import origin
             await origin(connection, self.binding['request_id'])
-            conversation = (await connection.execute(select(Conversation.__table__).where(Conversation.id == self.binding["conversation_id"]).with_for_update(read=True))).mappings().first()
+            # Events also update dialog dates; take the write lock before locking its request.
+            conversation = (await connection.execute(select(Conversation.__table__).where(Conversation.id == self.binding["conversation_id"]).with_for_update())).mappings().first()
             request = (await connection.execute(select(Request.__table__).where(Request.id == self.binding["request_id"]).with_for_update())).mappings().first()
             stored = (await connection.execute(select(GraphBinding.__table__).where(GraphBinding.request_id == self.binding["request_id"]).with_for_update(read=True))).mappings().first()
             if not request or not stored or not conversation or any(stored[key] != self.binding[key] for key in

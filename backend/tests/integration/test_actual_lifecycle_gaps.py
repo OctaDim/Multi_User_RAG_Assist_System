@@ -128,7 +128,7 @@ def test_actual_tokenizer_oversize_refusal_preserves_draft_and_empty_history(con
         page.locator('#question').fill(question);page.get_by_role('button',name='Отправить вопрос',exact=True).click()
         expect(page.locator('#status')).to_contain_text('Вопрос превышает доступный контекст')
         expect(page.locator('#question')).to_have_value(question)
-        expect(page.locator('#history')).to_have_text('В этой беседе пока нет сообщений.')
+        expect(page.locator('#history')).to_have_text('В этом диалоге пока нет сообщений.')
         with psycopg.connect(environment['dsn'],autocommit=True) as connection:
             assert connection.execute('SELECT count(*) FROM requests').fetchone()[0]==0
             assert connection.execute('SELECT count(*) FROM messages').fetchone()[0]==0

@@ -1,0 +1,18 @@
+{
+  "before": {
+    "revision": "0007_checkpoints",
+    "conversations": 16,
+    "documents": 5
+  },
+  "after": {
+    "revision": "0008_dialog_metadata",
+    "conversations": 16,
+    "documents": 5
+  },
+  "api_public_settings": 200,
+  "delete_route_registered": true,
+  "unauthenticated_delete": 401,
+  "frontend": 200,
+  "coordinator_epoch": 14,
+  "healthy_after_observation": true
+}

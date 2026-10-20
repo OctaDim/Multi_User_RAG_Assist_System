@@ -249,7 +249,9 @@ async def login(session, email, password):
 
 async def me_view(session, actor):
     conversations = (await session.execute(
-        select(Conversation.id).where(Conversation.owner_id == actor['id']).order_by(Conversation.id)
+        select(Conversation.id, Conversation.created_at, Conversation.updated_at)
+        .where(Conversation.owner_id == actor['id'], Conversation.deleted_at.is_(None))
+        .order_by(Conversation.updated_at.desc().nullslast(), Conversation.id)
     )).mappings().all()
     return {'account': public(actor), 'conversations': [dict(row) for row in conversations]}
 

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="40.074" timestamp="2026-10-20T11:02:52.515027+03:00" hostname="16IPK2"><testcase classname="tests.browser.test_dialog_management" name="test_recent_dialogs_scroll_inside_sidebar_at_desktop_and_mobile" time="39.999"><failure message="assert (139.5 + 880) &lt;= 1000">backend/tests/browser/test_dialog_management.py:102: in test_recent_dialogs_scroll_inside_sidebar_at_desktop_and_mobile
+    assert page.locator('#workspace-sidebar').bounding_box()['y']+page.locator('#workspace-sidebar').bounding_box()['height']&lt;=1000
+E   assert (139.5 + 880) &lt;= 1000</failure></testcase></testsuite></testsuites>

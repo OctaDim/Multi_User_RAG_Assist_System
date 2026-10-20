@@ -27,6 +27,7 @@ export class Drafts {
     return {text:'', revision:0, pending:null, documentIds:[], answerId:null,
       ...JSON.parse(sessionStorage.getItem(this.key(conversation)) || 'null')};
   }
+  remove(conversation) { sessionStorage.removeItem(this.key(conversation)); }
   save(conversation, value) { sessionStorage.setItem(this.key(conversation), JSON.stringify(value)); }
   edit(conversation, text) {
     const value = this.get(conversation);

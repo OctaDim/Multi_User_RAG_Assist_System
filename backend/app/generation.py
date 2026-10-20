@@ -61,7 +61,8 @@ class Coordinator:
             if not finalizing:
                 from app.events import origin
                 await origin(connection, request_id)
-            conversation = (await connection.execute(select(Conversation.__table__).where(Conversation.id == row["conversation_id"]).with_for_update(read=True))).mappings().first()
+            # Events also update dialog dates; take the write lock before locking its request.
+            conversation = (await connection.execute(select(Conversation.__table__).where(Conversation.id == row["conversation_id"]).with_for_update())).mappings().first()
             request = (await connection.execute(select(Request.__table__).where(Request.id == request_id).with_for_update())).mappings().first()
             binding = (await connection.execute(select(GraphBinding.__table__).where(GraphBinding.request_id == request_id))).mappings().first()
             if request['state'] not in answers.UNFINISHED:

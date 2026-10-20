@@ -8,16 +8,42 @@ export class Documents {
   constructor({perform, onSources, inputPolicy, reveal}) {
     this.perform=perform; this.onSources=onSources; this.inputPolicy=inputPolicy; this.reveal=reveal;
     this.owner=null; this.ownerName=''; this.read=0; this.opening=0; this.urls=new Set(); this.editor=null;
+    this.files=[];this.uploading=false;
     $('refresh-documents').onclick=()=>perform(()=>this.refresh(),$('refresh-documents'));
     $('own-library').onclick=()=>perform(()=>this.load(null),$('own-library'));
     $('close-editor').onclick=()=>this.closeEditor();
     $('document-editor').addEventListener('cancel',event=>{event.preventDefault();this.closeEditor();});
     window.addEventListener('beforeunload',event=>{if(this.dirty()){event.preventDefault();event.returnValue='';}});
-    $('document-upload').onsubmit=event=>{event.preventDefault();perform(()=>this.upload(),event.submitter);};
-    $('document-upload').elements.files.onchange=()=>{delete $('document-upload').dataset.uncertain;};
+    $('document-upload').onsubmit=event=>{
+      event.preventDefault();
+      Promise.resolve(perform(()=>this.upload(),event.submitter)).finally(()=>this.renderFiles());
+    };
+    $('choose-files').onclick=()=>$('document-files').click();
+    $('document-files').onchange=()=>{
+      const incoming=Array.from($('document-files').files);
+      this.files=$('document-upload').dataset.uncertain?incoming:[...this.files,...incoming];
+      delete $('document-upload').dataset.uncertain;this.renderFiles();
+    };
+    $('document-upload').addEventListener('reset',()=>{this.files=[];this.renderFiles();});
+    this.renderFiles();
     document.addEventListener('rag:section-changed',event=>{if(event.detail!=='library')++this.opening;});
   }
   dirty() {return Boolean(this.editor?.dirty);}
+  renderFiles() {
+    const transfer=new DataTransfer();
+    for(const file of this.files)transfer.items.add(file);
+    $('document-files').files=transfer.files;
+    $('document-files').disabled=this.uploading;$('choose-files').disabled=this.uploading;
+    $('upload-documents').disabled=this.uploading||!this.files.length;
+    $('file-selection-status').textContent=this.files.length?`Выбрано файлов: ${this.files.length}`:'Файлы не выбраны.';
+    $('selected-files').replaceChildren(...this.files.map((file,index)=>{
+      const item=document.createElement('li'),name=textElement('span',file.name),remove=textElement('button','×');
+      name.title=file.name;remove.type='button';remove.className='remove-selected-file';remove.disabled=this.uploading;
+      remove.setAttribute('aria-label',`Убрать файл ${file.name}`);remove.title='Убрать из загрузки';
+      remove.onclick=()=>{this.files.splice(index,1);this.renderFiles();$('choose-files').focus();};
+      item.append(name,remove);return item;
+    }));
+  }
   async allowLeave() {
     return !this.dirty() || await confirmAction('Несохранённые исправления','В документе есть несохранённый текст. Закрыть его и отказаться от исправлений?','Закрыть без сохранения');
   }
@@ -189,9 +215,11 @@ export class Documents {
   }
   async upload() {
     const form=$('document-upload');
-    if(form.dataset.uncertain){feedback(form.querySelector('button'),'Предыдущая загрузка могла быть принята. Проверьте список и выберите файлы заново перед новой загрузкой.',true);return;}
+    if(form.dataset.uncertain){feedback($('upload-documents'),'Предыдущая загрузка могла быть принята. Проверьте список и выберите файлы заново перед новой загрузкой.',true);return;}
     const files=Array.from(form.elements.files.files);
+    if(!files.length||this.uploading)return;
     if(files.some(file=>Array.from(file.name).length>this.inputPolicy().filename_max))throw new Error('filename_too_long');
+    this.uploading=true;this.renderFiles();
     try {
       const batch=await api('/documents/uploads','POST',{files:files.map(file=>({name:file.name,size:file.size}))});
       for(let i=0;i<batch.documents.length;i++)await api(`/documents/${batch.documents[i].id}/original`,'PUT',files[i]);
@@ -199,6 +227,6 @@ export class Documents {
     } catch(error) {
       if(uncertain(error))form.dataset.uncertain='true';
       await this.refresh().catch(()=>{});throw error;
-    }
+    } finally {this.uploading=false;this.renderFiles();}
   }
 }
