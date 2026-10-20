@@ -6,6 +6,26 @@ const mobileMenu=matchMedia('(max-width:959px)');
 let section = sessionStorage.getItem('rag:section') || 'workspace';
 let canManage = false;
 const areaFocus = new Map();
+let historySizeFrame;
+function sizeHistory() {
+  cancelAnimationFrame(historySizeFrame);
+  historySizeFrame=requestAnimationFrame(()=>{
+    const main=document.querySelector('main');
+    main.style.removeProperty('--history-extra-height');
+    const history=$('history');
+    if($('workspace').hidden||$('knowledge-workspace').hidden||!history.getClientRects().length)return;
+    // Measure the original layout, then add nine original history heights.
+    const extra=history.getBoundingClientRect().height*9+Math.max(0,main.scrollHeight-main.clientHeight);
+    main.style.setProperty('--history-extra-height',`${extra}px`);
+    if(history.querySelector('article')) {
+      history.scrollTop=history.scrollHeight;
+      if($('knowledge-workspace').dataset.activeArea==='chat')$('question-form').scrollIntoView({block:'end'});
+    }
+  });
+}
+window.addEventListener('resize',sizeHistory);
+document.addEventListener('rag:section-changed',sizeHistory);
+document.addEventListener('rag:history-changed',sizeHistory);
 function compactChat() {
   $('source-selection').open=false;
 }
@@ -82,6 +102,7 @@ function closeEvidence(focus=false) {
   $('knowledge-workspace').dataset.evidenceOpen='false';$('knowledge-workspace').dataset.activeArea='chat';
   $('evidence').hidden=true;$('open-evidence').setAttribute('aria-expanded','false');markArea('chat');
   if(focus)$('open-evidence').focus({preventScroll:true});
+  sizeHistory();
 }
 export function resetNavigation() {section='workspace';areaFocus.clear();closeEvidence();showSection(section);}
 $('nav-workspace').onclick=()=>showArea('chat');

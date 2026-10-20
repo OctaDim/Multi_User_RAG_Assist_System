@@ -46,6 +46,7 @@ def test_variant_a_positions_all_controls_and_keeps_new_chats_local(real_account
         page.locator('#close-evidence').click()
         page.locator('#conversation-title').evaluate("el=>el.textContent='A very long conversation title that should fit beside the evidence button without covering it'")
         page.locator('#active-answer-status').evaluate("el=>{el.hidden=false;el.querySelector('p').textContent='Ответ: Завершён';}")
+        page.locator('#send-question').scroll_into_view_if_needed()
         send=page.locator('#send-question').bounding_box()
         assert send['y']+send['height']<=812
         assert page.locator('#history').bounding_box()['height']>=180
@@ -83,6 +84,7 @@ def test_actual_llm_answers_without_documents_and_preserves_chat_history(real_an
         page.set_viewport_size({'width':375,'height':812})
         page.locator('#close-evidence').click()
         expect(page.locator('#question-form')).to_be_visible()
+        page.locator('#send-question').scroll_into_view_if_needed()
         send=page.locator('#send-question').bounding_box()
         assert send['y']+send['height']<=812
         assert page.locator('#history').bounding_box()['height']>=180

@@ -298,11 +298,13 @@ export class Conversations {
       return;
     }
     if (!this.cards.size) $('history').replaceChildren();
+    let historyChanged=false;
     const questions = new Map(value.messages.filter(message => message.role === 'user').map(message => [message.request_id,message.text]));
     const selectedAnswer = value.requests.find(request => request.id === draft.answerId) || value.requests.at(-1);
     for (const request of value.requests) {
       let card = this.cards.get(request.id);
       if (!card) {
+        historyChanged=true;
         const article = document.createElement('article'); article.dataset.request = request.id;
         const question = textElement('h3', '');
         const state = textElement('p', '');
@@ -320,7 +322,7 @@ export class Conversations {
         this.cards.set(request.id, card);
       }
       const question = questions.get(request.id) || 'Вопрос';
-      if (card.question.textContent !== question) card.question.textContent = question;
+      if (card.question.textContent !== question) {card.question.textContent = question;historyChanged=true;}
       const sourceLabels = Object.entries(request.source_flags || {}).map(([identifier,flag]) =>
         `${this.documentName(identifier,request.passport?.available?.find(source=>source.document_id===identifier)?.name)}: ${flag === 'deleted' ? 'источник удалён' : 'OCR исправлен'}`);
       const stateLabel = `${labels[request.state] || request.state}${Object.hasOwn(reasons,request.reason) ? `: ${reasons[request.reason]}` : ''}${sourceLabels.length ? `. ${sourceLabels.join('; ')}. Исключён из контекста следующих ответов.` : ''}`;
@@ -329,6 +331,7 @@ export class Conversations {
       card.answerLabel.hidden = !request.answer_text;
       const citationSignature = JSON.stringify(request.citations || []);
       if (card.answerText !== request.answer_text || card.citationSignature !== citationSignature) {
+        if(card.answerText!==request.answer_text)historyChanged=true;
         this.answer(card, request); card.answerText = request.answer_text; card.citationSignature = citationSignature;
       }
       card.stop.hidden = !unfinished.has(request.state);
@@ -340,6 +343,9 @@ export class Conversations {
     $('active-answer-state').textContent=`Ответ: ${activeCard.state.textContent}`;
     if($('active-answer-actions').firstChild!==activeCard.stop)$('active-answer-actions').replaceChildren(activeCard.stop,activeCard.feedback);
     this.renderEvidence(selectedAnswer);
+    if(historyChanged) {
+      document.dispatchEvent(new CustomEvent('rag:history-changed'));
+    }
   }
 
   renderEvidence(request) {
